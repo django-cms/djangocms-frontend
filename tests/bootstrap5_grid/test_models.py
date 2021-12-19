@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_grid.models import (
+from djangocms_frontend.contrib.grid.models import (
     Bootstrap5GridColumn, Bootstrap5GridContainer, Bootstrap5GridRow,
 )
 

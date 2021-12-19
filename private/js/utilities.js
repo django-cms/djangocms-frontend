@@ -10,8 +10,8 @@ import ButtonGroup from 'components/button-group';
 
 $(() => {
     // Row plugin
-    if ($('.djangocms-bootstrap5-spacing').length) {
-        const static_url = $('.djangocms-bootstrap5-spacing').data().static;
+    if ($('.djangocms-frontend-spacing').length) {
+        const static_url = $('.djangocms-frontend-spacing').data().static;
 
         new ButtonGroup({
             static: static_url,

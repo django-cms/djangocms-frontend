@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_badge.models import (
+from djangocms_frontend.contrib.badge.models import (
     Bootstrap5Badge,
 )
 

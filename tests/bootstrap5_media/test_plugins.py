@@ -1,7 +1,7 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_media.cms_plugins import (
+from djangocms_frontend.contrib.media.cms_plugins import (
     Bootstrap5MediaBodyPlugin, Bootstrap5MediaPlugin,
 )
 

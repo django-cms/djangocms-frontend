@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_card.models import (
+from djangocms_frontend.contrib.card.models import (
     Bootstrap5Card, Bootstrap5CardInner,
 )
 

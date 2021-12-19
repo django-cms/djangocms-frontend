@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_jumbotron.models import (
+from djangocms_frontend.contrib.jumbotron.models import (
     Bootstrap5Jumbotron,
 )
 

@@ -3,7 +3,7 @@ import warnings
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_grid.cms_plugins import (
+from djangocms_frontend.contrib.grid.cms_plugins import (
     Bootstrap5GridColumnPlugin, Bootstrap5GridContainerPlugin,
     Bootstrap5GridRowPlugin,
 )

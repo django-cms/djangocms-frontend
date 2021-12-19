@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.fields import (
+from djangocms_frontend.fields import (
     AttributesField, IntegerRangeField, TagTypeField,
 )
 

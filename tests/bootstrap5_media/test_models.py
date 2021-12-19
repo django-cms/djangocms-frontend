@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_media.models import (
+from djangocms_frontend.contrib.media.models import (
     Bootstrap5Media, Bootstrap5MediaBody,
 )
 

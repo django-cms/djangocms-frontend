@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.constants import (
+from djangocms_frontend.settings import (
     ALIGN_CHOICES, COLOR_STYLE_CHOICES, DEVICE_CHOICES, DEVICE_SIZES,
     TAG_CHOICES,
 )

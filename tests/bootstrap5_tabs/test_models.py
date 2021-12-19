@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_tabs.models import (
+from djangocms_frontend.contrib.tabs.models import (
     Bootstrap5Tab, Bootstrap5TabItem,
 )
 

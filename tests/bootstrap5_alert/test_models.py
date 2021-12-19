@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_alerts.models import (
+from djangocms_frontend.contrib.alert.models import (
     Bootstrap5Alerts,
 )
 

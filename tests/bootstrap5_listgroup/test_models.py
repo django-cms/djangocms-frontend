@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_listgroup.models import (
+from djangocms_frontend.contrib.listgroup.models import (
     Bootstrap5ListGroup, Bootstrap5ListGroupItem,
 )
 

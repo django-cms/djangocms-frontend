@@ -1,7 +1,7 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_utilities.cms_plugins import (
+from djangocms_frontend.contrib.utilities.cms_plugins import (
     Bootstrap5SpacingPlugin,
 )
 

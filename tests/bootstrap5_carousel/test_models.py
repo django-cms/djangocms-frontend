@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_carousel.models import (
+from djangocms_frontend.contrib.carousel.models import (
     Bootstrap5Carousel, Bootstrap5CarouselSlide,
 )
 

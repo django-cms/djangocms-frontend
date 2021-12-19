@@ -1,7 +1,7 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_collapse.cms_plugins import (
+from djangocms_frontend.contrib.collapse.cms_plugins import (
     Bootstrap5CollapseContainerPlugin, Bootstrap5CollapsePlugin,
     Bootstrap5CollapseTriggerPlugin,
 )

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_collapse.models import (
+from djangocms_frontend.contrib.collapse.models import (
     Bootstrap5Collapse, Bootstrap5CollapseContainer, Bootstrap5CollapseTrigger,
 )
 

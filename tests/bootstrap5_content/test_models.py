@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_content.models import (
+from djangocms_frontend.contrib.content.models import (
     Bootstrap5Blockquote, Bootstrap5Code, Bootstrap5Figure,
 )
 

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_link.models import Bootstrap5Link
+from djangocms_frontend.contrib.link.models import Bootstrap5Link
 
 
 class B5LinkModelTestCase(TestCase):

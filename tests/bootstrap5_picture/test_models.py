@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_picture.models import (
+from djangocms_frontend.contrib.picture.models import (
     Bootstrap5Picture,
 )
 

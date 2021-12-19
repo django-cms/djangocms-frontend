@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_bootstrap5.contrib.bootstrap5_utilities.models import (
+from djangocms_frontend.contrib.utilities.models import (
     Bootstrap5Spacing,
 )
 

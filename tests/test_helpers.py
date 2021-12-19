@@ -3,13 +3,13 @@ from django.test import TestCase
 
 from cms.api import add_plugin, create_page
 
-from djangocms_bootstrap5.contrib.bootstrap5_carousel.cms_plugins import (
+from djangocms_frontend.contrib.carousel.cms_plugins import (
     Bootstrap5CarouselPlugin,
 )
-from djangocms_bootstrap5.contrib.bootstrap5_carousel.constants import (
+from djangocms_frontend.contrib.carousel.constants import (
     CAROUSEL_TEMPLATE_CHOICES,
 )
-from djangocms_bootstrap5.helpers import (
+from djangocms_frontend.helpers import (
     concat_classes, get_plugin_template, get_template_path,
 )
 
@@ -29,7 +29,7 @@ class B5HelpersTestCase(TestCase):
         template = get_template_path(
             "carousel", "default", "slide"
         )
-        result = "djangocms_bootstrap5/carousel/default/slide.html"
+        result = "djangocms_frontend/carousel/default/slide.html"
         self.assertEqual(template, result)
         status = select_template([template])
         self.assertEqual(status.template.name, result)
@@ -49,12 +49,12 @@ class B5HelpersTestCase(TestCase):
             instance, "carousel", "carousel",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_bootstrap5/carousel/default/carousel.html")
+        self.assertEqual(template, "djangocms_frontend/carousel/default/carousel.html")
         # trigger default template
         template = get_plugin_template(
             instance, "does_not", "exist",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_bootstrap5/does_not/default/exist.html")
+        self.assertEqual(template, "djangocms_frontend/does_not/default/exist.html")
         # cleanup
         page.delete()

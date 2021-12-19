@@ -61,10 +61,10 @@ $(() => {
     });
 
     // IMAGE PREVIEW
-    if ($('.djangocms-bootstrap5-link').length) {
+    if ($('.djangocms-frontend-link').length) {
         new PreviewGenerator({
-            container: '.djangocms-bootstrap5-link',
-            title: $('.djangocms-bootstrap5-link').data().preview,
+            container: '.djangocms-frontend-link',
+            title: $('.djangocms-frontend-link').data().preview,
         });
     }
 
@@ -75,7 +75,7 @@ $(() => {
         $('#id_card_alignment').length ||
         $('#id_figure_alignment').length
     ) {
-        const static_url = $('.djangocms-bootstrap5').data('static');
+        const static_url = $('.djangocms-frontend').data('static');
 
         // alignment
         new ButtonGroup({

@@ -7,21 +7,21 @@ HELPER_SETTINGS = {
         'djangocms_text_ckeditor',
         'djangocms_link',
         'djangocms_picture',
-        'djangocms_bootstrap5',
-        'djangocms_bootstrap5.contrib.bootstrap5_alerts',
-        'djangocms_bootstrap5.contrib.bootstrap5_badge',
-        'djangocms_bootstrap5.contrib.bootstrap5_card',
-        'djangocms_bootstrap5.contrib.bootstrap5_carousel',
-        'djangocms_bootstrap5.contrib.bootstrap5_collapse',
-        'djangocms_bootstrap5.contrib.bootstrap5_content',
-        'djangocms_bootstrap5.contrib.bootstrap5_grid',
-        'djangocms_bootstrap5.contrib.bootstrap5_jumbotron',
-        'djangocms_bootstrap5.contrib.bootstrap5_link',
-        'djangocms_bootstrap5.contrib.bootstrap5_listgroup',
-        'djangocms_bootstrap5.contrib.bootstrap5_media',
-        'djangocms_bootstrap5.contrib.bootstrap5_picture',
-        'djangocms_bootstrap5.contrib.bootstrap5_tabs',
-        'djangocms_bootstrap5.contrib.bootstrap5_utilities',
+        'djangocms_frontend',
+        'djangocms_frontend.contrib.alert',
+        'djangocms_frontend.contrib.badge',
+        'djangocms_frontend.contrib.card',
+        'djangocms_frontend.contrib.carousel',
+        'djangocms_frontend.contrib.collapse',
+        'djangocms_frontend.contrib.content',
+        'djangocms_frontend.contrib.grid',
+        'djangocms_frontend.contrib.jumbotron',
+        'djangocms_frontend.contrib.link',
+        'djangocms_frontend.contrib.listgroup',
+        'djangocms_frontend.contrib.media',
+        'djangocms_frontend.contrib.picture',
+        'djangocms_frontend.contrib.tabs',
+        'djangocms_frontend.contrib.utilities',
     ],
     'CMS_LANGUAGES': {
         1: [{
@@ -45,7 +45,7 @@ HELPER_SETTINGS = {
 
 def run():
     from app_helper import runner
-    runner.cms('djangocms_bootstrap5')
+    runner.cms('djangocms_frontend')
 
 
 if __name__ == '__main__':

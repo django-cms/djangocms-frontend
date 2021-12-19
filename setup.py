@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from setuptools import find_packages, setup
 
-from djangocms_bootstrap5 import __version__
+from djangocms_frontend import __version__
 
 
 REQUIREMENTS = [
@@ -12,6 +12,7 @@ REQUIREMENTS = [
     'djangocms-icon>=1.4.0',
     'djangocms-link>=2.5.0',
     'djangocms-picture>=2.3.0',
+    'django-entangled>=0.4.0',
 ]
 
 
@@ -23,14 +24,15 @@ CLASSIFIERS = [
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
     'Framework :: Django',
     'Framework :: Django :: 2.2',
     'Framework :: Django :: 3.0',
     'Framework :: Django :: 3.1',
+    'Framework :: Django :: 3.2',
     'Framework :: Django CMS',
     'Framework :: Django CMS :: 3.7',
     'Framework :: Django CMS :: 3.8',
@@ -42,13 +44,13 @@ CLASSIFIERS = [
 
 
 setup(
-    name='djangocms-bootstrap5',
+    name='djangocms-frontend',
     version=__version__,
-    author='Divio AG',
-    author_email='info@divio.ch',
+    author='fsbraun',
+    author_email='fsbraun@gmx.de',
     url='https://github.com/divio/djangocms-bootstrap5',
     license='BSD-3-Clause',
-    description='Adds Bootstrap 5 components as plugins.',
+    description='Adds abstract User Interface items as plugins.',
     long_description=open('README.rst').read(),
     packages=find_packages(),
     include_package_data=True,
