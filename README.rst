@@ -1,18 +1,30 @@
-======================
-django CMS Bootstrap 5
-======================
+===================
+django CMS Frontend
+===================
 
 |pypi| |build| |coverage|
 
-**django CMS Bootstrap 5** is a plugin bundle for django CMS providing several
-components from the popular `Bootstrap 5 <http://getbootstrap.com/>`_ library.
+**django CMS Frontend** is a blugin bundle based on
+**`django CMS Bootstrap 5 <https://github.com/gl-agnx/djangocms-bootstrap5>`**.
+Its objective is to provide a set of popular frontend components independent of
+the currently used frontend framework such as Bootstrap.
+
+The plugin are framework agnostic and the framework can be changed by adapting
+your procet's settings. Also, it is designed to avoid having to rebuild your
+CMS plugin tree when upgrading e.g. from one version of your frontend framework
+to the next.
+
+.. note:
+    This is currently a proof of concept project.
+
+<!---
 
 This addon is compatible with `Divio Cloud <http://divio.com>`_ and is also available on the
 `django CMS Marketplace <https://marketplace.django-cms.org/en/addons/browse/djangocms-bootstrap5/>`_
 for easy installation.
 
 .. image:: preview.gif
-
+--->
 
 Contributing
 ============
