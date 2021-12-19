@@ -1,0 +1,31 @@
+from ...models import FrontendUIItem
+
+
+class Spacing(FrontendUIItem):
+    """
+    Utilities > "Spacing" Plugin
+    https://getbootstrap.com/docs/5.0/utilities/spacing/
+    """
+
+    class Meta:
+        proxy = True
+
+    def get_base_css_class(self):
+        # Source: https://getbootstrap.com/docs/5.0/utilities/spacing/#notation
+        # [...] format {property}{sides}-{size} for xs and
+        # {property}{sides}-{breakpoint}-{size} for sm, md, lg, and xl.
+
+        if not self.space_device or self.space_device == "xs":
+            template = "{property}{sides}-{size}"
+        else:
+            template = "{property}{sides}-{breakpoint}-{size}"
+
+        return template.format(
+            property=self.space_property,
+            sides=self.space_sides,
+            breakpoint=self.space_device,
+            size=self.space_size,
+        )
+
+    def get_short_description(self):
+        return "(.{})".format(self.get_base_css_class())
