@@ -7,3 +7,5 @@ isort
 flake8
 pyflakes>=2.1
 wheel
+black
+pre-commit

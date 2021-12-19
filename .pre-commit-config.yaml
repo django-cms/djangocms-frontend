@@ -1,0 +1,19 @@
+repos:
+- repo: https://github.com/pycqa/isort
+  rev: 5.10.1
+  hooks:
+    - id: isort
+      name: isort (python)
+- repo: https://github.com/ambv/black
+  rev: 21.12b0
+  hooks:
+  - id: black
+    language_version: python3.9
+- repo: https://gitlab.com/pycqa/flake8
+  rev: 3.9.2
+  hooks:
+    - id: flake8
+- repo: https://github.com/rtts/djhtml
+  rev: v1.4.10
+  hooks:
+    - id: djhtml
