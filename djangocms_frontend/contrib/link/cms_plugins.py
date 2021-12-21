@@ -1,6 +1,6 @@
+from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from djangocms_link.cms_plugins import LinkPlugin
 from djangocms_link.models import get_templates
 
 from djangocms_frontend.helpers import concat_classes, get_plugin_template
@@ -9,7 +9,7 @@ from . import forms, models
 from .constants import USE_LINK_ICONS
 
 
-class UILinkPlugin(LinkPlugin):
+class UILinkPlugin(CMSPluginBase):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/
@@ -31,9 +31,36 @@ class UILinkPlugin(LinkPlugin):
     if USE_LINK_ICONS:  # pragma: no cover
         fields = fields + (("icon_left", "icon_right"),)
 
-    LinkPlugin.fieldsets[0] = (None, {"fields": fields})
+    fieldsets = [
+        (None, {"fields": fields}),
+        (
+            _("Link settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    ("mailto", "phone"),
+                    ("anchor", "target"),
+                    ("file_link"),
+                ),
+            },
+        ),
+        (
+            _("Advanced settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "template",
+                    "attributes",
+                ),
+            },
+        ),
+    ]
 
-    fieldsets = LinkPlugin.fieldsets
+    @classmethod
+    def get_render_queryset(cls):
+        queryset = super().get_render_queryset()
+        print("###", queryset)
+        return queryset.select_related("internal_link")
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(instance, "link", "link", get_templates())
@@ -61,6 +88,7 @@ class UILinkPlugin(LinkPlugin):
             ]
         )
         instance.attributes["class"] = classes
+        context["link"] = instance.get_link()
 
         return super().render(context, instance, placeholder)
 
