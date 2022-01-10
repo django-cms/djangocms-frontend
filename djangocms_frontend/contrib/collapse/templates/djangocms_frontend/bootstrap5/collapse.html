@@ -1,0 +1,14 @@
+{% load cms_tags %}
+{% spaceless %}
+    <{{ instance.tag_type }} {{ instance.attributes_str }}
+    id="parent-{{ instance.pk|safe }}"
+    data-children="{{ .siblings }}"
+    role="tablist"
+    >
+    {% with parent=instance %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+        {% endfor %}
+    {% endwith %}
+    </{{ instance.tag_type }}>
+{% endspaceless %}

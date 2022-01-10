@@ -19,7 +19,7 @@ class AlertPlugin(CMSPluginBase):
     module = _("Interface")
     model = models.Alert
     form = forms.AlertForm
-    render_template = f"{settings.framework}/alert.html"
+    render_template = f"djangocms_frontend/{settings.framework}/alert.html"
     change_form_template = "djangocms_frontend/admin/alert.html"
     allow_children = True
 

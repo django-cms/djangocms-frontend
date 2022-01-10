@@ -19,7 +19,7 @@ class ListGroupPlugin(CMSPluginBase):
     module = _("Frontend")
     model = models.ListGroup
     form = forms.ListGroupForm
-    render_template = f"{settings.framework}/list-group.html"
+    render_template = f"djangocms_frontend/{settings.framework}/list-group.html"
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
     child_classes = ["ListGroupItemPlugin", "LinkPlugin"]
@@ -66,7 +66,7 @@ class ListGroupItemPlugin(CMSPluginBase):
     module = _("Frontend")
     model = models.ListGroupItem
     forms = forms.ListGroupItemForm
-    render_template = f"{settings.framework}/list-group-item.html"
+    render_template = f"djangocms_frontend/{settings.framework}/list-group-item.html"
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
     parent_classes = ["ListGroupPlugin"]

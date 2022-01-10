@@ -1,0 +1,11 @@
+{% load cms_tags %}
+{% spaceless %}
+    <blockquote {{ instance.attributes_str }}>
+        {{ instance.quote_content }}
+        {% if instance.quote_origin %}
+            <footer class="blockquote-footer">
+                <cite title="{{ instance.quote_origin }}">{{ instance.quote_origin }}</cite>
+            </footer>
+        {% endif %}
+    </blockquote>
+{% endspaceless %}

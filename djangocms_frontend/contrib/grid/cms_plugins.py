@@ -20,7 +20,7 @@ class GridContainerPlugin(CMSPluginBase):
     module = _("Interface")
     model = models.GridContainer
     form = forms.GridContainerForm
-    render_template = f"{settings.framework}/grid_container.html"
+    render_template = f"djangocms_frontend/{settings.framework}/grid_container.html"
     allow_children = True
 
     fieldsets = [
@@ -50,9 +50,9 @@ class GridRowPlugin(CMSPluginBase):
     model = models.GridRow
     form = forms.GridRowForm
     change_form_template = "djangocms_frontend/admin/grid_row.html"
-    render_template = f"{settings.framework}/grid_row.html"
+    render_template = f"djangocms_frontend/{settings.framework}/grid_row.html"
     allow_children = True
-    child_classes = ["Bootstrap5GridColumnPlugin"]
+    child_classes = ["GridColumnPlugin"]
 
     fieldsets = [
         (
@@ -131,7 +131,7 @@ class GridColumnPlugin(CMSPluginBase):
     model = models.GridColumn
     form = forms.GridColumnForm
     change_form_template = "djangocms_frontend/admin/grid_column.html"
-    render_template = f"{settings.framework}/grid_column.html"
+    render_template = f"djangocms_frontend/{settings.framework}/grid_column.html"
     allow_children = True
     require_parent = True
     # TODO it should allow for the responsive utilitiy class

@@ -14,7 +14,7 @@ def concat_classes(classes):
 
 
 def get_template_path(prefix, template, name):
-    return f"{settings.framework}/{prefix}/{template}/{name}.html"
+    return f"djangocms_frontend/{settings.framework}/{prefix}/{template}/{name}.html"
 
 
 def get_plugin_template(instance, prefix, name, templates):

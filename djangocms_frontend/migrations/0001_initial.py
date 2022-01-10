@@ -58,6 +58,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 "abstract": False,
+                "verbose_name": "UI Item",
             },
             bases=("cms.cmsplugin",),
         ),

@@ -19,7 +19,7 @@ class SpacingPlugin(CMSPluginBase):
     model = models.Spacing
     form = forms.SpacingForm
 
-    render_template = f"{settings.framework}/spacing.html"
+    render_template = f"djangocms_frontend/{settings.framework}/spacing.html"
     change_form_template = "djangocms_frontend/admin/spacing.html"
     allow_children = True
 

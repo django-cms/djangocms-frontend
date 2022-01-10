@@ -4,32 +4,31 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
 
-from .models import (
-    Bootstrap5Collapse,
-    Bootstrap5CollapseContainer,
-    Bootstrap5CollapseTrigger,
-)
+from ... import settings
+from . import forms, models
 
 
-class Bootstrap5CollapsePlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class CollapsePlugin(CMSPluginBase):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    model = Bootstrap5Collapse
     name = _("Collapse")
     module = _("Interface")
-    render_template = "djangocms_frontend/collapse.html"
+    model = models.Collapse
+    form = forms.CollapseForm
+    render_template = f"{settings.framework}/collapse.html"
     change_form_template = "djangocms_frontend/admin/collapse.html"
     allow_children = True
     child_classes = [
-        "Bootstrap5CollapseTriggerPlugin",
-        "Bootstrap5CollapseContainerPlugin",
-        "Bootstrap5LinkPlugin",
-        "Bootstrap5CardPlugin",
-        "Bootstrap5SpacingPlugin",
-        "Bootstrap5GridRowPlugin",
+        "CollapseTriggerPlugin",
+        "CollapseContainerPlugin",
+        "LinkPlugin",
+        "CardPlugin",
+        "SpacingPlugin",
+        "GridRowPlugin",
     ]
 
     fieldsets = [
@@ -38,7 +37,7 @@ class Bootstrap5CollapsePlugin(CMSPluginBase):
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "siblings",
+                    "collapse_siblings",
                     "tag_type",
                     "attributes",
                 ),
@@ -47,26 +46,28 @@ class Bootstrap5CollapsePlugin(CMSPluginBase):
     ]
 
 
-class Bootstrap5CollapseTriggerPlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class CollapseTriggerPlugin(CMSPluginBase):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    model = Bootstrap5CollapseTrigger
     name = _("Collapse trigger")
-    module = _("Bootstrap 5")
-    render_template = "djangocms_frontend/collapse-trigger.html"
+    module = _("Interface")
+    model = models.CollapseTrigger
+    form = forms.CollapseTriggerForm
+    render_template = f"djangocms_frontend/{settings.framework}/collapse-trigger.html"
     allow_children = True
     parent_classes = [
-        "Bootstrap5CardPlugin",
-        "Bootstrap5CardInnerPlugin",
-        "Bootstrap5CollapsePlugin",
-        "Bootstrap5GridColumnPlugin",
+        "CardPlugin",
+        "CardInnerPlugin",
+        "CollapsePlugin",
+        "GridColumnPlugin",
     ]
 
     fieldsets = [
-        (None, {"fields": ("identifier",)}),
+        (None, {"fields": ("trigger_identifier",)}),
         (
             _("Advanced settings"),
             {
@@ -80,26 +81,28 @@ class Bootstrap5CollapseTriggerPlugin(CMSPluginBase):
     ]
 
 
-class Bootstrap5CollapseContainerPlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class CollapseContainerPlugin(CMSPluginBase):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    model = Bootstrap5CollapseContainer
     name = _("Collapse container")
-    module = _("Bootstrap 5")
-    render_template = "djangocms_frontend/collapse-container.html"
+    module = _("Interface")
+    model = models.CollapseContainer
+    form = forms.CollapseContainerForm
+    render_template = f"djangocms_frontend/{settings.framework}/collapse-container.html"
     allow_children = True
     parent_classes = [
-        "Bootstrap5CardPlugin",
-        "Bootstrap5CardInnerPlugin",
-        "Bootstrap5CollapsePlugin",
-        "Bootstrap5GridColumnPlugin",
+        "CardPlugin",
+        "CardInnerPlugin",
+        "CollapsePlugin",
+        "GridColumnPlugin",
     ]
 
     fieldsets = [
-        (None, {"fields": ("identifier",)}),
+        (None, {"fields": ("container_identifier",)}),
         (
             _("Advanced settings"),
             {
@@ -122,8 +125,3 @@ class Bootstrap5CollapseContainerPlugin(CMSPluginBase):
         instance.attributes["class"] = classes
 
         return super().render(context, instance, placeholder)
-
-
-plugin_pool.register_plugin(Bootstrap5CollapsePlugin)
-plugin_pool.register_plugin(Bootstrap5CollapseTriggerPlugin)
-plugin_pool.register_plugin(Bootstrap5CollapseContainerPlugin)

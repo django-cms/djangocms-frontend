@@ -19,7 +19,7 @@ class BadgePlugin(CMSPluginBase):
     module = _("Interface")
     model = models.Badge
     form = forms.BadgeForm
-    render_template = f"{settings.framework}/badge.html"
+    render_template = f"djangocms_frontend/{settings.framework}/badge.html"
     change_form_template = "djangocms_frontend/admin/badge.html"
     text_enabled = True
 

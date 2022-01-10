@@ -1,0 +1,8 @@
+{% load cms_tags frontend %}
+{% spaceless %}
+    <{{ instance.tag_type }} {% classes_and_attributes "media-body" %}>
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+    </{{ instance.tag_type }}>
+{% endspaceless %}

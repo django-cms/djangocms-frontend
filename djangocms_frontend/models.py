@@ -16,7 +16,7 @@ class FrontendUIItem(CMSPlugin):
         verbose_name = gettext("UI item")
 
     ui_item = models.CharField(max_length=30)
-    tag_type = TagTypeField()
+    tag_type = TagTypeField(blank=True)
     config = models.JSONField()
     attributes = AttributesField()
 

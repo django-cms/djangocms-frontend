@@ -59,7 +59,6 @@ class UILinkPlugin(CMSPluginBase):
     @classmethod
     def get_render_queryset(cls):
         queryset = super().get_render_queryset()
-        print("###", queryset)
         return queryset.select_related("internal_link")
 
     def get_render_template(self, context, instance, placeholder):

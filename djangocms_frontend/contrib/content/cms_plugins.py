@@ -4,21 +4,22 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
 
-from .forms import Bootstrap5CodeForm
-from .models import Bootstrap5Blockquote, Bootstrap5Code, Bootstrap5Figure
+from ... import settings
+from . import forms, models
 
 
-class Bootstrap5CodePlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class CodePlugin(CMSPluginBase):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
     """
 
-    model = Bootstrap5Code
     name = _("Code")
-    module = _("Bootstrap 5")
-    form = Bootstrap5CodeForm
-    render_template = "djangocms_frontend/code.html"
+    module = _("Frontend")
+    model = models.CodeBlock
+    form = forms.CodeForm
+    render_template = f"djangocms_frontend/{settings.framework}/code.html"
     change_form_template = "djangocms_frontend/admin/code.html"
     text_enabled = True
 
@@ -28,7 +29,7 @@ class Bootstrap5CodePlugin(CMSPluginBase):
             {
                 "fields": (
                     "code_content",
-                    "tag_type",
+                    "code_type",
                 )
             },
         ),
@@ -36,16 +37,18 @@ class Bootstrap5CodePlugin(CMSPluginBase):
     ]
 
 
-class Bootstrap5BlockquotePlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class BlockquotePlugin(CMSPluginBase):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
     """
 
-    model = Bootstrap5Blockquote
     name = _("Blockquote")
-    module = _("Bootstrap 5")
-    render_template = "djangocms_frontend/blockquote.html"
+    module = _("Frontend")
+    model = models.Blockquote
+    form = forms.BlockquoteForm
+    render_template = f"djangocms_frontend/{settings.framework}/blockquote.html"
     change_form_template = "djangocms_frontend/admin/blockquote.html"
     text_enabled = True
 
@@ -77,19 +80,20 @@ class Bootstrap5BlockquotePlugin(CMSPluginBase):
         return super().render(context, instance, placeholder)
 
 
-class Bootstrap5FigurePlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class FigurePlugin(CMSPluginBase):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/
     """
 
-    model = Bootstrap5Figure
     name = _("Figure")
-    module = _("Bootstrap 5")
-    render_template = "djangocms_frontend/figure.html"
+    module = _("Frontend")
+    model = models.Figure
+    form = forms.FigureForm
+    render_template = f"djangocms_frontend/{settings.framework}/figure.html"
     change_form_template = "djangocms_frontend/admin/figure.html"
     allow_children = True
-    child_classes = ["Bootstrap5PicturePlugin"]
 
     fieldsets = [
         (
@@ -114,8 +118,3 @@ class Bootstrap5FigurePlugin(CMSPluginBase):
         instance.attributes["class"] = classes
 
         return super().render(context, instance, placeholder)
-
-
-plugin_pool.register_plugin(Bootstrap5CodePlugin)
-plugin_pool.register_plugin(Bootstrap5BlockquotePlugin)
-plugin_pool.register_plugin(Bootstrap5FigurePlugin)

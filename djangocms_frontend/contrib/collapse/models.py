@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import AttributesField, TagTypeField
+from djangocms_frontend.models import FrontendUIItem
 
 # TODO leaving this comment for now
 # data-bs-toggle="collapse" data-bs-target="#collapseExample"
@@ -12,85 +13,40 @@ from djangocms_frontend.fields import AttributesField, TagTypeField
 # <div class="collapse" id="collapseExample">
 
 
-class Bootstrap5Collapse(CMSPlugin):
+class Collapse(FrontendUIItem):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    siblings = models.CharField(
-        verbose_name=_("Siblings"),
-        default=".card",
-        max_length=255,
-        help_text=_("Element to be used to create accordions."),
-    )
-    tag_type = TagTypeField()
-    attributes = AttributesField(excluded_keys=["id"])
-
-    def __str__(self):
-        return str(self.pk)
+    class Meta:
+        proxy = True
 
     def get_short_description(self):
         return "(collapse-{})".format(str(self.pk))
 
 
-class Bootstrap5CollapseTrigger(CMSPlugin):
+class CollapseTrigger(FrontendUIItem):
     """
     Component > "Collapse Trigger" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    identifier = models.SlugField(
-        verbose_name=_("Unique identifier"),
-        max_length=255,
-        blank=False,
-        help_text=_("Identifier to connect trigger with container."),
-    )
-    tag_type = TagTypeField()
-    attributes = AttributesField(
-        excluded_keys=[
-            "data-bs-toggle",
-            "data-bs-target",
-            "data-bs-parent",
-            "aria-expanded",
-            "aria-controls",
-            "role",
-        ]
-    )
-
-    def __str__(self):
-        return str(self.pk)
+    class Meta:
+        proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.identifier)
+        return "({})".format(self.trigger_identifier)
 
 
-class Bootstrap5CollapseContainer(CMSPlugin):
+class CollapseContainer(FrontendUIItem):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
     """
 
-    identifier = models.SlugField(
-        verbose_name=_("Unique identifier"),
-        max_length=255,
-        blank=False,
-        help_text=_("Identifier to connect trigger with container."),
-    )
-    tag_type = TagTypeField()
-    attributes = AttributesField(
-        excluded_keys=[
-            "data-bs-toggle",
-            "data-bs-target",
-            "data-bs-parent",
-            "aria-expanded",
-            "aria-controls",
-            "role",
-        ]
-    )
-
-    def __str__(self):
-        return str(self.pk)
+    class Meta:
+        proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.identifier)
+        return "({})".format(self.container_identifier)

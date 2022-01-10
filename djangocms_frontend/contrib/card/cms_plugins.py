@@ -19,7 +19,7 @@ class CardPlugin(CMSPluginBase):
     module = _("Interface")
     model = models.Card
     form = forms.CardForm
-    render_template = f"{settings.framework}/card.html"
+    render_template = f"djangocms_frontend/{settings.framework}/card.html"
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     child_classes = [
@@ -86,7 +86,7 @@ class CardInnerPlugin(CMSPluginBase):
     module = _("Interface")
     model = models.CardInner
     form = forms.CardInnerForm
-    render_template = f"{settings.framework}/card.html"
+    render_template = f"djangocms_frontend/{settings.framework}/card.html"
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     parent_classes = [
