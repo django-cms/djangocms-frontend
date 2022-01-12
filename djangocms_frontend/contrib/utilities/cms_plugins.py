@@ -117,6 +117,15 @@ class TOCPlugin(CMSPluginBase):
     render_template = f"djangocms_frontend/{settings.framework}/toc.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
+    fieldsets = [
+        (
+            _("Advanced settings"),
+            {
+                "fields": ("attributes",),
+            },
+        ),
+    ]
+
     @staticmethod
     def create_tree(request_toc):
         def process_level():

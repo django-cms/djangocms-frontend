@@ -89,5 +89,7 @@ class TableOfContentsForm(EntangledModelForm):
         }
         untangled_fields = ("attributes",)
         help_texts = {
-            "attributes": _("Attributes apply to &lt;li&gt; items."),
+            "attributes": _(
+                "Attributes apply to the <b>list items</b> for each entry in the table of contents."
+            ),
         }
