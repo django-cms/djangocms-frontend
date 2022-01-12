@@ -46,3 +46,103 @@ class SpacingPlugin(CMSPluginBase):
             },
         ),
     ]
+
+
+@plugin_pool.register_plugin
+class EditorNotePlugin(CMSPluginBase):
+    """Room for notes for editor only visible in edit mode"""
+
+    name = _("Editor note")
+    module = _("Frontend")
+    allow_children = True
+    render_template = f"djangocms_frontend/{settings.framework}/editor_note.html"
+    change_form_template = "djangocms_frontend/admin/no_form.html"
+
+
+@plugin_pool.register_plugin
+class HeadingPlugin(CMSPluginBase):
+    """Room for notes for editor only visible in edit mode"""
+
+    name = _("Heading")
+    module = _("Frontend")
+    model = models.Heading
+    form = forms.HeadingForm
+
+    render_template = "djangocms_frontend/heading.html"
+    allow_children = True
+
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": (
+                    ("heading_level", "heading_id"),
+                    "heading",
+                )
+            },
+        ),
+        (
+            _("Advanced settings"),
+            {
+                "classes": ("collapse",),
+                "fields": ("attributes",),
+            },
+        ),
+    ]
+
+    def render(self, context, instance, placeholder):
+        if hasattr(context["request"], "TOC"):
+            context["request"].TOC = []
+        heading_id = getattr(instance, "heading_id", "")
+        if heading_id:
+            context["request"].TOC.append(
+                (
+                    heading_id,
+                    getattr(instance, "heading", ""),
+                    getattr(instance, "level", "h2"),
+                )
+            )
+        context["instance"] = instance
+        return context
+
+
+@plugin_pool.register_plugin
+class TOCPlugin(CMSPluginBase):
+    name = _("Table of contents")
+    module = _("Frontend")
+
+    model = models.TableOfContents
+    form = forms.TableOfContentsForm
+
+    render_template = f"djangocms_frontend/{settings.framework}/toc.html"
+    change_form_template = "djangocms_frontend/admin/no_form.html"
+
+    @staticmethod
+    def create_tree(request_toc):
+        def process_level():
+            nonlocal i
+
+            previous_level = None
+            toc_tree = []
+            while i < len(request_toc):
+                if previous_level is None or previous_level == request_toc[i][2]:
+                    toc_tree.append((request_toc[i][0], request_toc[i][1]))
+                    previous_level = request_toc[i][2]
+                    i += 1
+                elif previous_level < request_toc[i][2]:
+                    toc_tree.append((None, process_level()))
+                elif previous_level > request_toc[i][2]:
+                    break
+            return toc_tree
+
+        i = 0
+        return process_level()
+
+    def render(self, context, instance, palceholder):
+        if hasattr(context["request"], "TOC"):
+            toc_tree = self.create_tree(context["request"].TOC)
+            context["toc"] = toc_tree
+        else:
+            context["toc"] = []
+        context["template"] = self.render_template
+        return context

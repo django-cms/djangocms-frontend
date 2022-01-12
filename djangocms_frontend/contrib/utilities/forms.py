@@ -39,3 +39,55 @@ class SpacingForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + settings.DEVICE_CHOICES,
         required=False,
     )
+
+
+class HeadingForm(EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "heading_level",
+                "heading",
+                "heading_id",
+            ],
+        }
+        untangled_fields = ("attributes",)
+
+    HEADINGS = (
+        ("h1", _("Heading 1")),
+        ("h2", _("Heading 2")),
+        ("h3", _("Heading 3")),
+        ("h4", _("Heading 4")),
+        ("h5", _("Heading 5")),
+    )
+
+    heading_level = forms.ChoiceField(
+        label=_("Heading level"),
+        choices=getattr(settings, "DJANGO_FRONTEND_HEADINGS", HEADINGS),
+        required=True,
+    )
+
+    heading = forms.CharField(
+        label=_("Heading"),
+        required=True,
+    )
+
+    heading_id = forms.CharField(
+        label=_("ID"),
+        required=False,
+        help_text=_(
+            "Fill in unique ID for table of contents. If empty heading will not appear in table of contents."
+        ),
+    )
+
+
+class TableOfContentsForm(EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [],
+        }
+        untangled_fields = ("attributes",)
+        help_texts = {
+            "attributes": _("Attributes apply to &lt;li&gt; items."),
+        }

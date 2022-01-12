@@ -1,0 +1,11 @@
+{% spaceless %}
+    <ul class="toc-ul">
+        {% for id, heading in toc %}
+            {% if id is None %}
+                {% include template with toc=heading %}
+            {% else %}
+                <li><a href="#{{ id }}" instance.attributes_str>{{ heading }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endspaceless %}

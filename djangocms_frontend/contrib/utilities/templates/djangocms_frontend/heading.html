@@ -1,0 +1,10 @@
+{% load cms_tags %}{% spaceless %}
+    <{{ instance.heading_level }}{% if instance.heading_id %} id="{{ instance.heading_id }}"{% endif %} {{ instance.attributes_str }}>{{ instance.heading|safe }}</{{ instance.level }}>
+    {% if instance.child_plugin_instances %}
+        {% if request.toolbar.edit_mode_active %}<div style="margin-bottom: 1rem;">{% endif %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+        {% if request.toolbar.edit_mode_active %}</div>{% endif %}
+    {% endif %}
+{% endspaceless %}

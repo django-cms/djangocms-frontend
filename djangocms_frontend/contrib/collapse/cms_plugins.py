@@ -19,7 +19,7 @@ class CollapsePlugin(CMSPluginBase):
     module = _("Interface")
     model = models.Collapse
     form = forms.CollapseForm
-    render_template = f"{settings.framework}/collapse.html"
+    render_template = f"djangocms_frontend/{settings.framework}/collapse.html"
     change_form_template = "djangocms_frontend/admin/collapse.html"
     allow_children = True
     child_classes = [

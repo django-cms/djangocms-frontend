@@ -29,3 +29,29 @@ class Spacing(FrontendUIItem):
 
     def get_short_description(self):
         return "(.{})".format(self.get_base_css_class())
+
+
+class Heading(FrontendUIItem):
+    """
+    Creates a heading (<h1>, <h2>, ...) and adds the entry to the table of contents (if an id is given)
+    """
+
+    class Meta:
+        proxy = True
+
+    def get_short_description(self):
+        return "({})".format(self.heading)
+
+
+class TableOfContents(FrontendUIItem):
+    """
+    Creates a table of contents of all headings processed BEFORE the plugin.
+    If the table of contents is supposed to be at the top of the page, move the surrounding column
+    using flexbox directives.
+    """
+
+    class Meta:
+        proxy = True
+
+    def get_short_description(self):
+        return "({})".format(self.id)
