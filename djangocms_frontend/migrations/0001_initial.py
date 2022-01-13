@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                         verbose_name="Tag type",
                     ),
                 ),
-                ("config", models.JSONField()),
+                ("config", models.JSONField(default=dict)),
                 (
                     "attributes",
                     djangocms_frontend.fields.AttributesField(

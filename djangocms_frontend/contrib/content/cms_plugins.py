@@ -16,7 +16,7 @@ class CodePlugin(CMSPluginBase):
     """
 
     name = _("Code")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.CodeBlock
     form = forms.CodeForm
     render_template = f"djangocms_frontend/{settings.framework}/code.html"
@@ -45,7 +45,7 @@ class BlockquotePlugin(CMSPluginBase):
     """
 
     name = _("Blockquote")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Blockquote
     form = forms.BlockquoteForm
     render_template = f"djangocms_frontend/{settings.framework}/blockquote.html"
@@ -88,7 +88,7 @@ class FigurePlugin(CMSPluginBase):
     """
 
     name = _("Figure")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Figure
     form = forms.FigureForm
     render_template = f"djangocms_frontend/{settings.framework}/figure.html"

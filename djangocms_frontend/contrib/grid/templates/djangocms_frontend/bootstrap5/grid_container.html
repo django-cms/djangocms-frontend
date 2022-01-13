@@ -1,6 +1,6 @@
-{% load cms_tags %}{% spaceless %}
-    <{{ instance.tag_type }} {{ instance.attributes_str }}>
+{% load cms_tags frontend %}{% spaceless %}
+    <{{ instance.tag_type }} {% add_class instance.attributes instance.container_type %}>
     {% for plugin in instance.child_plugin_instances %}
-        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+        {% render_plugin plugin %}
     {% endfor %}
-    </{{ instance.tag_type }}>{% endspaceless %}
+    </{{ instance.tag_type }}>{% endspaceless %}

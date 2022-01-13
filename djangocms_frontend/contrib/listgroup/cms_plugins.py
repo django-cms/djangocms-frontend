@@ -16,7 +16,7 @@ class ListGroupPlugin(CMSPluginBase):
     """
 
     name = _("List group")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.ListGroup
     form = forms.ListGroupForm
     render_template = f"djangocms_frontend/{settings.framework}/list-group.html"
@@ -63,7 +63,7 @@ class ListGroupItemPlugin(CMSPluginBase):
     """
 
     name = _("List item")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.ListGroupItem
     form = forms.ListGroupItemForm
     render_template = f"djangocms_frontend/{settings.framework}/list-group-item.html"

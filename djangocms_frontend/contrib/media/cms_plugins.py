@@ -25,7 +25,7 @@ class MediaPlugin(CMSPluginBase):
     """
 
     name = _("Media")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Media
     form = EmptyForm
     render_template = f"djangocms_frontend/{settings.framework}/media.html"
@@ -54,7 +54,7 @@ class MediaBodyPlugin(CMSPluginBase):
     """
 
     name = _("Media body")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.MediaBody
     form = EmptyForm
     render_template = f"djangocms_frontend/{settings.framework}/media-body.html"

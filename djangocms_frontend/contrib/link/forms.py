@@ -5,7 +5,7 @@ from cms.models import Page
 from django import forms
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
@@ -114,21 +114,30 @@ class SmartLinkField(forms.ChoiceField):
                     obj_list,
                 )
             )
-
         return object_choices
 
     def prepare_value(self, value):
-        try:
-            type_id, obj_id = value
-            return f"{type_id}-{obj_id}"
-        except (TypeError, ValueError):
-            return ""
+        if value:
+            try:
+                app_label, model = value["model"].rsplit(".", 1)
+                content_type = ContentType.objects.get(app_label=app_label, model=model)
+                return f"{content_type.id}-{value['pk']}"
+            except (TypeError, ValueError, KeyError, ObjectDoesNotExist):
+                pass
+        return ""
 
     def clean(self, value):
         value = super().clean(value)
         if "-" in value:
             type_id, obj_id = value.split("-", 1)
-            return int(type_id), int(obj_id)
+            try:
+                content_type = ContentType.objects.get(id=type_id)
+                return dict(
+                    model=f"{content_type.app_label}.{content_type.model}",
+                    pk=int(obj_id),
+                )
+            except ObjectDoesNotExist:
+                pass
         return None
 
 

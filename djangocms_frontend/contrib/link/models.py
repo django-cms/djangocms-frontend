@@ -14,13 +14,22 @@ COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 class GetLinkMixin:
     def get_link(self):
         if getattr(self, "internal_link", None):
-            type_id, obj_id = self.internal_link
-            object_type = ContentType.objects.get(id=int(type_id)).model_class()
             try:
-                ref_page = object_type.objects.get(id=int(obj_id))
-            except models.ObjectDoesNotExist:
+                app_label, model = self.internal_link["model"].rsplit(".", 1)
+                object_type = ContentType.objects.get(
+                    app_label=app_label, model=model
+                ).model_class()
+                ref_page = object_type.objects.get(id=int(self.internal_link["pk"]))
+                link = ref_page.get_absolute_url()
+            except (
+                KeyError,
+                TypeError,
+                ValueError,
+                AttributeError,
+                models.ObjectDoesNotExist,
+            ):
+                self.internal_link = None
                 return ""
-            link = ref_page.get_absolute_url()
 
             # simulate the call to the unauthorized CMSPlugin.page property
             cms_page = self.placeholder.page if self.placeholder_id else None

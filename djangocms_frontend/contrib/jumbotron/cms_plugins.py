@@ -16,7 +16,7 @@ class JumbotronPlugin(CMSPluginBase):
     """
 
     name = _("Jumbotron")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Jumbotron
     form = forms.JumbotronForm
     render_template = f"djangocms_frontend/{settings.framework}/jumbotron.html"

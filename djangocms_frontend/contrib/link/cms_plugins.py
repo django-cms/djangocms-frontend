@@ -38,17 +38,19 @@ UILINK_FIELDSET = [
 ]
 
 
-class UILinkPlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class LinkPlugin(CMSPluginBase):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/
     """
 
     name = _("Link / Button")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Link
     form = forms.LinkForm
     change_form_template = "djangocms_frontend/admin/link.html"
+    text_enabled = True
 
     fieldsets = UILINK_FIELDSET + [
         (
@@ -97,7 +99,3 @@ class UILinkPlugin(CMSPluginBase):
         context["link"] = instance.get_link()
 
         return super().render(context, instance, placeholder)
-
-
-# plugin_pool.unregister_plugin(LinkPlugin)
-plugin_pool.register_plugin(UILinkPlugin)

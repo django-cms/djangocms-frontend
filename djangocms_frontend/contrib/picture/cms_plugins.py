@@ -19,7 +19,7 @@ class ImagePlugin(CMSPluginBase):
     """
 
     name = _("Picture / Image")
-    module = _("Frontend")
+    module = _("Interface")
 
     model = models.Picture
     form = forms.PictureForm

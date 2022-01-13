@@ -1,10 +1,10 @@
 {% load frontend %}{% spaceless %}
-    <ul {% classes_and_attributes "" "list_attributes" %}>
+    <ul {% add_class instance.list_attributes %}>
         {% for id, heading in toc %}
             {% if id is None %}
                 {% include template with toc=heading %}
             {% else %}
-                <li {% classes_and_attributes %}><a href="#{{ id }}" {% classes_and_attributes "" "link_attributes" %}>{{ heading }}</a></li>
+                <li {% add_class instance.attributes %}><a href="#{{ id }}" {% add_class instance.link_attributes %}>{{ heading }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>

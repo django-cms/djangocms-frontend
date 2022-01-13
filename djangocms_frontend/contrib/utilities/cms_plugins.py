@@ -53,7 +53,7 @@ class EditorNotePlugin(CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Editor note")
-    module = _("Frontend")
+    module = _("Interface")
     allow_children = True
     render_template = f"djangocms_frontend/{settings.framework}/editor_note.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
@@ -64,7 +64,7 @@ class HeadingPlugin(CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
-    module = _("Frontend")
+    module = _("Interface")
     model = models.Heading
     form = forms.HeadingForm
 
@@ -109,7 +109,7 @@ class HeadingPlugin(CMSPluginBase):
 @plugin_pool.register_plugin
 class TOCPlugin(CMSPluginBase):
     name = _("Table of contents")
-    module = _("Frontend")
+    module = _("Interface")
 
     model = models.TableOfContents
     form = forms.TableOfContentsForm
