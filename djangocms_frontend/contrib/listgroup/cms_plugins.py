@@ -65,7 +65,7 @@ class ListGroupItemPlugin(CMSPluginBase):
     name = _("List item")
     module = _("Frontend")
     model = models.ListGroupItem
-    forms = forms.ListGroupItemForm
+    form = forms.ListGroupItemForm
     render_template = f"djangocms_frontend/{settings.framework}/list-group-item.html"
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True

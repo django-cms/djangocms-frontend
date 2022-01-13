@@ -1,10 +1,11 @@
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.db import models
 from django.utils.translation import gettext as _
 
-from djangocms_frontend.settings import COLOR_STYLE_CHOICES
-
 # 'link' type is added manually as it is only required for this plugin
-from ...models import FrontendUIItem
+from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
 COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 
@@ -25,8 +26,12 @@ class Link(FrontendUIItem):
 
     def get_link(self):
         if self.internal_link:
-            assert False, "NOT IMPLEMENTED"
-            ref_page = self.internal_link
+            type_id, obj_id = self.internal_link
+            object_type = ContentType.objects.get(id=int(type_id)).model_class()
+            try:
+                ref_page = object_type.objects.get(id=int(obj_id))
+            except models.ObjectDoesNotExist:
+                return ""
             link = ref_page.get_absolute_url()
 
             # simulate the call to the unauthorized CMSPlugin.page property
@@ -47,11 +52,10 @@ class Link(FrontendUIItem):
 
             # now we do the same for the reference page the plugin links to
             # in order to compare them later
-            if cms_page is not None:
-                if getattr(cms_page, "node", None):
-                    ref_page_site_id = ref_page.node.site_id
-                else:
-                    ref_page_site_id = ref_page.site_id
+            if getattr(ref_page, "node", None) and cms_page is not None:
+                ref_page_site_id = ref_page.node.site_id
+            elif getattr(ref_page, "site_id", None) and cms_page is not None:
+                ref_page_site_id = ref_page.site_id
             # if no external reference is found the plugin links to the
             # current page
             else:

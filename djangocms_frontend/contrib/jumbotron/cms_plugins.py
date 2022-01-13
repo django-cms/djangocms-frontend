@@ -4,24 +4,27 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
 
-from .models import Bootstrap5Jumbotron
+from ... import settings
+from . import forms, models
 
 
-class Bootstrap5JumbotronPlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class JumbotronPlugin(CMSPluginBase):
     """
     Components > "Jumbotron" Plugin
     https://getbootstrap.com/docs/5.0/components/jumbotron/
     """
 
-    model = Bootstrap5Jumbotron
     name = _("Jumbotron")
-    module = _("Bootstrap 5")
-    render_template = "djangocms_frontend/jumbotron.html"
+    module = _("Frontend")
+    model = models.Jumbotron
+    form = forms.JumbotronForm
+    render_template = f"djangocms_frontend/{settings.framework}/jumbotron.html"
     change_form_template = "djangocms_frontend/admin/jumbotron.html"
     allow_children = True
 
     fieldsets = [
-        (None, {"fields": ("fluid",)}),
+        (None, {"fields": ("jumbotron_fluid",)}),
         (
             _("Advanced settings"),
             {
@@ -36,7 +39,7 @@ class Bootstrap5JumbotronPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         link_classes = ["jumbotron"]
-        if instance.fluid:
+        if instance.jumbotron_fluid:
             link_classes.append("jumbotron-fluid")
 
         classes = concat_classes(
@@ -48,6 +51,3 @@ class Bootstrap5JumbotronPlugin(CMSPluginBase):
         instance.attributes["class"] = classes
 
         return super().render(context, instance, placeholder)
-
-
-plugin_pool.register_plugin(Bootstrap5JumbotronPlugin)

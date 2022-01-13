@@ -16,7 +16,7 @@ class UILinkPlugin(CMSPluginBase):
     """
 
     name = _("Link / Button")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Link
     form = forms.LinkForm
     change_form_template = "djangocms_frontend/admin/link.html"
@@ -40,7 +40,7 @@ class UILinkPlugin(CMSPluginBase):
                 "fields": (
                     ("mailto", "phone"),
                     ("anchor", "target"),
-                    ("file_link"),
+                    ("file_link",),
                 ),
             },
         ),
@@ -56,10 +56,10 @@ class UILinkPlugin(CMSPluginBase):
         ),
     ]
 
-    @classmethod
-    def get_render_queryset(cls):
-        queryset = super().get_render_queryset()
-        return queryset.select_related("internal_link")
+    # @classmethod
+    # def get_render_queryset(cls):
+    #     queryset = super().get_render_queryset()
+    #     return queryset.select_related("internal_link")
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(instance, "link", "link", get_templates())

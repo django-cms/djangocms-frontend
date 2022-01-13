@@ -121,7 +121,8 @@ class TOCPlugin(CMSPluginBase):
         (
             _("Advanced settings"),
             {
-                "fields": ("attributes",),
+                "classes": ("collapse",),
+                "fields": ("list_attributes", "attributes", "link_attributes"),
             },
         ),
     ]
@@ -154,4 +155,5 @@ class TOCPlugin(CMSPluginBase):
         else:
             context["toc"] = []
         context["template"] = self.render_template
+        context["instance"] = instance
         return context

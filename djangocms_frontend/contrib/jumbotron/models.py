@@ -1,29 +1,19 @@
-from cms.models import CMSPlugin
-from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.fields import AttributesField, TagTypeField
+from djangocms_frontend.models import FrontendUIItem
 
 
-class Bootstrap5Jumbotron(CMSPlugin):
+class Jumbotron(FrontendUIItem):
     """
     Components > "Jumbotron" Plugin
     https://getbootstrap.com/docs/5.0/components/jumbotron/
     """
 
-    fluid = models.BooleanField(
-        verbose_name=_("Fluid"),
-        default=False,
-        help_text=_("Adds the .jumbotron-fluid class."),
-    )
-    tag_type = TagTypeField()
-    attributes = AttributesField()
-
-    def __str__(self):
-        return str(self.pk)
+    class Meta:
+        proxy = True
 
     def get_short_description(self):
         text = ""
-        if self.fluid:
+        if self.jumbotron_fluid:
             text = "({})".format(_("Fluid"))
         return text

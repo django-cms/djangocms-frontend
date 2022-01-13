@@ -1,10 +1,10 @@
-{% spaceless %}
-    <ul class="toc-ul">
+{% load frontend %}{% spaceless %}
+    <ul {% classes_and_attributes "" "list_attributes" %}>
         {% for id, heading in toc %}
             {% if id is None %}
                 {% include template with toc=heading %}
             {% else %}
-                <li><a href="#{{ id }}" instance.attributes_str>{{ heading }}</a></li>
+                <li {% classes_and_attributes %}><a href="#{{ id }}" {% classes_and_attributes "" "link_attributes" %}>{{ heading }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>

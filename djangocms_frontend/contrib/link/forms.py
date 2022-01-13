@@ -1,10 +1,16 @@
+from importlib import import_module
+
+from cms.forms.utils import get_page_choices
+from cms.models import Page
 from django import forms
+from django.conf import settings as django_settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
+from django_select2.forms import Select2Widget
 from djangocms_icon.fields import IconField
-from djangocms_link.fields import PageSearchField
 from djangocms_link.models import TARGET_CHOICES
 from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
@@ -31,6 +37,99 @@ def get_templates():
 
 
 HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
+LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
+
+
+class SmartLinkField(forms.ChoiceField):
+    widget = Select2Widget
+
+    def __init__(self, *args, **kwargs):
+        kwargs["choices"] = SmartLinkField.get_link_choices
+        super().__init__(*args, **kwargs)
+
+    @staticmethod
+    def get_link_choices(lang=None):
+        available_objects = []
+
+        for item in LINK_MODELS:
+            if item["class_path"] != "cms.models.Page":
+                # CMS pages are collected using a cms function to preserve hierarchy
+                model = item["type"]
+                parts = item["class_path"].rsplit(".", 1)
+                cls = getattr(import_module(parts[0]), parts[1])
+                queryset = cls.objects
+
+                if "manager_method" in item:
+                    queryset = getattr(queryset, item["manager_method"])()
+
+                if "filter" in item:
+                    for (k, v) in item["filter"].items():
+                        try:
+                            # Attempt to execute any callables in the filter dict.
+                            item["filter"][k] = v()
+                        except TypeError:
+                            # OK, it wasn't a callable, so, leave it be
+                            pass
+                    queryset = queryset.filter(**item["filter"])
+                else:
+                    if "manager_method" not in item:
+                        queryset = queryset.all()
+
+                if "order_by" in item:
+                    queryset = queryset.order_by(item["order_by"])
+
+                available_objects.append(
+                    {
+                        "model": model,
+                        "objects": list(queryset),
+                    }
+                )
+
+        # Now create our list of choices for the <select> field
+        object_choices = []
+        type_id = ContentType.objects.get_for_model(Page).id
+        for value, descr in get_page_choices(lang):
+            if isinstance(descr, list):
+                hierarchy = []
+                for page, name in descr:
+                    hierarchy.append((f"{type_id}-{page}", name))
+                object_choices.append((value, hierarchy))
+            else:
+                object_choices.append((value, descr))
+
+        for group in available_objects:
+            obj_list = []
+            for obj in group["objects"]:
+                type_class = ContentType.objects.get_for_model(obj.__class__)
+                type_id = type_class.id
+                obj_id = obj.id
+                form_value = f"{type_id}-{obj_id}"
+                display_text = str(obj)
+
+                obj_list.append((form_value, display_text))
+
+            object_choices.append(
+                (
+                    group["model"],
+                    obj_list,
+                )
+            )
+
+        return object_choices
+
+    def prepare_value(self, value):
+        try:
+            type_id, obj_id = value
+            return f"{type_id}-{obj_id}"
+        except (TypeError, ValueError):
+            return ""
+
+    def clean(self, value):
+        value = super().clean(value)
+        if "-" in value:
+            type_id, obj_id = value.split("-", 1)
+            return int(type_id), int(obj_id)
+        return None
 
 
 class AbstractLinkForm(EntangledModelForm):
@@ -71,7 +170,7 @@ class AbstractLinkForm(EntangledModelForm):
         validators=url_validators,
         help_text=_("Provide a link to an external source."),
     )
-    internal_link = PageSearchField(
+    internal_link = SmartLinkField(
         label=_("Internal link"),
         required=False,
         help_text=_("If provided, overrides the external link."),
@@ -194,6 +293,7 @@ class LinkForm(AbstractLinkForm):
                 "icon_right",
             ]
         }
+        untangled_fields = ("attributes",)
 
     link_type = forms.ChoiceField(
         label=_("Type"),
@@ -230,20 +330,3 @@ class LinkForm(AbstractLinkForm):
         label=_("Icon right"),
         required=False,
     )
-
-    # def get_form(self, request, obj=None, **kwargs):
-    #     form_class = super().get_form(request, obj, **kwargs)
-    #
-    #     if obj and obj.page and hasattr(obj.page, 'site') and obj.page.site:
-    #         site = obj.page.site
-    #     elif self.page and hasattr(self.page, 'site') and self.page.site:
-    #         site = self.page.site
-    #     else:
-    #         site = Site.objects.get_current()
-    #
-    #     class Form(form_class):
-    #         def __init__(self, *args, **kwargs):
-    #             super().__init__(*args, **kwargs)
-    #             self.for_site(site)
-    #
-    #     return Form

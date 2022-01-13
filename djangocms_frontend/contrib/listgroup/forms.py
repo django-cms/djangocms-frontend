@@ -1,10 +1,8 @@
-from cms.models import CMSPlugin
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
-from djangocms_frontend.fields import AttributesField, TagTypeField
 
 from ...models import FrontendUIItem
 from .constants import LISTGROUP_STATE_CHOICES
@@ -35,7 +33,7 @@ class ListGroupForm(EntangledModelForm):
 
 class ListGroupItemForm(EntangledModelForm):
     """
-    Components > "List Group Ite" Plugin
+    Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
     """
 

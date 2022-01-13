@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
+from djangocms_attributes_field.fields import AttributesFormField, AttributesWidget
 from entangled.forms import EntangledModelForm
 
 from ... import settings
@@ -85,7 +86,7 @@ class TableOfContentsForm(EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
-            "config": [],
+            "config": ["list_attributes", "link_attributes"],
         }
         untangled_fields = ("attributes",)
         help_texts = {
@@ -93,3 +94,24 @@ class TableOfContentsForm(EntangledModelForm):
                 "Attributes apply to the <b>list items</b> for each entry in the table of contents."
             ),
         }
+        labels = {
+            "attributes": _("Item attributes"),
+        }
+
+    list_attributes = AttributesFormField(
+        label=_("List attributes"),
+        widget=AttributesWidget(),
+        required=False,
+        help_text=_(
+            "Attributes apply to the <b>list</b> for each level in the table of contents."
+        ),
+    )
+
+    link_attributes = AttributesFormField(
+        label=_("Link attributes"),
+        widget=AttributesWidget(),
+        required=False,
+        help_text=_(
+            "Attributes apply to the <b>link</b> for each entry in the table of contents."
+        ),
+    )
