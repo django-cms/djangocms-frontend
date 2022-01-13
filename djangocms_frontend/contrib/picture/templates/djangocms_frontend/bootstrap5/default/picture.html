@@ -15,25 +15,24 @@
 
     <img src="{{ instance.img_src }}"
         alt="{% if instance.attributes.alt %}{{ instance.attributes.alt }}{% elif instance.image.default_alt_text %}{{ instance.image.default_alt_text }}{% endif %}"
-        {% if instance.width %} width="{{ instance.width }}"{% endif %}
-        {% if instance.height %} height="{{ instance.height }}"{% endif %}
+        {% if instance.width %} width="{{ instance.width|safe }}"{% endif %}
+        {% if instance.height %} height="{{ instance.height|safe }}"{% endif %}
         {% if img_srcset_data %}
             srcset="
             {% for size, thumb in img_srcset_data %}
-                {{ thumb.url }} {{ size }}w,
+                {{ thumb.url }} {{ size|safe }}w,
             {% endfor %}
             {{ instance.img_src }} {{ picture_size.size.0|safe }}w
             "
             sizes="
             {% for size, thumb in img_srcset_data %}
-                (max-width: {{ size }}px) {{ size }}px,
+                (max-width: {{ size|safe }}px) {{ size|safe }}px,
             {% endfor %}
             {{ picture_size.size.0|safe }}px
             "
         {% endif %}
         {{ instance.attributes_str }}
     >
-
     {# start render figure/figcaption #}
     {% if instance.caption_text %}
         <figcaption>{{ instance.caption_text }}</figcaption>

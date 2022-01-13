@@ -35,8 +35,8 @@ class PictureMixin:
             width = int(height * PICTURE_RATIO)
         elif not width and not height and getattr(self, "picture", None):
             picture = get_related_object(self.config, "picture")
-            width = picture.width
-            height = picture.height
+            width = int(picture.width)
+            height = int(picture.height)
 
         return {
             "size": (width, height),

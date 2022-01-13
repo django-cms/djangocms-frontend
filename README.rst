@@ -7,12 +7,21 @@ django CMS Frontend
 **django CMS Frontend** is a blugin bundle based on
 **`django CMS Bootstrap 5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_**.
 Its objective is to provide a set of popular frontend components independent of
-the currently used frontend framework such as Bootstrap.
+the currently used frontend framework such as Bootstrap, or its specific version.
 
 The plugin are framework agnostic and the framework can be changed by adapting
 your procet's settings. Also, it is designed to avoid having to rebuild your
 CMS plugin tree when upgrading e.g. from one version of your frontend framework
 to the next.
+
+django CMS Frontend uses **`django-entangled <https://github.com/jrief/django-entangled>`_**
+by Jacob Rief to avoid bloating your project's database with frontend framework-dependent
+tables. Instead all design parameters are stored in a common JSON field and future
+releases of improved frontend features will not require to rebuild your full
+plugin tree.
+
+The link plugin has been rewritten to not allow internal links to other CMS pages, but also
+to other django models such as, e.g., posts of **`djangocms-blog <https://github.com/nephila/djangocms-blog>`_**. 
 
 .. note:
     This is currently a proof of concept project.
@@ -59,23 +68,21 @@ For a manual install:
 * add the following entries to your ``INSTALLED_APPS``::
 
     'djangocms_icon',
-    'djangocms_link',
-    'djangocms_picture',
-    'djangocms_bootstrap5',
-    'djangocms_bootstrap5.contrib.bootstrap5_alerts',
-    'djangocms_bootstrap5.contrib.bootstrap5_badge',
-    'djangocms_bootstrap5.contrib.bootstrap5_card',
-    'djangocms_bootstrap5.contrib.bootstrap5_carousel',
-    'djangocms_bootstrap5.contrib.bootstrap5_collapse',
-    'djangocms_bootstrap5.contrib.bootstrap5_content',
-    'djangocms_bootstrap5.contrib.bootstrap5_grid',
-    'djangocms_bootstrap5.contrib.bootstrap5_jumbotron',
-    'djangocms_bootstrap5.contrib.bootstrap5_link',
-    'djangocms_bootstrap5.contrib.bootstrap5_listgroup',
-    'djangocms_bootstrap5.contrib.bootstrap5_media',
-    'djangocms_bootstrap5.contrib.bootstrap5_picture',
-    'djangocms_bootstrap5.contrib.bootstrap5_tabs',
-    'djangocms_bootstrap5.contrib.bootstrap5_utilities',
+    'djangocms_frontend',
+    'djangocms_frontend.contrib.bootstrap5_alerts',
+    'djangocms_frontend.contrib.bootstrap5_badge',
+    'djangocms_frontend.contrib.bootstrap5_card',
+    # 'djangocms_frontend.contrib.bootstrap5_carousel',
+    'djangocms_frontend.contrib.bootstrap5_collapse',
+    'djangocms_frontend.contrib.bootstrap5_content',
+    'djangocms_frontend.contrib.bootstrap5_grid',
+    'djangocms_frontend.contrib.bootstrap5_jumbotron',
+    'djangocms_frontend.contrib.bootstrap5_link',
+    'djangocms_frontend.contrib.bootstrap5_listgroup',
+    'djangocms_frontend.contrib.bootstrap5_media',
+    'djangocms_frontend.contrib.bootstrap5_picture',
+    'djangocms_frontend.contrib.bootstrap5_tabs',
+    'djangocms_frontend.contrib.bootstrap5_utilities',
 
 * run ``python manage.py migrate``
 
@@ -83,11 +90,11 @@ For a manual install:
 Configuration
 -------------
 
-django CMS Bootstrap 5 **utilises** the following django CMS plugins:
+django CMS frontend **utilises** the following django CMS plugin:
 
-* **django CMS Link**: `Link <https://github.com/divio/djangocms-link/>`_
-* **django CMS Picture**: `Picture <https://github.com/divio/djangocms-picture/>`_
 * **django CMS Icon**: `Icon <https://github.com/divio/djangocms-icon>`_
+
+Dependency on **django CMS Link** and **django CMS Picture** have been dropped.
 
 It provides the following **standard** Bootstrap 5 components:
 
