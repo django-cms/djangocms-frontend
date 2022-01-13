@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import gettext as _
+from entangled.utils import get_related_object
 
 # 'link' type is added manually as it is only required for this plugin
 from djangocms_frontend.models import FrontendUIItem
@@ -10,22 +11,9 @@ from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 
 
-class Link(FrontendUIItem):
-    """
-    Components > "Button" Plugin
-    https://getbootstrap.com/docs/5.0/components/buttons/
-    """
-
-    class Meta:
-        proxy = True
-
-    def get_short_description(self):
-        if self.name and self.get_link():
-            return "{} ({})".format(self.name, self.get_link())
-        return self.name or self.get_link() or _("<link is missing>")
-
+class GetLinkMixin:
     def get_link(self):
-        if self.internal_link:
+        if getattr(self, "internal_link", None):
             type_id, obj_id = self.internal_link
             object_type = ContentType.objects.get(id=int(type_id)).model_class()
             try:
@@ -65,22 +53,39 @@ class Link(FrontendUIItem):
                 ref_site = Site.objects._get_site_by_id(ref_page_site_id).domain
                 link = "//{}{}".format(ref_site, link)
 
-        elif self.file_link:
-            link = self.file_link.url
+        elif getattr(self, "file_link", None):
+            link = get_related_object(self.config, "file_link").url
 
-        elif self.external_link:
+        elif getattr(self, "external_link", None):
             link = self.external_link
 
-        elif self.phone:
+        elif getattr(self, "phone", None):
             link = "tel:{}".format(self.phone.replace(" ", ""))
 
-        elif self.mailto:
+        elif getattr(self, "mailto", None):
             link = "mailto:{}".format(self.mailto)
 
         else:
             link = ""
 
-        if (not self.phone and not self.mailto) and self.anchor:
+        if (
+            not getattr(self, "phone", None) and not getattr(self, "mailto", None)
+        ) and getattr(self, "anchor", None):
             link += "#{}".format(self.anchor)
 
         return link
+
+
+class Link(GetLinkMixin, FrontendUIItem):
+    """
+    Components > "Button" Plugin
+    https://getbootstrap.com/docs/5.0/components/buttons/
+    """
+
+    class Meta:
+        proxy = True
+
+    def get_short_description(self):
+        if self.name and self.get_link():
+            return "{} ({})".format(self.name, self.get_link())
+        return self.name or self.get_link() or _("<link is missing>")

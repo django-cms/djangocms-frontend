@@ -1,6 +1,3 @@
-from cms.models import CMSPlugin
-
-from djangocms_frontend.fields import AttributesField, TagTypeField
 from djangocms_frontend.models import FrontendUIItem
 
 

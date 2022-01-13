@@ -1,38 +1,101 @@
 import copy
 
+import cms.exceptions
+from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from djangocms_picture.cms_plugins import PicturePlugin
 
 from djangocms_frontend.helpers import concat_classes
 
-from .models import Bootstrap5Picture
+from ... import settings
+from . import forms, models
 
 
-class Bootstrap5PicturePlugin(PicturePlugin):
+@plugin_pool.register_plugin
+class ImagePlugin(CMSPluginBase):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/
     """
 
-    model = Bootstrap5Picture
     name = _("Picture / Image")
-    change_form_template = "djangocms_frontend/admin/picture.html"
-    module = _("Bootstrap 5")
+    module = _("Frontend")
 
-    fieldsets = copy.deepcopy(PicturePlugin.fieldsets)
-    fieldsets[0] = (
-        None,
-        {
-            "fields": (
-                "picture",
-                "external_picture",
-                ("picture_fluid", "picture_rounded", "picture_thumbnail"),
-            )
-        },
-    )
+    model = models.Picture
+    form = forms.PictureForm
+
+    change_form_template = "djangocms_frontend/admin/picture.html"
+
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": (
+                    "picture",
+                    "external_picture",
+                    ("picture_fluid", "picture_rounded", "picture_thumbnail"),
+                )
+            },
+        ),
+        (
+            _("Advanced settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "template",
+                    "use_responsive_image",
+                    ("width", "height"),
+                    "alignment",
+                    "caption_text",
+                    "attributes",
+                ),
+            },
+        ),
+        (
+            _("Link settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    (
+                        "external_link",
+                        "internal_link",
+                    ),
+                    "file_link",
+                ),
+            },
+        ),
+        (
+            _("Cropping settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    ("use_automatic_scaling", "use_no_cropping"),
+                    ("use_crop", "use_upscale"),
+                    "thumbnail_options",
+                ),
+            },
+        ),
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return (
+            f"djangocms_frontend/{settings.framework}/{instance.template}/picture.html"
+        )
 
     def render(self, context, instance, placeholder):
+        if instance.alignment:
+            classes = "align-{} ".format(instance.alignment)
+            classes += instance.attributes.get("class", "")
+            # Set the class attribute to include the alignment html class
+            # This is done to leverage the attributes_str property
+            instance.attributes["class"] = classes
+        # assign link to a context variable to be performant
+        context["picture_link"] = instance.get_link()
+        context["picture_size"] = instance.get_size(
+            width=context.get("width") or 0,
+            height=context.get("height") or 0,
+        )
+        context["img_srcset_data"] = instance.img_srcset_data
         link_classes = []
         if instance.picture_fluid:
             link_classes.append("img-fluid")
@@ -50,7 +113,3 @@ class Bootstrap5PicturePlugin(PicturePlugin):
         instance.attributes["class"] = classes
 
         return super().render(context, instance, placeholder)
-
-
-plugin_pool.unregister_plugin(PicturePlugin)
-plugin_pool.register_plugin(Bootstrap5PicturePlugin)

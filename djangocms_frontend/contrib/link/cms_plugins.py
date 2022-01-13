@@ -8,6 +8,35 @@ from djangocms_frontend.helpers import concat_classes, get_plugin_template
 from . import forms, models
 from .constants import USE_LINK_ICONS
 
+UILINK_FIELDS = (
+    ("name", "link_type"),
+    ("external_link", "internal_link"),
+    ("link_context", "link_size"),
+    ("link_outline", "link_block"),
+)
+
+UILINK_FIELDSET = [
+    (
+        None,
+        {
+            "fields": UILINK_FIELDS + (("icon_left", "icon_right"),)
+            if USE_LINK_ICONS
+            else UILINK_FIELDS
+        },
+    ),
+    (
+        _("Link settings"),
+        {
+            "classes": ("collapse",),
+            "fields": (
+                ("mailto", "phone"),
+                ("anchor", "target"),
+                ("file_link",),
+            ),
+        },
+    ),
+]
+
 
 class UILinkPlugin(CMSPluginBase):
     """
@@ -21,29 +50,7 @@ class UILinkPlugin(CMSPluginBase):
     form = forms.LinkForm
     change_form_template = "djangocms_frontend/admin/link.html"
 
-    fields = (
-        ("name", "link_type"),
-        ("external_link", "internal_link"),
-        ("link_context", "link_size"),
-        ("link_outline", "link_block"),
-    )
-
-    if USE_LINK_ICONS:  # pragma: no cover
-        fields = fields + (("icon_left", "icon_right"),)
-
-    fieldsets = [
-        (None, {"fields": fields}),
-        (
-            _("Link settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    ("mailto", "phone"),
-                    ("anchor", "target"),
-                    ("file_link",),
-                ),
-            },
-        ),
+    fieldsets = UILINK_FIELDSET + [
         (
             _("Advanced settings"),
             {

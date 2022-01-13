@@ -10,7 +10,7 @@ import ContextGroup from 'components/context-group';
 import PreviewGenerator from 'components/preview-generator';
 import ButtonGroup from 'components/button-group';
 
-window.djangoCMSBootstrap5 = {
+window.djangoCMSFrontend = {
     $,
 };
 
