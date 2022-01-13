@@ -5,7 +5,7 @@ django CMS Frontend
 |pypi| |build| |coverage|
 
 **django CMS Frontend** is a blugin bundle based on
-**`django CMS Bootstrap 5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_**.
+`django CMS Bootstrap 5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_.
 Its objective is to provide a set of popular frontend components independent of
 the currently used frontend framework such as Bootstrap, or its specific version.
 
@@ -14,17 +14,19 @@ your procet's settings. Also, it is designed to avoid having to rebuild your
 CMS plugin tree when upgrading e.g. from one version of your frontend framework
 to the next.
 
-django CMS Frontend uses **`django-entangled <https://github.com/jrief/django-entangled>`_**
+django CMS Frontend uses `django-entangled <https://github.com/jrief/django-entangled>`_
 by Jacob Rief to avoid bloating your project's database with frontend framework-dependent
 tables. Instead all design parameters are stored in a common JSON field and future
 releases of improved frontend features will not require to rebuild your full
 plugin tree.
 
 The link plugin has been rewritten to not allow internal links to other CMS pages, but also
-to other django models such as, e.g., posts of **`djangocms-blog <https://github.com/nephila/djangocms-blog>`_**. 
+to other django models such as, e.g., posts of
+`djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-.. note:
-    This is currently a proof of concept project.
+.. note::
+    This is currently a proof of concept project. The project is not fully tested
+    yet (in fact, test do not run). The carousel has not been converted.
 
 
 Contributing
