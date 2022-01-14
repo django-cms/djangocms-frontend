@@ -146,7 +146,6 @@ class AbstractLinkForm(EntangledModelForm):
     class Meta:
         entangled_fields = {
             "config": [
-                "template",
                 "name",
                 "external_link",
                 "internal_link",
@@ -165,11 +164,6 @@ class AbstractLinkForm(EntangledModelForm):
         IntranetURLValidator(intranet_host_re=HOSTNAME),
     ]
 
-    template = forms.ChoiceField(
-        label=_("Template"),
-        choices=get_templates(),
-        initial=get_templates()[0][0],
-    )
     name = forms.CharField(
         label=_("Display name"),
         required=False,
@@ -294,6 +288,7 @@ class LinkForm(AbstractLinkForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "template",
                 "link_type",
                 "link_context",
                 "link_size",
@@ -306,6 +301,11 @@ class LinkForm(AbstractLinkForm):
         }
         untangled_fields = ()
 
+    template = forms.ChoiceField(
+        label=_("Template"),
+        choices=get_templates(),
+        initial=get_templates()[0][0],
+    )
     link_type = forms.ChoiceField(
         label=_("Type"),
         choices=LINK_CHOICES,

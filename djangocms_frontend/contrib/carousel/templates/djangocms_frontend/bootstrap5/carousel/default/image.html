@@ -1,0 +1,5 @@
+{% load cms_tags easy_thumbnails_tags frontend %}
+
+{% thumbnail instance.image options.size crop=options.crop upscale=options.upscale subject_location=instance.image.subject_location as thumbnail %}
+
+<img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.image.default_alt_text|default:'' }}" >

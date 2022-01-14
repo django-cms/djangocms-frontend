@@ -26,7 +26,7 @@ to other django models such as, e.g., posts of
 
 .. note::
     This is currently a proof of concept project. The project is not fully tested
-    yet (in fact, test do not run). The carousel has not been converted.
+    yet (in fact, test do not run).
 
 
 Contributing
@@ -74,7 +74,7 @@ For a manual install:
     'djangocms_frontend.contrib.bootstrap5_alerts',
     'djangocms_frontend.contrib.bootstrap5_badge',
     'djangocms_frontend.contrib.bootstrap5_card',
-    # 'djangocms_frontend.contrib.bootstrap5_carousel',
+    'djangocms_frontend.contrib.bootstrap5_carousel',
     'djangocms_frontend.contrib.bootstrap5_collapse',
     'djangocms_frontend.contrib.bootstrap5_content',
     'djangocms_frontend.contrib.bootstrap5_grid',

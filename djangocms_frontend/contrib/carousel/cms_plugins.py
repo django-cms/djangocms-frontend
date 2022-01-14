@@ -1,25 +1,26 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from djangocms_link.cms_plugins import LinkPlugin
 
 from djangocms_frontend.helpers import concat_classes, get_plugin_template
 
+from . import forms, models
 from .constants import CAROUSEL_DEFAULT_SIZE, CAROUSEL_TEMPLATE_CHOICES
-from .models import Bootstrap5Carousel, Bootstrap5CarouselSlide
 
 
-class Bootstrap5CarouselPlugin(CMSPluginBase):
+@plugin_pool.register_plugin
+class CarouselPlugin(CMSPluginBase):
     """
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
     """
 
-    model = Bootstrap5Carousel
     name = _("Carousel")
     module = _("Interface")
+    model = models.Carousel
+    form = forms.CarouselForm
     allow_children = True
-    child_classes = ["Bootstrap5CarouselSlidePlugin"]
+    child_classes = ["CarouselSlidePlugin"]
 
     fieldsets = [
         (
@@ -65,17 +66,19 @@ class Bootstrap5CarouselPlugin(CMSPluginBase):
         return super().render(context, instance, placeholder)
 
 
-class Bootstrap5CarouselSlidePlugin(LinkPlugin):
+@plugin_pool.register_plugin
+class CarouselSlidePlugin(CMSPluginBase):
     """
     Components > "Carousel Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
     """
 
-    model = Bootstrap5CarouselSlide
     name = _("Carousel slide")
     module = _("Interface")
+    model = models.CarouselSlide
+    form = forms.CarouselSlideForm
     allow_children = True
-    parent_classes = ["Bootstrap5CarouselPlugin"]
+    parent_classes = ["CarouselPlugin"]
 
     fieldsets = [
         (
@@ -144,7 +147,3 @@ class Bootstrap5CarouselSlidePlugin(LinkPlugin):
             "slide",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-
-
-plugin_pool.register_plugin(Bootstrap5CarouselPlugin)
-plugin_pool.register_plugin(Bootstrap5CarouselSlidePlugin)
