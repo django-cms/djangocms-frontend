@@ -2,6 +2,8 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
+from djangocms_frontend.fields import AttributesFormField
+
 
 class JumbotronForm(EntangledModelForm):
     """
@@ -13,12 +15,10 @@ class JumbotronForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "jumbotron_fluid",
+                "attributes",
             ]
         }
-        untangled_fields = (
-            "tag_type",
-            "attributes",
-        )
+        untangled_fields = ("tag_type",)
 
     jumbotron_fluid = forms.BooleanField(
         label=_("Fluid"),
@@ -26,3 +26,4 @@ class JumbotronForm(EntangledModelForm):
         required=False,
         help_text=_("Adds the .jumbotron-fluid class."),
     )
+    attributes = AttributesFormField()

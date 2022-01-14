@@ -7,14 +7,7 @@ from djangocms_frontend.helpers import concat_classes
 
 from ... import settings
 from ...models import FrontendUIItem
-from . import models
-
-
-class EmptyForm(EntangledModelForm):
-    class Meta:
-        model = FrontendUIItem
-        entangled_fields = {"config": []}
-        untangled_fields = ("tag_type", "attributes")
+from . import forms, models
 
 
 @plugin_pool.register_plugin
@@ -27,7 +20,7 @@ class MediaPlugin(CMSPluginBase):
     name = _("Media")
     module = _("Interface")
     model = models.Media
-    form = EmptyForm
+    form = forms.MediaForm
     render_template = f"djangocms_frontend/{settings.framework}/media.html"
     change_form_template = "djangocms_frontend/admin/media.html"
     allow_children = True
@@ -56,7 +49,7 @@ class MediaBodyPlugin(CMSPluginBase):
     name = _("Media body")
     module = _("Interface")
     model = models.MediaBody
-    form = EmptyForm
+    form = forms.MediaBodyForm
     render_template = f"djangocms_frontend/{settings.framework}/media-body.html"
     change_form_template = "djangocms_frontend/admin/media.html"
     allow_children = True

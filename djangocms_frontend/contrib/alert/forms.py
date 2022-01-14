@@ -2,9 +2,9 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
+from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
-
-from ...models import FrontendUIItem
 
 
 class AlertForm(EntangledModelForm):
@@ -19,9 +19,10 @@ class AlertForm(EntangledModelForm):
             "config": [
                 "alert_context",
                 "alert_dismissable",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     alert_context = forms.ChoiceField(
         label=_("Context"),
@@ -34,3 +35,4 @@ class AlertForm(EntangledModelForm):
         required=False,
         help_text=_("Allows the alert to be closed."),
     )
+    attributes = AttributesFormField()

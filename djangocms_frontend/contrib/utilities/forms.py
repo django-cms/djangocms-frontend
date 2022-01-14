@@ -1,9 +1,9 @@
 from django import forms
 from django.utils.translation import gettext as _
-from djangocms_attributes_field.fields import AttributesFormField, AttributesWidget
 from entangled.forms import EntangledModelForm
 
 from ... import settings
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 
 
@@ -16,6 +16,7 @@ class SpacingForm(EntangledModelForm):
                 "space_sides",
                 "space_size",
                 "space_device",
+                "attributes",
             ],
         }
         untangled_fields = ("tag_type",)
@@ -40,6 +41,7 @@ class SpacingForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + settings.DEVICE_CHOICES,
         required=False,
     )
+    attributes = AttributesFormField()
 
 
 class HeadingForm(EntangledModelForm):
@@ -50,6 +52,7 @@ class HeadingForm(EntangledModelForm):
                 "heading_level",
                 "heading",
                 "heading_id",
+                "attributes",
             ],
         }
         untangled_fields = ("attributes",)
@@ -80,28 +83,23 @@ class HeadingForm(EntangledModelForm):
             "Fill in unique ID for table of contents. If empty heading will not appear in table of contents."
         ),
     )
+    attributes = AttributesFormField()
 
 
 class TableOfContentsForm(EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
-            "config": ["list_attributes", "link_attributes"],
+            "config": [
+                "list_attributes",
+                "link_attributes",
+                "attributes",
+            ],
         }
-        untangled_fields = ("attributes",)
-        help_texts = {
-            "attributes": _(
-                "Attributes apply to the <b>list items</b> for each entry in the table of contents."
-            ),
-        }
-        labels = {
-            "attributes": _("Item attributes"),
-        }
+        untangled_fields = ()
 
     list_attributes = AttributesFormField(
         label=_("List attributes"),
-        widget=AttributesWidget(),
-        required=False,
         help_text=_(
             "Attributes apply to the <b>list</b> for each level in the table of contents."
         ),
@@ -109,9 +107,13 @@ class TableOfContentsForm(EntangledModelForm):
 
     link_attributes = AttributesFormField(
         label=_("Link attributes"),
-        widget=AttributesWidget(),
-        required=False,
         help_text=_(
             "Attributes apply to the <b>link</b> for each entry in the table of contents."
+        ),
+    )
+    attributes = AttributesFormField(
+        label=_("Item attributes"),
+        help_text=_(
+            "Attributes apply to the <b>list items</b> for each entry in the table of contents."
         ),
     )

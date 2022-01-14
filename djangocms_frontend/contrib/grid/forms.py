@@ -8,6 +8,7 @@ from djangocms_frontend.helpers import mark_safe_lazy
 from djangocms_frontend.settings import DEVICE_SIZES
 
 from ... import settings
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import (
     GRID_COLUMN_ALIGNMENT_CHOICES,
@@ -30,9 +31,10 @@ class GridContainerForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "container_type",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     container_type = forms.ChoiceField(
         label=_("Container type"),
@@ -45,6 +47,7 @@ class GridContainerForm(EntangledModelForm):
             )
         ),
     )
+    attributes = AttributesFormField()
 
 
 class GridRowForm(EntangledModelForm):
@@ -56,9 +59,10 @@ class GridRowForm(EntangledModelForm):
                 "vertical_alignment",
                 "horizontal_alignment",
                 "gutters",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     create = forms.IntegerField(
         label=_("Create columns"),
@@ -97,6 +101,7 @@ class GridRowForm(EntangledModelForm):
         required=False,
         help_text=_("Removes the marginal gutters from the grid."),
     )
+    attributes = AttributesFormField()
 
 
 class GridColumnBaseForm(EntangledModelForm):
@@ -106,9 +111,10 @@ class GridColumnBaseForm(EntangledModelForm):
             "config": [
                 "column_type",
                 "column_alignment",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     column_type = forms.ChoiceField(
         label=_("Column type"),
@@ -121,6 +127,7 @@ class GridColumnBaseForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + GRID_COLUMN_ALIGNMENT_CHOICES,
         required=False,
     )
+    attributes = AttributesFormField()
 
 
 # convert regular text type fields to number

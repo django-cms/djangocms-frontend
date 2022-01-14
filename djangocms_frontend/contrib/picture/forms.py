@@ -1,15 +1,15 @@
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
-from djangocms_attributes_field.fields import AttributesFormField, AttributesWidget
-from entangled.forms import EntangledFormMetaclass, EntangledModelForm
+from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image, ThumbnailOption
 
 from djangocms_frontend import settings
 
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
-from ..link.forms import AbstractLinkForm, SmartLinkField
+from ..link.forms import AbstractLinkForm
 
 #
 # def get_model_form_fields(form, exclude):
@@ -108,9 +108,10 @@ class PictureForm(AbstractLinkForm, EntangledModelForm):
                 "picture_fluid",
                 "picture_rounded",
                 "picture_thumbnail",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     link_is_optional = True
 
@@ -167,8 +168,6 @@ class PictureForm(AbstractLinkForm, EntangledModelForm):
     )
     link_attributes = AttributesFormField(
         label=_("List attributes"),
-        widget=AttributesWidget(),
-        required=False,
         help_text=_(
             "Attributes apply to the <b>list</b> for each level in the table of contents."
         ),
@@ -244,6 +243,7 @@ class PictureForm(AbstractLinkForm, EntangledModelForm):
         initial=False,
         help_text=_("Adds the .img-thumbnail class."),
     )
+    attributes = AttributesFormField()
 
     def clean(self):
         data = self.cleaned_data

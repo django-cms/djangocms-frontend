@@ -14,6 +14,14 @@ class AttributesField(fields.AttributesField):
         super().__init__(*args, **kwargs)
 
 
+class AttributesFormField(fields.AttributesFormField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label", _("Attributes"))
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("widget", fields.AttributesWidget)
+        super().__init__(*args, **kwargs)
+
+
 class TagTypeField(models.CharField):
     def __init__(self, *args, **kwargs):
         if "verbose_name" not in kwargs:

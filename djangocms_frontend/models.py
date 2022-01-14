@@ -18,7 +18,6 @@ class FrontendUIItem(CMSPlugin):
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)
     config = models.JSONField(default=dict)
-    attributes = AttributesField()
 
     def __getattr__(self, item):
         if (

@@ -89,13 +89,6 @@ class LinkPlugin(CMSPluginBase):
         if instance.link_block:
             link_classes.append("btn-block")
 
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
         context["link"] = instance.get_link()
-
+        context["link_classes"] = " ".join(link_classes)
         return super().render(context, instance, placeholder)

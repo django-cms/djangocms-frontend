@@ -1,6 +1,6 @@
-{% load cms_tags %}
+{% load cms_tags frontend %}
 {% spaceless %}
-    <blockquote {{ instance.attributes_str }}>
+    <blockquote {% add_class instance.attributes %}>
         {{ instance.quote_content }}
         {% if instance.quote_origin %}
             <footer class="blockquote-footer">

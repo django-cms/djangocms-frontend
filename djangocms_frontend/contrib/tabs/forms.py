@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import (
     TAB_ALIGNMENT_CHOICES,
@@ -26,9 +27,10 @@ class TabForm(EntangledModelForm):
                 "tab_alignment",
                 "tab_index",
                 "tab_effect",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     template = forms.ChoiceField(
         label=_("Template"),
@@ -57,6 +59,7 @@ class TabForm(EntangledModelForm):
         choices=TAB_EFFECT_CHOICES,
         required=False,
     )
+    attributes = AttributesFormField()
 
 
 class TabItemForm(EntangledModelForm):
@@ -70,10 +73,12 @@ class TabItemForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "tab_title",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     tab_title = forms.CharField(
         label=_("Tab title"),
     )
+    attributes = AttributesFormField()

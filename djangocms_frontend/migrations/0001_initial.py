@@ -50,12 +50,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("config", models.JSONField(default=dict)),
-                (
-                    "attributes",
-                    djangocms_frontend.fields.AttributesField(
-                        blank=True, default=dict, verbose_name="Attributes"
-                    ),
-                ),
             ],
             options={
                 "verbose_name": "UI item",

@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import ALIGN_CHOICES
 
 from ... import settings
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import CODE_TYPE_CHOICES
 
@@ -21,12 +22,10 @@ class CodeForm(EntangledModelForm):
             "config": [
                 "code_content",
                 "code_type",
+                "attributes",
             ]
         }
-        untangled_fields = (
-            "tag_type",
-            "attributes",
-        )
+        untangled_fields = ("tag_type",)
 
     code_content = forms.CharField(
         label=_("Code"),
@@ -37,6 +36,7 @@ class CodeForm(EntangledModelForm):
         choices=CODE_TYPE_CHOICES,
         initial=CODE_TYPE_CHOICES[0][0],
     )
+    attributes = AttributesFormField()
 
 
 class BlockquoteForm(EntangledModelForm):
@@ -52,9 +52,10 @@ class BlockquoteForm(EntangledModelForm):
                 "quote_content",
                 "quote_origin",
                 "quote_alignment",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     quote_content = forms.CharField(
         label=_("Quote"),
@@ -71,6 +72,7 @@ class BlockquoteForm(EntangledModelForm):
         initial=settings.EMPTY_CHOICE[0][0],
         required=False,
     )
+    attributes = AttributesFormField()
 
 
 class FigureForm(EntangledModelForm):
@@ -85,9 +87,10 @@ class FigureForm(EntangledModelForm):
             "config": [
                 "figure_caption",
                 "figure_alignment",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     figure_caption = forms.CharField(
         label=_("Caption"),
@@ -98,3 +101,4 @@ class FigureForm(EntangledModelForm):
         initial=ALIGN_CHOICES[0][0],
         required=False,
     )
+    attributes = AttributesFormField()

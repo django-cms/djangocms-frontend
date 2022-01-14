@@ -1,5 +1,5 @@
-{% load cms_tags %}
+{% load cms_tags frontend %}
 
-<span {{ instance.attributes_str }}>
-    {{ instance.badge_text }}
+<span {% add_class instance.attributes %}>
+    {{ instance.badge_text }}
 </span>

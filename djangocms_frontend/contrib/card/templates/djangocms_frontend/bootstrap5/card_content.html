@@ -1,10 +1,9 @@
-{% load cms_tags %}
-
-<{{ instance.tag_type }} {{ instance.attributes_str }}>
-{% if instance.card_content %}
-    {{ instance.card_content }}
-{% endif %}
-{% for plugin in instance.child_plugin_instances %}
-    {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
-{% endfor %}
-</{{ instance.tag_type }}>
+{% load cms_tags frontend%}{% spaceless %}
+    <{{ instance.tag_type }} {% add_class instance.attributes %}>
+    {% if instance.card_content %}
+        {{ instance.card_content }}
+    {% endif %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+    </{{ instance.tag_type }}>{% endspaceless %}

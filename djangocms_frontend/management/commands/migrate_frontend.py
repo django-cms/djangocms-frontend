@@ -129,7 +129,6 @@ plugin_migrations = {
         "target -> link_target",
         "page_destination -> anchor",
         "() -> phone",
-        "() -> link_type",
         "() -> link_context",
         "() -> link_size",
         "() -> link_outline",
@@ -242,6 +241,19 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                             new_obj.config["internal_link"] = dict(
                                 model=f"{content_type.app_label}.{content_type.model}",
                                 pk=obj.int_destination_id,
+                            )
+                            styles = obj.styles.all()
+                            new_obj.config["attributes"] = {
+                                "class": " ".join(
+                                    (style.link_class for style in styles)
+                                )
+                            }
+                            for style in styles:
+                                obj.styles.remove(style)
+                            new_obj.config["link_type"] = (
+                                "btn"
+                                if "btn" in new_obj.attributes["class"]
+                                else "link"
                             )
                     else:
                         if " -> " in field:

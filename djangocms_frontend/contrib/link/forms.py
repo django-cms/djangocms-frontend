@@ -20,6 +20,7 @@ from filer.models import File
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
 from ... import settings
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES
 
@@ -300,9 +301,10 @@ class LinkForm(AbstractLinkForm):
                 "link_block",
                 "icon_left",
                 "icon_right",
+                "attributes",
             ]
         }
-        untangled_fields = ("attributes",)
+        untangled_fields = ()
 
     link_type = forms.ChoiceField(
         label=_("Type"),
@@ -339,3 +341,4 @@ class LinkForm(AbstractLinkForm):
         label=_("Icon right"),
         required=False,
     )
+    attributes = AttributesFormField()

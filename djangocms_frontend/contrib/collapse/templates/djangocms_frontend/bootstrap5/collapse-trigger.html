@@ -1,6 +1,6 @@
-{% load cms_tags %}
+{% load cms_tags frontend %}
 {% spaceless %}
-    <{{ instance.tag_type }} {{ instance.attributes_str }}
+    <{{ instance.tag_type }} {% add_class instance.attributes %}
     id="trigger-{{ instance.trigger_identifier }}"
     role="tab"
     data-bs-toggle="collapse"

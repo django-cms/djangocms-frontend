@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
 from ... import settings
+from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import (
     CARD_ALIGNMENT_CHOICES,
@@ -33,9 +34,10 @@ class CardForm(EntangledModelForm):
                 "card_alignment",
                 "card_outline",
                 "card_text_color",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     card_type = forms.ChoiceField(
         label=_("Card type"),
@@ -63,6 +65,7 @@ class CardForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + CARD_TEXT_STYLES,
         required=False,
     )
+    attributes = AttributesFormField()
 
 
 class CardInnerForm(EntangledModelForm):
@@ -76,9 +79,10 @@ class CardInnerForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "inner_type",
+                "attributes",
             ]
         }
-        untangled_fields = ("tag_type", "attributes")
+        untangled_fields = ("tag_type",)
 
     inner_type = forms.ChoiceField(
         label=_("Inner type"),
@@ -86,3 +90,4 @@ class CardInnerForm(EntangledModelForm):
         initial=CARD_INNER_TYPE_CHOICES[0][0],
         help_text=_("Define the structure of the plugin."),
     )
+    attributes = AttributesFormField()
