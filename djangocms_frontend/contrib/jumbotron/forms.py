@@ -23,5 +23,6 @@ class JumbotronForm(EntangledModelForm):
     jumbotron_fluid = forms.BooleanField(
         label=_("Fluid"),
         initial=False,
+        required=False,
         help_text=_("Adds the .jumbotron-fluid class."),
     )

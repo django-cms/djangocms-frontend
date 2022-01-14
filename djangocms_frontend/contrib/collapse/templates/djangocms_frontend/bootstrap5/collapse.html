@@ -2,7 +2,7 @@
 {% spaceless %}
     <{{ instance.tag_type }} {{ instance.attributes_str }}
     id="parent-{{ instance.pk|safe }}"
-    data-children="{{ .siblings }}"
+    data-children="{{ instance.siblings }}"
     role="tablist"
     >
     {% with parent=instance %}

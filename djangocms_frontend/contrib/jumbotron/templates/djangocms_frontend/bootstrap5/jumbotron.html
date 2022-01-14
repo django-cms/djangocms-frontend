@@ -1,7 +1,9 @@
-{% load cms_tags %}{% spaceless %}
-    <{{ instance.tag_type }} {{ instance.attributes_str }}>
-    {% for plugin in instance.child_plugin_instances %}
-        {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
-    {% endfor %}
+{% load cms_tags frontend %}{% spaceless %}
+    <{{ instance.tag_type }} {% add_class instance.attributes "p-4 my-0 bg-light" %}>
+    <div class="container{% if instance.jumbotron_fluid %}-fluid{% endif %} py-3">
+        {% for plugin in instance.child_plugin_instances %}
+            {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
+        {% endfor %}
+    </div>
     </{{ instance.tag_type }}>
 {% endspaceless %}

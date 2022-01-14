@@ -74,6 +74,20 @@ class CardPlugin(CMSPluginBase):
 
         return super().render(context, instance, placeholder)
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        obj.add_child(
+            instance=models.CardInner(
+                parent=obj,
+                placeholder=obj.placeholder,
+                position=obj.numchild,
+                language=obj.language,
+                plugin_type=CardInnerPlugin.__name__,
+                ui_item=models.CardInner.__class__.__name__,
+                config=dict(inner_type="card-body"),
+            )
+        )
+
 
 @plugin_pool.register_plugin
 class CardInnerPlugin(CMSPluginBase):

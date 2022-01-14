@@ -36,18 +36,3 @@ class JumbotronPlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        link_classes = ["jumbotron"]
-        if instance.jumbotron_fluid:
-            link_classes.append("jumbotron-fluid")
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)
