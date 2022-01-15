@@ -3,13 +3,16 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
+from .. import content
 
 from ... import settings
 from . import forms, models
 
+mixin_factory = settings.get_renderer(content)
+
 
 @plugin_pool.register_plugin
-class CodePlugin(CMSPluginBase):
+class CodePlugin(mixin_factory("Code"), CMSPluginBase):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
@@ -38,7 +41,7 @@ class CodePlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class BlockquotePlugin(CMSPluginBase):
+class BlockquotePlugin(mixin_factory("Blockquote"), CMSPluginBase):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
@@ -65,23 +68,9 @@ class BlockquotePlugin(CMSPluginBase):
         (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
 
-    def render(self, context, instance, placeholder):
-        link_classes = ["blockquote"]
-        if instance.quote_alignment:
-            link_classes.append(instance.quote_alignment)
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)
-
 
 @plugin_pool.register_plugin
-class FigurePlugin(CMSPluginBase):
+class FigurePlugin(mixin_factory("Figure"), CMSPluginBase):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/
@@ -108,13 +97,3 @@ class FigurePlugin(CMSPluginBase):
         (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
 
-    def render(self, context, instance, placeholder):
-        classes = concat_classes(
-            [
-                "figure",
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

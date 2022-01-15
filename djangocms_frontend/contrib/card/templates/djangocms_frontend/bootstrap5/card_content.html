@@ -3,7 +3,10 @@
     {% if instance.card_content %}
         {{ instance.card_content }}
     {% endif %}
-    {% for plugin in instance.child_plugin_instances %}
-        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
-    {% endfor %}
-    </{{ instance.tag_type }}>{% endspaceless %}
+     {% with parent=instance %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+        {% endfor %}
+    {% endwith %}
+    </{{ instance.tag_type }}>
+{% endspaceless %}

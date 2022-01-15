@@ -1,17 +1,17 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
-from djangocms_frontend.helpers import concat_classes
-
+from .. import media
 from ... import settings
-from ...models import FrontendUIItem
 from . import forms, models
 
 
+mixin_factory = settings.get_renderer(media)
+
+
 @plugin_pool.register_plugin
-class MediaPlugin(CMSPluginBase):
+class MediaPlugin(mixin_factory("Media"), CMSPluginBase):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/
@@ -40,7 +40,7 @@ class MediaPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class MediaBodyPlugin(CMSPluginBase):
+class MediaBodyPlugin(mixin_factory("MediaBody"), CMSPluginBase):
     """
     Layout > "Media body" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/

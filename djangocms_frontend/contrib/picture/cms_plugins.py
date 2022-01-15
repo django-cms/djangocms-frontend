@@ -6,13 +6,16 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
+from .. import picture
 
 from ... import settings
 from . import forms, models
 
+mixin_factory = settings.get_renderer(picture)
+
 
 @plugin_pool.register_plugin
-class ImagePlugin(CMSPluginBase):
+class ImagePlugin(mixin_factory("Image"), CMSPluginBase):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/
@@ -81,35 +84,3 @@ class ImagePlugin(CMSPluginBase):
         return (
             f"djangocms_frontend/{settings.framework}/{instance.template}/picture.html"
         )
-
-    def render(self, context, instance, placeholder):
-        if instance.alignment:
-            classes = "align-{} ".format(instance.alignment)
-            classes += instance.attributes.get("class", "")
-            # Set the class attribute to include the alignment html class
-            # This is done to leverage the attributes_str property
-            instance.attributes["class"] = classes
-        # assign link to a context variable to be performant
-        context["picture_link"] = instance.get_link()
-        context["picture_size"] = instance.get_size(
-            width=context.get("width", 0),
-            height=context.get("height", 0),
-        )
-        context["img_srcset_data"] = instance.img_srcset_data
-        link_classes = []
-        if instance.picture_fluid:
-            link_classes.append("img-fluid")
-        if instance.picture_rounded:
-            link_classes.append("rounded")
-        if instance.picture_thumbnail:
-            link_classes.append("img-thumbnail")
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

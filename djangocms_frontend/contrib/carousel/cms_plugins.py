@@ -2,14 +2,18 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import concat_classes, get_plugin_template
+from djangocms_frontend.helpers import get_plugin_template
 
 from . import forms, models
-from .constants import CAROUSEL_DEFAULT_SIZE, CAROUSEL_TEMPLATE_CHOICES
+from .constants import CAROUSEL_TEMPLATE_CHOICES
+from .. import carousel
+from ... import settings
+
+mixin_factory = settings.get_renderer(carousel)
 
 
 @plugin_pool.register_plugin
-class CarouselPlugin(CMSPluginBase):
+class CarouselPlugin(mixin_factory("Carousel"), CMSPluginBase):
     """
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -52,22 +56,9 @@ class CarouselPlugin(CMSPluginBase):
             instance, "carousel", "carousel", CAROUSEL_TEMPLATE_CHOICES
         )
 
-    def render(self, context, instance, placeholder):
-        link_classes = ["carousel", "slide"]
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)
-
 
 @plugin_pool.register_plugin
-class CarouselSlidePlugin(CMSPluginBase):
+class CarouselSlidePlugin(mixin_factory("CarouselSlide"), CMSPluginBase):
     """
     Components > "Carousel Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -112,33 +103,6 @@ class CarouselSlidePlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        parent = instance.parent.get_plugin_instance()[0]
-        width = float(context.get("width") or CAROUSEL_DEFAULT_SIZE[0])
-        height = float(context.get("height") or CAROUSEL_DEFAULT_SIZE[1])
-
-        if parent.carousel_aspect_ratio:
-            aspect_width, aspect_height = tuple(
-                [int(i) for i in parent.carousel_aspect_ratio.split("x")]
-            )
-            height = width * aspect_height / aspect_width
-
-        link_classes = ["carousel-item"]
-        if instance.position == 0:
-            link_classes.append("active")
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        context["instance"] = instance
-        context["link"] = instance.get_link()
-        context["options"] = {"crop": 10, "size": (width, height), "upscale": True}
-        return context
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(

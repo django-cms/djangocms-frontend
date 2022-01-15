@@ -26,9 +26,9 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     child_classes = [
         "CardPlugin",
         "CardInnerPlugin",
-        "LinkPlugin",
         "ListGroupPlugin",
-        "PicturePlugin",
+        "ImagePlugin",
+        "GridRowPlugin",
     ]
 
     fieldsets = [
@@ -60,20 +60,21 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
         ),
     ]
 
-    # def save_model(self, request, obj, form, change):
-    #     super().save_model(request, obj, form, change)
-    #     if self.card_type == "card":
-    #         obj.add_child(
-    #             instance=models.CardInner(
-    #                 parent=obj,
-    #                 placeholder=obj.placeholder,
-    #                 position=obj.numchild,
-    #                 language=obj.language,
-    #                 plugin_type=CardInnerPlugin.__name__,
-    #                 ui_item=models.CardInner.__class__.__name__,
-    #                 config=dict(inner_type="card-body"),
-    #             )
-    #         )
+    def save_model(self, request, obj, form, change):
+        new_card = obj.id is None
+        super().save_model(request, obj, form, change)
+        if new_card and obj.card_type == "card":
+            obj.add_child(
+                instance=models.CardInner(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    position=obj.numchild,
+                    language=obj.language,
+                    plugin_type=CardInnerPlugin.__name__,
+                    ui_item=models.CardInner.__class__.__name__,
+                    config=dict(inner_type="card-body"),
+                )
+            )
 
 
 @plugin_pool.register_plugin
@@ -94,6 +95,7 @@ class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
         "CardPlugin",
         "CollapseTriggerPlugin",
         "CollapseContainerPlugin",
+        "GridColumnPlugin",
     ]
 
     fieldsets = [

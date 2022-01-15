@@ -7,10 +7,13 @@ from djangocms_frontend.helpers import concat_classes
 
 from . import forms, models
 from .constants import GRID_COLUMN_CHOICES
+from .. import grid
+
+mixin_factory = settings.get_renderer(grid)
 
 
 @plugin_pool.register_plugin
-class GridContainerPlugin(CMSPluginBase):
+class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -39,7 +42,7 @@ class GridContainerPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class GridRowPlugin(CMSPluginBase):
+class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -111,31 +114,10 @@ class GridRowPlugin(CMSPluginBase):
             )
             obj.add_child(instance=col)
 
-    def render(self, context, instance, placeholder):
-        def get_grid_values(instance):
-            classes = []
-            for device in settings.DEVICE_SIZES:
-                size = getattr(instance, "row_cols_{}".format(device), None)
-                if isinstance(size, int):
-                    if device == "xs":
-                        classes.append("row-cols-{}".format(int(size)))
-                    else:
-                        classes.append("row-cols-{}-{}".format(device, int(size)))
-            return classes
-
-        add_classes = [
-            "row",
-            instance.vertical_alignment,
-            instance.horizontal_alignment,
-            "g-0" if instance.gutters else "",
-        ]
-        context["add_classes"] = " ".join(cls for cls in add_classes if cls)
-        context["grid_classes"] = " ".join(get_grid_values(instance))
-        return super().render(context, instance, placeholder)
 
 
 @plugin_pool.register_plugin
-class GridColumnPlugin(CMSPluginBase):
+class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
     """
     Layout > Grid: "Column" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

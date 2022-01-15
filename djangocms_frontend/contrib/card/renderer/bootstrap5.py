@@ -11,5 +11,5 @@ class CardRenderMixin:
             link_classes.append("text-{}".format(instance.card_text_color))
         if getattr(instance, "card_full_height", False):
             link_classes.append("h-100")
-        context["add_classes"] = " ".join(link_classes)
+        context["add_classes"] = link_classes
         return super().render(context, instance, placeholder)
