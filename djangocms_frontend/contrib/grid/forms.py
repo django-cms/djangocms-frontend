@@ -50,7 +50,7 @@ class GridContainerForm(EntangledModelForm):
     attributes = AttributesFormField()
 
 
-class GridRowForm(EntangledModelForm):
+class GridRowBaseForm(EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -102,6 +102,25 @@ class GridRowForm(EntangledModelForm):
         help_text=_("Removes the marginal gutters from the grid."),
     )
     attributes = AttributesFormField()
+
+
+# convert regular text type fields to number
+extra_fields_column = {}
+for size in DEVICE_SIZES:
+    extra_fields_column["row_cols_{}".format(size)] = forms.IntegerField(
+        label="row-cols" if size == "xs" else "row-cols-{}".format(size),
+        required=False,
+        min_value=1,
+        max_value=GRID_SIZE,
+    )
+
+GridRowForm = type(
+    str("GridRowBaseForm"),
+    (GridRowBaseForm,),
+    copy(extra_fields_column),
+)
+
+GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
 class GridColumnBaseForm(EntangledModelForm):

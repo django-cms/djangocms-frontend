@@ -8,3 +8,7 @@
 @import "components/grid-layout";
 @import "components/preview-generator";
 @import "components/forms";
+
+.sr-only {
+    @include visually-hidden
+}

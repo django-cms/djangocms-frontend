@@ -3,8 +3,8 @@ from django.utils.translation import gettext_lazy as _
 CARD_TYPE_CHOICES = (
     ("card", _("Card")),
     ("card-group", _("Card group")),
-    ("card-deck", _("Card deck")),
-    ("card-columns", _("Card columns")),
+    ("row", _("Card deck v4 (deprecated)")),  # Removed in 5
+    ("card-masonry", _("Card masonry")),  # Removed in 5
 )
 
 CARD_ALIGNMENT_CHOICES = (

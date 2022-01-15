@@ -52,7 +52,7 @@ class GridRowPlugin(CMSPluginBase):
     change_form_template = "djangocms_frontend/admin/grid_row.html"
     render_template = f"djangocms_frontend/{settings.framework}/grid_row.html"
     allow_children = True
-    child_classes = ["GridColumnPlugin"]
+    child_classes = ["GridColumnPlugin", "CardPlugin"]
 
     fieldsets = [
         (
@@ -62,6 +62,14 @@ class GridRowPlugin(CMSPluginBase):
                     "create",
                     ("vertical_alignment", "horizontal_alignment"),
                 )
+            },
+        ),
+        (
+            _("Row-cols settings"),
+            {
+                "fields": (
+                    ["row_cols_{}".format(size) for size in settings.DEVICE_SIZES],
+                ),
             },
         ),
         (
@@ -104,18 +112,25 @@ class GridRowPlugin(CMSPluginBase):
             obj.add_child(instance=col)
 
     def render(self, context, instance, placeholder):
-        gutter = "no-gutters" if instance.gutters else ""  # CHECK
-        classes = concat_classes(
-            [
-                "row",
-                instance.vertical_alignment,
-                instance.horizontal_alignment,
-                gutter,
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
+        def get_grid_values(instance):
+            classes = []
+            for device in settings.DEVICE_SIZES:
+                size = getattr(instance, "row_cols_{}".format(device), None)
+                if isinstance(size, int):
+                    if device == "xs":
+                        classes.append("row-cols-{}".format(int(size)))
+                    else:
+                        classes.append("row-cols-{}-{}".format(device, int(size)))
+            return classes
 
+        add_classes = [
+            "row",
+            instance.vertical_alignment,
+            instance.horizontal_alignment,
+            "g-0" if instance.gutters else "",
+        ]
+        context["add_classes"] = " ".join(cls for cls in add_classes if cls)
+        context["grid_classes"] = " ".join(get_grid_values(instance))
         return super().render(context, instance, placeholder)
 
 
@@ -165,20 +180,34 @@ class GridColumnPlugin(CMSPluginBase):
     ]
 
     def render(self, context, instance, placeholder):
+        def get_grid_values(self):
+            classes = []
+            for device in settings.DEVICE_SIZES:
+                for element in ("col", "order", "offset", "ml", "mr"):
+                    size = getattr(self, "{}_{}".format(device, element))
+                    if isinstance(size, int) and (
+                        element == "col" or element == "order" or element == "offset"
+                    ):
+                        if device == "xs":
+                            classes.append("{}-{}".format(element, int(size)))
+                        else:
+                            classes.append(
+                                "{}-{}-{}".format(element, device, int(size))
+                            )
+                    elif size:
+                        if device == "xs":
+                            classes.append("{}-{}".format(element, "auto"))
+                        else:
+                            classes.append("{}-{}-{}".format(element, device, "auto"))
+
+            return classes
+
         column = ""
-        classes = instance.get_grid_values()
-
-        if classes:
-            column += "{}".format(" ".join(cls for cls in classes if cls))
-
-        attr_classes = concat_classes(
-            [
-                instance.column_type,
-                column,
-                instance.column_alignment,
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = attr_classes
-
+        attr_classes = [
+            instance.column_type,
+            column,
+            instance.column_alignment,
+        ]
+        context["add_classes"] = " ".join(cls for cls in attr_classes if cls)
+        context["grid_classes"] = " ".join(get_grid_values(instance))
         return super().render(context, instance, placeholder)

@@ -19,6 +19,54 @@
     }
 }
 
+.djangocms-frontend-row {
+    .form-row.field-row_cols_xs {
+        position: relative;
+        display: flex;
+        padding: 0;
+        min-width: 860px;
+
+        .field-box,
+        .fieldBox {
+            position: relative;
+            text-align: center;
+            width: 110px !important;
+            padding: 15px 10px;
+            margin: 0 !important;
+            border-bottom: 1px solid #eee;
+            float: left !important;
+
+            input {
+                text-align: right;
+                padding-right: 5px !important;
+            }
+
+            label {
+                font-size: 12px !important;
+                font-weight: normal !important;
+                color: #ccc !important;
+                position: absolute;
+                left: 20px;
+                bottom: 18px;
+                text-transform: lowercase;
+            }
+
+            .disabled {
+                color: #ccc;
+                background: #eee;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        .errors {
+            margin-bottom: 0;
+        }
+    }
+}
+
 .djangocms-frontend-column {
     .form-row.field-xs_col,
     .form-row.field-xs_order,
@@ -70,7 +118,7 @@
         }
 
         .errorlist {
-            @include sr-only;
+            @include visually-hidden;
         }
 
         &.field-xs_mr .field-box {

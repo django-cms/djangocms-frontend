@@ -28,6 +28,14 @@ $(() => {
             icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end',
                 'flex-content-around', 'flex-content-between'],
         });
+                // Bootstrap 5 Grid Column - Responsive Settings
+        new GridLayout({
+            sizes: column.data().sizes,
+            rows: column.data().rows,
+            reset: column.data().reset,
+            static: static_url,
+        });
+
 
         $('.form-row.field-create > div').before(
             iconTemplate('columns', static_url)
@@ -45,7 +53,7 @@ $(() => {
             icons: ['align-reset', 'flex-self-start', 'flex-self-center', 'flex-self-end'],
             static: static_url,
         });
-        // Bootstrap 5 Grid Column - Reponsive Settings
+        // Bootstrap 5 Grid Column - Responsive Settings
         new GridLayout({
             sizes: column.data().sizes,
             rows: column.data().rows,
