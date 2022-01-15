@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+import importlib
 
 EMPTY_CHOICE = (("", "------"),)
 
@@ -70,10 +71,10 @@ SPACER_SIZE_CHOICES = getattr(
     ),
 )
 
+framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
+theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
 def preparator_factory(framework):
-    import importlib
-
     try:
         fr_settings = importlib.import_module(framework)
         if hasattr(fr_settings, "prepare_instance"):
@@ -82,6 +83,26 @@ def preparator_factory(framework):
         pass
     return lambda *args, **kwargs: None
 
-
-framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 prepare_instance = preparator_factory(framework)
+
+render_path = f"{theme}.renderer"
+
+
+def find_renderer(my_module):
+    def render_factory(name, module):
+        module = getattr(module, framework)
+        cls = f"Render{name}"
+        if hasattr(module, cls):
+            return getattr(module, cls)
+        return object
+
+    try:
+        theme_module = importlib.import_module(render_path)
+        if hasattr(theme_module, framework): # Theme package on path?
+            return lambda name:render_factory(name, theme_module)
+    except ModuleNotFoundError:
+        pass
+
+    if hasattr(my_module, framework):
+        return lambda name: render_factory(name, my_module)
+    return lambda _: object
