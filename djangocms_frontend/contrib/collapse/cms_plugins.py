@@ -3,13 +3,17 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
+from .. import collapse
 
 from ... import settings
 from . import forms, models
 
 
+mixin_factory = settings.get_renderer(collapse)
+
+
 @plugin_pool.register_plugin
-class CollapsePlugin(CMSPluginBase):
+class CollapsePlugin(mixin_factory("Collapse"), CMSPluginBase):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -47,7 +51,7 @@ class CollapsePlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CollapseTriggerPlugin(CMSPluginBase):
+class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSPluginBase):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -82,7 +86,7 @@ class CollapseTriggerPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CollapseContainerPlugin(CMSPluginBase):
+class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSPluginBase):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -114,14 +118,3 @@ class CollapseContainerPlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        classes = concat_classes(
-            [
-                "collapse",
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

@@ -1,9 +1,7 @@
 {% load cms_tags frontend %}
 {% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes %}
+    <{{ instance.tag_type }} {% add_class instance.attributes add_classes %}
     id="parent-{{ instance.pk|safe }}"
-    data-bs-children="{{ instance.siblings }}"
-    role="tablist"
     >
     {% with parent=instance %}
         {% for plugin in instance.child_plugin_instances %}

@@ -1,6 +1,6 @@
 {% load cms_tags frontend %}
 {% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes_str %}
+    <{{ instance.tag_type }} {% add_class instance.attributes_str add_classes %}
     id="{{ instance.container_identifier }}"
     role="tabpanel"
     data-bs-parent="#parent-{{ parent.pk|safe }}"

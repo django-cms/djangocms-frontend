@@ -32,7 +32,7 @@ class AlertPlugin(mixin_factory("Alert"), CMSPluginBase):
             {
                 "fields": (
                     "alert_context",
-                    "alert_dismissable",
+                    "alert_dismissible",
                 )
             },
         ),

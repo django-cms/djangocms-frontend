@@ -22,6 +22,18 @@ TAG_CHOICES = getattr(
 )
 TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 
+HEADER_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_HEADER_CHOICES",
+    (
+        ("h1", _("Heading 1"),),
+        ("h2", _("Heading 2"),),
+        ("h3", _("Heading 3"),),
+        ("h4", _("Heading 4"),),
+        ("h5", _("Heading 5"),),
+    )
+)
+
 COLOR_STYLE_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_COLOR_STYLE_CHOICES",
