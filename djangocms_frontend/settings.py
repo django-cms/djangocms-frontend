@@ -1,6 +1,7 @@
+import importlib
+
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-import importlib
 
 EMPTY_CHOICE = (("", "------"),)
 
@@ -89,10 +90,19 @@ prepare_instance = preparator_factory(framework)
 
 theme_render_path = f"{theme}.renderer.{framework}"
 
+
 def get_renderer(my_module):
     def render_factory(name, theme_module, render_module):
-        cls = f"Render{name}Mixin"
-        return type(cls, tuple(getattr(module, cls) for module in (render_module, theme_module) if module is not None), dict())  # Empty Mix
+        cls = f"{name}RenderMixin"
+        return type(
+            cls,
+            tuple(
+                getattr(module, cls, None)
+                for module in (render_module, theme_module)
+                if module is not None and getattr(module, cls, None) is not None
+            ),
+            dict(),
+        )  # Empty Mix
 
     if not isinstance(my_module, str):
         my_module = my_module.__name__
@@ -107,4 +117,3 @@ def get_renderer(my_module):
         render_module = None
 
     return lambda name: render_factory(name, theme_module, render_module)
-

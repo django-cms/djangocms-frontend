@@ -2,14 +2,15 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import concat_classes
-
 from ... import settings
+from .. import card
 from . import forms, models
+
+mixin_factory = settings.get_renderer(card)
 
 
 @plugin_pool.register_plugin
-class CardPlugin(CMSPluginBase):
+class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -59,21 +60,6 @@ class CardPlugin(CMSPluginBase):
         ),
     ]
 
-    def render(self, context, instance, placeholder):
-        link_classes = [instance.card_type]
-        if instance.card_context and instance.card_outline:
-            link_classes.append("border-{}".format(instance.card_context))
-        elif instance.card_context:
-            link_classes.append("bg-{}".format(instance.card_context))
-        if instance.card_alignment:
-            link_classes.append(instance.card_alignment)
-        if instance.card_text_color:
-            link_classes.append("text-{}".format(instance.card_text_color))
-        if getattr(instance, "card_full_height", False):
-            link_classes.append("h-100")
-        context["add_classes"] = " ".join(link_classes)
-        return super().render(context, instance, placeholder)
-
     # def save_model(self, request, obj, form, change):
     #     super().save_model(request, obj, form, change)
     #     if self.card_type == "card":
@@ -91,7 +77,7 @@ class CardPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CardInnerPlugin(CMSPluginBase):
+class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/

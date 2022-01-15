@@ -3,207 +3,19 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import BaseCommand, CommandError
 from django.db import connection, models
 
-from djangocms_frontend.settings import DEVICE_SIZES
-
-
-def breakpoints(props):
-    lst = []
-    for size in DEVICE_SIZES:
-        for prop in props:
-            lst.append(f"{size}_{prop}")
-    return lst
-
+from djangocms_frontend.management import bootstrap4_migration
 
 plugin_names = {
     "Picture": "ImagePlugin",
 }
 
-plugin_migrations = {
-    "bootstrap4_alerts.Bootstrap4Alerts -> alert.Alert": [
-        "alert_context",
-        "alert_dismissable -> alert_dismissible",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_badge.Bootstrap4Badge -> badge.Badge": [
-        "badge_text",
-        "badge_context",
-        "badge_pills",
-        "attributes",
-    ],
-    "bootstrap4_card.Bootstrap4Card -> card.Card": [
-        "card_type",
-        "card_context",
-        "card_alignment",
-        "card_outline",
-        "card_text_color",
-        "tag_type",
-        "attributes",
-        "X002",  # Replace v4 card deck
-    ],
-    "bootstrap4_card.Bootstrap4CardInner -> card.CardInner": [
-        "inner_type",
-        "tag_type",
-        "attributes",
-    ],
-    # carousel
-    "bootstrap4_collapse.Bootstrap4Collapse -> collapse.Collapse": [
-        "siblings",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_collapse.Bootstrap4CollapseContainer -> collapse.CollapseContainer": [
-        "identifier -> container_identifier",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_collapse.Bootstrap4CollapseTrigger -> collapse.CollapseTrigger": [
-        "identifier -> trigger_identifier",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_content.Bootstrap4Blockquote -> content.Blockquote": [
-        "quote_content",
-        "quote_origin",
-        "quote_alignment",
-        "attributes",
-    ],
-    "bootstrap4_content.Bootstrap4Code -> content.CodeBlock": [
-        "code_content",
-        "attributes",
-    ],
-    "bootstrap4_content.Bootstrap4Figure -> content.Figure": [
-        "figure_caption",
-        "figure_alignment",
-        "attributes",
-    ],
-    "bootstrap4_grid.Bootstrap4GridContainer -> grid.GridContainer": [
-        "container_type",
-        "attributes",
-        "tag_type",
-    ],
-    "bootstrap4_grid.Bootstrap4GridRow -> grid.GridRow": [
-        "horizontal_alignment",
-        "vertical_alignment",
-        "gutters",
-        "attributes",
-        "tag_type",
-    ],
-    "bootstrap4_grid.Bootstrap4GridColumn -> grid.GridColumn": [
-        "column_type",
-        "column_alignment",
-        "attributes",
-        "tag_type",
-    ]
-    + breakpoints(("col", "order", "ml", "mr", "offset")),
-    "bootstrap4_jumbotron.Bootstrap4Jumbotron -> jumbotron.Jumbotron": [
-        "fluid -> jumbotron_fluid",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_link.Bootstrap4Link -> link.Link": [
-        "template",
-        "name",
-        "external_link",
-        "anchor",
-        "mailto",
-        "phone",
-        "target -> link_target",
-        "link_type",
-        "link_context",
-        "link_size",
-        "link_outline",
-        "link_block",
-        "internal_link",
-        "icon_left",
-        "icon_right",
-        "file_link",
-        "attributes",
-    ],
-    "djangocms_styledlink.StyledLink -> link.Link": [
-        "(default) -> template",
-        "label -> name",
-        "title",
-        "ext_destination -> external_link",
-        "ext_follow",
-        "mailto",
-        "target -> link_target",
-        "page_destination -> anchor",
-        "() -> phone",
-        "() -> link_context",
-        "() -> link_size",
-        "() -> link_outline",
-        "() -> link_block",
-        "() -> icon_left",
-        "() -> icon_right",
-        "() -> file_link",
-        "X001",
-    ],
-    "bootstrap4_listgroup.Bootstrap4ListGroup -> listgroup.ListGroup": [
-        "list_group_flush",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_listgroup.Bootstrap4ListGroupItem -> listgroup.ListGroupItem": [
-        "list_context",
-        "list_state",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_media.Bootstrap4Media -> media.Media": [
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_media.Bootstrap4MediaBody -> media.MediaBody": [
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_picture.Bootstrap4Picture -> picture.Picture": [
-        "template",
-        "external_picture",
-        "width",
-        "height",
-        "alignment",
-        "caption_text",
-        "link_url -> external_link",
-        "link_target",
-        "link_attributes",
-        "use_automatic_scaling",
-        "use_no_cropping",
-        "use_crop",
-        "use_upscale",
-        "picture_fluid",
-        "picture_rounded",
-        "picture_thumbnail",
-        "link_page -> internal_link",
-        "picture",
-        "thumbnail_options",
-        "use_responsive_image",
-        "attributes",
-    ],
-    "bootstrap4_tabs.Bootstrap4Tab -> tabs.Tab": [
-        "template",
-        "tab_type",
-        "tab_alignment",
-        "tab_index",
-        "tab_effect",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_tabs.Bootstrap4TabItem -> tabs.TabItem": [
-        "tab_title",
-        "tag_type",
-        "attributes",
-    ],
-    "bootstrap4_utilities.Bootstrap4Spacing -> utilities.Spacing": [
-        "space_property",
-        "space_sides",
-        "space_device",
-        "space_size",
-        "tag_type",
-        "attributes",
-    ],
-}
+
+plugin_migrations = {}
+data_migration = {}
+
+# Bootstrap 4
+plugin_migrations.update(bootstrap4_migration.plugin_migrations)
+data_migration.update(bootstrap4_migration.data_migration)
 
 
 def migrate_to_djangocms_frontend(apps, schema_editor):
@@ -234,37 +46,8 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                 )
                 # Add something like `new_obj.field_name = obj.field_name` for any field in the the new plugin
                 for field in fields:
-                    if field == "X001":  # Special case internal link from styled link
-                        if obj.int_destination_type_id:
-                            content_type = ContentType.objects.get(
-                                id=obj.int_destination_type_id
-                            )
-                            new_obj.config["internal_link"] = dict(
-                                model=f"{content_type.app_label}.{content_type.model}",
-                                pk=obj.int_destination_id,
-                            )
-                            styles = obj.styles.all()
-                            new_obj.config["attributes"] = {
-                                "class": " ".join(
-                                    (style.link_class for style in styles)
-                                )
-                            }
-                            for style in styles:
-                                obj.styles.remove(style)
-                            new_obj.config["link_type"] = (
-                                "btn"
-                                if "btn" in new_obj.attributes["class"]
-                                else "link"
-                            )
-                    elif field == "X002":  # Remove card-deck v4
-                        if obj.card_type == "card-deck":
-                            print("Detected bootstrap v4 card-deck")
-                            new_obj.config["card_type"] = "row"
-                        classes = obj.attributes.get("class", "").split()
-                        if "h-100" in classes:
-                            classes.remove("h-100")
-                            new_obj.config["card_full_height"] = True
-                            new_obj.config["attributes"]["class"] = " ".join(classes)
+                    if field in data_migration:
+                        data_migration[field](obj, new_obj)
                     else:
                         if " -> " in field:
                             old_field, new_field = field.split(" -> ")
