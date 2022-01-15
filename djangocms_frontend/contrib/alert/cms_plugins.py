@@ -46,15 +46,8 @@ class AlertPlugin(CMSPluginBase):
     ]
 
     def render(self, context, instance, placeholder):
-        link_classes = ["alert"]
-        link_classes.append("alert-{}".format(instance.alert_context))
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
+        add_classes = ["alert-{}".format(instance.alert_context)]
+        if instance.alert_dismissable:
+            add_classes.append("alert-dismissible")
+        context["add_classes"] = " ".join(add_classes)
         return super().render(context, instance, placeholder)

@@ -39,6 +39,7 @@ plugin_migrations = {
         "card_text_color",
         "tag_type",
         "attributes",
+        "X002",  # Replace v4 card deck
     ],
     "bootstrap4_card.Bootstrap4CardInner -> card.CardInner": [
         "inner_type",
@@ -255,6 +256,15 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                                 if "btn" in new_obj.attributes["class"]
                                 else "link"
                             )
+                    elif field == "X002":  # Remove card-deck v4
+                        if obj.card_type == "card-deck":
+                            print("Detected bootstrap v4 card-deck")
+                            new_obj.config["card_type"] = "row"
+                        classes = obj.attributes.get("class", "").split()
+                        if "h-100" in classes:
+                            classes.remove("h-100")
+                            new_obj.config["card_full_height"] = True
+                            new_obj.config["attributes"]["class"] = " ".join(classes)
                     else:
                         if " -> " in field:
                             old_field, new_field = field.split(" -> ")

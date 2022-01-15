@@ -1,5 +1,5 @@
 {% load cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes %}>
+    <{{ instance.tag_type }} {% add_class instance.attributes grid_classes add_classes %}>
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
     {% endfor %}

@@ -63,33 +63,13 @@ class GridColumn(FrontendUIItem):
 
     def get_short_description(self):
         text = ""
-        classes = self.get_grid_values()
+        #        classes = self.get_grid_values()
         if self.xs_col:
             text += "(col-{}) ".format(self.xs_col)
         else:
             text += "(auto) "
         if self.column_type != "col":
             text += ".{} ".format(self.column_type)
-        if classes:
-            text += ".{}".format(" .".join(self.get_grid_values()))
+        #        if classes:
+        #            text += ".{}".format(" .".join(self.get_grid_values()))
         return text
-
-    def get_grid_values(self):
-        classes = []
-        for device in DEVICE_SIZES:
-            for element in ("col", "order", "offset", "ml", "mr"):
-                size = getattr(self, "{}_{}".format(device, element))
-                if isinstance(size, int) and (
-                    element == "col" or element == "order" or element == "offset"
-                ):
-                    if device == "xs":
-                        classes.append("{}-{}".format(element, int(size)))
-                    else:
-                        classes.append("{}-{}-{}".format(element, device, int(size)))
-                elif size:
-                    if device == "xs":
-                        classes.append("{}-{}".format(element, "auto"))
-                    else:
-                        classes.append("{}-{}-{}".format(element, device, "auto"))
-
-        return classes

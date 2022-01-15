@@ -35,9 +35,15 @@ class CardPlugin(CMSPluginBase):
             None,
             {
                 "fields": (
-                    "card_type",
+                    (
+                        "card_type",
+                        "card_alignment",
+                    ),
                     ("card_context", "card_text_color"),
-                    ("card_alignment", "card_outline"),
+                    (
+                        "card_outline",
+                        "card_full_height",
+                    ),
                 )
             },
         ),
@@ -63,30 +69,25 @@ class CardPlugin(CMSPluginBase):
             link_classes.append(instance.card_alignment)
         if instance.card_text_color:
             link_classes.append("text-{}".format(instance.card_text_color))
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
+        if getattr(instance, "card_full_height", False):
+            link_classes.append("h-100")
+        context["add_classes"] = " ".join(link_classes)
         return super().render(context, instance, placeholder)
 
-    def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        obj.add_child(
-            instance=models.CardInner(
-                parent=obj,
-                placeholder=obj.placeholder,
-                position=obj.numchild,
-                language=obj.language,
-                plugin_type=CardInnerPlugin.__name__,
-                ui_item=models.CardInner.__class__.__name__,
-                config=dict(inner_type="card-body"),
-            )
-        )
+    # def save_model(self, request, obj, form, change):
+    #     super().save_model(request, obj, form, change)
+    #     if self.card_type == "card":
+    #         obj.add_child(
+    #             instance=models.CardInner(
+    #                 parent=obj,
+    #                 placeholder=obj.placeholder,
+    #                 position=obj.numchild,
+    #                 language=obj.language,
+    #                 plugin_type=CardInnerPlugin.__name__,
+    #                 ui_item=models.CardInner.__class__.__name__,
+    #                 config=dict(inner_type="card-body"),
+    #             )
+    #         )
 
 
 @plugin_pool.register_plugin
@@ -100,7 +101,7 @@ class CardInnerPlugin(CMSPluginBase):
     module = _("Interface")
     model = models.CardInner
     form = forms.CardInnerForm
-    render_template = f"djangocms_frontend/{settings.framework}/card.html"
+    render_template = f"djangocms_frontend/{settings.framework}/card_content.html"
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     parent_classes = [
@@ -122,14 +123,3 @@ class CardInnerPlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        classes = concat_classes(
-            [instance.inner_type]
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)
