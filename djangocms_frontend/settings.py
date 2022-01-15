@@ -74,6 +74,7 @@ SPACER_SIZE_CHOICES = getattr(
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
+
 def preparator_factory(framework):
     try:
         fr_settings = importlib.import_module(framework)
@@ -83,26 +84,27 @@ def preparator_factory(framework):
         pass
     return lambda *args, **kwargs: None
 
+
 prepare_instance = preparator_factory(framework)
 
-render_path = f"{theme}.renderer"
+theme_render_path = f"{theme}.renderer.{framework}"
 
+def get_renderer(my_module):
+    def render_factory(name, theme_module, render_module):
+        cls = f"Render{name}Mixin"
+        return type(cls, tuple(getattr(module, cls) for module in (render_module, theme_module) if module is not None), dict())  # Empty Mix
 
-def find_renderer(my_module):
-    def render_factory(name, module):
-        module = getattr(module, framework)
-        cls = f"Render{name}"
-        if hasattr(module, cls):
-            return getattr(module, cls)
-        return object
+    if not isinstance(my_module, str):
+        my_module = my_module.__name__
+    try:
+        theme_module = importlib.import_module(theme_render_path)
+    except ModuleNotFoundError:
+        theme_module = None
 
     try:
-        theme_module = importlib.import_module(render_path)
-        if hasattr(theme_module, framework): # Theme package on path?
-            return lambda name:render_factory(name, theme_module)
+        render_module = importlib.import_module(f"{my_module}.renderer.{framework}")
     except ModuleNotFoundError:
-        pass
+        render_module = None
 
-    if hasattr(my_module, framework):
-        return lambda name: render_factory(name, my_module)
-    return lambda _: object
+    return lambda name: render_factory(name, theme_module, render_module)
+

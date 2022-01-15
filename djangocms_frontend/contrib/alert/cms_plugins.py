@@ -2,14 +2,17 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import concat_classes
+from .. import alert
 
 from ... import settings
 from . import forms, models
 
 
+mixin_factory = settings.get_renderer(alert)
+
+
 @plugin_pool.register_plugin
-class AlertPlugin(CMSPluginBase):
+class AlertPlugin(mixin_factory("Alert"), CMSPluginBase):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/
@@ -44,17 +47,3 @@ class AlertPlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        link_classes = ["alert"]
-        link_classes.append("alert-{}".format(instance.alert_context))
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

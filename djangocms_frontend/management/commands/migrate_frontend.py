@@ -21,7 +21,7 @@ plugin_names = {
 plugin_migrations = {
     "bootstrap4_alerts.Bootstrap4Alerts -> alert.Alert": [
         "alert_context",
-        "alert_dismissable",
+        "alert_dismissable -> alert_dismissible",
         "tag_type",
         "attributes",
     ],

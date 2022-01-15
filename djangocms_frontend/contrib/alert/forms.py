@@ -18,7 +18,7 @@ class AlertForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "alert_context",
-                "alert_dismissable",
+                "alert_dismissible",
                 "attributes",
             ]
         }
@@ -29,8 +29,8 @@ class AlertForm(EntangledModelForm):
         choices=COLOR_STYLE_CHOICES,
         initial=COLOR_STYLE_CHOICES[0][0],
     )
-    alert_dismissable = forms.BooleanField(
-        label=_("Dismissable"),
+    alert_dismissible = forms.BooleanField(
+        label=_("Dismissible"),
         initial=False,
         required=False,
         help_text=_("Allows the alert to be closed."),

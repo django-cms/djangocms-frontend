@@ -3,13 +3,16 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
+from .. import badge
 
 from ... import settings
 from . import forms, models
 
+mixin_factory = settings.get_renderer(badge)
+
 
 @plugin_pool.register_plugin
-class BadgePlugin(CMSPluginBase):
+class BadgePlugin(mixin_factory("Badge"), CMSPluginBase):
     """
     Components > "Badge" Plugin
     https://getbootstrap.com/docs/5.0/components/badge/
@@ -36,19 +39,3 @@ class BadgePlugin(CMSPluginBase):
         ),
         (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
-
-    def render(self, context, instance, placeholder):
-        link_classes = ["badge"]
-        if instance.badge_pills:
-            link_classes.append("badge-pill")
-        link_classes.append("badge-{}".format(instance.badge_context))
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

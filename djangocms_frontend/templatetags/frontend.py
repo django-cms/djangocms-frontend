@@ -7,12 +7,12 @@ register = template.Library()
 @register.simple_tag
 def add_class(attribute_field, *add_classes):
     """Joins a list of classes with an attributes field and returns all html attributes"""
-    additional_classes = " ".join(add_classes)
+    additional_classes = set(classes if isinstance(classes, str) else classes.split() for classes in add_classes)
     attrs = [""]
     if attribute_field:
         for key, val in attribute_field.items():
             if key.lower() == "class":
-                val += " " + additional_classes
+                val = " ".join(additional_classes+val.split())
             if val:
                 attrs.append(
                     '{key}="{value}"'.format(key=key, value=conditional_escape(val))
@@ -20,5 +20,5 @@ def add_class(attribute_field, *add_classes):
             else:
                 attrs.append("{key}".format(key=key))
     if additional_classes and "class" not in attribute_field:
-        attrs.append(f'class="{conditional_escape(additional_classes)}"')
+        attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))

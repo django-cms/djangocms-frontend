@@ -1,6 +1,6 @@
 {% load frontend cms_tags i18n %}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes "alert" alert_context %} role="alert">
-    {% if instance.alert_dismissable %}
+    <{{ instance.tag_type }} {% add_class instance.attributes add_classes %} role="alert">
+    {% if instance.alert_dismissible %}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
     {% endif %}
     {% for plugin in instance.child_plugin_instances %}
