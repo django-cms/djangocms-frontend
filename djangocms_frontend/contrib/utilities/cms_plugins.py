@@ -5,10 +5,13 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 
 from . import forms, models
+from .. import utilities
+
+mixin_factory = settings.get_renderer(utilities)
 
 
 @plugin_pool.register_plugin
-class SpacingPlugin(CMSPluginBase):
+class SpacingPlugin(mixin_factory("Spacing"), CMSPluginBase):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -49,7 +52,7 @@ class SpacingPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class EditorNotePlugin(CMSPluginBase):
+class EditorNotePlugin(mixin_factory("EditorNote"), CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Editor note")
@@ -60,7 +63,7 @@ class EditorNotePlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class HeadingPlugin(CMSPluginBase):
+class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
@@ -107,7 +110,7 @@ class HeadingPlugin(CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class TOCPlugin(CMSPluginBase):
+class TOCPlugin(mixin_factory("TOC"), CMSPluginBase):
     name = _("Table of contents")
     module = _("Interface")
 

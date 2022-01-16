@@ -66,25 +66,26 @@ Installation
 
 For a manual install:
 
-* run ``pip install djangocms-bootstrap5``
+* run ``pip install https://github.com/fsbraun/djangocms-frontend/archive/master.zip``
 * add the following entries to your ``INSTALLED_APPS``::
 
     'djangocms_icon',
     'djangocms_frontend',
-    'djangocms_frontend.contrib.bootstrap5_alerts',
-    'djangocms_frontend.contrib.bootstrap5_badge',
-    'djangocms_frontend.contrib.bootstrap5_card',
-    'djangocms_frontend.contrib.bootstrap5_carousel',
-    'djangocms_frontend.contrib.bootstrap5_collapse',
-    'djangocms_frontend.contrib.bootstrap5_content',
-    'djangocms_frontend.contrib.bootstrap5_grid',
-    'djangocms_frontend.contrib.bootstrap5_jumbotron',
-    'djangocms_frontend.contrib.bootstrap5_link',
-    'djangocms_frontend.contrib.bootstrap5_listgroup',
-    'djangocms_frontend.contrib.bootstrap5_media',
-    'djangocms_frontend.contrib.bootstrap5_picture',
-    'djangocms_frontend.contrib.bootstrap5_tabs',
-    'djangocms_frontend.contrib.bootstrap5_utilities',
+    'djangocms_frontend.contrib.accordion',
+    'djangocms_frontend.contrib.alert',
+    'djangocms_frontend.contrib.badge',
+    'djangocms_frontend.contrib.card',
+    'djangocms_frontend.contrib.carousel',
+    'djangocms_frontend.contrib.collapse',
+    'djangocms_frontend.contrib.content',
+    'djangocms_frontend.contrib.grid',
+    'djangocms_frontend.contrib.jumbotron',
+    'djangocms_frontend.contrib.link',
+    'djangocms_frontend.contrib.listgroup',
+    'djangocms_frontend.contrib.media',
+    'djangocms_frontend.contrib.picture',
+    'djangocms_frontend.contrib.tabs',
+    'djangocms_frontend.contrib.utilities',
 
 * run ``python manage.py migrate``
 
@@ -100,6 +101,7 @@ Dependency on **django CMS Link** and **django CMS Picture** have been dropped.
 
 It provides the following **standard** Bootstrap 5 components:
 
+* `Accordion <https://getbootstrap.com/docs/5.0/components/accordion/>`_
 * `Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
 * `Badge <https://getbootstrap.com/docs/5.0/components/badge/>`_
 * `Card <https://getbootstrap.com/docs/5.0/components/card/>`_

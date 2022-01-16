@@ -1,18 +1,19 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-
-from djangocms_frontend.helpers import concat_classes
+from .. import jumbotron
 
 from ... import settings
 from . import forms, models
 
+mixin_factory = settings.get_renderer(jumbotron)
+
 
 @plugin_pool.register_plugin
-class JumbotronPlugin(CMSPluginBase):
+class JumbotronPlugin(mixin_factory("Jumbotron"), CMSPluginBase):
     """
     Components > "Jumbotron" Plugin
-    https://getbootstrap.com/docs/5.0/components/jumbotron/
+    https://getbootstrap.com/docs/5.1/examples/jumbotron/
     """
 
     name = _("Jumbotron")

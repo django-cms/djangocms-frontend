@@ -3,13 +3,17 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import concat_classes
+from .. import listgroup
 
 from ... import settings
 from . import forms, models
 
 
+mixin_factory = settings.get_renderer(listgroup)
+
+
 @plugin_pool.register_plugin
-class ListGroupPlugin(CMSPluginBase):
+class ListGroupPlugin(mixin_factory("ListGroup"), CMSPluginBase):
     """
     Components > "List Group" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -39,24 +43,9 @@ class ListGroupPlugin(CMSPluginBase):
         ),
     ]
 
-    def render(self, context, instance, placeholder):
-        link_classes = ["list-group"]
-        if instance.list_group_flush:
-            link_classes.append("list-group-flush")
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)
-
 
 @plugin_pool.register_plugin
-class ListGroupItemPlugin(CMSPluginBase):
+class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSPluginBase):
     """
     Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -92,20 +81,3 @@ class ListGroupItemPlugin(CMSPluginBase):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        link_classes = ["list-group-item"]
-        if instance.list_context:
-            link_classes.append("list-group-item-{}".format(instance.list_context))
-        if instance.list_state:
-            link_classes.append(instance.list_state)
-
-        classes = concat_classes(
-            link_classes
-            + [
-                instance.attributes.get("class"),
-            ]
-        )
-        instance.attributes["class"] = classes
-
-        return super().render(context, instance, placeholder)

@@ -16,15 +16,6 @@ from djangocms_frontend.helpers import (
 
 class B5HelpersTestCase(TestCase):
 
-    def test_concat_classes(self):
-        classes = ['class1 class2', 'class3']
-        self.assertEqual(
-            concat_classes(classes),
-            'class1 class2 class3',
-        )
-        classes = []
-        self.assertEqual(concat_classes(classes), '')
-
     def test_get_template_path(self):
         template = get_template_path(
             "carousel", "default", "slide"

@@ -17,14 +17,14 @@ plugin_migrations = {
         "alert_dismissable -> alert_dismissible",
         "tag_type",
         "attributes",
-        "P001",
+        "P001",  # additional data migration, see below
     ],
     "bootstrap4_badge.Bootstrap4Badge -> badge.Badge": [
         "badge_text",
         "badge_context",
         "badge_pills",
         "attributes",
-        "P001",
+        "P001", # additional data migration, see below
     ],
     "bootstrap4_card.Bootstrap4Card -> card.Card": [
         "card_type",
@@ -124,25 +124,6 @@ plugin_migrations = {
         "file_link",
         "attributes",
         "P001",
-    ],
-    "djangocms_styledlink.StyledLink -> link.Link": [
-        "(default) -> template",
-        "label -> name",
-        "title",
-        "ext_destination -> external_link",
-        "ext_follow",
-        "mailto",
-        "target -> link_target",
-        "page_destination -> anchor",
-        "() -> phone",
-        "() -> link_context",
-        "() -> link_size",
-        "() -> link_outline",
-        "() -> link_block",
-        "() -> icon_left",
-        "() -> icon_right",
-        "() -> file_link",
-        "X001",
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroup -> listgroup.ListGroup": [
         "list_group_flush",
@@ -249,24 +230,6 @@ def p001_left_right_migration(obj, new_obj):
         new_obj.config["attributes"]["class"] = " ".join(classes)
 
 
-def x001_migrate_styled_link(obj, new_obj):
-    if obj.int_destination_type_id:
-        content_type = ContentType.objects.get(id=obj.int_destination_type_id)
-        new_obj.config["internal_link"] = dict(
-            model=f"{content_type.app_label}.{content_type.model}",
-            pk=obj.int_destination_id,
-        )
-        styles = obj.styles.all()
-        new_obj.config["attributes"] = {
-            "class": " ".join((style.link_class for style in styles))
-        }
-        for style in styles:
-            obj.styles.remove(style)
-        new_obj.config["link_type"] = (
-            "btn" if "btn" in new_obj.attributes["class"] else "link"
-        )
-
-
 def x002_replace_card_deck(obj, new_obj):
     if obj.card_type == "card-deck":
         print("Detected bootstrap v4 card-deck")
@@ -280,6 +243,5 @@ def x002_replace_card_deck(obj, new_obj):
 
 data_migration = {
     "P001": p001_left_right_migration,
-    "X001": x001_migrate_styled_link,
     "X002": x002_replace_card_deck,
 }
