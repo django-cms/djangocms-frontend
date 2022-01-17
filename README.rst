@@ -19,9 +19,9 @@ Key features
 * **New link plugin** allowing to link to internal pages provided by other applications,
   such as `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-* *Nice and well-arranged admin frontend** of djangocms-bootstrap4
+* **Nice and well-arranged admin frontend** of `djangocms_bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_
 
-* Management command to **migrate** from `djangocms_bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
+* Management command to **migrate from djangocms_bootstrap4**
 
 * **Extensible** within the project and with separate project (e.g., a theme app)
 

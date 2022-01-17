@@ -2,10 +2,8 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import concat_classes
-from .. import content
-
 from ... import settings
+from .. import content
 from . import forms, models
 
 mixin_factory = settings.get_renderer(content)
@@ -96,4 +94,3 @@ class FigurePlugin(mixin_factory("Figure"), CMSPluginBase):
         ),
         (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
-

@@ -3,12 +3,15 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_text_ckeditor.fields import HTMLFormField
 from entangled.forms import EntangledModelForm
 
+from djangocms_frontend import settings
+from djangocms_frontend.contrib import accordion
 from djangocms_frontend.fields import AttributesFormField
 from djangocms_frontend.models import FrontendUIItem
-from djangocms_frontend import settings
+
+mixin_factory = settings.get_forms(accordion)
 
 
-class AccordionForm(EntangledModelForm):
+class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
     """
     Components > "Accordion" Plugin
     https://getbootstrap.com/docs/5.0/components/accordion/
@@ -28,14 +31,16 @@ class AccordionForm(EntangledModelForm):
         label=_("Integrate into parent"),
         initial=False,
         required=False,
-        help_text=_("Removes the default background-color, some borders, and some rounded corners to render "
-                    "accordions "
-                    "edge-to-edge with their parent container "),
+        help_text=_(
+            "Removes the default background-color, some borders, and some rounded corners to render "
+            "accordions "
+            "edge-to-edge with their parent container "
+        ),
     )
     attributes = AttributesFormField()
 
 
-class AccordionItemForm(EntangledModelForm):
+class AccordionItemForm(mixin_factory("AccordionItem"), EntangledModelForm):
     """
     Components > "AccordionItem" Plugin
     https://getbootstrap.com/docs/5.0/components/accordion/

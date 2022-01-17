@@ -25,5 +25,3 @@ class CarouselSlideRenderMixin:
         context["link"] = instance.get_link()
         context["options"] = {"crop": 10, "size": (width, height), "upscale": True}
         return super().render(context, instance, placeholder)
-
-

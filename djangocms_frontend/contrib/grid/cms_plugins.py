@@ -3,11 +3,10 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
-from djangocms_frontend.helpers import concat_classes
 
+from .. import grid
 from . import forms, models
 from .constants import GRID_COLUMN_CHOICES
-from .. import grid
 
 mixin_factory = settings.get_renderer(grid)
 
@@ -113,7 +112,6 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
                 config=extra,
             )
             obj.add_child(instance=col)
-
 
 
 @plugin_pool.register_plugin

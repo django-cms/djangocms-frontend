@@ -2,12 +2,9 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import concat_classes
-from .. import listgroup
-
 from ... import settings
+from .. import listgroup
 from . import forms, models
-
 
 mixin_factory = settings.get_renderer(listgroup)
 

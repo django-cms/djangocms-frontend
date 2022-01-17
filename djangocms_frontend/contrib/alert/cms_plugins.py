@@ -2,11 +2,9 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from .. import alert
-
 from ... import settings
+from .. import alert
 from . import forms, models
-
 
 mixin_factory = settings.get_renderer(alert)
 
@@ -30,10 +28,10 @@ class AlertPlugin(mixin_factory("Alert"), CMSPluginBase):
         (
             None,
             {
-                "fields": (
+                "fields": [
                     "alert_context",
                     "alert_dismissible",
-                )
+                ]
             },
         ),
         (

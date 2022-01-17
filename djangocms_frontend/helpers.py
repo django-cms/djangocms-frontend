@@ -6,11 +6,30 @@ from django.utils.safestring import mark_safe
 from djangocms_frontend import settings
 
 
-def concat_classes(classes):
+def insert_fields(fieldsets, *new_fields, block=None, position=-1, blockname=None):
     """
-    merges a list of classes and return concatinated string
+    creates a copy of fieldsets inserting the new fields either in the indexed block at the position,
+    or - if no block is given - at the end
     """
-    return " ".join(_class for _class in classes if _class)
+    if block is None:
+        return fieldsets + [
+            (
+                blockname,
+                {
+                    "classes": ("collapse",),
+                    "fields": [*new_fields],
+                },
+            )
+        ]
+    modify = fieldsets[block]
+    fields = modify[1]["fields"]
+    modify[1]["fields"] = (
+        fields[:position]
+        + new_fields
+        + (fields[: position + 1] if position != -1 else [])
+    )
+    fs = fieldsets[:block] + [modify] + (fieldsets[block + 1 :] if block != -1 else [])
+    return fs
 
 
 def get_template_path(prefix, template, name):
