@@ -12,18 +12,18 @@ the currently used frontend framework such as Bootstrap, or its specific version
 Key features
 ============
 
-* Separation of plugins from css framework, i.e., no need to rebuild you
-site's plugin tree if css framework is changed in the future, e.g.,
-from Bootstrap 5 to a future version
+* **Separation of plugins from css framework**, i.e., no need to rebuild you
+  site's plugin tree if css framework is changed in the future, e.g.,
+  from Bootstrap 5 to a future version
 
-* New link plugin allowing to link to internal pages provided by other applications,
-such as `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
+* **New link plugin** allowing to link to internal pages provided by other applications,
+  such as `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-* Nice and well-aranged admin frontend of djangocms-bootstrap4
+* *Nice and well-arranged admin frontend** of djangocms-bootstrap4
 
-* Management command to migrate from `djangocms_bootstrap44 <https://github.com/django-cms/djangocms-bootstrap4>`_.
+* Management command to **migrate** from `djangocms_bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
 
-* Extensible within the project and with separate project (e.g., a theme app)
+* **Extensible** within the project and with separate project (e.g., a theme app)
 
 Description
 ===========
@@ -62,7 +62,8 @@ fsbraun(at)gmx.de
 .. <http://docs.django-cms.org/en/latest/contributing/index.html>`_.
 
 We're grateful to all contributors who have helped create and maintain this package.
-Contributors are listed at the `contributors <https://github.com/divio/djangocms-bootstrap5/graphs/contributors>`_
+Contributors are listed at the
+`contributors <https://github.com/fsbraun/djangocms-frontend/graphs/contributors>`_
 section.
 
 .. One of the easiest contributions you can make is helping to translate this addon on
@@ -72,7 +73,7 @@ section.
 Documentation
 =============
 
-See ``REQUIREMENTS`` in the `setup.py <https://github.com/divio/djangocms-bootstrap5/blob/master/setup.py>`_
+See ``REQUIREMENTS`` in the `setup.py <https://github.com/fsbraun/djangocms-frontend/blob/master/setup.py>`_
 file for additional dependencies:
 
 |python| |django| |djangocms|
