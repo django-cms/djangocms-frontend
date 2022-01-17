@@ -5,17 +5,36 @@ django CMS Frontend
 |pypi| |build| |coverage|
 
 **django CMS Frontend** is a blugin bundle based on
-`django CMS Bootstrap 5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_.
+`djangocms_bootstrap5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_.
 Its objective is to provide a set of popular frontend components independent of
 the currently used frontend framework such as Bootstrap, or its specific version.
 
-The plugin are framework agnostic and the framework can be changed by adapting
-your procet's settings. Also, it is designed to avoid having to rebuild your
+Key features
+============
+
+* Separation of plugins from css framework, i.e., no need to rebuild you
+site's plugin tree if css framework is changed in the future, e.g.,
+from Bootstrap 5 to a future version
+
+* New link plugin allowing to link to internal pages provided by other applications,
+such as `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
+
+* Nice and well-aranged admin frontend of djangocms-bootstrap4
+
+* Management command to migrate from `djangocms_bootstrap44 <https://github.com/django-cms/djangocms-bootstrap4>`_.
+
+* Extensible within the project and with separate project (e.g., a theme app)
+
+Description
+===========
+
+The plugins are framework agnostic and the framework can be changed by adapting
+your project's settings. Also, it is designed to avoid having to rebuild your
 CMS plugin tree when upgrading e.g. from one version of your frontend framework
 to the next.
 
 django CMS Frontend uses `django-entangled <https://github.com/jrief/django-entangled>`_
-by Jacob Rief to avoid bloating your project's database with frontend framework-dependent
+by Jacob Rief to avoid bloating your project's database with css framework-dependent
 tables. Instead all design parameters are stored in a common JSON field and future
 releases of improved frontend features will not require to rebuild your full
 plugin tree.
@@ -24,24 +43,29 @@ The link plugin has been rewritten to not allow internal links to other CMS page
 to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
+Feedback
+========
+
 .. note::
-    This is currently a proof of concept project. The project is not fully tested
-    yet (in fact, test do not run).
+    This is currently a proof of concept project. The project is not tested
+    yet (in fact, tests do not run).
 
+This project is in a early stage. All feedback is welcome! Please mail me at
+fsbraun(at)gmx.de
 
-Contributing
-============
+.. Contributing
+.. ============
 
-This is a an open-source project. We'll be delighted to receive your
+.. This is a an open-source project. We'll be delighted to receive your
 feedback in the form of issues and pull requests. Before submitting your
 pull request, please review our `contribution guidelines
 <http://docs.django-cms.org/en/latest/contributing/index.html>`_.
 
-We're grateful to all contributors who have helped create and maintain this package.
+.. We're grateful to all contributors who have helped create and maintain this package.
 Contributors are listed at the `contributors <https://github.com/divio/djangocms-bootstrap5/graphs/contributors>`_
 section.
 
-One of the easiest contributions you can make is helping to translate this addon on
+.. One of the easiest contributions you can make is helping to translate this addon on
 `Transifex <https://www.transifex.com/projects/p/djangocms-bootstrap5/>`_.
 
 
@@ -53,8 +77,14 @@ file for additional dependencies:
 
 |python| |django| |djangocms|
 
-* Django Filer 1.7 or higher
-* Django Text CKEditor 3.1 or higher
+*  django-cms, version 3.7 or later
+*  django-filer, version 1.7 or later
+*  djangocms-attributes-field, version 1.0 or later
+*  djangocms-text-ckeditor, version 3.1 or later
+*  djangocms-icon, version 1.4 or later
+*  django-select2",
+*  django-entangled
+
 
 Make sure `django Filer <http://django-filer.readthedocs.io/en/latest/installation.html>`_
 and `django CMS Text CKEditor <https://github.com/divio/djangocms-text-ckeditor>`_
@@ -99,7 +129,8 @@ django CMS frontend **utilises** the following django CMS plugin:
 
 Dependency on **django CMS Link** and **django CMS Picture** have been dropped.
 
-It provides the following **standard** Bootstrap 5 components:
+Currently, it provides the following **standard** components, all available for
+the Bootstrap 5 framework:
 
 * `Accordion <https://getbootstrap.com/docs/5.0/components/accordion/>`_
 * `Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
@@ -117,7 +148,8 @@ It provides the following **standard** Bootstrap 5 components:
 * `Tabs <https://getbootstrap.com/docs/5.0/components/navs/#tabs>`_
 * `Utilities (Spacing) <https://getbootstrap.com/docs/5.0/utilities/>`_
 
-django CMS Bootstrap 5 **does not** add the styles or javascript files to your frontend, these need to be added at your discretion.
+django CMS frontend **does not** add the styles or javascript files to your
+frontend, these need to be added at your discretion.
 
 
 Settings
@@ -201,7 +233,7 @@ To run the frontend make sure to use **node 10.x**.
 
 .. |python| image:: https://img.shields.io/badge/python-3.5+-blue.svg
     :target: https://pypi.org/project/djangocms-bootstrap5/
-.. |django| image:: https://img.shields.io/badge/django-2.2,%203.0,%203.1-blue.svg
+.. |django| image:: https://img.shields.io/badge/django-2.2,%203.0,%203.1,%203.2-blue.svg
     :target: https://www.djangoproject.com/
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.7%2B-blue.svg
     :target: https://www.django-cms.org/
