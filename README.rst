@@ -153,8 +153,8 @@ django CMS frontend **does not** add the styles or javascript files to your
 frontend, these need to be added at your discretion.
 
 
-Migration
----------
+Migration from djangocms-bootstrap4
+----------------------------------
 
 If you migrate from djangocms-bootstrap4 you (after you first back-up your database!)
 can try to run the automatic migation process::
