@@ -7,5 +7,18 @@ Changelog
 ==================
 
 * Bootstrap 5
-* Based on djangocms-bootstrap5 2.0.0
-* Changes to naming for Bootstrap 5
+* Based on djangocms-bootstrap5 0.1.0
+* Changes to naming for djangocms_framework
+* Refactor to separate frontend from framework elements
+* Unify models to one single table with a json field to contain plugin-
+  specific data (based an django-entangled)
+* Added accordion plugins
+* New link plugin with ability to link to internal pages from other apps than
+  djang-cms
+* New picture plugin to remove dependency from djangocms-picture
+* Add migration management command to migrate djangocms-bootstrap4 plugins to
+  django-framework plugin
+* Fixed templates to match bootstrap5 specs (removing some incompatibilities)
+* Replaced discontinued jumbotron and media templates with valid bootstrap 5
+  fixes
+

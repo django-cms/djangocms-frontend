@@ -83,7 +83,7 @@ file for additional dependencies:
 *  djangocms-attributes-field, version 1.0 or later
 *  djangocms-text-ckeditor, version 3.1 or later
 *  djangocms-icon, version 1.4 or later
-*  django-select2",
+*  django-select2
 *  django-entangled
 
 
@@ -151,6 +151,21 @@ the Bootstrap 5 framework:
 
 django CMS frontend **does not** add the styles or javascript files to your
 frontend, these need to be added at your discretion.
+
+
+Migration
+---------
+
+If you migrate from djangocms-bootstrap4 you (after you first back-up your database!)
+can try to run the automatic migation process::
+
+    ./manage.py migrate_frontend
+
+For this to work, the both the djangocms-frontend **and** the
+djangocms-bootstrap4 apps need to be included in
+``INSTALLED_APPS``. After you finish the migration you can remove all
+djangocms-bootstrap4 apps from ``INSTALLED_APPS`` and you may delete the now
+empty database tables.
 
 
 Settings
