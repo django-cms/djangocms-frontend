@@ -12,7 +12,9 @@ from djangocms_frontend.models import FrontendUIItem
 PICTURE_RATIO = getattr(settings, "DJANGOCMS_PICTURE_RATIO", 1.6180)
 
 
-class PictureMixin:
+class ImageMixin:
+    image_field = None
+
     def get_size(self, width=None, height=None):
         crop = getattr(self, "use_crop", False)
         upscale = getattr(self, "use_upscale", False)
@@ -34,9 +36,9 @@ class PictureMixin:
         elif not width and height:
             width = int(height * PICTURE_RATIO)
         elif not width and not height and getattr(self, "picture", None):
-            picture = get_related_object(self.config, "picture")
-            width = int(picture.width)
-            height = int(picture.height)
+            if self.rel_image:
+                width = int(self.rel_image.width)
+                height = int(self.rel_image.height)
 
         return {
             "size": (width, height),
@@ -44,8 +46,14 @@ class PictureMixin:
             "upscale": upscale,
         }
 
+    @cached_property
+    def rel_image(self):
+        if self.config.get(self.image_field, None):
+            return get_related_object(self.config, self.image_field)
+        return None
 
-class Picture(GetLinkMixin, PictureMixin, FrontendUIItem):
+
+class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/
@@ -54,11 +62,7 @@ class Picture(GetLinkMixin, PictureMixin, FrontendUIItem):
     class Meta:
         proxy = True
 
-    @cached_property
-    def image(self):
-        if self.picture:
-            return get_related_object(self.config, "picture")
-        return None
+    image_field = "picture"
 
     @property
     def is_responsive_image(self):
@@ -74,7 +78,7 @@ class Picture(GetLinkMixin, PictureMixin, FrontendUIItem):
             return None
 
         srcset = []
-        thumbnailer = get_thumbnailer(get_related_object(self.config, "picture"))
+        thumbnailer = get_thumbnailer(self.rel_image)
         picture_options = self.get_size(self.width, self.height)
         picture_width = picture_options["size"][0]
         thumbnail_options = {"crop": picture_options["crop"]}
@@ -102,7 +106,7 @@ class Picture(GetLinkMixin, PictureMixin, FrontendUIItem):
             return ""
         # return the original, unmodified picture
         elif self.use_no_cropping:
-            return get_related_object(self.config, "picture").url
+            return self.rel_image.url if self.rel_image else ""
 
         picture_options = self.get_size(
             width=self.width or 0,
@@ -113,17 +117,17 @@ class Picture(GetLinkMixin, PictureMixin, FrontendUIItem):
             "size": picture_options["size"],
             "crop": picture_options["crop"],
             "upscale": picture_options["upscale"],
-            "subject_location": get_related_object(
-                self.config, "picture"
-            ).subject_location,
+            "subject_location": self.rel_image.subject_location
+            if self.rel_image
+            else (),
         }
 
-        thumbnailer = get_thumbnailer(get_related_object(self.config, "picture"))
+        thumbnailer = get_thumbnailer(self.rel_image)
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
     def get_short_description(self):
         if self.external_picture:
             return self.external_picture
-        if self.image and self.image.label:
-            return self.image.label
+        if self.rel_image and self.rel_image.label:
+            return self.rel_image.label
         return _("<file is missing>")

@@ -1,17 +1,15 @@
 from copy import copy
 
 from django import forms
-from django.db.models import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
-from filer.fields.image import AdminImageFormField, FilerImageField
-from filer.models import Image
 
 from djangocms_frontend.helpers import mark_safe_lazy
 
 from ... import settings
 from ...fields import AttributesFormField
 from ...models import FrontendUIItem
+from .. import grid
 from .constants import (
     GRID_COLUMN_ALIGNMENT_CHOICES,
     GRID_COLUMN_CHOICES,
@@ -21,8 +19,10 @@ from .constants import (
     GRID_SIZE,
 )
 
+mixin_factory = settings.get_forms(grid)
 
-class GridContainerForm(EntangledModelForm):
+
+class GridContainerForm(mixin_factory("GridContainer"), EntangledModelForm):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -33,9 +33,6 @@ class GridContainerForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "container_type",
-                "container_context",
-                "container_transparency",
-                "container_image",
                 "attributes",
             ]
         }
@@ -52,31 +49,10 @@ class GridContainerForm(EntangledModelForm):
             )
         ),
     )
-    container_context = forms.ChoiceField(
-        label=_("Background"),
-        required=False,
-        choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
-        initial=settings.EMPTY_CHOICE,
-    )
-    container_transparency = forms.IntegerField(
-        required=False,
-        initial=0,
-        widget=forms.TextInput(attrs=dict(type="range", min=0, max=100)),
-        help_text=_("Transparency of the container. Only affects the background.")
-    )
-    container_image = AdminImageFormField(
-        rel=ManyToOneRel(FilerImageField, Image, "id"),
-        queryset=Image.objects.all(),
-        to_field_name="id",
-        label=_("Image"),
-        required=False,
-        help_text=_("If provided used as a cover for container."),
-    )
-
     attributes = AttributesFormField()
 
 
-class GridRowBaseForm(EntangledModelForm):
+class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -149,7 +125,7 @@ GridRowForm = type(
 GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
-class GridColumnBaseForm(EntangledModelForm):
+class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {

@@ -99,6 +99,18 @@ SPACER_SIZE_CHOICES = getattr(
     ),
 )
 
+IMAGE_POSITIONING = (
+    ("center center", _("Fully Centered")),
+    ("left top", _("Top left")),
+    ("center top", _("Top center")),
+    ("right top", _("Top right")),
+    ("left center", _("Center left")),
+    ("right center", _("Center right")),
+    ("left bottom", _("Bottom left")),
+    ("center bottom", _("Bottom center")),
+    ("right bottom", _("Bottom right")),
+)
+
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
@@ -116,19 +128,16 @@ def preparator_factory(framework):
 prepare_instance = preparator_factory(framework)
 
 theme_render_path = f"{theme}.renderer.{framework}"
-theme_forms_path = f"{theme}.fields.{framework}"
+theme_forms_path = f"{theme}.forms"
 
 
 def render_factory(cls, theme_module, render_module):
-    return type(
-        cls,
-        tuple(
-            getattr(module, cls, None)
-            for module in (render_module, theme_module)
-            if module is not None and getattr(module, cls, None) is not None
-        ),
-        dict(),
-    )  # Empty Mix
+    parents = tuple(
+        getattr(module, cls, None)
+        for module in (render_module, theme_module)
+        if module is not None and getattr(module, cls, None) is not None
+    )
+    return type(cls, parents, dict())  # Empty Mix
 
 
 def get_mixins(naming, theme_path, mixin_path):
@@ -160,15 +169,3 @@ def get_forms(my_module):
     return get_mixins(
         "{name}FormMixin", theme_forms_path, f"{my_module}.frameworks.{framework}"
     )
-
-    # try:
-    #     theme_module = importlib.import_module(theme_render_path)
-    # except ModuleNotFoundError:
-    #     theme_module = None
-    #
-    # try:
-    #     render_module = importlib.import_module(f"{my_module}.framework.{framework}")
-    # except ModuleNotFoundError:
-    #     render_module = None
-    #
-    # return lambda name: render_factory(name, f"{name}RenderMixin", theme_module, render_module)

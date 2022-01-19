@@ -1,10 +1,11 @@
+from functools import cached_property
+
 from django.utils.translation import ungettext
+from entangled.utils import get_related_object
 
 from djangocms_frontend.models import FrontendUIItem
 
-from .constants import (
-    GRID_CONTAINER_CHOICES,
-)
+from .constants import GRID_CONTAINER_CHOICES
 
 
 class GridContainer(FrontendUIItem):
@@ -22,6 +23,12 @@ class GridContainer(FrontendUIItem):
             if item[0] == self.container_type:
                 text = item[1]
         return "({})".format(text)
+
+    @cached_property
+    def image(self):
+        if getattr(self, "container_image", False):
+            return get_related_object(self.config, "container_image")
+        return None
 
 
 class GridRow(FrontendUIItem):

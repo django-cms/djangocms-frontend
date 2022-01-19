@@ -29,17 +29,6 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
     fieldsets = [
         (None, {"fields": ("container_type",)}),
         (
-            _("Context"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "container_context",
-                    "container_image",
-                    "container_transparency",
-                ),
-            },
-        ),
-        (
             _("Advanced settings"),
             {
                 "classes": ("collapse",),

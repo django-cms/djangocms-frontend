@@ -63,7 +63,7 @@ class GetLinkMixin:
                 link = "//{}{}".format(ref_site, link)
 
         elif getattr(self, "file_link", None):
-            link = get_related_object(self.config, "file_link").url
+            link = getattr(get_related_object(self.config, "file_link"), "url", "")
 
         elif getattr(self, "external_link", None):
             link = self.external_link

@@ -5,9 +5,7 @@ from django.db import connection, models
 
 from djangocms_frontend.management import bootstrap4_migration, styled_link_migration
 
-plugin_names = {
-    "Picture": "ImagePlugin",
-}
+plugin_names = {}
 
 
 plugin_migrations = {}
@@ -93,7 +91,6 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                                     "p_keys": list(value.values_list("pk", flat=True)),
                                 }
                             new_obj.config[new_field] = value
-
                 new_obj.save()
                 # Now delete old plugin from its table w/o checking for child plugins
                 with connection.cursor() as cursor:

@@ -8,6 +8,7 @@ from entangled.utils import get_related_object
 from djangocms_frontend.models import FrontendUIItem
 
 from ..link.models import GetLinkMixin
+from ..picture.models import ImageMixin
 
 
 class Carousel(FrontendUIItem):
@@ -31,7 +32,7 @@ class Carousel(FrontendUIItem):
         return text
 
 
-class CarouselSlide(GetLinkMixin, FrontendUIItem):
+class CarouselSlide(GetLinkMixin, ImageMixin, FrontendUIItem):
     """
     Components > "Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -40,25 +41,21 @@ class CarouselSlide(GetLinkMixin, FrontendUIItem):
     class Meta:
         proxy = True
 
-    @cached_property
-    def image(self):
-        if self.carousel_image:
-            return get_related_object(self.config, "carousel_image")
-        return None
+    image_field = "carousel_image"
 
     def get_short_description(self):
         image_text = content_text = ""
 
         if self.carousel_image:
-            if self.image is None:
+            if self.rel_image is None:
                 image_text = _("<file is missing>")
-            elif self.image.name:
-                image_text = self.image.name
+            elif self.rel_image.name:
+                image_text = self.rel_image.name
             elif (
-                self.image.original_filename
-                and os.path.split(self.image.original_filename)[1]
+                self.rel_image.original_filename
+                and os.path.split(self.rel_image.original_filename)[1]
             ):
-                image_text = os.path.split(self.image.original_filename)[1]
+                image_text = os.path.split(self.rel_image.original_filename)[1]
             else:
                 image_text = "Image"
         if self.carousel_content:

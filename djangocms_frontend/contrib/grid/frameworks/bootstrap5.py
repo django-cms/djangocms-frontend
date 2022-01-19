@@ -1,12 +1,6 @@
 from djangocms_frontend import settings
 
 
-class GridContainerRenderMixin:
-    def render(self, context, instance, placeholder):
-        context["add_classes"] = f"bg-{instance.container_context}" if getattr(instance, "container_context", False) else ""
-        return super().render(context, instance, placeholder)
-
-
 class GridRowRenderMixin:
     def render(self, context, instance, placeholder):
         def get_grid_values(instance):

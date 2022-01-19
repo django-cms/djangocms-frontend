@@ -1,5 +1,3 @@
-from django.contrib.contenttypes.models import ContentType
-
 from djangocms_frontend.settings import DEVICE_SIZES
 
 
@@ -24,7 +22,7 @@ plugin_migrations = {
         "badge_context",
         "badge_pills",
         "attributes",
-        "P001", # additional data migration, see below
+        "P001",  # additional data migration, see below
     ],
     "bootstrap4_card.Bootstrap4Card -> card.Card": [
         "card_type",
@@ -146,7 +144,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
     ],
-    "bootstrap4_picture.Bootstrap4Picture -> picture.Picture": [
+    "bootstrap4_picture.Bootstrap4Picture -> picture.Image": [
         "template",
         "external_picture",
         "width",

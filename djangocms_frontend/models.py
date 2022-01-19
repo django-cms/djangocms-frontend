@@ -27,6 +27,8 @@ class FrontendUIItem(CMSPlugin):
         return super().__getattribute__(item)
 
     def __str__(self):
+        if "__str__" in self.config:
+            return self.config["__str__"]
         return f"{gettext(self.ui_item)} ({str(self.pk)})"
 
     def save(self, *args, **kwargs):

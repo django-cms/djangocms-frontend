@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             },
             bases=(
                 djangocms_frontend.contrib.link.models.GetLinkMixin,
-                djangocms_frontend.contrib.picture.models.PictureMixin,
+                djangocms_frontend.contrib.picture.models.ImageMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),

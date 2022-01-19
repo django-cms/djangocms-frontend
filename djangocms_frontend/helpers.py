@@ -1,4 +1,6 @@
-from django.template import TemplateDoesNotExist
+import copy
+
+from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import select_template
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
@@ -6,21 +8,26 @@ from django.utils.safestring import mark_safe
 from djangocms_frontend import settings
 
 
-def insert_fields(fieldsets, *new_fields, block=None, position=-1, blockname=None):
+def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None):
     """
     creates a copy of fieldsets inserting the new fields either in the indexed block at the position,
     or - if no block is given - at the end
     """
     if block is None:
-        return fieldsets + [
-            (
-                blockname,
-                {
-                    "classes": ("collapse",),
-                    "fields": [*new_fields],
-                },
-            )
-        ]
+        fs = (
+            fieldsets[:position]
+            + [
+                (
+                    blockname,
+                    {
+                        "classes": ("collapse",),
+                        "fields": new_fields,
+                    },
+                )
+            ]
+            + (fieldsets[position:] if position != -1 else [])
+        )
+        return fs
     modify = fieldsets[block]
     fields = modify[1]["fields"]
     modify[1]["fields"] = (

@@ -14,7 +14,7 @@
 
 
     <img src="{{ instance.img_src }}"
-        alt="{% if instance.attributes.alt %}{{ instance.attributes.alt }}{% elif instance.image.default_alt_text %}{{ instance.image.default_alt_text }}{% endif %}"
+        alt="{% if instance.attributes.alt %}{{ instance.attributes.alt }}{% elif instance.rel_image.default_alt_text %}{{ instance.rel_image.default_alt_text }}{% endif %}"
         {% if instance.width %} width="{{ instance.width|safe }}"{% endif %}
         {% if instance.height %} height="{{ instance.height|safe }}"{% endif %}
         {% if img_srcset_data %}

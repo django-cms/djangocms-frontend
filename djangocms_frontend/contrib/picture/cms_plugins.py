@@ -22,7 +22,7 @@ class ImagePlugin(mixin_factory("Image"), CMSPluginBase):
     name = _("Picture / Image")
     module = _("Interface")
 
-    model = models.Picture
+    model = models.Image
     form = forms.PictureForm
 
     change_form_template = "djangocms_frontend/admin/picture.html"

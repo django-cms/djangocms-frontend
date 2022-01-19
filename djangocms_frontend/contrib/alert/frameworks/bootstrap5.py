@@ -5,7 +5,6 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.helpers import insert_fields
 
 
 class AlertRenderMixin:

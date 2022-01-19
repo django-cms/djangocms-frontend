@@ -1,8 +1,3 @@
-from cms.models import CMSPlugin
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-
-from djangocms_frontend.fields import AttributesField, TagTypeField
 from djangocms_frontend.models import FrontendUIItem
 
 # TODO leaving this comment for now
