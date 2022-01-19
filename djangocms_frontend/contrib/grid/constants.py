@@ -10,7 +10,7 @@ GRID_SIZE = getattr(
     12,
 )
 
-# Bootstrap 5 provides 2 container types, .container and .container-fluid
+# Bootstrap 5 provides more than 2 container types, .container and .container-fluid
 # https://getbootstrap.com/docs/5.0/layout/grid/#no-gutters
 GRID_CONTAINER_CHOICES = getattr(
     settings,
@@ -18,6 +18,11 @@ GRID_CONTAINER_CHOICES = getattr(
     (
         ("container", _("Container")),
         ("container-fluid", _("Fluid container")),
+        ("container-sm", _("SM Container")),
+        ("container-md", _("MD Container")),
+        ("container-lg", _("LG Container")),
+        ("container-xl", _("XL Container")),
+        ("container-xxl", _("XXL Container")),
     ),
 )
 

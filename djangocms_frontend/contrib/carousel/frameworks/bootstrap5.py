@@ -23,5 +23,6 @@ class CarouselSlideRenderMixin:
         if instance.position == 0:
             context["add_classes"] += " active"
         context["link"] = instance.get_link()
+        context["aspect_ratio"] = str(width/height)
         context["options"] = {"crop": 10, "size": (width, height), "upscale": True}
         return super().render(context, instance, placeholder)

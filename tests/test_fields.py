@@ -30,12 +30,3 @@ class B5FieldsTestCase(TestCase):
             "Select the HTML tag to be used.",
         )
 
-    def test_integer_range_field(self):
-        field = IntegerRangeField()
-        self.assertEqual(field.min_value, None)
-        self.assertEqual(field.max_value, None)
-        field.min_value = 255
-        field.max_value = 255
-        field = field.formfield()
-        self.assertEqual(field.min_value, 255)
-        self.assertEqual(field.max_value, 255)

@@ -167,7 +167,7 @@ def get_forms(my_module):
     #     theme_module = None
     #
     # try:
-    #     render_module = importlib.import_module(f"{my_module}.renderer.{framework}")
+    #     render_module = importlib.import_module(f"{my_module}.framework.{framework}")
     # except ModuleNotFoundError:
     #     render_module = None
     #

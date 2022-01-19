@@ -23,10 +23,22 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
     model = models.GridContainer
     form = forms.GridContainerForm
     render_template = f"djangocms_frontend/{settings.framework}/grid_container.html"
+    change_form_template = "djangocms_frontend/admin/grid_container.html"
     allow_children = True
 
     fieldsets = [
         (None, {"fields": ("container_type",)}),
+        (
+            _("Context"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "container_context",
+                    "container_image",
+                    "container_transparency",
+                ),
+            },
+        ),
         (
             _("Advanced settings"),
             {

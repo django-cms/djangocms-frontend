@@ -50,7 +50,9 @@ class CarouselSlide(GetLinkMixin, FrontendUIItem):
         image_text = content_text = ""
 
         if self.carousel_image:
-            if self.image.name:
+            if self.image is None:
+                image_text = _("<file is missing>")
+            elif self.image.name:
                 image_text = self.image.name
             elif (
                 self.image.original_filename

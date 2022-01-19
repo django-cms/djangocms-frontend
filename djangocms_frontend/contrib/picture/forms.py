@@ -126,7 +126,6 @@ class PictureForm(AbstractLinkForm, EntangledModelForm):
         to_field_name="id",
         label=_("Image"),
         required=False,
-        help_text=_("If provided links a file from the filer app."),
     )
     external_picture = forms.URLField(
         label=_("External image"),

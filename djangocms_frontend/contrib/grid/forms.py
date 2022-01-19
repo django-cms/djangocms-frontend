@@ -1,11 +1,13 @@
 from copy import copy
 
 from django import forms
+from django.db.models import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
+from filer.fields.image import AdminImageFormField, FilerImageField
+from filer.models import Image
 
 from djangocms_frontend.helpers import mark_safe_lazy
-from djangocms_frontend.settings import DEVICE_SIZES
 
 from ... import settings
 from ...fields import AttributesFormField
@@ -31,6 +33,9 @@ class GridContainerForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "container_type",
+                "container_context",
+                "container_transparency",
+                "container_image",
                 "attributes",
             ]
         }
@@ -47,6 +52,27 @@ class GridContainerForm(EntangledModelForm):
             )
         ),
     )
+    container_context = forms.ChoiceField(
+        label=_("Background"),
+        required=False,
+        choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
+        initial=settings.EMPTY_CHOICE,
+    )
+    container_transparency = forms.IntegerField(
+        required=False,
+        initial=0,
+        widget=forms.TextInput(attrs=dict(type="range", min=0, max=100)),
+        help_text=_("Transparency of the container. Only affects the background.")
+    )
+    container_image = AdminImageFormField(
+        rel=ManyToOneRel(FilerImageField, Image, "id"),
+        queryset=Image.objects.all(),
+        to_field_name="id",
+        label=_("Image"),
+        required=False,
+        help_text=_("If provided used as a cover for container."),
+    )
+
     attributes = AttributesFormField()
 
 
@@ -106,7 +132,7 @@ class GridRowBaseForm(EntangledModelForm):
 
 # convert regular text type fields to number
 extra_fields_column = {}
-for size in DEVICE_SIZES:
+for size in settings.DEVICE_SIZES:
     extra_fields_column["row_cols_{}".format(size)] = forms.IntegerField(
         label="row-cols" if size == "xs" else "row-cols-{}".format(size),
         required=False,
@@ -151,7 +177,7 @@ class GridColumnBaseForm(EntangledModelForm):
 
 # convert regular text type fields to number
 extra_fields_column = {}
-for size in DEVICE_SIZES:
+for size in settings.DEVICE_SIZES:
     extra_fields_column["{}_col".format(size)] = forms.IntegerField(
         label="col" if size == "xs" else "col-{}".format(size),
         required=False,

@@ -1,5 +1,9 @@
-{% load cms_tags easy_thumbnails_tags frontend %}
+{% load cms_tags easy_thumbnails_tags frontend %}{% spaceless %}
+{% if instance.image %}
+    {% thumbnail instance.image options.size crop=options.crop upscale=options.upscale subject_location=instance.image.subject_location as thumbnail %}
 
-{% thumbnail instance.image options.size crop=options.crop upscale=options.upscale subject_location=instance.image.subject_location as thumbnail %}
-
-<img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.image.default_alt_text|default:'' }}" >
+    <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.image.default_alt_text|default:'' }}" >
+{% else %}
+    <div class="placeholder placeholder-wave d-block w-100"
+         style="aspect-ratio: {{ aspect_ratio }}"></div>
+{% endif %}{% endspaceless %}

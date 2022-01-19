@@ -16,9 +16,9 @@ window.djangoCMSFrontend = {
 
 $(() => {
     // general color context without auto alignment
-    // ALERT, BADGE,
+    // ALERT, BADGE, CONTAINER
     new ContextGroup({
-        select: '#id_alert_context, #id_badge_context',
+        select: '#id_alert_context, #id_badge_context, #id_container_context',
         takeClassesFromSelectValues: true,
     });
     // general color context with auto alignment

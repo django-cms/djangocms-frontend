@@ -1,19 +1,9 @@
-from functools import partial
-
-from django.db import models
 from django.utils.translation import ungettext
 
-from djangocms_frontend.fields import IntegerRangeField
 from djangocms_frontend.models import FrontendUIItem
-from djangocms_frontend.settings import DEVICE_SIZES
 
 from .constants import (
-    GRID_COLUMN_ALIGNMENT_CHOICES,
-    GRID_COLUMN_CHOICES,
     GRID_CONTAINER_CHOICES,
-    GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
-    GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,
-    GRID_SIZE,
 )
 
 
