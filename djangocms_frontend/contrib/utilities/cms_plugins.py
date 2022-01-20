@@ -94,7 +94,7 @@ class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
     ]
 
     def render(self, context, instance, placeholder):
-        if hasattr(context["request"], "TOC"):
+        if not hasattr(context["request"], "TOC"):
             context["request"].TOC = []
         heading_id = getattr(instance, "heading_id", "")
         if heading_id:
