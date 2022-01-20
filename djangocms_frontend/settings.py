@@ -65,9 +65,9 @@ COLOR_STYLE_CHOICES = getattr(
 )
 
 ALIGN_CHOICES = (
-    ("text-left", _("Left")),
+    ("text-start", _("Left")),
     ("text-center", _("Center")),
-    ("text-right", _("Right")),
+    ("text-end", _("Right")),
 )
 
 

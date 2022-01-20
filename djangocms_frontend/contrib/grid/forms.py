@@ -132,6 +132,7 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
             "config": [
                 "column_type",
                 "column_alignment",
+                "text_alignment",
                 "attributes",
             ]
         }
@@ -139,13 +140,18 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
 
     column_type = forms.ChoiceField(
         label=_("Column type"),
-        choices=settings.EMPTY_CHOICE + GRID_COLUMN_CHOICES,
+        choices=GRID_COLUMN_CHOICES,
         initial=GRID_COLUMN_CHOICES[0][0],
-        required=False,
+        required=True,
     )
     column_alignment = forms.ChoiceField(
-        label=_("Alignment"),
+        label=_("Column alignment"),
         choices=settings.EMPTY_CHOICE + GRID_COLUMN_ALIGNMENT_CHOICES,
+        required=False,
+    )
+    text_alignment = forms.ChoiceField(
+        label=_("Content alignment"),
+        choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
         required=False,
     )
     attributes = AttributesFormField()
@@ -182,7 +188,7 @@ for size in settings.DEVICE_SIZES:
     )
 
 GridColumnForm = type(
-    str("GridColumnBaseForm"),
+    str("GridColumnForm"),
     (GridColumnBaseForm,),
     copy(extra_fields_column),
 )

@@ -1,8 +1,8 @@
 class BlockquoteRenderMixin:
     def render(self, context, instance, placeholder):
-        context["add_classes"] = "blockquote"
-        if instance.quote_alignment:
-            context["add_classes"] += instance.quote_alignment
+        context["add_classes"] = (
+            instance.quote_alignment if instance.quote_alignment else ""
+        )
         return super().render(context, instance, placeholder)
 
 

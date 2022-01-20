@@ -42,8 +42,8 @@ def get_alignment():
         settings,
         "DJANGOCMS_PICTURE_ALIGN",
         (
-            ("left", _("Align left")),
-            ("right", _("Align right")),
+            ("start", _("Align left")),
+            ("end", _("Align right")),
             ("center", _("Align center")),
         ),
     )

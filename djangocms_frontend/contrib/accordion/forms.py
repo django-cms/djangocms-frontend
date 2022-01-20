@@ -21,12 +21,19 @@ class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "accordion_header_type",
                 "accordion_flush",
                 "attributes",
             ]
         }
         untangled_fields = ("tag_type",)
 
+    accordion_header_type = forms.ChoiceField(
+        label=_("Header type"),
+        initial=settings.HEADER_CHOICES[1][0],
+        choices=settings.HEADER_CHOICES,
+        required=True,
+    )
     accordion_flush = forms.BooleanField(
         label=_("Integrate into parent"),
         initial=False,
@@ -59,12 +66,6 @@ class AccordionItemForm(mixin_factory("AccordionItem"), EntangledModelForm):
 
     accordion_item_header = forms.CharField(
         label=_("Header"),
-        required=True,
-    )
-    accordion_header_type = forms.ChoiceField(
-        label=_("Header type"),
-        initial=settings.HEADER_CHOICES[1][0],
-        choices=settings.HEADER_CHOICES,
         required=True,
     )
     accordion_item_open = forms.BooleanField(

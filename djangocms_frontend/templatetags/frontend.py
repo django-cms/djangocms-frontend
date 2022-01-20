@@ -1,5 +1,3 @@
-from functools import reduce
-
 from django import template
 from django.utils.html import conditional_escape, mark_safe
 

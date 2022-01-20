@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 
-from . import forms, models
 from .. import utilities
+from . import forms, models
 
 mixin_factory = settings.get_renderer(utilities)
 
@@ -109,6 +109,27 @@ class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
         return context
 
 
+def create_tree(request_toc):
+    def process_level():
+        nonlocal i
+
+        previous_level = None
+        toc_tree = []
+        while i < len(request_toc):
+            if previous_level is None or previous_level == request_toc[i][2]:
+                toc_tree.append((request_toc[i][0], request_toc[i][1]))
+                previous_level = request_toc[i][2]
+                i += 1
+            elif previous_level < request_toc[i][2]:
+                toc_tree.append((None, process_level()))
+            elif previous_level > request_toc[i][2]:
+                break
+        return toc_tree
+
+    i = 0
+    return process_level()
+
+
 @plugin_pool.register_plugin
 class TOCPlugin(mixin_factory("TOC"), CMSPluginBase):
     name = _("Table of contents")
@@ -130,30 +151,9 @@ class TOCPlugin(mixin_factory("TOC"), CMSPluginBase):
         ),
     ]
 
-    @staticmethod
-    def create_tree(request_toc):
-        def process_level():
-            nonlocal i
-
-            previous_level = None
-            toc_tree = []
-            while i < len(request_toc):
-                if previous_level is None or previous_level == request_toc[i][2]:
-                    toc_tree.append((request_toc[i][0], request_toc[i][1]))
-                    previous_level = request_toc[i][2]
-                    i += 1
-                elif previous_level < request_toc[i][2]:
-                    toc_tree.append((None, process_level()))
-                elif previous_level > request_toc[i][2]:
-                    break
-            return toc_tree
-
-        i = 0
-        return process_level()
-
     def render(self, context, instance, palceholder):
         if hasattr(context["request"], "TOC"):
-            toc_tree = self.create_tree(context["request"].TOC)
+            toc_tree = create_tree(context["request"].TOC)
             context["toc"] = toc_tree
         else:
             context["toc"] = []

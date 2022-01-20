@@ -135,7 +135,18 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
     parent_classes = ["GridRowPlugin"]
 
     fieldsets = [
-        (None, {"fields": (("column_type", "column_alignment"),)}),
+        (
+            None,
+            {
+                "fields": (
+                    (
+                        "column_type",
+                        "column_alignment",
+                        "text_alignment",
+                    ),
+                )
+            },
+        ),
         (
             _("Responsive settings"),
             {

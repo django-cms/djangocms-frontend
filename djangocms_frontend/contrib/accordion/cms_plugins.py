@@ -2,11 +2,9 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from .. import accordion
-
 from ... import settings
+from .. import accordion
 from . import forms, models
-
 
 mixin_factory = settings.get_renderer(accordion)
 
@@ -30,7 +28,15 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
     ]
 
     fieldsets = [
-        (None, {"fields": ("accordion_flush",)}),
+        (
+            None,
+            {
+                "fields": (
+                    "accordion_header_type",
+                    "accordion_flush",
+                )
+            },
+        ),
         (
             _("Advanced settings"),
             {
@@ -40,7 +46,7 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
                     "attributes",
                 ),
             },
-         ),
+        ),
     ]
 
 
@@ -62,10 +68,15 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSPluginBase):
     ]
 
     fieldsets = [
-        (None, {"fields": (
-            "accordion_item_header",
-            "accordion_item_open",
-        )}),
+        (
+            None,
+            {
+                "fields": (
+                    "accordion_item_header",
+                    "accordion_item_open",
+                )
+            },
+        ),
         (
             _("Advanced settings"),
             {
@@ -77,4 +88,3 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSPluginBase):
             },
         ),
     ]
-

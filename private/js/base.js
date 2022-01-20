@@ -72,6 +72,7 @@ $(() => {
     // BLOCKQUOTE, CARD, FIGURE
     if (
         $('#id_quote_alignment').length ||
+        $('#id_text_alignment').length ||
         $('#id_card_alignment').length ||
         $('#id_figure_alignment').length
     ) {
@@ -80,7 +81,7 @@ $(() => {
         // alignment
         new ButtonGroup({
             static: static_url,
-            select: '#id_quote_alignment, #id_card_alignment, #id_figure_alignment',
+            select: '#id_quote_alignment, #id_card_alignment, #id_figure_alignment, #id_text_alignment',
             icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end'],
         });
     }

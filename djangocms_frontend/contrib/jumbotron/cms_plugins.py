@@ -1,9 +1,9 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from .. import jumbotron
 
 from ... import settings
+from .. import jumbotron
 from . import forms, models
 
 mixin_factory = settings.get_renderer(jumbotron)

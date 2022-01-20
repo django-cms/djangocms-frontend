@@ -34,6 +34,7 @@ plugin_migrations = {
         "attributes",
         "P001",
         "X002",  # Replace v4 card deck
+        "A001_card",  # fix alignment
     ],
     "bootstrap4_card.Bootstrap4CardInner -> card.CardInner": [
         "inner_type",
@@ -64,6 +65,7 @@ plugin_migrations = {
         "quote_alignment",
         "attributes",
         "P001",
+        "A001_quote",  # fix alignment
     ],
     "bootstrap4_content.Bootstrap4Code -> content.CodeBlock": [
         "code_content",
@@ -92,8 +94,10 @@ plugin_migrations = {
     "bootstrap4_grid.Bootstrap4GridColumn -> grid.GridColumn": [
         "column_type",
         "column_alignment",
+        "() -> text_alignment",
         "attributes",
         "P001",
+        "G001",  # fill text_alignment from attributes if possible
         "tag_type",
     ]
     + breakpoints(("col", "order", "ml", "mr", "offset")),
@@ -167,6 +171,7 @@ plugin_migrations = {
         "use_responsive_image",
         "attributes",
         "P001",
+        "A001_picture",  # fix alignment
     ],
     "bootstrap4_tabs.Bootstrap4Tab -> tabs.Tab": [
         "template",
@@ -239,7 +244,34 @@ def x002_replace_card_deck(obj, new_obj):
         new_obj.config["attributes"]["class"] = " ".join(classes)
 
 
+def a001_alignment(obj, new_obj, field):
+    if field in new_obj["config"] and new_obj["config"][field]:
+        new_obj["config"][field].replace("-left", "-start")
+        new_obj["config"][field].replace("-right", "-end")
+
+
+def g001_col_text_alignment(obj, new_obj):
+    classes = new_obj["config"]["attributes"].get("class", "").split()
+    if "text-left" in classes or "text-start" in classes:
+        classes.remove("text-left")
+        classes.remove("text-start")
+        new_obj.config["text_alignment"] = "text-start"
+    if "text-center" in classes:
+        classes.remove("text-center")
+        new_obj.config["text_alignment"] = "text-center"
+    if "text-right" in classes or "text-end" in classes:
+        classes.remove("text-right")
+        classes.remove("text-end")
+        new_obj.config["text_alignment"] = "text-end"
+    new_obj.config["attributes"]["class"] = " ".join(classes)
+
+
 data_migration = {
     "P001": p001_left_right_migration,
     "X002": x002_replace_card_deck,
+    "A001_quote": lambda x, y: a001_alignment(x, y, "quote_alignment"),
+    "A001_figure": lambda x, y: a001_alignment(x, y, "figure_alignment"),
+    "A001_picture": lambda x, y: a001_alignment(x, y, "alignment"),
+    "A001_card": lambda x, y: a001_alignment(x, y, "card_alignment"),
+    "G001": g001_col_text_alignment,
 }
