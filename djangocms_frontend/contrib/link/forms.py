@@ -17,10 +17,8 @@ from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
-from djangocms_frontend.settings import COLOR_STYLE_CHOICES
-
 from ... import settings
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, ColoredButtonGroup
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES
 
@@ -314,7 +312,10 @@ class LinkForm(AbstractLinkForm):
         help_text=_("Adds either the .btn-* or .text-* classes."),
     )
     link_context = forms.ChoiceField(
-        label=_("Context"), choices=COLOR_STYLE_CHOICES, required=False
+        label=_("Context"),
+        choices=settings.COLOR_STYLE_CHOICES,
+        required=False,
+        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
     )
     link_size = forms.ChoiceField(
         label=_("Size"),

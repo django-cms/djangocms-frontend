@@ -38,7 +38,7 @@ $(() => {
     new ContextGroup({
         select: '#id_inner_type',
         classes: [
-            'btn-secondary', 'btn-secondary', 'btn-secondary',
+            'btn-secondary', 'btn-secondary', 'btn-secondary', 'btn-secondary',
         ],
     });
     // LIST

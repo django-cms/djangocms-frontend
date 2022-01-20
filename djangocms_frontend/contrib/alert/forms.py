@@ -4,7 +4,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import alert
-from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
@@ -32,6 +32,9 @@ class AlertForm(mixin_factory("Alert"), EntangledModelForm):
         label=_("Context"),
         choices=COLOR_STYLE_CHOICES,
         initial=COLOR_STYLE_CHOICES[0][0],
+        widget=ColoredButtonGroup(
+            colors=settings.COLOR_CODES,
+        ),
     )
     alert_dismissible = forms.BooleanField(
         label=_("Dismissible"),

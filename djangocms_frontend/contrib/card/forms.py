@@ -7,7 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, ColoredButtonGroup
 from ...models import FrontendUIItem
 from ..grid.constants import GRID_SIZE
 from ..grid.forms import GridColumnForm
@@ -18,7 +18,9 @@ from .constants import (
 )
 
 # card allow for a transparent color
-CARD_COLOR_STYLE_CHOICES = COLOR_STYLE_CHOICES + (("transparent", _("Transparent")),)
+CARD_COLOR_STYLE_CHOICES = settings.COLOR_STYLE_CHOICES + (
+    ("transparent", _("Transparent")),
+)
 
 CARD_TEXT_STYLES = COLOR_STYLE_CHOICES + (("white", _("White")),)
 
@@ -52,6 +54,7 @@ class CardForm(EntangledModelForm):
     card_context = forms.ChoiceField(
         label=_("Background context"),
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
+        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
         required=False,
     )
     card_alignment = forms.ChoiceField(

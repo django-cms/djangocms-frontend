@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 # least devisable by 2, 3 and 4.
 GRID_SIZE = getattr(
     settings,
-    "DJANGOCMS_BOOTSTRAP5_GRID_SIZE",
+    "DJANGOCMS_FRONTEND_GRID_SIZE",
     12,
 )
 
@@ -14,7 +14,7 @@ GRID_SIZE = getattr(
 # https://getbootstrap.com/docs/5.0/layout/grid/#no-gutters
 GRID_CONTAINER_CHOICES = getattr(
     settings,
-    "DJANGOCMS_BOOTSTRAP5_GRID_CONTAINERS",
+    "DJANGOCMS_FRONTEND_GRID_CONTAINERS",
     (
         ("container", _("Container")),
         ("container-fluid", _("Fluid container")),
@@ -22,7 +22,7 @@ GRID_CONTAINER_CHOICES = getattr(
         ("container-md", _("MD Container")),
         ("container-lg", _("LG Container")),
         ("container-xl", _("XL Container")),
-        ("container-xxl", _("XXL Container")),
+        #        ("container-xxl", _("XXL Container")),
     ),
 )
 

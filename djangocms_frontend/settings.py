@@ -5,15 +5,6 @@ from django.utils.translation import gettext_lazy as _
 
 EMPTY_CHOICE = (("", "------"),)
 
-DEVICE_CHOICES = (
-    ("xs", _("Extra small")),  # default <576px
-    ("sm", _("Small")),  # default ≥576px
-    ("md", _("Medium")),  # default ≥768px
-    ("lg", _("Large")),  # default ≥992px
-    ("xl", _("Extra large")),  # default ≥1200px
-)
-DEVICE_SIZES = tuple([size for size, name in DEVICE_CHOICES])
-
 # Only adding block elements
 TAG_CHOICES = getattr(
     settings,
@@ -26,41 +17,11 @@ HEADER_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_HEADER_CHOICES",
     (
-        (
-            "h1",
-            _("Heading 1"),
-        ),
-        (
-            "h2",
-            _("Heading 2"),
-        ),
-        (
-            "h3",
-            _("Heading 3"),
-        ),
-        (
-            "h4",
-            _("Heading 4"),
-        ),
-        (
-            "h5",
-            _("Heading 5"),
-        ),
-    ),
-)
-
-COLOR_STYLE_CHOICES = getattr(
-    settings,
-    "DJANGOCMS_FRONTEND_COLOR_STYLE_CHOICES",
-    (
-        ("primary", _("Primary")),
-        ("secondary", _("Secondary")),
-        ("success", _("Success")),
-        ("danger", _("Danger")),
-        ("warning", _("Warning")),
-        ("info", _("Info")),
-        ("light", _("Light")),
-        ("dark", _("Dark")),
+        ("h1", _("Heading 1")),
+        ("h2", _("Heading 2")),
+        ("h3", _("Heading 3")),
+        ("h4", _("Heading 4")),
+        ("h5", _("Heading 5")),
     ),
 )
 
@@ -113,6 +74,15 @@ IMAGE_POSITIONING = (
 
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
+
+framework_settings = importlib.import_module(
+    f"djangocms_frontend.frontends.{framework}"
+)
+
+DEVICE_SIZES = framework_settings.DEVICE_SIZES
+DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
+COLOR_STYLE_CHOICES = framework_settings.COLOR_STYLE_CHOICES
+COLOR_CODES = framework_settings.COLOR_CODES
 
 
 def preparator_factory(framework):

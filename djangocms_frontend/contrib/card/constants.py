@@ -4,7 +4,6 @@ CARD_TYPE_CHOICES = (
     ("card", _("Card")),
     ("card-group", _("Card group")),
     ("row", _("Card deck v4 (deprecated)")),  # Removed in 5
-    ("card-masonry", _("Card masonry")),  # Removed in 5
 )
 
 CARD_ALIGNMENT_CHOICES = (
@@ -17,6 +16,7 @@ CARD_INNER_TYPE_CHOICES = (
     ("card-body", _("Body")),
     ("card-header", _("Header")),
     ("card-footer", _("Footer")),
+    ("card-img-overlay", _("Image overlay")),
 )
 
 CARD_TAG_CHOICES = (

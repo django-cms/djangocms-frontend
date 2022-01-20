@@ -1,8 +1,9 @@
+from django import forms
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
-from .settings import TAG_CHOICES
+from . import settings
 
 
 class AttributesField(fields.AttributesField):
@@ -28,12 +29,25 @@ class TagTypeField(models.CharField):
         if "verbose_name" not in kwargs:
             kwargs["verbose_name"] = _("Tag type")
         if "choices" not in kwargs:
-            kwargs["choices"] = TAG_CHOICES
+            kwargs["choices"] = settings.TAG_CHOICES
         if "default" not in kwargs:
-            kwargs["default"] = TAG_CHOICES[0][0]
+            kwargs["default"] = settings.TAG_CHOICES[0][0]
         if "max_length" not in kwargs:
             kwargs["max_length"] = 255
         if "help_text" not in kwargs:
             kwargs["help_text"] = _("Select the HTML tag to be used.")
         super().__init__(*args, **kwargs)
 
+
+class ColoredButtonGroup(forms.Select):
+    template_name = "djangocms_frontend/admin/button_group_colors.html"
+    # option_template_name = 'djangocms_frontend/admin/button_group_option.html'
+
+    def __init__(self, *args, **kwargs):
+        self.colors = kwargs.pop("colors", {})
+        super().__init__(*args, **kwargs)
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["colors"] = self.colors
+        return context
