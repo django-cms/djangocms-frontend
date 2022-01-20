@@ -39,4 +39,4 @@ class CardInner(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.inner_type)
+        return "({})".format(self.inner_type.split("-", 1)[-1])
