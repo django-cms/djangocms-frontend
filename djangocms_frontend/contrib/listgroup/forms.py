@@ -56,7 +56,7 @@ class ListGroupItemForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
         initial=settings.EMPTY_CHOICE,
         required=False,
-        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
+        widget=ColoredButtonGroup(),
     )
     list_state = forms.ChoiceField(
         label=_("State"),

@@ -315,7 +315,7 @@ class LinkForm(AbstractLinkForm):
         label=_("Context"),
         choices=settings.COLOR_STYLE_CHOICES,
         required=False,
-        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
+        widget=ColoredButtonGroup(),
     )
     link_size = forms.ChoiceField(
         label=_("Size"),

@@ -26,12 +26,12 @@ $(() => {
     new ContextGroup({
         select: '#id_card_context',
         takeClassesFromSelectValues: true,
-        extraClass: 'bootstrap5-button-group-context-colors',
+        extraClass: 'frontend-button-group-context-colors',
     });
     new ContextGroup({
         select: '#id_card_text_color',
         takeClassesFromSelectValues: true,
-        extraClass: 'bootstrap5-button-group-context-colors',
+        extraClass: 'frontend-button-group-context-colors',
     });
     // simple buttons
     // CARD
@@ -50,14 +50,14 @@ $(() => {
     new ContextGroup({
         select: '#id_link_context',
         takeClassesFromSelectValues: true,
-        extraClass: 'bootstrap5-button-group-context-colors',
+        extraClass: 'frontend-button-group-context-colors',
     });
     new ContextGroup({
         select: '#id_link_size',
         classes: [
             'btn-sm btn-secondary', 'btn-secondary', 'btn-secondary btn-lg',
         ],
-        extraClass: 'bootstrap5-button-group-context-size',
+        extraClass: 'frontend-button-group-context-size',
     });
 
     // IMAGE PREVIEW

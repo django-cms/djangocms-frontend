@@ -26,6 +26,9 @@ class AjaxFormMixin(FormMixin):
     parameter = {}
     template_name = None
 
+    def render(self):
+        return str(self)
+
     def json_return(self, errors, result, redirect, content):
         return JsonResponse(
             {

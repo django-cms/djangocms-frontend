@@ -40,14 +40,6 @@ class TagTypeField(models.CharField):
 
 
 class ColoredButtonGroup(forms.Select):
-    template_name = "djangocms_frontend/admin/button_group_colors.html"
-    # option_template_name = 'djangocms_frontend/admin/button_group_option.html'
-
-    def __init__(self, *args, **kwargs):
-        self.colors = kwargs.pop("colors", {})
-        super().__init__(*args, **kwargs)
-
-    def get_context(self, name, value, attrs):
-        context = super().get_context(name, value, attrs)
-        context["colors"] = self.colors
-        return context
+    """Includes ADMIN_CSS"""
+    class Media:
+        css = settings.ADMIN_CSS

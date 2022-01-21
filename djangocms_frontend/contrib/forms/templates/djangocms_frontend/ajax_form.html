@@ -1,0 +1,111 @@
+{% load sekizai_tags i18n l10n crispy_forms_tags %}{% spaceless %}
+<div id="data{{ instance.id|unlocalize }}{{ form.slug }}" class="form-div">
+  <div class="all-invalid alert alert-block alert-danger d-none">
+    <ul class="m-0">
+    </ul>
+  </div>
+  {{ form.render }}
+</div>{% endspaceless %}
+{% addtoblock 'js' %}{% spaceless %}{% localize off %}
+<script>
+  djs(function () {
+    function feedback(node, data) {
+      if (data.result === 'success') {   {# success function attached to form tag? #}
+        if (typeof($(node).data().success) === "function") {
+          $(node).data().success();
+        }
+        node.replaceWith(function () {
+          return $(data.content).hide().fadeIn();
+        });
+        djs_exec(); {# new content could contain javascript #}
+      } else if (data.result === 'result') {
+        $(node).find(".all-invalid").addClass("d-none")
+          .find("li").remove();
+        $(node).find('.form-group')
+          .addClass('has-feedback has-success is-valid')
+          .removeClass('has-error is-invalid')
+          .find('.invalid-feedback').remove();
+        $(node.data("results")).html(function () {
+          return $(data.content).hide().fadeIn();
+        });
+        if (typeof($(node).data().success) === "function") {   {# success function attached to form tag? #}
+          $(node).data().success();
+        }
+        // softscroll("div#results{{instance.id}}{{form.slug}}");
+        djs_exec(); {# new content could contain javascript #}
+      } else if (data.result === 'invalid form') {
+        $(node).find(".all-invalid").addClass("d-none")
+          .find("li").remove();
+        $(node).find('.form-group')
+          .addClass('has-feedback has-success is-valid')
+          .removeClass('has-error is-invalid')
+          .find('.invalid-feedback').remove();
+        for (const [key, value] of Object.entries(data.field_errors)) {
+          for (const err of value) {
+            if (key.substring(0,7) !== "__all__") {
+              $(node).find("#" + key).after($("<span class='invalid-feedback'><strong>" + err + "</strong></span>"));
+            } else {
+              $(node).find(".all-invalid").removeClass("d-none")
+                .find(".m-0").append("<li>" + err + "</li>");
+            }
+          }
+        }
+        // $(node).find(".form-div").html(data.html);  {# div#data{{instance.id}}{{form.slug}} #}
+        $(node).addClass('was-validated');
+      } else if (data.result === 'error') {
+        alert(data.errors[0]);
+      }
+      if ('redirect' in data) {
+        if (data.redirect !== '' && data.redirect !== 'result')
+          window.location.href = data.redirect;
+      }
+    }
+
+    function post_ajax(node) {
+      $.ajax({
+        type: 'POST',
+        url: $(node).attr('action'),
+        data: $(node).serialize(),
+      }).done(function (data) {
+        feedback(node, data)
+      }).fail(function () {
+          alert("{% trans 'Network connection or server error. Please try again later. We apologize for the inconvenience.' %}");
+        });
+
+    };
+
+    var form = $("form#form{{instance.id}}{{form.slug}}");
+    var recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
+    if (recaptcha.length === 1) {
+      var checkExist = setInterval(function () {
+        if (window.hasOwnProperty("recaptcha_loaded")) {
+          clearInterval(checkExist);
+          var gid = grecaptcha.render(recaptcha[0], {
+            "callback": function (token) {
+              form.find(".g-recaptcha-response").val(token);
+              post_ajax(form);
+              grecaptcha.reset(gid);
+            },
+          });
+          if(!form.data("submit_event")) {
+            form.data("submit_event", true);
+            form.submit(function (event) {
+              event.preventDefault();
+              grecaptcha.execute(gid);
+            });
+          }
+
+        }
+      }, 100);
+    } else {
+      if(!form.data("submit_event")) {
+        form.data("submit_event", true);
+        form.submit(function (event) {
+          event.preventDefault();
+          post_ajax(form);
+        });
+      }
+    }
+  });
+</script>{% endlocalize %}{% endspaceless %}
+{% endaddtoblock %}

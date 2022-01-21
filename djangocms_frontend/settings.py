@@ -13,6 +13,13 @@ TAG_CHOICES = getattr(
 )
 TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 
+ADMIN_CSS = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_ADMIN_CSS",
+    {},
+)
+
+
 HEADER_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_HEADER_CHOICES",

@@ -45,6 +45,7 @@ class CardForm(EntangledModelForm):
             ]
         }
         untangled_fields = ("tag_type",)
+        css = settings.ADMIN_CSS
 
     card_type = forms.ChoiceField(
         label=_("Card type"),
@@ -54,7 +55,7 @@ class CardForm(EntangledModelForm):
     card_context = forms.ChoiceField(
         label=_("Background context"),
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
-        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
+        widget=ColoredButtonGroup(),
         required=False,
     )
     card_alignment = forms.ChoiceField(

@@ -34,7 +34,7 @@ class BadgeForm(EntangledModelForm):
         label=_("Context"),
         choices=COLOR_STYLE_CHOICES,
         initial=COLOR_STYLE_CHOICES[0][0],
-        widget=ColoredButtonGroup(colors=settings.COLOR_CODES),
+        widget=ColoredButtonGroup(),
     )
     badge_pills = forms.BooleanField(
         label=_("Pills style"),
