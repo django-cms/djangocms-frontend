@@ -1,0 +1,50 @@
+from django import forms
+from django.utils.translation import gettext_lazy as _
+from entangled.forms import EntangledModelForm
+
+from djangocms_frontend import settings
+from djangocms_frontend.contrib import forms as forms_module
+from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.models import FrontendUIItem
+
+mixin_factory = settings.get_forms(forms_module)
+
+
+class ContactForm(forms.Form):
+    email = forms.EmailField(label=_("Email"))
+    subject = forms.CharField(label=_("Subject"), required=False)
+    content = forms.CharField(label=_("Content"), widget=forms.Textarea())
+
+    template = "cmsplugin_contact/contact.html"
+
+
+class FormsForm(mixin_factory("Form"), EntangledModelForm):
+    """
+    Components > "Alerts" Plugin
+    https://getbootstrap.com/docs/5.0/components/alerts/
+    """
+
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "form_submit_message",
+                "form_submit_context",
+                "attributes",
+            ]
+        }
+        untangled_fields = ("tag_type",)
+
+    form_submit_message = forms.CharField(
+        label=_("Submit message"),
+        initial=_("Submit"),
+        required=True,
+    )
+    form_submit_context = forms.ChoiceField(
+        label=_("Context"),
+        choices=settings.COLOR_STYLE_CHOICES,
+        initial=settings.COLOR_STYLE_CHOICES[0][0],
+        required=True,
+        widget=ColoredButtonGroup(),
+    )
+    attributes = AttributesFormField()

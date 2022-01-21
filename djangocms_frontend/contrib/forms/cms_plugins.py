@@ -1,6 +1,7 @@
 from urllib.parse import urlencode
 
 from cms.plugin_base import CMSPluginBase
+from cms.plugin_pool import plugin_pool
 from django.http import Http404, JsonResponse
 from django.template.context_processors import csrf
 from django.template.loader import render_to_string
@@ -8,6 +9,11 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormMixin
 from sekizai.context import SekizaiContext
+
+from djangocms_frontend import settings
+from djangocms_frontend.contrib import forms as forms_module
+
+from . import forms, models
 
 
 class CMSAjaxBase(CMSPluginBase):
@@ -25,9 +31,6 @@ class AjaxFormMixin(FormMixin):
     instance = None
     parameter = {}
     template_name = None
-
-    def render(self):
-        return str(self)
 
     def json_return(self, errors, result, redirect, content):
         return JsonResponse(
@@ -221,3 +224,46 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
         context.update(self.set_context(context, instance, placeholder))
         context.update({"instance": instance, "form": form})
         return context
+
+
+mixin_factory = settings.get_renderer(forms_module)
+
+
+@plugin_pool.register_plugin
+class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
+    """
+    Components > "Alerts" Plugin
+    https://getbootstrap.com/docs/5.0/components/alerts/
+    """
+
+    name = _("Form")
+    module = _("Interface")
+    model = models.Form
+
+    form_class = forms.ContactForm
+    form = forms.FormsForm
+    render_template = f"djangocms_frontend/{settings.framework}/form.html"
+    # change_form_template = "djangocms_frontend/admin/alert.html"
+    allow_children = True
+
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": [
+                    "form_submit_message",
+                    "form_submit_context",
+                ]
+            },
+        ),
+        (
+            _("Advanced settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "tag_type",
+                    "attributes",
+                ),
+            },
+        ),
+    ]

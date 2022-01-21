@@ -104,7 +104,7 @@ def preparator_factory(framework):
 
 prepare_instance = preparator_factory(framework)
 
-theme_render_path = f"{theme}.renderer.{framework}"
+theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"
 
 
