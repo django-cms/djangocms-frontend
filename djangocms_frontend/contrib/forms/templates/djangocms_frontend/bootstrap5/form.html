@@ -1,20 +1,10 @@
-{% load static cms_tags sekizai_tags i18n l10n  %}
+{% load static cms_tags sekizai_tags i18n frontend  %}
 {% spaceless %}
-    <form id="form{{ instance.id|unlocalize }}{{ form.slug }}" novalidate action="{% url 'xhr:ajaxview' instance.id %}"
-        method="post" class="text-center{% if not instance.multiline %} d-inline-flex {% endif %}">
+    <form id="form{{ instance.id|safe }}{{ form.slug }}" novalidate action="{% url 'xhr:ajaxview' instance.id %}"
+        method="post" {% add_class instance.attributes %}>
         {% csrf_token %}
-        {% if instance.headsup %}
-            <p>XXXX</p>
-            <div class="signup-headsup btn{% if not instance.multiline %} align-content-center me-2{% endif %}"
-                style="cursor: inherit;">
-                {{ instance.headsup }}
-            </div>
-        {% endif %}
-        <hr>
-        {% include 'djangocms_frontend/ajax_form.html' with form=form id=instance.id tracking=instance.tracking_code %}
-        <hr>
+        {% include 'djangocms_frontend/ajax_form.html' with form=form id=instance.id tracking=instance.tracking_code template="djangocms_frontend/bootstrap5/render/form.html" %}
         <input type="submit" value="{{ instance.form_submit_message|default:_("Submit") }}"
-            class="{{ instance.button_classes }}{% if not instance.multiline %} align-content-center mb-2 ms-1{% endif %}"
-            style="height: max-content;"/>
+            class="btn btn-{{ instance.form_submit_context }}"/>
     </form>
 {% endspaceless %}

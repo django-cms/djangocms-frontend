@@ -13,9 +13,20 @@ mixin_factory = settings.get_forms(forms_module)
 class ContactForm(forms.Form):
     email = forms.EmailField(label=_("Email"))
     subject = forms.CharField(label=_("Subject"), required=False)
-    content = forms.CharField(label=_("Content"), widget=forms.Textarea())
+    content = forms.CharField(label=_("Content"),
+                              widget=forms.Textarea(attrs=dict(style="height: 240px;")),
+                              help_text="Put your message here!")
 
-    template = "cmsplugin_contact/contact.html"
+#      template = "cmsplugin_contact/contact.html"
+    redirect = "/"
+    floating_labels = True
+
+    fieldsets = (
+        ("Contact form", {"floating": True,
+                          "classes": ("collapse",),
+                          "fields": (("email", "subject",), "content")}),
+    )
+
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):

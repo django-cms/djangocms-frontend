@@ -1,0 +1,13 @@
+{% load frontend_forms %}{% spaceless %}
+    {% render_div form form_field floating as div %}
+    {% if div %}<div {{ div }}>{% endif %}
+    {% if floating or form.field.form_field.field.widget.input_type == "radio" or form.field.form_field.field.widget.input_type == "checkbox" %}
+        {% render_field form form_field "-" %}
+        {% render_label form form_field %}
+    {% else %}
+        {% render_label form form_field %}
+        {% render_field form form_field %}
+    {% endif %}
+    {% render_help_text form form_field %}
+    {% if div %}</div>{% endif %}
+{% endspaceless %}

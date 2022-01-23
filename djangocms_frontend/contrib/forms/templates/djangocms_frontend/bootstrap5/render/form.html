@@ -1,0 +1,15 @@
+{% load frontend_forms %}{% spaceless %}
+     <div class="alert alert-danger{% if not form.non_field_errors %} d-none{% endif %}" role="alert">
+        <ul>
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+    </div>
+    {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+    {% endfor %}
+    {% for title, prop in form|get_fieldset %}
+        {% include "djangocms_frontend/bootstrap5/render/section.html" with form=form title=title prop=prop section=forloop.counter %}
+    {% endfor %}
+{% endspaceless %}

@@ -59,7 +59,7 @@ class AjaxFormMixin(FormMixin):
             get_success_context += "_" + form.slug
             render_success += "_" + form.slug
 
-        if hasattr(self, render_success):
+        if hasattr(form, render_success):
             context = SekizaiContext(
                 {
                     "form": form,
@@ -70,7 +70,7 @@ class AjaxFormMixin(FormMixin):
                     ),
                 }
             )
-            if hasattr(self, get_success_context):
+            if hasattr(form, get_success_context):
                 get_success_context = getattr(self, get_success_context)
                 context.update(get_success_context(self.request, self.instance, form))
             errors, result, redir, content = (
@@ -80,6 +80,13 @@ class AjaxFormMixin(FormMixin):
                 render_to_string(
                     getattr(self, render_success), context.flatten(), self.request
                 ),
+            )
+        elif redirect:
+            errors, result, redir, content = (
+                [],
+                "success",
+                redirect,
+                "",
             )
         else:
             errors, result, redir, content = (
@@ -137,6 +144,7 @@ class AjaxFormMixin(FormMixin):
         kwargs = {
             "initial": self.get_initial(slug),
             "prefix": self.get_prefix(),
+            "label_suffix": "",
         }
 
         if self.request.method in ("POST", "PUT"):
@@ -156,13 +164,13 @@ class AjaxFormMixin(FormMixin):
                 form.fields[field].widget.attrs.update(
                     {"id": field + str(self.instance.id)}
                 )
-        if not getattr(getattr(form, "helper", None), "form_show_labels", None):
-            for field in form.base_fields:
-                form.fields[field].widget.attrs.update(
-                    {
-                        "placeholder": form.fields[field].label,
-                    }
-                )
+        # if not getattr(getattr(form, "helper", None), "form_show_labels", None):
+        #     for field in form.base_fields:
+        #         form.fields[field].widget.attrs.update(
+        #             {
+        #                 "placeholder": form.fields[field].label,
+        #             }
+        #         )
         return form
 
     def ajax_post(self, request, instance, parameter=None):
