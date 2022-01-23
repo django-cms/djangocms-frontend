@@ -164,13 +164,6 @@ class AjaxFormMixin(FormMixin):
                 form.fields[field].widget.attrs.update(
                     {"id": field + str(self.instance.id)}
                 )
-        # if not getattr(getattr(form, "helper", None), "form_show_labels", None):
-        #     for field in form.base_fields:
-        #         form.fields[field].widget.attrs.update(
-        #             {
-        #                 "placeholder": form.fields[field].label,
-        #             }
-        #         )
         return form
 
     def ajax_post(self, request, instance, parameter=None):

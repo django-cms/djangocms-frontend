@@ -19,11 +19,11 @@ class ContactForm(forms.Form):
 
 #      template = "cmsplugin_contact/contact.html"
     redirect = "/"
-    floating_labels = True
+    frontend_options = {"floating_labels": True,}
 
     fieldsets = (
         ("Contact form", {"floating": True,
-                          "classes": ("collapse",),
+                          "classes": ("collapse", "show",),
                           "fields": (("email", "subject",), "content")}),
     )
 

@@ -25,6 +25,10 @@ Key features
 
 * **Extensible** within the project and with separate project (e.g., a theme app)
 
+* **Accordion** plugin and simple **forms** plugin w/ Bootstrap-styled forms on
+  your cms page.
+
+
 Description
 ===========
 

@@ -76,8 +76,9 @@ def render_widget(context, form, form_field, **kwargs):
     field = get_bound_field(form, form_field)
     if field is None:
         return ""
-    floating_labels = getattr(form, "floating_labels", False)
-    field_sep = context.get("field_sep", "mb-3")
+    options = getattr(form, "frontend_options", {})
+    floating_labels = "floating_labels" in options
+    field_sep = options.get("field_sep", "mb-3")
     widget_attr = kwargs
     widget_attr.update(attrs_for_widget(field.field.widget, "input"))
     label_attr = attrs_for_widget(field.field.widget, "label")
