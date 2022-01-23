@@ -23,7 +23,7 @@ class ContactForm(forms.Form):
 
     fieldsets = (
         ("Contact form", {"floating": True,
-                          "classes": ("collapse", "show",),
+#                          "classes": ("collapse", "show",),
                           "fields": (("email", "subject",), "content")}),
     )
 

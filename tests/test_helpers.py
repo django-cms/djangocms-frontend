@@ -2,7 +2,7 @@ from cms.api import add_plugin, create_page
 from django.template.loader import select_template
 from django.test import TestCase
 
-from djangocms_frontend.contrib.carousel.cms_plugins import Bootstrap5CarouselPlugin
+from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
 from djangocms_frontend.helpers import get_plugin_template, get_template_path
 
@@ -23,7 +23,7 @@ class B5HelpersTestCase(TestCase):
         )
         instance = add_plugin(
             placeholder=page.placeholders.get(slot="content"),
-            plugin_type=Bootstrap5CarouselPlugin.__name__,
+            plugin_type=CarouselPlugin.__name__,
             language="en",
         )
         template = get_plugin_template(
