@@ -1,7 +1,6 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
-from djangocms_link.models import get_templates
 
 from djangocms_frontend.helpers import get_plugin_template
 
@@ -71,4 +70,4 @@ class LinkPlugin(mixin_factory("Link"), CMSPluginBase):
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(instance, "link", "link", get_templates())
+        return get_plugin_template(instance, "link", "link", settings.LINK_TEMPLATE_CHOICES)

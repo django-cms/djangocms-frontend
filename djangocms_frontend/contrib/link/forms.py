@@ -11,8 +11,8 @@ from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
 from django_select2.forms import Select2Widget
 from djangocms_icon.fields import IconField
-from djangocms_link.models import TARGET_CHOICES
-from djangocms_link.validators import IntranetURLValidator
+#from djangocms_link.models import TARGET_CHOICES
+#from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
@@ -20,7 +20,7 @@ from filer.models import File
 from ... import settings
 from ...fields import AttributesFormField, ColoredButtonGroup
 from ...models import FrontendUIItem
-from .constants import LINK_CHOICES, LINK_SIZE_CHOICES
+from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 
 
 def get_templates():
@@ -158,9 +158,9 @@ class AbstractLinkForm(EntangledModelForm):
 
     link_is_optional = False
 
-    url_validators = [
-        IntranetURLValidator(intranet_host_re=HOSTNAME),
-    ]
+    # url_validators = [
+    #     IntranetURLValidator(intranet_host_re=HOSTNAME),
+    # ]
 
     name = forms.CharField(
         label=_("Display name"),
@@ -169,7 +169,7 @@ class AbstractLinkForm(EntangledModelForm):
     external_link = forms.CharField(
         label=_("External link"),
         required=False,
-        validators=url_validators,
+#        validators=url_validators,
         help_text=_("Provide a link to an external source."),
     )
     internal_link = SmartLinkField(

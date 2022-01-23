@@ -38,7 +38,7 @@ class B5ConstantsTestCase(TestCase):
             ('dark', 'Dark'),
         ))
         self.assertEquals(ALIGN_CHOICES, (
-            ('text-left', 'Left'),
+            ('text-start', 'Left'),
             ('text-center', 'Center'),
-            ('text-right', 'Right'),
+            ('text-end', 'Right'),
         ))

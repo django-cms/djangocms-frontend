@@ -38,6 +38,10 @@ ALIGN_CHOICES = (
     ("text-end", _("Right")),
 )
 
+LINK_TEMPLATE_CHOICES = [
+    ('default', _('Default')),
+]
+
 
 SPACER_PROPERTY_CHOICES = (
     ("m", "margin"),

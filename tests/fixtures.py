@@ -1,7 +1,7 @@
 from cms.api import create_page
 
 
-class B5TestFixture:
+class TestFixture:
     """Sets up generic setUp and tearDown methods for tests."""
 
     def setUp(self):

@@ -1,11 +1,11 @@
 from django.test import TestCase
 
 from djangocms_frontend.fields import (
-    AttributesField, IntegerRangeField, TagTypeField,
+    AttributesField, TagTypeField,
 )
 
 
-class B5FieldsTestCase(TestCase):
+class FieldsTestCase(TestCase):
 
     def test_attributes_field(self):
         field = AttributesField()

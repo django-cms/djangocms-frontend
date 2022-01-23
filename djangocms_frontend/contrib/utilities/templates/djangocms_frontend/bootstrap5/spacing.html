@@ -1,5 +1,5 @@
-{% load cms_tags %}{% spaceless %}
-    <{{ instance.tag_type }} class="{% if not instance.space_device or instance.space_device == "xs" %}{{instance.space_property}}{{instance.space_sides}}-{{ instance.space_size }}{% else %}{{instance.space_property}}{{instance.space_sides}}-{{ instance.space_device }}-{{ instance.space_size }}{% endif %}" {{ instance.attributes_str }}>
+{% load cms_tags frontend %}{% spaceless %}
+    <{{ instance.tag_type }}{% add_class instance.attributes spacer_class %}>
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
     {% endfor %}

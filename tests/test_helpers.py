@@ -7,10 +7,10 @@ from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOI
 from djangocms_frontend.helpers import get_plugin_template, get_template_path
 
 
-class B5HelpersTestCase(TestCase):
+class HelpersTestCase(TestCase):
     def test_get_template_path(self):
         template = get_template_path("carousel", "default", "slide")
-        result = "djangocms_frontend/carousel/default/slide.html"
+        result = "djangocms_frontend/bootstrap5/carousel/default/slide.html"
         self.assertEqual(template, result)
         status = select_template([template])
         self.assertEqual(status.template.name, result)
@@ -32,7 +32,7 @@ class B5HelpersTestCase(TestCase):
             "carousel",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_frontend/carousel/default/carousel.html")
+        self.assertEqual(template, "djangocms_frontend/bootstrap5/carousel/default/carousel.html")
         # trigger default template
         template = get_plugin_template(
             instance,
@@ -40,6 +40,6 @@ class B5HelpersTestCase(TestCase):
             "exist",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_frontend/does_not/default/exist.html")
+        self.assertEqual(template, "djangocms_frontend/bootstrap5/does_not/default/exist.html")
         # cleanup
         page.delete()
