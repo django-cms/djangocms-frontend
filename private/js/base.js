@@ -24,7 +24,7 @@ $(() => {
     // general color context with auto alignment
     // CARD
     new ContextGroup({
-        select: '#id_card_context',
+        select: '#id_card_context, #id_inner_context, #id_form_submit_context',
         takeClassesFromSelectValues: true,
         extraClass: 'frontend-button-group-context-colors',
     });
@@ -73,6 +73,7 @@ $(() => {
     if (
         $('#id_quote_alignment').length ||
         $('#id_text_alignment').length ||
+        $('#id_form_submit_align').length ||
         $('#id_card_alignment').length ||
         $('#id_figure_alignment').length
     ) {
@@ -81,7 +82,7 @@ $(() => {
         // alignment
         new ButtonGroup({
             static: static_url,
-            select: '#id_quote_alignment, #id_card_alignment, #id_figure_alignment, #id_text_alignment',
+            select: '#id_quote_alignment, #id_card_alignment, #id_figure_alignment, #id_text_alignment, #id_form_submit_align',
             icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end'],
         });
     }

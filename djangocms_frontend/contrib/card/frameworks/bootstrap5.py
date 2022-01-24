@@ -13,3 +13,18 @@ class CardRenderMixin:
             link_classes.append("h-100")
         context["add_classes"] = link_classes
         return super().render(context, instance, placeholder)
+
+
+class CardInnerRenderMixin:
+    def render(self, context, instance, placeholder):
+        context["inner_context"] = (
+            f"bg-{instance.inner_context}"
+            if getattr(instance, "inner_context", None)
+            else ""
+        )
+        context["text_alignment"] = (
+            f"text-{instance.text_alignment}"
+            if getattr(instance, "text_alignment", None)
+            else ""
+        )
+        return super().render(context, instance, placeholder)

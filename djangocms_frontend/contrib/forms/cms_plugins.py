@@ -244,17 +244,18 @@ class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
     form_class = forms.ContactForm
     form = forms.FormsForm
     render_template = f"djangocms_frontend/{settings.framework}/form.html"
-    # change_form_template = "djangocms_frontend/admin/alert.html"
+    change_form_template = "djangocms_frontend/admin/forms.html"
     allow_children = True
 
     fieldsets = [
         (
-            None,
+            _("Submit button"),
             {
+                "classes": ("collapse",),
                 "fields": [
-                    "form_submit_message",
+                    ("form_submit_message", "form_submit_align"),
                     "form_submit_context",
-                ]
+                ],
             },
         ),
         (

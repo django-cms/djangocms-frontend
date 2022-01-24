@@ -26,3 +26,13 @@ class GridRowRenderMixin:
         context["add_classes"] = " ".join(cls for cls in add_classes if cls)
         context["grid_classes"] = " ".join(get_grid_values(instance))
         return super().render(context, instance, placeholder)
+
+
+class GridColumnRenderMixin:
+    def render(self, context, instance, placeholder):
+        context["add_classes"] = (
+            f"text-{instance.text_alignment}"
+            if instance.config.get("text_alignment", None)
+            else ""
+        )
+        return super().render(context, instance, placeholder)

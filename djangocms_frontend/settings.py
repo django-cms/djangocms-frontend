@@ -39,9 +39,9 @@ HEADER_CHOICES = getattr(
 )
 
 ALIGN_CHOICES = (
-    ("text-start", _("Left")),
-    ("text-center", _("Center")),
-    ("text-end", _("Right")),
+    ("start", _("Left")),
+    ("center", _("Center")),
+    ("end", _("Right")),
 )
 
 LINK_TEMPLATE_CHOICES = [

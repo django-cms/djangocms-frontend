@@ -13,20 +13,34 @@ mixin_factory = settings.get_forms(forms_module)
 class ContactForm(forms.Form):
     email = forms.EmailField(label=_("Email"))
     subject = forms.CharField(label=_("Subject"), required=False)
-    content = forms.CharField(label=_("Content"),
-                              widget=forms.Textarea(attrs=dict(style="height: 240px;")),
-                              help_text="Put your message here!")
-
-#      template = "cmsplugin_contact/contact.html"
-    redirect = "/"
-    frontend_options = {"floating_labels": True,}
-
-    fieldsets = (
-        ("Contact form", {"floating": True,
-#                          "classes": ("collapse", "show",),
-                          "fields": (("email", "subject",), "content")}),
+    content = forms.CharField(
+        label=_("Content"),
+        widget=forms.Textarea(attrs=dict(style="height: 240px;")),
+        help_text="Put your message here!",
     )
 
+    #      template = "cmsplugin_contact/contact.html"
+    redirect = "/"
+    frontend_options = {
+        "floating_labels": True,
+    }
+
+    fieldsets = (
+        (
+            "Contact form",
+            {
+                "floating": True,
+                #                          "classes": ("collapse", "show",),
+                "fields": (
+                    (
+                        "email",
+                        "subject",
+                    ),
+                    "content",
+                ),
+            },
+        ),
+    )
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
@@ -41,6 +55,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
             "config": [
                 "form_submit_message",
                 "form_submit_context",
+                "form_submit_align",
                 "attributes",
             ]
         }
@@ -52,10 +67,16 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         required=True,
     )
     form_submit_context = forms.ChoiceField(
-        label=_("Context"),
+        label=_("Subit Context"),
         choices=settings.COLOR_STYLE_CHOICES,
         initial=settings.COLOR_STYLE_CHOICES[0][0],
         required=True,
         widget=ColoredButtonGroup(),
+    )
+    form_submit_align = forms.ChoiceField(
+        label=_("Submit button alignment"),
+        choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
+        required=False,
     )
     attributes = AttributesFormField()

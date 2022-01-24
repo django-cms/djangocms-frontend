@@ -246,8 +246,9 @@ def x002_replace_card_deck(obj, new_obj):
 
 def a001_alignment(obj, new_obj, field):
     if field in new_obj["config"] and new_obj["config"][field]:
-        new_obj["config"][field].replace("-left", "-start")
-        new_obj["config"][field].replace("-right", "-end")
+        new_obj["config"][field].replace("text-left", "start")
+        new_obj["config"][field].replace("text-center", "center")
+        new_obj["config"][field].replace("text-right", "end")
 
 
 def g001_col_text_alignment(obj, new_obj):

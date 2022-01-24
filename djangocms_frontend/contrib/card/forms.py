@@ -96,6 +96,8 @@ class CardInnerForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "inner_type",
+                "inner_context",
+                "text_alignment",
                 "attributes",
             ]
         }
@@ -106,6 +108,17 @@ class CardInnerForm(EntangledModelForm):
         choices=CARD_INNER_TYPE_CHOICES,
         initial=CARD_INNER_TYPE_CHOICES[0][0],
         help_text=_("Define the structure of the plugin."),
+    )
+    inner_context = forms.ChoiceField(
+        label=_("Background context"),
+        choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
+        widget=ColoredButtonGroup(),
+        required=False,
+    )
+    text_alignment = forms.ChoiceField(
+        label=_("Content alignment"),
+        choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
+        required=False,
     )
     attributes = AttributesFormField()
 

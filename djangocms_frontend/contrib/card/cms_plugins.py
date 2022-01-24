@@ -99,7 +99,18 @@ class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
     ]
 
     fieldsets = [
-        (None, {"fields": ("inner_type",)}),
+        (
+            None,
+            {
+                "fields": (
+                    "inner_type",
+                    (
+                        "inner_context",
+                        "text_alignment",
+                    ),
+                )
+            },
+        ),
         (
             _("Advanced settings"),
             {
