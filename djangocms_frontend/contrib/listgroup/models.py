@@ -1,4 +1,5 @@
 from ...models import FrontendUIItem
+from .constants import LISTGROUP_STATE_CHOICES
 
 
 class ListGroup(FrontendUIItem):
@@ -9,6 +10,10 @@ class ListGroup(FrontendUIItem):
 
     class Meta:
         proxy = True
+
+    default_config = dict(
+        list_group_flush=False,
+    )
 
     def get_short_description(self):
         text = ""
@@ -25,6 +30,11 @@ class ListGroupItem(FrontendUIItem):
 
     class Meta:
         proxy = True
+
+    default_config = dict(
+        list_context="",
+        list_state="",
+    )
 
     def get_short_description(self):
         text = []

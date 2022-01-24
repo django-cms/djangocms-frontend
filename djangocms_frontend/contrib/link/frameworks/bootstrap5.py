@@ -14,6 +14,10 @@ class LinkRenderMixin:
             link_classes.append(instance.link_size)
         if instance.link_block:
             link_classes.append("btn-block")
+        parent = context.get("parent", None)
+        if parent and parent.ui_item == "ListGroup":
+            link_classes.append("list-group-item")
+            link_classes.append("list-group-item-action")
 
         context["link"] = instance.get_link()
         context["link_classes"] = " ".join(link_classes)

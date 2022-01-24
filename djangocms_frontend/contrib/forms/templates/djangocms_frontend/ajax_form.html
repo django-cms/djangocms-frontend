@@ -1,10 +1,10 @@
 {% load sekizai_tags i18n frontend_forms %}{% spaceless %}
-    <div id="data{{ instance.id|safe }}{{ form.slug }}" class="form-div">
+    <div id="data{{ instance.id|safe }}{{ form.slug }}" class="form-div{% if form.bound %} was-validated{% endif %}">
         <div class="all-invalid alert alert-block alert-danger d-none">
             <ul class="m-0">
             </ul>
         </div>
-        {% include template with form=form %}
+        {% render_form form %}
     </div>{% endspaceless %}
 {% addtoblock 'js' %}{% spaceless %}
     <script>
@@ -38,7 +38,7 @@
                     for (const [key, value] of Object.entries(data.field_errors)) {
                         for (const err of value) {
                             if (key.substring(0,7) !== "__all__") {
-                                $(node).find("#" + key).after($("<span class='invalid-feedback'><strong>" + err + "</strong></span>"));
+                                $(node).find("#" + key).after($("<div class='invalid-feedback'><strong>" + err + "</strong></div>"));
                             } else {
                                 $(node).find(".all-invalid").removeClass("d-none")
                                     .find("ul").append("<li>" + err + "</li>");

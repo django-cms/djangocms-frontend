@@ -1,22 +1,20 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.card.cms_plugins import (
-    CardInnerPlugin, CardPlugin,
-)
+from djangocms_frontend.contrib.card.cms_plugins import CardInnerPlugin, CardPlugin
+from djangocms_frontend.contrib.card.forms import CardForm, CardInnerForm
 
 from ..fixtures import TestFixture
 
 
 class CardPluginTestCase(TestFixture, CMSTestCase):
-
     def test_card_plugin(self):
         plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=CardPlugin.__name__,
             language=self.language,
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CardForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -29,38 +27,52 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=CardPlugin.__name__,
             language=self.language,
-            card_type="card-columns",
-            card_context="transparent",
-            card_outline=True,
-            card_alignment="text-right",
-            card_text_color="white",
+            config=dict(
+                card_type="card-group",
+                card_context="transparent",
+                card_outline=True,
+                card_alignment="text-start",
+                card_text_color="white",
+            ),
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CardForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            '<div class="card-columns border-transparent text-right text-white">',
-        )
+        self.assertContains(response, "card-group")
+        self.assertContains(response, "border-transparent")
+        self.assertContains(response, "text-white")
+        self.assertContains(response, "text-start")
 
         # special case when card outline is given but not card context
         plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=CardPlugin.__name__,
             language=self.language,
-            card_type="card-group",
-            card_context="transparent",
+            config=dict(
+                card_type="card-group",
+                card_context="transparent",
+            ),
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CardForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<div class="card-group bg-transparent">')
+        self.assertTrue(
+            (
+                '<div class="card-group bg-transparent">'
+                in response.content.decode("utf-8")
+            )
+            or (
+                '<div class="bg-transparent card-group">'
+                in response.content.decode("utf-8")
+            ),
+            f'<div class="card-group bg-transparent"> not found in {response.content.decode("utf-8")}',
+        )
 
     def test_card_inner_plugin(self):
         plugin = add_plugin(
@@ -68,7 +80,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CardInnerPlugin.__name__,
             language=self.language,
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CardInnerForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -81,9 +93,11 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=CardInnerPlugin.__name__,
             language=self.language,
-            inner_type="card-footer",
+            config=dict(
+                inner_type="card-footer",
+            ),
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CardInnerForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):

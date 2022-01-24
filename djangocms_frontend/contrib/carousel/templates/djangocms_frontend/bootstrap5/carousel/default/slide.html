@@ -1,5 +1,4 @@
 {% load cms_tags frontend %}{% spaceless %}
-
     <{{ instance.tag_type }}  {% add_class instance.attributes add_classes %}>
     {% if link %}
         <a href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>

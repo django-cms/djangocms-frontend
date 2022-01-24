@@ -2,15 +2,16 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_frontend.contrib.carousel.cms_plugins import (
-    CarouselPlugin, CarouselSlidePlugin,
+    CarouselPlugin,
+    CarouselSlidePlugin,
 )
+from djangocms_frontend.contrib.carousel.forms import CarouselForm, CarouselSlideForm
 
 from ..fixtures import TestFixture
 from ..helpers import get_filer_image
 
 
 class CarouselPluginTestCase(TestFixture, CMSTestCase):
-
     def setUp(self):
         super().setUp()
         self.image = get_filer_image()
@@ -25,13 +26,17 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CarouselPlugin.__name__,
             language=self.language,
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CarouselForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<div class="carousel slide"')
+        self.assertTrue(
+            ('<div class="slide carousel"' in response.content.decode("utf-8"))
+            or ('<div class="carousel slide"' in response.content.decode("utf-8")),
+            f'<div class="slide carousel" not found in {response.content.decode("utf-8")}',
+        )
         self.assertContains(response, 'data-bs-interval="5000"')
         self.assertContains(response, 'data-bs-keyboard="true"')
         self.assertContains(response, 'data-bs-pause="hover"')
@@ -44,20 +49,25 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CarouselPlugin.__name__,
             language=self.language,
         )
+        row.initialize_from_form(CarouselForm).save()
         plugin = add_plugin(
             target=row,
             placeholder=self.placeholder,
             plugin_type=CarouselSlidePlugin.__name__,
             language=self.language,
-            carousel_image=self.image,
+            config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(CarouselSlideForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<div class="carousel slide"')
+        self.assertTrue(
+            ('<div class="slide carousel"' in response.content.decode("utf-8"))
+            or ('<div class="carousel slide"' in response.content.decode("utf-8")),
+            f'<div class="slide carousel" not found in {response.content.decode("utf-8")}',
+        )
 
         # testing aspect ratio variant
         # also testing multiply entries
@@ -65,25 +75,32 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=CarouselPlugin.__name__,
             language=self.language,
-            carousel_aspect_ratio="16x9",
+            config=dict(
+                carousel_aspect_ratio="16x9",
+            ),
         )
+        row.initialize_from_form(CarouselForm).save()
         add_plugin(
             target=row,
             placeholder=self.placeholder,
             plugin_type=CarouselSlidePlugin.__name__,
             language=self.language,
-            carousel_image=self.image,
-        )
+            config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
+        ).initialize_from_form(CarouselSlideForm).save()
         add_plugin(
             target=row,
             placeholder=self.placeholder,
             plugin_type=CarouselSlidePlugin.__name__,
             language=self.language,
-            carousel_image=self.image,
-        )
+            config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
+        ).initialize_from_form(CarouselSlideForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<div class="carousel slide"')
+        self.assertTrue(
+            ('<div class="slide carousel"' in response.content.decode("utf-8"))
+            or ('<div class="carousel slide"' in response.content.decode("utf-8")),
+            f'<div class="slide carousel" not found in {response.content.decode("utf-8")}',
+        )

@@ -3,7 +3,7 @@
     <form id="form{{ instance.id|safe }}{{ form.slug }}" novalidate action="{% url 'xhr:ajaxview' instance.id %}"
         method="post" {% add_class instance.attributes %}>
         {% csrf_token %}
-        {% include 'djangocms_frontend/ajax_form.html' with form=form id=instance.id tracking=instance.tracking_code template="djangocms_frontend/bootstrap5/render/form.html" %}
+        {% include 'djangocms_frontend/ajax_form.html' with form=form id=instance.id tracking=instance.tracking_code %}
         <input type="submit" value="{{ instance.form_submit_message|default:_("Submit") }}"
             class="btn btn-{{ instance.form_submit_context }}"/>
     </form>

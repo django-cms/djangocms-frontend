@@ -60,7 +60,7 @@ class ListGroupItemForm(EntangledModelForm):
     )
     list_state = forms.ChoiceField(
         label=_("State"),
-        choices=LISTGROUP_STATE_CHOICES,
-        initial=LISTGROUP_STATE_CHOICES[-1][0],
+        choices=settings.EMPTY_CHOICE + LISTGROUP_STATE_CHOICES,
+        initial=settings.EMPTY_CHOICE,
     )
     attributes = AttributesFormField()

@@ -4,8 +4,6 @@ from django.utils.translation import gettext
 
 from djangocms_frontend.fields import AttributesField, TagTypeField
 
-from .settings import prepare_instance
-
 
 class FrontendUIItem(CMSPlugin):
     """
@@ -19,11 +17,15 @@ class FrontendUIItem(CMSPlugin):
     tag_type = TagTypeField(blank=True)
     config = models.JSONField(default=dict)
 
+    default_config = {}
+
     def __getattr__(self, item):
         if (
             item[0] != "_" and item in self.config
         ):  # Avoid infinite recursion trying to get .config from db
             return self.config[item]
+        if item in self.default_config:
+            return self.default_config[item]
         return super().__getattribute__(item)
 
     def __str__(self):
@@ -33,8 +35,19 @@ class FrontendUIItem(CMSPlugin):
 
     def save(self, *args, **kwargs):
         self.ui_item = self.__class__.__name__
-        prepare_instance(self)
         return super().save(*args, **kwargs)
+
+    def initialize_from_form(self, form):
+        if isinstance(form, type):  # if is class
+            form = form()  # instantiate
+        entangled_fields = getattr(
+            getattr(form, "Meta", None), "entangled_fields", {}
+        ).get("config", ())
+        for field in entangled_fields:
+            self.config.setdefault(
+                field, {} if field == "attributes" else form[field].initial or ""
+            )
+        return self
 
     def get_short_description(self):
         pass

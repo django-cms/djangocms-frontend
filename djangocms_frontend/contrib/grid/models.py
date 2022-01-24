@@ -60,13 +60,10 @@ class GridColumn(FrontendUIItem):
 
     def get_short_description(self):
         text = ""
-        #        classes = self.get_grid_values()
         if self.xs_col:
             text += "(col-{}) ".format(self.xs_col)
         else:
             text += "(auto) "
         if self.column_type != "col":
             text += ".{} ".format(self.column_type)
-        #        if classes:
-        #            text += ".{}".format(" .".join(self.get_grid_values()))
-        return text
+        return text.strip()

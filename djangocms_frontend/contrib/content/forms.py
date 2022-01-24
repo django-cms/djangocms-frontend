@@ -29,12 +29,15 @@ class CodeForm(EntangledModelForm):
 
     code_content = forms.CharField(
         label=_("Code"),
+        initial="",
+        required=True,
         widget=forms.widgets.Textarea(attrs={"class": "js-ckeditor-use-selected-text"}),
     )
     code_type = forms.ChoiceField(
         label=_("Code type"),
         choices=CODE_TYPE_CHOICES,
         initial=CODE_TYPE_CHOICES[0][0],
+        required=True,
     )
     attributes = AttributesFormField()
 
@@ -59,6 +62,8 @@ class BlockquoteForm(EntangledModelForm):
 
     quote_content = forms.CharField(
         label=_("Quote"),
+        initial="",
+        required=True,
         widget=forms.Textarea(),
     )
     quote_origin = forms.CharField(
@@ -94,6 +99,8 @@ class FigureForm(EntangledModelForm):
 
     figure_caption = forms.CharField(
         label=_("Caption"),
+        initial="",
+        required=True,
     )
     figure_alignment = forms.ChoiceField(
         label=_("Alignment"),

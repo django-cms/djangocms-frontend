@@ -6,6 +6,10 @@ from easy_thumbnails.files import get_thumbnailer
 from entangled.utils import get_related_object
 
 from djangocms_frontend.contrib.link.models import GetLinkMixin
+from djangocms_frontend.contrib.picture.forms import (
+    RESPONSIVE_IMAGE_CHOICES,
+    get_templates,
+)
 from djangocms_frontend.models import FrontendUIItem
 
 # use golden ration as default (https://en.wikipedia.org/wiki/Golden_ratio)
@@ -63,6 +67,19 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
         proxy = True
 
     image_field = "picture"
+    default_configx = {
+        "external_picture": "",
+        "picture": {},
+        "alignment": "",
+        "picture_fluid": True,
+        "picture_rounded": False,
+        "picture_thumbnail": False,
+        "use_no_cropping": False,
+        "width": None,
+        "height": None,
+        "use_responsive_image": RESPONSIVE_IMAGE_CHOICES[0][0],
+        "template": get_templates()[0][0],
+    }
 
     @property
     def is_responsive_image(self):

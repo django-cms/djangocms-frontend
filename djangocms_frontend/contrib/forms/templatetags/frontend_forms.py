@@ -1,14 +1,18 @@
-import functools
-
 from django import template
+from django.template.loader import render_to_string
 from django.utils.html import mark_safe
+
+from djangocms_frontend.settings import FORM_TEMPLATE
 
 register = template.Library()
 
 try:
-    from crispy_forms.utils import render_crispy_form as render_form_implementation
     from crispy_forms.helper import FormHelper
+    from crispy_forms.utils import render_crispy_form as render_form_implementation
+
+    crispy_forms_installed = True
 except ImportError:
+    crispy_forms_installed = False
 
     def render_form_implementation(form, helper=None, context=None):
         return str(form)
@@ -18,16 +22,31 @@ except ImportError:
             self.form = form
 
 
-@register.simple_tag(takes_context=True)
-def render_form(context, form, helper=None):
-    """Joins a list of classes with an attributes field and returns all html attributes"""
-    if helper is None:
-        helper = getattr(form, "helper", None)
-    if helper is None:
-        helper = FormHelper(form)
-    helper.form_tag = False
-    helper.disable_csrf = True
-    return mark_safe(render_form_implementation(form, helper, None))
+@register.filter
+def add_placeholder(form):
+    """Adds placeholder based on a form field's title"""
+    for field_name, field in form.fields.items():
+        form.fields[field_name].widget.attrs["placeholder"] = form.fields[
+            field_name
+        ].label
+    return form
+
+
+@register.simple_tag()
+def render_form(form, **kwargs):
+    """Renders form either with crispy_forms if installed and form has helper or with
+    djangocms-frontend's means"""
+    options = getattr(form, "frontend_options", {})
+    if False and crispy_forms_installed:
+        helper = kwargs.pop("helper", None) or getattr(form, "helper", None)
+        if helper is None and options.get("crispy_form", False):
+            helper = FormHelper(form=form)
+        if helper is not None:
+            helper.form_tag = False
+            helper.disable_csrf = True
+            return mark_safe(render_form_implementation(form, helper, None))
+    template = kwargs.pop("template", FORM_TEMPLATE)
+    return render_to_string(template, {"form": form, **kwargs})
 
 
 default_attr = dict(
@@ -67,7 +86,7 @@ def attrs_for_widget(widget, item, additional_classes=None):
         if additional_classes:
             cls += " " + additional_classes
     else:
-        cls = (additional_classes or "")
+        cls = additional_classes or ""
     return {"class": cls}
 
 
@@ -80,7 +99,13 @@ def render_widget(context, form, form_field, **kwargs):
     floating_labels = "floating_labels" in options
     field_sep = options.get("field_sep", "mb-3")
     widget_attr = kwargs
-    widget_attr.update(attrs_for_widget(field.field.widget, "input"))
+    if form.is_bound:
+        add_classes = "is_invalid" if field.errors else "is_valid"
+    else:
+        add_classes = None
+    widget_attr.update(
+        attrs_for_widget(field.field.widget, "input", additional_classes=add_classes)
+    )
     label_attr = attrs_for_widget(field.field.widget, "label")
     if field.help_text:
         widget_attr.update({"aria-describedby": f"hints_{field.id_for_label}"})
@@ -95,12 +120,29 @@ def render_widget(context, form, form_field, **kwargs):
     label = field.label_tag(attrs=label_attr)
     widget = field.as_widget(attrs=widget_attr)
     input_type = getattr(field.field.widget, "input_type", None)
+    errors = "".join(
+        f'<div class="invalid-feedback">{error}</div>' for error in field.errors
+    )
     if floating_labels or input_type == "checkbox" or input_type == "select":
-        render = f'<div {div_attrs}>{widget}{label}{help_text}</div>'
+        render = f"<div {div_attrs}>{widget}{label}{errors}{help_text}</div>"
     else:
-        render = f'<div {div_attrs}>{label}{widget}{help_text}</div>'
-    return mark_safe(render)
+        render = f"<div {div_attrs}>{label}{widget}{errors}{help_text}</div>"
 
+    #     if field.errors:
+    #
+    #         { %
+    #         for error in field.errors %}
+    #         < div
+    #
+    #         class ="invalid-feedback" >
+    #
+    #         {{error}}
+    #     < / div >
+    #
+    #
+    # { % endfor %}
+
+    return mark_safe(render)
 
 
 @register.filter_function
@@ -112,4 +154,3 @@ def get_fieldset(form):
     elif hasattr(form, "get_fieldsets") and callable(form.get_fieldsets):
         return form.get_fieldsets()
     return ((None, {"fields": [field.name for field in form.visible_fields()]}),)
-

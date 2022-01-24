@@ -1,23 +1,21 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.link.cms_plugins import (
-    LinkPlugin,
-)
+from djangocms_frontend.contrib.link.cms_plugins import LinkPlugin
 
 from ..fixtures import TestFixture
 
 
 class LinkPluginTestCase(TestFixture, CMSTestCase):
-
     def test_plugin(self):
-        plugin = add_plugin(
+        add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
-            external_link="https://www.divio.com",
+            config=dict(
+                external_link="https://www.divio.com",
+            ),
         )
-        plugin.full_clean()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -26,54 +24,64 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, 'href="https://www.divio.com"')
 
         # add more options
-        plugin = add_plugin(
+        add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
-            external_link="https://www.divio.com",
-            link_context="primary",
-            link_size="btn-sm",
-            link_block=True,
+            config=dict(
+                external_link="https://www.divio.com",
+                link_context="primary",
+                link_size="btn-sm",
+                link_block=True,
+            ),
         )
-        plugin.full_clean()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'class="text-primary btn-sm btn-block"')
+        self.assertContains(response, "text-primary")
+        self.assertContains(response, "btn-sm")
+        self.assertContains(response, "btn-block")
 
         # alternate version for link_type
-        plugin = add_plugin(
+        add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
-            external_link="https://www.divio.com",
-            link_context="primary",
-            link_type="btn",
+            config=dict(
+                external_link="https://www.divio.com",
+                link_context="primary",
+                link_type="btn",
+            ),
         )
-        plugin.full_clean()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'class="btn btn-primary"')
+        self.assertContains(response, "btn-primary")
 
         # alternate version using link_outline
-        plugin = add_plugin(
+        add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
-            external_link="https://www.divio.com",
-            link_context="primary",
-            link_type="btn",
-            link_outline=True,
+            config=dict(
+                external_link="https://www.divio.com",
+                link_context="primary",
+                link_type="btn",
+                link_outline=True,
+            ),
         )
-        plugin.full_clean()
+
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'class="btn btn-outline-primary"')
+        self.assertTrue(
+            ('class="btn btn-outline-primary"' in response.content.decode("utf-8"))
+            or ('class="btn-outline-primary btn"' in response.content.decode("utf-8")),
+            f'Cound not find class="btn btn-outline-primary" in {response.content.decode("utf-8")}',
+        )

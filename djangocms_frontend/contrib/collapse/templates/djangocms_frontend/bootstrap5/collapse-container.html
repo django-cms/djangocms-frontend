@@ -4,7 +4,7 @@
     id="{{ instance.container_identifier }}"
     role="tabpanel"
     data-bs-parent="#parent-{{ parent.pk|safe }}"
-    aria-labelledby="{{ instance.container_identifier }}"
+    aria-labelledby="trigger-{{ instance.container_identifier }}"
     >
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}

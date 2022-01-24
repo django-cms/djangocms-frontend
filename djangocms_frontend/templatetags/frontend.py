@@ -12,7 +12,7 @@ def add_class(attribute_field, *add_classes):
         additional_classes.update(
             classes.split() if isinstance(classes, str) else classes
         )
-    attrs = [""]
+    attrs = []
     if attribute_field:
         for key, val in attribute_field.items():
             if key.lower() == "class":
@@ -23,6 +23,6 @@ def add_class(attribute_field, *add_classes):
                 )
             else:
                 attrs.append("{key}".format(key=key))
-    if additional_classes and "class" not in attribute_field:
+    if additional_classes and (not attribute_field or "class" not in attribute_field):
         attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))

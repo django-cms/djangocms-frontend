@@ -1,16 +1,14 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.picture.cms_plugins import (
-    ImagePlugin,
-)
+from djangocms_frontend.contrib.picture.cms_plugins import ImagePlugin
+from djangocms_frontend.contrib.picture.forms import PictureForm
 
 from ..fixtures import TestFixture
 from ..helpers import get_filer_image
 
 
 class PicturePluginTestCase(TestFixture, CMSTestCase):
-
     def setUp(self):
         super().setUp()
         self.image = get_filer_image()
@@ -24,11 +22,11 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=ImagePlugin.__name__,
             language=self.language,
-            picture=self.image,
+            config={"picture": {"pk": self.image.id, "model": "filer.Image"}},
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(PictureForm)
+        plugin.save()
         self.page.publish(self.language)
-
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
@@ -39,15 +37,22 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=ImagePlugin.__name__,
             language=self.language,
-            picture=self.image,
-            picture_fluid=False,
-            picture_rounded=True,
-            picture_thumbnail=True,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "picture_fluid": False,
+                "picture_rounded": True,
+                "picture_thumbnail": True,
+            },
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(PictureForm)
+        plugin.save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'class="rounded img-thumbnail"')
+        self.assertTrue(
+            ('class="img-thumbnail rounded"' in response.content.decode("utf-8"))
+            or ('class="rounded img-thumbnail"' in response.content.decode("utf-8")),
+            f'class="img-thumbnail rounded" not found in {response.content.decode("utf-8")}',
+        )

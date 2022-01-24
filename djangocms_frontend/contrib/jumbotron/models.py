@@ -12,6 +12,8 @@ class Jumbotron(FrontendUIItem):
     class Meta:
         proxy = True
 
+    default_config = dict(jumbotron_fluid=False)
+
     def get_short_description(self):
         text = ""
         if self.jumbotron_fluid:

@@ -15,11 +15,7 @@ class GetLinkMixin:
     def get_link(self):
         if getattr(self, "internal_link", None):
             try:
-                app_label, model = self.internal_link["model"].rsplit(".", 1)
-                object_type = ContentType.objects.get(
-                    app_label=app_label, model=model
-                ).model_class()
-                ref_page = object_type.objects.get(id=int(self.internal_link["pk"]))
+                ref_page = get_related_object(self.config, "internal_link")
                 link = ref_page.get_absolute_url()
             except (
                 KeyError,
@@ -93,6 +89,14 @@ class Link(GetLinkMixin, FrontendUIItem):
 
     class Meta:
         proxy = True
+
+    default_config = dict(
+        link_context="",
+        link_type="link",
+        link_size="",
+        link_block="",
+        link_outline=False,
+    )
 
     def get_short_description(self):
         if self.name and self.get_link():

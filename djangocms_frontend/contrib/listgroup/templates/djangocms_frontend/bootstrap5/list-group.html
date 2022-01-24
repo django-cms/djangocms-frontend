@@ -2,6 +2,6 @@
 
 <{{instance.tag_type }} {% add_class instance.attributes add_classes %}>
 {% for plugin in instance.child_plugin_instances %}
-    {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
 {% endfor %}
 </{{instance.tag_type }}>

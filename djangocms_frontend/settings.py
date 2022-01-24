@@ -19,6 +19,12 @@ ADMIN_CSS = getattr(
     {},
 )
 
+FORM_TEMPLATE = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_FORM_TEMPLATE",
+    "djangocms_frontend/bootstrap5/render/form.html",
+)
+
 
 HEADER_CHOICES = getattr(
     settings,
@@ -39,7 +45,7 @@ ALIGN_CHOICES = (
 )
 
 LINK_TEMPLATE_CHOICES = [
-    ('default', _('Default')),
+    ("default", _("Default")),
 ]
 
 
@@ -95,18 +101,6 @@ DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
 COLOR_STYLE_CHOICES = framework_settings.COLOR_STYLE_CHOICES
 COLOR_CODES = framework_settings.COLOR_CODES
 
-
-def preparator_factory(framework):
-    try:
-        fr_settings = importlib.import_module(framework)
-        if hasattr(fr_settings, "prepare_instance"):
-            return fr_settings.prepare_instance
-    except ModuleNotFoundError:
-        pass
-    return lambda *args, **kwargs: None
-
-
-prepare_instance = preparator_factory(framework)
 
 theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"
