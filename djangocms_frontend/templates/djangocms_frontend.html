@@ -1,0 +1,38 @@
+<!DOCTYPE html>{% load cms_tags menu_tags sekizai_tags static i18n meta %}{% spaceless %}
+    <html lang="{{ LANGUAGE_CODE }}">
+        <head {% meta_namespaces %}>
+            <meta charset="utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            {% block meta %}
+                <meta name="description" content="{% page_attribute meta_description %}"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:title" content="{% page_attribute "page_title" %}"/>
+                <meta property="og:description" content="{% page_attribute meta_description %}"/>
+            {% endblock meta %}
+            {% block canonical_url %}
+                <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
+                <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+            {% endblock canonical_url %}
+            {% block fb_meta %}{% endblock fb_meta %}
+            {% block title %}{% endblock %}
+            {% block base_css %}{% endblock %}
+{% endspaceless %}{% render_block 'css' %}{% spaceless %}
+    {% block page_head %}{% endblock %}
+    </head>
+    <body {% block body_attrs %}{% endblock %}>
+{% endspaceless %}{% cms_toolbar %}{% spaceless %}
+    {% block navbar %}{% endblock %}
+    {% block content %}
+        <section>
+            {% placeholder "Page Content" %}
+        </section>&nbsp;
+        <footer>
+            {% static_placeholder "Footer" %}
+        </footer>
+    {% endblock content %}
+    {% block base_js %}{% endblock %}
+{% endspaceless %}{% render_block 'js' %}{% spaceless %}
+    {% block bottom_css %}<link rel="stylesheet" href="{% static "css/all.min.css" %}">{% endblock %}
+    </body>
+    </html>{% endspaceless %}
