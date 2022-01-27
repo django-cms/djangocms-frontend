@@ -1,0 +1,18 @@
+{% extends "djangocms_frontend.html" %}{% load cms_tags menu_tags%}
+{% block base_css %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">{% endblock %}
+{% block base_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+    <script>$(document).foundation();</script>
+{% endblock %}
+{% block navbar %}
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">{% block site_title %}{% endblock %}</li>
+                {% show_menu 0 100 0 100 'foundation/menu.html' %}
+            </ul>
+        </div>
+        {% block searchbar %}{% endblock %}
+    </div>
+{% endblock %}

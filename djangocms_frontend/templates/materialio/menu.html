@@ -1,0 +1,8 @@
+{% load i18n menu_tags cache %}{% spaceless %}
+    {% for child in children %}
+        <a class="mdc-list-item mdc-list-item--activated" href="{{ child.get_absolute_url }}" aria-current="page">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__text">{{ child.get_menu_title }}</span>
+        </a>
+    {% endfor %}
+{% endspaceless %}
