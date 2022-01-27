@@ -1,0 +1,6 @@
+{% load cms_tags frontend %}{% spaceless %}
+    <{{ instance.tag_type }} {% add_class instance.attributes add_classes %}{% if instance.container_transparency %} style="opacity: {{ instance.container_transparency }}%"{% endif %}>
+    {% for plugin in instance.child_plugin_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
+    </{{ instance.tag_type }}>{% endspaceless %}

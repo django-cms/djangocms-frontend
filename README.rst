@@ -2,7 +2,7 @@
 django CMS Frontend
 ===================
 
-|pypi| |build| |coverage|
+|pypi| |coverage|
 
 **django CMS Frontend** is a blugin bundle based on
 `djangocms_bootstrap5 <https://github.com/gl-agnx/djangocms-bootstrap5>`_.
@@ -14,14 +14,14 @@ Key features
 
 * **Separation of plugins from css framework**, i.e., no need to rebuild you
   site's plugin tree if css framework is changed in the future, e.g.,
-  from Bootstrap 5 to a future version
+  from Bootstrap 5 to a future version.
 
 * **New link plugin** allowing to link to internal pages provided by other applications,
   such as `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-* **Nice and well-arranged admin frontend** of `djangocms_bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_
+* **Nice and well-arranged admin frontend** of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_
 
-* Management command to **migrate from djangocms_bootstrap4**
+* Management command to **migrate from djangocms-bootstrap4**. This command automatically migrates all djangocms-bootstrap4 plugins to djangocms-frontend.
 
 * **Extensible** within the project and with separate project (e.g., a theme app)
 
@@ -51,11 +51,11 @@ Feedback
 ========
 
 .. note::
-    This is currently a proof of concept project. The project is not tested
-    yet (in fact, tests do not run).
+    This is currently a proof of concept project. Tests, e.g., do not reach a
+    sufficient coverage yet.
 
 This project is in a early stage. All feedback is welcome! Please mail me at
-fsbraun(at)gmx.de
+fsbraun(at)gmx.de All contributions are welcome.
 
 .. Contributing
 .. ============
@@ -175,33 +175,36 @@ empty database tables.
 Settings
 ~~~~~~~~
 
-There are various settings possible on django CMS Bootstrap 5, to restrict them
-for now only the following can be changed::
+Available settings will be revised. For now only the following can be changed::
 
-    DJANGOCMS_BOOTSTRAP5_TAG_CHOICES = ['div', 'section', 'article', 'header', 'footer', 'aside']
+    DJANGOCMS_FRONTEND_TAG_CHOICES = ['div', 'section', 'article', 'header', 'footer', 'aside']
 
-    DJANGOCMS_BOOTSTRAP5_CAROUSEL_TEMPLATES = (
+    DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES = (
         ('default', _('Default')),
     )
 
-    DJANGOCMS_BOOTSTRAP5_GRID_SIZE = 12
-    DJANGOCMS_BOOTSTRAP5_GRID_CONTAINERS = (
+    DJANGOCMS_FRONTEND_GRID_SIZE = 12
+    DJANGOCMS_FRONTEND_GRID_CONTAINERS = (
         ('container', _('Container')),
         ('container-fluid', _('Fluid container')),
+        ("container-sm", _("SM Container")),
+        ("container-md", _("MD Container")),
+        ("container-lg", _("LG Container")),
+        ("container-xl", _("XL Container")),
     )
-    DJANGOCMS_BOOTSTRAP5_GRID_COLUMN_CHOICES = (
+    DJANGOCMS_FRONTEND_GRID_COLUMN_CHOICES = (
         ('col', _('Column')),
         ('w-100', _('Break')),
         ('', _('Empty'))
     )
 
-    DJANGOCMS_BOOTSTRAP5_USE_ICONS = True
+    DJANGOCMS_FRONTEND_USE_ICONS = True
 
-    DJANGOCMS_BOOTSTRAP5_TAB_TEMPLATES = (
+    DJANGOCMS_FRONTEND_TAB_TEMPLATES = (
         ('default', _('Default')),
     )
 
-    DJANGOCMS_BOOTSTRAP5_SPACER_SIZES = (
+    DJANGOCMS_FRONTEND_SPACER_SIZES = (
         ('0', '* 0'),
         ('1', '* .25'),
         ('2', '* .5'),
@@ -210,7 +213,7 @@ for now only the following can be changed::
         ('5', '* 3'),
     )
 
-    DJANGOCMS_BOOTSTRAP5_CAROUSEL_ASPECT_RATIOS = (
+    DJANGOCMS_FRONTEND_CAROUSEL_ASPECT_RATIOS = (
         (16, 9),
     )
 
@@ -245,14 +248,12 @@ To run the frontend make sure to use **node 10.x**.
 
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-bootstrap5.svg
-    :target: http://badge.fury.io/py/djangocms-bootstrap5
-.. |build| image:: https://travis-ci.org/divio/djangocms-bootstrap5.svg?branch=master
-    :target: https://travis-ci.org/divio/djangocms-bootstrap5
+    :target: http://badge.fury.io/py/djangocms-frontend
 .. |coverage| image:: https://codecov.io/gh/divio/djangocms-bootstrap5/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/divio/djangocms-bootstrap5
+    :target: https://codecov.io/gh/fsbraun/djangocms-frontend
 
 .. |python| image:: https://img.shields.io/badge/python-3.5+-blue.svg
-    :target: https://pypi.org/project/djangocms-bootstrap5/
+    :target: https://pypi.org/project/djangocms-frontend/
 .. |django| image:: https://img.shields.io/badge/django-2.2,%203.0,%203.1,%203.2-blue.svg
     :target: https://www.djangoproject.com/
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.7%2B-blue.svg

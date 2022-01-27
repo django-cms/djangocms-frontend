@@ -110,4 +110,7 @@
         };
     </script>
 {% endspaceless %}{% endaddtoblock %}
-{% addtoblock 'js' %}<script>djangocmsfrontend_form("form#form{{instance.id|safe}}{{form.slug}}");</script>{% endaddtoblock %}
+{% addtoblock 'js' %}<script>
+    jQuery(document).ready(function() {
+        djangocmsfrontend_form("form#form{{instance.id|safe}}{{form.slug}}");
+    });</script>{% endaddtoblock %}
