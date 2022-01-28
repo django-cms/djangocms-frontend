@@ -235,7 +235,8 @@ def p001_left_right_migration(obj, new_obj):
 
 def x002_replace_card_deck(obj, new_obj):
     if obj.card_type == "card-deck":
-        print("Detected bootstrap v4 card-deck")
+        print("* Detected bootstrap v4 card-deck which is not part of bootstrap5")
+        print("  Replaced it with grid tools: 'row row-cols'")
         new_obj.config["card_type"] = "row"
     classes = obj.attributes.get("class", "").split()
     if "h-100" in classes:
@@ -245,14 +246,14 @@ def x002_replace_card_deck(obj, new_obj):
 
 
 def a001_alignment(obj, new_obj, field):
-    if field in new_obj["config"] and new_obj["config"][field]:
-        new_obj["config"][field].replace("text-left", "start")
-        new_obj["config"][field].replace("text-center", "center")
-        new_obj["config"][field].replace("text-right", "end")
+    if field in new_obj.config and new_obj.config[field]:
+        new_obj.config[field].replace("text-left", "start")
+        new_obj.config[field].replace("text-center", "center")
+        new_obj.config[field].replace("text-right", "end")
 
 
 def g001_col_text_alignment(obj, new_obj):
-    classes = new_obj["config"]["attributes"].get("class", "").split()
+    classes = new_obj.config["attributes"].get("class", "").split()
     if "text-left" in classes or "text-start" in classes:
         classes.remove("text-left")
         classes.remove("text-start")
