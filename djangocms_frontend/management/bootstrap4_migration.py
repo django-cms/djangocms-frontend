@@ -265,7 +265,10 @@ def g001_col_text_alignment(obj, new_obj):
         classes.remove("text-right")
         classes.remove("text-end")
         new_obj.config["text_alignment"] = "end"
-    new_obj.config["attributes"]["class"] = " ".join(classes)
+    if classes:
+        new_obj.config["attributes"]["class"] = " ".join(classes)
+    elif "class" in new_obj.config:
+        del new_obj.config["class"]
 
 
 data_migration = {

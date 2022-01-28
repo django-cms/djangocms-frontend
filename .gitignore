@@ -27,3 +27,4 @@ npm-debug.log
 package-lock.json
 
 local.sqlite
+/docs/_build/

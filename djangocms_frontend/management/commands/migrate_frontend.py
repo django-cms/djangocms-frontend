@@ -1,6 +1,5 @@
 from django.apps import apps
-from django.contrib.contenttypes.models import ContentType
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db import connection, models
 
 from djangocms_frontend.management import bootstrap4_migration, styled_link_migration
@@ -12,11 +11,13 @@ plugin_migrations = {}
 data_migration = {}
 
 # Bootstrap 4
-plugin_migrations.update(bootstrap4_migration.plugin_migrations)
-data_migration.update(bootstrap4_migration.data_migration)
+if "djangocms_bootstrap4" in apps.all_models:
+    plugin_migrations.update(bootstrap4_migration.plugin_migrations)
+    data_migration.update(bootstrap4_migration.data_migration)
 # Styled link
-plugin_migrations.update(styled_link_migration.plugin_migrations)
-data_migration.update(styled_link_migration.data_migration)
+if "djangocms_styledlink" in apps.all_models:
+    plugin_migrations.update(styled_link_migration.plugin_migrations)
+    data_migration.update(styled_link_migration.data_migration)
 
 
 def migrate_to_djangocms_frontend(apps, schema_editor):
