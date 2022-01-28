@@ -57,14 +57,16 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
-                "create",
                 "vertical_alignment",
                 "horizontal_alignment",
                 "gutters",
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
+        untangled_fields = (
+            "tag_type",
+            "create",
+        )
 
     create = forms.IntegerField(
         label=_("Create columns"),

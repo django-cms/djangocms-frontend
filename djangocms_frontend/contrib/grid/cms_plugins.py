@@ -93,9 +93,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        for x in range(
-            data["config"]["create"] if data["config"]["create"] is not None else 0
-        ):
+        for x in range(data["create"] if data["create"] is not None else 0):
             extra = dict(column_type=GRID_COLUMN_CHOICES[0][0], column_alignment=None)
             for size in settings.DEVICE_SIZES:
                 extra[f"{size}_col"] = data.get("create_{}_col".format(size))
