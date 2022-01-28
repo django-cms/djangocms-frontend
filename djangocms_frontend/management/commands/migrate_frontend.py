@@ -31,6 +31,7 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
             for obj in OldPluginModel.objects.all():
                 #
                 new_obj = NewPluginModel()
+                new_obj_fields = [field.name for field in new_obj._meta.get_fields()]
                 new_obj.id = obj.id
                 new_obj.placeholder = obj.placeholder
                 new_obj.parent = obj.parent
@@ -61,25 +62,17 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                         )
                         if value == "":
                             value = None
-                        if hasattr(new_obj, new_field):
+                        if new_field in new_obj_fields:
                             setattr(new_obj, new_field, value)
                         else:
                             if isinstance(value, models.Model):  # related field
-                                if (
-                                    new_field == "internal_link" and False
-                                ):  # link convention
-                                    type_class = ContentType.objects.get_for_model(
-                                        value.__class__
-                                    )
-                                    value = f"{type_class.id}-{value.id}"
-                                else:  # django-entangled convention
-                                    value = {
-                                        "model": "{}.{}".format(
-                                            value._meta.app_label,
-                                            value._meta.model_name,
-                                        ),
-                                        "pk": value.pk,
-                                    }
+                                value = {
+                                    "model": "{}.{}".format(
+                                        value._meta.app_label,
+                                        value._meta.model_name,
+                                    ),
+                                    "pk": value.pk,
+                                }
                             elif isinstance(
                                 value, models.QuerySet
                             ):  # related many field

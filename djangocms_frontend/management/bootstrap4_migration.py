@@ -114,8 +114,8 @@ plugin_migrations = {
         "anchor",
         "mailto",
         "phone",
-        "target -> link_target",
         "link_type",
+        "target -> link_target",
         "link_context",
         "link_size",
         "link_outline",
@@ -257,14 +257,14 @@ def g001_col_text_alignment(obj, new_obj):
     if "text-left" in classes or "text-start" in classes:
         classes.remove("text-left")
         classes.remove("text-start")
-        new_obj.config["text_alignment"] = "text-start"
+        new_obj.config["text_alignment"] = "start"
     if "text-center" in classes:
         classes.remove("text-center")
-        new_obj.config["text_alignment"] = "text-center"
+        new_obj.config["text_alignment"] = "center"
     if "text-right" in classes or "text-end" in classes:
         classes.remove("text-right")
         classes.remove("text-end")
-        new_obj.config["text_alignment"] = "text-end"
+        new_obj.config["text_alignment"] = "end"
     new_obj.config["attributes"]["class"] = " ".join(classes)
 
 
