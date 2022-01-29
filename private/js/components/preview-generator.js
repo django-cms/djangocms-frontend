@@ -165,8 +165,8 @@ export default class PreviewGenerator {
                 } = iconSet;
 
                 if (iconSet.svg) {
-                    $(`.js-icon-${left ? 'left' : 'right'}`).html(`
-                        <span class="${iconClass} ${icon}">
+                    $(`.js-icon-${left ? 'left' : 'right'}`).html(`<span></span>`).find("span")
+                        .addClass(iconClass).addClass(icon).html(`)
                             <svg role="presentation">
                                 <use></use>
                             </svg>
