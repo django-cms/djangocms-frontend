@@ -9,8 +9,6 @@ REQUIREMENTS = [
     "djangocms-attributes-field>=1",
     "djangocms-text-ckeditor>=3.1.0",
     "djangocms-icon>=1.4.0",
-    "djangocms-link>=2.5.0",
-    "djangocms-picture>=2.3.0",
     "django-select2",
     "django-entangled>=0.4.0",
 ]
@@ -49,7 +47,7 @@ setup(
     version=__version__,
     author="fsbraun",
     author_email="fsbraun@gmx.de",
-    url="https://github.com/divio/djangocms-bootstrap5",
+    url="https://github.com/fsbraun/djangocms-frontend",
     license="BSD-3-Clause",
     description="Adds abstract User Interface items as plugins.",
     long_description=open("README.rst").read(),
@@ -58,5 +56,5 @@ setup(
     zip_safe=False,
     install_requires=REQUIREMENTS,
     classifiers=CLASSIFIERS,
-    test_suite="tests.settings.run",
+    test_suite="run_tests",
 )

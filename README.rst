@@ -15,6 +15,8 @@ the currently used frontend framework such as Bootstrap, or its specific version
 Key features
 ============
 
+* Support of `Bootstrap 5 <https://getbootstrap.com>`_.
+
 * **Separation of plugins from css framework**, i.e., no need to rebuild you
   site's plugin tree if css framework is changed in the future, e.g.,
   from Bootstrap 5 to a future version.
