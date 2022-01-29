@@ -1,4 +1,7 @@
-from functools import cached_property
+try:
+    from functools import cached_property
+except ImportError:  # Only available since Pyhton 3.8
+    cached_property = property
 
 from django.conf import settings
 from django.utils.translation import gettext as _

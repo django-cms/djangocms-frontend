@@ -1,4 +1,7 @@
-from functools import cached_property
+try:
+    from functools import cached_property
+except ImportError:  # Only available since Pyhton 3.8
+    cached_property = property
 
 from django.utils.translation import ungettext
 from entangled.utils import get_related_object
