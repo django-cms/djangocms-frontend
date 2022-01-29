@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-20 22:54+0100\n"
+"POT-Creation-Date: 2022-01-29 17:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,32 +29,33 @@ msgstr ""
 #: contrib/collapse/cms_plugins.py:20 contrib/collapse/cms_plugins.py:58
 #: contrib/collapse/cms_plugins.py:93 contrib/content/cms_plugins.py:20
 #: contrib/content/cms_plugins.py:49 contrib/content/cms_plugins.py:78
-#: contrib/grid/cms_plugins.py:22 contrib/grid/cms_plugins.py:52
-#: contrib/grid/cms_plugins.py:126 contrib/jumbotron/cms_plugins.py:20
-#: contrib/link/cms_plugins.py:54 contrib/listgroup/cms_plugins.py:20
-#: contrib/listgroup/cms_plugins.py:52 contrib/media/cms_plugins.py:21
-#: contrib/media/cms_plugins.py:50 contrib/picture/cms_plugins.py:23
-#: contrib/tabs/cms_plugins.py:24 contrib/tabs/cms_plugins.py:66
-#: contrib/utilities/cms_plugins.py:21 contrib/utilities/cms_plugins.py:59
-#: contrib/utilities/cms_plugins.py:70 contrib/utilities/cms_plugins.py:136
+#: contrib/forms/cms_plugins.py:241 contrib/grid/cms_plugins.py:22
+#: contrib/grid/cms_plugins.py:52 contrib/grid/cms_plugins.py:124
+#: contrib/image/cms_plugins.py:23 contrib/jumbotron/cms_plugins.py:20
+#: contrib/link/cms_plugins.py:53 contrib/listgroup/cms_plugins.py:20
+#: contrib/listgroup/cms_plugins.py:52 contrib/media/cms_plugins.py:20
+#: contrib/media/cms_plugins.py:49 contrib/tabs/cms_plugins.py:23
+#: contrib/tabs/cms_plugins.py:65 contrib/utilities/cms_plugins.py:21
+#: contrib/utilities/cms_plugins.py:59 contrib/utilities/cms_plugins.py:70
+#: contrib/utilities/cms_plugins.py:136
 msgid "Interface"
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:41 contrib/accordion/cms_plugins.py:81
 #: contrib/alert/cms_plugins.py:38 contrib/badge/cms_plugins.py:38
-#: contrib/card/cms_plugins.py:52 contrib/card/cms_plugins.py:104
+#: contrib/card/cms_plugins.py:52 contrib/card/cms_plugins.py:115
 #: contrib/carousel/cms_plugins.py:42 contrib/carousel/cms_plugins.py:96
 #: contrib/collapse/cms_plugins.py:37 contrib/collapse/cms_plugins.py:73
 #: contrib/collapse/cms_plugins.py:108 contrib/content/cms_plugins.py:37
 #: contrib/content/cms_plugins.py:66 contrib/content/cms_plugins.py:95
-#: contrib/grid/cms_plugins.py:32 contrib/grid/cms_plugins.py:79
-#: contrib/grid/cms_plugins.py:163 contrib/jumbotron/cms_plugins.py:30
-#: contrib/link/cms_plugins.py:62 contrib/listgroup/cms_plugins.py:32
-#: contrib/listgroup/cms_plugins.py:71 contrib/media/cms_plugins.py:30
-#: contrib/media/cms_plugins.py:60 contrib/picture/cms_plugins.py:42
-#: contrib/tabs/cms_plugins.py:42 contrib/tabs/cms_plugins.py:76
-#: contrib/utilities/cms_plugins.py:42 contrib/utilities/cms_plugins.py:88
-#: contrib/utilities/cms_plugins.py:146
+#: contrib/forms/cms_plugins.py:262 contrib/grid/cms_plugins.py:32
+#: contrib/grid/cms_plugins.py:79 contrib/grid/cms_plugins.py:161
+#: contrib/image/cms_plugins.py:42 contrib/jumbotron/cms_plugins.py:30
+#: contrib/link/cms_plugins.py:61 contrib/listgroup/cms_plugins.py:32
+#: contrib/listgroup/cms_plugins.py:71 contrib/media/cms_plugins.py:29
+#: contrib/media/cms_plugins.py:59 contrib/tabs/cms_plugins.py:41
+#: contrib/tabs/cms_plugins.py:75 contrib/utilities/cms_plugins.py:42
+#: contrib/utilities/cms_plugins.py:88 contrib/utilities/cms_plugins.py:146
 msgid "Advanced settings"
 msgstr ""
 
@@ -97,36 +98,16 @@ msgid "Alert"
 msgstr ""
 
 #: contrib/alert/forms.py:32 contrib/badge/forms.py:34
-#: contrib/link/forms.py:315 contrib/listgroup/forms.py:55
+#: contrib/link/forms.py:323 contrib/listgroup/forms.py:55
 msgid "Context"
 msgstr ""
 
-#: contrib/alert/forms.py:40
+#: contrib/alert/forms.py:38
 msgid "Dismissible"
 msgstr ""
 
-#: contrib/alert/forms.py:43
+#: contrib/alert/forms.py:41
 msgid "Allows the alert to be closed."
-msgstr ""
-
-#: contrib/alert/frameworks/bootstrap5.py:32
-msgid "Icon"
-msgstr ""
-
-#: contrib/alert/frameworks/bootstrap5.py:36
-msgid "Check"
-msgstr ""
-
-#: contrib/alert/frameworks/bootstrap5.py:37
-msgid "Information"
-msgstr ""
-
-#: contrib/alert/frameworks/bootstrap5.py:38
-msgid "Exclamation"
-msgstr ""
-
-#: contrib/alert/frameworks/bootstrap5.py:40
-msgid "Adds an icon at teh left of the alert."
 msgstr ""
 
 #: contrib/alert/templates/djangocms_frontend/bootstrap5/alert.html:4
@@ -165,15 +146,15 @@ msgstr ""
 msgid "Grid cards"
 msgstr ""
 
-#: contrib/card/constants.py:10 settings.py:29
+#: contrib/card/constants.py:10 settings.py:42
 msgid "Left"
 msgstr ""
 
-#: contrib/card/constants.py:11 settings.py:30
+#: contrib/card/constants.py:11 settings.py:43
 msgid "Center"
 msgstr ""
 
-#: contrib/card/constants.py:12 settings.py:31
+#: contrib/card/constants.py:12 settings.py:44
 msgid "Right"
 msgstr ""
 
@@ -197,47 +178,51 @@ msgstr ""
 msgid "White"
 msgstr ""
 
-#: contrib/card/forms.py:50
+#: contrib/card/forms.py:51
 msgid "Card type"
 msgstr ""
 
-#: contrib/card/forms.py:55
+#: contrib/card/forms.py:56 contrib/card/forms.py:113
 msgid "Background context"
 msgstr ""
 
-#: contrib/card/forms.py:61 contrib/content/forms.py:70
-#: contrib/content/forms.py:99 contrib/picture/forms.py:155
+#: contrib/card/forms.py:62 contrib/content/forms.py:75
+#: contrib/content/forms.py:106 contrib/image/forms.py:155
 #: contrib/tabs/forms.py:47
 msgid "Alignment"
 msgstr ""
 
-#: contrib/card/forms.py:66 contrib/link/forms.py:326
+#: contrib/card/forms.py:67 contrib/link/forms.py:336
 msgid "Outline"
 msgstr ""
 
-#: contrib/card/forms.py:69
+#: contrib/card/forms.py:70
 msgid "Uses the border context instead of the background."
 msgstr ""
 
-#: contrib/card/forms.py:72
+#: contrib/card/forms.py:73
 msgid "Text context"
 msgstr ""
 
-#: contrib/card/forms.py:77
+#: contrib/card/forms.py:78
 msgid "Full height"
 msgstr ""
 
-#: contrib/card/forms.py:81
+#: contrib/card/forms.py:82
 msgid ""
 "If checked cards in one row will automatically extend to the full row height."
 msgstr ""
 
-#: contrib/card/forms.py:104
+#: contrib/card/forms.py:107
 msgid "Inner type"
 msgstr ""
 
-#: contrib/card/forms.py:107
+#: contrib/card/forms.py:110
 msgid "Define the structure of the plugin."
+msgstr ""
+
+#: contrib/card/forms.py:119 contrib/grid/forms.py:155
+msgid "Content alignment"
 msgstr ""
 
 #: contrib/carousel/cms_plugins.py:22
@@ -248,18 +233,18 @@ msgstr ""
 msgid "Carousel slide"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:85 contrib/link/cms_plugins.py:33
-#: contrib/picture/cms_plugins.py:56
+#: contrib/carousel/cms_plugins.py:85 contrib/image/cms_plugins.py:56
+#: contrib/link/cms_plugins.py:32
 msgid "Link settings"
 msgstr ""
 
-#: contrib/carousel/constants.py:19 contrib/link/forms.py:28
-#: contrib/picture/forms.py:56 contrib/tabs/constants.py:23
+#: contrib/carousel/constants.py:19 contrib/image/forms.py:56
+#: contrib/link/forms.py:30 contrib/tabs/constants.py:23 settings.py:48
 msgid "Default"
 msgstr ""
 
-#: contrib/carousel/forms.py:47 contrib/link/forms.py:303
-#: contrib/picture/forms.py:119 contrib/tabs/forms.py:36
+#: contrib/carousel/forms.py:47 contrib/image/forms.py:119
+#: contrib/link/forms.py:311 contrib/tabs/forms.py:36
 msgid "Template"
 msgstr ""
 
@@ -267,7 +252,7 @@ msgstr ""
 msgid "This is the template that will be used for the component."
 msgstr ""
 
-#: contrib/carousel/forms.py:53 contrib/carousel/models.py:25
+#: contrib/carousel/forms.py:53 contrib/carousel/models.py:23
 msgid "Interval"
 msgstr ""
 
@@ -277,7 +262,7 @@ msgid ""
 "carousel will not automatically cycle."
 msgstr ""
 
-#: contrib/carousel/forms.py:61 contrib/carousel/models.py:26
+#: contrib/carousel/forms.py:61 contrib/carousel/models.py:24
 msgid "Controls"
 msgstr ""
 
@@ -285,7 +270,7 @@ msgstr ""
 msgid "Adding in the previous and next controls."
 msgstr ""
 
-#: contrib/carousel/forms.py:67 contrib/carousel/models.py:27
+#: contrib/carousel/forms.py:67 contrib/carousel/models.py:25
 msgid "Indicators"
 msgstr ""
 
@@ -293,7 +278,7 @@ msgstr ""
 msgid "Adding in the indicators to the carousel."
 msgstr ""
 
-#: contrib/carousel/forms.py:73 contrib/carousel/models.py:28
+#: contrib/carousel/forms.py:73 contrib/carousel/models.py:26
 msgid "Keyboard"
 msgstr ""
 
@@ -301,7 +286,7 @@ msgstr ""
 msgid "Whether the carousel should react to keyboard events."
 msgstr ""
 
-#: contrib/carousel/forms.py:79 contrib/carousel/models.py:29
+#: contrib/carousel/forms.py:79 contrib/carousel/models.py:27
 msgid "Pause"
 msgstr ""
 
@@ -312,7 +297,7 @@ msgid ""
 "\", hovering over the carousel won't pause it."
 msgstr ""
 
-#: contrib/carousel/forms.py:90 contrib/carousel/models.py:30
+#: contrib/carousel/forms.py:90 contrib/carousel/models.py:28
 msgid "Ride"
 msgstr ""
 
@@ -322,7 +307,7 @@ msgid ""
 "\"carousel\", autoplays the carousel on load."
 msgstr ""
 
-#: contrib/carousel/forms.py:99 contrib/carousel/models.py:31
+#: contrib/carousel/forms.py:99 contrib/carousel/models.py:29
 msgid "Wrap"
 msgstr ""
 
@@ -343,7 +328,7 @@ msgstr ""
 msgid "Slide image"
 msgstr ""
 
-#: contrib/carousel/forms.py:154
+#: contrib/carousel/forms.py:154 contrib/forms/forms.py:17
 msgid "Content"
 msgstr ""
 
@@ -351,7 +336,7 @@ msgstr ""
 msgid "Content may also be added using child plugins."
 msgstr ""
 
-#: contrib/carousel/models.py:51 contrib/picture/models.py:133
+#: contrib/carousel/models.py:49 contrib/image/models.py:140
 msgid "<file is missing>"
 msgstr ""
 
@@ -429,20 +414,67 @@ msgstr ""
 msgid "Sample output"
 msgstr ""
 
-#: contrib/content/forms.py:35
+#: contrib/content/forms.py:37
 msgid "Code type"
 msgstr ""
 
-#: contrib/content/forms.py:61
+#: contrib/content/forms.py:64
 msgid "Quote"
 msgstr ""
 
-#: contrib/content/forms.py:65
+#: contrib/content/forms.py:70
 msgid "Cite"
 msgstr ""
 
-#: contrib/content/forms.py:96
+#: contrib/content/forms.py:101
 msgid "Caption"
+msgstr ""
+
+#: contrib/forms/cms_plugins.py:93
+msgid "No content in response from"
+msgstr ""
+
+#: contrib/forms/cms_plugins.py:240
+msgid "Form"
+msgstr ""
+
+#: contrib/forms/cms_plugins.py:252
+msgid "Submit button"
+msgstr ""
+
+#: contrib/forms/forms.py:14
+msgid "Email"
+msgstr ""
+
+#: contrib/forms/forms.py:15
+msgid "Subject"
+msgstr ""
+
+#: contrib/forms/forms.py:65
+msgid "Submit message"
+msgstr ""
+
+#: contrib/forms/forms.py:66
+#: contrib/forms/templates/djangocms_frontend/bootstrap5/form.html:10
+msgid "Submit"
+msgstr ""
+
+#: contrib/forms/forms.py:70
+msgid "Submit context"
+msgstr ""
+
+#: contrib/forms/forms.py:77
+msgid "Submit button alignment"
+msgstr ""
+
+#: contrib/forms/templates/djangocms_frontend/ajax_form.html:73
+msgid ""
+"Network connection or server error. Please try again later. We apologize for "
+"the inconvenience."
+msgstr ""
+
+#: contrib/forms/views.py:25
+msgid "Only unique slugs accepted for form views"
 msgstr ""
 
 #: contrib/grid/cms_plugins.py:21 contrib/grid/constants.py:19
@@ -457,12 +489,12 @@ msgstr ""
 msgid "Row-cols settings"
 msgstr ""
 
-#: contrib/grid/cms_plugins.py:125 contrib/grid/constants.py:54
+#: contrib/grid/cms_plugins.py:123 contrib/grid/constants.py:54
 #: contrib/tabs/constants.py:15
 msgid "Column"
 msgstr ""
 
-#: contrib/grid/cms_plugins.py:151
+#: contrib/grid/cms_plugins.py:149
 msgid "Responsive settings"
 msgstr ""
 
@@ -548,49 +580,45 @@ msgid ""
 "fluid width (<code>.container-fluid</code>)."
 msgstr ""
 
-#: contrib/grid/forms.py:70
+#: contrib/grid/forms.py:72
 msgid "Create columns"
 msgstr ""
 
-#: contrib/grid/forms.py:71
+#: contrib/grid/forms.py:73
 msgid "Number of columns to create when saving."
 msgstr ""
 
-#: contrib/grid/forms.py:77
+#: contrib/grid/forms.py:79
 msgid "Vertical alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:82 contrib/grid/forms.py:94
+#: contrib/grid/forms.py:84 contrib/grid/forms.py:96
 #, python-brace-format
 msgid ""
 "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr ""
 
-#: contrib/grid/forms.py:89
+#: contrib/grid/forms.py:91
 msgid "Horizontal alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:101
+#: contrib/grid/forms.py:103
 msgid "Remove gutters"
 msgstr ""
 
-#: contrib/grid/forms.py:104
+#: contrib/grid/forms.py:106
 msgid "Removes the marginal gutters from the grid."
 msgstr ""
 
-#: contrib/grid/forms.py:142
+#: contrib/grid/forms.py:144
 msgid "Column type"
 msgstr ""
 
-#: contrib/grid/forms.py:148
+#: contrib/grid/forms.py:150
 msgid "Column alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:153
-msgid "Content alignment"
-msgstr ""
-
-#: contrib/grid/models.py:46
+#: contrib/grid/models.py:49
 #, python-format
 msgid "(1 column)"
 msgid_plural "(%(count)i columns)"
@@ -598,27 +626,30 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:13
-#: frontends/bootstrap5.py:5
+#: frontends/bootstrap5.py:5 frontends/foundation.py:5
 msgid "Extra small"
 msgstr ""
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:14
 #: contrib/link/constants.py:10 frontends/bootstrap5.py:6
+#: frontends/foundation.py:6
 msgid "Small"
 msgstr ""
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:15
 #: contrib/link/constants.py:11 frontends/bootstrap5.py:7
+#: frontends/foundation.py:7
 msgid "Medium"
 msgstr ""
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:16
 #: contrib/link/constants.py:12 frontends/bootstrap5.py:8
+#: frontends/foundation.py:8
 msgid "Large"
 msgstr ""
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:17
-#: frontends/bootstrap5.py:9
+#: frontends/bootstrap5.py:9 frontends/foundation.py:9
 msgid "Extra large"
 msgstr ""
 
@@ -646,6 +677,202 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#: contrib/image/cms_plugins.py:22
+msgid "Picture / Image"
+msgstr ""
+
+#: contrib/image/cms_plugins.py:69
+msgid "Cropping settings"
+msgstr ""
+
+#: contrib/image/forms.py:45
+msgid "Align left"
+msgstr ""
+
+#: contrib/image/forms.py:46
+msgid "Align right"
+msgstr ""
+
+#: contrib/image/forms.py:47
+msgid "Align center"
+msgstr ""
+
+#: contrib/image/forms.py:71 contrib/link/constants.py:22
+msgid "Open in new window"
+msgstr ""
+
+#: contrib/image/forms.py:72 contrib/link/constants.py:23
+msgid "Open in same window"
+msgstr ""
+
+#: contrib/image/forms.py:73 contrib/link/constants.py:24
+msgid "Delegate to parent"
+msgstr ""
+
+#: contrib/image/forms.py:74 contrib/link/constants.py:25
+msgid "Delegate to top"
+msgstr ""
+
+#: contrib/image/forms.py:78
+msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
+msgstr ""
+
+#: contrib/image/forms.py:79
+msgid "Yes"
+msgstr ""
+
+#: contrib/image/forms.py:80
+msgid "No"
+msgstr ""
+
+#: contrib/image/forms.py:127
+msgid "Image"
+msgstr ""
+
+#: contrib/image/forms.py:131
+msgid "External image"
+msgstr ""
+
+#: contrib/image/forms.py:134
+msgid ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+msgstr ""
+
+#: contrib/image/forms.py:139
+msgid "Width"
+msgstr ""
+
+#: contrib/image/forms.py:143
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+
+#: contrib/image/forms.py:147
+msgid "Height"
+msgstr ""
+
+#: contrib/image/forms.py:151
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+
+#: contrib/image/forms.py:158
+msgid "Aligns the image according to the selected option."
+msgstr ""
+
+#: contrib/image/forms.py:161
+msgid "Caption text"
+msgstr ""
+
+#: contrib/image/forms.py:165
+msgid "Provide a description, attribution, copyright or other information."
+msgstr ""
+
+#: contrib/image/forms.py:169 contrib/utilities/forms.py:109
+msgid "Link attributes"
+msgstr ""
+
+#: contrib/image/forms.py:171
+msgid "Attributes apply to the <b>link</b>."
+msgstr ""
+
+#: contrib/image/forms.py:178
+msgid "Automatic scaling"
+msgstr ""
+
+#: contrib/image/forms.py:181
+msgid "Uses the placeholder dimensions to automatically calculate the size."
+msgstr ""
+
+#: contrib/image/forms.py:187
+msgid "Use original image"
+msgstr ""
+
+#: contrib/image/forms.py:189
+msgid "Outputs the raw image without cropping."
+msgstr ""
+
+#: contrib/image/forms.py:194
+msgid "Crop image"
+msgstr ""
+
+#: contrib/image/forms.py:197
+msgid ""
+"Crops the image according to the thumbnail settings provided in the template."
+msgstr ""
+
+#: contrib/image/forms.py:201
+msgid "Upscale image"
+msgstr ""
+
+#: contrib/image/forms.py:204
+msgid ""
+"Upscales the image to the size of the thumbnail settings in the template."
+msgstr ""
+
+#: contrib/image/forms.py:208
+msgid "Use responsive image"
+msgstr ""
+
+#: contrib/image/forms.py:212
+msgid ""
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
+"(external pictures will not be affected). "
+msgstr ""
+
+#: contrib/image/forms.py:221
+msgid "Thumbnail options"
+msgstr ""
+
+#: contrib/image/forms.py:224
+msgid ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+msgstr ""
+
+#: contrib/image/forms.py:228
+msgid "Responsive"
+msgstr ""
+
+#: contrib/image/forms.py:231
+msgid "Adds the .img-fluid class to make the image responsive."
+msgstr ""
+
+#: contrib/image/forms.py:234
+msgid "Rounded"
+msgstr ""
+
+#: contrib/image/forms.py:237
+msgid "Adds the .rounded class for round corners."
+msgstr ""
+
+#: contrib/image/forms.py:240
+msgid "Thumbnail"
+msgstr ""
+
+#: contrib/image/forms.py:243
+msgid "Adds the .img-thumbnail class."
+msgstr ""
+
+#: contrib/image/forms.py:262
+msgid ""
+"You have given more than one external, internal, or file link target. Only "
+"one option is allowed."
+msgstr ""
+
+#: contrib/image/forms.py:271
+msgid "You need to add either an image, or a URL linking to an external image."
+msgstr ""
+
+#: contrib/image/forms.py:297
+#, python-brace-format
+msgid ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
+msgstr ""
+
 #: contrib/jumbotron/cms_plugins.py:19
 msgid "Jumbotron"
 msgstr ""
@@ -658,7 +885,7 @@ msgstr ""
 msgid "Adds the .jumbotron-fluid class."
 msgstr ""
 
-#: contrib/link/cms_plugins.py:53
+#: contrib/link/cms_plugins.py:52
 msgid "Link / Button"
 msgstr ""
 
@@ -670,104 +897,104 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: contrib/link/forms.py:166
+#: contrib/link/forms.py:174
 msgid "Display name"
 msgstr ""
 
-#: contrib/link/forms.py:170
+#: contrib/link/forms.py:178
 msgid "External link"
 msgstr ""
 
-#: contrib/link/forms.py:173
+#: contrib/link/forms.py:181
 msgid "Provide a link to an external source."
 msgstr ""
 
-#: contrib/link/forms.py:176
+#: contrib/link/forms.py:184
 msgid "Internal link"
 msgstr ""
 
-#: contrib/link/forms.py:178
+#: contrib/link/forms.py:186
 msgid "If provided, overrides the external link."
 msgstr ""
 
-#: contrib/link/forms.py:184
+#: contrib/link/forms.py:192
 msgid "File link"
 msgstr ""
 
-#: contrib/link/forms.py:186
+#: contrib/link/forms.py:194
 msgid "If provided links a file from the filer app."
 msgstr ""
 
-#: contrib/link/forms.py:190
+#: contrib/link/forms.py:198
 msgid "Anchor"
 msgstr ""
 
-#: contrib/link/forms.py:193
+#: contrib/link/forms.py:201
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
 "include a preceding \"#\" symbol."
 msgstr ""
 
-#: contrib/link/forms.py:198
+#: contrib/link/forms.py:206
 msgid "Email address"
 msgstr ""
 
-#: contrib/link/forms.py:202
+#: contrib/link/forms.py:210
 msgid "Phone"
 msgstr ""
 
-#: contrib/link/forms.py:207
+#: contrib/link/forms.py:215
 msgid "Target"
 msgstr ""
 
-#: contrib/link/forms.py:253
+#: contrib/link/forms.py:261
 #, python-brace-format
 msgid "Only one of {0} or {1} may be given."
 msgstr ""
 
-#: contrib/link/forms.py:265
+#: contrib/link/forms.py:273
 msgid "Please provide a link."
 msgstr ""
 
-#: contrib/link/forms.py:271
+#: contrib/link/forms.py:279
 #, python-format
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
 msgstr ""
 
-#: contrib/link/forms.py:308 contrib/tabs/forms.py:42
+#: contrib/link/forms.py:316 contrib/tabs/forms.py:42
 msgid "Type"
 msgstr ""
 
-#: contrib/link/forms.py:312
+#: contrib/link/forms.py:320
 msgid "Adds either the .btn-* or .text-* classes."
 msgstr ""
 
-#: contrib/link/forms.py:321 contrib/utilities/forms.py:35
+#: contrib/link/forms.py:330 contrib/utilities/forms.py:35
 msgid "Size"
 msgstr ""
 
-#: contrib/link/forms.py:329
+#: contrib/link/forms.py:339
 msgid "Applies the .btn-outline class to the elements."
 msgstr ""
 
-#: contrib/link/forms.py:332
+#: contrib/link/forms.py:342
 msgid "Block"
 msgstr ""
 
-#: contrib/link/forms.py:335
+#: contrib/link/forms.py:345
 msgid "Extends the button to the width of its container."
 msgstr ""
 
-#: contrib/link/forms.py:338
+#: contrib/link/forms.py:348
 msgid "Icon left"
 msgstr ""
 
-#: contrib/link/forms.py:342
+#: contrib/link/forms.py:353
 msgid "Icon right"
 msgstr ""
 
-#: contrib/link/models.py:100
+#: contrib/link/models.py:96
 msgid "<link is missing>"
 msgstr ""
 
@@ -803,216 +1030,19 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: contrib/media/cms_plugins.py:20
+#: contrib/media/cms_plugins.py:19
 msgid "Media"
 msgstr ""
 
-#: contrib/media/cms_plugins.py:49
+#: contrib/media/cms_plugins.py:48
 msgid "Media body"
 msgstr ""
 
-#: contrib/picture/cms_plugins.py:22
-msgid "Picture / Image"
-msgstr ""
-
-#: contrib/picture/cms_plugins.py:69
-msgid "Cropping settings"
-msgstr ""
-
-#: contrib/picture/forms.py:45
-msgid "Align left"
-msgstr ""
-
-#: contrib/picture/forms.py:46
-msgid "Align right"
-msgstr ""
-
-#: contrib/picture/forms.py:47
-msgid "Align center"
-msgstr ""
-
-#: contrib/picture/forms.py:71
-msgid "Open in new window"
-msgstr ""
-
-#: contrib/picture/forms.py:72
-msgid "Open in same window"
-msgstr ""
-
-#: contrib/picture/forms.py:73
-msgid "Delegate to parent"
-msgstr ""
-
-#: contrib/picture/forms.py:74
-msgid "Delegate to top"
-msgstr ""
-
-#: contrib/picture/forms.py:78
-msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
-msgstr ""
-
-#: contrib/picture/forms.py:79
-msgid "Yes"
-msgstr ""
-
-#: contrib/picture/forms.py:80
-msgid "No"
-msgstr ""
-
-#: contrib/picture/forms.py:127
-msgid "Image"
-msgstr ""
-
-#: contrib/picture/forms.py:131
-msgid "External image"
-msgstr ""
-
-#: contrib/picture/forms.py:134
-msgid ""
-"If provided, overrides the embedded image. Certain options such as cropping "
-"are not applicable to external images."
-msgstr ""
-
-#: contrib/picture/forms.py:139
-msgid "Width"
-msgstr ""
-
-#: contrib/picture/forms.py:143
-msgid ""
-"The image width as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr ""
-
-#: contrib/picture/forms.py:147
-msgid "Height"
-msgstr ""
-
-#: contrib/picture/forms.py:151
-msgid ""
-"The image height as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr ""
-
-#: contrib/picture/forms.py:158
-msgid "Aligns the image according to the selected option."
-msgstr ""
-
-#: contrib/picture/forms.py:161
-msgid "Caption text"
-msgstr ""
-
-#: contrib/picture/forms.py:165
-msgid "Provide a description, attribution, copyright or other information."
-msgstr ""
-
-#: contrib/picture/forms.py:169 contrib/utilities/forms.py:102
-msgid "List attributes"
-msgstr ""
-
-#: contrib/picture/forms.py:171 contrib/utilities/forms.py:104
-msgid ""
-"Attributes apply to the <b>list</b> for each level in the table of contents."
-msgstr ""
-
-#: contrib/picture/forms.py:178
-msgid "Automatic scaling"
-msgstr ""
-
-#: contrib/picture/forms.py:181
-msgid "Uses the placeholder dimensions to automatically calculate the size."
-msgstr ""
-
-#: contrib/picture/forms.py:187
-msgid "Use original image"
-msgstr ""
-
-#: contrib/picture/forms.py:189
-msgid "Outputs the raw image without cropping."
-msgstr ""
-
-#: contrib/picture/forms.py:194
-msgid "Crop image"
-msgstr ""
-
-#: contrib/picture/forms.py:197
-msgid ""
-"Crops the image according to the thumbnail settings provided in the template."
-msgstr ""
-
-#: contrib/picture/forms.py:201
-msgid "Upscale image"
-msgstr ""
-
-#: contrib/picture/forms.py:204
-msgid ""
-"Upscales the image to the size of the thumbnail settings in the template."
-msgstr ""
-
-#: contrib/picture/forms.py:208
-msgid "Use responsive image"
-msgstr ""
-
-#: contrib/picture/forms.py:212
-msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
-"(external pictures will not be affected). "
-msgstr ""
-
-#: contrib/picture/forms.py:221
-msgid "Thumbnail options"
-msgstr ""
-
-#: contrib/picture/forms.py:224
-msgid ""
-"Overrides width, height, and crop; scales up to the provided preset "
-"dimensions."
-msgstr ""
-
-#: contrib/picture/forms.py:228
-msgid "Responsive"
-msgstr ""
-
-#: contrib/picture/forms.py:231
-msgid "Adds the .img-fluid class to make the image responsive."
-msgstr ""
-
-#: contrib/picture/forms.py:234
-msgid "Rounded"
-msgstr ""
-
-#: contrib/picture/forms.py:237
-msgid "Adds the .rounded class for round corners."
-msgstr ""
-
-#: contrib/picture/forms.py:240
-msgid "Thumbnail"
-msgstr ""
-
-#: contrib/picture/forms.py:243
-msgid "Adds the .img-thumbnail class."
-msgstr ""
-
-#: contrib/picture/forms.py:262
-msgid ""
-"You have given more than one external, internal, or file link target. Only "
-"one option is allowed."
-msgstr ""
-
-#: contrib/picture/forms.py:271
-msgid "You need to add either an image, or a URL linking to an external image."
-msgstr ""
-
-#: contrib/picture/forms.py:297
-#, python-brace-format
-msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with "
-"\"{field_b}\"."
-msgstr ""
-
-#: contrib/tabs/cms_plugins.py:23 contrib/tabs/constants.py:5
+#: contrib/tabs/cms_plugins.py:22 contrib/tabs/constants.py:5
 msgid "Tabs"
 msgstr ""
 
-#: contrib/tabs/cms_plugins.py:65
+#: contrib/tabs/cms_plugins.py:64
 msgid "Tab item"
 msgstr ""
 
@@ -1088,23 +1118,23 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: contrib/utilities/forms.py:61 settings.py:20
+#: contrib/utilities/forms.py:61 settings.py:33
 msgid "Heading 1"
 msgstr ""
 
-#: contrib/utilities/forms.py:62 settings.py:21
+#: contrib/utilities/forms.py:62 settings.py:34
 msgid "Heading 2"
 msgstr ""
 
-#: contrib/utilities/forms.py:63 settings.py:22
+#: contrib/utilities/forms.py:63 settings.py:35
 msgid "Heading 3"
 msgstr ""
 
-#: contrib/utilities/forms.py:64 settings.py:23
+#: contrib/utilities/forms.py:64 settings.py:36
 msgid "Heading 4"
 msgstr ""
 
-#: contrib/utilities/forms.py:65 settings.py:24
+#: contrib/utilities/forms.py:65 settings.py:37
 msgid "Heading 5"
 msgstr ""
 
@@ -1122,8 +1152,13 @@ msgid ""
 "table of contents."
 msgstr ""
 
-#: contrib/utilities/forms.py:109
-msgid "Link attributes"
+#: contrib/utilities/forms.py:102
+msgid "List attributes"
+msgstr ""
+
+#: contrib/utilities/forms.py:104
+msgid ""
+"Attributes apply to the <b>list</b> for each level in the table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:111
@@ -1153,74 +1188,74 @@ msgstr ""
 msgid "Select the HTML tag to be used."
 msgstr ""
 
-#: frontends/bootstrap5.py:18
+#: frontends/bootstrap5.py:18 frontends/foundation.py:18
 msgid "Primary"
 msgstr ""
 
-#: frontends/bootstrap5.py:19
+#: frontends/bootstrap5.py:19 frontends/foundation.py:19
 msgid "Secondary"
 msgstr ""
 
-#: frontends/bootstrap5.py:20
+#: frontends/bootstrap5.py:20 frontends/foundation.py:20
 msgid "Success"
 msgstr ""
 
-#: frontends/bootstrap5.py:21
+#: frontends/bootstrap5.py:21 frontends/foundation.py:21
 msgid "Danger"
 msgstr ""
 
-#: frontends/bootstrap5.py:22
+#: frontends/bootstrap5.py:22 frontends/foundation.py:22
 msgid "Warning"
 msgstr ""
 
-#: frontends/bootstrap5.py:23
+#: frontends/bootstrap5.py:23 frontends/foundation.py:23
 msgid "Info"
 msgstr ""
 
-#: frontends/bootstrap5.py:24
+#: frontends/bootstrap5.py:24 frontends/foundation.py:24
 msgid "Light"
 msgstr ""
 
-#: frontends/bootstrap5.py:25
+#: frontends/bootstrap5.py:25 frontends/foundation.py:25
 msgid "Dark"
 msgstr ""
 
-#: models.py:16
+#: models.py:14
 msgid "UI item"
 msgstr ""
 
-#: settings.py:64
+#: settings.py:81
 msgid "Fully Centered"
 msgstr ""
 
-#: settings.py:65
+#: settings.py:82
 msgid "Top left"
 msgstr ""
 
-#: settings.py:66
+#: settings.py:83
 msgid "Top center"
 msgstr ""
 
-#: settings.py:67
+#: settings.py:84
 msgid "Top right"
 msgstr ""
 
-#: settings.py:68
+#: settings.py:85
 msgid "Center left"
 msgstr ""
 
-#: settings.py:69
+#: settings.py:86
 msgid "Center right"
 msgstr ""
 
-#: settings.py:70
+#: settings.py:87
 msgid "Bottom left"
 msgstr ""
 
-#: settings.py:71
+#: settings.py:88
 msgid "Bottom center"
 msgstr ""
 
-#: settings.py:72
+#: settings.py:89
 msgid "Bottom right"
 msgstr ""

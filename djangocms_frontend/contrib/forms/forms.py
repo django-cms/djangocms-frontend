@@ -67,7 +67,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         required=True,
     )
     form_submit_context = forms.ChoiceField(
-        label=_("Subit Context"),
+        label=_("Submit context"),
         choices=settings.COLOR_STYLE_CHOICES,
         initial=settings.COLOR_STYLE_CHOICES[0][0],
         required=True,

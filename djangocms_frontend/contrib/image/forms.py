@@ -166,10 +166,8 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
         ),
     )
     link_attributes = AttributesFormField(
-        label=_("List attributes"),
-        help_text=_(
-            "Attributes apply to the <b>list</b> for each level in the table of contents."
-        ),
+        label=_("Link attributes"),
+        help_text=_("Attributes apply to the <b>link</b>."),
     )
 
     # cropping models
