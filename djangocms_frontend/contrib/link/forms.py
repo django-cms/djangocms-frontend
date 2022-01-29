@@ -11,8 +11,9 @@ from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
 from django_select2.forms import Select2Widget
 from djangocms_icon.fields import IconField
-#from djangocms_link.models import TARGET_CHOICES
-#from djangocms_link.validators import IntranetURLValidator
+
+# from djangocms_link.models import TARGET_CHOICES
+# from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
@@ -169,7 +170,7 @@ class AbstractLinkForm(EntangledModelForm):
     external_link = forms.CharField(
         label=_("External link"),
         required=False,
-#        validators=url_validators,
+        #        validators=url_validators,
         help_text=_("Provide a link to an external source."),
     )
     internal_link = SmartLinkField(

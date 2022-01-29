@@ -41,5 +41,6 @@ class TagTypeField(models.CharField):
 
 class ColoredButtonGroup(forms.Select):
     """Includes ADMIN_CSS"""
+
     class Media:
         css = settings.ADMIN_CSS

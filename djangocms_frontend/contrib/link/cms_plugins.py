@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
 
+from ... import settings
+from .. import link
 from . import forms, models
 from .constants import USE_LINK_ICONS
-from .. import link
-from ... import settings
 
 mixin_factory = settings.get_renderer(link)
 
@@ -70,4 +70,6 @@ class LinkPlugin(mixin_factory("Link"), CMSPluginBase):
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(instance, "link", "link", settings.LINK_TEMPLATE_CHOICES)
+        return get_plugin_template(
+            instance, "link", "link", settings.LINK_TEMPLATE_CHOICES
+        )
