@@ -11,6 +11,7 @@ REQUIREMENTS = [
     "djangocms-icon>=1.4.0",
     "django-select2",
     "django-entangled>=0.4.0",
+    "pre-commit",
 ]
 
 
