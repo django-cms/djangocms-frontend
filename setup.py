@@ -4,6 +4,7 @@ from setuptools import find_packages, setup
 from djangocms_frontend import __version__
 
 REQUIREMENTS = [
+    "Django>=3.1.14",
     "django-cms>=3.7",
     "django-filer>=1.7",
     "djangocms-attributes-field>=1",
