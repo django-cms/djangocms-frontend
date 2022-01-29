@@ -1,9 +1,7 @@
 import os
-from functools import cached_property
 
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
-from entangled.utils import get_related_object
 
 from djangocms_frontend.models import FrontendUIItem
 

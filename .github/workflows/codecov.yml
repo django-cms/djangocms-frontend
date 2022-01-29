@@ -12,7 +12,7 @@ jobs:
         requirements-file: [
             dj31_cms37.txt,
             dj31_cms38.txt,
-            dj32_cms37.txt,
+            dj31_cms39.txt,
             dj32_cms38.txt,
             dj32_cms39.txt,
         ]
