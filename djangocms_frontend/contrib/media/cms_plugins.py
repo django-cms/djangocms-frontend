@@ -2,10 +2,9 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from .. import media
 from ... import settings
+from .. import media
 from . import forms, models
-
 
 mixin_factory = settings.get_renderer(media)
 

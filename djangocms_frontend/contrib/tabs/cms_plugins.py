@@ -4,11 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
 
+from ... import settings
+from .. import tabs
 from . import forms, models
 from .constants import TAB_TEMPLATE_CHOICES
-from .. import tabs
-from ... import settings
-
 
 mixin_factory = settings.get_renderer(tabs)
 

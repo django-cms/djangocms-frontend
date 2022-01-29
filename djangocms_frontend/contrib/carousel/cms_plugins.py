@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
 
+from ... import settings
+from .. import carousel
 from . import forms, models
 from .constants import CAROUSEL_TEMPLATE_CHOICES
-from .. import carousel
-from ... import settings
 
 mixin_factory = settings.get_renderer(carousel)
 

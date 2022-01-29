@@ -2,12 +2,11 @@ import hashlib
 
 from cms.models import CMSPlugin
 from django.core.exceptions import ValidationError
-from django.http import QueryDict, Http404, JsonResponse
+from django.http import Http404, JsonResponse, QueryDict
 from django.shortcuts import get_object_or_404
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext as _
 from django.views import View
-
 
 _formview_pool = {}
 
