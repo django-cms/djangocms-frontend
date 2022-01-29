@@ -198,6 +198,6 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
             column,
             instance.column_alignment,
         ]
-        context["add_classes"] = " ".join(cls for cls in attr_classes if cls)
+        context["base_classes"] = " ".join(cls for cls in attr_classes if cls)
         context["grid_classes"] = " ".join(get_grid_values(instance))
         return super().render(context, instance, placeholder)

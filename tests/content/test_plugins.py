@@ -6,7 +6,7 @@ from djangocms_frontend.contrib.content.cms_plugins import (
     CodePlugin,
     FigurePlugin,
 )
-from djangocms_frontend.contrib.content.forms import BlockquoteForm
+from djangocms_frontend.contrib.content.forms import BlockquoteForm, FigureForm
 
 from ..fixtures import TestFixture
 
@@ -72,7 +72,7 @@ class ContentPluginTestCase(TestFixture, CMSTestCase):
                 figure_caption="hello world",
             ),
         )
-        plugin.full_clean()
+        plugin.initialize_from_form(FigureForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):

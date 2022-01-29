@@ -86,17 +86,19 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, '<div class="row">')
 
         # add column with values
-        add_plugin(
+        plugin = add_plugin(
             target=row,
             placeholder=self.placeholder,
             plugin_type=GridColumnPlugin.__name__,
             language=self.language,
             config=dict(xs_col=12),
-        ).initialize_from_form(GridColumnForm).save()
+        )
+        plugin.initialize_from_form(GridColumnForm).save()
 
         self.page.publish(self.language)
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
+        self.assertEqual(plugin.column_type, "col")
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
             ('<div class="col col-12">' in response.content.decode("utf-8"))
