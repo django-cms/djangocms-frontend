@@ -259,7 +259,7 @@ To run the frontend make sure to use **node 10.x**.
 
 .. |python| image:: https://img.shields.io/badge/python-3.5+-blue.svg
     :target: https://pypi.org/project/djangocms-frontend/
-.. |django| image:: https://img.shields.io/badge/django-2.2,%203.0,%203.1,%203.2-blue.svg
+.. |django| image:: https://img.shields.io/badge/django-3.2-blue.svg
     :target: https://www.djangoproject.com/
-.. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.7%2B-blue.svg
+.. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
     :target: https://www.django-cms.org/
