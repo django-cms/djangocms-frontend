@@ -155,7 +155,7 @@ export default class PreviewGenerator {
             const iconSetPrefix = element.find('select option:selected').data('iconset-prefix');
 
             if (typeof iconSet === 'string') {
-                $(`.js-icon-${left ? 'left' : 'right'}`).html("<span></span>")
+                $(`.js-icon-${left ? 'left' : 'right'}`).html("<i></i>").find("i")
                     .addClass(iconSetPrefix).addClass(icon);
             } else {
                 const staticPath = this.container.data('static');
@@ -168,14 +168,13 @@ export default class PreviewGenerator {
                     $(`.js-icon-${left ? 'left' : 'right'}`).html(`
                         <span class="${iconClass} ${icon}">
                             <svg role="presentation">
-                                <use xlink:href="${staticPath}${spritePath}#${icon}"></use>
+                                <use></use>
                             </svg>
                         </span>
-                    `);
+                    `).find("use").attr("xlink:href","${staticPath}${spritePath}#${icon}");
                 } else {
-                    $(`.js-icon-${left ? 'left' : 'right'}`).html(`
-                        <span class="${iconClass} ${icon}"></span>
-                    `);
+                    $(`.js-icon-${left ? 'left' : 'right'}`).html("<i></i>").find("i")
+                    .addClass(iconSetPrefix).addClass(icon);
                 }
             }
         });

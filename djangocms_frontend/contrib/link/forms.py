@@ -6,6 +6,7 @@ from django import forms
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.db import models
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
@@ -118,12 +119,18 @@ class SmartLinkField(forms.ChoiceField):
 
     def prepare_value(self, value):
         if value:
-            try:
-                app_label, model = value["model"].rsplit(".", 1)
-                content_type = ContentType.objects.get(app_label=app_label, model=model)
-                return f"{content_type.id}-{value['pk']}"
-            except (TypeError, ValueError, KeyError, ObjectDoesNotExist):
-                pass
+            if isinstance(value, dict):  # Entangled dictionary?
+                try:
+                    app_label, model = value["model"].rsplit(".", 1)
+                    content_type = ContentType.objects.get(
+                        app_label=app_label, model=model
+                    )
+                    return f"{content_type.id}-{value['pk']}"
+                except (TypeError, ValueError, KeyError, ObjectDoesNotExist):
+                    pass
+            elif isinstance(value, models.Model):
+                content_type = ContentType.objects.get_for_model(value)
+                return f"{content_type.id}-{value.id}"
         return ""
 
     def clean(self, value):
@@ -314,13 +321,15 @@ class LinkForm(AbstractLinkForm):
     )
     link_context = forms.ChoiceField(
         label=_("Context"),
-        choices=settings.COLOR_STYLE_CHOICES,
+        choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
         required=False,
         widget=ColoredButtonGroup(),
     )
     link_size = forms.ChoiceField(
         label=_("Size"),
         choices=LINK_SIZE_CHOICES,
+        initial=LINK_SIZE_CHOICES[1][0],  # Medium
         required=False,
     )
     link_outline = forms.BooleanField(
@@ -337,10 +346,12 @@ class LinkForm(AbstractLinkForm):
     )
     icon_left = IconField(
         label=_("Icon left"),
+        initial="",
         required=False,
     )
     icon_right = IconField(
         label=_("Icon right"),
+        initial="",
         required=False,
     )
     attributes = AttributesFormField()
