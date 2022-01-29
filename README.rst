@@ -257,7 +257,7 @@ To run the frontend make sure to use **node 10.x**.
 .. |coverage| image:: https://codecov.io/gh/divio/djangocms-bootstrap5/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/fsbraun/djangocms-frontend
 
-.. |python| image:: https://img.shields.io/badge/python-3.5+-blue.svg
+.. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
     :target: https://pypi.org/project/djangocms-frontend/
 .. |django| image:: https://img.shields.io/badge/django-3.2-blue.svg
     :target: https://www.djangoproject.com/
