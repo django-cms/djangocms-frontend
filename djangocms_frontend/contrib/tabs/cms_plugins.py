@@ -20,7 +20,7 @@ class TabPlugin(mixin_factory("Tab"), CMSPluginBase):
     """
 
     name = _("Tabs")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Tab
     form = forms.TabForm
     change_form_template = "djangocms_frontend/admin/tabs.html"
@@ -62,7 +62,7 @@ class TabItemPlugin(mixin_factory("TabItem"), CMSPluginBase):
     """
 
     name = _("Tab item")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.TabItem
     form = forms.TabItemForm
     change_form_template = "djangocms_frontend/admin/tabs.html"

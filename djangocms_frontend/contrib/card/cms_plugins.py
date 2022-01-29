@@ -17,7 +17,7 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     """
 
     name = _("Card")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Card
     form = forms.CardForm
     render_template = f"djangocms_frontend/{settings.framework}/card.html"
@@ -85,7 +85,7 @@ class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
     """
 
     name = _("Card inner")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.CardInner
     form = forms.CardInnerForm
     render_template = f"djangocms_frontend/{settings.framework}/card_content.html"

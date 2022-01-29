@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 17:14+0100\n"
+"POT-Creation-Date: 2022-01-29 17:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: contrib/tabs/cms_plugins.py:65 contrib/utilities/cms_plugins.py:21
 #: contrib/utilities/cms_plugins.py:59 contrib/utilities/cms_plugins.py:70
 #: contrib/utilities/cms_plugins.py:136
-msgid "Interface"
+msgid "Frontend"
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:41 contrib/accordion/cms_plugins.py:81
@@ -773,100 +773,100 @@ msgstr ""
 msgid "Link attributes"
 msgstr ""
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:170
 msgid "Attributes apply to the <b>link</b>."
 msgstr ""
 
-#: contrib/image/forms.py:178
+#: contrib/image/forms.py:176
 msgid "Automatic scaling"
 msgstr ""
 
-#: contrib/image/forms.py:181
+#: contrib/image/forms.py:179
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr ""
 
-#: contrib/image/forms.py:187
+#: contrib/image/forms.py:185
 msgid "Use original image"
 msgstr ""
 
-#: contrib/image/forms.py:189
+#: contrib/image/forms.py:187
 msgid "Outputs the raw image without cropping."
 msgstr ""
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:192
 msgid "Crop image"
 msgstr ""
 
-#: contrib/image/forms.py:197
+#: contrib/image/forms.py:195
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr ""
 
-#: contrib/image/forms.py:201
+#: contrib/image/forms.py:199
 msgid "Upscale image"
 msgstr ""
 
-#: contrib/image/forms.py:204
+#: contrib/image/forms.py:202
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr ""
 
-#: contrib/image/forms.py:208
+#: contrib/image/forms.py:206
 msgid "Use responsive image"
 msgstr ""
 
-#: contrib/image/forms.py:212
+#: contrib/image/forms.py:210
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
-#: contrib/image/forms.py:221
+#: contrib/image/forms.py:219
 msgid "Thumbnail options"
 msgstr ""
 
-#: contrib/image/forms.py:224
+#: contrib/image/forms.py:222
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
 msgstr ""
 
-#: contrib/image/forms.py:228
+#: contrib/image/forms.py:226
 msgid "Responsive"
 msgstr ""
 
-#: contrib/image/forms.py:231
+#: contrib/image/forms.py:229
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr ""
 
-#: contrib/image/forms.py:234
+#: contrib/image/forms.py:232
 msgid "Rounded"
 msgstr ""
 
-#: contrib/image/forms.py:237
+#: contrib/image/forms.py:235
 msgid "Adds the .rounded class for round corners."
 msgstr ""
 
-#: contrib/image/forms.py:240
+#: contrib/image/forms.py:238
 msgid "Thumbnail"
 msgstr ""
 
-#: contrib/image/forms.py:243
+#: contrib/image/forms.py:241
 msgid "Adds the .img-thumbnail class."
 msgstr ""
 
-#: contrib/image/forms.py:262
+#: contrib/image/forms.py:260
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
 msgstr ""
 
-#: contrib/image/forms.py:271
+#: contrib/image/forms.py:269
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
-#: contrib/image/forms.py:297
+#: contrib/image/forms.py:295
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "

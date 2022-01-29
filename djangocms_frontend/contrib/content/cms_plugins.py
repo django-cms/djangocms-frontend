@@ -17,7 +17,7 @@ class CodePlugin(mixin_factory("Code"), CMSPluginBase):
     """
 
     name = _("Code")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.CodeBlock
     form = forms.CodeForm
     render_template = f"djangocms_frontend/{settings.framework}/code.html"
@@ -46,7 +46,7 @@ class BlockquotePlugin(mixin_factory("Blockquote"), CMSPluginBase):
     """
 
     name = _("Blockquote")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Blockquote
     form = forms.BlockquoteForm
     render_template = f"djangocms_frontend/{settings.framework}/blockquote.html"
@@ -75,7 +75,7 @@ class FigurePlugin(mixin_factory("Figure"), CMSPluginBase):
     """
 
     name = _("Figure")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Figure
     form = forms.FigureForm
     render_template = f"djangocms_frontend/{settings.framework}/figure.html"

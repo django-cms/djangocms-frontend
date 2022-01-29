@@ -1,6 +1,6 @@
 {% load static cms_tags sekizai_tags i18n frontend  %}
 {% spaceless %}
-    <form id="form{{ instance.id|safe }}{{ form.slug }}" novalidate action="{% url 'xhr:ajaxview' instance.id %}"
+    <form id="form{{ instance.id|safe }}{{ form.slug }}" class="djangocms-frontend-ajax-form" novalidate action="{% url 'xhr:ajaxview' instance.id %}"
         method="post" {% add_class instance.attributes %}>
         {% csrf_token %}
         {% include 'djangocms_frontend/ajax_form.html' with form=form id=instance.id tracking=instance.tracking_code %}

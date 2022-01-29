@@ -17,7 +17,7 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
     """
 
     name = _("Accordion")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Accordion
     form = forms.AccordionForm
     render_template = f"djangocms_frontend/{settings.framework}/accordion.html"
@@ -58,7 +58,7 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSPluginBase):
     """
 
     name = _("Accordion item")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.AccordionItem
     form = forms.AccordionItemForm
     render_template = f"djangocms_frontend/{settings.framework}/accordion_item.html"

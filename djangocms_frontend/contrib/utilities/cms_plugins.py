@@ -18,7 +18,7 @@ class SpacingPlugin(mixin_factory("Spacing"), CMSPluginBase):
     """
 
     name = _("Spacing")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Spacing
     form = forms.SpacingForm
 
@@ -56,7 +56,7 @@ class EditorNotePlugin(mixin_factory("EditorNote"), CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Editor note")
-    module = _("Interface")
+    module = _("Frontend")
     allow_children = True
     render_template = f"djangocms_frontend/{settings.framework}/editor_note.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
@@ -67,7 +67,7 @@ class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Heading
     form = forms.HeadingForm
 
@@ -133,7 +133,7 @@ def create_tree(request_toc):
 @plugin_pool.register_plugin
 class TOCPlugin(mixin_factory("TOC"), CMSPluginBase):
     name = _("Table of contents")
-    module = _("Interface")
+    module = _("Frontend")
 
     model = models.TableOfContents
     form = forms.TableOfContentsForm

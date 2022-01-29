@@ -8,7 +8,7 @@
     </div>{% endspaceless %}
 {% addtoblock 'js' %}{% spaceless %}
     <script>
-        function djangocmsfrontend_form(form_selector) {
+        function djangocmsfrontend_form() {
             function feedback(node, data) {
                 if (data.result === 'success') {
                     if (typeof($(node).data().success) === "function") {
@@ -75,7 +75,7 @@
 
             };
 
-            var form = $(form_selector);
+            var form = $(this);
             var recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
             if (recaptcha.length === 1) {
                 var checkExist = setInterval(function () {
@@ -112,5 +112,10 @@
 {% endspaceless %}{% endaddtoblock %}
 {% addtoblock 'js' %}<script>
     jQuery(document).ready(function() {
-        djangocmsfrontend_form("form#form{{instance.id|safe}}{{form.slug}}");
-    });</script>{% endaddtoblock %}
+        $(".djangocms-frontend-ajax-form").each(djangocmsfrontend_form);
+    });
+    {% if request.toolbar and request.toolbar.edit_mode_active %}
+        CMS.$(window).on('cms-content-refresh', function () {
+            $(".djangocms-frontend-ajax-form").each(djangocmsfrontend_form);
+    });{% endif %}
+</script>{% endaddtoblock %}

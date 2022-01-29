@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 17:14+0100\n"
+"POT-Creation-Date: 2022-01-29 17:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Peter Wischer <peter.wischer@lwl.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
@@ -38,8 +38,8 @@ msgstr "Akkordion"
 #: contrib/tabs/cms_plugins.py:65 contrib/utilities/cms_plugins.py:21
 #: contrib/utilities/cms_plugins.py:59 contrib/utilities/cms_plugins.py:70
 #: contrib/utilities/cms_plugins.py:136
-msgid "Interface"
-msgstr "Inhalte"
+msgid "Frontend"
+msgstr "Frontend"
 
 #: contrib/accordion/cms_plugins.py:41 contrib/accordion/cms_plugins.py:81
 #: contrib/alert/cms_plugins.py:38 contrib/badge/cms_plugins.py:38
@@ -146,7 +146,7 @@ msgstr "Card-Gruppe"
 
 #: contrib/card/constants.py:6
 msgid "Grid cards"
-msgstr ""
+msgstr "Grid-Cards"
 
 #: contrib/card/constants.py:10 settings.py:42
 msgid "Left"
@@ -456,11 +456,11 @@ msgstr "Email"
 
 #: contrib/forms/forms.py:15
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: contrib/forms/forms.py:65
 msgid "Submit message"
-msgstr ""
+msgstr "Absende-Aufforderung"
 
 #: contrib/forms/forms.py:66
 #: contrib/forms/templates/djangocms_frontend/bootstrap5/form.html:10
@@ -790,102 +790,101 @@ msgstr ""
 msgid "Link attributes"
 msgstr "Link-Attribute"
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:170
 #, fuzzy
 msgid "Attributes apply to the <b>link</b>."
-msgstr ""
-"Attribute werden auf die auf den Links angewendet."
+msgstr "Attribute werden auf die auf den Links angewendet."
 
-#: contrib/image/forms.py:178
+#: contrib/image/forms.py:176
 msgid "Automatic scaling"
 msgstr "Automatische Skalierung"
 
-#: contrib/image/forms.py:181
+#: contrib/image/forms.py:179
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr ""
 
-#: contrib/image/forms.py:187
+#: contrib/image/forms.py:185
 msgid "Use original image"
 msgstr "Original-Bild nutzen"
 
-#: contrib/image/forms.py:189
+#: contrib/image/forms.py:187
 msgid "Outputs the raw image without cropping."
 msgstr ""
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:192
 msgid "Crop image"
 msgstr "Bild beschneiden"
 
-#: contrib/image/forms.py:197
+#: contrib/image/forms.py:195
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr ""
 
-#: contrib/image/forms.py:201
+#: contrib/image/forms.py:199
 msgid "Upscale image"
 msgstr "Bildgröße anpassen"
 
-#: contrib/image/forms.py:204
+#: contrib/image/forms.py:202
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr ""
 
-#: contrib/image/forms.py:208
+#: contrib/image/forms.py:206
 msgid "Use responsive image"
 msgstr "Bild responsive darstellen"
 
-#: contrib/image/forms.py:212
+#: contrib/image/forms.py:210
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
-#: contrib/image/forms.py:221
+#: contrib/image/forms.py:219
 msgid "Thumbnail options"
 msgstr "Optionen für Vorschaubilder"
 
-#: contrib/image/forms.py:224
+#: contrib/image/forms.py:222
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
 msgstr ""
 
-#: contrib/image/forms.py:228
+#: contrib/image/forms.py:226
 msgid "Responsive"
 msgstr "Responsive"
 
-#: contrib/image/forms.py:231
+#: contrib/image/forms.py:229
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Fügt die Klasse .img-fluid hinzu um das Bild responsiv zu machen."
 
-#: contrib/image/forms.py:234
+#: contrib/image/forms.py:232
 msgid "Rounded"
 msgstr "Abgerundet"
 
-#: contrib/image/forms.py:237
+#: contrib/image/forms.py:235
 msgid "Adds the .rounded class for round corners."
 msgstr "Fügt die Klasse .rounded für abgerundete Ecken hinzu."
 
-#: contrib/image/forms.py:240
+#: contrib/image/forms.py:238
 msgid "Thumbnail"
 msgstr "Vorschaubild"
 
-#: contrib/image/forms.py:243
+#: contrib/image/forms.py:241
 msgid "Adds the .img-thumbnail class."
 msgstr "Fügt die Klasse .img-thumbnail hinzu."
 
-#: contrib/image/forms.py:262
+#: contrib/image/forms.py:260
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
 msgstr ""
 
-#: contrib/image/forms.py:271
+#: contrib/image/forms.py:269
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
-#: contrib/image/forms.py:297
+#: contrib/image/forms.py:295
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -1185,7 +1184,8 @@ msgstr "Listen-Attribute"
 #: contrib/utilities/forms.py:104
 msgid ""
 "Attributes apply to the <b>list</b> for each level in the table of contents."
-msgstr "Attribute werden auf die auf die Liste für jede Einrückungstiefe im "
+msgstr ""
+"Attribute werden auf die auf die Liste für jede Einrückungstiefe im "
 "Inhaltesverzeichnis angewendet."
 
 #: contrib/utilities/forms.py:111
@@ -1290,3 +1290,6 @@ msgstr "Unten Mitte"
 #: settings.py:89
 msgid "Bottom right"
 msgstr "Unten rechts"
+
+#~ msgid "Interface"
+#~ msgstr "Inhalte"

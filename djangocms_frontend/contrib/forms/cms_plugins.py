@@ -238,7 +238,7 @@ class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
     """
 
     name = _("Form")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Form
 
     form_class = forms.ContactForm

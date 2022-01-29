@@ -17,7 +17,7 @@ class AlertPlugin(mixin_factory("Alert"), CMSPluginBase):
     """
 
     name = _("Alert")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Alert
     form = forms.AlertForm
     render_template = f"djangocms_frontend/{settings.framework}/alert.html"

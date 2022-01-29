@@ -17,7 +17,7 @@ class BadgePlugin(mixin_factory("Badge"), CMSPluginBase):
     """
 
     name = _("Badge")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Badge
     form = forms.BadgeForm
     render_template = f"djangocms_frontend/{settings.framework}/badge.html"

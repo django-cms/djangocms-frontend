@@ -20,7 +20,7 @@ class ImagePlugin(mixin_factory("Image"), CMSPluginBase):
     """
 
     name = _("Picture / Image")
-    module = _("Interface")
+    module = _("Frontend")
 
     model = models.Image
     form = forms.ImageForm

@@ -50,7 +50,7 @@ class LinkPlugin(mixin_factory("Link"), CMSPluginBase):
     """
 
     name = _("Link / Button")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Link
     form = forms.LinkForm
     change_form_template = "djangocms_frontend/admin/link.html"

@@ -19,7 +19,7 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
     """
 
     name = _("Container")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.GridContainer
     form = forms.GridContainerForm
     render_template = f"djangocms_frontend/{settings.framework}/grid_container.html"
@@ -49,7 +49,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
     """
 
     name = _("Row")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.GridRow
     form = forms.GridRowForm
     change_form_template = "djangocms_frontend/admin/grid_row.html"
@@ -121,7 +121,7 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
     """
 
     name = _("Column")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.GridColumn
     form = forms.GridColumnForm
     change_form_template = "djangocms_frontend/admin/grid_column.html"

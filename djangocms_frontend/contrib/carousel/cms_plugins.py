@@ -20,7 +20,7 @@ class CarouselPlugin(mixin_factory("Carousel"), CMSPluginBase):
     """
 
     name = _("Carousel")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Carousel
     form = forms.CarouselForm
     allow_children = True
@@ -65,7 +65,7 @@ class CarouselSlidePlugin(mixin_factory("CarouselSlide"), CMSPluginBase):
     """
 
     name = _("Carousel slide")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.CarouselSlide
     form = forms.CarouselSlideForm
     allow_children = True

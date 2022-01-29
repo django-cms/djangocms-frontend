@@ -17,7 +17,7 @@ class MediaPlugin(mixin_factory("Media"), CMSPluginBase):
     """
 
     name = _("Media")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Media
     form = forms.MediaForm
     render_template = f"djangocms_frontend/{settings.framework}/media.html"
@@ -46,7 +46,7 @@ class MediaBodyPlugin(mixin_factory("MediaBody"), CMSPluginBase):
     """
 
     name = _("Media body")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.MediaBody
     form = forms.MediaBodyForm
     render_template = f"djangocms_frontend/{settings.framework}/media-body.html"

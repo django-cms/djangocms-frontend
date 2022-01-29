@@ -17,7 +17,7 @@ class ListGroupPlugin(mixin_factory("ListGroup"), CMSPluginBase):
     """
 
     name = _("List group")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.ListGroup
     form = forms.ListGroupForm
     render_template = f"djangocms_frontend/{settings.framework}/list-group.html"
@@ -49,7 +49,7 @@ class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSPluginBase):
     """
 
     name = _("List item")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.ListGroupItem
     form = forms.ListGroupItemForm
     render_template = f"djangocms_frontend/{settings.framework}/list-group-item.html"

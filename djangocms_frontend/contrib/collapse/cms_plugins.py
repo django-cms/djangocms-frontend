@@ -17,7 +17,7 @@ class CollapsePlugin(mixin_factory("Collapse"), CMSPluginBase):
     """
 
     name = _("Collapse")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.Collapse
     form = forms.CollapseForm
     render_template = f"djangocms_frontend/{settings.framework}/collapse.html"
@@ -55,7 +55,7 @@ class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSPluginBase):
     """
 
     name = _("Collapse trigger")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.CollapseTrigger
     form = forms.CollapseTriggerForm
     render_template = f"djangocms_frontend/{settings.framework}/collapse-trigger.html"
@@ -90,7 +90,7 @@ class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSPluginBase)
     """
 
     name = _("Collapse container")
-    module = _("Interface")
+    module = _("Frontend")
     model = models.CollapseContainer
     form = forms.CollapseContainerForm
     render_template = f"djangocms_frontend/{settings.framework}/collapse-container.html"
