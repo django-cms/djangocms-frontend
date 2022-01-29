@@ -1,5 +1,6 @@
 from django import template
 from django.utils.html import conditional_escape, mark_safe
+from entangled.utils import get_related_object as related_object
 
 register = template.Library()
 
@@ -26,3 +27,9 @@ def add_class(attribute_field, *add_classes):
     if additional_classes and (not attribute_field or "class" not in attribute_field):
         attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))
+
+
+@register.filter
+def get_related_object(reference):
+    print("XXX", reference)
+    return related_object(dict(obj=reference), "obj")

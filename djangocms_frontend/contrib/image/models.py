@@ -8,11 +8,11 @@ from django.utils.translation import gettext as _
 from easy_thumbnails.files import get_thumbnailer
 from entangled.utils import get_related_object
 
-from djangocms_frontend.contrib.link.models import GetLinkMixin
-from djangocms_frontend.contrib.picture.forms import (
+from djangocms_frontend.contrib.image.forms import (
     RESPONSIVE_IMAGE_CHOICES,
     get_templates,
 )
+from djangocms_frontend.contrib.link.models import GetLinkMixin
 from djangocms_frontend.models import FrontendUIItem
 
 # use golden ration as default (https://en.wikipedia.org/wiki/Golden_ratio)
@@ -37,7 +37,7 @@ class ImageMixin:
             height = getattr(self, "height", None)
 
         # calculate height when not given according to the
-        # golden ratio or fallback to the picture size
+        # golden ratio or fallback to the image size
         if not height and width:
             height = int(width / PICTURE_RATIO)
         elif not width and height:
@@ -70,19 +70,6 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
         proxy = True
 
     image_field = "picture"
-    default_configx = {
-        "external_picture": "",
-        "picture": {},
-        "alignment": "",
-        "picture_fluid": True,
-        "picture_rounded": False,
-        "picture_thumbnail": False,
-        "use_no_cropping": False,
-        "width": None,
-        "height": None,
-        "use_responsive_image": RESPONSIVE_IMAGE_CHOICES[0][0],
-        "template": get_templates()[0][0],
-    }
 
     @property
     def is_responsive_image(self):
@@ -116,15 +103,15 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     @cached_property
     def img_src(self):
-        # we want the external picture to take priority by design
+        # we want the external image to take priority by design
         # please open a ticket if you disagree for an open discussion
         if self.external_picture:
             return self.external_picture
-        # picture can be empty, for example when the image is removed from filer
+        # image can be empty, for example when the image is removed from filer
         # in this case we want to return an empty string to avoid #69
         elif not self.picture:
             return ""
-        # return the original, unmodified picture
+        # return the original, unmodified image
         elif self.use_no_cropping:
             return self.rel_image.url if self.rel_image else ""
 

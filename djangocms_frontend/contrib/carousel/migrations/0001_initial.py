@@ -2,8 +2,8 @@
 
 from django.db import migrations
 
+import djangocms_frontend.contrib.image.models
 import djangocms_frontend.contrib.link.models
-import djangocms_frontend.contrib.picture.models
 
 
 class Migration(migrations.Migration):
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
             },
             bases=(
                 djangocms_frontend.contrib.link.models.GetLinkMixin,
-                djangocms_frontend.contrib.picture.models.ImageMixin,
+                djangocms_frontend.contrib.image.models.ImageMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),

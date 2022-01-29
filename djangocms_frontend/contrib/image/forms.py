@@ -22,7 +22,7 @@ from ..link.forms import AbstractLinkForm
 #
 #
 # abstract_picture_fields = get_model_form_fields(
-#     AbstractPicture, ("picture", "link_page", "tag_type", "attributes")
+#     AbstractPicture, ("image", "link_page", "tag_type", "attributes")
 # )
 #
 #
@@ -37,7 +37,7 @@ from ..link.forms import AbstractLinkForm
 
 
 def get_alignment():
-    """add setting for picture alignment, renders a class or inline styles depending on your template setup"""
+    """add setting for image alignment, renders a class or inline styles depending on your template setup"""
     alignment = getattr(
         settings,
         "DJANGOCMS_PICTURE_ALIGN",
@@ -81,7 +81,7 @@ RESPONSIVE_IMAGE_CHOICES = (
 )
 
 
-class PictureForm(AbstractLinkForm, EntangledModelForm):
+class ImageForm(AbstractLinkForm, EntangledModelForm):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/

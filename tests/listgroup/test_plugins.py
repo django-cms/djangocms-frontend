@@ -5,6 +5,7 @@ from djangocms_frontend.contrib.listgroup.cms_plugins import (
     ListGroupItemPlugin,
     ListGroupPlugin,
 )
+from djangocms_frontend.contrib.listgroup.forms import ListGroupForm, ListGroupItemForm
 
 from ..fixtures import TestFixture
 
@@ -25,12 +26,13 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, '<div class="list-group">')
 
         # test list_group_flush option
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=ListGroupPlugin.__name__,
             language=self.language,
             config=dict(list_group_flush=True),
         )
+        plugin.initialize_from_form(ListGroupForm)
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -49,11 +51,12 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
         )
 
     def test_list_group_item_plugin(self):
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=ListGroupItemPlugin.__name__,
             language=self.language,
         )
+        plugin.initialize_from_form(ListGroupItemForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):

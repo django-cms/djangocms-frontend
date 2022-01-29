@@ -17,15 +17,11 @@ class FrontendUIItem(CMSPlugin):
     tag_type = TagTypeField(blank=True)
     config = models.JSONField(default=dict)
 
-    default_config = {}
-
     def __getattr__(self, item):
         if (
             item[0] != "_" and item in self.config
         ):  # Avoid infinite recursion trying to get .config from db
             return self.config[item]
-        if item in self.default_config:
-            return self.default_config[item]
         return super().__getattribute__(item)
 
     def __str__(self):

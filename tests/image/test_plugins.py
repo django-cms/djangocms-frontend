@@ -1,8 +1,8 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.picture.cms_plugins import ImagePlugin
-from djangocms_frontend.contrib.picture.forms import PictureForm
+from djangocms_frontend.contrib.image.cms_plugins import ImagePlugin
+from djangocms_frontend.contrib.image.forms import ImageForm
 
 from ..fixtures import TestFixture
 from ..helpers import get_filer_image
@@ -22,9 +22,9 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=ImagePlugin.__name__,
             language=self.language,
-            config={"picture": {"pk": self.image.id, "model": "filer.Image"}},
+            config={"image": {"pk": self.image.id, "model": "filer.Image"}},
         )
-        plugin.initialize_from_form(PictureForm)
+        plugin.initialize_from_form(ImageForm)
         plugin.save()
         self.page.publish(self.language)
         with self.login_user_context(self.superuser):
@@ -38,13 +38,13 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             plugin_type=ImagePlugin.__name__,
             language=self.language,
             config={
-                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "image": {"pk": self.image.id, "model": "filer.Image"},
                 "picture_fluid": False,
                 "picture_rounded": True,
                 "picture_thumbnail": True,
             },
         )
-        plugin.initialize_from_form(PictureForm)
+        plugin.initialize_from_form(ImageForm)
         plugin.save()
         self.page.publish(self.language)
 

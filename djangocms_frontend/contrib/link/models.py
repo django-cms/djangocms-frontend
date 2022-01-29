@@ -90,14 +90,6 @@ class Link(GetLinkMixin, FrontendUIItem):
     class Meta:
         proxy = True
 
-    default_config = dict(
-        link_context="",
-        link_type="link",
-        link_size="",
-        link_block="",
-        link_outline=False,
-    )
-
     def get_short_description(self):
         if self.name and self.get_link():
             return "{} ({})".format(self.name, self.get_link())

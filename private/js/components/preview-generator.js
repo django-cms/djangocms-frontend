@@ -155,9 +155,8 @@ export default class PreviewGenerator {
             const iconSetPrefix = element.find('select option:selected').data('iconset-prefix');
 
             if (typeof iconSet === 'string') {
-                $(`.js-icon-${left ? 'left' : 'right'}`).html(`
-                    <span class="${iconSetPrefix} ${icon}"></span>
-                `);
+                $(`.js-icon-${left ? 'left' : 'right'}`).html("<span></span>")
+                    .addClass(iconSetPrefix).addClass(icon);
             } else {
                 const staticPath = this.container.data('static');
                 const {

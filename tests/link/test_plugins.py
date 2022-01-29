@@ -2,6 +2,7 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_frontend.contrib.link.cms_plugins import LinkPlugin
+from djangocms_frontend.contrib.link.forms import LinkForm
 
 from ..fixtures import TestFixture
 
@@ -15,7 +16,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             config=dict(
                 external_link="https://www.divio.com",
             ),
-        )
+        ).initialize_from_form(LinkForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -24,7 +25,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, 'href="https://www.divio.com"')
 
         # add more options
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
@@ -35,6 +36,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 link_block=True,
             ),
         )
+        plugin.initialize_from_form(LinkForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -45,7 +47,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, "btn-block")
 
         # alternate version for link_type
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
@@ -55,6 +57,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 link_type="btn",
             ),
         )
+        plugin.initialize_from_form(LinkForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):
@@ -63,7 +66,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, "btn-primary")
 
         # alternate version using link_outline
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=LinkPlugin.__name__,
             language=self.language,
@@ -74,7 +77,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 link_outline=True,
             ),
         )
-
+        plugin.initialize_from_form(LinkForm).save()
         self.page.publish(self.language)
 
         with self.login_user_context(self.superuser):

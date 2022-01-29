@@ -5,8 +5,8 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.models import FrontendUIItem
 
+from ..image.models import ImageMixin
 from ..link.models import GetLinkMixin
-from ..picture.models import ImageMixin
 
 
 class Carousel(FrontendUIItem):

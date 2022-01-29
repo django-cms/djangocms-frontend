@@ -6,10 +6,10 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
-from .. import picture
+from .. import image
 from . import forms, models
 
-mixin_factory = settings.get_renderer(picture)
+mixin_factory = settings.get_renderer(image)
 
 
 @plugin_pool.register_plugin
@@ -23,9 +23,9 @@ class ImagePlugin(mixin_factory("Image"), CMSPluginBase):
     module = _("Interface")
 
     model = models.Image
-    form = forms.PictureForm
+    form = forms.ImageForm
 
-    change_form_template = "djangocms_frontend/admin/picture.html"
+    change_form_template = "djangocms_frontend/admin/image.html"
 
     fieldsets = [
         (
@@ -79,6 +79,4 @@ class ImagePlugin(mixin_factory("Image"), CMSPluginBase):
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return (
-            f"djangocms_frontend/{settings.framework}/{instance.template}/picture.html"
-        )
+        return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"

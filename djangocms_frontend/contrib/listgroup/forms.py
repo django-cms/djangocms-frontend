@@ -54,13 +54,13 @@ class ListGroupItemForm(EntangledModelForm):
     list_context = forms.ChoiceField(
         label=_("Context"),
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
-        initial=settings.EMPTY_CHOICE,
+        initial=settings.EMPTY_CHOICE[0][0],
         required=False,
         widget=ColoredButtonGroup(),
     )
     list_state = forms.ChoiceField(
         label=_("State"),
         choices=settings.EMPTY_CHOICE + LISTGROUP_STATE_CHOICES,
-        initial=settings.EMPTY_CHOICE,
+        initial=settings.EMPTY_CHOICE[0][0],
     )
     attributes = AttributesFormField()

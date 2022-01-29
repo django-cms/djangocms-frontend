@@ -148,7 +148,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
     ],
-    "bootstrap4_picture.Bootstrap4Picture -> picture.Image": [
+    "bootstrap4_picture.Bootstrap4Picture -> image.Image": [
         "template",
         "external_picture",
         "width",
@@ -166,7 +166,7 @@ plugin_migrations = {
         "picture_rounded",
         "picture_thumbnail",
         "link_page -> internal_link",
-        "picture",
+        "image",
         "thumbnail_options",
         "use_responsive_image",
         "attributes",
