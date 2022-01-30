@@ -18,10 +18,10 @@ GRID_CONTAINER_CHOICES = getattr(
     (
         ("container", _("Container")),
         ("container-fluid", _("Fluid container")),
-        ("container-sm", _("SM Container")),
-        ("container-md", _("MD Container")),
-        ("container-lg", _("LG Container")),
-        ("container-xl", _("XL Container")),
+        ("container-sm", _("sm container")),
+        ("container-md", _("md container")),
+        ("container-lg", _("lg container")),
+        ("container-xl", _("xl container")),
         #        ("container-xxl", _("XXL Container")),
     ),
 )
