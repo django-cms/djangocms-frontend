@@ -100,6 +100,11 @@ Contents
    howto_guides
    reference
 
+.. toctree::
+   :hidden:
+
+   genindex
+
 Indices and tables
 ==================
 

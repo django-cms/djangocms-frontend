@@ -32,8 +32,11 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
             None,
             {
                 "fields": (
-                    "accordion_header_type",
-                    "accordion_flush",
+                    "create",
+                    (
+                        "accordion_header_type",
+                        "accordion_flush",
+                    ),
                 )
             },
         ),
@@ -48,6 +51,25 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
             },
         ),
     ]
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        data = form.cleaned_data
+        print("XXX", data)
+        for x in range(data["create"] if data["create"] is not None else 0):
+            item = models.AccordionItem(
+                parent=obj,
+                placeholder=obj.placeholder,
+                language=obj.language,
+                position=obj.numchild,
+                plugin_type=AccordionItemPlugin.__name__,
+                ui_item=models.AccordionItem.__class__.__name__,
+                config=dict(
+                    accordion_item_header=_("Item {}").format(x + 1),
+                    accordion_item_open=(x == 0),
+                ),
+            ).initialize_from_form(forms.AccordionItemForm)
+            obj.add_child(instance=item)
 
 
 @plugin_pool.register_plugin

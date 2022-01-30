@@ -5,7 +5,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import accordion
-from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(accordion)
@@ -26,11 +26,22 @@ class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
+        untangled_fields = (
+            "tag_type",
+            "create",
+        )
 
+    create = forms.IntegerField(
+        label=_("Create accordion items"),
+        help_text=_("Number of accordion items to create when saving."),
+        required=False,
+        initial=False,
+        min_value=0,
+        max_value=20,
+    )
     accordion_header_type = forms.ChoiceField(
         label=_("Header type"),
-        initial=settings.HEADER_CHOICES[1][0],
+        initial=settings.HEADER_CHOICES[-1][0],
         choices=settings.HEADER_CHOICES,
         required=True,
     )

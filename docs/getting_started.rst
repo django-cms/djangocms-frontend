@@ -1,9 +1,12 @@
 #################
- Getting started
+Getting started
 #################
 
+.. index::
+    single: Installation
+
 **************
- Installation
+Installation
 **************
 
 Install package
@@ -90,6 +93,9 @@ If you have restricted rights for users our groups in your projects make
 sure that editors have the right to to add, change, delete, and - of
 course - view instances of djangocms_frontend UI Item.
 
+.. index::
+    single: Migration from Bootstrap 4
+
 *************************************
  Migrating from djangocms-bootstrap4
 *************************************
@@ -137,6 +143,10 @@ tables of djangocms-bootstrap4. You identify them by their name pattern:
    ...
    bootstrap4_utilities_bootstrap4spacing
 
+
+.. index::
+    single: Plugins
+
 **************
  Grid plugins
 **************
@@ -148,6 +158,9 @@ a placeholder:
 
 For details on how grids work, see, e.g. the `Bootstrap 5 documentation
 <https://getbootstrap.com/docs/5.1/layout/grid/>`_.
+
+.. index::
+    single: Container
 
 Container
 =========
@@ -165,6 +178,9 @@ Container
    container will be fluid below the respective breakpoint.
 
 .. image:: screenshots/container.png
+
+.. index::
+    single: Row
 
 Row
 ===
@@ -188,6 +204,9 @@ number of columns on mobile devices (and above if no other setting is
 given), the "row-cols-xl" entry the number of columns on a xl screen.
 
 .. image:: screenshots/row.png
+
+.. index::
+    single: Column
 
 Column
 ======
@@ -224,22 +243,78 @@ content.
 quick usage of components defined by the underlying css framework, e.g.
 bootstrap 5.
 
-`Accordion <https://getbootstrap.com/docs/5.0/components/accordion/>`_
+While ``djangocoms-frontend`` is set up to become framework agnostic its
+heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
+Hence  for the timne being, this documentation references the Bootstrap 5
+documentation.
+
+.. index::
+    single: Accordion
+
+Accordion component
+===================
+
+Build vertically collapsing sections using accordions:
+
+.. image:: screenshots/accordion-example.png
+
+Accordions consist of an Accordion plugin which has an Accordion Item plugin for
+each collapsable section.
+
+.. image:: screenshots/accordion-plugins.png
+    :width: 394
+
+Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.0/components/accordion/>`_
+documentation.
+
+.. index::
+    single: Alert
 
 Alert component
 ===============
 
-`Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
+Alerts provide contextual feedback messages for typical user actions with a
+handful of available alert messages.
+
+.. image:: screenshots/alert-example.png
+
+Alerts can be marked dismissible which implies that a close button is added on
+the right hand side.
+
+.. image:: screenshots/alert-plugins.png
+    :width: 391
+
+Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
+documentation.
+
+.. index::
+    single: Badge
 
 Badge component
 ===============
 
-`Badge <https://getbootstrap.com/docs/5.0/components/badge/>`_
+Badges are small count and labeling components usually in headers and buttons.
+
+While often useful if populated automatically as opposed to statically in a
+plugin, badges are useful, e.g., to mark featured or new headers.
+
+.. image:: screenshots/badge-example.png
+    :width: 180
+
+Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.0/components/badge/>`_
+documentation.
+
+.. index::
+    single: Card
 
 Card component
 ==============
 
-`Card <https://getbootstrap.com/docs/5.0/components/card/>`_
+Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.0/components/card/>`_
+documentation.
+
+.. index::
+    single: Carousel
 
 Carousel component
 ==================
@@ -254,6 +329,60 @@ Collapse component
 The `Collapse <https://getbootstrap.com/docs/5.0/components/collapse/>`_
 hides text behind its headline and offers the user a trigger (e.g., a
 button) to reveal itself.
+
+.. index::
+    single: Jumbotron
+
+Jumbotron component
+===================
+
+.. index::
+    single: Link
+    single: Button
+
+Link / Button component
+=======================
+
+Media component
+===============
+
+.. index::
+    single: Picture
+    single: Image
+
+Picture / image component
+=========================
+
+.. index::
+    single: Spacing
+    single: Spacer
+
+Spacing component
+=================
+
+.. index::
+    single: Blockquote
+
+Blockquote component
+====================
+
+.. index::
+    single: Code
+
+Code component
+==============
+
+.. index::
+    single: Figure
+
+Figure component
+================
+
+.. index::
+    single: Tabs
+
+Tabs component
+==============
 
 -  `Content (Blockquote, Code, Figure)
    <https://getbootstrap.com/docs/5.0/content/>`_
