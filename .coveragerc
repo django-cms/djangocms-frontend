@@ -2,7 +2,9 @@
 branch = True
 source = djangocms_frontend
 omit =
-    migrations/*
+    djangocms_frontend/contrib/forms/*
+    djangocms_frontend/migrations/*
+    djangocms_frontend/management/*
     tests/*
 
 [report]

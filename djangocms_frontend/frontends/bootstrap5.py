@@ -31,3 +31,38 @@ COLOR_CODES = getattr(
     "DJANGOCMS_FRONTEND_COLOR_CODES",
     dict(),
 )
+
+
+FORM_TEMPLATE = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_FORM_TEMPLATE",
+    "djangocms_frontend/bootstrap5/render/form.html",
+)
+
+SPACER_PROPERTY_CHOICES = (
+    ("m", "margin"),
+    ("p", "padding"),
+)
+
+SPACER_SIDE_CHOICES = (
+    ("", "*"),
+    ("t", "*-top"),
+    ("r", "*-right"),
+    ("b", "*-bottom"),
+    ("l", "*-left"),
+    ("x", "*-left & *-right"),
+    ("y", "*-top & *-bottom"),
+)
+
+SPACER_SIZE_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_SPACER_SIZES",
+    (
+        ("0", "* 0"),
+        ("1", "* .25"),
+        ("2", "* .5"),
+        ("3", "* 1"),
+        ("4", "* 1.5"),
+        ("5", "* 3"),
+    ),
+)

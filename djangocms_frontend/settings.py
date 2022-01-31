@@ -19,13 +19,6 @@ ADMIN_CSS = getattr(
     {},
 )
 
-FORM_TEMPLATE = getattr(
-    settings,
-    "DJANGOCMS_FRONTEND_FORM_TEMPLATE",
-    "djangocms_frontend/bootstrap5/render/form.html",
-)
-
-
 HEADER_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_HEADER_CHOICES",
@@ -44,38 +37,14 @@ ALIGN_CHOICES = (
     ("end", _("Right")),
 )
 
-LINK_TEMPLATE_CHOICES = [
-    ("default", _("Default")),
-]
-
-
-SPACER_PROPERTY_CHOICES = (
-    ("m", "margin"),
-    ("p", "padding"),
-)
-
-SPACER_SIDE_CHOICES = (
-    ("", "*"),
-    ("t", "*-top"),
-    ("r", "*-right"),
-    ("b", "*-bottom"),
-    ("l", "*-left"),
-    ("x", "*-left & *-right"),
-    ("y", "*-top & *-bottom"),
-)
-
-SPACER_SIZE_CHOICES = getattr(
+LINK_TEMPLATE_CHOICES = getattr(
     settings,
-    "DJANGOCMS_FRONTEND_SPACER_SIZES",
-    (
-        ("0", "* 0"),
-        ("1", "* .25"),
-        ("2", "* .5"),
-        ("3", "* 1"),
-        ("4", "* 1.5"),
-        ("5", "* 3"),
-    ),
+    "DJANGOCMS_FRONTEND_LINK_TEMPLATE_CHOICES",
+    [
+        ("default", _("Default")),
+    ],
 )
+
 
 IMAGE_POSITIONING = (
     ("center center", _("Fully Centered")),
@@ -100,6 +69,10 @@ DEVICE_SIZES = framework_settings.DEVICE_SIZES
 DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
 COLOR_STYLE_CHOICES = framework_settings.COLOR_STYLE_CHOICES
 COLOR_CODES = framework_settings.COLOR_CODES
+FORM_TEMPLATE = framework_settings.FORM_TEMPLATE
+SPACER_PROPERTY_CHOICES = framework_settings.SPACER_PROPERTY_CHOICES
+SPACER_SIDE_CHOICES = framework_settings.SPACER_SIDE_CHOICES
+SPACER_SIZE_CHOICES = framework_settings.SPACER_SIZE_CHOICES
 
 
 theme_render_path = f"{theme}.frameworks.{framework}"
