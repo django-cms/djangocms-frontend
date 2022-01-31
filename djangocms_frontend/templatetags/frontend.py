@@ -31,5 +31,4 @@ def add_class(attribute_field, *add_classes):
 
 @register.filter
 def get_related_object(reference):
-    print("XXX", reference)
     return related_object(dict(obj=reference), "obj")

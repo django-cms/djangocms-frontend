@@ -55,7 +55,6 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        print("XXX", data)
         for x in range(data["create"] if data["create"] is not None else 0):
             item = models.AccordionItem(
                 parent=obj,

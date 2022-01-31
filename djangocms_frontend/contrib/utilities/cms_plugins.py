@@ -102,7 +102,7 @@ class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
                 (
                     heading_id,
                     getattr(instance, "heading", ""),
-                    getattr(instance, "level", "h2"),
+                    getattr(instance, "heading_level", "h2"),
                 )
             )
         context["instance"] = instance
