@@ -1,0 +1,10 @@
+{% spaceless %}
+    {% with prop.classes as classes  %}
+        {% if title %}<h5>{% if "collapse" in classes %}<a href="#" data-bs-toggle="collapse" data-bs-target="#form{{ instance.id|safe }}{{ form.slug }}-s{{ section }}" aria-expanded="{% if "show" in classes %}true{% else %}false{% endif %}" aria-controls="collapseExample">{% endif %}{{ title }}{% if "collapse" in classes %}</a>{% endif %}</h5>{% endif %}
+        <div id="form{{ instance.id|safe }}{{ form.slug }}-s{{ section }}" class="{{ classes|join:" " }}">
+        {% for form_field in prop.fields %}
+            {% include "djangocms_frontend/bootstrap5/render/field.html" with form=form form_field=form_field %}
+        {% endfor %}
+        </div>
+    {% endwith %}
+{% endspaceless %}

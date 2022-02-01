@@ -1,0 +1,121 @@
+{% load sekizai_tags i18n frontend_forms %}{% spaceless %}
+    <div id="data{{ instance.id|safe }}{{ form.slug }}" class="form-div{% if form.bound %} was-validated{% endif %}">
+        <div class="all-invalid alert alert-block alert-danger d-none">
+            <ul class="m-0">
+            </ul>
+        </div>
+        {% render_form form %}
+    </div>{% endspaceless %}
+{% addtoblock 'js' %}{% spaceless %}
+    <script>
+        function djangocmsfrontend_form() {
+            function feedback(node, data) {
+                if (data.result === 'success') {
+                    if (typeof($(node).data().success) === "function") {
+                        $(node).data().success();
+                    }
+                    node.replaceWith(function () {
+                        return $(data.content).hide().fadeIn();
+                    });
+                } else if (data.result === 'result') {
+                    $(node).find(".all-invalid").addClass("d-none")
+                        .find("li").remove();
+                    $(node).find('.form-group')
+                        .addClass('has-feedback has-success is-valid')
+                        .removeClass('has-error is-invalid')
+                        .find('.invalid-feedback').remove();
+                    $(node.data("results")).html(function () {
+                        return $(data.content).hide().fadeIn();
+                    });
+                    if (typeof($(node).data().success) === "function") {   // success function attached to form tag?
+                        $(node).data().success();
+                    }
+                    // softscroll("div#results{{instance.id|safe}}{{form.slug}}");
+                } else if (data.result === 'invalid form') {
+                    $(node).find(".all-invalid").addClass("d-none")
+                        .find("li").remove();
+                    $(node).find('.invalid-feedback').remove();
+                    for (const [key, value] of Object.entries(data.field_errors)) {
+                        for (const err of value) {
+                            if (key.substring(0,7) !== "__all__") {
+                                $(node).find("#" + key).after($("<div class='invalid-feedback'><strong>" + err + "</strong></div>"));
+                            } else {
+                                $(node).find(".all-invalid").removeClass("d-none")
+                                    .find("ul").append("<li>" + err + "</li>");
+                            }
+                        }
+                    }
+                    // make invalid fields visible in collapsed sections
+                    $(node).find(".collapse").each(function(){
+                        if(($(this).find(".invalid-feedback")).length) {
+                            $(this).addClass("show");
+                        }
+                    });
+                    // $(node).find(".form-div").html(data.html);  {# div#data{{instance.id}}{{form.slug}} #}
+                    $(node).addClass('was-validated');
+                } else if (data.result === 'error') {
+                    alert(data.errors[0]);
+                }
+                if ('redirect' in data) {
+                    if (data.redirect !== '' && data.redirect !== 'result')
+                    window.location.href = data.redirect;
+                }
+            }
+
+            function post_ajax(node) {
+                $.ajax({
+                    type: 'POST',
+                    url: $(node).attr('action'),
+                    data: $(node).serialize(),
+                }).done(function (data) {
+                    feedback(node, data)
+                }).fail(function () {
+                    alert("{% trans 'Network connection or server error. Please try again later. We apologize for the inconvenience.' %}");
+                });
+
+            };
+
+            var form = $(this);
+            var recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
+            if (recaptcha.length === 1) {
+                var checkExist = setInterval(function () {
+                    if (window.hasOwnProperty("recaptcha_loaded")) {
+                        clearInterval(checkExist);
+                        var gid = grecaptcha.render(recaptcha[0], {
+                            "callback": function (token) {
+                                form.find(".g-recaptcha-response").val(token);
+                                post_ajax(form);
+                                grecaptcha.reset(gid);
+                            },
+                        });
+                        if(!form.data("submit_event")) {
+                            form.data("submit_event", true);
+                            form.submit(function (event) {
+                                event.preventDefault();
+                                grecaptcha.execute(gid);
+                            });
+                        }
+
+                    }
+                }, 100);
+            } else {
+                if(!form.data("submit_event")) {
+                    form.data("submit_event", true);
+                    form.submit(function (event) {
+                        event.preventDefault();
+                        post_ajax(form);
+                    });
+                }
+            }
+        };
+    </script>
+{% endspaceless %}{% endaddtoblock %}
+{% addtoblock 'js' %}<script>
+    jQuery(document).ready(function() {
+        $(".djangocms-frontend-ajax-form").each(djangocmsfrontend_form);
+    });
+    {% if request.toolbar and request.toolbar.edit_mode_active %}
+        CMS.$(window).on('cms-content-refresh', function () {
+            $(".djangocms-frontend-ajax-form").each(djangocmsfrontend_form);
+    });{% endif %}
+</script>{% endaddtoblock %}
