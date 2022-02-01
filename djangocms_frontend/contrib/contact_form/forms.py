@@ -77,6 +77,11 @@ class ContactForm(forms.Form):
             ),
         )
 
+    template = "djangocms_frontend/contact_form_body.txt"
+    recipients = settings.ADMINS
+    render_success = "djangocms_frontend/contact_form_success.html"
+    # replace = True
+
     email = forms.EmailField(label=_("Email"))
     subject = forms.CharField(label=_("Subject"), required=False)
     content = forms.CharField(
@@ -89,11 +94,6 @@ class ContactForm(forms.Form):
         public_key=settings.RECAPTCHA_V2_INVISIBLE,
         private_key=settings.RECAPTCHA_V2_SECRET,
     )
-
-    template = "djangocms_frontend/contact_form_body.txt"
-    recipients = settings.ADMINS
-    render_success = "djangocms_frontend/contact_form_success.html"
-    replace = True
 
     def save(self):
         EmailMessage(
