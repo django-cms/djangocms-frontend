@@ -52,7 +52,7 @@ class AjaxFormMixin(FormMixin):
             pass
 
         if callable(save):
-            save()
+            form.save()
         get_success_context = "get_success_context"
         render_success = "render_success"
         if hasattr(form, "slug"):
@@ -71,14 +71,14 @@ class AjaxFormMixin(FormMixin):
                 }
             )
             if hasattr(form, get_success_context):
-                get_success_context = getattr(self, get_success_context)
+                get_success_context = getattr(form, get_success_context)
                 context.update(get_success_context(self.request, self.instance, form))
             errors, result, redir, content = (
                 [],
                 context.get("result", "success"),
                 "" if self.replace else "result",
                 render_to_string(
-                    getattr(self, render_success), context.flatten(), self.request
+                    getattr(form, render_success), context.flatten(), self.request
                 ),
             )
         elif redirect:
@@ -158,13 +158,15 @@ class AjaxFormMixin(FormMixin):
 
     def get_ajax_form(self, slug=None):
         form_class = self.get_form_class(slug)
-        form = form_class(**self.get_form_kwargs(slug))
-        if self.instance:
-            for field in form.base_fields:
-                form.fields[field].widget.attrs.update(
-                    {"id": field + str(self.instance.id)}
-                )
-        return form
+        if form_class:
+            form = form_class(**self.get_form_kwargs(slug))
+            if self.instance:
+                for field in form.base_fields:
+                    form.fields[field].widget.attrs.update(
+                        {"id": field + str(self.instance.id)}
+                    )
+            return form
+        return None
 
     def ajax_post(self, request, instance, parameter=None):
         if parameter is None:
@@ -241,13 +243,20 @@ class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
     module = _("Frontend")
     model = models.Form
 
-    form_class = forms.ContactForm
     form = forms.FormsForm
     render_template = f"djangocms_frontend/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/forms.html"
-    allow_children = True
+    allow_children = False
 
     fieldsets = [
+        (
+            None,
+            {
+                "fields": [
+                    "form_selection",
+                ],
+            },
+        ),
         (
             _("Submit button"),
             {
@@ -269,3 +278,8 @@ class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
             },
         ),
     ]
+
+    def get_form_class(self, slug=None):
+        if self.instance.config.get("form_selection", None):
+            return forms._form_registry.get(self.instance.form_selection, None)
+        return None

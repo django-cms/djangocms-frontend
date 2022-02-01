@@ -12,42 +12,6 @@ from djangocms_frontend.models import FrontendUIItem
 mixin_factory = settings.get_forms(forms_module)
 
 
-class ContactForm(forms.Form):
-
-    email = forms.EmailField(label=_("Email"))
-    subject = forms.CharField(label=_("Subject"), required=False)
-    content = forms.CharField(
-        label=_("Content"),
-        widget=forms.Textarea(attrs=dict(style="height: 240px;")),
-        help_text="Put your message here!",
-    )
-
-    #      template = "cmsplugin_contact/contact.html"
-    redirect = "/"
-    frontend_options = {
-        "floating_labels": True,
-    }
-
-    class Meta:
-        verbose_name = _("Contact form")
-        fieldsets = (
-            (
-                "Contact form",
-                {
-                    "floating": True,
-                    #                          "classes": ("collapse", "show",),
-                    "fields": (
-                        (
-                            "email",
-                            "subject",
-                        ),
-                        "content",
-                    ),
-                },
-            ),
-        )
-
-
 _form_registry = {}
 
 
@@ -67,9 +31,10 @@ def verbose_name(form_class):
 
 def get_registered_forms():
     """Creates a tuple for a ChoiceField to select form"""
-    return tuple(
+    result = tuple(
         (hash, verbose_name(form_class)) for hash, form_class in _form_registry.items()
     )
+    return result if result else ((_("No forms registered"), ()),)
 
 
 def register(form_class):
@@ -78,9 +43,6 @@ def register(form_class):
     hash = hashlib.sha1(form_class.__name__.encode("utf-8")).hexdigest()
     _form_registry.update({hash: form_class})
     return form_class
-
-
-register(ContactForm)
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
@@ -93,6 +55,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "form_selection",
                 "form_submit_message",
                 "form_submit_context",
                 "form_submit_align",
