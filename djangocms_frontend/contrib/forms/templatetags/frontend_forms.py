@@ -2,9 +2,13 @@ from django import template
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
 
+from djangocms_frontend.contrib.forms import constants
 from djangocms_frontend.settings import FORM_TEMPLATE
 
 register = template.Library()
+attr_dict = constants.attr_dict
+default_attr = constants.default_attr
+
 
 try:
     from crispy_forms.helper import FormHelper
@@ -49,27 +53,6 @@ def render_form(form, **kwargs):
     return render_to_string(template, {"form": form, **kwargs})
 
 
-default_attr = dict(
-    input="form-control",
-    label="form-label",
-    div="",
-)
-
-attr_dict = dict(
-    Select=dict(input="form-select"),
-    SelectMultiple=dict(input="form-select"),
-    NullBooleanSelect=dict(input="form-select"),
-    RadioSelect=dict(
-        input="form-check-input", label="form-check-label", div="form-check"
-    ),
-    CheckboxInput=dict(
-        input="form-check-input", label="form-check-label", div="form-check"
-    ),
-    ButtonRadio=dict(input="btn-check", label="btn btn-outline-primary"),
-    ButtonCheckbox=dict(input="btn-check", label="btn btn-outline-primary"),
-)
-
-
 def get_bound_field(form, formfield):
     for field in form.visible_fields():
         if field.name == formfield:
@@ -78,7 +61,7 @@ def get_bound_field(form, formfield):
 
 
 def attrs_for_widget(widget, item, additional_classes=None):
-    if widget.__class__.__name__ in attr_dict:
+    if widget.__class__.__name__ in constants.attr_dict:
         cls = attr_dict[widget.__class__.__name__].get(item, None)
     else:
         cls = default_attr[item]
@@ -97,7 +80,7 @@ def render_widget(context, form, form_field, **kwargs):
         return ""
     options = getattr(form, "frontend_options", {})
     floating_labels = "floating_labels" in options
-    field_sep = options.get("field_sep", "mb-3")
+    field_sep = options.get("field_sep", constants.DEFAULT_FIELD_SEP)
     widget_attr = kwargs
     if form.is_bound:
         add_classes = "is_invalid" if field.errors else "is_valid"
@@ -127,21 +110,6 @@ def render_widget(context, form, form_field, **kwargs):
         render = f"<div {div_attrs}>{widget}{label}{errors}{help_text}</div>"
     else:
         render = f"<div {div_attrs}>{label}{widget}{errors}{help_text}</div>"
-
-    #     if field.errors:
-    #
-    #         { %
-    #         for error in field.errors %}
-    #         < div
-    #
-    #         class ="invalid-feedback" >
-    #
-    #         {{error}}
-    #     < / div >
-    #
-    #
-    # { % endfor %}
-
     return mark_safe(render)
 
 
@@ -149,8 +117,8 @@ def render_widget(context, form, form_field, **kwargs):
 def get_fieldset(form):
     """returns the fieldsets of a form if available or generates a fieldset as a
     list of all fields"""
-    if hasattr(form, "fieldsets"):
-        return form.fieldsets
-    elif hasattr(form, "get_fieldsets") and callable(form.get_fieldsets):
+    if hasattr(form, "get_fieldsets") and callable(form.get_fieldsets):
         return form.get_fieldsets()
+    elif hasattr(form, "Meta") and hasattr(form.Meta, "fieldsets"):
+        return form.Meta.fieldsets
     return ((None, {"fields": [field.name for field in form.visible_fields()]}),)

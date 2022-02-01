@@ -1,3 +1,5 @@
+import hashlib
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
@@ -11,6 +13,7 @@ mixin_factory = settings.get_forms(forms_module)
 
 
 class ContactForm(forms.Form):
+
     email = forms.EmailField(label=_("Email"))
     subject = forms.CharField(label=_("Subject"), required=False)
     content = forms.CharField(
@@ -25,22 +28,59 @@ class ContactForm(forms.Form):
         "floating_labels": True,
     }
 
-    fieldsets = (
-        (
-            "Contact form",
-            {
-                "floating": True,
-                #                          "classes": ("collapse", "show",),
-                "fields": (
-                    (
-                        "email",
-                        "subject",
+    class Meta:
+        verbose_name = _("Contact form")
+        fieldsets = (
+            (
+                "Contact form",
+                {
+                    "floating": True,
+                    #                          "classes": ("collapse", "show",),
+                    "fields": (
+                        (
+                            "email",
+                            "subject",
+                        ),
+                        "content",
                     ),
-                    "content",
-                ),
-            },
-        ),
+                },
+            ),
+        )
+
+
+_form_registry = {}
+
+
+def verbose_name(form_class):
+    """returns the verbose_name property of a Meta class if present or else
+    splits the camel-cased form class name"""
+    if hasattr(form_class, "Meta") and hasattr(form_class.Meta, "verbose_name"):
+        return getattr(form_class.Meta, "verbose_name")
+    class_name = form_class.__name__.rsplit(".", 1)[-1]
+    from re import finditer
+
+    matches = finditer(
+        ".+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)", class_name
     )
+    return " ".join(m.group(0) for m in matches)
+
+
+def get_registered_forms():
+    """Creates a tuple for a ChoiceField to select form"""
+    return tuple(
+        (hash, verbose_name(form_class)) for hash, form_class in _form_registry.items()
+    )
+
+
+def register(form_class):
+    """Function to call or decorator for a Form class to make it available for the
+    djangocms_frontend.contrib.forms plugin"""
+    hash = hashlib.sha1(form_class.__name__.encode("utf-8")).hexdigest()
+    _form_registry.update({hash: form_class})
+    return form_class
+
+
+register(ContactForm)
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
@@ -60,6 +100,13 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
             ]
         }
         untangled_fields = ("tag_type",)
+
+    form_selection = forms.ChoiceField(
+        label=_("Form"),
+        required=True,
+        initial="",
+        choices=get_registered_forms,
+    )
 
     form_submit_message = forms.CharField(
         label=_("Submit message"),
