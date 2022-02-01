@@ -1,4 +1,4 @@
-from djangocms_frontend.settings import DEVICE_SIZES
+from djangocms_bootstrap4.constants import DEVICE_SIZES
 
 
 def breakpoints(props):
@@ -166,7 +166,7 @@ plugin_migrations = {
         "picture_rounded",
         "picture_thumbnail",
         "link_page -> internal_link",
-        "image",
+        "picture",
         "thumbnail_options",
         "use_responsive_image",
         "attributes",

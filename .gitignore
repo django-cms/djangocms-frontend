@@ -29,3 +29,5 @@ package-lock.json
 local.sqlite
 /docs/_build/
 
+/filer_public/
+/filer_public_thumbnails/

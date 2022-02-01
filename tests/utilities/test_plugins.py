@@ -79,7 +79,6 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        print("XXX", response.content.decode("utf-8"))
         self.assertContains(response, '<ul class="empty-toc"></ul>')
         self.assertContains(response, '<h2 id="id1" >Welcome to django CMS!</h2>')
         self.assertContains(
