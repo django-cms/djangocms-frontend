@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
 
@@ -9,7 +10,6 @@ register = template.Library()
 attr_dict = constants.attr_dict
 default_attr = constants.default_attr
 
-OPTIONS = "options"
 
 try:
     from crispy_forms.helper import FormHelper
@@ -27,6 +27,14 @@ except ImportError:
             self.form = form
 
 
+global_options = getattr(settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
+
+
+def get_option(form, option, default=None):
+    form_options = getattr(getattr(form, "Meta", None), "options", {})
+    return form_options.get(option, global_options.get(option, default))
+
+
 @register.filter
 def add_placeholder(form):
     """Adds placeholder based on a form field's title"""
@@ -41,10 +49,9 @@ def add_placeholder(form):
 def render_form(form, **kwargs):
     """Renders form either with crispy_forms if installed and form has helper or with
     djangocms-frontend's means"""
-    options = getattr(getattr(form, "Meta", None), OPTIONS, {})
-    if False and crispy_forms_installed:
+    if crispy_forms_installed:
         helper = kwargs.pop("helper", None) or getattr(form, "helper", None)
-        if helper is None and options.get("crispy_form", False):
+        if helper is None and get_option(form, "crispy_form"):
             helper = FormHelper(form=form)
         if helper is not None:
             helper.form_tag = False
@@ -79,9 +86,8 @@ def render_widget(context, form, form_field, **kwargs):
     field = get_bound_field(form, form_field)
     if field is None:
         return ""
-    options = getattr(getattr(form, "Meta", None), OPTIONS, {})
-    floating_labels = options.get("floating_labels", False)
-    field_sep = options.get("field_sep", constants.DEFAULT_FIELD_SEP)
+    floating_labels = get_option(form, "floating_labels")
+    field_sep = get_option(form, "field_sep", constants.DEFAULT_FIELD_SEP)
     widget_attr = kwargs
     if form.is_bound:
         add_classes = "is_invalid" if field.errors else "is_valid"

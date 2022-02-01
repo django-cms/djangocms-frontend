@@ -64,7 +64,7 @@ class ContactForm(forms.Form):
         }
         fieldsets = (
             (
-                "Contact form",
+                None,
                 {
                     "fields": (
                         (
