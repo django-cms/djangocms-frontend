@@ -177,7 +177,7 @@ With these three additions, all grid container plugins will now have
 additional fields to define abckground images to cover the container
 area.
 
-If the theme is taken from the path djangocms-frontend will fall back to
+If the theme is taken out of the path djangocms-frontend will fall back to
 its basic functionality, i.e. the background images will not be shown.
 As long as plugins are not edited the background image information will
 be preserved.

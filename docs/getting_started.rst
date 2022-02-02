@@ -310,6 +310,26 @@ documentation.
 Card component
 ==============
 
+A card is a flexible and extensible content container. It includes options for
+headers and footers, a wide variety of content, contextual background colors,
+and powerful display options.
+
+A card consists of the card wrapper itself, the Card Plugin. It can contain
+one ore more instances of a Card Inner Plugin for header, body or footer, but
+also potentially an Image Plugin for the card image or list group components.
+
+Cards can be grouped by a Card Layout component offering the ability group cards
+or display a grid of cards. The latter can be controlled by responsive tools.
+
+.. image:: screenshots/card-example.png
+
+The corresponding plugin tree is here:
+
+.. image:: screenshots/card-plugins.png
+    :width: 825
+
+
+
 Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.0/components/card/>`_
 documentation.
 
@@ -330,11 +350,21 @@ The `Collapse <https://getbootstrap.com/docs/5.0/components/collapse/>`_
 hides text behind its headline and offers the user a trigger (e.g., a
 button) to reveal itself.
 
+Compared to the accordion component the collapse component often is more
+flexible but also requires more detailed styling.
+
 .. index::
     single: Jumbotron
 
 Jumbotron component
 ===================
+
+The jumbotron component is a large header.
+
+.. note::
+
+    The jumbotron header is not reflected
+    by the table of contents component.
 
 .. index::
     single: Link
@@ -343,8 +373,25 @@ Jumbotron component
 Link / Button component
 =======================
 
+
+
+List group component
+====================
+
+List groups are a flexible and powerful component for displaying a series of
+content. Modify and extend them to support just about any content within.
+
+The component consists of a wrapper - ListGroup Plugin - and the items of the
+list - ListGroupItem Plugin. If the list item is a link it suffices to instert
+a Link Plugin directly as a child of the ListGroup Plugin.
+
+
+
+
 Media component
 ===============
+
+
 
 .. index::
     single: Picture
@@ -352,6 +399,10 @@ Media component
 
 Picture / image component
 =========================
+
+The image or picture component make responsive picture uploads available as
+well as responsive embedding of external pitures.
+
 
 .. index::
     single: Spacing
@@ -371,6 +422,8 @@ Blockquote component
 
 Code component
 ==============
+
+Very nice to have code snippets on your site, either inline or as a code block.
 
 .. index::
     single: Figure

@@ -32,4 +32,14 @@ class Migration(migrations.Migration):
             },
             bases=("djangocms_frontend.frontenduiitem",),
         ),
+        migrations.CreateModel(
+            name="CardLayout",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
     ]

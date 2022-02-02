@@ -124,7 +124,7 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     def save_model(self, request, obj, form, change):
         new_card = obj.id is None
         super().save_model(request, obj, form, change)
-        if new_card and obj.card_type == "card":
+        if new_card:
             obj.add_child(
                 instance=models.CardInner(
                     parent=obj,

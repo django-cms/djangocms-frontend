@@ -1,11 +1,16 @@
 class LinkRenderMixin:
     def render(self, context, instance, placeholder):
         link_classes = []
-        parent = context.get("parent", None)
-        if parent and parent.ui_item == "ListGroup":
+        if instance.parent and instance.parent.plugin_type == "ListGroupPlugin":
             link_classes.append("list-group-item")
             link_classes.append("list-group-item-action")
             background_prefix = "list-group-item"
+        elif (
+            instance.link_type == "link"
+            and instance.parent
+            and instance.parent.plugin_type == "CardInnerPlugin"
+        ):
+            link_classes.append("card-link")
         else:
             background_prefix = "btn"
         if instance.link_context:

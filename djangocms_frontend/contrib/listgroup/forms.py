@@ -62,5 +62,6 @@ class ListGroupItemForm(EntangledModelForm):
         label=_("State"),
         choices=settings.EMPTY_CHOICE + LISTGROUP_STATE_CHOICES,
         initial=settings.EMPTY_CHOICE[0][0],
+        required=False,
     )
     attributes = AttributesFormField()
