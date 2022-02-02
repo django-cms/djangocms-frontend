@@ -9,7 +9,7 @@ CARD_COLOR_STYLE_CHOICES = COLOR_STYLE_CHOICES + (("transparent", _("Transparent
 CARD_TEXT_STYLES = COLOR_STYLE_CHOICES + (("white", _("White")),)
 
 
-class Card(FrontendUIItem):
+class CardLayout(FrontendUIItem):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -20,10 +20,25 @@ class Card(FrontendUIItem):
 
     def get_short_description(self):
         text = "({})".format(self.card_type)
+        return text
+
+
+class Card(FrontendUIItem):
+    """
+    Components > "Card" Plugin
+    https://getbootstrap.com/docs/5.0/components/card/
+    """
+
+    class Meta:
+        proxy = True
+
+    def get_short_description(self):
         if self.card_context and self.card_outline:
-            text += " .border-{}".format(self.card_context)
+            text = ".border-{}".format(self.card_context)
         elif self.card_context:
-            text += " .bg-{}".format(self.card_context)
+            text = ".bg-{}".format(self.card_context)
+        else:
+            text = ""
         if self.card_alignment:
             text += " .{}".format(self.card_alignment)
         return text

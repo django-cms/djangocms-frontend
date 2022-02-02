@@ -56,6 +56,17 @@ def get_plugin_template(instance, prefix, name, templates):
     return template_path
 
 
+def first_choice(choices):
+    for value, verbose in choices:
+        if not isinstance(verbose, (tuple, list)):
+            return value
+        else:
+            first = first_choice(value)
+            if first is not None:
+                return first
+    return None
+
+
 # use mark_safe_lazy to delay the translation when using mark_safe
 # otherwise they will not be added to /locale/
 # https://docs.djangoproject.com/en/1.11/topics/i18n/translation/#other-uses-of-lazy-in-delayed-translations

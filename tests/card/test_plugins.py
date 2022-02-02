@@ -28,7 +28,6 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CardPlugin.__name__,
             language=self.language,
             config=dict(
-                card_type="card-group",
                 card_context="transparent",
                 card_outline=True,
                 card_alignment="text-start",
@@ -41,7 +40,6 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "card-group")
         self.assertContains(response, "border-transparent")
         self.assertContains(response, "text-white")
         self.assertContains(response, "text-start")
@@ -52,7 +50,6 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CardPlugin.__name__,
             language=self.language,
             config=dict(
-                card_type="card-group",
                 card_context="transparent",
             ),
         )
@@ -63,15 +60,11 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            (
-                '<div class="card-group bg-transparent">'
-                in response.content.decode("utf-8")
-            )
+            ('<div class="card bg-transparent">' in response.content.decode("utf-8"))
             or (
-                '<div class="bg-transparent card-group">'
-                in response.content.decode("utf-8")
+                '<div class="bg-transparent card">' in response.content.decode("utf-8")
             ),
-            f'<div class="card-group bg-transparent"> not found in {response.content.decode("utf-8")}',
+            f'<div class="card bg-transparent"> not found in {response.content.decode("utf-8")}',
         )
 
     def test_card_inner_plugin(self):

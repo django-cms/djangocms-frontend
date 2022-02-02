@@ -1,6 +1,6 @@
 class CardRenderMixin:
     def render(self, context, instance, placeholder):
-        card_classes = [instance.card_type]
+        card_classes = []
         if instance.card_context and instance.card_outline:
             card_classes.append("border-{}".format(instance.card_context))
         elif instance.card_context:
@@ -11,7 +11,7 @@ class CardRenderMixin:
             card_classes.append("text-{}".format(instance.card_text_color))
         if getattr(instance, "card_full_height", False):
             card_classes.append("h-100")
-        if instance.parent and instance.parent.plugin_type == "CardPlugin":
+        if instance.parent and instance.parent.plugin_type == "CardLayoutPlugin":
             if instance.parent.get_plugin_instance()[0].card_type == "row":
                 card_classes.append("h-100")
         context["add_classes"] = card_classes

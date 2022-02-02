@@ -1,11 +1,11 @@
 {% load cms_tags frontend %}{% spaceless %}
-    {% if instance.parent.plugin_type == "CardPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}<div class="col">{% endif %}
-    <{{ instance.tag_type }} {% add_class instance.attributes add_classes %}>
+    {% if instance.parent.plugin_type == "CardLayoutPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}<div class="col">{% endif %}
+    <{{ instance.tag_type }} {% add_class instance.attributes "card" add_classes %}>
     {% with parent=instance %}
         {% for plugin in instance.child_plugin_instances %}
             {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
         {% endfor %}
     {% endwith %}
     </{{ instance.tag_type }}>
-    {% if instance.parent.plugin_type == "CardPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}</div>{% endif %}
+    {% if instance.parent.plugin_type == "CardLayoutPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}</div>{% endif %}
 {% endspaceless %}

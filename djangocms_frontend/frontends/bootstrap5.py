@@ -90,4 +90,7 @@ FRAMEWORK_PLUGIN_INFO = {
         "vertical_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#vertical-alignment",
         "horizontal_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#horizontal-alignment",
     },
+    "Card": {
+        "card_type_link": "https://getbootstrap.com/docs/5.1/components/card/#card-layout",
+    },
 }

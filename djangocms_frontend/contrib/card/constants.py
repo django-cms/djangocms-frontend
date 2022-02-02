@@ -1,7 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-CARD_TYPE_CHOICES = (
-    ("card", _("Card")),
+CARD_LAYOUT_TYPE_CHOICES = (
     ("card-group", _("Card group")),
     ("row", _("Grid cards")),  # Removed in 5
 )

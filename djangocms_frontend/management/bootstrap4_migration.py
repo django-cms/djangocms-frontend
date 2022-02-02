@@ -237,11 +237,18 @@ def x002_replace_card_deck(obj, new_obj):
         print("* Detected bootstrap v4 card-deck which is not part of bootstrap5")
         print("  Replaced it with grid tools: 'row row-cols'")
         new_obj.config["card_type"] = "row"
+    if obj.card_type == "card-deck" or obj.card_type == "card-group":
+        new_obj.plugin_type = "CardLayoutPlugin"
+        new_obj.ui_item = "CardLayout"
     classes = obj.attributes.get("class", "").split()
     if "h-100" in classes:
         classes.remove("h-100")
         new_obj.config["card_full_height"] = True
         new_obj.config["attributes"]["class"] = " ".join(classes)
+    if new_obj["config"]["card_alignment"] == "text-left":
+        new_obj["config"]["card_alignment"] = "text-start"
+    elif new_obj["config"]["card_alignment"] == "text-right":
+        new_obj["config"]["card_alignment"] = "text-end"
 
 
 def a001_alignment(obj, new_obj, field):

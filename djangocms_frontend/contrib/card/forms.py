@@ -8,13 +8,15 @@ from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
 from ...fields import AttributesFormField, ColoredButtonGroup
+from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
+from .. import card
 from ..grid.constants import GRID_SIZE
 from ..grid.forms import GridColumnForm
 from .constants import (
     CARD_ALIGNMENT_CHOICES,
     CARD_INNER_TYPE_CHOICES,
-    CARD_TYPE_CHOICES,
+    CARD_LAYOUT_TYPE_CHOICES,
 )
 
 # card allow for a transparent color
@@ -24,8 +26,10 @@ CARD_COLOR_STYLE_CHOICES = settings.COLOR_STYLE_CHOICES + (
 
 CARD_TEXT_STYLES = COLOR_STYLE_CHOICES + (("white", _("White")),)
 
+mixin_factory = settings.get_forms(card)
 
-class CardForm(EntangledModelForm):
+
+class CardLayoutForm(mixin_factory("CardLayout"), EntangledModelForm):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -36,6 +40,41 @@ class CardForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "card_type",
+                "attributes",
+            ]
+        }
+        untangled_fields = (
+            "tag_type",
+            "create",
+        )
+        css = settings.ADMIN_CSS
+
+    create = forms.IntegerField(
+        label=_("Create cards"),
+        help_text=_("Number of cards to create when saving."),
+        required=False,
+        min_value=0,
+        max_value=100,
+    )
+    card_type = forms.ChoiceField(
+        label=_("Card type"),
+        choices=CARD_LAYOUT_TYPE_CHOICES,
+        initial=first_choice(CARD_LAYOUT_TYPE_CHOICES),
+        help_text=link_to_framework_doc("CardLayout", "card_type_link"),
+    )
+    attributes = AttributesFormField()
+
+
+class CardForm(mixin_factory("Card"), EntangledModelForm):
+    """
+    Components > "Card" Plugin
+    https://getbootstrap.com/docs/5.0/components/card/
+    """
+
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
                 "card_context",
                 "card_alignment",
                 "card_outline",
@@ -47,11 +86,6 @@ class CardForm(EntangledModelForm):
         untangled_fields = ("tag_type",)
         css = settings.ADMIN_CSS
 
-    card_type = forms.ChoiceField(
-        label=_("Card type"),
-        choices=CARD_TYPE_CHOICES,
-        initial=CARD_TYPE_CHOICES[0][0],
-    )
     card_context = forms.ChoiceField(
         label=_("Background context"),
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
@@ -85,7 +119,7 @@ class CardForm(EntangledModelForm):
     attributes = AttributesFormField()
 
 
-class CardInnerForm(EntangledModelForm):
+class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/

@@ -10,6 +10,63 @@ mixin_factory = settings.get_renderer(card)
 
 
 @plugin_pool.register_plugin
+class CardLayoutPlugin(mixin_factory("CardLayout"), CMSPluginBase):
+    """
+    Components > "Card" Plugin
+    https://getbootstrap.com/docs/5.0/components/card/
+    """
+
+    name = _("Card layout")
+    module = _("Frontend")
+    model = models.CardLayout
+    form = forms.CardLayoutForm
+    render_template = f"djangocms_frontend/{settings.framework}/card_layout.html"
+    change_form_template = "djangocms_frontend/admin/card_layout.html"
+    allow_children = True
+    child_classes = [
+        "CardPlugin",
+    ]
+
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": (
+                    (
+                        "create",
+                        "card_type",
+                    ),
+                )
+            },
+        ),
+        (
+            _("Advanced settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "tag_type",
+                    "attributes",
+                ),
+            },
+        ),
+    ]
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        data = form.cleaned_data
+        for x in range(data["create"] if data["create"] is not None else 0):
+            col = models.Card(
+                parent=obj,
+                placeholder=obj.placeholder,
+                language=obj.language,
+                position=obj.numchild,
+                plugin_type=CardPlugin.__name__,
+                ui_item=models.Card.__class__.__name__,
+            ).initialize_from_form(forms.CardForm)
+            obj.add_child(instance=col)
+
+
+@plugin_pool.register_plugin
 class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     """
     Components > "Card" Plugin
@@ -24,7 +81,6 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     child_classes = [
-        "CardPlugin",
         "CardInnerPlugin",
         "ListGroupPlugin",
         "ImagePlugin",
@@ -36,10 +92,7 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
             None,
             {
                 "fields": (
-                    (
-                        "card_type",
-                        "card_alignment",
-                    ),
+                    "card_alignment",
                     ("card_context", "card_text_color"),
                     (
                         "card_outline",
