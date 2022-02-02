@@ -73,7 +73,7 @@ FRAMEWORK_PLUGIN_INFO = {
     "GridColumn": {
         "row_links": json.dumps(
             [
-                "https://getbootstrap.com/docs/5.0/layout/grid/#grid-options",
+                "https://getbootstrap.com/docs/5.1/layout/grid/#grid-options",
                 "https://getbootstrap.com/docs/5.1/layout/columns/#reordering",
                 "https://getbootstrap.com/docs/5.1/layout/columns/#offsetting-columns",
                 "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
@@ -82,6 +82,11 @@ FRAMEWORK_PLUGIN_INFO = {
         ),
     },
     "GridRow": {
+        "row_links": json.dumps(
+            [
+                "https://getbootstrap.com/docs/5.1/layout/grid/#row-columns",
+            ]
+        ),
         "vertical_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#vertical-alignment",
         "horizontal_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#horizontal-alignment",
     },

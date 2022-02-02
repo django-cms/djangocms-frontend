@@ -67,7 +67,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
             },
         ),
         (
-            _("Row-cols settings"),
+            _("Responsive settings"),
             {
                 "fields": (
                     ["row_cols_{}".format(size) for size in settings.DEVICE_SIZES],

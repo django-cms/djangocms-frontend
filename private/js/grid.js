@@ -12,8 +12,9 @@ import { iconTemplate } from 'components/templates'
 
 $(() => {
     // Row plugin
-    if ($('.djangocms-frontend-row').length) {
-        const static_url = $('.djangocms-frontend-row').data().static;
+        const row = $('.djangocms-frontend-row')
+    if (row.length) {
+        const static_url = row.data().static;
 
         // Bootstrap 5 Grid Row - Vertical Alignment
         new ButtonGroup({
@@ -29,14 +30,16 @@ $(() => {
                 'flex-content-around', 'flex-content-between'],
         });
                 // Bootstrap 5 Grid Column - Responsive Settings
+
         new GridLayout({
-            sizes: column.data().sizes,
-            rows: column.data().rows,
-            reset: column.data().reset,
+             selector: `
+                .form-row.field-row_cols_xs
+            `,
+            sizes:  row.data().sizes,
+            rows:   row.data().rows,
+            links:  row.data().links,
             static: static_url,
         });
-
-
         $('.form-row.field-create > div').before(
             iconTemplate('columns', static_url)
         );
@@ -45,7 +48,7 @@ $(() => {
     // Column plugin
     const column = $('.djangocms-frontend-column');
     if (column.length) {
-        const static_url = $('.djangocms-frontend-column').data().static;
+        const static_url = column.data().static;
 
         // Bootstrap 5 Grid Column - Alignment
         new ButtonGroup({
@@ -55,6 +58,13 @@ $(() => {
         });
         // Bootstrap 5 Grid Column - Responsive Settings
         new GridLayout({
+            selector: `
+                .form-row.field-xs_col,
+                .form-row.field-xs_order,
+                .form-row.field-xs_offset,
+                .form-row.field-xs_ms,
+                .form-row.field-xs_me
+            `,
             sizes: column.data().sizes,
             rows: column.data().rows,
             reset: column.data().reset,

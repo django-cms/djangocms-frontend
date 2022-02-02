@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 17:49+0100\n"
+"POT-Creation-Date: 2022-02-02 12:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Peter Wischer <peter.wischer@lwl.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Accordion"
 msgstr "Akkordion"
 
-#: contrib/accordion/cms_plugins.py:20 contrib/accordion/cms_plugins.py:61
+#: contrib/accordion/cms_plugins.py:20 contrib/accordion/cms_plugins.py:82
 #: contrib/alert/cms_plugins.py:20 contrib/badge/cms_plugins.py:20
 #: contrib/card/cms_plugins.py:20 contrib/card/cms_plugins.py:88
 #: contrib/carousel/cms_plugins.py:23 contrib/carousel/cms_plugins.py:68
 #: contrib/collapse/cms_plugins.py:20 contrib/collapse/cms_plugins.py:58
 #: contrib/collapse/cms_plugins.py:93 contrib/content/cms_plugins.py:20
 #: contrib/content/cms_plugins.py:49 contrib/content/cms_plugins.py:78
-#: contrib/forms/cms_plugins.py:241 contrib/grid/cms_plugins.py:22
-#: contrib/grid/cms_plugins.py:52 contrib/grid/cms_plugins.py:124
+#: contrib/forms/cms_plugins.py:243 contrib/grid/cms_plugins.py:21
+#: contrib/grid/cms_plugins.py:51 contrib/grid/cms_plugins.py:123
 #: contrib/image/cms_plugins.py:23 contrib/jumbotron/cms_plugins.py:20
 #: contrib/link/cms_plugins.py:53 contrib/listgroup/cms_plugins.py:20
 #: contrib/listgroup/cms_plugins.py:52 contrib/media/cms_plugins.py:20
@@ -41,15 +41,15 @@ msgstr "Akkordion"
 msgid "Frontend"
 msgstr "Frontend"
 
-#: contrib/accordion/cms_plugins.py:41 contrib/accordion/cms_plugins.py:81
+#: contrib/accordion/cms_plugins.py:44 contrib/accordion/cms_plugins.py:102
 #: contrib/alert/cms_plugins.py:38 contrib/badge/cms_plugins.py:38
 #: contrib/card/cms_plugins.py:52 contrib/card/cms_plugins.py:115
 #: contrib/carousel/cms_plugins.py:42 contrib/carousel/cms_plugins.py:96
 #: contrib/collapse/cms_plugins.py:37 contrib/collapse/cms_plugins.py:73
 #: contrib/collapse/cms_plugins.py:108 contrib/content/cms_plugins.py:37
 #: contrib/content/cms_plugins.py:66 contrib/content/cms_plugins.py:95
-#: contrib/forms/cms_plugins.py:262 contrib/grid/cms_plugins.py:32
-#: contrib/grid/cms_plugins.py:79 contrib/grid/cms_plugins.py:161
+#: contrib/forms/cms_plugins.py:271 contrib/grid/cms_plugins.py:31
+#: contrib/grid/cms_plugins.py:78 contrib/grid/cms_plugins.py:159
 #: contrib/image/cms_plugins.py:42 contrib/jumbotron/cms_plugins.py:30
 #: contrib/link/cms_plugins.py:61 contrib/listgroup/cms_plugins.py:32
 #: contrib/listgroup/cms_plugins.py:71 contrib/media/cms_plugins.py:29
@@ -59,19 +59,31 @@ msgstr "Frontend"
 msgid "Advanced settings"
 msgstr "Erweiterte Einstellungen"
 
-#: contrib/accordion/cms_plugins.py:60
+#: contrib/accordion/cms_plugins.py:67
+msgid "Item {}"
+msgstr "Element {}"
+
+#: contrib/accordion/cms_plugins.py:81
 msgid "Accordion item"
 msgstr "Akkordion-Element"
 
-#: contrib/accordion/forms.py:32
+#: contrib/accordion/forms.py:35
+msgid "Create accordion items"
+msgstr "Akkordion-Element erstellen"
+
+#: contrib/accordion/forms.py:36
+msgid "Number of accordion items to create when saving."
+msgstr "Anzahl der Akkordion-Elemente, die beim Speichern erstellt werden soll."
+
+#: contrib/accordion/forms.py:43
 msgid "Header type"
 msgstr "Überschritften-Typ"
 
-#: contrib/accordion/forms.py:38
+#: contrib/accordion/forms.py:49
 msgid "Integrate into parent"
 msgstr "In Eltern-Element einfügen"
 
-#: contrib/accordion/forms.py:42
+#: contrib/accordion/forms.py:53
 msgid ""
 "Removes the default background-color, some borders, and some rounded corners "
 "to render accordions edge-to-edge with their parent container "
@@ -79,15 +91,15 @@ msgstr ""
 "Entfernt die Hintergrundfarbe, Rahmen und ausgewählte abgerundete Ecken, um "
 "Akkordions direkt in ihren Eltern-Elementen anzuzeigen."
 
-#: contrib/accordion/forms.py:68 contrib/card/constants.py:17
+#: contrib/accordion/forms.py:79 contrib/card/constants.py:17
 msgid "Header"
 msgstr "Überschrift"
 
-#: contrib/accordion/forms.py:72
+#: contrib/accordion/forms.py:83
 msgid "Item open"
 msgstr "Offenes element"
 
-#: contrib/accordion/forms.py:75
+#: contrib/accordion/forms.py:86
 msgid "Initially shows this accordion item on page load."
 msgstr "Zeigt nach dem Laden dieses Akkordion-Element."
 
@@ -148,15 +160,15 @@ msgstr "Card-Gruppe"
 msgid "Grid cards"
 msgstr "Grid-Cards"
 
-#: contrib/card/constants.py:10 settings.py:42
+#: contrib/card/constants.py:10 settings.py:35
 msgid "Left"
 msgstr "Links"
 
-#: contrib/card/constants.py:11 settings.py:43
+#: contrib/card/constants.py:11 settings.py:36
 msgid "Center"
 msgstr "Mitte"
 
-#: contrib/card/constants.py:12 settings.py:44
+#: contrib/card/constants.py:12 settings.py:37
 msgid "Right"
 msgstr "Rechts"
 
@@ -223,7 +235,7 @@ msgstr "Innen-Typ"
 msgid "Define the structure of the plugin."
 msgstr "Definiert die Struktur des Plugins."
 
-#: contrib/card/forms.py:119 contrib/grid/forms.py:155
+#: contrib/card/forms.py:119 contrib/grid/forms.py:135
 msgid "Content alignment"
 msgstr "Inhalts-Ausrichtung"
 
@@ -241,7 +253,7 @@ msgid "Link settings"
 msgstr "Link-Einstellungen"
 
 #: contrib/carousel/constants.py:19 contrib/image/forms.py:56
-#: contrib/link/forms.py:30 contrib/tabs/constants.py:23 settings.py:48
+#: contrib/link/forms.py:30 contrib/tabs/constants.py:23 settings.py:44
 msgid "Default"
 msgstr "Standard"
 
@@ -336,7 +348,7 @@ msgstr ""
 msgid "Slide image"
 msgstr "Karussell-Bild"
 
-#: contrib/carousel/forms.py:154 contrib/forms/forms.py:17
+#: contrib/carousel/forms.py:154 contrib/contact_form/forms.py:88
 msgid "Content"
 msgstr "Inhalt"
 
@@ -390,6 +402,38 @@ msgstr "Kennung, welche den Auslöser mit dem Collapse-Kontainer verbindet."
 msgid "There is no configuration required here."
 msgstr "Keine Konfiguration nötig"
 
+#: contrib/contact_form/forms.py:35
+msgid "Are you a robot?"
+msgstr ""
+
+#: contrib/contact_form/forms.py:47
+msgid "Please don't check this box."
+msgstr ""
+
+#: contrib/contact_form/forms.py:61
+msgid "Contact form"
+msgstr "Kontaktformular"
+
+#: contrib/contact_form/forms.py:85
+msgid "Email"
+msgstr "Email"
+
+#: contrib/contact_form/forms.py:86
+msgid "Subject"
+msgstr "Betreff"
+
+#: contrib/contact_form/templates/djangocms_frontend/contact_form_body.txt:1
+msgid "Message from"
+msgstr "Nachricht von"
+
+#: contrib/contact_form/templates/djangocms_frontend/contact_form_success.html:3
+msgid "Thank you"
+msgstr "Danke"
+
+#: contrib/contact_form/templates/djangocms_frontend/contact_form_success.html:4
+msgid "Your message has been sent."
+msgstr "Die Nachricht wurde verschickt."
+
 #: contrib/content/cms_plugins.py:19 contrib/content/forms.py:31
 msgid "Code"
 msgstr "Code"
@@ -442,36 +486,32 @@ msgstr "Bildlegende"
 msgid "No content in response from"
 msgstr "Kein Inhalt"
 
-#: contrib/forms/cms_plugins.py:240
+#: contrib/forms/cms_plugins.py:242 contrib/forms/forms.py:68
 msgid "Form"
 msgstr "Formular"
 
-#: contrib/forms/cms_plugins.py:252
+#: contrib/forms/cms_plugins.py:261
 msgid "Submit button"
 msgstr "Absende-Button"
 
-#: contrib/forms/forms.py:14
-msgid "Email"
-msgstr "Email"
+#: contrib/forms/forms.py:37
+msgid "No forms registered"
+msgstr "Keine Formulare registriert"
 
-#: contrib/forms/forms.py:15
-msgid "Subject"
-msgstr "Betreff"
-
-#: contrib/forms/forms.py:65
+#: contrib/forms/forms.py:75
 msgid "Submit message"
 msgstr "Absende-Aufforderung"
 
-#: contrib/forms/forms.py:66
-#: contrib/forms/templates/djangocms_frontend/bootstrap5/form.html:10
+#: contrib/forms/forms.py:76
+#: contrib/forms/templates/djangocms_frontend/bootstrap5/form.html:11
 msgid "Submit"
 msgstr "Absenden"
 
-#: contrib/forms/forms.py:70
+#: contrib/forms/forms.py:80
 msgid "Submit context"
 msgstr "Kontext Absende-Button"
 
-#: contrib/forms/forms.py:77
+#: contrib/forms/forms.py:87
 msgid "Submit button alignment"
 msgstr "Ausrichtung Absende-Button"
 
@@ -487,46 +527,41 @@ msgstr ""
 msgid "Only unique slugs accepted for form views"
 msgstr "Nur eindeutige Slugs für Formular-Anschten akzeptiert."
 
-#: contrib/grid/cms_plugins.py:21 contrib/grid/constants.py:19
+#: contrib/grid/cms_plugins.py:20 contrib/grid/constants.py:19
 msgid "Container"
 msgstr "Kontainer"
 
-#: contrib/grid/cms_plugins.py:51
+#: contrib/grid/cms_plugins.py:50
 msgid "Row"
 msgstr "Zeile"
 
-#: contrib/grid/cms_plugins.py:71
-msgid "Row-cols settings"
-msgstr "Spalten-pro-Row-Einstellung"
-
-#: contrib/grid/cms_plugins.py:123 contrib/grid/constants.py:54
-#: contrib/tabs/constants.py:15
-msgid "Column"
-msgstr "Spalte"
-
-#: contrib/grid/cms_plugins.py:149
+#: contrib/grid/cms_plugins.py:70 contrib/grid/cms_plugins.py:147
 msgid "Responsive settings"
 msgstr "Responsive-Hilfsmittel"
+
+#: contrib/grid/cms_plugins.py:122 contrib/tabs/constants.py:15
+msgid "Column"
+msgstr "Spalte"
 
 #: contrib/grid/constants.py:20
 msgid "Fluid container"
 msgstr "Kontainer mit voller Breite"
 
 #: contrib/grid/constants.py:21
-msgid "SM Container"
-msgstr "Kontainer (klein)"
+msgid "sm container"
+msgstr "sm-Kontainer"
 
 #: contrib/grid/constants.py:22
-msgid "MD Container"
-msgstr "Kontainer (mittel)"
+msgid "md container"
+msgstr "md-Kontainer"
 
 #: contrib/grid/constants.py:23
-msgid "LG Container"
-msgstr "Kontainer (groß)"
+msgid "lg container"
+msgstr "lg-Kontainer"
 
 #: contrib/grid/constants.py:24
-msgid "XL Container"
-msgstr "Kontainer (XL)"
+msgid "xl container"
+msgstr "xl-Kontainer"
 
 #: contrib/grid/constants.py:32
 msgid "Align items start"
@@ -572,19 +607,11 @@ msgstr "Selbst-Ausrichtung Mittig"
 msgid "Align self end"
 msgstr "Selbst-Ausrichtung Ende"
 
-#: contrib/grid/constants.py:54
-msgid "Break"
-msgstr "Umbruch"
-
-#: contrib/grid/constants.py:54
-msgid "Empty"
-msgstr "Leer"
-
-#: contrib/grid/forms.py:42
+#: contrib/grid/forms.py:41
 msgid "Container type"
 msgstr "Kontainer-Typ"
 
-#: contrib/grid/forms.py:47
+#: contrib/grid/forms.py:46
 msgid ""
 "Defines if the grid should use fixed width (<code>.container</code>) or "
 "fluid width (<code>.container-fluid</code>)."
@@ -592,41 +619,31 @@ msgstr ""
 "Definiert ob das Grid eine fixe Breite (<code>.container</code>) oder "
 "fließende Breite (<code>.container-fluid</code>) haben soll."
 
-#: contrib/grid/forms.py:72
+#: contrib/grid/forms.py:71
 msgid "Create columns"
 msgstr "Spalten erstellen"
 
-#: contrib/grid/forms.py:73
+#: contrib/grid/forms.py:72
 msgid "Number of columns to create when saving."
 msgstr "Anzahl der Spalten, die beim Speichern erstellt werden soll."
 
-#: contrib/grid/forms.py:79
+#: contrib/grid/forms.py:78
 msgid "Vertical alignment"
 msgstr "Vertikale Ausrichtung"
 
-#: contrib/grid/forms.py:84 contrib/grid/forms.py:96
-#, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
-msgstr "Mehr in der <a href=\"{link}\" target=\"_blank\">Dokumentation</a>."
-
-#: contrib/grid/forms.py:91
+#: contrib/grid/forms.py:84
 msgid "Horizontal alignment"
 msgstr "Horizontale Ausrichtung"
 
-#: contrib/grid/forms.py:103
+#: contrib/grid/forms.py:90
 msgid "Remove gutters"
 msgstr "Zwischenräume entfernen"
 
-#: contrib/grid/forms.py:106
+#: contrib/grid/forms.py:93
 msgid "Removes the marginal gutters from the grid."
 msgstr "Entfernt die Zwischenräume im Grid,"
 
-#: contrib/grid/forms.py:144
-msgid "Column type"
-msgstr "Spalten-Typ"
-
-#: contrib/grid/forms.py:150
+#: contrib/grid/forms.py:130
 msgid "Column alignment"
 msgstr "Spalten-Ausrichtung"
 
@@ -638,36 +655,41 @@ msgstr[0] "(1 Spalte)"
 msgstr[1] "(%(count)i Spalten)"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:13
-#: frontends/bootstrap5.py:5 frontends/foundation.py:5
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:12
+#: frontends/bootstrap5.py:7 frontends/foundation.py:5
 msgid "Extra small"
 msgstr "Sehr klein"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:14
-#: contrib/link/constants.py:10 frontends/bootstrap5.py:6
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:13
+#: contrib/link/constants.py:10 frontends/bootstrap5.py:8
 #: frontends/foundation.py:6
 msgid "Small"
 msgstr "Klein"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:15
-#: contrib/link/constants.py:11 frontends/bootstrap5.py:7
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:14
+#: contrib/link/constants.py:11 frontends/bootstrap5.py:9
 #: frontends/foundation.py:7
 msgid "Medium"
 msgstr "Mittel"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:16
-#: contrib/link/constants.py:12 frontends/bootstrap5.py:8
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:15
+#: contrib/link/constants.py:12 frontends/bootstrap5.py:10
 #: frontends/foundation.py:8
 msgid "Large"
 msgstr "Groß"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:17
-#: frontends/bootstrap5.py:9 frontends/foundation.py:9
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:16
+#: frontends/bootstrap5.py:11 frontends/foundation.py:9
 msgid "Extra large"
 msgstr "Sehr groß"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:20
 msgid "Column size"
-msgstr "Spalten-Größe"
+msgstr "Spaltengröße"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:21
 msgid "Order"
@@ -688,6 +710,10 @@ msgstr "Rand rechts"
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:26
 msgid "Reset"
 msgstr "Zurücksetzen"
+
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:19
+msgid "Colums per row"
+msgstr "Splaten pro Zeile"
 
 #: contrib/image/cms_plugins.py:22
 msgid "Picture / Image"
@@ -791,9 +817,8 @@ msgid "Link attributes"
 msgstr "Link-Attribute"
 
 #: contrib/image/forms.py:170
-#, fuzzy
 msgid "Attributes apply to the <b>link</b>."
-msgstr "Attribute werden auf die auf den Links angewendet."
+msgstr "Attribute werden auf den <b>Link</b> angewendet."
 
 #: contrib/image/forms.py:176
 msgid "Automatic scaling"
@@ -1142,23 +1167,23 @@ msgstr "Seiten"
 msgid "Device"
 msgstr "Gerät"
 
-#: contrib/utilities/forms.py:61 settings.py:33
+#: contrib/utilities/forms.py:61 settings.py:26
 msgid "Heading 1"
 msgstr "Überschrift 1"
 
-#: contrib/utilities/forms.py:62 settings.py:34
+#: contrib/utilities/forms.py:62 settings.py:27
 msgid "Heading 2"
 msgstr "Überschrift 2"
 
-#: contrib/utilities/forms.py:63 settings.py:35
+#: contrib/utilities/forms.py:63 settings.py:28
 msgid "Heading 3"
 msgstr "Überschrift 3"
 
-#: contrib/utilities/forms.py:64 settings.py:36
+#: contrib/utilities/forms.py:64 settings.py:29
 msgid "Heading 4"
 msgstr "Überschrift 4"
 
-#: contrib/utilities/forms.py:65 settings.py:37
+#: contrib/utilities/forms.py:65 settings.py:30
 msgid "Heading 5"
 msgstr "Überschrift 5"
 
@@ -1219,77 +1244,101 @@ msgstr "HTML-Tag"
 msgid "Select the HTML tag to be used."
 msgstr "HTML-Tag auswählen, der genutzt werden soll."
 
-#: frontends/bootstrap5.py:18 frontends/foundation.py:18
+#: frontends/bootstrap5.py:20 frontends/foundation.py:18
 msgid "Primary"
 msgstr "Primär"
 
-#: frontends/bootstrap5.py:19 frontends/foundation.py:19
+#: frontends/bootstrap5.py:21 frontends/foundation.py:19
 msgid "Secondary"
 msgstr "Sekundär"
 
-#: frontends/bootstrap5.py:20 frontends/foundation.py:20
+#: frontends/bootstrap5.py:22 frontends/foundation.py:20
 msgid "Success"
 msgstr "Erfolg"
 
-#: frontends/bootstrap5.py:21 frontends/foundation.py:21
+#: frontends/bootstrap5.py:23 frontends/foundation.py:21
 msgid "Danger"
 msgstr "Gefahr"
 
-#: frontends/bootstrap5.py:22 frontends/foundation.py:22
+#: frontends/bootstrap5.py:24 frontends/foundation.py:22
 msgid "Warning"
 msgstr "Warnung"
 
-#: frontends/bootstrap5.py:23 frontends/foundation.py:23
+#: frontends/bootstrap5.py:25 frontends/foundation.py:23
 msgid "Info"
 msgstr "Info"
 
-#: frontends/bootstrap5.py:24 frontends/foundation.py:24
+#: frontends/bootstrap5.py:26 frontends/foundation.py:24
 msgid "Light"
 msgstr "Hell"
 
-#: frontends/bootstrap5.py:25 frontends/foundation.py:25
+#: frontends/bootstrap5.py:27 frontends/foundation.py:25
 msgid "Dark"
 msgstr "Dunkel"
 
-#: models.py:14
+#: helpers.py:70
+#, python-brace-format
+msgid ""
+"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgstr "Mehr in der <a href=\"{link}\" target=\"_blank\">Dokumentation</a>."
+
+#: models.py:16
 msgid "UI item"
 msgstr "Frontend-Element"
 
-#: settings.py:81
+#: settings.py:50
 msgid "Fully Centered"
 msgstr "Zentriert"
 
-#: settings.py:82
+#: settings.py:51
 msgid "Top left"
 msgstr "Oben links"
 
-#: settings.py:83
+#: settings.py:52
 msgid "Top center"
 msgstr "Oben Mitte"
 
-#: settings.py:84
+#: settings.py:53
 msgid "Top right"
 msgstr "Oben rechts"
 
-#: settings.py:85
+#: settings.py:54
 msgid "Center left"
 msgstr "Mitte links"
 
-#: settings.py:86
+#: settings.py:55
 msgid "Center right"
 msgstr "Mitte rechts"
 
-#: settings.py:87
+#: settings.py:56
 msgid "Bottom left"
 msgstr "Unten links"
 
-#: settings.py:88
+#: settings.py:57
 msgid "Bottom center"
 msgstr "Unten Mitte"
 
-#: settings.py:89
+#: settings.py:58
 msgid "Bottom right"
 msgstr "Unten rechts"
+
+#~ msgid "SM Container"
+#~ msgstr "Kontainer (klein)"
+
+#~ msgid "MD Container"
+#~ msgstr "Kontainer (mittel)"
+
+#~ msgid "LG Container"
+#~ msgstr "Kontainer (groß)"
+
+#~ msgid "XL Container"
+#~ msgstr "Kontainer (XL)"
+
+#~ msgid "Break"
+#~ msgstr "Umbruch"
+
+#~ msgid "Empty"
+#~ msgstr "Leer"
 
 #~ msgid "Interface"
 #~ msgstr "Inhalte"

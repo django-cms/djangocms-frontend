@@ -63,10 +63,26 @@
         .errors {
             margin-bottom: 0;
         }
+        .field-box-label {
+            display: flex;
+            margin-top: auto;
+            color: #999;
+
+            a {
+                width: 100%;
+                margin-top: auto;
+            }
+
+            .icon {
+                position: relative;
+                top: 3px;
+            }
+        }
+
     }
 }
 
-.djangocms-frontend-column {
+.djangocms-frontend-row, .djangocms-frontend-column {
     .form-row.field-xs_col,
     .form-row.field-xs_order,
     .form-row.field-xs_offset,
@@ -130,6 +146,7 @@
 
             a {
                 width: 100%;
+                margin-top: auto;
             }
 
             .icon {
@@ -138,12 +155,12 @@
             }
         }
 
-        &.field-xs_col .field-box-label a,
-        &.field-xs_offset .field-box-label a,
-        &.field-xs_order .field-box-label a {
-            position: relative;
-            top: 8px;
-        }
+        //&.field-xs_col .field-box-label a,
+        //&.field-xs_offset .field-box-label a,
+        //&.field-xs_order .field-box-label a {
+        //    position: relative;
+        //    top: 8px;
+        //}
 
         // ms/me checkbox
         .field-xs_ms,

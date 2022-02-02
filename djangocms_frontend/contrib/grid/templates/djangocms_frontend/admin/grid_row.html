@@ -1,5 +1,5 @@
 {% extends "djangocms_frontend/admin/base.html" %}
-{% load static %}
+{% load static i18n  %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -7,7 +7,20 @@
 {% endblock %}
 
 {% block field_sets %}
-    <div class="djangocms-frontend djangocms-frontend-row" data-static="{% get_static_prefix %}">
+    <div class="djangocms-frontend djangocms-frontend-row" data-static="{% get_static_prefix %}"
+         data-sizes='[
+            "{% trans 'Extra small' %}",
+            "{% trans 'Small' %}",
+            "{% trans 'Medium' %}",
+            "{% trans 'Large' %}",
+            "{% trans 'Extra large' %}"
+            ]'
+            data-rows='[
+            "{% trans 'Colums per row' %}"
+            ]'
+            data-links='{{ plugin.framework_info.row_links }}'
+    >
         {{ block.super }}
     </div>
 {% endblock %}
+{% block custom_class  %}frontend-grid-icons {{ block.super }}{% endblock %}
