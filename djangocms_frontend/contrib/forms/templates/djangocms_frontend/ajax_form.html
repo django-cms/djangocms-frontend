@@ -30,7 +30,6 @@
                     if (typeof($(node).data().success) === "function") {   // success function attached to form tag?
                         $(node).data().success();
                     }
-                    // softscroll("div#results{{instance.id|safe}}{{form.slug}}");
                 } else if (data.result === 'invalid form') {
                     $(node).find(".all-invalid").addClass("d-none")
                         .find("li").remove();
@@ -73,15 +72,15 @@
                     alert("{% trans 'Network connection or server error. Please try again later. We apologize for the inconvenience.' %}");
                 });
 
-            };
+            }
 
-            var form = $(this);
-            var recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
+            let form = $(this);
+            let recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
             if (recaptcha.length === 1) {
-                var checkExist = setInterval(function () {
+                let checkExist = setInterval(function () {
                     if (window.hasOwnProperty("recaptcha_loaded")) {
                         clearInterval(checkExist);
-                        var gid = grecaptcha.render(recaptcha[0], {
+                        let gid = grecaptcha.render(recaptcha[0], {
                             "callback": function (token) {
                                 form.find(".g-recaptcha-response").val(token);
                                 post_ajax(form);
@@ -107,7 +106,7 @@
                     });
                 }
             }
-        };
+        }
     </script>
 {% endspaceless %}{% endaddtoblock %}
 {% addtoblock 'js' %}<script>

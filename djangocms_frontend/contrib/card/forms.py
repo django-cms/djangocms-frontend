@@ -29,7 +29,7 @@ CARD_TEXT_STYLES = COLOR_STYLE_CHOICES + (("white", _("White")),)
 mixin_factory = settings.get_forms(card)
 
 
-class CardLayoutForm(mixin_factory("CardLayout"), EntangledModelForm):
+class CardLayoutBaseForm(mixin_factory("CardLayout"), EntangledModelForm):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -63,6 +63,24 @@ class CardLayoutForm(mixin_factory("CardLayout"), EntangledModelForm):
         help_text=link_to_framework_doc("CardLayout", "card_type_link"),
     )
     attributes = AttributesFormField()
+
+
+extra_fields_row_cols = {}
+for size in settings.DEVICE_SIZES:
+    extra_fields_row_cols["row_cols_{}".format(size)] = forms.IntegerField(
+        label="row-cols" if size == "xs" else "row-cols-{}".format(size),
+        required=False,
+        min_value=1,
+        max_value=GRID_SIZE,
+    )
+
+CardLayoutForm = type(
+    str("CardLayoutBaseForm"),
+    (CardLayoutBaseForm,),
+    copy(extra_fields_row_cols),
+)
+
+CardLayoutForm.Meta.entangled_fields["config"] += extra_fields_row_cols.keys()
 
 
 class CardForm(mixin_factory("Card"), EntangledModelForm):

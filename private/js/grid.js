@@ -17,18 +17,22 @@ $(() => {
         const static_url = row.data().static;
 
         // Bootstrap 5 Grid Row - Vertical Alignment
-        new ButtonGroup({
-            static: static_url,
-            select: '#id_vertical_alignment',
-            icons: ['align-reset', 'flex-align-start', 'flex-align-center', 'flex-align-end'],
-        });
+        if($('#id_vertical_alignment').length > 0) {
+            new ButtonGroup({
+                static: static_url,
+                select: '#id_vertical_alignment',
+                icons: ['align-reset', 'flex-align-start', 'flex-align-center', 'flex-align-end'],
+            });
+        }
         // Bootstrap 5 Grid Row - Horizontal Alignment
-        new ButtonGroup({
-            static: static_url,
-            select: '#id_horizontal_alignment',
-            icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end',
-                'flex-content-around', 'flex-content-between'],
-        });
+        if($('#id_horizontal_alignment').length > 0) {
+            new ButtonGroup({
+                static: static_url,
+                select: '#id_horizontal_alignment',
+                icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end',
+                    'flex-content-around', 'flex-content-between'],
+            });
+        }
                 // Bootstrap 5 Grid Column - Responsive Settings
 
         new GridLayout({

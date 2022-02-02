@@ -1,3 +1,6 @@
+from djangocms_frontend import settings
+
+
 class CardRenderMixin:
     def render(self, context, instance, placeholder):
         card_classes = []
@@ -30,4 +33,22 @@ class CardInnerRenderMixin:
             if getattr(instance, "text_alignment", None)
             else ""
         )
+        return super().render(context, instance, placeholder)
+
+
+class CardLayoutRenderMixin:
+    def render(self, context, instance, placeholder):
+        def get_grid_values(instance):
+            classes = []
+            for device in settings.DEVICE_SIZES:
+                size = getattr(instance, "row_cols_{}".format(device), None)
+                if isinstance(size, int):
+                    if device == "xs":
+                        classes.append("row-cols-{}".format(int(size)))
+                    else:
+                        classes.append("row-cols-{}-{}".format(device, int(size)))
+            return classes
+
+        context["add_classes"] = instance.card_type
+        context["grid_classes"] = " ".join(get_grid_values(instance))
         return super().render(context, instance, placeholder)

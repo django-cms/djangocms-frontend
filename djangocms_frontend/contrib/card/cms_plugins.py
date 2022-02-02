@@ -33,10 +33,18 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSPluginBase):
             {
                 "fields": (
                     (
-                        "create",
                         "card_type",
+                        "create",
                     ),
                 )
+            },
+        ),
+        (
+            _("Responsive settings"),
+            {
+                "fields": (
+                    ["row_cols_{}".format(size) for size in settings.DEVICE_SIZES],
+                ),
             },
         ),
         (

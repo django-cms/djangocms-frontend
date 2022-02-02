@@ -95,7 +95,6 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
     attributes = AttributesFormField()
 
 
-# convert regular text type fields to number
 extra_fields_column = {}
 for size in settings.DEVICE_SIZES:
     extra_fields_column["row_cols_{}".format(size)] = forms.IntegerField(
