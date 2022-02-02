@@ -24,13 +24,7 @@
         "{% trans 'Margin right' %}"
         ]'
         data-reset="{% trans 'Reset' %}"
-        data-links='[
-        "https://getbootstrap.com/docs/5.0/layout/grid/#grid-options",
-        "https://getbootstrap.com/docs/5.1/layout/columns/#reordering",
-        "https://getbootstrap.com/docs/5.1/layout/columns/#offsetting-columns",
-        "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
-        "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins"
-        ]'
+        data-links='{{ plugin.framework_info.row_links }}'
     >
         {{ block.super }}
     </div>

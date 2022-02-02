@@ -26,21 +26,16 @@ class GridModelTestCase(TestCase):
             instance.get_short_description(),
             "(col-12)",
         )
-        instance.config["column_type"] = "column"
-        self.assertEqual(
-            instance.get_short_description(),
-            "(col-12) .column",
-        )
         instance.config["md_col"] = 12
         instance.config["md_offset"] = 12
         instance.config["xs_offset"] = 12
         self.assertEqual(
             instance.get_short_description(),
-            "(col-12) .column",
+            "(col-12)",
         )
-        instance.config["xs_ml"] = 12
-        instance.config["md_ml"] = 12
+        instance.config["xs_ms"] = 12
+        instance.config["md_ms"] = 12
         self.assertEqual(
             instance.get_short_description(),
-            "(col-12) .column",
+            "(col-12)",
         )

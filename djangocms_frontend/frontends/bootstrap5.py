@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
@@ -66,3 +68,21 @@ SPACER_SIZE_CHOICES = getattr(
         ("5", "* 3"),
     ),
 )
+
+FRAMEWORK_PLUGIN_INFO = {
+    "GridColumn": {
+        "row_links": json.dumps(
+            [
+                "https://getbootstrap.com/docs/5.0/layout/grid/#grid-options",
+                "https://getbootstrap.com/docs/5.1/layout/columns/#reordering",
+                "https://getbootstrap.com/docs/5.1/layout/columns/#offsetting-columns",
+                "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
+                "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
+            ]
+        ),
+    },
+    "GridRow": {
+        "vertical_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#vertical-alignment",
+        "horizontal_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#horizontal-alignment",
+    },
+}

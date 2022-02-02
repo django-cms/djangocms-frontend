@@ -4,7 +4,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
-from djangocms_frontend.helpers import mark_safe_lazy
+from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
 
 from ... import settings
 from ...fields import AttributesFormField
@@ -78,25 +78,13 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
         label=_("Vertical alignment"),
         choices=settings.EMPTY_CHOICE + GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,
         required=False,
-        help_text=mark_safe_lazy(
-            _(
-                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
-            ).format(
-                link="https://getbootstrap.com/docs/5.0/layout/grid/#vertical-alignment"
-            )
-        ),
+        help_text=link_to_framework_doc("GridRow", "vertical_alignment_link"),
     )
     horizontal_alignment = forms.ChoiceField(
         label=_("Horizontal alignment"),
         choices=settings.EMPTY_CHOICE + GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
         required=False,
-        help_text=mark_safe_lazy(
-            _(
-                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
-            ).format(
-                link="https://getbootstrap.com/docs/5.0/layout/grid/#horizontal-alignment"
-            )
-        ),
+        help_text=link_to_framework_doc("GridRow", "horizontal_alignment_link"),
     )
     gutters = forms.BooleanField(
         label=_("Remove gutters"),

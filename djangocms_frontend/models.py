@@ -2,12 +2,14 @@ from cms.models import CMSPlugin
 from django.db import models
 from django.utils.translation import gettext
 
-from djangocms_frontend.fields import AttributesField, TagTypeField
+from djangocms_frontend.fields import TagTypeField
+from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
 
 
 class FrontendUIItem(CMSPlugin):
     """
-    Generic plugin model to store all frontend items
+    Generic plugin model to store all frontend items. Plugin-specific information is stored in a JSON field
+    called "config".
     """
 
     class Meta:
@@ -18,6 +20,7 @@ class FrontendUIItem(CMSPlugin):
     config = models.JSONField(default=dict)
 
     def __getattr__(self, item):
+        """Makes properties of plugin config available as plugin properties."""
         if (
             item[0] != "_" and item in self.config
         ):  # Avoid infinite recursion trying to get .config from db
@@ -34,6 +37,7 @@ class FrontendUIItem(CMSPlugin):
         return super().save(*args, **kwargs)
 
     def initialize_from_form(self, form):
+        """Populates the config JSON field based on initial values provided by the fields of form"""
         if isinstance(form, type):  # if is class
             form = form()  # instantiate
         entangled_fields = getattr(
@@ -46,4 +50,10 @@ class FrontendUIItem(CMSPlugin):
         return self
 
     def get_short_description(self):
+        """Plugin-specific short description (to be defined by subclasses)"""
         pass
+
+    @property
+    def framework_info(self):
+        print(FRAMEWORK_PLUGIN_INFO)
+        return FRAMEWORK_PLUGIN_INFO.get(self.ui_item, None)
