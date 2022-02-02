@@ -29,7 +29,6 @@
         .field-box,
         .fieldBox {
             position: relative;
-            text-align: center;
             width: 110px !important;
             padding: 15px 10px;
             margin: 0 !important;
@@ -71,8 +70,8 @@
     .form-row.field-xs_col,
     .form-row.field-xs_order,
     .form-row.field-xs_offset,
-    .form-row.field-xs_ml,
-    .form-row.field-xs_mr {
+    .form-row.field-xs_ms,
+    .form-row.field-xs_me {
         position: relative;
         display: flex;
         padding: 0;
@@ -81,7 +80,6 @@
         .field-box,
         .fieldBox {
             position: relative;
-            text-align: center;
             width: 110px !important;
             padding: 15px 10px;
             margin: 0 !important;
@@ -121,7 +119,7 @@
             @include visually-hidden;
         }
 
-        &.field-xs_mr .field-box {
+        &.field-xs_me .field-box {
             border-bottom: none;
         }
 
@@ -147,17 +145,17 @@
             top: 8px;
         }
 
-        // ml checkbox
-        .field-xs_ml,
-        .field-sm_ml,
-        .field-md_ml,
-        .field-lg_ml,
-        .field-xl_ml,
-        .field-xs_mr,
-        .field-sm_mr,
-        .field-md_mr,
-        .field-lg_mr,
-        .field-xl_mr {
+        // ms/me checkbox
+        .field-xs_ms,
+        .field-sm_ms,
+        .field-md_ms,
+        .field-lg_ms,
+        .field-xl_ms,
+        .field-xs_me,
+        .field-sm_me,
+        .field-md_me,
+        .field-lg_me,
+        .field-xl_me {
             text-align: left;
 
             label {

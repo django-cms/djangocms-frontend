@@ -12,7 +12,6 @@ from ...models import FrontendUIItem
 from .. import grid
 from .constants import (
     GRID_COLUMN_ALIGNMENT_CHOICES,
-    GRID_COLUMN_CHOICES,
     GRID_CONTAINER_CHOICES,
     GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
     GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,
@@ -132,7 +131,6 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
-                "column_type",
                 "column_alignment",
                 "text_alignment",
                 "attributes",
@@ -140,12 +138,6 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
         }
         untangled_fields = ("tag_type",)
 
-    column_type = forms.ChoiceField(
-        label=_("Column type"),
-        choices=GRID_COLUMN_CHOICES,
-        initial=GRID_COLUMN_CHOICES[0][0],
-        required=True,
-    )
     column_alignment = forms.ChoiceField(
         label=_("Column alignment"),
         choices=settings.EMPTY_CHOICE + GRID_COLUMN_ALIGNMENT_CHOICES,
@@ -180,12 +172,12 @@ for size in settings.DEVICE_SIZES:
         min_value=0,
         max_value=GRID_SIZE,
     )
-    extra_fields_column["{}_ml".format(size)] = forms.BooleanField(
-        label="ml-auto" if size == "xs" else "ml-{}-auto".format(size),
+    extra_fields_column["{}_ms".format(size)] = forms.BooleanField(
+        label="ms-auto" if size == "xs" else "ms-{}-auto".format(size),
         required=False,
     )
-    extra_fields_column["{}_mr".format(size)] = forms.BooleanField(
-        label="mr-auto" if size == "xs" else "mr-{}-auto".format(size),
+    extra_fields_column["{}_me".format(size)] = forms.BooleanField(
+        label="me-auto" if size == "xs" else "me-{}-auto".format(size),
         required=False,
     )
 

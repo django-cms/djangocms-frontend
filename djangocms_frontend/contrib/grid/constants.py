@@ -47,9 +47,3 @@ GRID_COLUMN_ALIGNMENT_CHOICES = (
     ("align-self-center", _("Align self center")),
     ("align-self-end", _("Align self end")),
 )
-
-GRID_COLUMN_CHOICES = getattr(
-    settings,
-    "DJANGOCMS_BOOTSTRAP5_GRID_COLUMN_CHOICES",
-    (("col", _("Column")), ("w-100", _("Break")), ("", _("Empty"))),
-)

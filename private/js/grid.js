@@ -58,6 +58,7 @@ $(() => {
             sizes: column.data().sizes,
             rows: column.data().rows,
             reset: column.data().reset,
+            links: column.data().links,
             static: static_url,
         });
     }

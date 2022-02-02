@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block field_sets %}
-    <div class="djangocms-bootstrap5 djangocms-frontend-column"
+    <div class="djangocms-frontend djangocms-frontend-column"
         data-static="{% get_static_prefix %}"
         data-sizes='[
         "{% trans 'Extra small' %}",
@@ -24,6 +24,13 @@
         "{% trans 'Margin right' %}"
         ]'
         data-reset="{% trans 'Reset' %}"
+        data-links='[
+        "https://getbootstrap.com/docs/5.0/layout/grid/#grid-options",
+        "https://getbootstrap.com/docs/5.1/layout/columns/#reordering",
+        "https://getbootstrap.com/docs/5.1/layout/columns/#offsetting-columns",
+        "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
+        "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins"
+        ]'
     >
         {{ block.super }}
     </div>

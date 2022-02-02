@@ -21,15 +21,10 @@ changed:
    DJANGOCMS_FRONTEND_GRID_CONTAINERS = (
        ('container', _('Container')),
        ('container-fluid', _('Fluid container')),
-       ("container-sm", _("SM Container")),
-       ("container-md", _("MD Container")),
-       ("container-lg", _("LG Container")),
-       ("container-xl", _("XL Container")),
-   )
-   DJANGOCMS_FRONTEND_GRID_COLUMN_CHOICES = (
-       ('col', _('Column')),
-       ('w-100', _('Break')),
-       ('', _('Empty'))
+       ("container-sm", _("sx container")),
+       ("container-md", _("md container")),
+       ("container-lg", _("lg container")),
+       ("container-xl", _("xl container")),
    )
 
    DJANGOCMS_FRONTEND_USE_ICONS = True

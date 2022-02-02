@@ -67,6 +67,4 @@ class GridColumn(FrontendUIItem):
             text += "(col-{}) ".format(self.xs_col)
         else:
             text += "(auto) "
-        if self.column_type != "col":
-            text += ".{} ".format(self.column_type)
         return text.strip()

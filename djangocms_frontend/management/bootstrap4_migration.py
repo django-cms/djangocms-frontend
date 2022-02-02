@@ -92,7 +92,6 @@ plugin_migrations = {
         "tag_type",
     ],
     "bootstrap4_grid.Bootstrap4GridColumn -> grid.GridColumn": [
-        "column_type",
         "column_alignment",
         "() -> text_alignment",
         "attributes",
@@ -253,6 +252,8 @@ def a001_alignment(obj, new_obj, field):
 
 
 def g001_col_text_alignment(obj, new_obj):
+    if obj.column_type != "col":
+        print(f"Warning: Break column detected - not supported (id={obj.id})")
     classes = new_obj.config["attributes"].get("class", "").split()
     if "text-left" in classes or "text-start" in classes:
         classes.remove("text-left")

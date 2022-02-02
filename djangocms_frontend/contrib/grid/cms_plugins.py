@@ -6,7 +6,6 @@ from djangocms_frontend import settings
 
 from .. import grid
 from . import forms, models
-from .constants import GRID_COLUMN_CHOICES
 
 mixin_factory = settings.get_renderer(grid)
 
@@ -94,7 +93,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
         for x in range(data["create"] if data["create"] is not None else 0):
-            extra = dict(column_type=GRID_COLUMN_CHOICES[0][0], column_alignment=None)
+            extra = dict(column_alignment=None)
             for size in settings.DEVICE_SIZES:
                 extra[f"{size}_col"] = data.get("create_{}_col".format(size))
                 extra[f"{size}_order"] = None
@@ -138,7 +137,6 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
             {
                 "fields": (
                     (
-                        "column_type",
                         "column_alignment",
                         "text_alignment",
                     ),
@@ -152,8 +150,8 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
                     ["{}_col".format(size) for size in settings.DEVICE_SIZES],
                     ["{}_order".format(size) for size in settings.DEVICE_SIZES],
                     ["{}_offset".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_ml".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_mr".format(size) for size in settings.DEVICE_SIZES],
+                    ["{}_ms".format(size) for size in settings.DEVICE_SIZES],
+                    ["{}_me".format(size) for size in settings.DEVICE_SIZES],
                 )
             },
         ),
@@ -173,8 +171,8 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
         def get_grid_values(self):
             classes = []
             for device in settings.DEVICE_SIZES:
-                for element in ("col", "order", "offset", "ml", "mr"):
-                    size = getattr(self, "{}_{}".format(device, element))
+                for element in ("col", "order", "offset", "ms", "me"):
+                    size = getattr(self, "{}_{}".format(device, element), None)
                     if isinstance(size, int) and (
                         element == "col" or element == "order" or element == "offset"
                     ):
@@ -194,7 +192,6 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
 
         column = ""
         attr_classes = [
-            instance.column_type,
             column,
             instance.column_alignment,
         ]

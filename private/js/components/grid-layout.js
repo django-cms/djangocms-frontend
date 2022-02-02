@@ -48,8 +48,8 @@ export default class GridLayout {
             .form-row.field-xs_col,
             .form-row.field-xs_order,
             .form-row.field-xs_offset,
-            .form-row.field-xs_ml,
-            .form-row.field-xs_mr
+            .form-row.field-xs_ms,
+            .form-row.field-xs_me
         `);
         let template = (text = '', link = '#') => `
             <div class="field-box field-box-label">
@@ -59,13 +59,7 @@ export default class GridLayout {
                 </a>
             </div>
         `;
-        let links = [
-            'https://getbootstrap.com/docs/5.0/layout/grid/#grid-options',
-            'https://getbootstrap.com/docs/5.0/layout/grid/#reordering',
-            'https://getbootstrap.com/docs/5.0/layout/grid/#offsetting-columns',
-            'https://getbootstrap.com/docs/5.0/layout/grid/#offsetting-columns',
-            'https://getbootstrap.com/docs/5.0/layout/grid/#offsetting-columns',
-        ];
+        let links = this.options.links;
 
         container.toArray().forEach(function (item, index) {
             $(item).prepend(template(this.options.rows[index], links[index]));
