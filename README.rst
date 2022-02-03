@@ -60,17 +60,13 @@ The link plugin has been rewritten to not allow internal links to other
 CMS pages, but also to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-**********
- Feedback
-**********
+Feedback
+========
 
 .. note::
 
-   This is currently a proof of concept project. Tests, e.g., do not
-   reach a sufficient coverage yet.
-
-This project is in a early stage. All feedback is welcome! Please mail
-me at fsbraun(at)gmx.de All contributions are welcome.
+   This project is in a early stage. All feedback is welcome! Please
+   mail me at fsbraun(at)gmx.de All contributions are welcome.
 
 ..
    Contributing
@@ -101,9 +97,8 @@ section.
 ..
    `Transifex <https://www.transifex.com/projects/p/djangocms-bootstrap5/>`_.
 
-***************
- Documentation
-***************
+Requirements
+============
 
 See ``REQUIREMENTS`` in the `setup.py
 <https://github.com/fsbraun/djangocms-frontend/blob/master/setup.py>`_
@@ -163,10 +158,10 @@ Documentation
 See readthedocs for the `currently draft documentation
 <https://djangocms-frontend.readthedocs.io>`_.
 
-.. |pypi| image:: https://badge.fury.io/py/djangocms-bootstrap5.svg
+.. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
 
-.. |coverage| image:: https://codecov.io/gh/divio/djangocms-bootstrap5/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/divio/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/fsbraun/djangocms-frontend
 
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
