@@ -102,13 +102,10 @@ class SmartLinkField(forms.ChoiceField):
             obj_list = []
             for obj in group["objects"]:
                 type_class = ContentType.objects.get_for_model(obj.__class__)
-                type_id = type_class.id
-                obj_id = obj.id
-                form_value = f"{type_id}-{obj_id}"
+                form_value = f"{type_class.id}-{obj.id}"
                 display_text = str(obj)
 
                 obj_list.append((form_value, display_text))
-
             object_choices.append(
                 (
                     group["model"],

@@ -96,6 +96,8 @@ course - view instances of djangocms_frontend UI Item.
 .. index::
     single: Migration from Bootstrap 4
 
+.. _Migrating from djangocms-bootstrap4:
+
 *************************************
  Migrating from djangocms-bootstrap4
 *************************************
@@ -181,6 +183,8 @@ Container
 
 .. index::
     single: Row
+
+.. _Grid plugins:
 
 Row
 ===
@@ -306,6 +310,8 @@ documentation.
 
 .. index::
     single: Card
+    single: CardInner
+    single: CardLayout
 
 Card component
 ==============
@@ -318,15 +324,23 @@ A card consists of the card wrapper itself, the Card Plugin. It can contain
 one ore more instances of a Card Inner Plugin for header, body or footer, but
 also potentially an Image Plugin for the card image or list group components.
 
-Cards can be grouped by a Card Layout component offering the ability group cards
-or display a grid of cards. The latter can be controlled by responsive tools.
-
 .. image:: screenshots/card-example.png
 
 The corresponding plugin tree is here:
 
 .. image:: screenshots/card-plugins.png
     :width: 825
+
+Cards can be grouped by a **Card Layout component** offering the ability group
+cards or display a grid of cards. The latter can be controlled by responsive
+tools. If you need more granular responsive settings, please revert to
+:ref:`Grid plugins <Grid plugins>` and build your own custom grid.
+
+.. warning::
+
+    djangocms-bootstrap4 Card Decks are not supported by bootstrap4. Card decks
+    will be converted to grids of cards upon
+    :ref:`Migrating from djangocms-bootstrap4`.
 
 
 
@@ -373,6 +387,30 @@ The jumbotron component is a large header.
 Link / Button component
 =======================
 
+The link / button plugin creates a styled link or button (using the ``<a>``
+HTML tag).
+
+It is designed to allow for external and internal links. Internal links point
+to a CMS page or pages of other Django applications. They are dynamic, i.e. if
+the page's url changes (e.g. because it is moved in the page tree) all links
+pointing to the page change accordingly.
+
+.. note::
+
+    **djangocms-frontend** uses django-cms' function ``get_page_choices(lang)``
+    to get the list of available pages in the current language.
+
+The developer can extend the list of available internal link targets to pages
+outside the CMS page tree using the
+``DJANGOCMS_FRONTEND_LINK_MODELS`` setting in the project's ``.settings`` file.
+The link/button
+component can point to any page controlled by a Django model if the model class
+implements the ``get_absolute_url`` method. A typical use case would, e.g.,
+blog entries of `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
+(This approach was inspired by mkoisten's `djangocms-styledlink
+<https://github.com/mkoistinen/djangocms-styledlink>`_.)
+
+For more information, see :ref:`How to add internal link targets outside of the CMS`
 
 
 List group component

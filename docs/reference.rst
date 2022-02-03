@@ -9,59 +9,98 @@
 Available settings will be revised. For now only the following can be
 changed:
 
-.. code::
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
-   DJANGOCMS_FRONTEND_TAG_CHOICES = ['div', 'section', 'article', 'header', 'footer', 'aside']
+    Defaults to ``['div', 'section', 'article', 'header', 'footer', 'aside']``.
 
-   DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES = (
-       ('default', _('Default')),
-   )
+    Lists the choices for the tag field of all djangocms-frontend plugins.
+    ``div`` is the default tag.
 
-   DJANGOCMS_FRONTEND_GRID_SIZE = 12
-   DJANGOCMS_FRONTEND_GRID_CONTAINERS = (
-       ('container', _('Container')),
-       ('container-fluid', _('Fluid container')),
-       ("container-sm", _("sx container")),
-       ("container-md", _("md container")),
-       ("container-lg", _("lg container")),
-       ("container-xl", _("xl container")),
-   )
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_GRID_SIZE
 
-   DJANGOCMS_FRONTEND_USE_ICONS = True
+    Defaults to ``12``.
 
-   DJANGOCMS_FRONTEND_TAB_TEMPLATES = (
-       ('default', _('Default')),
-   )
 
-   DJANGOCMS_FRONTEND_SPACER_SIZES = (
-       ('0', '* 0'),
-       ('1', '* .25'),
-       ('2', '* .5'),
-       ('3', '* 1'),
-       ('4', '* 1.5'),
-       ('5', '* 3'),
-   )
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_GRID_CONTAINERS
 
-   DJANGOCMS_FRONTEND_CAROUSEL_ASPECT_RATIOS = (
-       (16, 9),
-   )
+    Default:
 
-   DJANGOCMS_BOOTSTRAP5_COLOR_STYLE_CHOICES = (
-       ('primary', _('Primary')),
-       ('secondary', _('Secondary')),
-       ('success', _('Success')),
-       ('danger', _('Danger')),
-       ('warning', _('Warning')),
-       ('info', _('Info')),
-       ('light', _('Light')),
-       ('dark', _('Dark')),
-       ('custom', _('Custom')),
-   )
+    .. code::
 
-Please be aware that this package does not support
-djangocms-text-ckeditor's `Drag & Drop Images
-<https://github.com/divio/djangocms-text-ckeditor/#drag--drop-images>`_
-so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION = None``.
+        (
+           ('container', _('Container')),
+           ('container-fluid', _('Fluid container')),
+           ("container-sm", _("sx container")),
+           ("container-md", _("md container")),
+           ("container-lg", _("lg container")),
+           ("container-xl", _("xl container")),
+       )
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_USE_ICONS
+
+    Defaults to ``True``.
+
+    Decides if icons should be offered, e.g. in links.
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES
+
+   Defaults to ``(('default', _('Default')),)``
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_TAB_TEMPLATES
+
+   Defaults to ``(('default', _('Default')),)``
+
+
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_SPACER_SIZES
+
+    Default:
+
+    .. code::
+
+        (
+           ('0', '* 0'),
+           ('1', '* .25'),
+           ('2', '* .5'),
+           ('3', '* 1'),
+           ('4', '* 1.5'),
+           ('5', '* 3'),
+       )
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_CAROUSEL_ASPECT_RATIOS
+
+    Default: ``((16, 9),)``
+
+    Additional aspect ratios offered in the carousel component
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_COLOR_STYLE_CHOICES
+
+    Default:
+
+    .. code::
+
+        (
+           ('primary', _('Primary')),
+           ('secondary', _('Secondary')),
+           ('success', _('Success')),
+           ('danger', _('Danger')),
+           ('warning', _('Warning')),
+           ('info', _('Info')),
+           ('light', _('Light')),
+           ('dark', _('Dark')),
+           ('custom', _('Custom')),
+       )
+
+.. py:attribute:: TEXT_SAVE_IMAGE_FUNCTION
+
+    Requirement: ``TEXT_SAVE_IMAGE_FUNCTION = None``
+
+    .. warning::
+
+        Please be aware that this package does not support
+        djangocms-text-ckeditor's `Drag & Drop Images
+        <https://github.com/divio/djangocms-text-ckeditor/#drag--drop-images>`_
+        so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION = None``.
 
 ***************
  Running Tests
