@@ -161,7 +161,7 @@ See readthedocs for the `currently draft documentation
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
 
-.. |coverage| image:: https://codecov.io/gh/divio/djangocms-frontend/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/fsbraun/djangocms-frontend
 
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
