@@ -30,6 +30,7 @@ class SpacingForm(EntangledModelForm):
         label=_("Sides"),
         choices=settings.SPACER_SIDE_CHOICES,
         initial=settings.SPACER_SIDE_CHOICES[0][0],
+        required=False,
     )
     space_size = forms.ChoiceField(
         label=_("Size"),
