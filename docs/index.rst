@@ -81,7 +81,7 @@ Components
    to grasp and easy to use look. Alerts or cards are examples of
    components.
 
-Forms
+Forms (work in progress)
    Finally, djangocms-frontend lets you display forms in a nice way.
    Also, it handles form submit actions, validation etc. Forms can be
    easily structured using fieldsets known from django's admin app. But

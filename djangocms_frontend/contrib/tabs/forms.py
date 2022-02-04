@@ -57,7 +57,7 @@ class TabForm(EntangledModelForm):
     )
     tab_effect = forms.ChoiceField(
         label=_("Animation effect"),
-        choices=TAB_EFFECT_CHOICES,
+        choices=settings.EMPTY_CHOICE + TAB_EFFECT_CHOICES,
         required=False,
     )
     attributes = AttributesFormField()

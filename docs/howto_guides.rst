@@ -254,28 +254,38 @@ Lastly, a new template is needed (in
 
 .. code::
 
-   {% load cms_tags frontend %}{% spaceless %}
-       <{{ instance.tag_type }} {% add_class instance.attributes instance.container_type add_classes %}
-           {% if instance.container_opacity and not instance.image %}style="opacity: {{ instance.container_opacity }}%;" {% endif %}
-       >
-         {% if instance.image %}
-           <div class="image"
-           style="background-image: url('{{ instance.image.url }}');
-                  background-position: {{ instance.image_position|default:'center center' }};
-                  background-repeat: no-repeat;background-size: cover;">
-           </div>
-         {% elif instance.container_image %}
-           <div class="image placeholder placeholder-wave"></div>
-         {% endif %}
-         {% if bg_color %}
-           <div class="cover {{bg_color}}"{% if instance.container_opacity %} style="opacity: {{ instance.container_opacity }}%"{% endif %}></div>
-         {% endif %}
-         {% if "imagecontainer" in add_classes %}<div class="content">{% endif %}
-           {% for plugin in instance.child_plugin_instances %}
-               {% render_plugin plugin %}
-           {% endfor %}
-         {% if "imagecontainer" in add_classes %}</div>>{% endif %}
-       </{{ instance.tag_type }}>{% endspaceless %}
+    {% load cms_tags %}{% spaceless %}
+        <{{ instance.tag_type }}{{ instance.get_attributes }}
+            {% if instance.container_opacity and not instance.image %}
+                style="opacity: {{ instance.container_opacity }}%;
+                    {% if instance.container_blur %}backdrop-filter: blur({{ instance.container_blur }}px);
+                {% endif %}"
+            {% endif %}
+        >
+          {% if instance.image %}
+            <div class="image"
+                style="background-image: url('{{ instance.image.url }}');
+                       background-position: {{ instance.image_position|default:'center center' }};
+                       background-repeat: no-repeat;
+                       background-size: cover;
+                       {% if instance.container_blur %} filter: blur({{instance.container_blur}}px);{% endif %}">
+            </div>
+          {% elif instance.container_image %}
+            <div class="image placeholder placeholder-wave"></div>
+          {% endif %}
+          {% if instance.video and instance.image %}
+            <video class="image" playsinline autoplay muted loop>
+              <source src="{{ instance.video.url }}" media="screen and (min-width:768px)">
+            </video>
+          {% endif %}
+          {% if bg_color %}<div class="cover {{bg_color}}"{% if instance.container_opacity %} style="opacity: {{ instance.container_opacity }}%"{% endif %}></div>{% endif %}
+          {% if "imagecontainer" in add_classes %}<div class="content">{% endif %}
+            {% for plugin in instance.child_plugin_instances %}
+                {% render_plugin plugin %}
+            {% endfor %}
+          {% if "imagecontainer" in add_classes %}</div>{% endif %}
+        </{{ instance.tag_type }}>
+    {% endspaceless %}
 
 With these three additions, all grid container plugins will now have
 additional fields to define abckground images to cover the container

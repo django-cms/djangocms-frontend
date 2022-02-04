@@ -72,12 +72,17 @@ class TabItemPlugin(mixin_factory("TabItem"), CMSPluginBase):
     fieldsets = [
         (
             None,
+            {"fields": ("tab_title",)},
+        ),
+        (
+            _("Tab item border"),
             {
+                "classes": ("collapse",),
                 "fields": (
-                    "tab_title",
                     "tab_bordered",
-                    ("tab_padding_size", "tab_padding_side"),
-                )
+                    "tab_padding_size",
+                    "tab_padding_side",
+                ),
             },
         ),
         (
