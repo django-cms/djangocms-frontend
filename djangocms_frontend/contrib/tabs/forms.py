@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
+from ... import settings
 from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from .constants import (
@@ -73,6 +74,9 @@ class TabItemForm(EntangledModelForm):
         entangled_fields = {
             "config": [
                 "tab_title",
+                "tab_bordered",
+                "tab_padding_size",
+                "tab_padding_side",
                 "attributes",
             ]
         }
@@ -81,4 +85,21 @@ class TabItemForm(EntangledModelForm):
     tab_title = forms.CharField(
         label=_("Tab title"),
     )
+    tab_bordered = forms.BooleanField(
+        label=_("Bordered"),
+        required=False,
+        help_text=_("Add borders to the tab item"),
+    )
+    tab_padding_size = forms.ChoiceField(
+        label=_("Internal padding size"),
+        choices=settings.SPACER_SIZE_CHOICES,
+        initial=settings.SPACER_SIZE_CHOICES[1][0],
+    )
+    tab_padding_side = forms.ChoiceField(
+        label=_("Internal padding sides"),
+        choices=settings.SPACER_SIDE_CHOICES,
+        initial=settings.SPACER_SIDE_CHOICES[0][0],
+        required=False,
+    )
+
     attributes = AttributesFormField()

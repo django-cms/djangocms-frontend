@@ -70,7 +70,16 @@ class TabItemPlugin(mixin_factory("TabItem"), CMSPluginBase):
     parent_classes = ["TabPlugin"]
 
     fieldsets = [
-        (None, {"fields": ("tab_title",)}),
+        (
+            None,
+            {
+                "fields": (
+                    "tab_title",
+                    "tab_bordered",
+                    ("tab_padding_size", "tab_padding_side"),
+                )
+            },
+        ),
         (
             _("Advanced settings"),
             {

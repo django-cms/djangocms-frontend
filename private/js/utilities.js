@@ -28,7 +28,19 @@ $(() => {
         new ButtonGroup({
             static: static_url,
             select: '#id_space_device',
-            icons: ['align-reset', 'size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl'],
+            icons: ['align-reset', 'size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl', 'size-xxl'],
+        });
+    }
+    if ($('.djangocms-frontend-tabs').length) {
+        const static_url = $('.djangocms-frontend-tabs').data().static;
+
+        new ButtonGroup({
+            static: static_url,
+            select: '#id_tab_padding_size',
+        });
+        new ButtonGroup({
+            static: static_url,
+            select: '#id_tab_padding_side',
         });
     }
 });

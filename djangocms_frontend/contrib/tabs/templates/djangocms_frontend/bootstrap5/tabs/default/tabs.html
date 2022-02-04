@@ -20,14 +20,10 @@
 
     <div class="tab-content">
         {% for plugin in instance.child_plugin_instances %}
-            <{{ plugin.tag_type }}
-                {% if instance.tab_index == forloop.counter %}{% add_class plugin.attributes "tab-pane show active" instance.tab_effect %}
-                {% else %}{% add_class plugin.attributes "tab-pane" instance.tab_effect %}{% endif %}
-                id="tab-{{ plugin.pk|safe }}"
-                aria-labelledby="tab-label-{{ plugin.pk|safe }}"
-                role="tabpanel">
+            {% with parent=instance parentloop=forloop %}
                 {% render_plugin plugin %}
-            </{{ plugin.tag_type }}>
+            {% endwith %}
         {% endfor %}
     </div>
-    </{{ instance.tag_type }}>{% endspaceless %}
+    </{{ instance.tag_type }}>
+{% endspaceless %}
