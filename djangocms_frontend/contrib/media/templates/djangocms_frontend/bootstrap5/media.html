@@ -1,6 +1,6 @@
 {% load cms_tags frontend %}
 {% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes "d-flex" %}>
+    <{{ instance.tag_type }} {% get_attributes instance.attributes "d-flex" %}>
         <div class="flex-shrink-0">
             {% for plugin in instance.child_plugin_instances %}
                 {% if plugin.plugin_type == "MediaBodyPlugin" %}

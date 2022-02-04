@@ -1,5 +1,5 @@
-{% load cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes %}>
+{% load cms_tags %}{% spaceless %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }}>
     <ul class="nav {{ instance.tab_type }} {% if instance.tab_alignment %} {{ instance.tab_alignment }}{% endif %}" role="tablist">
         {% for plugin in instance.child_plugin_instances %}
             <li class="nav-item">

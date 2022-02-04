@@ -1,5 +1,6 @@
 from cms.models import CMSPlugin
 from django.db import models
+from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext
 
 from djangocms_frontend.fields import TagTypeField
@@ -19,6 +20,10 @@ class FrontendUIItem(CMSPlugin):
     tag_type = TagTypeField(blank=True)
     config = models.JSONField(default=dict)
 
+    def __init__(self, *args, **kwargs):
+        self._additional_classes = []
+        super().__init__(*args, **kwargs)
+
     def __getattr__(self, item):
         """Makes properties of plugin config available as plugin properties."""
         if (
@@ -31,6 +36,27 @@ class FrontendUIItem(CMSPlugin):
         if "__str__" in self.config:
             return self.config["__str__"]
         return f"{gettext(self.ui_item)} ({str(self.pk)})"
+
+    def add_classes(self, *args):
+        for arg in args:
+            if arg:
+                self._additional_classes += arg.split() if isinstance(arg, str) else arg
+
+    def get_attributes(self):
+        classes = (
+            set(self.config["attributes"].get("class", "").split())
+            if "attributes" in self.config
+            else set()
+        )
+        classes.update(self._additional_classes)
+        parts = (
+            f'{item}="{conditional_escape(value)}"' if value else f"{item}"
+            for item, value in {
+                **self.config.get("attributes", {}),
+                **{"class": " ".join(classes)},
+            }.items()
+        )
+        return mark_safe(" " + " ".join(parts))
 
     def save(self, *args, **kwargs):
         self.ui_item = self.__class__.__name__
@@ -55,5 +81,4 @@ class FrontendUIItem(CMSPlugin):
 
     @property
     def framework_info(self):
-        print(FRAMEWORK_PLUGIN_INFO)
         return FRAMEWORK_PLUGIN_INFO.get(self.ui_item, None)

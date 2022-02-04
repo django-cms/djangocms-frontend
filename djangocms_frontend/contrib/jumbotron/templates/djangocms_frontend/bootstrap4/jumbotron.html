@@ -1,5 +1,5 @@
 {% load cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes "jumbotron" %}>
+    <{{ instance.tag_type }} {% get_attrubutes instance.attributes "jumbotron" %}>
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
     {% endfor %}

@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def add_class(attribute_field, *add_classes):
+def get_attributes(attribute_field, *add_classes):
     """Joins a list of classes with an attributes field and returns all html attributes"""
     additional_classes = set()
     for classes in add_classes:

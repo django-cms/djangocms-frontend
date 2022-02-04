@@ -1,5 +1,5 @@
 {% load cms_tags frontend%}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes instance.inner_type instance.add_classes %}>
+    <{{ instance.tag_type }}{{ instance.get_attributes }}>
     {% if instance.card_content %}
         {{ instance.card_content }}
     {% endif %}

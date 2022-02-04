@@ -1,8 +1,8 @@
 {% load cms_tags frontend %}{% spaceless %}
     {% if "bg-" in instance.attributes.class or "background" in instance.attributes.style %}
-        <{{ instance.tag_type }} {% add_class instance.attributes "p-4 my-0" %}>
+        <{{ instance.tag_type }} {% get_attributes instance.attributes "p-4 my-0" %}>
     {% else %}
-        <{{ instance.tag_type }} {% add_class instance.attributes "p-4 my-0 bg-light" %}>
+        <{{ instance.tag_type }} {% get_attributes instance.attributes "p-4 my-0 bg-light" %}>
     {% endif %}
     <div class="container{% if instance.jumbotron_fluid %}-fluid{% endif %} py-3">
         {% for plugin in instance.child_plugin_instances %}

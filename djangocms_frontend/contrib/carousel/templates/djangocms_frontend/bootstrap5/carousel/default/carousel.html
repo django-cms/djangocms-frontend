@@ -1,5 +1,5 @@
-{% load i18n cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes add_classes %}
+{% load i18n cms_tags %}{% spaceless %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }}
     id="carousel-{{ instance.pk|safe }}"
     data-bs-interval="{{ instance.carousel_interval|lower }}"
     data-bs-keyboard="{{ instance.carousel_keyboard|lower }}"

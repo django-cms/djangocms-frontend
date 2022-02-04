@@ -1,6 +1,6 @@
 {% load cms_tags frontend %}{% spaceless %}
     {% if instance.parent.plugin_type == "CardLayoutPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}<div class="col">{% endif %}
-    <{{ instance.tag_type }} {% add_class instance.attributes "card" instance.add_classes %}>
+    <{{ instance.tag_type }}{{ instance.get_attributes }}>
     {% with parent=instance %}
         {% for plugin in instance.child_plugin_instances %}
             {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}

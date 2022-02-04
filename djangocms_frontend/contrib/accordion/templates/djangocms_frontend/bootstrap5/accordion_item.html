@@ -1,4 +1,4 @@
-{% load cms_tags frontend %}
+{% load cms_tags %}
 {% spaceless %}
     <div class="accordion-item">
         <{{ parent.accordion_header_type }} class="mb-0"
@@ -10,12 +10,7 @@
             aria-expanded="{{ instance.accordion_item_open|lower }}"
             aria-controls="item-{{ instance.pk|safe }}">{{ instance.accordion_item_header }}</button>
     </{{ parent.accordion_header_type }}>
-    <{{ instance.tag_type}}
-    {% add_class instance.attributes instance.add_classes %}
-    id="item-{{ instance.pk|safe }}"
-    aria-labelledby="heading-{{ instance.pk|safe}}"
-    data-bs-parent="#parent-{{ parent.pk|safe }}"
-    >
+    <{{ instance.tag_type}}{{ instance.get_attributes }} id="item-{{ instance.pk|safe }}" aria-labelledby="heading-{{ instance.pk|safe}}" data-bs-parent="#parent-{{ parent.pk|safe }}">
     <div  class="accordion-body">
         {% with parent=instance %}
             {% for plugin in instance.child_plugin_instances %}

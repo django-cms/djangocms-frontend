@@ -1,7 +1,5 @@
-{% load cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }}
-     {% if parent.tab_index == parentloop.counter %}{% add_class instance.attributes "tab-pane show active" parent.tab_effect instance.add_classes %}
-     {% else %}{% add_class instance.attributes "tab-pane" parent.tab_effect instance.add_classes %}{% endif %}
+{% load cms_tags %}{% spaceless %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }}
      id="tab-{{ instance.pk|safe }}"
      aria-labelledby="tab-label-{{ instance.pk|safe }}"
      role="tabpanel">

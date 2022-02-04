@@ -30,5 +30,5 @@ class LinkRenderMixin:
             link_classes.append("btn-block")
 
         context["link"] = instance.get_link()
-        context["link_classes"] = " ".join(link_classes)
+        instance.add_classes(link_classes)
         return super().render(context, instance, placeholder)

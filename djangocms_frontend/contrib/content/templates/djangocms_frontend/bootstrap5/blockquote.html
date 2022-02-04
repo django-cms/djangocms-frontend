@@ -1,13 +1,13 @@
-{% load cms_tags frontend %}
+{% load cms_tags %}
 {% spaceless %}
     {% if instance.quote_origin %}
         <figure>
     {% endif %}
-    <blockquote {% add_class instance.attributes "blockquote" add_classes %}>
+    <blockquote{{ instance.get_attributes }}>
         {{ instance.quote_content }}
     </blockquote>
     {% if instance.quote_origin %}
-        <figcaption class="blockquote-footer {{ add_classes }}">
+        <figcaption class="blockquote-footer">
             <cite title="{{ instance.quote_origin }}">{{ instance.quote_origin }}</cite>
         </figcaption>
         </figure>

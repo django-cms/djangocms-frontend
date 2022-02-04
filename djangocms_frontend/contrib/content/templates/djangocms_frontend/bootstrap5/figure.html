@@ -1,6 +1,6 @@
-{% load i18n cms_tags frontend %}
+{% load i18n cms_tags %}
 {% spaceless %}
-    <figure {% add_class instance.attributes add_classes %}>
+    <figure {{ instance.get_attribtues }}>
         {% for plugin in instance.child_plugin_instances %}
             {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
         {% endfor %}
