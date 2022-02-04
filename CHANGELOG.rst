@@ -17,8 +17,13 @@ Changelog
   djang-cms
 * New picture plugin to remove dependency from djangocms-picture
 * Add migration management command to migrate djangocms-bootstrap4 plugins to
-  django-framework plugin
+  django-framework plugins
 * Fixed templates to match bootstrap5 specs (removing some incompatibilities)
 * Replaced discontinued jumbotron and media templates with valid bootstrap 5
   fixes
+* Added bootstrap 5's new xxl breakpoint
 
+0.2.0
+=====
+
+* First release on Pypi

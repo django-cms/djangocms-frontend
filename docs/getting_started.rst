@@ -12,22 +12,15 @@ Installation
 Install package
 ===============
 
-For a manual install run ``pip install
-https://github.com/fsbraun/djangocms-frontend/archive/master.zip``
+For a manual install run ``pip install djangocms-frontend``
 
 Alternatively, add the following line to your project's
 ``requirements.txt``:
 
 .. code::
 
-   https://github.com/fsbraun/djangocms-frontend/archive/master.zip
+   djangocms-frontend
 
-.. warning::
-
-   This installs directly from the current development tree of
-   **djangocms-frontend**. **djangocms-frontend** currently is not yet
-   suitable for production. Make sure to install a released version as
-   soon as one becomes available. Please regularly check pypi.
 
 Make apps available to your django project
 ==========================================
