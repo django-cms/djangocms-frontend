@@ -3,7 +3,7 @@
     <div class="accordion-item">
         <{{ parent.accordion_header_type }} class="mb-0"
         id="heading-{{ instance.pk|safe}}"><button
-            class="accordion-button{% if not instance.accordion_item_open %} collapsed{% endif %} {{ font_size }}"
+            class="accordion-button{% if not instance.accordion_item_open %} collapsed{% endif %} {{ instance.font_size }}"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#item-{{ instance.pk|safe }}"
@@ -11,7 +11,7 @@
             aria-controls="item-{{ instance.pk|safe }}">{{ instance.accordion_item_header }}</button>
     </{{ parent.accordion_header_type }}>
     <{{ instance.tag_type}}
-    {% add_class instance.attributes add_classes %}
+    {% add_class instance.attributes instance.add_classes %}
     id="item-{{ instance.pk|safe }}"
     aria-labelledby="heading-{{ instance.pk|safe}}"
     data-bs-parent="#parent-{{ parent.pk|safe }}"

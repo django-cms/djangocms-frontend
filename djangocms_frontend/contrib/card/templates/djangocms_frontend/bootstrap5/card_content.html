@@ -1,5 +1,5 @@
 {% load cms_tags frontend%}{% spaceless %}
-    <{{ instance.tag_type }} {% add_class instance.attributes instance.inner_type inner_context text_alignment %}>
+    <{{ instance.tag_type }} {% add_class instance.attributes instance.inner_type instance.add_classes %}>
     {% if instance.card_content %}
         {{ instance.card_content }}
     {% endif %}

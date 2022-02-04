@@ -17,19 +17,19 @@ class CardRenderMixin:
         if instance.parent and instance.parent.plugin_type == "CardLayoutPlugin":
             if instance.parent.get_plugin_instance()[0].card_type == "row":
                 card_classes.append("h-100")
-        context["add_classes"] = card_classes
+        instance.add_classes = card_classes
         return super().render(context, instance, placeholder)
 
 
 class CardInnerRenderMixin:
     def render(self, context, instance, placeholder):
-        context["inner_context"] = (
+        instance.add_classes = (
             f"bg-{instance.inner_context}"
             if getattr(instance, "inner_context", None)
             else ""
         )
-        context["text_alignment"] = (
-            f"text-{instance.text_alignment}"
+        instance.add_classes += (
+            f" text-{instance.text_alignment}"
             if getattr(instance, "text_alignment", None)
             else ""
         )
