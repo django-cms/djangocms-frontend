@@ -338,8 +338,9 @@ tools. If you need more granular responsive settings, please revert to
 
 .. warning::
 
-    djangocms-bootstrap4 Card Decks are not supported by bootstrap4. Card decks
-    will be converted to grids of cards upon
+    djangocms-bootstrap4 Card Decks are not supported by `Bootstrap 5
+    <https://getbootstrap.com/docs/5.1/components/card/#card-layout>`_.
+    Card decks will be converted to grids of cards upon
     :ref:`Migrating from djangocms-bootstrap4`.
 
 
@@ -410,7 +411,8 @@ blog entries of `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 (This approach was inspired by mkoisten's `djangocms-styledlink
 <https://github.com/mkoistinen/djangocms-styledlink>`_.)
 
-For more information, see :ref:`How to add internal link targets outside of the CMS`
+For more information, see
+:ref:`How to add internal link targets outside of the CMS`
 
 
 List group component
@@ -475,21 +477,6 @@ Figure component
 Tabs component
 ==============
 
--  `Content (Blockquote, Code, Figure)
-   <https://getbootstrap.com/docs/5.0/content/>`_
--  `Grid (Container, Row, Column)
-   <https://getbootstrap.com/docs/5.0/layout/grid/>`_
--  `Jumbotron
-   <https://getbootstrap.com/docs/5.0/components/jumbotron/>`_
--  `Link / Button
-   <https://getbootstrap.com/docs/5.0/components/buttons/>`_
--  `List group
-   <https://getbootstrap.com/docs/5.0/components/list-group/>`_
--  `Media <https://getbootstrap.com/docs/5.0/layout/media-object/>`_
--  `Picture / Image
-   <https://getbootstrap.com/docs/5.0/content/images/>`_
--  `Tabs <https://getbootstrap.com/docs/5.0/components/navs/#tabs>`_
--  `Utilities (Spacing) <https://getbootstrap.com/docs/5.0/utilities/>`_
 
 *******
  Forms

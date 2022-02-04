@@ -22,9 +22,10 @@ class B5ConstantsTestCase(TestCase):
                 ("md", "Medium"),  # default ≥768px
                 ("lg", "Large"),  # default ≥992px
                 ("xl", "Extra large"),  # default ≥1200px
+                ("xxl", "Extra-extra large"),
             ),
         )
-        self.assertEquals(DEVICE_SIZES, ("xs", "sm", "md", "lg", "xl"))
+        self.assertEquals(DEVICE_SIZES, ("xs", "sm", "md", "lg", "xl", "xxl"))
         self.assertEquals(
             TAG_CHOICES,
             (

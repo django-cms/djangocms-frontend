@@ -63,10 +63,10 @@ CMS pages, but also to other django models such as, e.g., posts of
 Feedback
 ========
 
-.. note::
+This project is in a early stage. All feedback is welcome! Please
+mail me at fsbraun(at)gmx.de
 
-   This project is in a early stage. All feedback is welcome! Please
-   mail me at fsbraun(at)gmx.de All contributions are welcome.
+Also, all contributions are welcome.
 
 ..
    Contributing

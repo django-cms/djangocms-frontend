@@ -9,7 +9,7 @@ DEVICE_CHOICES = (
     ("md", _("Medium")),  # default ≥768px
     ("lg", _("Large")),  # default ≥992px
     ("xl", _("Extra large")),  # default ≥1200px
-    #   ("xxl", _("Extra-extra large")),  # default ≥1200px
+    ("xxl", _("Extra-extra large")),  # default ≥1200px
 )
 DEVICE_SIZES = tuple([size for size, name in DEVICE_CHOICES])
 
