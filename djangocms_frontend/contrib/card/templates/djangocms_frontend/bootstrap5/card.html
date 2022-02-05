@@ -1,5 +1,5 @@
 {% load cms_tags frontend %}{% spaceless %}
-    {% if instance.parent.plugin_type == "CardLayoutPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}<div class="col">{% endif %}
+    {% if instance.parent.plugin_type == "CardLayoutPlugin" and instance.parent.get_plugin_instance.0.card_type == "row" %}<div class="col mb-3">{% endif %}
     <{{ instance.tag_type }}{{ instance.get_attributes }}>
     {% with parent=instance %}
         {% for plugin in instance.child_plugin_instances %}
