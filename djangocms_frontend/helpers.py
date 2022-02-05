@@ -1,3 +1,5 @@
+import copy
+
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import select_template
 from django.utils.functional import lazy
@@ -15,27 +17,31 @@ def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None
     """
     if block is None:
         fs = (
-            fieldsets[:position]
+            list(fieldsets[:position] if position != -1 else fieldsets)
             + [
                 (
                     blockname,
                     {
                         "classes": ("collapse",),
-                        "fields": new_fields,
+                        "fields": list(new_fields),
                     },
                 )
             ]
-            + (fieldsets[position:] if position != -1 else [])
+            + list(fieldsets[position:] if position != -1 else [])
         )
         return fs
-    modify = fieldsets[block]
+    modify = copy.deepcopy(fieldsets[block])
     fields = modify[1]["fields"]
     modify[1]["fields"] = (
-        fields[:position]
-        + new_fields
-        + (fields[: position + 1] if position != -1 else [])
+        list(fields[: position + 1] if position != -1 else fields)
+        + list(new_fields)
+        + list(fields[position + 1 :] if position != -1 else [])
     )
-    fs = fieldsets[:block] + [modify] + (fieldsets[block + 1 :] if block != -1 else [])
+    fs = (
+        list(fieldsets[:block] if block != -1 else fieldsets)
+        + [modify]
+        + list(fieldsets[block + 1 :] if block != -1 else [])
+    )
     return fs
 
 
@@ -61,7 +67,7 @@ def first_choice(choices):
         if not isinstance(verbose, (tuple, list)):
             return value
         else:
-            first = first_choice(value)
+            first = first_choice(verbose)
             if first is not None:
                 return first
     return None

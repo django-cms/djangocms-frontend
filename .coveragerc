@@ -5,6 +5,7 @@ omit =
     djangocms_frontend/contrib/forms/*
     djangocms_frontend/migrations/*
     djangocms_frontend/management/*
+    djangocms_frontend/contrib/contact_form/*
     tests/*
 
 [report]

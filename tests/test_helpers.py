@@ -1,10 +1,17 @@
+import copy
+
 from cms.api import add_plugin, create_page
 from django.template.loader import select_template
 from django.test import TestCase
 
 from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
-from djangocms_frontend.helpers import get_plugin_template, get_template_path
+from djangocms_frontend.helpers import (
+    first_choice,
+    get_plugin_template,
+    get_template_path,
+    insert_fields,
+)
 
 
 class HelpersTestCase(TestCase):
@@ -32,7 +39,9 @@ class HelpersTestCase(TestCase):
             "carousel",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_frontend/bootstrap5/carousel/default/carousel.html")
+        self.assertEqual(
+            template, "djangocms_frontend/bootstrap5/carousel/default/carousel.html"
+        )
         # trigger default template
         template = get_plugin_template(
             instance,
@@ -40,6 +49,127 @@ class HelpersTestCase(TestCase):
             "exist",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(template, "djangocms_frontend/bootstrap5/does_not/default/exist.html")
+        self.assertEqual(
+            template, "djangocms_frontend/bootstrap5/does_not/default/exist.html"
+        )
         # cleanup
         page.delete()
+
+    def test_insert_fields(self):
+        fieldsets = (
+            (
+                None,
+                {
+                    "fields": (
+                        "F1",
+                        "F2",
+                        "F3",
+                    )
+                },
+            ),
+        )
+        fs = insert_fields(fieldsets, ("F4",), block=0)
+        self.assertEqual(
+            fs,
+            [
+                (
+                    None,
+                    {
+                        "fields": [
+                            "F1",
+                            "F2",
+                            "F3",
+                            "F4",
+                        ],
+                    },
+                ),
+            ],
+        )
+        fs = insert_fields(fieldsets, ("F4",), position=-2, block=0)
+        self.assertEqual(
+            fs,
+            [
+                (
+                    None,
+                    {
+                        "fields": [
+                            "F1",
+                            "F2",
+                            "F4",
+                            "F3",
+                        ],
+                    },
+                ),
+            ],
+        )
+
+        fs = insert_fields(fieldsets, ("F4",), blockname="Tarantula")
+        self.assertEqual(
+            fs,
+            [
+                (
+                    None,
+                    {
+                        "fields": (
+                            "F1",
+                            "F2",
+                            "F3",
+                        ),
+                    },
+                ),
+                (
+                    "Tarantula",
+                    {
+                        "classes": ("collapse",),
+                        "fields": [
+                            "F4",
+                        ],
+                    },
+                ),
+            ],
+        )
+
+    def test_first_choice(self):
+        self.assertEqual(
+            first_choice(
+                (
+                    ("first", "First"),
+                    ("second", "Second"),
+                )
+            ),
+            "first",
+        )
+
+        self.assertEqual(
+            first_choice(
+                (
+                    (
+                        "Section 1",
+                        (
+                            ("first", "First"),
+                            ("second", "Second"),
+                        ),
+                    ),
+                ),
+            ),
+            "first",
+        )
+
+        self.assertEqual(
+            first_choice(
+                (
+                    (
+                        "Section 1",
+                        (),
+                    ),
+                    (
+                        "Section 2",
+                        (
+                            ("second", "Second"),
+                            ("third", "Third"),
+                        ),
+                    ),
+                )
+            ),
+            "second",
+        )
