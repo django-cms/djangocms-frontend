@@ -11,30 +11,6 @@ from ...fields import AttributesFormField
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
 
-#
-# def get_model_form_fields(form, exclude):
-#     plugin_fields = ("cmsplugin_ptr",)
-#     return [
-#         field.name
-#         for field in form._meta.get_fields(include_parents=False)
-#         if field.name not in plugin_fields and field.name not in exclude
-#     ]
-#
-#
-# abstract_picture_fields = get_model_form_fields(
-#     AbstractPicture, ("image", "link_page", "tag_type", "attributes")
-# )
-#
-#
-# class PictureFormMetaClass(EntangledFormMetaclass):
-#     def __new__(cls, class_name, bases, attrs):
-#         for field in abstract_picture_fields:
-#             model_field = AbstractPicture._meta.get_field(field)
-#             if field not in attrs:
-#                 attrs[field] = model_field.formfield()
-#         return super().__new__(cls, class_name, bases, attrs)
-#
-
 
 def get_alignment():
     """add setting for image alignment, renders a class or inline styles depending on your template setup"""

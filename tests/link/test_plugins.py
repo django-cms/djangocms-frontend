@@ -1,8 +1,13 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
+from django.http import HttpRequest
 
 from djangocms_frontend.contrib.link.cms_plugins import LinkPlugin
-from djangocms_frontend.contrib.link.forms import LinkForm, SmartLinkField
+from djangocms_frontend.contrib.link.forms import (
+    LinkForm,
+    SmartLinkField,
+    get_templates,
+)
 
 from ..fixtures import TestFixture
 
@@ -126,3 +131,27 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(slf.prepare_value("blabla"), "")
         self.assertEqual(slf.prepare_value(dict(model="cms.page", pk=1)), "2-1")
         self.assertEqual(slf.prepare_value(self.home), "2-1")
+
+    def test_image_form(self):
+        request = HttpRequest()
+        request.POST = {
+            "template": get_templates()[0][0],
+            "link_type": "link",
+        }
+        form = LinkForm(request.POST)
+        self.assertFalse(form.is_valid())
+        request.POST.update(
+            {
+                "name": "One of the world's most advanced open source CMS",
+                "external_link": "https://www.django-cms.com/",
+                "anchor": "allowed-here",
+            }
+        )
+        form = LinkForm(request.POST)
+        self.assertTrue(form.is_valid())
+        request.POST.update({"mailto": "none@nowhere.com"})
+        form = LinkForm(request.POST)
+        self.assertFalse(form.is_valid())  # Two targets
+        request.POST["external_link"] = None
+        form = LinkForm(request.POST)
+        self.assertFalse(form.is_valid())  # no anchor for mail

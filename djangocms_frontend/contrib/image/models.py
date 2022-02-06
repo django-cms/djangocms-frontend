@@ -8,10 +8,6 @@ from django.utils.translation import gettext as _
 from easy_thumbnails.files import get_thumbnailer
 from entangled.utils import get_related_object
 
-from djangocms_frontend.contrib.image.forms import (
-    RESPONSIVE_IMAGE_CHOICES,
-    get_templates,
-)
 from djangocms_frontend.contrib.link.models import GetLinkMixin
 from djangocms_frontend.models import FrontendUIItem
 
