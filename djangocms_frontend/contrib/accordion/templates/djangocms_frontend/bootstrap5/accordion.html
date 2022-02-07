@@ -1,12 +1,8 @@
 {% load cms_tags %}
 {% spaceless %}
-    <{{ instance.tag_type }}{{ instance.get_attributes }}
-    id="parent-{{ instance.pk|safe }}"
-    >
-    {% with parent=instance %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }} id="parent-{{ instance.pk|safe }}">
         {% for plugin in instance.child_plugin_instances %}
-            {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+            {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
         {% endfor %}
-    {% endwith %}
     </{{ instance.tag_type }}>
 {% endspaceless %}

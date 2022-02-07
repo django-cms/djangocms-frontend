@@ -1,8 +1,8 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import card
 from . import forms, models
 
@@ -10,7 +10,7 @@ mixin_factory = settings.get_renderer(card)
 
 
 @plugin_pool.register_plugin
-class CardLayoutPlugin(mixin_factory("CardLayout"), CMSPluginBase):
+class CardLayoutPlugin(mixin_factory("CardLayout"), CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -20,7 +20,6 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSPluginBase):
     module = _("Frontend")
     model = models.CardLayout
     form = forms.CardLayoutForm
-    render_template = f"djangocms_frontend/{settings.framework}/card_layout.html"
     change_form_template = "djangocms_frontend/admin/card_layout.html"
     allow_children = True
     child_classes = [
@@ -75,7 +74,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CardPlugin(mixin_factory("Card"), CMSPluginBase):
+class CardPlugin(mixin_factory("Card"), CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -85,7 +84,6 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
     module = _("Frontend")
     model = models.Card
     form = forms.CardForm
-    render_template = f"djangocms_frontend/{settings.framework}/card.html"
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     child_classes = [
@@ -139,7 +137,7 @@ class CardPlugin(mixin_factory("Card"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
+class CardInnerPlugin(mixin_factory("CardInner"), CMSUIPlugin):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/
@@ -149,7 +147,6 @@ class CardInnerPlugin(mixin_factory("CardInner"), CMSPluginBase):
     module = _("Frontend")
     model = models.CardInner
     form = forms.CardInnerForm
-    render_template = f"djangocms_frontend/{settings.framework}/card_content.html"
     change_form_template = "djangocms_frontend/admin/card.html"
     allow_children = True
     parent_classes = [

@@ -104,15 +104,15 @@ plugins.
 
 .. note::
 
-   Bootstrap 4 and Bootstrap 5 differ, so even a most successful
-   migration will require manual work to fix differences. the migration
+   Bootstrap 4 and Bootstrap 5 differ, hence even a  successful
+   migration will require manual work to fix differences. The migration
    command is a support to reduce the amount of manual work. It will not
    do everything automatically!
 
    The more your existing installation uses the attributes field (found
    in "advanced settings") the more likely it is, that you will have to
    do some manual adjustment. While the migration command does adjust
-   settings in the attributes field but it cannot know the specifics of
+   settings in the attributes field it cannot know the specifics of
    your project.
 
 .. attention::

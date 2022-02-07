@@ -1,10 +1,10 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import tabs
 from . import forms, models
 from .constants import TAB_TEMPLATE_CHOICES
@@ -13,7 +13,7 @@ mixin_factory = settings.get_renderer(tabs)
 
 
 @plugin_pool.register_plugin
-class TabPlugin(mixin_factory("Tab"), CMSPluginBase):
+class TabPlugin(mixin_factory("Tab"), CMSUIPlugin):
     """
     Components > "Navs - Tab" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -55,7 +55,7 @@ class TabPlugin(mixin_factory("Tab"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class TabItemPlugin(mixin_factory("TabItem"), CMSPluginBase):
+class TabItemPlugin(mixin_factory("TabItem"), CMSUIPlugin):
     """
     Components > "Navs - Tab Item" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/

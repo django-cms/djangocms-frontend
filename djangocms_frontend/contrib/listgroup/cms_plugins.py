@@ -1,8 +1,8 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import listgroup
 from . import forms, models
 
@@ -10,7 +10,7 @@ mixin_factory = settings.get_renderer(listgroup)
 
 
 @plugin_pool.register_plugin
-class ListGroupPlugin(mixin_factory("ListGroup"), CMSPluginBase):
+class ListGroupPlugin(mixin_factory("ListGroup"), CMSUIPlugin):
     """
     Components > "List Group" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -20,7 +20,6 @@ class ListGroupPlugin(mixin_factory("ListGroup"), CMSPluginBase):
     module = _("Frontend")
     model = models.ListGroup
     form = forms.ListGroupForm
-    render_template = f"djangocms_frontend/{settings.framework}/list-group.html"
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
     child_classes = ["ListGroupItemPlugin", "LinkPlugin"]
@@ -42,7 +41,7 @@ class ListGroupPlugin(mixin_factory("ListGroup"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSPluginBase):
+class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSUIPlugin):
     """
     Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -52,7 +51,6 @@ class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSPluginBase):
     module = _("Frontend")
     model = models.ListGroupItem
     form = forms.ListGroupItemForm
-    render_template = f"djangocms_frontend/{settings.framework}/list-group-item.html"
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
     parent_classes = ["ListGroupPlugin"]

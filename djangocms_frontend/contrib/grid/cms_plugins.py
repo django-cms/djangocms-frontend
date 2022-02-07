@@ -1,9 +1,9 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 
+from ...cms_plugins import CMSUIPlugin
 from .. import grid
 from . import forms, models
 
@@ -11,7 +11,7 @@ mixin_factory = settings.get_renderer(grid)
 
 
 @plugin_pool.register_plugin
-class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
+class GridContainerPlugin(mixin_factory("GridContainer"), CMSUIPlugin):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -21,7 +21,6 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
     module = _("Frontend")
     model = models.GridContainer
     form = forms.GridContainerForm
-    render_template = f"djangocms_frontend/{settings.framework}/grid_container.html"
     change_form_template = "djangocms_frontend/admin/grid_container.html"
     allow_children = True
 
@@ -41,7 +40,7 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
+class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -52,7 +51,6 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
     model = models.GridRow
     form = forms.GridRowForm
     change_form_template = "djangocms_frontend/admin/grid_row.html"
-    render_template = f"djangocms_frontend/{settings.framework}/grid_row.html"
     allow_children = True
     child_classes = ["GridColumnPlugin", "CardPlugin"]
 
@@ -113,7 +111,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
+class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
     """
     Layout > Grid: "Column" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -124,7 +122,6 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSPluginBase):
     model = models.GridColumn
     form = forms.GridColumnForm
     change_form_template = "djangocms_frontend/admin/grid_column.html"
-    render_template = f"djangocms_frontend/{settings.framework}/grid_column.html"
     allow_children = True
     require_parent = True
     # TODO it should allow for the responsive utilitiy class

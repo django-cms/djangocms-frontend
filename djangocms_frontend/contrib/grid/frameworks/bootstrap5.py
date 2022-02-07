@@ -20,6 +20,8 @@ class GridContainerRenderMixin:
 
 
 class GridRowRenderMixin:
+    render_template = "djangocms_frontend/bootstrap5/grid_row.html"
+
     def render(self, context, instance, placeholder):
         instance.add_classes(
             "row",

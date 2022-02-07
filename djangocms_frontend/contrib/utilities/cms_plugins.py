@@ -1,9 +1,9 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 
+from ...cms_plugins import CMSUIPlugin
 from .. import utilities
 from . import forms, models
 
@@ -11,7 +11,7 @@ mixin_factory = settings.get_renderer(utilities)
 
 
 @plugin_pool.register_plugin
-class SpacingPlugin(mixin_factory("Spacing"), CMSPluginBase):
+class SpacingPlugin(mixin_factory("Spacing"), CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -22,7 +22,6 @@ class SpacingPlugin(mixin_factory("Spacing"), CMSPluginBase):
     model = models.Spacing
     form = forms.SpacingForm
 
-    render_template = f"djangocms_frontend/{settings.framework}/spacing.html"
     change_form_template = "djangocms_frontend/admin/spacing.html"
     allow_children = True
 
@@ -51,18 +50,17 @@ class SpacingPlugin(mixin_factory("Spacing"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class EditorNotePlugin(mixin_factory("EditorNote"), CMSPluginBase):
+class EditorNotePlugin(mixin_factory("EditorNote"), CMSUIPlugin):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Editor note")
     module = _("Frontend")
     allow_children = True
-    render_template = f"djangocms_frontend/{settings.framework}/editor_note.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
 
 @plugin_pool.register_plugin
-class HeadingPlugin(mixin_factory("Heading"), CMSPluginBase):
+class HeadingPlugin(mixin_factory("Heading"), CMSUIPlugin):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
@@ -130,14 +128,14 @@ def create_tree(request_toc):
 
 
 @plugin_pool.register_plugin
-class TOCPlugin(mixin_factory("TOC"), CMSPluginBase):
+class TOCPlugin(mixin_factory("TOC"), CMSUIPlugin):
     name = _("Table of contents")
     module = _("Frontend")
 
     model = models.TableOfContents
     form = forms.TableOfContentsForm
 
-    render_template = f"djangocms_frontend/{settings.framework}/toc.html"
+    render_template = "djangocms_frontend/toc.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
     fieldsets = [

@@ -20,8 +20,6 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
     module = _("Frontend")
     model = models.Accordion
     form = forms.AccordionForm
-    render_template = f"djangocms_frontend/{settings.framework}/accordion.html"
-    # change_form_template = "djangocms_frontend/admin/collapse.html"
     allow_children = True
     child_classes = [
         "AccordionItemPlugin",
@@ -82,7 +80,6 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSPluginBase):
     module = _("Frontend")
     model = models.AccordionItem
     form = forms.AccordionItemForm
-    render_template = f"djangocms_frontend/{settings.framework}/accordion_item.html"
     allow_children = True
     parent_classes = [
         "AccordionPlugin",

@@ -6,7 +6,7 @@ class LinkRenderMixin:
             link_classes.append("list-group-item-action")
             background_prefix = "list-group-item"
         elif (
-            instance.link_type == "link"
+            getattr(instance, "link_type", "link") == "link"
             and instance.parent
             and instance.parent.plugin_type == "CardInnerPlugin"
         ):
@@ -14,7 +14,7 @@ class LinkRenderMixin:
         else:
             background_prefix = "btn"
         if instance.link_context:
-            if instance.link_type == "link":
+            if getattr(instance, "link_type", "link") == "link":
                 link_classes.append("text-{}".format(instance.link_context))
             else:
                 link_classes.append("btn")

@@ -5,7 +5,7 @@
     {% endif %}
     <div>
         {% for plugin in instance.child_plugin_instances %}
-            {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+            {% with parent=instance %}{% render_plugin plugin %}{% endwith %}
         {% endfor %}
     </div>
     </{{ instance.tag_type }}>

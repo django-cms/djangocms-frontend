@@ -9,3 +9,7 @@ class SpacingRenderMixin:
                 f"{instance.space_property}{instance.space_sides}-{ instance.space_device }-{instance.space_size}"
             )
         return super().render(context, instance, placeholder)
+
+
+class EditorNoteRenderMixin:
+    render_template = "djangocms_frontend/bootstrap5/editor_note.html"

@@ -1,10 +1,10 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import link
 from . import forms, models
 from .constants import USE_LINK_ICONS
@@ -43,7 +43,7 @@ UILINK_FIELDSET = [
 
 
 @plugin_pool.register_plugin
-class LinkPlugin(mixin_factory("Link"), CMSPluginBase):
+class LinkPlugin(mixin_factory("Link"), CMSUIPlugin):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/

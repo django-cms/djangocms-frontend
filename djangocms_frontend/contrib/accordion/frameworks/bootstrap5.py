@@ -1,4 +1,6 @@
 class AccordionRenderMixin:
+    render_template = "djangocms_frontend/bootstrap5/accordion.html"
+
     def render(self, context, instance, placeholder):
         if instance.accordion_flush:
             instance.add_classes("accordion-flush")
@@ -6,6 +8,8 @@ class AccordionRenderMixin:
 
 
 class AccordionItemRenderMixin:
+    render_template = "djangocms_frontend/bootstrap5/accordion_item.html"
+
     def render(self, context, instance, placeholder):
         instance.add_classes("accordion-collapse collapse")
         if instance.accordion_item_open:

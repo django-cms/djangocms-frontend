@@ -4,6 +4,8 @@ from djangocms_frontend.contrib.grid.frameworks.bootstrap5 import (
 
 
 class CardRenderMixin:
+    render_template = "djangocms_frontend/bootstrap5/card.html"
+
     def render(self, context, instance, placeholder):
         instance.add_classes("card")
         if instance.card_context and instance.card_outline:
