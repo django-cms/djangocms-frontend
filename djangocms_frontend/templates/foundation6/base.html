@@ -1,0 +1,32 @@
+{% extends "djangocms_frontend.html" %}{% load cms_tags menu_tags%}
+{% block base_css %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">{% endblock %}
+{% block base_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+    <script>$(document).foundation();</script>
+{% endblock %}
+{% block end_js %}
+    {% if request.toolbar and request.toolbar.edit_mode_active %}
+        <script>
+            CMS.$(window).on('cms-content-refresh', function() {
+                $(document).foundation()
+            });
+        </script>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
+{% block navbar %}
+    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+      <div class="title-bar-title">Menu</div>
+    </div>
+    <div class="top-bar" id="responsive-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">{% block brand %}{% endblock %}</li>
+                {% block menubar %}{% show_menu 0 100 0 100 'foundation6/menu.html' %}{% endblock %}
+            </ul>
+        </div>
+        <div class="top-bar-right">{% block searchbar %}{% endblock %}</div>
+    </div>
+{% endblock %}

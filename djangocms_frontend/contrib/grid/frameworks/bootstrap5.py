@@ -44,10 +44,12 @@ def get_grid_values(self):
             if isinstance(size, int) and (
                 element == "col" or element == "order" or element == "offset"
             ):
+                if size == 0 and element == "col":
+                    size = "auto"
                 if device == "xs":
-                    classes.append(f"{element}-{int(size)}")
+                    classes.append(f"{element}-{size}")
                 else:
-                    classes.append(f"{element}-{device}-{int(size)}")
+                    classes.append(f"{element}-{device}-{size}")
             elif size:
                 if device == "xs":
                     classes.append("{}-{}".format(element, "auto"))

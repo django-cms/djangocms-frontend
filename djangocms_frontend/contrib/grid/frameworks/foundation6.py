@@ -26,7 +26,7 @@ class GridRowRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes("grid-x", get_row_cols_grid_values(instance))
         if not instance.gutters:
-            instance.add_classes("grad-padding-x", "grid-padding-y")
+            instance.add_classes("grid-padding-x", "grid-padding-y")
         return super().render(context, instance, placeholder)
 
 
@@ -36,10 +36,11 @@ def get_grid_values(self):
         for element in ("col", "order", "offset"):
             size = getattr(self, f"{device}_{element}", None)
             if isinstance(size, int):
-                if size == 0:
-                    size = "auto"
                 if element == "col":
-                    classes.append(f"{foundation_sizes.get(device, device)}-{size}")
+                    if size == 0:
+                        classes.append(f"{foundation_sizes.get(device, device)}-auto")
+                    else:
+                        classes.append(f"{foundation_sizes.get(device, device)}-{size}")
                 else:
                     classes.append(
                         f"{foundation_sizes.get(device, device)}-{element}-{size}"

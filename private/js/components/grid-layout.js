@@ -43,14 +43,12 @@ export default class GridLayout {
      * @method setColumn
      */
     setColumn() {
-        let template = (text = '', link = '#') => `
-            <div class="field-box field-box-label">
-                <a href="${link}" target="_blank" class="d-inline-block text-right">
-                    ${text}
-                    <span class="icon icon-info icon-primary"></span>
-                </a>
-            </div>
-        `;
+        let template = (text = '', link = '#') =>
+            '<div class="field-box field-box-label">' +
+            (link != "#" ? `<a href="${link}" target="_blank" class="d-inline-block text-right">` : '')
+            + text
+            + (link != "#" ? ' <span class="icon icon-info icon-primary"></span></a>' : "")
+            + "</div>";
         let container = $(this.options.selector);
         let links = this.options.links;
 

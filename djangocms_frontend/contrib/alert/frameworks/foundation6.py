@@ -1,4 +1,4 @@
-from djangocms_frontend.frontends.foundation import convert_context
+from djangocms_frontend.frontends.foundation6 import convert_context
 
 
 class AlertRenderMixin:

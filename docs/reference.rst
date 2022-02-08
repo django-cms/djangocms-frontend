@@ -177,6 +177,16 @@ Models
     returns a plugin-specific short description shown in the structure mode
     of django CMS.
 
+*********************
+ Management commands
+*********************
+
+Management commands are run by typing ``./manage.py command`` in the project
+directory.
+
+``migrate_frontend``
+    Migrates plugins from other frontend packages to **djangocms-frontend**.
+    Currently supports **djangocms-bootstrap4** and **djangocms_styled_link**.
 
 
 ***************
@@ -190,6 +200,5 @@ You can run tests by executing:
    virtualenv env
    source env/bin/activate
    pip install -r tests/requirements.txt
-   python setup.py test
+   python ./run_tests.py
 
-To run the frontend make sure to use **node 10.x**.

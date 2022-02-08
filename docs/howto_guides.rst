@@ -51,7 +51,7 @@ setting to the project's ``.settings.py`` file.
 
 Example for a configuration that allows linking CMS pages plus two
 different page types from two djangocms-blog apps called "Blog" and
-"Hub" (having the ``app_config_id`` 1 and 2, respectively):
+"Content hub" (having the ``app_config_id`` 1 and 2, respectively):
 
 .. code::
 
@@ -62,7 +62,7 @@ different page types from two djangocms-blog apps called "Blog" and
            "filter": {"publish": True, "app_config_id": 1},
        },
        {
-           "type": _("Hub pages"),
+           "type": _("Content hub pages"),
            "class_path": "djangocms_blog.models.Post",
            "filter": {"publish": True, "app_config_id": 2},
        },

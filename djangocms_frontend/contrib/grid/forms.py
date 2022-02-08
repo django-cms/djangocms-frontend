@@ -144,28 +144,33 @@ for size in settings.DEVICE_SIZES:
     extra_fields_column[f"{size}_col"] = forms.IntegerField(
         label="col" if size == "xs" else f"col-{size}",
         required=False,
-        min_value=1,
+        min_value=0,
         max_value=GRID_SIZE,
+        disabled=f"{size}_col" in getattr(settings, "EXCL_COL_PROP", ()),
     )
     extra_fields_column[f"{size}_order"] = forms.IntegerField(
         label="order" if size == "xs" else f"order-{size}",
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
+        disabled=f"{size}_order" in getattr(settings, "EXCL_COL_PROP", ()),
     )
     extra_fields_column[f"{size}_offset"] = forms.IntegerField(
         label="offset" if size == "xs" else f"offset-{size}",
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
+        disabled=f"{size}_offset" in getattr(settings, "EXCL_COL_PROP", ()),
     )
     extra_fields_column[f"{size}_ms"] = forms.BooleanField(
         label="ms-auto" if size == "xs" else f"ms-{size}-auto",
         required=False,
+        disabled=f"{size}_ms" in getattr(settings, "EXCL_COL_PROP", ()),
     )
     extra_fields_column[f"{size}_me"] = forms.BooleanField(
         label="me-auto" if size == "xs" else f"me-{size}-auto",
         required=False,
+        disabled=f"{size}_me" in getattr(settings, "EXCL_COL_PROP", ()),
     )
 
 GridColumnForm = type(
