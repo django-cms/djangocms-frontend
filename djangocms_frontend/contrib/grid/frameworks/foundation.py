@@ -1,5 +1,7 @@
 from djangocms_frontend import settings
 
+foundation_sizes = dict(xs="small", md="medium", xl="large")
+
 
 class GridContainerRenderMixin:
     def render(self, context, instance, placeholder):
@@ -14,18 +16,39 @@ class GridContainerRenderMixin:
 def get_row_cols_grid_values(instance):
     classes = []
     for device in settings.DEVICE_SIZES:
-        size = getattr(instance, "row_cols_{}".format(device), None)
+        size = getattr(instance, f"row_cols_{device}", None)
         if isinstance(size, int):
-            if device == "xs":
-                classes.append("row-cols-{}".format(int(size)))
-            else:
-                classes.append("row-cols-{}-{}".format(device, int(size)))
+            classes.append(f"{foundation_sizes.get(device, device)}-up-{int(size)}")
     return classes
 
 
-class GridRowContainerMixin:
+class GridRowRenderMixin:
     def render(self, context, instance, placeholder):
-        instance.add_classes("grid-x")
+        instance.add_classes("grid-x", get_row_cols_grid_values(instance))
         if not instance.gutters:
             instance.add_classes("grad-padding-x", "grid-padding-y")
+        return super().render(context, instance, placeholder)
+
+
+def get_grid_values(self):
+    classes = []
+    for device in settings.DEVICE_SIZES:
+        for element in ("col", "order", "offset"):
+            size = getattr(self, f"{device}_{element}", None)
+            if isinstance(size, int):
+                if size == 0:
+                    size = "auto"
+                if element == "col":
+                    classes.append(f"{foundation_sizes.get(device, device)}-{size}")
+                else:
+                    classes.append(
+                        f"{foundation_sizes.get(device, device)}-{element}-{size}"
+                    )
+
+    return classes
+
+
+class GridColumnRenderMixin:
+    def render(self, context, instance, placeholder):
+        instance.add_classes("cell", get_grid_values(instance))
         return super().render(context, instance, placeholder)

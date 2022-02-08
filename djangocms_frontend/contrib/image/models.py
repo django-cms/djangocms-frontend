@@ -1,9 +1,5 @@
-try:
-    from functools import cached_property
-except ImportError:  # Only available since Pyhton 3.8
-    cached_property = property
-
 from django.conf import settings
+from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from easy_thumbnails.files import get_thumbnailer
 from entangled.utils import get_related_object

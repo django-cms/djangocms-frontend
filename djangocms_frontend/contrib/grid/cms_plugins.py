@@ -161,28 +161,3 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
             },
         ),
     ]
-
-    def render(self, context, instance, placeholder):
-        def get_grid_values(self):
-            classes = []
-            for device in settings.DEVICE_SIZES:
-                for element in ("col", "order", "offset", "ms", "me"):
-                    size = getattr(self, f"{device}_{element}", None)
-                    if isinstance(size, int) and (
-                        element == "col" or element == "order" or element == "offset"
-                    ):
-                        if device == "xs":
-                            classes.append(f"{element}-{int(size)}")
-                        else:
-                            classes.append(f"{element}-{device}-{int(size)}")
-                    elif size:
-                        if device == "xs":
-                            classes.append("{}-{}".format(element, "auto"))
-                        else:
-                            classes.append("{}-{}-{}".format(element, device, "auto"))
-
-            return classes
-
-        instance.add_classes(instance.column_alignment)
-        instance.add_classes(get_grid_values(instance))
-        return super().render(context, instance, placeholder)
