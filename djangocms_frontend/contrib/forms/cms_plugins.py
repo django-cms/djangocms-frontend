@@ -1,6 +1,5 @@
 from urllib.parse import urlencode
 
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.http import Http404, JsonResponse
 from django.template.context_processors import csrf
@@ -13,10 +12,11 @@ from sekizai.context import SekizaiContext
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
 
+from ...cms_plugins import CMSUIPlugin
 from . import forms, models
 
 
-class CMSAjaxBase(CMSPluginBase):
+class CMSAjaxBase(CMSUIPlugin):
     def ajax_post(self, request, instance, parameter):
         return JsonResponse({})
 
@@ -233,7 +233,7 @@ mixin_factory = settings.get_renderer(forms_module)
 
 
 @plugin_pool.register_plugin
-class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
+class FormPlugin(mixin_factory("Form"), CMSAjaxForm):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/
@@ -244,7 +244,6 @@ class FormPlugin(mixin_factory("Forms"), CMSAjaxForm):
     model = models.Form
 
     form = forms.FormsForm
-    render_template = f"djangocms_frontend/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/forms.html"
     allow_children = False
 

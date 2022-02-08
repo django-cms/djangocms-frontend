@@ -8,18 +8,12 @@
 
 {% block field_sets %}
     <div class="djangocms-frontend djangocms-frontend-card_layout djangocms-frontend-row" data-static="{% get_static_prefix %}"
-         data-sizes='[
-            "{% trans 'Extra small' %}",
-            "{% trans 'Small' %}",
-            "{% trans 'Medium' %}",
-            "{% trans 'Large' %}",
-            "{% trans 'Extra large' %}",
-            "{% trans 'XX large' %}"
-            ]'
-            data-rows='[
+         data-sizes='{{ plugin.framework_info.grid_sizes }}'
+         data-icons='{{ plugin.framework_info.grid_icons }}'
+         data-rows='[
             "{% trans 'Colums per row' %}"
-            ]'
-            data-links='{{ plugin.framework_info.row_links }}'
+         ]'
+        data-links='{{ plugin.framework_info.row_links }}'
     >
         {{ block.super }}
     </div>

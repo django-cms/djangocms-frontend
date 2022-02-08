@@ -9,14 +9,8 @@
 {% block field_sets %}
     <div class="djangocms-frontend djangocms-frontend-column"
         data-static="{% get_static_prefix %}"
-        data-sizes='[
-        "{% trans 'Extra small' %}",
-        "{% trans 'Small' %}",
-        "{% trans 'Medium' %}",
-        "{% trans 'Large' %}",
-        "{% trans 'Extra large' %}",
-        "{% trans 'XX large' %}"
-        ]'
+        data-sizes='{{ plugin.framework_info.grid_sizes }}'
+        data-icons='{{ plugin.framework_info.grid_icons }}'
         data-rows='[
         "{% trans 'Column size' %}",
         "{% trans 'Order' %}",

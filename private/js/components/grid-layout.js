@@ -9,6 +9,7 @@ export default class GridLayout {
      * @method constructor
      * @param {Object} options
      * @param {Array} options.sizes
+     * @param {Array} options.icons
      * @param {Array} options.row
      * @param {String} options.reset
      * @param {String} options.static
@@ -27,13 +28,12 @@ export default class GridLayout {
      */
     setHeader() {
         let container = $('.form-row.field-xs_col .fieldBox, .form-row.field-row_cols_xs .fieldBox');
-        let sizes = ['size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl', 'size-xxl'];
         let wrapper = wrapper => `<div class="icon-thead">${wrapper}</div>`;
         let icons = (icon, title = '') => `
             <span class="icon icon-${icon}" title="${title}"></span>
             <span class="icon-title">${title}</span>`
         let tmp = '';
-        sizes.forEach(function (item, index) {
+        this.options.icons.forEach(function (item, index) {
             tmp = icons(item, this.options.sizes[index]);
             container.eq(index).prepend(wrapper(tmp));
         }, this);

@@ -40,6 +40,7 @@ $(() => {
                 .form-row.field-row_cols_xs
             `,
             sizes:  row.data().sizes,
+            icons:  row.data().icons,
             rows:   row.data().rows,
             links:  row.data().links,
             static: static_url,
@@ -70,6 +71,7 @@ $(() => {
                 .form-row.field-xs_me
             `,
             sizes: column.data().sizes,
+            icons: column.data().icons,
             rows: column.data().rows,
             reset: column.data().reset,
             links: column.data().links,

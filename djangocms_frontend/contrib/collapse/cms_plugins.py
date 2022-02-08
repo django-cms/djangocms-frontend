@@ -1,8 +1,8 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import collapse
 from . import forms, models
 
@@ -10,7 +10,7 @@ mixin_factory = settings.get_renderer(collapse)
 
 
 @plugin_pool.register_plugin
-class CollapsePlugin(mixin_factory("Collapse"), CMSPluginBase):
+class CollapsePlugin(mixin_factory("Collapse"), CMSUIPlugin):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -20,7 +20,6 @@ class CollapsePlugin(mixin_factory("Collapse"), CMSPluginBase):
     module = _("Frontend")
     model = models.Collapse
     form = forms.CollapseForm
-    render_template = f"djangocms_frontend/{settings.framework}/collapse.html"
     change_form_template = "djangocms_frontend/admin/collapse.html"
     allow_children = True
     child_classes = [
@@ -48,7 +47,7 @@ class CollapsePlugin(mixin_factory("Collapse"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSPluginBase):
+class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSUIPlugin):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -58,7 +57,6 @@ class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSPluginBase):
     module = _("Frontend")
     model = models.CollapseTrigger
     form = forms.CollapseTriggerForm
-    render_template = f"djangocms_frontend/{settings.framework}/collapse-trigger.html"
     allow_children = True
     parent_classes = [
         "CardPlugin",
@@ -83,7 +81,7 @@ class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSPluginBase):
+class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSUIPlugin):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -93,7 +91,6 @@ class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSPluginBase)
     module = _("Frontend")
     model = models.CollapseContainer
     form = forms.CollapseContainerForm
-    render_template = f"djangocms_frontend/{settings.framework}/collapse-container.html"
     allow_children = True
     parent_classes = [
         "CardPlugin",

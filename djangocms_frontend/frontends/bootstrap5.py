@@ -1,7 +1,7 @@
 import json
 
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 DEVICE_CHOICES = (
     ("xs", _("Extra small")),  # default <576px
@@ -69,8 +69,25 @@ SPACER_SIZE_CHOICES = getattr(
     ),
 )
 
+grid_sizes = json.dumps(
+    [
+        _("Extra small"),
+        _("Small"),
+        _("Medium"),
+        _("Large"),
+        _("Extra large"),
+        _("XX large"),
+    ]
+)
+
+grid_icons = json.dumps(
+    ["size-xs", "size-sm", "size-md", "size-lg", "size-xl", "size-xxl"]
+)
+
 FRAMEWORK_PLUGIN_INFO = {
     "GridColumn": {
+        "grid_sizes": grid_sizes,
+        "grid_icons": grid_icons,
         "row_links": json.dumps(
             [
                 "https://getbootstrap.com/docs/5.1/layout/grid/#grid-options",
@@ -82,6 +99,8 @@ FRAMEWORK_PLUGIN_INFO = {
         ),
     },
     "GridRow": {
+        "grid_sizes": grid_sizes,
+        "grid_icons": grid_icons,
         "row_links": json.dumps(
             [
                 "https://getbootstrap.com/docs/5.1/layout/grid/#row-columns",
@@ -92,6 +111,8 @@ FRAMEWORK_PLUGIN_INFO = {
     },
     "CardLayout": {
         "card_type_link": "https://getbootstrap.com/docs/5.1/components/card/#card-layout",
+        "grid_sizes": grid_sizes,
+        "grid_icons": grid_icons,
         "row_links": json.dumps(
             [
                 "https://getbootstrap.com/docs/5.1/layout/grid/#row-columns",

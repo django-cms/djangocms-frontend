@@ -1,8 +1,8 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import content
 from . import forms, models
 
@@ -10,7 +10,7 @@ mixin_factory = settings.get_renderer(content)
 
 
 @plugin_pool.register_plugin
-class CodePlugin(mixin_factory("Code"), CMSPluginBase):
+class CodePlugin(mixin_factory("Code"), CMSUIPlugin):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
@@ -20,7 +20,6 @@ class CodePlugin(mixin_factory("Code"), CMSPluginBase):
     module = _("Frontend")
     model = models.CodeBlock
     form = forms.CodeForm
-    render_template = f"djangocms_frontend/{settings.framework}/code.html"
     change_form_template = "djangocms_frontend/admin/code.html"
     text_enabled = True
 
@@ -39,7 +38,7 @@ class CodePlugin(mixin_factory("Code"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class BlockquotePlugin(mixin_factory("Blockquote"), CMSPluginBase):
+class BlockquotePlugin(mixin_factory("Blockquote"), CMSUIPlugin):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
@@ -49,7 +48,6 @@ class BlockquotePlugin(mixin_factory("Blockquote"), CMSPluginBase):
     module = _("Frontend")
     model = models.Blockquote
     form = forms.BlockquoteForm
-    render_template = f"djangocms_frontend/{settings.framework}/blockquote.html"
     change_form_template = "djangocms_frontend/admin/blockquote.html"
     text_enabled = True
 
@@ -68,7 +66,7 @@ class BlockquotePlugin(mixin_factory("Blockquote"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class FigurePlugin(mixin_factory("Figure"), CMSPluginBase):
+class FigurePlugin(mixin_factory("Figure"), CMSUIPlugin):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/
@@ -78,7 +76,6 @@ class FigurePlugin(mixin_factory("Figure"), CMSPluginBase):
     module = _("Frontend")
     model = models.Figure
     form = forms.FigureForm
-    render_template = f"djangocms_frontend/{settings.framework}/figure.html"
     change_form_template = "djangocms_frontend/admin/figure.html"
     allow_children = True
 

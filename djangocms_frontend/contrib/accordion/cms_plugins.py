@@ -1,8 +1,8 @@
-from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
 from .. import accordion
 from . import forms, models
 
@@ -10,7 +10,7 @@ mixin_factory = settings.get_renderer(accordion)
 
 
 @plugin_pool.register_plugin
-class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
+class AccordionPlugin(mixin_factory("Accordion"), CMSUIPlugin):
     """
     Component > "Accordion" Plugin
     https://getbootstrap.com/docs/5.0/components/accordion/
@@ -70,7 +70,7 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSPluginBase):
+class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSUIPlugin):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/

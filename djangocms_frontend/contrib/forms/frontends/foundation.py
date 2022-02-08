@@ -19,7 +19,3 @@ attr_dict = dict(
 )
 
 DEFAULT_FIELD_SEP = "mb-3"
-
-
-class FormRenderMixin:
-    render_template = "djangocms_frontend/bootstrap5/form.html"
