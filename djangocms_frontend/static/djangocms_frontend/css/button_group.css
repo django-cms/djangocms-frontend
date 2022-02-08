@@ -1,0 +1,42 @@
+    form .form-row > div > label.btn-grp {
+        margin: 3px;
+        text-transform: none;
+        text-align: center !important;
+        border-color: transparent !important;
+        outline:  3px solid white;
+        width: auto !important;
+        font-weight: normal !important;
+    }
+    form .form-row > div > label.btn-grp.btn-outline-secondary {
+        color: black !important;
+    }
+    form .form-row > div > label.btn-grp.btn-secondary {
+        color: white !important;
+    }
+    .btn-check:checked+.btn-outline-secondary.btn-grp {
+        background: white;
+    }
+    form .form-row > div > input[type="radio"]:checked+label.btn-grp {
+        outline:  3px solid #0bf;
+        border-color: white !important;
+    }
+    form .form-row > div > input[property="opacity"]+label.btn-grp {
+        width: 3em !important;
+        line-height: 3;
+        padding: 0 !important;
+        color: black !important;
+        overflow: hidden;
+        white-space: nowrap;
+        background: rgba(var(--bs-secondary-rgb), calc(var(--fe-value) / 100));
+    }
+    form .form-row > div > input[property="opacity"][value="100"]+label.btn-grp,
+    form .form-row > div > input[property="opacity"][value="75"]+label.btn-grp {
+        color: white !important;
+    }
+    form .form-row > div > input[property="list_state"][value="active"]+label.btn-grp {
+        background: var(--bs-primary);
+    }
+    form .form-row > div > input[property="list_state"][value="disabled"]+label.btn-grp {
+        color: var(--bs-gray-600) !important;
+        background: white;
+    }

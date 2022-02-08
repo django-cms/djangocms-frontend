@@ -60,6 +60,7 @@ class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSUIPlugin):
             None,
             {
                 "fields": (
+                    "simple_content",
                     "list_context",
                     "list_state",
                 )

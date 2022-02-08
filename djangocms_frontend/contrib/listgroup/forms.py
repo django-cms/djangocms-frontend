@@ -4,7 +4,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 
-from ...fields import AttributesFormField, ColoredButtonGroup
+from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
 from ...models import FrontendUIItem
 from .constants import LISTGROUP_STATE_CHOICES
 
@@ -44,6 +44,7 @@ class ListGroupItemForm(EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "simple_content",
                 "list_context",
                 "list_state",
                 "attributes",
@@ -51,6 +52,13 @@ class ListGroupItemForm(EntangledModelForm):
         }
         untangled_fields = ("tag_type",)
 
+    simple_content = forms.CharField(
+        label=_("One line content"),
+        required=False,
+        help_text=_(
+            "List item text. Is only show if this list item has no child plugins."
+        ),
+    )
     list_context = forms.ChoiceField(
         label=_("Context"),
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
@@ -63,5 +71,6 @@ class ListGroupItemForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + LISTGROUP_STATE_CHOICES,
         initial=settings.EMPTY_CHOICE[0][0],
         required=False,
+        widget=ButtonGroup(attrs=dict(property="list_state")),
     )
     attributes = AttributesFormField()

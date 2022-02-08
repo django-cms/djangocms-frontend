@@ -1,0 +1,27 @@
+{% with id=widget.attrs.id %}<div{% if id %} id="{{ id }}"{% endif %} style="display: flex; flex-wrap: wrap; align-items: center;" class="color-button-group{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">{% for group, options, index in widget.optgroups %}{% if group %}
+    <div>{{ group }}<div{% if id %} id="{{ id }}_{{ index }}"{% endif %}>{% endif %}{% for option in options %}
+        <div  style="overflow: hidden; flex-basis: calc(20% - 4px);">{% include option.template_name with widget=option %}</div>{% endfor %}{% if group %}
+            </div></div>{% endif %}{% endfor %}
+</div>{% endwith %}
+<style>
+    {% for value, color in colors.items %}
+        {%  if color %}
+            .btn-{{ value }} {
+                background-color: {{ color }};
+                border-color: {{ color }};
+            }
+        {% endif %}
+        .color-button-group .btn-check:checked+.btn-{{ value }}, .color-button-group .btn-check:active+.btn-{{ value }}, .color-button-group .btn-{{ value }}:active, .color-button-group .btn-{{ value }}.active, .color-button-group .show>.btn-{{ value }}.dropdown-toggle {
+            outline:  3px solid #0bf;
+            border-color: white !important;
+        }
+        .color-button-group .btn-{{ value }} {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 2px;
+            text-transform: none;
+            width: 100%;
+        }
+    {% endfor %}
+</style>

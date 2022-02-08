@@ -6,6 +6,7 @@ omit =
     djangocms_frontend/migrations/*
     djangocms_frontend/management/*
     djangocms_frontend/contrib/contact_form/*
+    */foundation6.py
     tests/*
 
 [report]
