@@ -1,0 +1,24 @@
+{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
+    <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
+        {% include option.template_name with widget=option %}{% endfor %}{% if group_name %}
+            </optgroup>{% endif %}{% endfor %}
+<style>
+    form .form-row > div > label.btn-opacity {
+        width: 3em !important;
+        color: black !important;
+        overflow: hidden;
+        white-space: nowrap;
+        margin: 4px;
+        text-transform: none;
+        text-align: center !important;
+        line-height: 3;
+        padding: 0 !important;
+        border-color: transparent !important;
+        outline:  3px solid white;
+
+    }
+    form .form-row > div > input[type="radio"]:checked+label.btn-opacity {
+        outline:  3px solid #0bf;
+        border-color: white !important;
+    }
+</style>

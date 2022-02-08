@@ -69,6 +69,18 @@ SPACER_SIZE_CHOICES = getattr(
     ),
 )
 
+OPACITY_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_OPACITY_CHOICES",
+    (
+        (100, "100%"),
+        (75, "75%"),
+        (50, "50%"),
+        (25, "25%"),
+        (10, "10%"),
+    ),
+)
+
 grid_sizes = json.dumps(
     [
         _("Extra small"),

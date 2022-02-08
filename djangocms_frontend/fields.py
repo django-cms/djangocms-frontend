@@ -44,3 +44,8 @@ class ColoredButtonGroup(forms.Select):
 
     class Media:
         css = settings.ADMIN_CSS
+
+
+class OpacityButtonGroup(forms.RadioSelect):
+    template_name = "djangocms_frontend/admin/button_group_opacity.html"
+    option_template_name = "djangocms_frontend/admin/button_group_opacity_option.html"
