@@ -9,7 +9,7 @@ DEVICE_CHOICES = (
     ("xl", _("Extra large")),  # default ≥1200px
     #   ("xxl", _("Extra-extra large")),  # default ≥1200px
 )
-DEVICE_SIZES = tuple([size for size, name in DEVICE_CHOICES])
+DEVICE_SIZES = tuple(size for size, name in DEVICE_CHOICES)
 
 COLOR_STYLE_CHOICES = getattr(
     settings,

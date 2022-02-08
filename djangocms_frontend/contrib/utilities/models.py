@@ -28,7 +28,7 @@ class Spacing(FrontendUIItem):
         )
 
     def get_short_description(self):
-        return "(.{})".format(self.get_base_css_class())
+        return f"(.{self.get_base_css_class()})"
 
 
 class Heading(FrontendUIItem):
@@ -40,7 +40,7 @@ class Heading(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.heading)
+        return f"({self.heading})"
 
 
 class TableOfContents(FrontendUIItem):
@@ -54,4 +54,4 @@ class TableOfContents(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.id)
+        return f"({self.id})"

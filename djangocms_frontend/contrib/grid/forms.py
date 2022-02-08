@@ -97,15 +97,15 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
 
 extra_fields_column = {}
 for size in settings.DEVICE_SIZES:
-    extra_fields_column["row_cols_{}".format(size)] = forms.IntegerField(
-        label="row-cols" if size == "xs" else "row-cols-{}".format(size),
+    extra_fields_column[f"row_cols_{size}"] = forms.IntegerField(
+        label="row-cols" if size == "xs" else f"row-cols-{size}",
         required=False,
         min_value=1,
         max_value=GRID_SIZE,
     )
 
 GridRowForm = type(
-    str("GridRowBaseForm"),
+    "GridRowBaseForm",
     (GridRowBaseForm,),
     copy(extra_fields_column),
 )
@@ -141,35 +141,35 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
 # convert regular text type fields to number
 extra_fields_column = {}
 for size in settings.DEVICE_SIZES:
-    extra_fields_column["{}_col".format(size)] = forms.IntegerField(
-        label="col" if size == "xs" else "col-{}".format(size),
+    extra_fields_column[f"{size}_col"] = forms.IntegerField(
+        label="col" if size == "xs" else f"col-{size}",
         required=False,
         min_value=1,
         max_value=GRID_SIZE,
     )
-    extra_fields_column["{}_order".format(size)] = forms.IntegerField(
-        label="order" if size == "xs" else "order-{}".format(size),
+    extra_fields_column[f"{size}_order"] = forms.IntegerField(
+        label="order" if size == "xs" else f"order-{size}",
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
     )
-    extra_fields_column["{}_offset".format(size)] = forms.IntegerField(
-        label="offset" if size == "xs" else "offset-{}".format(size),
+    extra_fields_column[f"{size}_offset"] = forms.IntegerField(
+        label="offset" if size == "xs" else f"offset-{size}",
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
     )
-    extra_fields_column["{}_ms".format(size)] = forms.BooleanField(
-        label="ms-auto" if size == "xs" else "ms-{}-auto".format(size),
+    extra_fields_column[f"{size}_ms"] = forms.BooleanField(
+        label="ms-auto" if size == "xs" else f"ms-{size}-auto",
         required=False,
     )
-    extra_fields_column["{}_me".format(size)] = forms.BooleanField(
-        label="me-auto" if size == "xs" else "me-{}-auto".format(size),
+    extra_fields_column[f"{size}_me"] = forms.BooleanField(
+        label="me-auto" if size == "xs" else f"me-{size}-auto",
         required=False,
     )
 
 GridColumnForm = type(
-    str("GridColumnForm"),
+    "GridColumnForm",
     (GridColumnBaseForm,),
     copy(extra_fields_column),
 )

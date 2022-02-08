@@ -19,7 +19,7 @@ class Carousel(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        text = "({})".format(self.template)
+        text = f"({self.template})"
         text += " {}: {}".format(_("Interval"), self.carousel_interval)
         text += ", {}: {}".format(_("Controls"), self.carousel_controls)
         text += ", {}: {}".format(_("Indicators"), self.carousel_indicators)
@@ -59,11 +59,11 @@ class CarouselSlide(GetLinkMixin, ImageMixin, FrontendUIItem):
         if self.carousel_content:
             text = strip_tags(self.carousel_content).strip()
             if len(text) > 100:
-                content_text = "{}...".format(text[:100])
+                content_text = f"{text[:100]}..."
             else:
-                content_text = "{}".format(text)
+                content_text = f"{text}"
 
         if image_text and content_text:
-            return "{} ({})".format(image_text, content_text)
+            return f"{image_text} ({content_text})"
         else:
             return image_text or content_text

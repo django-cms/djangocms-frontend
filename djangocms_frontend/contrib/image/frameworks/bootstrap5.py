@@ -8,7 +8,7 @@ class ImageRenderMixin:
         )
         context["img_srcset_data"] = instance.img_srcset_data
         if instance.alignment:
-            instance.add_classes("align-{}".format(instance.alignment))
+            instance.add_classes(f"align-{instance.alignment}")
         if instance.picture_fluid:
             instance.add_classes("img-fluid")
         if instance.picture_rounded:

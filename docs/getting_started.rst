@@ -39,11 +39,11 @@ Add the following entries to your ``INSTALLED_APPS``:
       'djangocms_frontend.contrib.collapse',
       'djangocms_frontend.contrib.content',
       'djangocms_frontend.contrib.grid',
+      'djangocms_frontend.contrib.image',
       'djangocms_frontend.contrib.jumbotron',
       'djangocms_frontend.contrib.link',
       'djangocms_frontend.contrib.listgroup',
       'djangocms_frontend.contrib.media',
-      'djangocms_frontend.contrib.picture',
       'djangocms_frontend.contrib.tabs',
       'djangocms_frontend.contrib.utilities',
 

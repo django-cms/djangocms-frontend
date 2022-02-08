@@ -36,7 +36,7 @@ class AjaxView(View):
                 return self.ajax_get(request, *args, **kwargs)
             elif request.method == "POST" and "post" in self.http_method_names:
                 return self.ajax_post(request, *args, **kwargs)
-        return super(AjaxView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     @staticmethod
     def decode_path(path):

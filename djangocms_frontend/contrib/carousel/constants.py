@@ -36,8 +36,5 @@ CAROUSEL_ASPECT_RATIOS = (
 ) + tuple(getattr(settings, "DJANGOCMS_BOOTSTRAP5_CAROUSEL_ASPECT_RATIOS", tuple()))
 
 CAROUSEL_ASPECT_RATIO_CHOICES = tuple(
-    [
-        ("{0}x{1}".format(x, y), "{0}x{1}".format(x, y))
-        for x, y in CAROUSEL_ASPECT_RATIOS
-    ]
+    (f"{x}x{y}", f"{x}x{y}") for x, y in CAROUSEL_ASPECT_RATIOS
 )
