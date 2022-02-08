@@ -38,7 +38,7 @@ def s001_migrate_styled_link(obj, new_obj):
         )
         styles = obj.styles.all()
         new_obj.config["attributes"] = {
-            "class": " ".join((style.link_class for style in styles))
+            "class": " ".join(style.link_class for style in styles)
         }
         for style in styles:
             obj.styles.remove(style)

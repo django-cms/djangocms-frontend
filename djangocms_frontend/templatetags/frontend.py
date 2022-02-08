@@ -20,11 +20,9 @@ def get_attributes(attribute_field, *add_classes):
             if key.lower() == "class":
                 val = " ".join(additional_classes.union(set(val.split())))
             if val:
-                attrs.append(
-                    '{key}="{value}"'.format(key=key, value=conditional_escape(val))
-                )
+                attrs.append(f'{key}="{conditional_escape(val)}"')
             else:
-                attrs.append("{key}".format(key=key))
+                attrs.append(f"{key}")
     if additional_classes and (not attribute_field or "class" not in attribute_field):
         attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))

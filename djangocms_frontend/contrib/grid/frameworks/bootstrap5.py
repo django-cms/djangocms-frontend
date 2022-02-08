@@ -4,12 +4,12 @@ from djangocms_frontend import settings
 def get_row_cols_grid_values(instance):
     classes = []
     for device in settings.DEVICE_SIZES:
-        size = getattr(instance, "row_cols_{}".format(device), None)
+        size = getattr(instance, f"row_cols_{device}", None)
         if isinstance(size, int):
             if device == "xs":
-                classes.append("row-cols-{}".format(int(size)))
+                classes.append(f"row-cols-{int(size)}")
             else:
-                classes.append("row-cols-{}-{}".format(device, int(size)))
+                classes.append(f"row-cols-{device}-{int(size)}")
     return classes
 
 

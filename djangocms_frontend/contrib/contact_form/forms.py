@@ -34,14 +34,12 @@ class HoneypotWidget(forms.CheckboxInput):
             '<div style="display: none;"><label for="id_accept_terms">%s</label>%%s</div>'
             % (_("Are you a robot?"))
         )
-        return mark_safe(
-            wrapper_html % super(HoneypotWidget, self).render(*args, **kwargs)
-        )
+        return mark_safe(wrapper_html % super().render(*args, **kwargs))
 
 
 class HoneypotField(forms.BooleanField):
     def __init__(self, *args, **kwargs):
-        super(HoneypotField, self).__init__(
+        super().__init__(
             widget=HoneypotWidget,
             required=False,
             error_messages={"checked": _("Please don't check this box.")},
@@ -50,7 +48,7 @@ class HoneypotField(forms.BooleanField):
         )
 
     def clean(self, value):
-        val = super(HoneypotField, self).clean(value)
+        val = super().clean(value)
         if val:
             raise ValidationError(self.error_messages["checked"])
         return val

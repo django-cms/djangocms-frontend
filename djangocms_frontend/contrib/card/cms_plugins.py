@@ -41,9 +41,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSUIPlugin):
         (
             _("Responsive settings"),
             {
-                "fields": (
-                    ["row_cols_{}".format(size) for size in settings.DEVICE_SIZES],
-                ),
+                "fields": ([f"row_cols_{size}" for size in settings.DEVICE_SIZES],),
             },
         ),
         (

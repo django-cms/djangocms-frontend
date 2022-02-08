@@ -18,7 +18,7 @@ class Collapse(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "(collapse-{})".format(str(self.pk))
+        return f"(collapse-{str(self.pk)})"
 
 
 class CollapseTrigger(FrontendUIItem):
@@ -31,7 +31,7 @@ class CollapseTrigger(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.trigger_identifier)
+        return f"({self.trigger_identifier})"
 
 
 class CollapseContainer(FrontendUIItem):
@@ -44,4 +44,4 @@ class CollapseContainer(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.container_identifier)
+        return f"({self.container_identifier})"

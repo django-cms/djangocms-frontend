@@ -11,7 +11,7 @@ class CodeBlock(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "<{}>".format(self.code_type)
+        return f"<{self.code_type}>"
 
 
 class Blockquote(FrontendUIItem):

@@ -15,15 +15,13 @@ class LinkRenderMixin:
             background_prefix = "btn"
         if instance.link_context:
             if getattr(instance, "link_type", "link") == "link":
-                link_classes.append("text-{}".format(instance.link_context))
+                link_classes.append(f"text-{instance.link_context}")
             else:
                 link_classes.append("btn")
                 if not instance.link_outline:
-                    link_classes.append(
-                        "{}-{}".format(background_prefix, instance.link_context)
-                    )
+                    link_classes.append(f"{background_prefix}-{instance.link_context}")
                 else:
-                    link_classes.append("btn-outline-{}".format(instance.link_context))
+                    link_classes.append(f"btn-outline-{instance.link_context}")
         if instance.link_size:
             link_classes.append(instance.link_size)
         if instance.link_block:

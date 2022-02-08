@@ -25,7 +25,7 @@ class GridContainer(FrontendUIItem):
         for item in GRID_CONTAINER_CHOICES:
             if item[0] == self.container_type:
                 text = item[1]
-        return "({})".format(text)
+        return f"({text})"
 
     @cached_property
     def image(self):
@@ -64,7 +64,7 @@ class GridColumn(FrontendUIItem):
     def get_short_description(self):
         text = ""
         if self.xs_col:
-            text += "(col-{}) ".format(self.xs_col)
+            text += f"(col-{self.xs_col}) "
         else:
             text += "(auto) "
         return text.strip()

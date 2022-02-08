@@ -56,7 +56,7 @@ class GetLinkMixin:
 
             if ref_page_site_id != cms_page_site_id:
                 ref_site = Site.objects._get_site_by_id(ref_page_site_id).domain
-                link = "//{}{}".format(ref_site, link)
+                link = f"//{ref_site}{link}"
 
         elif getattr(self, "file_link", None):
             link = getattr(get_related_object(self.config, "file_link"), "url", "")
@@ -68,7 +68,7 @@ class GetLinkMixin:
             link = "tel:{}".format(self.phone.replace(" ", ""))
 
         elif getattr(self, "mailto", None):
-            link = "mailto:{}".format(self.mailto)
+            link = f"mailto:{self.mailto}"
 
         else:
             link = ""
@@ -76,7 +76,7 @@ class GetLinkMixin:
         if (
             not getattr(self, "phone", None) and not getattr(self, "mailto", None)
         ) and getattr(self, "anchor", None):
-            link += "#{}".format(self.anchor)
+            link += f"#{self.anchor}"
 
         return link
 
@@ -92,5 +92,5 @@ class Link(GetLinkMixin, FrontendUIItem):
 
     def get_short_description(self):
         if self.name and self.get_link():
-            return "{} ({})".format(self.name, self.get_link())
+            return f"{self.name} ({self.get_link()})"
         return self.name or self.get_link() or _("<link is missing>")

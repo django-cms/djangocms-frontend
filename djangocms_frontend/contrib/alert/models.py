@@ -11,4 +11,4 @@ class Alert(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.alert_context)
+        return f"({self.alert_context})"

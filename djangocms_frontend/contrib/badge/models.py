@@ -11,4 +11,4 @@ class Badge(FrontendUIItem):
         proxy = True
 
     def get_short_description(self):
-        return "({})".format(self.badge_context)
+        return f"({self.badge_context})"

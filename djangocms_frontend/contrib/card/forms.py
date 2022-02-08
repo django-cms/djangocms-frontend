@@ -67,15 +67,15 @@ class CardLayoutBaseForm(mixin_factory("CardLayout"), EntangledModelForm):
 
 extra_fields_row_cols = {}
 for size in settings.DEVICE_SIZES:
-    extra_fields_row_cols["row_cols_{}".format(size)] = forms.IntegerField(
-        label="row-cols" if size == "xs" else "row-cols-{}".format(size),
+    extra_fields_row_cols[f"row_cols_{size}"] = forms.IntegerField(
+        label="row-cols" if size == "xs" else f"row-cols-{size}",
         required=False,
         min_value=1,
         max_value=GRID_SIZE,
     )
 
 CardLayoutForm = type(
-    str("CardLayoutBaseForm"),
+    "CardLayoutBaseForm",
     (CardLayoutBaseForm,),
     copy(extra_fields_row_cols),
 )
@@ -190,15 +190,15 @@ class CardDeckBaseForm(EntangledModelForm):
 
 extra_fields_column = {}
 for size in DEVICE_SIZES:
-    extra_fields_column["{}_cards".format(size)] = forms.IntegerField(
-        label="col" if size == "xs" else "col-{}".format(size),
+    extra_fields_column[f"{size}_cards"] = forms.IntegerField(
+        label="col" if size == "xs" else f"col-{size}",
         required=False,
         min_value=1,
         max_value=GRID_SIZE,
     )
 
 CardDeckForm = type(
-    str("CardDeckBaseForm"),
+    "CardDeckBaseForm",
     (CardDeckBaseForm,),
     copy(extra_fields_column),
 )

@@ -67,9 +67,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
         (
             _("Responsive settings"),
             {
-                "fields": (
-                    ["row_cols_{}".format(size) for size in settings.DEVICE_SIZES],
-                ),
+                "fields": ([f"row_cols_{size}" for size in settings.DEVICE_SIZES],),
             },
         ),
         (
@@ -93,7 +91,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
         for x in range(data["create"] if data["create"] is not None else 0):
             extra = dict(column_alignment=None)
             for size in settings.DEVICE_SIZES:
-                extra[f"{size}_col"] = data.get("create_{}_col".format(size))
+                extra[f"{size}_col"] = data.get(f"create_{size}_col")
                 extra[f"{size}_order"] = None
                 extra[f"{size}_offset"] = None
                 extra[f"{size}_ml"] = None
@@ -144,11 +142,11 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
             _("Responsive settings"),
             {
                 "fields": (
-                    ["{}_col".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_order".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_offset".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_ms".format(size) for size in settings.DEVICE_SIZES],
-                    ["{}_me".format(size) for size in settings.DEVICE_SIZES],
+                    [f"{size}_col" for size in settings.DEVICE_SIZES],
+                    [f"{size}_order" for size in settings.DEVICE_SIZES],
+                    [f"{size}_offset" for size in settings.DEVICE_SIZES],
+                    [f"{size}_ms" for size in settings.DEVICE_SIZES],
+                    [f"{size}_me" for size in settings.DEVICE_SIZES],
                 )
             },
         ),
@@ -169,16 +167,14 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
             classes = []
             for device in settings.DEVICE_SIZES:
                 for element in ("col", "order", "offset", "ms", "me"):
-                    size = getattr(self, "{}_{}".format(device, element), None)
+                    size = getattr(self, f"{device}_{element}", None)
                     if isinstance(size, int) and (
                         element == "col" or element == "order" or element == "offset"
                     ):
                         if device == "xs":
-                            classes.append("{}-{}".format(element, int(size)))
+                            classes.append(f"{element}-{int(size)}")
                         else:
-                            classes.append(
-                                "{}-{}-{}".format(element, device, int(size))
-                            )
+                            classes.append(f"{element}-{device}-{int(size)}")
                     elif size:
                         if device == "xs":
                             classes.append("{}-{}".format(element, "auto"))
