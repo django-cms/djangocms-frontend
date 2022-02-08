@@ -5,7 +5,12 @@ def breakpoints(props):
     lst = []
     for size in DEVICE_SIZES:
         for prop in props:
-            lst.append(f"{size}_{prop}")
+            if prop == "ml":
+                lst.append(f"{size}_ml -> {size}_ms")
+            elif prop == "mr":
+                lst.append(f"{size}_mr -> {size}_me")
+            else:
+                lst.append(f"{size}_{prop}")
     return lst
 
 
