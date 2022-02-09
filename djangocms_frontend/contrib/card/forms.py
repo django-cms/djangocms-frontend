@@ -107,24 +107,35 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
     card_context = forms.ChoiceField(
         label=_("Background context"),
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
-        widget=ColoredButtonGroup(),
         required=False,
+        widget=forms.HiddenInput()
+        if "card_context" in getattr(settings, "EXCL_CARD_PROP", ())
+        else ColoredButtonGroup(),
     )
     card_alignment = forms.ChoiceField(
         label=_("Alignment"),
         choices=settings.EMPTY_CHOICE + CARD_ALIGNMENT_CHOICES,
         required=False,
+        widget=forms.HiddenInput()
+        if "card_alignment" in getattr(settings, "EXCL_CARD_PROP", ())
+        else forms.Select(),
     )
     card_outline = forms.BooleanField(
         label=_("Outline"),
         initial=False,
         required=False,
         help_text=_("Uses the border context instead of the background."),
+        widget=forms.HiddenInput()
+        if "card_outline" in getattr(settings, "EXCL_CARD_PROP", ())
+        else forms.CheckboxInput(),
     )
     card_text_color = forms.ChoiceField(
         label=_("Text context"),
         choices=settings.EMPTY_CHOICE + CARD_TEXT_STYLES,
         required=False,
+        widget=forms.HiddenInput()
+        if "card_text_color" in getattr(settings, "EXCL_CARD_PROP", ())
+        else ColoredButtonGroup(),
     )
     card_full_height = forms.BooleanField(
         label=_("Full height"),
@@ -133,6 +144,9 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         help_text=_(
             "If checked cards in one row will automatically extend to the full row height."
         ),
+        widget=forms.HiddenInput()
+        if "card_full_height" in getattr(settings, "EXCL_CARD_PROP", ())
+        else forms.CheckboxInput,
     )
     attributes = AttributesFormField()
 
@@ -164,13 +178,18 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
     inner_context = forms.ChoiceField(
         label=_("Background context"),
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
-        widget=ColoredButtonGroup(),
         required=False,
+        widget=forms.HiddenInput()
+        if "inner_context" in getattr(settings, "EXCL_CARD_PROP", ())
+        else ColoredButtonGroup(),
     )
     text_alignment = forms.ChoiceField(
         label=_("Content alignment"),
         choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
         required=False,
+        widget=forms.HiddenInput()
+        if "text_alignment" in getattr(settings, "EXCL_CARD_PROP", ())
+        else forms.Select(),
     )
     attributes = AttributesFormField()
 

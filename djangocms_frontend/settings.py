@@ -76,6 +76,7 @@ SPACER_SIZE_CHOICES = framework_settings.SPACER_SIZE_CHOICES
 FRAMEWORK_PLUGIN_INFO = getattr(framework_settings, "FRAMEWORK_PLUGIN_INFO", dict())
 
 EXCL_COL_PROP = FRAMEWORK_PLUGIN_INFO.get("GridColumn", {}).get("excl_col_prop", [])
+EXCL_CARD_PROP = FRAMEWORK_PLUGIN_INFO.get("Card", {}).get("excl_card_prop", [])
 
 theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"

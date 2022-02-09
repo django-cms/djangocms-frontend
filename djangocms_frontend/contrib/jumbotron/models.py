@@ -11,6 +11,7 @@ class Jumbotron(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Jumbotron")
 
     def get_short_description(self):
         text = ""

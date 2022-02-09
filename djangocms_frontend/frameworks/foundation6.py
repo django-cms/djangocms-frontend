@@ -114,6 +114,17 @@ FRAMEWORK_PLUGIN_INFO = {
             ]
         ),
     },
+    "Card": {
+        "excl_card_prop": [
+            "card_context",
+            "card_alignment",
+            "card_text_color",
+            "card_full_height",
+            "card_outline",
+            "inner_context",
+            "text_alignment",
+        ],
+    },
 }
 
 

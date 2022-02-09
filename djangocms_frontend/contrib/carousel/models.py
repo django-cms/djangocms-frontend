@@ -17,6 +17,7 @@ class Carousel(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Carousel")
 
     def get_short_description(self):
         text = f"({self.template})"
@@ -38,6 +39,7 @@ class CarouselSlide(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Carousel slide")
 
     image_field = "carousel_image"
 

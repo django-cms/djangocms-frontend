@@ -1,3 +1,5 @@
+from django.utils.translation import gettext as _
+
 from ...models import FrontendUIItem
 
 
@@ -9,6 +11,7 @@ class Spacing(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Spacing")
 
     def get_base_css_class(self):
         # Source: https://getbootstrap.com/docs/5.0/utilities/spacing/#notation
@@ -38,6 +41,7 @@ class Heading(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Heading")
 
     def get_short_description(self):
         return f"({self.heading})"
@@ -52,6 +56,7 @@ class TableOfContents(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Table of contents")
 
     def get_short_description(self):
         return f"({self.id})"

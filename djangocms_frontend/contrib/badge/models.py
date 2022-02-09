@@ -1,3 +1,5 @@
+from django.utils.translation import gettext as _
+
 from djangocms_frontend.models import FrontendUIItem
 
 
@@ -9,6 +11,7 @@ class Badge(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Badge")
 
     def get_short_description(self):
         return f"({self.badge_context})"

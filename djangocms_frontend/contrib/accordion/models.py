@@ -11,6 +11,7 @@ class Accordion(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Accordion")
 
     def get_short_description(self):
         return _("({} entries)").format(self.get_children_count())
@@ -24,6 +25,7 @@ class AccordionItem(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Accordion item")
 
     def get_short_description(self):
         return getattr(self, "accordion_item_header", "-")

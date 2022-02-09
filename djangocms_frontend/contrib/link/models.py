@@ -89,6 +89,7 @@ class Link(GetLinkMixin, FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Link")
 
     def get_short_description(self):
         if self.name and self.get_link():

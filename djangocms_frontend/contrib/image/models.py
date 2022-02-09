@@ -60,6 +60,7 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Image")
 
     image_field = "picture"
 

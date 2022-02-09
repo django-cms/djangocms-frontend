@@ -1,9 +1,12 @@
+from django.utils.translation import gettext as _
+
 from ...models import FrontendUIItem
 
 
 class Tab(FrontendUIItem):
     class Meta:
         proxy = True
+        verbose_name = _("Tab")
 
     def get_short_description(self):
         text = f"({self.tab_type})"
@@ -21,6 +24,7 @@ class TabItem(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Tab item")
 
     def get_short_description(self):
         return self.tab_title

@@ -31,6 +31,7 @@ class Card(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Card")
 
     def get_short_description(self):
         if self.card_context and self.card_outline:
@@ -52,6 +53,7 @@ class CardInner(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Card inner")
 
     def get_short_description(self):
         return "({})".format(self.inner_type.split("-", 1)[-1])

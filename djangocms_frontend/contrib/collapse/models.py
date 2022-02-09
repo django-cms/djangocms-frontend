@@ -1,3 +1,5 @@
+from django.utils.translation import gettext as _
+
 from djangocms_frontend.models import FrontendUIItem
 
 # TODO leaving this comment for now
@@ -16,6 +18,7 @@ class Collapse(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Collapse")
 
     def get_short_description(self):
         return f"(collapse-{str(self.pk)})"
@@ -29,6 +32,7 @@ class CollapseTrigger(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Collapse trigger")
 
     def get_short_description(self):
         return f"({self.trigger_identifier})"
@@ -42,6 +46,7 @@ class CollapseContainer(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Collapse container")
 
     def get_short_description(self):
         return f"({self.container_identifier})"

@@ -39,7 +39,7 @@ class CardRenderMixin:
 
     def get_fieldsets(self, request, obj=None):
         return insert_fields(
-            self.fieldsets,
+            super().get_fieldsets(request, obj),
             (("card_opacity", "card_shadow"),),
             block=0,
             position=1,
@@ -87,7 +87,7 @@ class CardInnerRenderMixin:
 
     def get_fieldsets(self, request, obj=None):
         return insert_fields(
-            self.fieldsets,
+            super().get_fieldsets(request, obj),
             ("inner_opacity",),
             block=0,
             position=1,

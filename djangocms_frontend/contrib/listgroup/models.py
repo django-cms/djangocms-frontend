@@ -1,5 +1,6 @@
+from django.utils.translation import gettext as _
+
 from ...models import FrontendUIItem
-from .constants import LISTGROUP_STATE_CHOICES
 
 
 class ListGroup(FrontendUIItem):
@@ -10,6 +11,7 @@ class ListGroup(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("List group")
 
     def get_short_description(self):
         text = ""
@@ -26,6 +28,7 @@ class ListGroupItem(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("List group item")
 
     def get_short_description(self):
         text = []

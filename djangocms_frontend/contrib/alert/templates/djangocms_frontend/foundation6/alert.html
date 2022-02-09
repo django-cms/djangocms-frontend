@@ -1,0 +1,14 @@
+{% load cms_tags i18n %}{% spaceless %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }} role="alert">
+    {% if instance.alert_dismissible %}
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+  </button>
+    {% endif %}
+    <div>
+        {% for plugin in instance.child_plugin_instances %}
+            {% with parent=instance %}{% render_plugin plugin %}{% endwith %}
+        {% endfor %}
+    </div>
+    </{{ instance.tag_type }}>
+{% endspaceless %}

@@ -42,6 +42,11 @@ class FrontendUIItem(CMSPlugin):
             if arg:
                 self._additional_classes += arg.split() if isinstance(arg, str) else arg
 
+    def add_attribute(self, attr, value=None):
+        attrs = self.config.get("attributes", {})
+        attrs.update({attr: value})
+        self.config["attributes"] = attrs
+
     def get_attributes(self):
         classes = (
             set(self.config["attributes"].get("class", "").split())
