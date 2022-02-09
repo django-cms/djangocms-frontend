@@ -1,6 +1,7 @@
 from django import template
 from django.utils.html import conditional_escape, mark_safe
-from entangled.utils import get_related_object as related_object
+
+from djangocms_frontend.helpers import get_related_object as related_object
 
 register = template.Library()
 

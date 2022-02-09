@@ -42,7 +42,7 @@ class CardRenderMixin:
             super().get_fieldsets(request, obj),
             (("card_opacity", "card_shadow"),),
             block=0,
-            position=1,
+            position=2,
         )
 
 
@@ -70,7 +70,7 @@ class CardFormMixin(EntangledModelFormMixin):
         choices=settings.EMPTY_CHOICE + settings.framework_settings.SHADOW_CHOICES,
         initial=settings.EMPTY_CHOICE[0][0],
         widget=ButtonGroup(attrs=dict(property="shadow")),
-        help_text=_("Use shadows to optically lift cards up from the background."),
+        help_text=_("Use shadows to optically lift cards from the background."),
     )
 
 
@@ -90,7 +90,7 @@ class CardInnerRenderMixin:
             super().get_fieldsets(request, obj),
             ("inner_opacity",),
             block=0,
-            position=1,
+            position=2,
         )
 
 

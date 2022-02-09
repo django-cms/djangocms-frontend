@@ -11,6 +11,7 @@ from djangocms_frontend.helpers import (
     get_plugin_template,
     get_template_path,
     insert_fields,
+    link_to_framework_doc,
 )
 
 
@@ -80,6 +81,23 @@ class HelpersTestCase(TestCase):
                             "F2",
                             "F3",
                             "F4",
+                        ],
+                    },
+                ),
+            ],
+        )
+        fs = insert_fields(fieldsets, ("F4",), position=1, block=0)
+        self.assertEqual(
+            fs,
+            [
+                (
+                    None,
+                    {
+                        "fields": [
+                            "F1",
+                            "F4",
+                            "F2",
+                            "F3",
                         ],
                     },
                 ),
@@ -172,4 +190,10 @@ class HelpersTestCase(TestCase):
                 )
             ),
             "second",
+        )
+
+    def test_link_to_framework(self):
+        self.assertIsNone(link_to_framework_doc("Card", "this topic does not exist"))
+        self.assertIsNone(
+            link_to_framework_doc("NonExistingUIITEM", "this topic does not exist")
         )

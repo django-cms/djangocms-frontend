@@ -62,6 +62,7 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=GridContainerPlugin.__name__,
             language=self.language,
+            config=dict(container_shadow="reg"),
         )
         container.initialize_from_form(GridContainerForm)
         container.save()
@@ -70,6 +71,7 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "shadow")
 
         row = add_plugin(
             target=container,

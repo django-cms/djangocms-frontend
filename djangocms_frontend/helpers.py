@@ -1,5 +1,7 @@
 import copy
 
+from django.apps import apps
+from django.db.models import ObjectDoesNotExist
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import select_template
 from django.utils.functional import lazy
@@ -8,6 +10,18 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
+
+
+def get_related_object(scope, field_name):
+    """
+    Returns the related field, referenced by the content of a ModelChoiceField.
+    """
+    try:
+        Model = apps.get_model(scope[field_name]["model"])
+        relobj = Model.objects.get(pk=scope[field_name]["pk"])
+    except (ObjectDoesNotExist, LookupError):
+        relobj = None
+    return relobj
 
 
 def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None):
@@ -32,11 +46,16 @@ def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None
         return fs
     modify = copy.deepcopy(fieldsets[block])
     fields = modify[1]["fields"]
-    modify[1]["fields"] = (
-        list(fields[: position + 1] if position != -1 else fields)
-        + list(new_fields)
-        + list(fields[position + 1 :] if position != -1 else [])
-    )
+    if position >= 0:
+        modify[1]["fields"] = (
+            list(fields[:position]) + list(new_fields) + list(fields[position:])
+        )
+    else:
+        modify[1]["fields"] = (
+            list(fields[: position + 1] if position != -1 else fields)
+            + list(new_fields)
+            + list(fields[position + 1 :] if position != -1 else [])
+        )
     fs = (
         list(fieldsets[:block] if block != -1 else fieldsets)
         + [modify]

@@ -23,6 +23,8 @@ class AccordionItem(FrontendUIItem):
     https://getbootstrap.com/docs/5.0/components/accordion/
     """
 
+    _("AccordionItem")
+
     class Meta:
         proxy = True
         verbose_name = _("Accordion item")

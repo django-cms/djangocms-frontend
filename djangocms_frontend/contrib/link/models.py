@@ -1,8 +1,8 @@
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import gettext as _
-from entangled.utils import get_related_object
+
+from djangocms_frontend.helpers import get_related_object
 
 # 'link' type is added manually as it is only required for this plugin
 from djangocms_frontend.models import FrontendUIItem

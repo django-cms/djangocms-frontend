@@ -1,3 +1,5 @@
+from djangocms_frontend.helpers import get_related_object
+
 try:
     from functools import cached_property
 except ImportError:  # Only available since Pyhton 3.8
@@ -5,7 +7,6 @@ except ImportError:  # Only available since Pyhton 3.8
 
 from django.utils.translation import gettext as _
 from django.utils.translation import ungettext
-from entangled.utils import get_related_object
 
 from djangocms_frontend.models import FrontendUIItem
 
@@ -21,6 +22,7 @@ class GridContainer(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Container")
+        _("GridContainer")
 
     def get_short_description(self):
         text = ""
@@ -45,6 +47,7 @@ class GridRow(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Row")
+        _("GridRow")
 
     def get_short_description(self):
         column_count = len(self.child_plugin_instances or [])
@@ -64,6 +67,7 @@ class GridColumn(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Column")
+        _("GridColumn")
 
     def get_short_description(self):
         text = ""

@@ -14,16 +14,25 @@ Changelog
   specific data (based an django-entangled)
 * Added accordion plugins
 * New link plugin with ability to link to internal pages from other apps than
-  djang-cms
-* New picture plugin to remove dependency from djangocms-picture
+  django CMS
+* New image plugin to remove dependency from djangocms-picture
 * Add migration management command to migrate djangocms-bootstrap4 plugins to
   django-framework plugins
 * Fixed templates to match bootstrap5 specs (removing some incompatibilities)
-* Replaced discontinued jumbotron and media templates with valid bootstrap 5
-  fixes
+* Replaced discontinued jumbotron and media  with valid bootstrap 5
+  templates
 * Added bootstrap 5's new xxl breakpoint
 
 0.2.0
 =====
 
 * First release on Pypi
+
+
+unreleased
+==========
+
+* Added shadow options for containers, cards, alerts, ...
+* Added background color and opacity options for containers and cards
+* Added management command `stale_frontend_references` to identify stale
+  references (e.g., images, links)
