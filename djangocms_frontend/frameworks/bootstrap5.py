@@ -81,6 +81,17 @@ OPACITY_CHOICES = getattr(
     ),
 )
 
+SHADOW_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_SHADOW_CHOICES",
+    (
+        ("none", _("None")),
+        ("sm", "S"),
+        ("reg", "M"),
+        ("lg", "L"),
+    ),
+)
+
 grid_sizes = json.dumps(
     [
         _("Extra small"),

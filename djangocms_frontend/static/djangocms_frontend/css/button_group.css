@@ -3,7 +3,7 @@
         text-transform: none;
         text-align: center !important;
         border-color: transparent !important;
-        outline:  3px solid white;
+        outline:  3px solid transparent;
         width: auto !important;
         font-weight: normal !important;
     }
@@ -39,4 +39,28 @@
     form .form-row > div > input[property="list_state"][value="disabled"]+label.btn-grp {
         color: var(--bs-gray-600) !important;
         background: white;
+    }
+
+    form .form-row > div > input[property="shadow"]+label.btn-grp {
+        margin-right: 1em;
+        width: 2em !important;
+        background: white;
+        color: black !important;
+        text-align: center !important;
+        border: var(--bs-secondary) 1px solid !important;
+        overflow: hidden;
+        white-space: nowrap;
+
+    }
+
+    form .form-row > div > input[property="shadow"][value="lg"]+label.btn-grp {
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    }
+
+    form .form-row > div > input[property="shadow"][value="reg"]+label.btn-grp {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    form .form-row > div > input[property="shadow"][value="sm"]+label.btn-grp {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
     }

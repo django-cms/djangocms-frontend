@@ -62,7 +62,7 @@ framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
 framework_settings = importlib.import_module(
-    f"djangocms_frontend.frontends.{framework}"
+    f"djangocms_frontend.frameworks.{framework}"
 )
 
 DEVICE_SIZES = framework_settings.DEVICE_SIZES

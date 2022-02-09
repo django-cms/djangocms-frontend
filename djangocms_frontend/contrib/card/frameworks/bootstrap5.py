@@ -21,6 +21,11 @@ class CardRenderMixin:
             instance.add_classes(f"bg-{instance.card_context}")
             if getattr(instance, "card_opacity", "100") != "100":
                 instance.add_classes(f"bg-opacity-{instance.card_opacity}")
+        if getattr(instance, "card_shadow", ""):
+            if instance.card_shadow == "reg":
+                instance.add_classes("shadow")
+            else:
+                instance.add_classes(f"shadow-{instance.card_shadow}")
         if instance.card_alignment:
             instance.add_classes(instance.card_alignment)
         if instance.card_text_color:
@@ -35,7 +40,7 @@ class CardRenderMixin:
     def get_fieldsets(self, request, obj=None):
         return insert_fields(
             self.fieldsets,
-            ("card_opacity",),
+            (("card_opacity", "card_shadow"),),
             block=0,
             position=1,
         )
@@ -46,6 +51,7 @@ class CardFormMixin(EntangledModelFormMixin):
         entangled_fields = {
             "config": [
                 "card_opacity",
+                "card_shadow",
             ]
         }
 
@@ -56,6 +62,15 @@ class CardFormMixin(EntangledModelFormMixin):
         initial=settings.framework_settings.OPACITY_CHOICES[0][0],
         widget=ButtonGroup(attrs=dict(property="opacity")),
         help_text=_("Opacity of card background color (only if no outline selected)"),
+    )
+
+    card_shadow = forms.ChoiceField(
+        label=_("Shadow"),
+        required=False,
+        choices=settings.EMPTY_CHOICE + settings.framework_settings.SHADOW_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
+        widget=ButtonGroup(attrs=dict(property="shadow")),
+        help_text=_("Use shadows to optically lift cards up from the background."),
     )
 
 
