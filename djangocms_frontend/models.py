@@ -86,4 +86,4 @@ class FrontendUIItem(CMSPlugin):
 
     @property
     def framework_info(self):
-        return FRAMEWORK_PLUGIN_INFO.get(self.ui_item, None)
+        return FRAMEWORK_PLUGIN_INFO.get(self.__class__.__name__, None)

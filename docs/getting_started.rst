@@ -253,16 +253,28 @@ Container
 A container is an invisible element that wraps other content. There are
 in two types of containers:
 
+Container
+   All other containers restrict the width of their content depending on
+   the used device.
+
 Fluid container
    A fluid container occupies the full width available - no matter how
    wide the viewport (or containing) element is.
 
-Container
-   All other containers restrict the width of their content depending on
-   the used device. If prefixed by a size (sm, md, lg, xl) then the
-   container will be fluid below the respective breakpoint.
+Full container
+   A full container is like a fluid container and occupies the full width
+   available. Additionally, it does not have a padding. Its content can
+   therefore fill the entire area. Full containers are useful if you want
+   to add a background color or shadow to another DOM element, like, e.g.,
+   the contents of a column.
 
 .. image:: screenshots/container.png
+
+.. note::
+
+    New feature:
+        Containers can have a background color ("context"), opacity and shadow.
+
 
 .. index::
     single: Row
@@ -285,12 +297,17 @@ positioned against each other.
 Horizontal alignment defines how columns **that do not fill an entire
 row** are distributed horizontally.
 
-The section "Row-cols settings" defines how many columns should be next
-to each other for a given display size. The "row-cols" entry defines the
-number of columns on mobile devices (and above if no other setting is
-given), the "row-cols-xl" entry the number of columns on a xl screen.
+.. note::
+
+    New feature:
+
+        The section "Row-cols settings" defines how many columns should be next
+        to each other for a given display size. The "row-cols" entry defines the
+        number of columns on mobile devices (and above if no other setting is
+        given), the "row-cols-xl" entry the number of columns on a xl screen.
 
 .. image:: screenshots/row.png
+
 
 .. index::
     single: Column
@@ -312,6 +329,10 @@ Specifically sized columns
    exactly have the specified width. The unit of width is one twelfth of
    the surrounding's row width.
 
+Natural width:
+    If you need a column to take its natural width, enter ``0`` for its
+    column size.
+
 Also, you can adjust the vertical alignment of the specific column from
 the row's default setting.
 
@@ -321,6 +342,12 @@ comes handy if, e.g., the column is supposed to contain centered
 content.
 
 .. image:: screenshots/col.png
+
+.. note::
+
+    Removed:
+        The column type entry has been removed since it was a legacy from
+        Bootstrap version 3.
 
 *******************
  Component plugins
@@ -370,6 +397,11 @@ the right hand side.
 
 .. image:: screenshots/alert-plugins.png
     :width: 391
+
+.. note::
+
+    New features:
+        Alerts can have **shadows** to optically lift them.
 
 Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
 documentation.
@@ -426,7 +458,36 @@ tools. If you need more granular responsive settings, please revert to
     Card decks will be converted to grids of cards upon
     :ref:`Migrating from djangocms-bootstrap4`.
 
+Card
+----
 
+The card resides in a Card plugin which allows for coloring, opacity and shadow
+options.
+
+.. image:: screenshots/card.png
+
+Content is added to the card plugin by creating child plugins. These can be of
+the type `Card inner`_, `Picture / Image`_, `List group`_, or `Row`_.
+
+.. note::
+
+    New feature:
+        By adding iamges or list groups directly to a card, unnecessary
+        margins are avoided.
+
+
+Card inner
+----------
+
+The Card Inner plugin allows to add the card header, body, footer or an overlay
+space for a card image.
+
+.. image:: screenshots/card-inner.png
+
+Here is an example of the new card overlay feature:
+
+.. image:: screenshots/card-overlay-example.png
+    :width: 298
 
 Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.0/components/card/>`_
 documentation.
@@ -508,6 +569,8 @@ The component consists of a wrapper - ListGroup Plugin - and the items of the
 list - ListGroupItem Plugin. If the list item is a link it suffices to instert
 a Link Plugin directly as a child of the ListGroup Plugin.
 
+List group
+----------
 
 
 
@@ -521,6 +584,8 @@ The media component is another legacy component from djangocms-bootstrap4.
 .. index::
     single: Picture
     single: Image
+
+.. _Picture / Image:
 
 Picture / image component
 =========================

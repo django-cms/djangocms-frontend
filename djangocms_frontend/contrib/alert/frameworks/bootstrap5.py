@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.utils.functional import cached_property
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.files import get_thumbnailer
 
 from djangocms_frontend.contrib.link.models import GetLinkMixin

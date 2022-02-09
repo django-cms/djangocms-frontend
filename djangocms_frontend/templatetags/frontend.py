@@ -1,4 +1,9 @@
+import json
+
 from django import template
+from django.core.serializers.json import DjangoJSONEncoder
+from django.utils.encoding import force_text
+from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
 
 from djangocms_frontend.helpers import get_related_object as related_object
@@ -32,3 +37,15 @@ def get_attributes(attribute_field, *add_classes):
 @register.filter
 def get_related_object(reference):
     return related_object(dict(obj=reference), "obj")
+
+
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Promise):
+            return force_text(obj)
+        return super(LazyEncoder, self).default(obj)
+
+
+@register.filter
+def json_dumps(data):
+    return mark_safe(json.dumps(data, cls=LazyEncoder))

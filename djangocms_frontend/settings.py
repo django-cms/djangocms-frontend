@@ -85,7 +85,7 @@ theme_forms_path = f"{theme}.forms"
 def render_factory(cls, theme_module, render_module):
     parents = tuple(
         getattr(module, cls, None)
-        for module in (render_module, theme_module)
+        for module in (theme_module, render_module)
         if module is not None and getattr(module, cls, None) is not None
     )
     return type(cls, parents, dict())  # Empty Mix

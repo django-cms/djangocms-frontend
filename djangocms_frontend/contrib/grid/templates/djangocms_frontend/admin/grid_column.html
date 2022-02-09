@@ -1,5 +1,5 @@
 {% extends "djangocms_frontend/admin/base.html" %}
-{% load i18n static %}
+{% load i18n static frontend %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -9,8 +9,8 @@
 {% block field_sets %}
     <div class="djangocms-frontend djangocms-frontend-column"
         data-static="{% get_static_prefix %}"
-        data-sizes='{{ plugin.framework_info.grid_sizes }}'
-        data-icons='{{ plugin.framework_info.grid_icons }}'
+        data-sizes='{{ plugin.framework_info.grid_sizes|json_dumps }}'
+        data-icons='{{ plugin.framework_info.grid_icons|json_dumps }}'
         data-rows='[
         "{% trans 'Column size' %}",
         "{% trans 'Order' %}",

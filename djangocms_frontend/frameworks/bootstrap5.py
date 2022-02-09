@@ -1,7 +1,7 @@
 import json
 
 from django.conf import settings
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 DEVICE_CHOICES = (
     ("xs", _("Extra small")),  # default <576px
@@ -92,20 +92,17 @@ SHADOW_CHOICES = getattr(
     ),
 )
 
-grid_sizes = json.dumps(
-    [
-        _("Extra small"),
-        _("Small"),
-        _("Medium"),
-        _("Large"),
-        _("Extra large"),
-        _("XX large"),
-    ]
-)
+grid_sizes = [
+    _("Extra small"),
+    _("Small"),
+    _("Medium"),
+    _("Large"),
+    _("Extra large"),
+    _("XX large"),
+]
 
-grid_icons = json.dumps(
-    ["size-xs", "size-sm", "size-md", "size-lg", "size-xl", "size-xxl"]
-)
+grid_icons = ["size-xs", "size-sm", "size-md", "size-lg", "size-xl", "size-xxl"]
+
 
 FRAMEWORK_PLUGIN_INFO = {
     "GridColumn": {

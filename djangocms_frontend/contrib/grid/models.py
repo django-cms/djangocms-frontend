@@ -5,7 +5,7 @@ try:
 except ImportError:  # Only available since Pyhton 3.8
     cached_property = property
 
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ungettext
 
 from djangocms_frontend.models import FrontendUIItem
