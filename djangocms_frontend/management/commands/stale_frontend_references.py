@@ -5,7 +5,7 @@ from djangocms_frontend.helpers import get_related_object
 
 
 class Command(BaseCommand):
-    help = "Migrates plugins djangocms_bootstrap4 to djangocms_frontend"
+    help = "Prints all stale references in the djangocms frontend plugins"
 
     def handle(self, *args, **options):
         for ui_item in models.FrontendUIItem.objects.all():

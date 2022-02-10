@@ -188,6 +188,14 @@ directory.
     Migrates plugins from other frontend packages to **djangocms-frontend**.
     Currently supports **djangocms-bootstrap4** and **djangocms_styled_link**.
 
+``stale_frontend_references``
+    If references in a UI item are moved or removed, the UI items are designed to
+    fall back gracefully and both not throw errors or be deleted themselves
+    (by a db cascade).
+
+    The drawback is, that references might become stale. This command prints all
+    stale references, their plugins and pages/placeholder they belong to.
+
 
 ***************
  Running Tests
