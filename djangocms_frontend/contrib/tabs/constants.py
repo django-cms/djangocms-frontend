@@ -15,10 +15,14 @@ TAB_ALIGNMENT_CHOICES = (
     ("flex-column", _("Column")),
 )
 
-TAB_EFFECT_CHOICES = (("fade", _("Fade")),)
+TAB_EFFECT_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_TAB_EFFECTS",
+    (("fade", _("Fade")),),
+)
 
 TAB_TEMPLATE_CHOICES = getattr(
     settings,
-    "DJANGOCMS_BOOTSTRAP5_TAB_TEMPLATES",
+    "DJANGOCMS_FRONTEND_TAB_TEMPLATES",
     (("default", _("Default")),),
 )

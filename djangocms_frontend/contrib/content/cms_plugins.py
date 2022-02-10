@@ -50,6 +50,7 @@ class BlockquotePlugin(mixin_factory("Blockquote"), CMSUIPlugin):
     form = forms.BlockquoteForm
     change_form_template = "djangocms_frontend/admin/blockquote.html"
     text_enabled = True
+    allow_children = True
 
     fieldsets = [
         (

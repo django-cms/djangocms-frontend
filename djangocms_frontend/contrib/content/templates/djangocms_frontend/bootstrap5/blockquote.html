@@ -4,7 +4,9 @@
         <figure>
     {% endif %}
     <blockquote{{ instance.get_attributes }}>
-        {{ instance.quote_content }}
+        {% for plugin in instance.child_plugin_instances %}
+            {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+        {% empty %}{{ instance.quote_content }}{% endfor %}
     </blockquote>
     {% if instance.quote_origin %}
         <figcaption class="blockquote-footer">

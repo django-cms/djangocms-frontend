@@ -97,6 +97,9 @@ Contents
    :maxdepth: 3
 
    getting_started
+   grid
+   components
+   forms
    howto_guides
    reference
 
