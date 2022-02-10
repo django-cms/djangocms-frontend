@@ -95,24 +95,20 @@ FRAMEWORK_PLUGIN_INFO = {
         "grid_sizes": grid_sizes,
         "grid_icons": grid_icons,
         "excl_col_prop": ["xs_me", "xs_ms", "md_me", "md_ms", "xl_me", "xl_ms"],
-        "row_links": json.dumps(
-            [
-                "https://get.foundation/sites/docs/xy-grid.html#basics",
-                "https://get.foundation/sites/docs/flexbox-utilities.html#source-ordering",
-                "https://get.foundation/sites/docs/xy-grid.html#offsets",
-                "#",
-                "#",
-            ]
-        ),
+        "row_links": [
+            "https://get.foundation/sites/docs/xy-grid.html#basics",
+            "https://get.foundation/sites/docs/flexbox-utilities.html#source-ordering",
+            "https://get.foundation/sites/docs/xy-grid.html#offsets",
+            "#",
+            "#",
+        ],
     },
     "CardLayout": {
         "grid_sizes": grid_sizes,
         "grid_icons": grid_icons,
-        "row_links": json.dumps(
-            [
-                "https://get.foundation/sites/docs/xy-grid.html#block-grids",
-            ]
-        ),
+        "row_links": [
+            "https://get.foundation/sites/docs/xy-grid.html#block-grids",
+        ],
     },
     "Card": {
         "excl_card_prop": [

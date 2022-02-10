@@ -9,8 +9,8 @@
 {% block field_sets %}
     <div class="djangocms-frontend djangocms-frontend-column"
         data-static="{% get_static_prefix %}"
-        data-sizes='{{ plugin.framework_info.grid_sizes|json_dumps }}'
-        data-icons='{{ plugin.framework_info.grid_icons|json_dumps }}'
+        data-sizes='{% framework_info "grid_sizes" %}'
+        data-icons='{% framework_info "grid_icons" %}'
         data-rows='[
         "{% trans 'Column size' %}",
         "{% trans 'Order' %}",
@@ -19,7 +19,7 @@
         "{% trans 'Margin right' %}"
         ]'
         data-reset="{% trans 'Reset' %}"
-        data-links='{{ plugin.framework_info.row_links }}'
+        data-links='{% framework_info "row_links" %}'
     >
         {{ block.super }}
     </div>

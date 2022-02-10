@@ -6,14 +6,14 @@
     <script src="{% static 'djangocms_frontend/js/bundle.grid.js' %}"></script>
 {% endblock %}
 
-{% block field_sets %}
+{% block field_sets %}{% spaceless %}
     <div class="djangocms-frontend djangocms-frontend-row" data-static="{% get_static_prefix %}"
-         data-sizes='{{ plugin.framework_info.grid_sizes|json_dumps }}'
-         data-icons='{{ plugin.framework_info.grid_icons|json_dumps }}'
+         data-sizes='{% framework_info "grid_sizes" %}'
+         data-icons='{% framework_info "grid_icons" %}'
          data-rows='["{% trans 'Colums per row' %}"]'
-         data-links='{{ plugin.framework_info.row_links }}'
+         data-links='{% framework_info "row_links" %}'
     >
         {{ block.super }}
-    </div>
+    </div>{% endspaceless %}
 {% endblock %}
 {% block custom_class  %}frontend-grid-icons {{ block.super }}{% endblock %}
