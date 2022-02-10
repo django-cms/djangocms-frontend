@@ -1,4 +1,4 @@
-{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
+<div class="frontend-button-group{% if "block" in widget.attrs %} frontend-button-group-block{% endif %}">{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
     <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
         {% include option.template_name with widget=option %}{% endfor %}{% if group_name %}
-            </optgroup>{% endif %}{% endfor %}
+    </optgroup>{% endif %}{% endfor %}</div>

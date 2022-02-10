@@ -2,7 +2,21 @@
     background: white;
 }
 
-form .form-row > div {
+form .form-row  div.frontend-button-group.frontend-button-group-block {
+    display: flex;
+    flex-wrap: wrap;
+    label {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex-basis: calc(25% - 6px);
+        @media (min-width: 820px) {
+            flex-basis: calc(20% - 6px);
+        }
+    }
+}
+
+form .form-row  div.frontend-button-group {
     & > label.btn-grp {
         margin: 3px;
         text-transform: none;
@@ -12,11 +26,8 @@ form .form-row > div {
         width: auto !important;
         font-weight: normal !important;
     }
-    & > label.btn-grp.btn-outline-secondary {
+    & > input[property="color"]+label.btn-grp.btn-outline-secondary {
         color: black !important;
-    }
-    & > label.btn-grp.btn-secondary {
-        color: white !important;
     }
     & > input[type="radio"]:checked+label.btn-grp {
         outline:  3px solid #0bf;

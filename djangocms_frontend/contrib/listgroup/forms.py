@@ -4,7 +4,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 
-from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
+from ...fields import AttributesFormField, ButtonGroup, LegacyColoredButtonGroup
 from ...models import FrontendUIItem
 from .constants import LISTGROUP_STATE_CHOICES
 
@@ -64,7 +64,7 @@ class ListGroupItemForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
         initial=settings.EMPTY_CHOICE[0][0],
         required=False,
-        widget=ColoredButtonGroup(),
+        widget=LegacyColoredButtonGroup(),
     )
     list_state = forms.ChoiceField(
         label=_("State"),

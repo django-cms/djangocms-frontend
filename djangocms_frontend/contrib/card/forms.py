@@ -7,7 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...fields import AttributesFormField, ColoredButtonGroup
+from ...fields import AttributesFormField, LegacyColoredButtonGroup
 from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
 from .. import card
@@ -110,7 +110,7 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         required=False,
         widget=forms.HiddenInput()
         if "card_context" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
+        else LegacyColoredButtonGroup(),
     )
     card_alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -135,7 +135,7 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         required=False,
         widget=forms.HiddenInput()
         if "card_text_color" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
+        else LegacyColoredButtonGroup(),
     )
     card_full_height = forms.BooleanField(
         label=_("Full height"),
@@ -181,7 +181,7 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
         required=False,
         widget=forms.HiddenInput()
         if "inner_context" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
+        else LegacyColoredButtonGroup(),
     )
     text_alignment = forms.ChoiceField(
         label=_("Content alignment"),

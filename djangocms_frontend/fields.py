@@ -39,7 +39,7 @@ class TagTypeField(models.CharField):
         super().__init__(*args, **kwargs)
 
 
-class ColoredButtonGroup(forms.Select):
+class LegacyColoredButtonGroup(forms.Select):
     """Includes ADMIN_CSS"""
 
     class Media:
@@ -48,7 +48,14 @@ class ColoredButtonGroup(forms.Select):
 
 class ButtonGroup(forms.RadioSelect):
     template_name = "djangocms_frontend/admin/button_group.html"
-    option_template_name = "djangocms_frontend/admin/button_group_option.html"
+    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
 
     class Media:
         css = {"all": ("djangocms_frontend/css/button_group.css",)}
+
+
+class ColoredButtonGroup(ButtonGroup):
+    """Includes ADMIN_CSS for context colors"""
+
+    class Media:
+        css = settings.ADMIN_CSS

@@ -45,6 +45,14 @@ LINK_TEMPLATE_CHOICES = getattr(
     ],
 )
 
+JUMBOTRON_TEMPLATE_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_JUMBOTRON_TEMPLATE_CHOICES",
+    [
+        ("default", _("Default")),
+    ],
+)
+
 
 IMAGE_POSITIONING = (
     ("center center", _("Fully Centered")),

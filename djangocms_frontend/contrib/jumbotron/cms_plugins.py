@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...helpers import get_plugin_template
 from .. import jumbotron
 from . import forms, models
 
@@ -24,15 +25,21 @@ class JumbotronPlugin(mixin_factory("Jumbotron"), CMSUIPlugin):
     allow_children = True
 
     fieldsets = [
-        (None, {"fields": ("jumbotron_fluid",)}),
+        (None, {"fields": ("jumbotron_fluid", "jumbotron_context")}),
         (
             _("Advanced settings"),
             {
                 "classes": ("collapse",),
                 "fields": (
+                    "template",
                     "tag_type",
                     "attributes",
                 ),
             },
         ),
     ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return get_plugin_template(
+            instance, "jumbotron", "jumbotron", settings.JUMBOTRON_TEMPLATE_CHOICES
+        )

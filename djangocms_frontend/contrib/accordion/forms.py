@@ -5,7 +5,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import accordion
-from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.fields import AttributesFormField, LegacyColoredButtonGroup
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(accordion)
@@ -50,9 +50,8 @@ class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
         initial=False,
         required=False,
         help_text=_(
-            "Removes the default background-color, some borders, and some rounded corners to render "
-            "accordions "
-            "edge-to-edge with their parent container "
+            "Removes the default background-color, some borders, and some rounded corners "
+            "to render accordions edge-to-edge with their parent container "
         ),
     )
     attributes = AttributesFormField()

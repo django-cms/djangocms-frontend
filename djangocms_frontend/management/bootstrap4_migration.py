@@ -107,6 +107,9 @@ plugin_migrations = {
     + breakpoints(("col", "order", "ml", "mr", "offset")),
     "bootstrap4_jumbotron.Bootstrap4Jumbotron -> jumbotron.Jumbotron": [
         "fluid -> jumbotron_fluid",
+        "(default) -> template",
+        "() -> jumbotron_context",
+        "() -> jumbotron_opacity",
         "tag_type",
         "attributes",
         "P001",
