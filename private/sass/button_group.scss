@@ -19,6 +19,7 @@ form .form-row  div.frontend-button-group.frontend-button-group-block {
 form .form-row  div.frontend-button-group {
     & > label.btn-grp {
         margin: 3px;
+        padding: 6px;
         text-transform: none;
         text-align: center !important;
         border-color: transparent !important;
@@ -36,7 +37,7 @@ form .form-row  div.frontend-button-group {
     & > input[property="opacity"]+label.btn-grp {
         width: 3.5em !important;
         padding-left: 0 !important;;
-        padding-right: 0 !important;;
+        padding-right: 0 !important;
         color: black !important;
         overflow: hidden;
         white-space: nowrap;
@@ -58,7 +59,7 @@ form .form-row  div.frontend-button-group {
         margin-right: 1em;
         width: 3.5em !important;
         padding-left: 0 !important;;
-        padding-right: 0 !important;;
+        padding-right: 0 !important;
         background: white;
         color: black !important;
         text-align: center !important;
