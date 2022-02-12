@@ -12,3 +12,7 @@
 .sr-only {
     @include visually-hidden
 }
+
+.djangocms-frontend {
+    color-scheme: dark light;
+}

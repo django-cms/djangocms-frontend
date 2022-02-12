@@ -7,7 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...fields import AttributesFormField, ColoredButtonGroup
+from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
 from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
 from .. import card
@@ -174,6 +174,7 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
         choices=CARD_INNER_TYPE_CHOICES,
         initial=CARD_INNER_TYPE_CHOICES[0][0],
         help_text=_("Define the structure of the plugin."),
+        widget=ButtonGroup(attrs=dict(label_class="btn-secondary")),
     )
     inner_context = forms.ChoiceField(
         label=_("Background context"),

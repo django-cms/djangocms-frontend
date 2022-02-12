@@ -48,7 +48,7 @@ class LegacyColoredButtonGroup(forms.Select):
 
 class ButtonGroup(forms.RadioSelect):
     template_name = "djangocms_frontend/admin/button_group.html"
-    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
+    option_template_name = "djangocms_frontend/admin/button_group_option.html"
 
     class Media:
         css = {"all": ("djangocms_frontend/css/button_group.css",)}
@@ -56,6 +56,8 @@ class ButtonGroup(forms.RadioSelect):
 
 class ColoredButtonGroup(ButtonGroup):
     """Includes ADMIN_CSS for context colors"""
+
+    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
 
     class Media:
         css = settings.ADMIN_CSS
