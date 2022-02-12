@@ -18,3 +18,20 @@
         </div>
     </nav>
 {% endblock %}
+{% block bottom_css %} {# Quick check for dark mode #}
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bs-body-bg: #1e1e1e;
+                --bs-body-bg-rgb: 30, 30, 30;
+                --bs-body-color: #FFF;
+                --bs-body-color-rgb: 255, 255, 255;
+                --bs-dark: #3D3D3D;
+                --bs-dark-rgb: 61, 61, 61;
+                --bs-light: #c4c4c4;
+                --bs-light-rgb: 196, 196, 196;
+            }
+        }
+    </style>
+    {{ block.super }}
+{% endblock %}

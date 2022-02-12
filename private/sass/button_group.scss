@@ -36,7 +36,8 @@ form .form-row  div.frontend-button-group {
     }
     & > input[type="radio"]:checked+label.btn-grp {
         outline:  3px solid $cms-primary;
-        border-color: white !important;
+        border-color: white;
+        border-radius: 0;
     }
     & > input[property="opacity"]+label.btn-grp {
         width: 3.5em !important;
@@ -84,4 +85,27 @@ form .form-row  div.frontend-button-group {
     & > input[property="shadow"][value="sm"]+label.btn-grp {
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
     }
+
+    $btn-colors: [
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "light"
+        "dark"
+    ];
+    @each $key in $btn-colors {
+        .btn-#{$key} {
+
+        }
+    }
+    .btn-transparent {
+        color:  black;
+        @media (prefers-color-scheme: dark) {
+            color: white;
+        }
+    }
+
 }
