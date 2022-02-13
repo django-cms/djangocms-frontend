@@ -66,10 +66,10 @@ form .form-row  div.frontend-button-group {
     & > input[property="shadow"]+label.btn-grp {
         margin-right: 1em;
         width: 3.5em !important;
-        padding-left: 0 !important;;
+        padding-left: 0 !important;
         padding-right: 0 !important;
-        //background: white;
-        //color: black !important;
+        background: var(--bs-secondary);
+        color: white !important;
         text-align: center !important;
         border: var(--bs-secondary) 1px solid !important;
         overflow: hidden;
@@ -105,8 +105,8 @@ form .form-row  div.frontend-button-group {
         }
     }
     .btn-white {
-        background: var(--bs-secondary);
-        color: white;
+        background: white;
+        color: black;
     }
     .btn-light {
       color: black !important;

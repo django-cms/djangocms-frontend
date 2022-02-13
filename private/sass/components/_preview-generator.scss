@@ -12,7 +12,10 @@
     border: 1px solid #ccc;
     border-top: none;
     border-right: none;
-    background: #fff;
+    background: white;
+    @media (prefers-color-scheme: dark) {
+        background: black;
+    }
 
     h2 {
         font-size: 14px;
@@ -32,6 +35,7 @@
         display: block;
         color: darken($cms-gray, 50%);
         font-size: 12px;
+        line-height: 20px;
         font-weight: bold;
         text-transform: uppercase;
         width: 20px;
