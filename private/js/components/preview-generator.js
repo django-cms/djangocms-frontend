@@ -106,7 +106,7 @@ export default class PreviewGenerator {
     }
 
     update() {
-        const context = this.elements.context.val() || '';
+        const context = this.elements.context.find("input:radio:checked").val() || '';
 
         // reset
         this.button.attr('class', '');
@@ -123,7 +123,7 @@ export default class PreviewGenerator {
         }
 
         // handle size class
-        this.button.addClass(this.elements.size.val());
+        this.button.addClass(this.elements.size.find("input:radio:checked").val());
 
         const resetIcon = (left) => {
             $(`.js-icon-${left ? 'left' : 'right'}`).html('');

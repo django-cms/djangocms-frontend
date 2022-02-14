@@ -61,7 +61,6 @@ class GridContainerFormMixin(EntangledModelFormMixin):
         required=False,
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
         initial=settings.EMPTY_CHOICE,
-        help_text=_("Covers image."),
         widget=ColoredButtonGroup(),
     )
     container_opacity = forms.ChoiceField(

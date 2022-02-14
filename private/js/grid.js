@@ -5,7 +5,7 @@
  */
 
 import $ from 'jquery';
-import ButtonGroup from 'components/button-group';
+// import ButtonGroup from 'components/button-group';
 import GridLayout from 'components/grid-layout'
 import { iconTemplate } from 'components/templates'
 
@@ -15,25 +15,6 @@ $(() => {
         const row = $('.djangocms-frontend-row')
     if (row.length) {
         const static_url = row.data().static;
-
-        // Bootstrap 5 Grid Row - Vertical Alignment
-        if($('#id_vertical_alignment').length > 0) {
-            new ButtonGroup({
-                static: static_url,
-                select: '#id_vertical_alignment',
-                icons: ['align-reset', 'flex-align-start', 'flex-align-center', 'flex-align-end'],
-            });
-        }
-        // Bootstrap 5 Grid Row - Horizontal Alignment
-        if($('#id_horizontal_alignment').length > 0) {
-            new ButtonGroup({
-                static: static_url,
-                select: '#id_horizontal_alignment',
-                icons: ['align-reset', 'flex-content-start', 'flex-content-center', 'flex-content-end',
-                    'flex-content-around', 'flex-content-between'],
-            });
-        }
-                // Bootstrap 5 Grid Column - Responsive Settings
 
         new GridLayout({
              selector: `
@@ -55,12 +36,6 @@ $(() => {
     if (column.length) {
         const static_url = column.data().static;
 
-        // Bootstrap 5 Grid Column - Alignment
-        new ButtonGroup({
-            select: '#id_column_alignment',
-            icons: ['align-reset', 'flex-self-start', 'flex-self-center', 'flex-self-end'],
-            static: static_url,
-        });
         // Bootstrap 5 Grid Column - Responsive Settings
         new GridLayout({
             selector: `

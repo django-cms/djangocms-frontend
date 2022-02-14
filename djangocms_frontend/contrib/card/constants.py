@@ -6,9 +6,9 @@ CARD_LAYOUT_TYPE_CHOICES = (
 )
 
 CARD_ALIGNMENT_CHOICES = (
-    ("text-start", _("Left")),
-    ("text-center", _("Center")),
-    ("text-end", _("Right")),
+    ("start", _("Left")),
+    ("center", _("Center")),
+    ("end", _("Right")),
 )
 
 CARD_INNER_TYPE_CHOICES = (

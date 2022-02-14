@@ -61,3 +61,15 @@ class ColoredButtonGroup(ButtonGroup):
 
     class Media:
         css = settings.ADMIN_CSS
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="color")}})
+        super().__init__(*args, **kwargs)
+
+
+class IconGroup(ButtonGroup):
+    option_template_name = "djangocms_frontend/admin/icon_group_option.html"
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="icon")}})
+        super().__init__(*args, **kwargs)

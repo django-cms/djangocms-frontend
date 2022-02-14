@@ -7,7 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
 
 from ... import settings
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, IconGroup
 from ...models import FrontendUIItem
 from .. import grid
 from .constants import (
@@ -129,11 +129,13 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
         label=_("Column alignment"),
         choices=settings.EMPTY_CHOICE + GRID_COLUMN_ALIGNMENT_CHOICES,
         required=False,
+        widget=IconGroup(),
     )
     text_alignment = forms.ChoiceField(
         label=_("Content alignment"),
         choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
         required=False,
+        widget=IconGroup(),
     )
     attributes = AttributesFormField()
 

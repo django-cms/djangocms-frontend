@@ -27,7 +27,7 @@ class CardRenderMixin:
             else:
                 instance.add_classes(f"shadow-{instance.card_shadow}")
         if instance.card_alignment:
-            instance.add_classes(instance.card_alignment)
+            instance.add_classes(f"text-{instance.card_alignment}")
         if instance.card_text_color:
             instance.add_classes(f"text-{instance.card_text_color}")
         if getattr(instance, "card_full_height", False):

@@ -31,13 +31,26 @@ form .form-row  div.frontend-button-group {
         width: auto !important;
         font-weight: normal !important;
     }
-    & > input[property="color"]+label.btn-grp.btn-outline-secondary {
-        // color: black !important;
+    & > label.btn-grp[style="--fe-value: ;"] {
+        color: black !important;
+        @media (prefers-color-scheme: dark) {
+            color: white !important;
+        }
+    }
+    & > input[property="text"]+label.btn-grp {
+        color: black;
+        @media (prefers-color-scheme: dark) {
+            color: white;
+        }
     }
     & > input[type="radio"]:checked+label.btn-grp {
         outline:  3px solid $cms-primary;
         border-color: white;
         border-radius: 0;
+    }
+    & > input[type="radio"][property="text"]:checked+label.btn-grp,
+    & > input[type="radio"][property="icon"]:checked+label.btn-grp {
+        background: $cms-primary;
     }
     & > input[property="opacity"]+label.btn-grp {
         width: 3.5em !important;
@@ -54,6 +67,16 @@ form .form-row  div.frontend-button-group {
         @media (prefers-color-scheme: light) {
             color: black !important;
         }
+    }
+    & > input[property="link-size"][value="btn-lg"]+label.btn-grp {
+        padding: 0.5rem 1rem !important;
+        font-size: 1.25rem;
+        border-radius: 0.3rem
+    }
+    & > input[property="link-size"][value="btn-sm"]+label.btn-grp {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.875rem;
+        border-radius: 0.2rem;
     }
     & > input[property="list_state"][value="active"]+label.btn-grp {
         background: var(--bs-primary);

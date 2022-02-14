@@ -1,6 +1,11 @@
 {% extends "djangocms_frontend/admin/base.html" %}
 {% load static i18n %}
 
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'djangocms_frontend/js/bundle.link.js' %}"></script>
+{% endblock %}
+
 {% block field_sets %}
     <div class="djangocms-frontend djangocms-frontend-link"
         data-static="{% get_static_prefix %}"

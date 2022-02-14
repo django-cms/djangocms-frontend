@@ -20,7 +20,7 @@ from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
 from ... import settings
-from ...fields import AttributesFormField, LegacyColoredButtonGroup
+from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 
@@ -321,13 +321,16 @@ class LinkForm(AbstractLinkForm):
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
         initial=settings.EMPTY_CHOICE[0][0],
         required=False,
-        widget=LegacyColoredButtonGroup(),
+        widget=ColoredButtonGroup(),
     )
     link_size = forms.ChoiceField(
-        label=_("Size"),
+        label=_("Button size"),
         choices=LINK_SIZE_CHOICES,
         initial=LINK_SIZE_CHOICES[1][0],  # Medium
         required=False,
+        widget=ButtonGroup(
+            attrs=dict(property="link-size", label_class="btn-secondary")
+        ),
     )
     link_outline = forms.BooleanField(
         label=_("Outline"),

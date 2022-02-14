@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, ButtonGroup, IconGroup
 from ...models import FrontendUIItem
 
 
@@ -25,22 +25,26 @@ class SpacingForm(EntangledModelForm):
         label=_("Property"),
         choices=settings.SPACER_PROPERTY_CHOICES,
         initial=settings.SPACER_PROPERTY_CHOICES[0][0],
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_sides = forms.ChoiceField(
         label=_("Sides"),
         choices=settings.SPACER_SIDE_CHOICES,
         initial=settings.SPACER_SIDE_CHOICES[0][0],
         required=False,
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_size = forms.ChoiceField(
         label=_("Size"),
         choices=settings.SPACER_SIZE_CHOICES,
         initial=settings.SPACER_SIZE_CHOICES[0][0],
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_device = forms.ChoiceField(
         label=_("Device"),
         choices=settings.EMPTY_CHOICE + settings.DEVICE_CHOICES,
         required=False,
+        widget=IconGroup(),
     )
     attributes = AttributesFormField()
 

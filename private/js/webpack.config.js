@@ -8,8 +8,14 @@ process.env.NODE_ENV = (argv.debug) ? 'development' : 'production';
 
 plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'base',
-        chunks: ['base', 'grid', 'utilities'],
+        name: 'grid',
+        chunks: ['grid',],
+    })
+);
+plugins.push(
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'link',
+        chunks: ['link',],
     })
 );
 
@@ -58,9 +64,8 @@ if (argv.debug) {
 module.exports = {
     devtool: argv.debug ? 'cheap-module-eval-source-map' : false,
     entry: {
-        base: path.join(__dirname, 'base.js'),
+        link: path.join(__dirname, 'link.js'),
         grid: path.join(__dirname, 'grid.js'),
-        utilities: path.join(__dirname, 'utilities.js'),
     },
     output: {
         path: path.join(__dirname, '..', '..', 'djangocms_frontend', 'static', 'djangocms_frontend', 'js'),

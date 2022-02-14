@@ -6,7 +6,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
-from djangocms_frontend.fields import AttributesFormField, LegacyColoredButtonGroup
+from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(forms_module)
@@ -81,7 +81,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         choices=settings.COLOR_STYLE_CHOICES,
         initial=settings.COLOR_STYLE_CHOICES[0][0],
         required=True,
-        widget=LegacyColoredButtonGroup(),
+        widget=ColoredButtonGroup(),
     )
     form_submit_align = forms.ChoiceField(
         label=_("Submit button alignment"),
