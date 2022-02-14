@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 "proxy": True,
                 "indexes": [],
                 "constraints": [],
+                "verbose_name": "Image",
             },
             bases=(
                 djangocms_frontend.contrib.link.models.GetLinkMixin,
