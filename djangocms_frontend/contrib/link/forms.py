@@ -41,8 +41,16 @@ HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
 
 
+class Select2jqWidget(Select2Widget):
+    """Make jQuery available to Select2 widget"""
+
+    class Media:
+        js = ("/static/admin/js/vendor/jquery/jquery.js",)
+        css = {"screen": ("djangocms_frontend/css/select2.css",)}
+
+
 class SmartLinkField(forms.ChoiceField):
-    widget = Select2Widget
+    widget = Select2jqWidget
 
     def __init__(self, *args, **kwargs):
         kwargs["choices"] = SmartLinkField.get_link_choices

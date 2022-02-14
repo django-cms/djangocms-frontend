@@ -79,12 +79,14 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
         choices=settings.EMPTY_CHOICE + GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,
         required=False,
         help_text=link_to_framework_doc("GridRow", "vertical_alignment_link"),
+        widget=IconGroup(),
     )
     horizontal_alignment = forms.ChoiceField(
         label=_("Horizontal alignment"),
         choices=settings.EMPTY_CHOICE + GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
         required=False,
         help_text=link_to_framework_doc("GridRow", "horizontal_alignment_link"),
+        widget=IconGroup(),
     )
     gutters = forms.BooleanField(
         label=_("Remove gutters"),

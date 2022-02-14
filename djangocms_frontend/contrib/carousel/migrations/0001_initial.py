@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 "proxy": True,
                 "indexes": [],
                 "constraints": [],
+                "verbose_name": "Carousel",
             },
             bases=("djangocms_frontend.frontenduiitem",),
         ),
@@ -32,6 +33,7 @@ class Migration(migrations.Migration):
                 "proxy": True,
                 "indexes": [],
                 "constraints": [],
+                "verbose_name": "Carousel slide",
             },
             bases=(
                 djangocms_frontend.contrib.link.models.GetLinkMixin,

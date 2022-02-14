@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 "proxy": True,
                 "indexes": [],
                 "constraints": [],
+                "verbose_name": "Badge",
             },
             bases=("djangocms_frontend.frontenduiitem",),
         ),

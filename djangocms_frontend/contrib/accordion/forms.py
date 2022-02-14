@@ -1,11 +1,10 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from djangocms_text_ckeditor.fields import HTMLFormField
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import accordion
-from djangocms_frontend.fields import AttributesFormField, LegacyColoredButtonGroup
+from djangocms_frontend.fields import AttributesFormField
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(accordion)

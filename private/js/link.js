@@ -8,6 +8,7 @@
 import $ from 'jquery';
 import PreviewGenerator from 'components/preview-generator';
 
+
 window.djangoCMSFrontend = {
     $,
 };

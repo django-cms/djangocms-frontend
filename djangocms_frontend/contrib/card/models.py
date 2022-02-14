@@ -17,6 +17,7 @@ class CardLayout(FrontendUIItem):
 
     class Meta:
         proxy = True
+        verbose_name = _("Card layout")
 
     def get_short_description(self):
         text = f"({self.card_type})"

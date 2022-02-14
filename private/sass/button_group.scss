@@ -31,16 +31,16 @@ form .form-row  div.frontend-button-group {
         width: auto !important;
         font-weight: normal !important;
     }
-    & > label.btn-grp[style="--fe-value: ;"] {
+    & > input[property="color"]+label.btn-grp[style="--fe-value: ;"] {
         color: black !important;
         @media (prefers-color-scheme: dark) {
-            color: white !important;
+            color: var(--dca-black, $django-dark-color) !important;
         }
     }
     & > input[property="text"]+label.btn-grp {
         color: black;
         @media (prefers-color-scheme: dark) {
-            color: white;
+            color: var(--dca-black, $django-dark-color);
         }
     }
     & > input[type="radio"]:checked+label.btn-grp {
@@ -56,7 +56,7 @@ form .form-row  div.frontend-button-group {
         width: 3.5em !important;
         padding-left: 0 !important;;
         padding-right: 0 !important;
-        color: white !important;
+        color: var(--dca-black, $django-dark-color) !important;
         overflow: hidden;
         white-space: nowrap;
         background: rgba(var(--bs-secondary-rgb), calc(var(--fe-value) / 100));

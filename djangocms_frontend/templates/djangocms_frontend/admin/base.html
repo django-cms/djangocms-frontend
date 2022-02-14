@@ -2,9 +2,8 @@
 {% load static %}
 
 {% block extrahead %}
-    {{ block.super }}
     <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}">
-    <!-- script src="{% static 'djangocms_frontend/js/bundle.link.js' %}"></script -->
+    {{ block.super }}
 {% endblock %}
 
 {% block field_sets %}
