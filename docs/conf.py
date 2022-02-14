@@ -123,7 +123,10 @@ todo_include_todos = True
 # -- Options for HTML output ----------------------------------------------
 
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
+html_theme_options = {
+    "navigation_with_keys": True,
+}
 
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 

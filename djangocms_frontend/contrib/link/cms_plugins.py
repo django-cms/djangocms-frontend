@@ -55,6 +55,7 @@ class LinkPlugin(mixin_factory("Link"), CMSUIPlugin):
     form = forms.LinkForm
     change_form_template = "djangocms_frontend/admin/link.html"
     text_enabled = True
+    allow_children = True
 
     fieldsets = UILINK_FIELDSET + [
         (

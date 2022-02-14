@@ -106,11 +106,15 @@ form .form-row  div.frontend-button-group {
     }
     .btn-white {
         background: white;
-        color: black;
+        color: black !important;
     }
     .btn-light {
       color: black !important;
     }
+    .btn-dark {
+      color: white !important;
+    }
+
 
     .btn-transparent {
         color:  black;

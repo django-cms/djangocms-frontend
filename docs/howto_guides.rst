@@ -4,9 +4,9 @@
 
 .. _how to add internal link targets outside of the cms:
 
-*****************************************************
- How to add internal link targets outside of the CMS
-*****************************************************
+**************************************************
+ How to add internal link targets outside the CMS
+**************************************************
 
 By default the link/button component offers available CMS pages of the
 selected language as internal links.
@@ -99,7 +99,7 @@ This allows you to search the page titles.
 
 .. warning::
 
-   If you have a huge number (> 10.,000) of link target (i.e., pages or
+   If you have a huge number (> 10,000) of link target (i.e., pages or
    blog entries or whatever) the current implementation might slow down
    the editing process. **Future** implementation might get link targets
    dynamically from the server to allow a practically limitless number
