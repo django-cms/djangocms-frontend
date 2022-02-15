@@ -8,6 +8,7 @@ from djangocms_frontend.contrib.link.forms import (
     SmartLinkField,
     get_templates,
 )
+from djangocms_frontend.contrib.link.helpers import get_choices
 
 from ..fixtures import TestFixture
 
@@ -120,10 +121,9 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
 
     def test_smart_link_field(self):
         slf = SmartLinkField()
-        choices = slf.get_link_choices()
-        self.assertIn(("", "----"), choices)
-        self.assertEqual("example.com", choices[1][0])  # Site name
-        self.assertIn(("2-1", "home"), choices[1][1])
+        choices = get_choices()
+        self.assertEqual("example.com", choices[0][0])  # Site name
+        self.assertIn(("2-1", "home"), choices[0][1])
 
         cleaned = slf.clean("2-1")
         self.assertEqual(dict(model="cms.page", pk=1), cleaned)

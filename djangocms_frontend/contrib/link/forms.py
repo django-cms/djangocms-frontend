@@ -93,17 +93,17 @@ class SmartLinkField(forms.ChoiceField):
         return ""
 
     def clean(self, value):
-        if "-" in value:
+        if isinstance(value, str) and "-" in value:
             type_id, obj_id = value.split("-", 1)
             try:
                 content_type = ContentType.objects.get(id=type_id)
-                value = dict(
+                return dict(
                     model=f"{content_type.app_label}.{content_type.model}",
                     pk=int(obj_id),
                 )  # Exists? Validated!
             except (ObjectDoesNotExist, TypeError):
-                value = super().clean(value)
-        return value
+                pass
+        return super().clean(value)
 
 
 class AbstractLinkForm(EntangledModelForm):
@@ -204,7 +204,6 @@ class AbstractLinkForm(EntangledModelForm):
         )
         anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
         anchor_field_value = self.cleaned_data[anchor_field_name]
-        print("XXX", self.cleaned_data)
         link_fields = {key: self.cleaned_data[key] for key in link_field_names}
         link_field_verbose_names = {
             key: force_text(self.fields[key].label) for key in link_fields.keys()
