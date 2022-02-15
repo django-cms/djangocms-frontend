@@ -25,7 +25,7 @@ class LinkRenderMixin:
         if instance.link_size:
             link_classes.append(instance.link_size)
         if instance.link_block:
-            link_classes.append("btn-block")
+            link_classes.append("d-block")
 
         context["link"] = instance.get_link()
         instance.add_classes(link_classes)
