@@ -51,7 +51,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "link-primary")
         self.assertContains(response, "btn-sm")
-        self.assertContains(response, "btn-block")
+        self.assertContains(response, "d-block")
 
         # alternate version for link_type
         plugin = add_plugin(
