@@ -1,84 +1,13 @@
-from importlib import import_module
-
-from cms.forms.utils import get_page_choices
-from cms.models import Page
 from django.apps import apps
-from django.conf import settings as django_settings
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import FieldDoesNotExist, PermissionDenied
 from django.http import Http404, JsonResponse
 from django.views.generic import View
 
-LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
+from .helpers import get_link_choices
 
 
-def get_link_choices(lang=None):
-    available_objects = []
-
-    for item in LINK_MODELS:
-        if item["class_path"] != "cms.models.Page":
-            # CMS pages are collected using a cms function to preserve hierarchy
-            model = item["type"]
-            parts = item["class_path"].rsplit(".", 1)
-            cls = getattr(import_module(parts[0]), parts[1])
-            queryset = cls.objects
-
-            if "manager_method" in item:
-                queryset = getattr(queryset, item["manager_method"])()
-
-            if "filter" in item:
-                for (k, v) in item["filter"].items():
-                    try:
-                        # Attempt to execute any callables in the filter dict.
-                        item["filter"][k] = v()
-                    except TypeError:
-                        # OK, it wasn't a callable, so, leave it be
-                        pass
-                queryset = queryset.filter(**item["filter"])
-            else:
-                if "manager_method" not in item:
-                    queryset = queryset.all()
-
-            if "order_by" in item:
-                queryset = queryset.order_by(item["order_by"])
-
-            available_objects.append(
-                {
-                    "model": model,
-                    "objects": list(queryset),
-                }
-            )
-
-    # Now create our list of choices for the <select> field
-    object_choices = []
-    type_id = ContentType.objects.get_for_model(Page).id
-    for value, descr in get_page_choices(lang):
-        if isinstance(descr, list):
-            hierarchy = []
-            for page, name in descr:
-                hierarchy.append((f"{type_id}-{page}", name))
-            object_choices.append((value, hierarchy))
-        else:
-            object_choices.append((value, descr))
-
-    for group in available_objects:
-        obj_list = []
-        for obj in group["objects"]:
-            type_class = ContentType.objects.get_for_model(obj.__class__)
-            form_value = f"{type_class.id}-{obj.id}"
-            display_text = str(obj)
-
-            obj_list.append((form_value, display_text))
-        object_choices.append(
-            (
-                group["model"],
-                obj_list,
-            )
-        )
-    return object_choices
-
-
-class AutocompleteJsonView(View):
+class AutocompleteJsonView(LoginRequiredMixin, View):
     """Handle AutocompleteWidget's AJAX requests for data."""
 
     paginate_by = 20
@@ -92,29 +21,17 @@ class AutocompleteJsonView(View):
             pagination: {more: true}
         }
         """
-        results = get_link_choices()
-        print(results)
+
+        # TODO Check permissions
+        # ======================
+        self.term = kwargs.get("term", request.GET.get("term", ""))
+        results = get_link_choices(self.term)
         return JsonResponse(
             {
                 "results": results,
                 "pagination": {"more": False},
             }
         )
-
-    def get_paginator(self, *args, **kwargs):
-        """Use the ModelAdmin's paginator."""
-        return self.model_admin.get_paginator(self.request, *args, **kwargs)
-
-    def get_queryset(self):
-        """Return queryset based on ModelAdmin.get_search_results()."""
-        qs = self.model_admin.get_queryset(self.request)
-        qs = qs.complex_filter(self.source_field.get_limit_choices_to())
-        qs, search_use_distinct = self.model_admin.get_search_results(
-            self.request, qs, self.term
-        )
-        if search_use_distinct:
-            qs = qs.distinct()
-        return qs
 
     def process_request(self, request):
         """

@@ -1,7 +1,3 @@
-from importlib import import_module
-
-from cms.forms.utils import get_page_choices
-from cms.models import Page
 from django import forms
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
@@ -10,7 +6,7 @@ from django.db import models
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
-from django_select2.forms import Select2Widget
+from django_select2.forms import HeavySelect2Widget, Select2Widget
 from djangocms_icon.fields import IconField
 
 # from djangocms_link.validators import IntranetURLValidator
@@ -27,6 +23,7 @@ from ...fields import (
 )
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
+from .helpers import get_choices
 
 
 def get_templates():
@@ -43,88 +40,41 @@ def get_templates():
 
 HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
+MINIMUM_INPUT_LENGTH = getattr(
+    django_settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH", 0
+)
 
 
-class Select2jqWidget(Select2Widget):
+class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Widget):
     """Make jQuery available to Select2 widget"""
 
     class Media:
         js = ("/static/admin/js/vendor/jquery/jquery.js",)
         css = {"screen": ("djangocms_frontend/css/select2.css",)}
 
+    def __init__(self, *args, **kwargs):
+        if MINIMUM_INPUT_LENGTH:
+            if "attrs" in kwargs:
+                kwargs["attrs"].setdefault(
+                    "data-minimum-input-length", MINIMUM_INPUT_LENGTH
+                )
+            else:
+                kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
+            kwargs.setdefault("data_view", "autocomplete:ac_view")
+        super().__init__(*args, **kwargs)
+
 
 class SmartLinkField(forms.ChoiceField):
     widget = Select2jqWidget()
 
     def __init__(self, *args, **kwargs):
-        kwargs["choices"] = SmartLinkField.get_link_choices
+        if MINIMUM_INPUT_LENGTH == 0:
+            kwargs["choices"] = get_choices
+        else:
+            pass
+            # TODO: Load description of current value and make it available as a
+            # single choice so that the widget can present the current value
         super().__init__(*args, **kwargs)
-
-    @staticmethod
-    def get_link_choices(lang=None):
-        available_objects = []
-
-        for item in LINK_MODELS:
-            if item["class_path"] != "cms.models.Page":
-                # CMS pages are collected using a cms function to preserve hierarchy
-                model = item["type"]
-                parts = item["class_path"].rsplit(".", 1)
-                cls = getattr(import_module(parts[0]), parts[1])
-                queryset = cls.objects
-
-                if "manager_method" in item:
-                    queryset = getattr(queryset, item["manager_method"])()
-
-                if "filter" in item:
-                    for (k, v) in item["filter"].items():
-                        try:
-                            # Attempt to execute any callables in the filter dict.
-                            item["filter"][k] = v()
-                        except TypeError:
-                            # OK, it wasn't a callable, so, leave it be
-                            pass
-                    queryset = queryset.filter(**item["filter"])
-                else:
-                    if "manager_method" not in item:
-                        queryset = queryset.all()
-
-                if "order_by" in item:
-                    queryset = queryset.order_by(item["order_by"])
-
-                available_objects.append(
-                    {
-                        "model": model,
-                        "objects": list(queryset),
-                    }
-                )
-
-        # Now create our list of choices for the <select> field
-        object_choices = []
-        type_id = ContentType.objects.get_for_model(Page).id
-        for value, descr in get_page_choices(lang):
-            if isinstance(descr, list):
-                hierarchy = []
-                for page, name in descr:
-                    hierarchy.append((f"{type_id}-{page}", name))
-                object_choices.append((value, hierarchy))
-            else:
-                object_choices.append((value, descr))
-
-        for group in available_objects:
-            obj_list = []
-            for obj in group["objects"]:
-                type_class = ContentType.objects.get_for_model(obj.__class__)
-                form_value = f"{type_class.id}-{obj.id}"
-                display_text = str(obj)
-
-                obj_list.append((form_value, display_text))
-            object_choices.append(
-                (
-                    group["model"],
-                    obj_list,
-                )
-            )
-        return object_choices
 
     def prepare_value(self, value):
         if value:
@@ -143,18 +93,17 @@ class SmartLinkField(forms.ChoiceField):
         return ""
 
     def clean(self, value):
-        value = super().clean(value)
         if "-" in value:
             type_id, obj_id = value.split("-", 1)
             try:
                 content_type = ContentType.objects.get(id=type_id)
-                return dict(
+                value = dict(
                     model=f"{content_type.app_label}.{content_type.model}",
                     pk=int(obj_id),
-                )
-            except ObjectDoesNotExist:
-                pass
-        return None
+                )  # Exists? Validated!
+            except (ObjectDoesNotExist, TypeError):
+                value = super().clean(value)
+        return value
 
 
 class AbstractLinkForm(EntangledModelForm):
@@ -255,7 +204,7 @@ class AbstractLinkForm(EntangledModelForm):
         )
         anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
         anchor_field_value = self.cleaned_data[anchor_field_name]
-
+        print("XXX", self.cleaned_data)
         link_fields = {key: self.cleaned_data[key] for key in link_field_names}
         link_field_verbose_names = {
             key: force_text(self.fields[key].label) for key in link_fields.keys()

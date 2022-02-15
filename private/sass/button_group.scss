@@ -85,6 +85,7 @@ form .form-row  div.frontend-button-group {
     }
     & > input[property="list_state"][value="active"]+label.btn-grp {
         background: var(--bs-primary);
+        color: white;
     }
     & > input[property="list_state"][value="disabled"]+label.btn-grp {
         color: var(--bs-gray-600) !important;
