@@ -7,7 +7,7 @@ from filer.models import Image, ThumbnailOption
 
 from djangocms_frontend import settings
 
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, TagTypeFormField
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
 
@@ -217,6 +217,7 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
         help_text=_("Adds the .img-thumbnail class."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
     def clean(self):
         data = self.cleaned_data

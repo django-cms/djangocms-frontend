@@ -7,7 +7,13 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup, IconGroup
+from ...fields import (
+    AttributesFormField,
+    ButtonGroup,
+    ColoredButtonGroup,
+    IconGroup,
+    TagTypeFormField,
+)
 from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
 from .. import card
@@ -63,6 +69,7 @@ class CardLayoutBaseForm(mixin_factory("CardLayout"), EntangledModelForm):
         help_text=link_to_framework_doc("CardLayout", "card_type_link"),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 extra_fields_row_cols = {}
@@ -149,6 +156,7 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         else forms.CheckboxInput,
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
@@ -193,6 +201,7 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
         else IconGroup(),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class CardDeckBaseForm(EntangledModelForm):
@@ -206,6 +215,7 @@ class CardDeckBaseForm(EntangledModelForm):
         untangled_fields = ("tag_type",)
 
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 extra_fields_column = {}

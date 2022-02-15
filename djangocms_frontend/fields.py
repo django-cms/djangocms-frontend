@@ -6,6 +6,33 @@ from djangocms_attributes_field import fields
 from . import settings
 
 
+class ButtonGroup(forms.RadioSelect):
+    template_name = "djangocms_frontend/admin/button_group.html"
+    option_template_name = "djangocms_frontend/admin/button_group_option.html"
+
+    class Media:
+        css = {"all": ("djangocms_frontend/css/button_group.css",)}
+
+
+class ColoredButtonGroup(ButtonGroup):
+    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
+
+    class Media:
+        css = settings.ADMIN_CSS
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="color")}})
+        super().__init__(*args, **kwargs)
+
+
+class IconGroup(ButtonGroup):
+    option_template_name = "djangocms_frontend/admin/icon_group_option.html"
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="icon")}})
+        super().__init__(*args, **kwargs)
+
+
 class AttributesField(fields.AttributesField):
     def __init__(self, *args, **kwargs):
         if "verbose_name" not in kwargs:
@@ -39,28 +66,11 @@ class TagTypeField(models.CharField):
         super().__init__(*args, **kwargs)
 
 
-class ButtonGroup(forms.RadioSelect):
-    template_name = "djangocms_frontend/admin/button_group.html"
-    option_template_name = "djangocms_frontend/admin/button_group_option.html"
-
-    class Media:
-        css = {"all": ("djangocms_frontend/css/button_group.css",)}
-
-
-class ColoredButtonGroup(ButtonGroup):
-    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
-
-    class Media:
-        css = settings.ADMIN_CSS
-
+class TagTypeFormField(forms.ChoiceField):
     def __init__(self, *args, **kwargs):
-        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="color")}})
-        super().__init__(*args, **kwargs)
-
-
-class IconGroup(ButtonGroup):
-    option_template_name = "djangocms_frontend/admin/icon_group_option.html"
-
-    def __init__(self, *args, **kwargs):
-        kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="icon")}})
+        kwargs.setdefault("label", _("Tag type"))
+        kwargs.setdefault("choices", settings.TAG_CHOICES)
+        kwargs.setdefault("initial", settings.TAG_CHOICES[0][0])
+        kwargs.setdefault("required", False)
+        kwargs.setdefault("widget", ButtonGroup(attrs=dict(property="text")))
         super().__init__(*args, **kwargs)

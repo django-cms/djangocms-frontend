@@ -78,6 +78,11 @@ form .form-row  div.frontend-button-group {
         font-size: 0.875rem;
         border-radius: 0.2rem;
     }
+    & > input[property="list_state"]+label.btn-grp[style="--fe-value: ;"] {
+        @media (prefers-color-scheme: dark) {
+            color: var(--dca-black, $django-dark-color);
+        }
+    }
     & > input[property="list_state"][value="active"]+label.btn-grp {
         background: var(--bs-primary);
     }

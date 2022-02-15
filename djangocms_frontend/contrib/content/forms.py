@@ -5,7 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import ALIGN_CHOICES
 
 from ... import settings
-from ...fields import AttributesFormField, IconGroup
+from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .constants import CODE_TYPE_CHOICES
 
@@ -40,6 +40,7 @@ class CodeForm(EntangledModelForm):
         required=True,
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class BlockquoteForm(EntangledModelForm):
@@ -79,6 +80,7 @@ class BlockquoteForm(EntangledModelForm):
         widget=IconGroup(),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class FigureForm(EntangledModelForm):
@@ -111,3 +113,4 @@ class FigureForm(EntangledModelForm):
         widget=IconGroup(),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

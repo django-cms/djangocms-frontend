@@ -7,7 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
 
 from ... import settings
-from ...fields import AttributesFormField, IconGroup
+from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .. import grid
 from .constants import (
@@ -49,6 +49,7 @@ class GridContainerForm(mixin_factory("GridContainer"), EntangledModelForm):
         ),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
@@ -95,6 +96,7 @@ class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
         help_text=_("Removes the marginal gutters from the grid."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 extra_fields_column = {}
@@ -140,6 +142,7 @@ class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
         widget=IconGroup(),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 # convert regular text type fields to number

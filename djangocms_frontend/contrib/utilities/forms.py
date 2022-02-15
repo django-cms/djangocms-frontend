@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...fields import AttributesFormField, ButtonGroup, IconGroup
+from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 
 
@@ -47,6 +47,7 @@ class SpacingForm(EntangledModelForm):
         widget=IconGroup(),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class HeadingForm(EntangledModelForm):

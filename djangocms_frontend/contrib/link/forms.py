@@ -13,14 +13,18 @@ from django.utils.translation import gettext as _
 from django_select2.forms import Select2Widget
 from djangocms_icon.fields import IconField
 
-# from djangocms_link.models import TARGET_CHOICES
 # from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
 from ... import settings
-from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
+from ...fields import (
+    AttributesFormField,
+    ButtonGroup,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 
@@ -50,7 +54,7 @@ class Select2jqWidget(Select2Widget):
 
 
 class SmartLinkField(forms.ChoiceField):
-    widget = Select2jqWidget
+    widget = Select2jqWidget()
 
     def __init__(self, *args, **kwargs):
         kwargs["choices"] = SmartLinkField.get_link_choices
@@ -363,3 +367,4 @@ class LinkForm(AbstractLinkForm):
         required=False,
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

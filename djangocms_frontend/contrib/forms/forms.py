@@ -6,7 +6,11 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
-from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(forms_module)
@@ -90,3 +94,4 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         required=False,
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

@@ -3,7 +3,11 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
-from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
@@ -43,3 +47,4 @@ class BadgeForm(EntangledModelForm):
         help_text=_("Activates the pills style."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

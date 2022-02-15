@@ -4,7 +4,11 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import alert
-from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
@@ -41,3 +45,4 @@ class AlertForm(mixin_factory("Alert"), EntangledModelForm):
         help_text=_("Allows the alert to be closed."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

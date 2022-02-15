@@ -4,7 +4,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import accordion
-from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(accordion)
@@ -54,6 +54,7 @@ class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
         ),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class AccordionItemForm(mixin_factory("AccordionItem"), EntangledModelForm):
@@ -84,3 +85,4 @@ class AccordionItemForm(mixin_factory("AccordionItem"), EntangledModelForm):
         help_text=_("Initially shows this accordion item on page load."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

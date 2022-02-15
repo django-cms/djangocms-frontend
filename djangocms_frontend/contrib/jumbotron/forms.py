@@ -4,7 +4,11 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import jumbotron
-from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 
 mixin_factory = settings.get_forms(jumbotron)
 
@@ -47,3 +51,4 @@ class JumbotronForm(mixin_factory("Jumbotron"), EntangledModelForm):
         widget=ColoredButtonGroup(attrs=dict(property="color")),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

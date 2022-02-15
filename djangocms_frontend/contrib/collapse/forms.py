@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
-from ...fields import AttributesFormField
+from ...fields import AttributesFormField, TagTypeFormField
 from ...models import FrontendUIItem
 
 # TODO leaving this comment for now
@@ -36,6 +36,7 @@ class CollapseForm(EntangledModelForm):
         help_text=_("Element to be used to create accordions."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class CollapseTriggerForm(EntangledModelForm):
@@ -60,6 +61,7 @@ class CollapseTriggerForm(EntangledModelForm):
         help_text=_("Identifier to connect trigger with container."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class CollapseContainerForm(EntangledModelForm):
@@ -84,3 +86,4 @@ class CollapseContainerForm(EntangledModelForm):
         help_text=_("Identifier to connect trigger with container."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

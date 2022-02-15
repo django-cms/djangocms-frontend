@@ -92,9 +92,11 @@ class AutocompleteJsonView(View):
             pagination: {more: true}
         }
         """
+        results = get_link_choices()
+        print(results)
         return JsonResponse(
             {
-                "results": get_link_choices(),
+                "results": results,
                 "pagination": {"more": False},
             }
         )

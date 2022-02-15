@@ -1,6 +1,6 @@
 from entangled.forms import EntangledModelForm
 
-from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 
 from ...models import FrontendUIItem
 
@@ -21,6 +21,7 @@ class MediaForm(EntangledModelForm):
         untangled_fields = ("tag_type",)
 
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class MediaBodyForm(EntangledModelForm):
@@ -39,3 +40,4 @@ class MediaBodyForm(EntangledModelForm):
         untangled_fields = ("tag_type",)
 
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

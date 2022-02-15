@@ -4,7 +4,12 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 
-from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup
+from ...fields import (
+    AttributesFormField,
+    ButtonGroup,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
 from ...models import FrontendUIItem
 from .constants import LISTGROUP_STATE_CHOICES
 
@@ -32,6 +37,7 @@ class ListGroupForm(EntangledModelForm):
         help_text=_("Create lists of content in a card with a flush list group."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
 
 
 class ListGroupItemForm(EntangledModelForm):
@@ -74,3 +80,4 @@ class ListGroupItemForm(EntangledModelForm):
         widget=ButtonGroup(attrs=dict(property="list_state")),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

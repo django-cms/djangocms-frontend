@@ -6,7 +6,7 @@ from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
 
-from djangocms_frontend.fields import AttributesFormField
+from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 
 from ... import settings
 from ...models import FrontendUIItem
@@ -123,6 +123,7 @@ class CarouselForm(EntangledModelForm):
             "data-bs-wrap",
         ],
     )
+    tag_type = TagTypeFormField()
 
 
 class CarouselSlideForm(AbstractLinkForm, EntangledModelForm):
@@ -157,3 +158,4 @@ class CarouselSlideForm(AbstractLinkForm, EntangledModelForm):
         help_text=_("Content may also be added using child plugins."),
     )
     attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
