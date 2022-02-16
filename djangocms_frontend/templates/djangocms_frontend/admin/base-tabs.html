@@ -4,22 +4,16 @@
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}">
     <script src="{% static 'djangocms_frontend/js/bundle.base.js' %}"></script>
-    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script-->
     {{ block.super }}
-    <!--style>
-        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {background-color: #0bf;}
-        .nav-link {color: #0bf; }
-    </style-->
 {% endblock %}
 {% block content_subtitle %}{% endblock %}
 {% block field_sets %}
     <div class="djangocms-frontend
         {% block custom_class %}{% endblock %}" data-static="{% get_static_prefix %}">
-        {% block custom_message %}{% endblock %}
         <ul class="djangocms-frontend nav nav-tabs" role="tablist">
             {% for fieldset in adminform %}
                 <li class="nav-item" role="presentation">
-                    <a class="btn nav-link" href="#tab-{{ forloop.counter }}"
+                    <a class="nav-link" href="#tab-{{ forloop.counter }}"
                        data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
                        data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
                           <span class="indicator error">
@@ -38,11 +32,3 @@
         </div>
     </div>
 {% endblock %}
-{% block after_field_sets %}
-    <template id="error-badge">
-      <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-        <span class="visually-hidden"></span>
-      </span>
-    </template>
-{% endblock %}
-

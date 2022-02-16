@@ -129,7 +129,7 @@ the type `Card inner`_, `Picture / Image`_, `List group`_, or `Row`_.
 .. note::
 
     New feature:
-        By adding iamges or list groups directly to a card, unnecessary
+        By adding images or list groups directly to a card, unnecessary
         margins are avoided.
 
 

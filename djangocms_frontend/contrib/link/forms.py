@@ -157,7 +157,7 @@ class AbstractLinkForm(EntangledModelForm):
         required=False,
         help_text=_(
             "Appends the value only after the internal or external link. "
-            'Do <em>not</em> include a preceding "#" symbol.'
+            'Do <em>not</em> include a preceding "&#35;" symbol.'
         ),
     )
     mailto = forms.EmailField(
@@ -203,8 +203,10 @@ class AbstractLinkForm(EntangledModelForm):
             "internal_link",
         )
         anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
-        anchor_field_value = self.cleaned_data[anchor_field_name]
-        link_fields = {key: self.cleaned_data[key] for key in link_field_names}
+        anchor_field_value = self.cleaned_data.get(anchor_field_name, None)
+        link_fields = {
+            key: self.cleaned_data.get(key, None) for key in link_field_names
+        }
         link_field_verbose_names = {
             key: force_text(self.fields[key].label) for key in link_fields.keys()
         }
@@ -224,7 +226,7 @@ class AbstractLinkForm(EntangledModelForm):
 
         if (
             len(provided_link_fields) == 0
-            and not self.cleaned_data[anchor_field_name]
+            and not self.cleaned_data.get(anchor_field_name, None)
             and not self.link_is_optional
         ):
             raise ValidationError(_("Please provide a link."))

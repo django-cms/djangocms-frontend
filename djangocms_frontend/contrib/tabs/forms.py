@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...fields import AttributesFormField, TagTypeFormField
+from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .constants import (
     TAB_ALIGNMENT_CHOICES,
@@ -43,11 +43,13 @@ class TabForm(EntangledModelForm):
         label=_("Type"),
         choices=TAB_TYPE_CHOICES,
         initial=TAB_TYPE_CHOICES[0][0],
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     tab_alignment = forms.ChoiceField(
         label=_("Alignment"),
         choices=TAB_ALIGNMENT_CHOICES,
         required=False,
+        widget=IconGroup(),
     )
     tab_index = forms.IntegerField(
         label=_("Index"),
@@ -95,12 +97,14 @@ class TabItemForm(EntangledModelForm):
         label=_("Internal padding size"),
         choices=settings.SPACER_SIZE_CHOICES,
         initial=settings.SPACER_SIZE_CHOICES[1][0],
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     tab_padding_side = forms.ChoiceField(
         label=_("Internal padding sides"),
         choices=settings.SPACER_SIDE_CHOICES,
         initial=settings.SPACER_SIDE_CHOICES[0][0],
         required=False,
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
 
     attributes = AttributesFormField()

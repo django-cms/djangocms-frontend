@@ -2,9 +2,10 @@ ul.nav {
     .nav-item {
         margin-right: 1rem;
     }
-    margin-bottom: 0;
+    // margin-bottom: 0;
     .nav-link {
         position: relative;
+        text-decoration: none;
         span.indicator {
             display:    none;
             border-radius: 50%;
@@ -27,9 +28,22 @@ ul.nav.nav-pills .nav-link:not(.active) {
     border-width: 1px;
 }
 
-ul.djangocms-frontend.nav-tabs+div.tab-content .tab-pane {
+body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs+div.tab-content .tab-pane {
     border-left-style: solid;
     border-bottom-style: solid;
     border-right-style: solid;
+    border-left-color: var(--hairline-color);
+    border-bottom-color: var(--hairline-color);
+    border-right-color: var(--hairline-color);
     border-width: 1px;
+    fieldset:last-child {
+        margin-bottom: 0;
+    }
+}
+
+body.djangocms-admin-style .colM ul:not(.object-tools) li {
+    border: none;
+    a.active {
+        border-bottom: 1px solid #dee2e6;
+    }
 }

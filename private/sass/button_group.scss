@@ -23,7 +23,7 @@ form .form-row  div.frontend-button-group.frontend-button-group-block {
 form .form-row  div.frontend-button-group {
     & > label.btn-grp {
         margin: 3px;
-        padding: 6px;
+        padding: 4px 7px;
         text-transform: none;
         text-align: center !important;
         //border-color: transparent !important;
@@ -32,7 +32,7 @@ form .form-row  div.frontend-button-group {
         font-weight: normal !important;
     }
     & > input[property="color"]+label.btn-grp[style="--fe-value: ;"] {
-        var(--dca-black, $django-fg) !important;
+        color: var(--dca-black, $django-fg) !important;
         @media (prefers-color-scheme: dark) {
             color: var(--dca-black, $django-dark-color) !important;
         }

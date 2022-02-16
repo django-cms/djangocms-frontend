@@ -177,6 +177,36 @@ Models
     returns a plugin-specific short description shown in the structure mode
     of django CMS.
 
+**************
+ Form widgets
+**************
+
+**djangocms-frontend** contains button group widgets which can be used as
+for ``forms.ChoiceField``. They might turn out helpful when adding custom
+plugins.
+
+.. py:class:: ButtonGroup()
+
+    Import from ``djangocms_frontend.fields``
+
+    Button group displays a set of buttons for the user to chose. Usable for up
+    to roughly five options.
+
+.. py:class:: ColoredButtonGroup(ButtonGroup)
+
+    Import from ``djangocms_frontend.fields``
+
+    Used to display the context color selection buttons.
+
+.. py:class:: IconGroup(ButtonGroup)
+
+    Import from ``djangocms_frontend.fields``.
+
+    Displays icons in stead of text for the options. Each icon is rendered
+    by ``<span class="icon icon-{{value}}"></span>``. Add css in the ``Media``
+    subclass to ensure that for each option's value the span renders the
+    appropriate icon.
+
 *********************
  Management commands
 *********************

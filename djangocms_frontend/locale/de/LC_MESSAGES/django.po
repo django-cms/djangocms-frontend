@@ -1029,10 +1029,10 @@ msgstr "Anker"
 #: contrib/link/forms.py:198
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
-"include a preceding \"#\" symbol."
+"include a preceding \"&#35;\" symbol."
 msgstr ""
-"Hängt bei internen oder externen Links einen Anker an. <em>Ohne</em "
-"fährendes \"#\"-Smybol."
+"Hängt bei internen oder externen Links einen Anker an. <em>Ohne</em> "
+"führendes \"&#35;\"-Symbol."
 
 #: contrib/link/forms.py:203
 msgid "Email address"

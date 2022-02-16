@@ -56,7 +56,7 @@ Instead all design parameters are stored in a common JSON field and
 future releases of improved frontend features will not require to
 rebuild your full plugin tree.
 
-The link plugin has been rewritten to not allow internal links to other
+The link plugin has been rewritten to not only allow internal links to other
 CMS pages, but also to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
@@ -155,7 +155,7 @@ For a manual install:
 Documentation
 =============
 
-See readthedocs for the `currently draft documentation
+See readthedocs for the `documentation
 <https://djangocms-frontend.readthedocs.io>`_.
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
