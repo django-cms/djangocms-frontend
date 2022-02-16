@@ -1,0 +1,15 @@
+{% extends "admin/cms/page/plugin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}">
+    {{ block.super }}
+{% endblock %}
+
+{% block field_sets %}
+    <div class="djangocms-frontend
+        {% block custom_class %}{% endblock %}" data-static="{% get_static_prefix %}">
+        {% block custom_message %}{% endblock %}
+        {{ block.super }}
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@
  */
 
 // import 'bootstrap/js/dist/alert'
-import $ from 'jquery';
+// import $ from 'jquery';
 import PreviewGenerator from 'components/preview-generator';
 
 

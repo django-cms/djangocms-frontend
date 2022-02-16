@@ -181,7 +181,9 @@ export default class PreviewGenerator {
 
         // handle block class
         if (this.elements.block.is(':checked')) {
-            this.button.addClass('btn-block');
+            this.button.css('width','100%');
+        } else {
+            this.button.css('width', 'fit-content');
         }
     }
 
