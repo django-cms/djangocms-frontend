@@ -18,7 +18,7 @@
         {% endfor %}
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content{% if instance.tab_alignment == "flex-column" %} flex-fill{% endif %}">
         {% for plugin in instance.child_plugin_instances %}
             {% with parent=instance parentloop=forloop %}
                 {% render_plugin plugin %}
