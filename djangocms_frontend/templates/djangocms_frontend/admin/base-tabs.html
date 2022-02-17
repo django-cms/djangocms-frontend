@@ -10,25 +10,28 @@
 {% block field_sets %}
     <div class="djangocms-frontend
         {% block custom_class %}{% endblock %}" data-static="{% get_static_prefix %}">
-        <ul class="djangocms-frontend nav nav-tabs" role="tablist">
+        <ul class="djangocms-frontend nav nav-pills" role="tablist">
             {% for fieldset in adminform %}
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" href="#tab-{{ forloop.counter }}"
-                       data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
-                       data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
-                          <span class="indicator error">
-                          </span>
-                    </a>
-                </li>
+                {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#tab-{{ forloop.counter }}"
+                           data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
+                           data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
+                              <span class="indicator error">
+                              </span>
+                        </a>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
         <div class="djangocms-frontend tab-content">
             {% for fieldset in adminform %}
-                <div class="tab-pane fade"
-                     id="tab-{{ forloop.counter }}" role="tabpanel">
-                        {% include "djangocms_frontend/admin/includes/fieldset.html" %}
-                </div>
-            {% endfor %}
+                {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
+                    {% if  forloop.counter != 1 %}</div>{% endif %}
+                    <div class="tab-pane fade" id="tab-{{ forloop.counter }}" role="tabpanel">
+                {% endif %}
+                {% include "djangocms_frontend/admin/includes/fieldset.html" %}
+            {% endfor %}</div>
         </div>
     </div>
 {% endblock %}

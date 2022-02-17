@@ -40,6 +40,7 @@ class SpacingPlugin(mixin_factory("Spacing"), CMSUIPlugin):
         (
             _("Advanced settings"),
             {
+                "classes": ("collapse",),
                 "fields": (
                     "tag_type",
                     "attributes",

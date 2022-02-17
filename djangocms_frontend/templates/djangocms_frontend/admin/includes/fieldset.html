@@ -1,5 +1,5 @@
 <fieldset class="module aligned">
-    {# if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif #}
+    {% if fieldset.name and not "collapse" in fieldset.classes %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
@@ -27,3 +27,4 @@
         </div>
     {% endfor %}
 </fieldset>
+
