@@ -5,6 +5,7 @@ from djangocms_frontend import settings
 
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.background import BackgroundMixin
 from .. import grid
 from . import forms, models
 
@@ -12,7 +13,9 @@ mixin_factory = settings.get_renderer(grid)
 
 
 @plugin_pool.register_plugin
-class GridContainerPlugin(mixin_factory("GridContainer"), AttributesMixin, CMSUIPlugin):
+class GridContainerPlugin(
+    mixin_factory("GridContainer"), AttributesMixin, BackgroundMixin, CMSUIPlugin
+):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

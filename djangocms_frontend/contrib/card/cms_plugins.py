@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.background import BackgroundFormMixin, BackgroundMixin
 from .. import card
 from . import forms, models
 
@@ -63,7 +64,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
 
 
 @plugin_pool.register_plugin
-class CardPlugin(mixin_factory("Card"), AttributesMixin, CMSUIPlugin):
+class CardPlugin(mixin_factory("Card"), AttributesMixin, BackgroundMixin, CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -88,11 +89,11 @@ class CardPlugin(mixin_factory("Card"), AttributesMixin, CMSUIPlugin):
             {
                 "fields": (
                     "card_alignment",
-                    ("card_context", "card_text_color"),
                     (
+                        "card_text_color",
                         "card_outline",
-                        "card_full_height",
                     ),
+                    "card_full_height",
                 )
             },
         ),

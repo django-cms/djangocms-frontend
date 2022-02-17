@@ -1,11 +1,13 @@
-from django.core.management.base import BaseCommand
 from django.db.models import Count
 
 from djangocms_frontend.models import FrontendUIItem
 
+from .base import SubcommandsCommand
 
-class Command(BaseCommand):
+
+class FrequencyAnalysis(SubcommandsCommand):
     help = "Migrates plugins djangocms_bootstrap4 to djangocms_frontend"
+    command_name = "frequency_analysis"
 
     def handle(self, *args, **options):
         analysis = (

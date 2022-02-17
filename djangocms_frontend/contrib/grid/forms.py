@@ -7,6 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
 
 from ... import settings
+from ...common.background import BackgroundFormMixin
 from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .. import grid
@@ -21,7 +22,9 @@ from .constants import (
 mixin_factory = settings.get_forms(grid)
 
 
-class GridContainerForm(mixin_factory("GridContainer"), EntangledModelForm):
+class GridContainerForm(
+    mixin_factory("GridContainer"), BackgroundFormMixin, EntangledModelForm
+):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

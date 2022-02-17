@@ -1,8 +1,9 @@
 from django.apps import apps
-from django.core.management.base import BaseCommand
 from django.db import connection, models
 
 from djangocms_frontend.management import bootstrap4_migration, styled_link_migration
+
+from .base import SubcommandsCommand
 
 plugin_names = {}
 
@@ -99,8 +100,9 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
     print()
 
 
-class Command(BaseCommand):
+class Migrate(SubcommandsCommand):
     help = "Migrates plugins djangocms_bootstrap4 to djangocms_frontend"
+    command_name = "migrate"
 
     def handle(self, *args, **options):
         migrate_to_djangocms_frontend(apps, None)

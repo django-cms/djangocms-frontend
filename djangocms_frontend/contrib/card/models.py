@@ -35,15 +35,15 @@ class Card(FrontendUIItem):
         verbose_name = _("Card")
 
     def get_short_description(self):
-        if self.card_context and self.card_outline:
-            text = f".border-{self.card_context}"
-        elif self.card_context:
-            text = f".bg-{self.card_context}"
+        if self.config.get("background_context", False):
+            text = [f".bg-{self.background_context}"]
         else:
-            text = ""
+            text = []
+        if self.config.get("card_outline", False):
+            text.append(f".border-{self.card_outline}")
         if self.card_alignment:
-            text += f" .{self.card_alignment}"
-        return text
+            text.append(f".{self.card_alignment}")
+        return " ".join(text)
 
 
 class CardInner(FrontendUIItem):

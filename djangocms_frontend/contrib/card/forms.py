@@ -7,6 +7,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
+from ...common.background import BackgroundFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -90,7 +91,7 @@ CardLayoutForm = type(
 CardLayoutForm.Meta.entangled_fields["config"] += extra_fields_row_cols.keys()
 
 
-class CardForm(mixin_factory("Card"), EntangledModelForm):
+class CardForm(mixin_factory("Card"), BackgroundFormMixin, EntangledModelForm):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -100,7 +101,6 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
-                "card_context",
                 "card_alignment",
                 "card_outline",
                 "card_text_color",
@@ -111,12 +111,14 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         untangled_fields = ("tag_type",)
         css = settings.ADMIN_CSS
 
-    card_context = forms.ChoiceField(
-        label=_("Background context"),
+    card_outline = forms.ChoiceField(
+        label=_("Card outline context"),
+        initial=settings.EMPTY_CHOICE,
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
         required=False,
+        help_text=_("Uses the border to indicate context."),
         widget=forms.HiddenInput()
-        if "card_context" in getattr(settings, "EXCL_CARD_PROP", ())
+        if "card_outline" in getattr(settings, "EXCL_CARD_PROP", ())
         else ColoredButtonGroup(),
     )
     card_alignment = forms.ChoiceField(
@@ -126,15 +128,6 @@ class CardForm(mixin_factory("Card"), EntangledModelForm):
         widget=forms.HiddenInput()
         if "card_alignment" in getattr(settings, "EXCL_CARD_PROP", ())
         else IconGroup(),
-    )
-    card_outline = forms.BooleanField(
-        label=_("Outline"),
-        initial=False,
-        required=False,
-        help_text=_("Uses the border context instead of the background."),
-        widget=forms.HiddenInput()
-        if "card_outline" in getattr(settings, "EXCL_CARD_PROP", ())
-        else forms.CheckboxInput(),
     )
     card_text_color = forms.ChoiceField(
         label=_("Text context"),

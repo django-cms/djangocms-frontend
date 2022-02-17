@@ -8,8 +8,7 @@ from djangocms_frontend.helpers import insert_fields
 class AttributesMixin:
     block_attr = {
         "description": _(
-            """Advanced settings lets you decide which html attributes
-        should be used to render this element."""
+            "Advanced settings lets you add html attributes to render this element. Use them wisely and rarely."
         )
     }
 

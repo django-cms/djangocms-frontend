@@ -1,11 +1,12 @@
-from django.core.management.base import BaseCommand
-
 from djangocms_frontend import models
 from djangocms_frontend.helpers import get_related_object
 
+from .base import SubcommandsCommand
 
-class Command(BaseCommand):
+
+class StaleReferences(SubcommandsCommand):
     help = "Prints all stale references in the djangocms frontend plugins"
+    command_name = "stale_references"
 
     def handle(self, *args, **options):
         for ui_item in models.FrontendUIItem.objects.all():

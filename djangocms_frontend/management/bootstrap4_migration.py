@@ -31,7 +31,7 @@ plugin_migrations = {
     ],
     "bootstrap4_card.Bootstrap4Card -> card.Card": [
         "card_type",
-        "card_context",
+        "card_context -> background_context",
         "card_alignment",
         "card_outline",
         "card_text_color",
@@ -39,6 +39,7 @@ plugin_migrations = {
         "attributes",
         "P001",
         "X002",  # Replace v4 card deck
+        "X003",  # Align card_outline and background_context
         "A001_card",  # fix alignment
     ],
     "bootstrap4_card.Bootstrap4CardInner -> card.CardInner": [
@@ -259,6 +260,14 @@ def x002_replace_card_deck(obj, new_obj):
         new_obj.config["card_alignment"] = "text-end"
 
 
+def x003_card_context(obj, new_obj):
+    if obj.card_outline:
+        new_obj.config["card_outline"] = new_obj.config["background_context"]
+        new_obj.config["background_context"] = ""
+    else:
+        new_obj.config["card_outline"] = ""
+
+
 def a001_alignment(obj, new_obj, field):
     if field in new_obj.config and new_obj.config[field]:
         new_obj.config[field].replace("text-left", "start")
@@ -290,6 +299,7 @@ def g001_col_text_alignment(obj, new_obj):
 data_migration = {
     "P001": p001_left_right_migration,
     "X002": x002_replace_card_deck,
+    "X003": x003_card_context,
     "A001_quote": lambda x, y: a001_alignment(x, y, "quote_alignment"),
     "A001_figure": lambda x, y: a001_alignment(x, y, "figure_alignment"),
     "A001_picture": lambda x, y: a001_alignment(x, y, "alignment"),

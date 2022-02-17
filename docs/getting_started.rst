@@ -176,8 +176,8 @@ Otherwise the plugins will not appear in the editors' frontend.
 
 .. index::
     single: Migration from Bootstrap 4
-    single: migrate_frontend
-    single: manage.py migrate_frontend
+    single: migrate
+    single: manage.py
 
 .. _Migrating from djangocms-bootstrap4:
 
@@ -215,7 +215,7 @@ djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
 
 .. code::
 
-   ./manage.py migrate_frontend
+   ./manage.py frontend migrate
 
 After you finish the migration you can remove all djangocms-bootstrap4
 apps from ``INSTALLED_APPS`` and you may delete the now empty database
