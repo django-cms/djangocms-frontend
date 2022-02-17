@@ -46,8 +46,10 @@ class BackgroundFormMixin(EntangledModelFormMixin):
     background_context = forms.ChoiceField(
         label=_("Background context"),
         required=False,
-        choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
-        initial=settings.EMPTY_CHOICE,
+        choices=settings.EMPTY_CHOICE
+        + settings.COLOR_STYLE_CHOICES
+        + (("transparent", _("Transparent")),),
+        initial=settings.EMPTY_CHOICE[0][0],
         widget=ColoredButtonGroup(),
     )
     background_opacity = forms.ChoiceField(

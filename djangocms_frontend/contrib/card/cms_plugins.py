@@ -117,7 +117,9 @@ class CardPlugin(mixin_factory("Card"), AttributesMixin, BackgroundMixin, CMSUIP
 
 
 @plugin_pool.register_plugin
-class CardInnerPlugin(mixin_factory("CardInner"), AttributesMixin, CMSUIPlugin):
+class CardInnerPlugin(
+    mixin_factory("CardInner"), AttributesMixin, BackgroundMixin, CMSUIPlugin
+):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/
@@ -142,10 +144,7 @@ class CardInnerPlugin(mixin_factory("CardInner"), AttributesMixin, CMSUIPlugin):
             {
                 "fields": (
                     "inner_type",
-                    (
-                        "inner_context",
-                        "text_alignment",
-                    ),
+                    "text_alignment",
                 )
             },
         ),

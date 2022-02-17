@@ -32,39 +32,9 @@ class CardRenderMixin:
 class CardInnerRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes(instance.inner_type)
-        if getattr(instance, "inner_context", None):
-            instance.add_classes(f"bg-{instance.inner_context}")
-            if getattr(instance, "inner_opacity", "100") != "100":
-                instance.add_classes(f"bg-opacity-{instance.inner_opacity}")
         if getattr(instance, "text_alignment", None):
             instance.add_classes(f"text-{instance.text_alignment}")
         return super().render(context, instance, placeholder)
-
-    def get_fieldsets(self, request, obj=None):
-        return insert_fields(
-            super().get_fieldsets(request, obj),
-            ("inner_opacity",),
-            block=0,
-            position=2,
-        )
-
-
-class CardInnerFormMixin(EntangledModelFormMixin):
-    class Meta:
-        entangled_fields = {
-            "config": [
-                "inner_opacity",
-            ]
-        }
-
-    inner_opacity = forms.ChoiceField(
-        label=_("Background opacity"),
-        required=False,
-        choices=settings.framework_settings.OPACITY_CHOICES,
-        initial=settings.framework_settings.OPACITY_CHOICES[0][0],
-        widget=ButtonGroup(attrs=dict(property="opacity")),
-        help_text=_("Opacity of card inner background color"),
-    )
 
 
 class CardLayoutRenderMixin:

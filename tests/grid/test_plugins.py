@@ -62,7 +62,7 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=GridContainerPlugin.__name__,
             language=self.language,
-            config=dict(container_shadow="reg"),
+            config=dict(background_shadow="reg"),
         )
         container.initialize_from_form(GridContainerForm)
         container.save()

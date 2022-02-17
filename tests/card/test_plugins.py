@@ -28,8 +28,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CardPlugin.__name__,
             language=self.language,
             config=dict(
-                card_context="transparent",
-                card_outline=True,
+                card_outline="transparent",
                 card_alignment="text-start",
                 card_text_color="white",
             ),
@@ -50,7 +49,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=CardPlugin.__name__,
             language=self.language,
             config=dict(
-                card_context="transparent",
+                background_context="transparent",
             ),
         )
         plugin.initialize_from_form(CardForm).save()

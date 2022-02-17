@@ -113,7 +113,7 @@ class CardForm(mixin_factory("Card"), BackgroundFormMixin, EntangledModelForm):
 
     card_outline = forms.ChoiceField(
         label=_("Card outline context"),
-        initial=settings.EMPTY_CHOICE,
+        initial=settings.EMPTY_CHOICE[0][0],
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
         required=False,
         help_text=_("Uses the border to indicate context."),
@@ -152,7 +152,9 @@ class CardForm(mixin_factory("Card"), BackgroundFormMixin, EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
+class CardInnerForm(
+    mixin_factory("CardInner"), BackgroundFormMixin, EntangledModelForm
+):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/
@@ -163,7 +165,6 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
         entangled_fields = {
             "config": [
                 "inner_type",
-                "inner_context",
                 "text_alignment",
                 "attributes",
             ]
@@ -176,14 +177,6 @@ class CardInnerForm(mixin_factory("CardInner"), EntangledModelForm):
         initial=CARD_INNER_TYPE_CHOICES[0][0],
         help_text=_("Define the structure of the plugin."),
         widget=ButtonGroup(attrs=dict(label_class="btn-secondary")),
-    )
-    inner_context = forms.ChoiceField(
-        label=_("Background context"),
-        choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
-        required=False,
-        widget=forms.HiddenInput()
-        if "inner_context" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
     )
     text_alignment = forms.ChoiceField(
         label=_("Content alignment"),
