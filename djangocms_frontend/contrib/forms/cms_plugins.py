@@ -13,6 +13,7 @@ from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
 
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from . import forms, models
 
 
@@ -233,7 +234,7 @@ mixin_factory = settings.get_renderer(forms_module)
 
 
 @plugin_pool.register_plugin
-class FormPlugin(mixin_factory("Form"), CMSAjaxForm):
+class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/
@@ -264,16 +265,6 @@ class FormPlugin(mixin_factory("Form"), CMSAjaxForm):
                     ("form_submit_message", "form_submit_align"),
                     "form_submit_context",
                 ],
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

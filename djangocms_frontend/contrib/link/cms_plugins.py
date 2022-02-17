@@ -5,6 +5,7 @@ from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import link
 from . import forms, models
 from .constants import USE_LINK_ICONS
@@ -23,9 +24,12 @@ UILINK_FIELDSET = [
     (
         None,
         {
-            "fields": UILINK_FIELDS + (("icon_left", "icon_right"),)
-            if USE_LINK_ICONS
-            else UILINK_FIELDS
+            "fields": ("template",)
+            + (
+                UILINK_FIELDS + (("icon_left", "icon_right"),)
+                if USE_LINK_ICONS
+                else UILINK_FIELDS
+            )
         },
     ),
     (
@@ -43,7 +47,7 @@ UILINK_FIELDSET = [
 
 
 @plugin_pool.register_plugin
-class LinkPlugin(mixin_factory("Link"), CMSUIPlugin):
+class LinkPlugin(mixin_factory("Link"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/
@@ -57,18 +61,7 @@ class LinkPlugin(mixin_factory("Link"), CMSUIPlugin):
     text_enabled = True
     allow_children = True
 
-    fieldsets = UILINK_FIELDSET + [
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "template",
-                    "attributes",
-                ),
-            },
-        ),
-    ]
+    fieldsets = UILINK_FIELDSET
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(

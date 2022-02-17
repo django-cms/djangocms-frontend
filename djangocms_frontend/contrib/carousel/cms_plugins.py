@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
+from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import carousel
 from . import forms, models
 from .constants import CAROUSEL_TEMPLATE_CHOICES
@@ -13,7 +15,7 @@ mixin_factory = settings.get_renderer(carousel)
 
 
 @plugin_pool.register_plugin
-class CarouselPlugin(mixin_factory("Carousel"), CMSPluginBase):
+class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -31,22 +33,12 @@ class CarouselPlugin(mixin_factory("Carousel"), CMSPluginBase):
             None,
             {
                 "fields": (
+                    "template",
                     ("carousel_aspect_ratio", "carousel_interval"),
                     ("carousel_controls", "carousel_indicators"),
                     ("carousel_keyboard", "carousel_wrap"),
                     ("carousel_ride", "carousel_pause"),
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "template",
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]
@@ -58,7 +50,7 @@ class CarouselPlugin(mixin_factory("Carousel"), CMSPluginBase):
 
 
 @plugin_pool.register_plugin
-class CarouselSlidePlugin(mixin_factory("CarouselSlide"), CMSPluginBase):
+class CarouselSlidePlugin(mixin_factory("CarouselSlide"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Carousel Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -89,16 +81,6 @@ class CarouselSlidePlugin(mixin_factory("CarouselSlide"), CMSPluginBase):
                     ("external_link", "internal_link"),
                     ("mailto", "phone"),
                     ("anchor", "target"),
-                ),
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
                 ),
             },
         ),

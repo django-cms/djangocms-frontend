@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import grid
 from . import forms, models
 
@@ -11,7 +12,7 @@ mixin_factory = settings.get_renderer(grid)
 
 
 @plugin_pool.register_plugin
-class GridContainerPlugin(mixin_factory("GridContainer"), CMSUIPlugin):
+class GridContainerPlugin(mixin_factory("GridContainer"), AttributesMixin, CMSUIPlugin):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -26,21 +27,11 @@ class GridContainerPlugin(mixin_factory("GridContainer"), CMSUIPlugin):
 
     fieldsets = [
         (None, {"fields": ("container_type",)}),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
 
 @plugin_pool.register_plugin
-class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
+class GridRowPlugin(mixin_factory("GridRow"), AttributesMixin, CMSUIPlugin):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -70,19 +61,6 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
                 "fields": ([f"row_cols_{size}" for size in settings.DEVICE_SIZES],),
             },
         ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    (
-                        "tag_type",
-                        "gutters",
-                    ),
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
     def save_model(self, request, obj, form, change):
@@ -109,7 +87,7 @@ class GridRowPlugin(mixin_factory("GridRow"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
+class GridColumnPlugin(mixin_factory("GridColumn"), AttributesMixin, CMSUIPlugin):
     """
     Layout > Grid: "Column" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -148,16 +126,6 @@ class GridColumnPlugin(mixin_factory("GridColumn"), CMSUIPlugin):
                     [f"{size}_ms" for size in settings.DEVICE_SIZES],
                     [f"{size}_me" for size in settings.DEVICE_SIZES],
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

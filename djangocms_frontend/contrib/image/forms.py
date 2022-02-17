@@ -87,7 +87,6 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     link_is_optional = True
 
@@ -95,6 +94,7 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
         label=_("Template"),
         choices=get_templates(),
         initial=get_templates()[0][0],
+        widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     picture = AdminImageFormField(
         rel=ManyToOneRel(FilerImageField, Image, "id"),
@@ -220,14 +220,15 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
     tag_type = TagTypeFormField()
 
     def clean(self):
+        super().clean()
         data = self.cleaned_data
         # there can be only one link type
         if (
             sum(
                 (
-                    bool(data["external_link"]),
-                    bool(data["internal_link"]),
-                    bool(data["file_link"]),
+                    bool(data.get("external_link", False)),
+                    bool(data.get("internal_link", False)),
+                    bool(data.get("file_link", False)),
                 )
             )
             > 1
@@ -240,7 +241,7 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
             )
 
         # you shall only set one image kind
-        if not data["picture"] and not data["external_picture"]:
+        if not data.get("picture", False) and not data.get("external_picture", False):
             raise forms.ValidationError(
                 _(
                     "You need to add either an image, "
@@ -263,7 +264,7 @@ class ImageForm(AbstractLinkForm, EntangledModelForm):
         invalid_option_pair = None
 
         for pair in invalid_option_pairs:
-            if data.get(pair[0]) and data.get(pair[1]):
+            if data.get(pair[0], False) and data.get(pair[1], False):
                 invalid_option_pair = pair
                 break
 

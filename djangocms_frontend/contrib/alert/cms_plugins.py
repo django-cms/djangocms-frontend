@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import alert
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(alert)
 
 
 @plugin_pool.register_plugin
-class AlertPlugin(mixin_factory("Alert"), CMSUIPlugin):
+class AlertPlugin(mixin_factory("Alert"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/
@@ -31,16 +32,6 @@ class AlertPlugin(mixin_factory("Alert"), CMSUIPlugin):
                     "alert_context",
                     "alert_dismissible",
                 ]
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

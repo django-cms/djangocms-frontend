@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import badge
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(badge)
 
 
 @plugin_pool.register_plugin
-class BadgePlugin(mixin_factory("Badge"), CMSUIPlugin):
+class BadgePlugin(mixin_factory("Badge"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Badge" Plugin
     https://getbootstrap.com/docs/5.0/components/badge/
@@ -35,5 +36,4 @@ class BadgePlugin(mixin_factory("Badge"), CMSUIPlugin):
                 )
             },
         ),
-        (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]

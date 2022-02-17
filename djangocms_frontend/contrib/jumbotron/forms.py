@@ -34,6 +34,9 @@ class JumbotronForm(mixin_factory("Jumbotron"), EntangledModelForm):
         label=_("Template"),
         choices=settings.JUMBOTRON_TEMPLATE_CHOICES,
         initial=settings.JUMBOTRON_TEMPLATE_CHOICES[0][0],
+        widget=forms.HiddenInput
+        if len(settings.JUMBOTRON_TEMPLATE_CHOICES) < 2
+        else forms.Select,
     )
     jumbotron_fluid = forms.BooleanField(
         label=_("Fluid"),

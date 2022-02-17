@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import listgroup
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(listgroup)
 
 
 @plugin_pool.register_plugin
-class ListGroupPlugin(mixin_factory("ListGroup"), CMSUIPlugin):
+class ListGroupPlugin(mixin_factory("ListGroup"), AttributesMixin, CMSUIPlugin):
     """
     Components > "List Group" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -27,21 +28,11 @@ class ListGroupPlugin(mixin_factory("ListGroup"), CMSUIPlugin):
 
     fieldsets = [
         (None, {"fields": ("list_group_flush",)}),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
 
 @plugin_pool.register_plugin
-class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSUIPlugin):
+class ListGroupItemPlugin(mixin_factory("ListGroupItem"), AttributesMixin, CMSUIPlugin):
     """
     Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -64,16 +55,6 @@ class ListGroupItemPlugin(mixin_factory("ListGroupItem"), CMSUIPlugin):
                     "list_context",
                     "list_state",
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

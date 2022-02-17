@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import accordion
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(accordion)
 
 
 @plugin_pool.register_plugin
-class AccordionPlugin(mixin_factory("Accordion"), CMSUIPlugin):
+class AccordionPlugin(mixin_factory("Accordion"), AttributesMixin, CMSUIPlugin):
     """
     Component > "Accordion" Plugin
     https://getbootstrap.com/docs/5.0/components/accordion/
@@ -36,16 +37,6 @@ class AccordionPlugin(mixin_factory("Accordion"), CMSUIPlugin):
                         "accordion_flush",
                     ),
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

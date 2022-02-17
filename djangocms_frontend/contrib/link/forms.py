@@ -120,7 +120,6 @@ class AbstractLinkForm(EntangledModelForm):
                 "target",
             ]
         }
-        untangled_fields = ("attributes",)
 
     link_is_optional = False
 
@@ -132,7 +131,7 @@ class AbstractLinkForm(EntangledModelForm):
         label=_("Display name"),
         required=False,
     )
-    external_link = forms.CharField(
+    external_link = forms.URLField(
         label=_("External link"),
         required=False,
         #        validators=url_validators,
@@ -270,6 +269,7 @@ class LinkForm(AbstractLinkForm):
         label=_("Template"),
         choices=get_templates(),
         initial=get_templates()[0][0],
+        widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     link_type = forms.ChoiceField(
         label=_("Type"),

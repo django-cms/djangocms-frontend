@@ -25,7 +25,6 @@ class CodeForm(EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     code_content = forms.CharField(
         label=_("Code"),
@@ -59,7 +58,6 @@ class BlockquoteForm(EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     quote_content = forms.CharField(
         label=_("Quote"),
@@ -98,7 +96,6 @@ class FigureForm(EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     figure_caption = forms.CharField(
         label=_("Caption"),

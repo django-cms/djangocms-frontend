@@ -38,6 +38,7 @@ class TabForm(EntangledModelForm):
         choices=TAB_TEMPLATE_CHOICES,
         initial=TAB_TEMPLATE_CHOICES[0][0],
         help_text=_("This is the template that will be used for the component."),
+        widget=forms.HiddenInput if len(TAB_TEMPLATE_CHOICES) < 2 else forms.Select,
     )
     tab_type = forms.ChoiceField(
         label=_("Type"),

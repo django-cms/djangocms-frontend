@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import image
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(image)
 
 
 @plugin_pool.register_plugin
-class ImagePlugin(mixin_factory("Image"), CMSUIPlugin):
+class ImagePlugin(mixin_factory("Image"), AttributesMixin, CMSUIPlugin):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/
@@ -29,6 +30,7 @@ class ImagePlugin(mixin_factory("Image"), CMSUIPlugin):
             None,
             {
                 "fields": (
+                    "template",
                     "picture",
                     "external_picture",
                     ("picture_fluid", "picture_rounded", "picture_thumbnail"),
@@ -36,16 +38,14 @@ class ImagePlugin(mixin_factory("Image"), CMSUIPlugin):
             },
         ),
         (
-            _("Advanced settings"),
+            _("Format"),
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "template",
                     "use_responsive_image",
                     ("width", "height"),
                     "alignment",
                     "caption_text",
-                    "attributes",
                 ),
             },
         ),

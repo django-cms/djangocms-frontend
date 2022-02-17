@@ -5,6 +5,7 @@ from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import tabs
 from . import forms, models
 from .constants import TAB_TEMPLATE_CHOICES
@@ -13,7 +14,7 @@ mixin_factory = settings.get_renderer(tabs)
 
 
 @plugin_pool.register_plugin
-class TabPlugin(mixin_factory("Tab"), CMSUIPlugin):
+class TabPlugin(mixin_factory("Tab"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Navs - Tab" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -32,20 +33,10 @@ class TabPlugin(mixin_factory("Tab"), CMSUIPlugin):
             None,
             {
                 "fields": (
+                    "template",
                     ("tab_type", "tab_alignment"),
                     ("tab_index", "tab_effect"),
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "template",
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]
@@ -55,7 +46,7 @@ class TabPlugin(mixin_factory("Tab"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class TabItemPlugin(mixin_factory("TabItem"), CMSUIPlugin):
+class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Navs - Tab Item" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -82,16 +73,6 @@ class TabItemPlugin(mixin_factory("TabItem"), CMSUIPlugin):
                     "tab_bordered",
                     "tab_padding_size",
                     "tab_padding_side",
-                ),
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
                 ),
             },
         ),

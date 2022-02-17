@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import media
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(media)
 
 
 @plugin_pool.register_plugin
-class MediaPlugin(mixin_factory("Media"), CMSUIPlugin):
+class MediaPlugin(mixin_factory("Media"), AttributesMixin, CMSUIPlugin):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/
@@ -23,22 +24,11 @@ class MediaPlugin(mixin_factory("Media"), CMSUIPlugin):
     change_form_template = "djangocms_frontend/admin/media.html"
     allow_children = True
 
-    fieldsets = [
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
-    ]
+    fieldsets = settings.EMPTY_FIELDSET
 
 
 @plugin_pool.register_plugin
-class MediaBodyPlugin(mixin_factory("MediaBody"), CMSUIPlugin):
+class MediaBodyPlugin(mixin_factory("MediaBody"), AttributesMixin, CMSUIPlugin):
     """
     Layout > "Media body" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/
@@ -52,15 +42,4 @@ class MediaBodyPlugin(mixin_factory("MediaBody"), CMSUIPlugin):
     allow_children = True
     parent_classes = ["MediaPlugin"]
 
-    fieldsets = [
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
-    ]
+    fieldsets = settings.EMPTY_FIELDSET

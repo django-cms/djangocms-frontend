@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import utilities
 from . import forms, models
 
@@ -11,7 +12,7 @@ mixin_factory = settings.get_renderer(utilities)
 
 
 @plugin_pool.register_plugin
-class SpacingPlugin(mixin_factory("Spacing"), CMSUIPlugin):
+class SpacingPlugin(mixin_factory("Spacing"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -37,16 +38,6 @@ class SpacingPlugin(mixin_factory("Spacing"), CMSUIPlugin):
                 )
             },
         ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
 
@@ -61,7 +52,7 @@ class EditorNotePlugin(mixin_factory("EditorNote"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class HeadingPlugin(mixin_factory("Heading"), CMSUIPlugin):
+class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, CMSUIPlugin):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
@@ -80,13 +71,6 @@ class HeadingPlugin(mixin_factory("Heading"), CMSUIPlugin):
                     ("heading_level", "heading_id"),
                     "heading",
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": ("attributes",),
             },
         ),
     ]
@@ -129,7 +113,7 @@ def create_tree(request_toc):
 
 
 @plugin_pool.register_plugin
-class TOCPlugin(mixin_factory("TOC"), CMSUIPlugin):
+class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
     name = _("Table of contents")
     module = _("Frontend")
 
@@ -139,15 +123,7 @@ class TOCPlugin(mixin_factory("TOC"), CMSUIPlugin):
     render_template = "djangocms_frontend/toc.html"
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
-    fieldsets = [
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": ("list_attributes", "attributes", "link_attributes"),
-            },
-        ),
-    ]
+    fieldsets = settings.EMPTY_FIELDSET
 
     def render(self, context, instance, palceholder):
         if hasattr(context["request"], "TOC"):

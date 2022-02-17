@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import collapse
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(collapse)
 
 
 @plugin_pool.register_plugin
-class CollapsePlugin(mixin_factory("Collapse"), CMSUIPlugin):
+class CollapsePlugin(mixin_factory("Collapse"), AttributesMixin, CMSUIPlugin):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -32,22 +33,14 @@ class CollapsePlugin(mixin_factory("Collapse"), CMSUIPlugin):
     ]
 
     fieldsets = [
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "collapse_siblings",
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
+        (None, {"fields": ("collapse_siblings",)}),
     ]
 
 
 @plugin_pool.register_plugin
-class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSUIPlugin):
+class CollapseTriggerPlugin(
+    mixin_factory("CollapseTrigger"), AttributesMixin, CMSUIPlugin
+):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -67,21 +60,13 @@ class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), CMSUIPlugin):
 
     fieldsets = [
         (None, {"fields": ("trigger_identifier",)}),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
 
 @plugin_pool.register_plugin
-class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSUIPlugin):
+class CollapseContainerPlugin(
+    mixin_factory("CollapseContainer"), AttributesMixin, CMSUIPlugin
+):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -101,14 +86,4 @@ class CollapseContainerPlugin(mixin_factory("CollapseContainer"), CMSUIPlugin):
 
     fieldsets = [
         (None, {"fields": ("container_identifier",)}),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]

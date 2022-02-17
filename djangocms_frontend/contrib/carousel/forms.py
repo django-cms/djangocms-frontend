@@ -48,6 +48,9 @@ class CarouselForm(EntangledModelForm):
         choices=CAROUSEL_TEMPLATE_CHOICES,
         initial=CAROUSEL_TEMPLATE_CHOICES[0][0],
         help_text=_("This is the template that will be used for the component."),
+        widget=forms.HiddenInput
+        if len(CAROUSEL_TEMPLATE_CHOICES) < 2
+        else forms.Select,
     )
     carousel_interval = forms.IntegerField(
         label=_("Interval"),

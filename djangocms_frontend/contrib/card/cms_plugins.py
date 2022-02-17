@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import card
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(card)
 
 
 @plugin_pool.register_plugin
-class CardLayoutPlugin(mixin_factory("CardLayout"), CMSUIPlugin):
+class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -44,16 +45,6 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSUIPlugin):
                 "fields": ([f"row_cols_{size}" for size in settings.DEVICE_SIZES],),
             },
         ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
     def save_model(self, request, obj, form, change):
@@ -72,7 +63,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class CardPlugin(mixin_factory("Card"), CMSUIPlugin):
+class CardPlugin(mixin_factory("Card"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -105,16 +96,6 @@ class CardPlugin(mixin_factory("Card"), CMSUIPlugin):
                 )
             },
         ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
-            },
-        ),
     ]
 
     def save_model(self, request, obj, form, change):
@@ -135,7 +116,7 @@ class CardPlugin(mixin_factory("Card"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class CardInnerPlugin(mixin_factory("CardInner"), CMSUIPlugin):
+class CardInnerPlugin(mixin_factory("CardInner"), AttributesMixin, CMSUIPlugin):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)
     https://getbootstrap.com/docs/5.0/components/card/
@@ -165,16 +146,6 @@ class CardInnerPlugin(mixin_factory("CardInner"), CMSUIPlugin):
                         "text_alignment",
                     ),
                 )
-            },
-        ),
-        (
-            _("Advanced settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tag_type",
-                    "attributes",
-                ),
             },
         ),
     ]

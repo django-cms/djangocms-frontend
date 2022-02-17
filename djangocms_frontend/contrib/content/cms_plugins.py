@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
+from ...common.attributes import AttributesMixin
 from .. import content
 from . import forms, models
 
@@ -10,7 +11,7 @@ mixin_factory = settings.get_renderer(content)
 
 
 @plugin_pool.register_plugin
-class CodePlugin(mixin_factory("Code"), CMSUIPlugin):
+class CodePlugin(mixin_factory("Code"), AttributesMixin, CMSUIPlugin):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
@@ -33,12 +34,11 @@ class CodePlugin(mixin_factory("Code"), CMSUIPlugin):
                 )
             },
         ),
-        (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
 
 
 @plugin_pool.register_plugin
-class BlockquotePlugin(mixin_factory("Blockquote"), CMSUIPlugin):
+class BlockquotePlugin(mixin_factory("Blockquote"), AttributesMixin, CMSUIPlugin):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
@@ -62,12 +62,11 @@ class BlockquotePlugin(mixin_factory("Blockquote"), CMSUIPlugin):
                 )
             },
         ),
-        (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]
 
 
 @plugin_pool.register_plugin
-class FigurePlugin(mixin_factory("Figure"), CMSUIPlugin):
+class FigurePlugin(mixin_factory("Figure"), AttributesMixin, CMSUIPlugin):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/
@@ -90,5 +89,4 @@ class FigurePlugin(mixin_factory("Figure"), CMSUIPlugin):
                 )
             },
         ),
-        (_("Advanced settings"), {"classes": ("collapse",), "fields": ("attributes",)}),
     ]

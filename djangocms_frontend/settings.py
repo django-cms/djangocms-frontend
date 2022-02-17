@@ -3,7 +3,19 @@ import importlib
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-EMPTY_CHOICE = (("", "------"),)
+EMPTY_CHOICE = (("", "-----"),)
+
+EMPTY_FIELDSET = [
+    (
+        None,
+        {
+            "fields": (),
+            "description": _(
+                "There are no further settings for this plugin. Please press save."
+            ),
+        },
+    )
+]
 
 # Only adding block elements
 TAG_CHOICES = getattr(

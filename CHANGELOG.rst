@@ -2,6 +2,22 @@
 Changelog
 =========
 
+unreleased
+==========
+
+* Added shadow options for containers, cards, alerts, ...
+* Added background color and opacity options for containers and cards
+* Added management command `stale_frontend_references` to identify stale
+  references (e.g., images, links)
+* Added icons for tab alignment
+* Added Tabs edit UI for simpler edit
+* Introduced Mixins (for advanced settings, first)
+
+
+0.2.0
+=====
+
+* First release on Pypi
 
 0.1.0 (unreleased)
 ==================
@@ -23,16 +39,4 @@ Changelog
   templates
 * Added bootstrap 5's new xxl breakpoint
 
-0.2.0
-=====
 
-* First release on Pypi
-
-
-unreleased
-==========
-
-* Added shadow options for containers, cards, alerts, ...
-* Added background color and opacity options for containers and cards
-* Added management command `stale_frontend_references` to identify stale
-  references (e.g., images, links)

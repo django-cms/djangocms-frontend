@@ -24,11 +24,15 @@ def get_related_object(scope, field_name):
     return relobj
 
 
-def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None):
+def insert_fields(
+    fieldsets, new_fields, block=None, position=-1, blockname=None, blockattrs=None
+):
     """
     creates a copy of fieldsets inserting the new fields either in the indexed block at the position,
     or - if no block is given - at the end
     """
+    if blockattrs is None:
+        blockattrs = dict()
     if block is None:
         fs = (
             list(fieldsets[:position] if position != -1 else fieldsets)
@@ -36,8 +40,9 @@ def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None
                 (
                     blockname,
                     {
-                        "classes": ("collapse",),
+                        "classes": ("collapse",) if len(fieldsets) > 0 else (),
                         "fields": list(new_fields),
+                        **blockattrs,
                     },
                 )
             ]

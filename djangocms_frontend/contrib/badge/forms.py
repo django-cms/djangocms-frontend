@@ -28,7 +28,6 @@ class BadgeForm(EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     badge_text = forms.CharField(
         label=_("Badge text"),
