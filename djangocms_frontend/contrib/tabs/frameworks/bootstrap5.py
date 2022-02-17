@@ -1,6 +1,6 @@
 class TabRenderMixin:
     def render(self, context, instance, placeholder):
-        if instance.tab_alignment == "flex-column":
+        if instance.config.get("tab_alignment", "") == "flex-column":
             instance.add_classes("flex-row", "d-flex")
         return super().render(context, instance, placeholder)
 
