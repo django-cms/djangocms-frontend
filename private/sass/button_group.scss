@@ -27,7 +27,7 @@ form .form-row  div.frontend-button-group {
         text-transform: none;
         text-align: center !important;
         //border-color: transparent !important;
-        outline:  3px solid transparent;
+        outline:  2px solid transparent;
         width: auto !important;
         font-weight: normal !important;
     }
@@ -49,13 +49,14 @@ form .form-row  div.frontend-button-group {
             color: var(--dca-black, $django-dark-color) !important;
         }
     }
-    & > input[type="radio"]:checked+label.btn-grp {
-        outline:  3px solid $cms-primary;
+    & > input[type="radio"]:checked+label.btn-grp,
+    & > input[type="checkbox"]:checked+label.btn-grp {
+        outline:  2px solid $cms-primary;
         border-color: white;
         border-radius: 0;
     }
-    & > input[type="radio"][property="text"]:checked+label.btn-grp,
-    & > input[type="radio"][property="icon"]:checked+label.btn-grp {
+    & > input[property="text"]:checked+label.btn-grp,
+    & > input[property="icon"]:checked+label.btn-grp {
         background: $cms-primary;
     }
     & > input[property="opacity"]+label.btn-grp {

@@ -18,11 +18,10 @@ class AttributesMixin:
             ["tag_type"] if "tag_type" in getattr(meta, "untangled_fields", ()) else []
         )
         fields.append("attributes")
-        fs = insert_fields(
+        return insert_fields(
             super().get_fieldsets(request, obj),
             fields,
             blockname=_("Advanced settings"),
-            blockattrs=copy(self.block_attr),
+            blockattrs=self.block_attr,
             position=-1,
         )
-        return fs

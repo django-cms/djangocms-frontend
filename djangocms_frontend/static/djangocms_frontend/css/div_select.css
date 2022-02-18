@@ -1,0 +1,8 @@
+div.inline-select {
+    width: 160px;
+    margin-right: 1rem;
+    display: inline-flex;
+}
+div.inline-select+div {
+    display: inline-flex;
+}

@@ -6,6 +6,8 @@ from djangocms_frontend import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
+from ...common.responsive import ResponsiveMixin
+from ...common.spacing import SpacingMixin
 from .. import grid
 from . import forms, models
 
@@ -14,7 +16,12 @@ mixin_factory = settings.get_renderer(grid)
 
 @plugin_pool.register_plugin
 class GridContainerPlugin(
-    mixin_factory("GridContainer"), AttributesMixin, BackgroundMixin, CMSUIPlugin
+    mixin_factory("GridContainer"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
 ):
     """
     Layout > Grid: "Container" Plugin
@@ -34,7 +41,13 @@ class GridContainerPlugin(
 
 
 @plugin_pool.register_plugin
-class GridRowPlugin(mixin_factory("GridRow"), AttributesMixin, CMSUIPlugin):
+class GridRowPlugin(
+    mixin_factory("GridRow"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    CMSUIPlugin,
+):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -90,7 +103,13 @@ class GridRowPlugin(mixin_factory("GridRow"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class GridColumnPlugin(mixin_factory("GridColumn"), AttributesMixin, CMSUIPlugin):
+class GridColumnPlugin(
+    mixin_factory("GridColumn"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    CMSUIPlugin,
+):
     """
     Layout > Grid: "Column" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

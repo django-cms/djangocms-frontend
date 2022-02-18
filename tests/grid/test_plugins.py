@@ -128,7 +128,12 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         # create 5 column plugins
-        data = {"create": 5, "tag_type": "div"}
+        data = {
+            "create": 5,
+            "tag_type": "div",
+            "margin_devices": ["xs"],
+            "padding_devices": ["xl"],
+        }
 
         with self.login_user_context(self.superuser), warnings.catch_warnings():
             # hide the "DontUsePageAttributeWarning" warning when using

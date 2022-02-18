@@ -36,13 +36,14 @@ class SpacingForm(EntangledModelForm):
     )
     space_size = forms.ChoiceField(
         label=_("Size"),
-        choices=settings.SPACER_SIZE_CHOICES,
+        choices=settings.SPACER_SIZE_CHOICES + (("auto", _("Auto")),),
         initial=settings.SPACER_SIZE_CHOICES[0][0],
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_device = forms.ChoiceField(
         label=_("Device"),
         choices=settings.EMPTY_CHOICE + settings.DEVICE_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
         required=False,
         widget=IconGroup(),
     )

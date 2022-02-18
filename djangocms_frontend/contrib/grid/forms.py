@@ -8,6 +8,8 @@ from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
 
 from ... import settings
 from ...common.background import BackgroundFormMixin
+from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import SpacingFormMixin
 from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .. import grid
@@ -23,7 +25,11 @@ mixin_factory = settings.get_forms(grid)
 
 
 class GridContainerForm(
-    mixin_factory("GridContainer"), BackgroundFormMixin, EntangledModelForm
+    mixin_factory("GridContainer"),
+    BackgroundFormMixin,
+    ResponsiveFormMixin,
+    SpacingFormMixin,
+    EntangledModelForm,
 ):
     """
     Layout > Grid: "Container" Plugin
@@ -55,7 +61,9 @@ class GridContainerForm(
     tag_type = TagTypeFormField()
 
 
-class GridRowBaseForm(mixin_factory("GridRow"), EntangledModelForm):
+class GridRowBaseForm(
+    mixin_factory("GridRow"), ResponsiveFormMixin, SpacingFormMixin, EntangledModelForm
+):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -120,7 +128,12 @@ GridRowForm = type(
 GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
-class GridColumnBaseForm(mixin_factory("GridColumn"), EntangledModelForm):
+class GridColumnBaseForm(
+    mixin_factory("GridColumn"),
+    ResponsiveFormMixin,
+    SpacingFormMixin,
+    EntangledModelForm,
+):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {

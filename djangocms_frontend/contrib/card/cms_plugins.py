@@ -4,7 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundFormMixin, BackgroundMixin
+from ...common.background import BackgroundMixin
+from ...common.responsive import ResponsiveMixin
+from ...common.spacing import MarginMixin, PaddingMixin
 from .. import card
 from . import forms, models
 
@@ -64,7 +66,14 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
 
 
 @plugin_pool.register_plugin
-class CardPlugin(mixin_factory("Card"), AttributesMixin, BackgroundMixin, CMSUIPlugin):
+class CardPlugin(
+    mixin_factory("Card"),
+    AttributesMixin,
+    ResponsiveMixin,
+    MarginMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
+):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -118,7 +127,12 @@ class CardPlugin(mixin_factory("Card"), AttributesMixin, BackgroundMixin, CMSUIP
 
 @plugin_pool.register_plugin
 class CardInnerPlugin(
-    mixin_factory("CardInner"), AttributesMixin, BackgroundMixin, CMSUIPlugin
+    mixin_factory("CardInner"),
+    AttributesMixin,
+    ResponsiveMixin,
+    PaddingMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
 ):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)

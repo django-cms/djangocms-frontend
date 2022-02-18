@@ -56,6 +56,18 @@ SPACER_SIDE_CHOICES = (
     ("y", "*-top & *-bottom"),
 )
 
+SPACER_X_SIDES_CHOICES = (
+    ("x", _("Both")),
+    ("s", _("Left")),
+    ("e", _("Right")),
+)
+
+SPACER_Y_SIDES_CHOICES = (
+    ("y", _("Both")),
+    ("t", _("Top")),
+    ("b", _("Bottom")),
+)
+
 SPACER_SIZE_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_SPACER_SIZES",

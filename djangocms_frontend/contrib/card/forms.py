@@ -8,6 +8,8 @@ from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
 from ...common.background import BackgroundFormMixin
+from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import MarginFormMixin, PaddingFormMixin, SpacingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -91,7 +93,13 @@ CardLayoutForm = type(
 CardLayoutForm.Meta.entangled_fields["config"] += extra_fields_row_cols.keys()
 
 
-class CardForm(mixin_factory("Card"), BackgroundFormMixin, EntangledModelForm):
+class CardForm(
+    mixin_factory("Card"),
+    BackgroundFormMixin,
+    ResponsiveFormMixin,
+    MarginFormMixin,
+    EntangledModelForm,
+):
     """
     Components > "Card" Plugin
     https://getbootstrap.com/docs/5.0/components/card/
@@ -153,7 +161,11 @@ class CardForm(mixin_factory("Card"), BackgroundFormMixin, EntangledModelForm):
 
 
 class CardInnerForm(
-    mixin_factory("CardInner"), BackgroundFormMixin, EntangledModelForm
+    mixin_factory("CardInner"),
+    BackgroundFormMixin,
+    ResponsiveFormMixin,
+    PaddingFormMixin,
+    EntangledModelForm,
 ):
     """
     Components > "Card - Inner" Plugin (Header, Footer, Body)

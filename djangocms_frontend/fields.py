@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
@@ -7,15 +8,17 @@ from . import settings
 
 
 class ButtonGroup(forms.RadioSelect):
-    template_name = "djangocms_frontend/admin/button_group.html"
-    option_template_name = "djangocms_frontend/admin/button_group_option.html"
+    template_name = "djangocms_frontend/admin/widgets/button_group.html"
+    option_template_name = "djangocms_frontend/admin/widgets/button_group_option.html"
 
     class Media:
         css = {"all": ("djangocms_frontend/css/button_group.css",)}
 
 
 class ColoredButtonGroup(ButtonGroup):
-    option_template_name = "djangocms_frontend/admin/button_group_color_option.html"
+    option_template_name = (
+        "djangocms_frontend/admin/widgets/button_group_color_option.html"
+    )
 
     class Media:
         css = settings.ADMIN_CSS
@@ -26,11 +29,46 @@ class ColoredButtonGroup(ButtonGroup):
 
 
 class IconGroup(ButtonGroup):
-    option_template_name = "djangocms_frontend/admin/icon_group_option.html"
+    option_template_name = "djangocms_frontend/admin/widgets/icon_group_option.html"
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({"attrs": {**dict(property="icon"), **kwargs.get("attrs", {})}})
+        super().__init__(*args, **kwargs)
+
+
+class IconMultiselect(forms.CheckboxSelectMultiple):
+    template_name = "djangocms_frontend/admin/widgets/button_group.html"
+    option_template_name = "djangocms_frontend/admin/widgets/icon_group_option.html"
+
+    class Media:
+        css = {"all": ("djangocms_frontend/css/button_group.css",)}
 
     def __init__(self, *args, **kwargs):
         kwargs.update({"attrs": {**kwargs.get("attrs", {}), **dict(property="icon")}})
         super().__init__(*args, **kwargs)
+
+
+class SizeChoiceField(forms.MultipleChoiceField):
+    def __init__(self, **kwargs):
+        kwargs.setdefault("choices", settings.DEVICE_CHOICES)
+        kwargs.setdefault("initial", None)
+        kwargs.setdefault("widget", IconMultiselect())
+        super().__init__(**kwargs)
+
+    def clean(self, value):
+        value = super().clean(value)
+        if len(value) == 0:
+            raise ValidationError(
+                _("Please select at least one device size"), code="invalid"
+            )
+        if len(value) == len(settings.DEVICE_CHOICES):
+            return None
+        return value
+
+    def prepare_value(self, value):
+        if value is None:
+            value = [size for size, _ in settings.DEVICE_CHOICES]
+        return super().prepare_value(value)
 
 
 class AttributesField(fields.AttributesField):

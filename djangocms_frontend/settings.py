@@ -93,6 +93,9 @@ FORM_TEMPLATE = getattr(framework_settings, "FORM_TEMPLATE", None)
 SPACER_PROPERTY_CHOICES = framework_settings.SPACER_PROPERTY_CHOICES
 SPACER_SIDE_CHOICES = framework_settings.SPACER_SIDE_CHOICES
 SPACER_SIZE_CHOICES = framework_settings.SPACER_SIZE_CHOICES
+SPACER_X_SIDES_CHOICES = framework_settings.SPACER_X_SIDES_CHOICES
+SPACER_Y_SIDES_CHOICES = framework_settings.SPACER_Y_SIDES_CHOICES
+
 FRAMEWORK_PLUGIN_INFO = getattr(framework_settings, "FRAMEWORK_PLUGIN_INFO", dict())
 
 EXCL_COL_PROP = FRAMEWORK_PLUGIN_INFO.get("GridColumn", {}).get("excl_col_prop", [])

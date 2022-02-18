@@ -11,7 +11,7 @@
             aria-controls="item-{{ instance.pk|safe }}">{{ instance.accordion_item_header }}</button>
     </{{ parent.accordion_header_type }}>
     <{{ instance.tag_type}}{{ instance.get_attributes }} id="item-{{ instance.pk|safe }}" aria-labelledby="heading-{{ instance.pk|safe}}" data-bs-parent="#parent-{{ parent.pk|safe }}">
-    <div  class="accordion-body">
+    <div class="accordion-body">
         {% with parent=instance %}
             {% for plugin in instance.child_plugin_instances %}
                 {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}

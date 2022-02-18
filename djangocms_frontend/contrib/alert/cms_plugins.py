@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.responsive import ResponsiveMixin
+from ...common.spacing import SpacingMixin
 from .. import alert
 from . import forms, models
 
@@ -11,7 +13,9 @@ mixin_factory = settings.get_renderer(alert)
 
 
 @plugin_pool.register_plugin
-class AlertPlugin(mixin_factory("Alert"), AttributesMixin, CMSUIPlugin):
+class AlertPlugin(
+    mixin_factory("Alert"), AttributesMixin, ResponsiveMixin, SpacingMixin, CMSUIPlugin
+):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/
