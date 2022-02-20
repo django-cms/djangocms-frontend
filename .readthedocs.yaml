@@ -13,8 +13,6 @@ python:
 
   install:
       - method: pip
-        path: .
-        extra_requirements:
-            - sphinx==4.4.0
-            - furo==2022.1.2
-
+        path: sphinx==4.4.0
+      - method: pip
+        path: furo==2022.1.2
