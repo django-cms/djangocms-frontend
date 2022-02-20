@@ -4,6 +4,8 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 
+from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import MarginFormMixin, PaddingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -14,7 +16,7 @@ from ...models import FrontendUIItem
 from .constants import LISTGROUP_STATE_CHOICES
 
 
-class ListGroupForm(EntangledModelForm):
+class ListGroupForm(MarginFormMixin, ResponsiveFormMixin, EntangledModelForm):
     """
     Components > "List Group" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -40,7 +42,7 @@ class ListGroupForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class ListGroupItemForm(EntangledModelForm):
+class ListGroupItemForm(PaddingFormMixin, ResponsiveFormMixin, EntangledModelForm):
     """
     Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/

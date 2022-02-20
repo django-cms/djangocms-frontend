@@ -6,6 +6,7 @@ from djangocms_frontend.helpers import get_plugin_template
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.spacing import PaddingMixin
 from .. import tabs
 from . import forms, models
 from .constants import TAB_TEMPLATE_CHOICES
@@ -46,7 +47,9 @@ class TabPlugin(mixin_factory("Tab"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, CMSUIPlugin):
+class TabItemPlugin(
+    mixin_factory("TabItem"), AttributesMixin, PaddingMixin, CMSUIPlugin
+):
     """
     Components > "Navs - Tab Item" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -63,18 +66,7 @@ class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, CMSUIPlugin):
     fieldsets = [
         (
             None,
-            {"fields": ("tab_title",)},
-        ),
-        (
-            _("Tab item border"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "tab_bordered",
-                    "tab_padding_size",
-                    "tab_padding_side",
-                ),
-            },
+            {"fields": ("tab_title", "tab_bordered")},
         ),
     ]
 

@@ -7,6 +7,8 @@ from filer.models import Image, ThumbnailOption
 
 from djangocms_frontend import settings
 
+from ...common.background import BackgroundFormMixin
+from ...common.responsive import ResponsiveFormMixin
 from ...fields import AttributesFormField, TagTypeFormField
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
@@ -57,7 +59,9 @@ RESPONSIVE_IMAGE_CHOICES = (
 )
 
 
-class ImageForm(AbstractLinkForm, EntangledModelForm):
+class ImageForm(
+    AbstractLinkForm, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+):
     """
     Content > "Image" Plugin
     https://getbootstrap.com/docs/5.0/content/images/

@@ -6,6 +6,7 @@ from djangocms_frontend.helpers import get_plugin_template
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.spacing import SpacingMixin
 from .. import link
 from . import forms, models
 from .constants import USE_LINK_ICONS
@@ -47,7 +48,7 @@ UILINK_FIELDSET = [
 
 
 @plugin_pool.register_plugin
-class LinkPlugin(mixin_factory("Link"), AttributesMixin, CMSUIPlugin):
+class LinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, CMSUIPlugin):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/

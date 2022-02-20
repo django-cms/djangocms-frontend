@@ -1,5 +1,7 @@
 from djangocms_bootstrap4.constants import DEVICE_SIZES
 
+from djangocms_frontend import settings
+
 
 def breakpoints(props):
     lst = []
@@ -21,6 +23,8 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",  # additional data migration, see below
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
     ],
     "bootstrap4_badge.Bootstrap4Badge -> badge.Badge": [
         "badge_text",
@@ -41,11 +45,17 @@ plugin_migrations = {
         "X002",  # Replace v4 card deck
         "X003",  # Align card_outline and background_context
         "A001_card",  # fix alignment
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_card.Bootstrap4CardInner -> card.CardInner": [
         "inner_type",
         "tag_type",
         "attributes",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     # carousel
     "bootstrap4_collapse.Bootstrap4Collapse -> collapse.Collapse": [
@@ -72,22 +82,34 @@ plugin_migrations = {
         "attributes",
         "P001",
         "A001_quote",  # fix alignment
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_content.Bootstrap4Code -> content.CodeBlock": [
         "code_content",
         "attributes",
         "P001",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_content.Bootstrap4Figure -> content.Figure": [
         "figure_caption",
         "figure_alignment",
         "attributes",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_grid.Bootstrap4GridContainer -> grid.GridContainer": [
         "container_type",
         "attributes",
         "P001",
         "tag_type",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_grid.Bootstrap4GridRow -> grid.GridRow": [
         "horizontal_alignment",
@@ -96,6 +118,9 @@ plugin_migrations = {
         "attributes",
         "P001",
         "tag_type",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_grid.Bootstrap4GridColumn -> grid.GridColumn": [
         "column_alignment",
@@ -104,6 +129,9 @@ plugin_migrations = {
         "P001",
         "G001",  # fill text_alignment from attributes if possible
         "tag_type",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ]
     + breakpoints(("col", "order", "ml", "mr", "offset")),
     "bootstrap4_jumbotron.Bootstrap4Jumbotron -> jumbotron.Jumbotron": [
@@ -114,6 +142,9 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
+        "M003",  # BackgroundMixin
     ],
     "bootstrap4_link.Bootstrap4Link -> link.Link": [
         "template",
@@ -134,12 +165,15 @@ plugin_migrations = {
         "file_link",
         "attributes",
         "P001",
+        "M001",  # SpacingMixin
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroup -> listgroup.ListGroup": [
         "list_group_flush",
         "tag_type",
         "attributes",
         "P001",
+        "M001",  # SpacingMixin
+        "M002",  # ResponsiveMixin
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroupItem -> listgroup.ListGroupItem": [
         "list_context",
@@ -151,6 +185,7 @@ plugin_migrations = {
     "bootstrap4_media.Bootstrap4Media -> media.Media": [
         "tag_type",
         "attributes",
+        "M002",  # ResponsiveMixin
     ],
     "bootstrap4_media.Bootstrap4MediaBody -> media.MediaBody": [
         "tag_type",
@@ -180,6 +215,7 @@ plugin_migrations = {
         "attributes",
         "P001",
         "A001_picture",  # fix alignment
+        "M002",  # ResponsiveMixin
     ],
     "bootstrap4_tabs.Bootstrap4Tab -> tabs.Tab": [
         "template",
@@ -190,11 +226,13 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "M001",  # SpacingMixin
     ],
     "bootstrap4_tabs.Bootstrap4TabItem -> tabs.TabItem": [
         "tab_title",
         "tag_type",
         "attributes",
+        "M001",  # SpacingMixin
         "P001",
     ],
     "bootstrap4_utilities.Bootstrap4Spacing -> utilities.Spacing": [
@@ -275,6 +313,102 @@ def a001_alignment(obj, new_obj, field):
         new_obj.config[field].replace("text-right", "end")
 
 
+def m001_spacing_mixin(obj, new_obj):
+    classes = new_obj.config["attributes"].get("class", "").split()
+    if classes:
+        for size, _ in list(settings.SPACER_SIZE_CHOICES) + [("auto", "auto")]:
+            if f"m-{size}" in classes:
+                classes.remove(f"m-{size}")
+                classes.append(f"mx-{size}")
+                classes.append(f"my-{size}")
+            if f"p-{size}" in classes:
+                classes.remove(f"p-{size}")
+                classes.append(f"px-{size}")
+                classes.append(f"py-{size}")
+            for side, _ in settings.SPACER_X_SIDES_CHOICES:
+                if f"m{side}-{size}" in classes:
+                    new_obj.config["margin_x"] = f"m{side}-{size}"
+                    new_obj.config["margin_devices"] = None
+                    classes.remove(f"m{side}-{size}")
+            for side, _ in settings.SPACER_Y_SIDES_CHOICES:
+                if f"m{side}-{size}" in classes:
+                    new_obj.config["margin_y"] = f"m{side}-{size}"
+                    new_obj.config["margin_devices"] = None
+                    classes.remove(f"m{side}-{size}")
+            for side, _ in settings.SPACER_X_SIDES_CHOICES:
+                if f"p{side}-{size}" in classes:
+                    new_obj.config["padding_x"] = f"p{side}-{size}"
+                    new_obj.config["padding_devices"] = None
+                    classes.remove(f"p{side}-{size}")
+            for side, _ in settings.SPACER_Y_SIDES_CHOICES:
+                if f"p{side}-{size}" in classes:
+                    new_obj.config["margin_y"] = f"p{side}-{size}"
+                    new_obj.config["padding_devices"] = None
+                    classes.remove(f"p{side}-{size}")
+        if classes:
+            new_obj.config["attributes"]["class"] = " ".join(classes)
+        else:
+            new_obj.config["attributes"].pop("class")
+
+
+def m002_responsive_mixin(obj, new_obj):
+    classes = new_obj.config["attributes"].get("class", "").split()
+    if classes:
+        display = (
+            "block",
+            "flex",
+        )
+        hidden = "none"
+
+        visible = True
+        hit = False
+        responsive = []
+
+        for device, _ in settings.DEVICE_CHOICES:
+            stump = f"d-{device}-" if device != "xs" else "d-"
+            if f"{stump}{hidden}" in classes and visible:
+                visible = False
+                hit = True
+                classes.remove(f"{stump}{hidden}")
+            for type in display:
+                if f"{stump}{type}" in classes and not visible:
+                    visible = True
+                    hit = True
+                    classes.remove(f"{stump}{type}")
+            if visible:
+                responsive.append(device)
+        if hit:
+            new_obj.config["responsive_visibility"] = responsive
+            if classes:
+                new_obj.config["attributes"]["class"] = " ".join(classes)
+            else:
+                new_obj.config["attributes"].pop("class")
+        else:
+            new_obj.config["responsive_visibility"] = None
+
+
+def m003_background_mixin(obj, new_obj):
+    classes = new_obj.config["attributes"].get("class", "").split()
+    if classes:
+        for context, _ in settings.COLOR_STYLE_CHOICES:
+            if f"bg-{context}" in classes:
+                new_obj.config["background_context"] = context
+                classes.remove(f"bg-{context}")
+        for cls, key in {
+            "shadow-none": "none",
+            "shadow-sm": "sm",
+            "shadow": "reg",
+            "shadow-lg": "lg",
+        }.items():
+            if cls in classes:
+                new_obj.config["background_shadow"] = key
+                classes.remove(cls)
+        if classes:
+            new_obj.config["attributes"]["class"] = " ".join(classes)
+        else:
+            new_obj.config["attributes"].pop("class")
+
+
 def g001_col_text_alignment(obj, new_obj):
     if obj.column_type != "col":
         print(f"Warning: Break column detected - not supported (id={obj.id})")
@@ -292,8 +426,8 @@ def g001_col_text_alignment(obj, new_obj):
         new_obj.config["text_alignment"] = "end"
     if classes:
         new_obj.config["attributes"]["class"] = " ".join(classes)
-    elif "class" in new_obj.config:
-        del new_obj.config["class"]
+    elif "class" in new_obj.config["attributes"]:
+        new_obj.config["attributes"].pop("class")
 
 
 data_migration = {
@@ -305,4 +439,7 @@ data_migration = {
     "A001_picture": lambda x, y: a001_alignment(x, y, "alignment"),
     "A001_card": lambda x, y: a001_alignment(x, y, "card_alignment"),
     "G001": g001_col_text_alignment,
+    "M001": m001_spacing_mixin,
+    "M002": m002_responsive_mixin,
+    "M003": m003_background_mixin,
 }

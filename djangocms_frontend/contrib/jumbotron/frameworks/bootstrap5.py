@@ -9,7 +9,6 @@ from djangocms_frontend.helpers import insert_fields
 
 class JumbotronRenderMixin:
     def render(self, context, instance, placeholder):
-        instance.add_classes("p-4", "my-0")
         if not getattr(instance, "background_context", False):
             instance.add_classes("bg-light")
         return super().render(context, instance, placeholder)

@@ -4,6 +4,8 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.common.background import BackgroundFormMixin
+from djangocms_frontend.common.responsive import ResponsiveFormMixin
+from djangocms_frontend.common.spacing import SpacingFormMixin
 from djangocms_frontend.contrib import jumbotron
 from djangocms_frontend.fields import (
     AttributesFormField,
@@ -15,7 +17,11 @@ mixin_factory = settings.get_forms(jumbotron)
 
 
 class JumbotronForm(
-    mixin_factory("Jumbotron"), BackgroundFormMixin, EntangledModelForm
+    mixin_factory("Jumbotron"),
+    ResponsiveFormMixin,
+    SpacingFormMixin,
+    BackgroundFormMixin,
+    EntangledModelForm,
 ):
     """
     Components > "Jumbotron" Plugin

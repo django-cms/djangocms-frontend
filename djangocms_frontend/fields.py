@@ -48,27 +48,33 @@ class IconMultiselect(forms.CheckboxSelectMultiple):
         super().__init__(*args, **kwargs)
 
 
-class SizeChoiceField(forms.MultipleChoiceField):
+class OptionalDeviceChoiceField(forms.MultipleChoiceField):
     def __init__(self, **kwargs):
         kwargs.setdefault("choices", settings.DEVICE_CHOICES)
         kwargs.setdefault("initial", None)
         kwargs.setdefault("widget", IconMultiselect())
         super().__init__(**kwargs)
 
-    def clean(self, value):
-        value = super().clean(value)
-        if len(value) == 0:
-            raise ValidationError(
-                _("Please select at least one device size"), code="invalid"
-            )
-        if len(value) == len(settings.DEVICE_CHOICES):
-            return None
-        return value
-
     def prepare_value(self, value):
         if value is None:
             value = [size for size, _ in settings.DEVICE_CHOICES]
         return super().prepare_value(value)
+
+    def clean(self, value):
+        value = super().clean(value)
+        if len(value) == len(settings.DEVICE_CHOICES):
+            return None
+        return value
+
+
+class DeviceChoiceField(OptionalDeviceChoiceField):
+    def clean(self, value):
+        value = super().clean(value)
+        if isinstance(value, list) and len(value) == 0:
+            raise ValidationError(
+                _("Please select at least one device size"), code="invalid"
+            )
+        return value
 
 
 class AttributesField(fields.AttributesField):

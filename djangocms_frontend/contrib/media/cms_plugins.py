@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.responsive import ResponsiveMixin
 from .. import media
 from . import forms, models
 
@@ -11,7 +12,9 @@ mixin_factory = settings.get_renderer(media)
 
 
 @plugin_pool.register_plugin
-class MediaPlugin(mixin_factory("Media"), AttributesMixin, CMSUIPlugin):
+class MediaPlugin(
+    mixin_factory("Media"), AttributesMixin, ResponsiveMixin, CMSUIPlugin
+):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/

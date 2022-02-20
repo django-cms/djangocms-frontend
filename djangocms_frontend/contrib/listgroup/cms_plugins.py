@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.responsive import ResponsiveMixin
+from ...common.spacing import MarginMixin, PaddingMixin
 from .. import listgroup
 from . import forms, models
 
@@ -11,7 +13,13 @@ mixin_factory = settings.get_renderer(listgroup)
 
 
 @plugin_pool.register_plugin
-class ListGroupPlugin(mixin_factory("ListGroup"), AttributesMixin, CMSUIPlugin):
+class ListGroupPlugin(
+    mixin_factory("ListGroup"),
+    AttributesMixin,
+    ResponsiveMixin,
+    MarginMixin,
+    CMSUIPlugin,
+):
     """
     Components > "List Group" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/
@@ -32,7 +40,13 @@ class ListGroupPlugin(mixin_factory("ListGroup"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class ListGroupItemPlugin(mixin_factory("ListGroupItem"), AttributesMixin, CMSUIPlugin):
+class ListGroupItemPlugin(
+    mixin_factory("ListGroupItem"),
+    AttributesMixin,
+    ResponsiveMixin,
+    PaddingMixin,
+    CMSUIPlugin,
+):
     """
     Components > "List Group Item" Plugin
     https://getbootstrap.com/docs/5.0/components/list-group/

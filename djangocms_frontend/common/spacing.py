@@ -5,9 +5,9 @@ from entangled.forms import EntangledModelFormMixin
 from djangocms_frontend import settings
 from djangocms_frontend.fields import (
     ButtonGroup,
+    DeviceChoiceField,
     IconGroup,
     IconMultiselect,
-    SizeChoiceField,
 )
 from djangocms_frontend.helpers import insert_fields
 from djangocms_frontend.settings import DEVICE_CHOICES
@@ -193,7 +193,7 @@ class MarginFormMixin(EntangledModelFormMixin):
         size_choices=settings.SPACER_SIZE_CHOICES + AUTO_SIZE,
         side_choices=settings.SPACER_Y_SIDES_CHOICES,
     )
-    margin_devices = SizeChoiceField(
+    margin_devices = DeviceChoiceField(
         label=_("Apply margin on device"),
         required=False,
         help_text=_(
@@ -225,7 +225,7 @@ class PaddingFormMixin(EntangledModelFormMixin):
         size_choices=settings.SPACER_SIZE_CHOICES,
         side_choices=settings.SPACER_Y_SIDES_CHOICES,
     )
-    padding_devices = SizeChoiceField(
+    padding_devices = DeviceChoiceField(
         label=_("Apply padding on device"),
         required=False,
         help_text=_(

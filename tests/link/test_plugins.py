@@ -145,6 +145,8 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 "name": "One of the world's most advanced open source CMS",
                 "external_link": "https://www.django-cms.com/",
                 "anchor": "allowed-here",
+                "margin_devices": ["xs"],
+                "padding_devices": ["xs"],
             }
         )
         form = LinkForm(request.POST)

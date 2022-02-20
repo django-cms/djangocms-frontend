@@ -5,12 +5,17 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import ALIGN_CHOICES
 
 from ... import settings
+from ...common.background import BackgroundFormMixin
+from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import SpacingFormMixin
 from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .constants import CODE_TYPE_CHOICES
 
 
-class CodeForm(EntangledModelForm):
+class CodeForm(
+    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
@@ -42,7 +47,9 @@ class CodeForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class BlockquoteForm(EntangledModelForm):
+class BlockquoteForm(
+    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
@@ -81,7 +88,9 @@ class BlockquoteForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class FigureForm(EntangledModelForm):
+class FigureForm(
+    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/

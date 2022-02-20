@@ -3,6 +3,7 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
+from ...common.spacing import PaddingFormMixin
 from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
 from ...models import FrontendUIItem
 from .constants import (
@@ -48,7 +49,8 @@ class TabForm(EntangledModelForm):
     )
     tab_alignment = forms.ChoiceField(
         label=_("Alignment"),
-        choices=TAB_ALIGNMENT_CHOICES,
+        choices=settings.EMPTY_CHOICE + TAB_ALIGNMENT_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
         required=False,
         widget=IconGroup(),
     )
@@ -67,7 +69,7 @@ class TabForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class TabItemForm(EntangledModelForm):
+class TabItemForm(PaddingFormMixin, EntangledModelForm):
     """
     Components > "Navs - Tab Item" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -79,8 +81,6 @@ class TabItemForm(EntangledModelForm):
             "config": [
                 "tab_title",
                 "tab_bordered",
-                "tab_padding_size",
-                "tab_padding_side",
                 "attributes",
             ]
         }
@@ -93,19 +93,6 @@ class TabItemForm(EntangledModelForm):
         label=_("Bordered"),
         required=False,
         help_text=_("Add borders to the tab item"),
-    )
-    tab_padding_size = forms.ChoiceField(
-        label=_("Internal padding size"),
-        choices=settings.SPACER_SIZE_CHOICES,
-        initial=settings.SPACER_SIZE_CHOICES[1][0],
-        widget=ButtonGroup(attrs=dict(property="text")),
-    )
-    tab_padding_side = forms.ChoiceField(
-        label=_("Internal padding sides"),
-        choices=settings.SPACER_SIDE_CHOICES,
-        initial=settings.SPACER_SIDE_CHOICES[0][0],
-        required=False,
-        widget=ButtonGroup(attrs=dict(property="text")),
     )
 
     attributes = AttributesFormField()

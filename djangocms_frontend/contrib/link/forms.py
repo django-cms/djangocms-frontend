@@ -15,6 +15,7 @@ from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
 from ... import settings
+from ...common.spacing import SpacingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -235,7 +236,7 @@ class AbstractLinkForm(EntangledModelForm):
                     )
 
 
-class LinkForm(AbstractLinkForm):
+class LinkForm(SpacingFormMixin, AbstractLinkForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {

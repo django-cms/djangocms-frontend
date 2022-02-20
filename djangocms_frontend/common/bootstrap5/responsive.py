@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.fields import IconMultiselect
+from djangocms_frontend.fields import IconMultiselect, OptionalDeviceChoiceField
 from djangocms_frontend.helpers import insert_fields
 from djangocms_frontend.settings import DEVICE_CHOICES
 
@@ -64,11 +64,9 @@ class ResponsiveFormMixin(EntangledModelFormMixin):
             ]
         }
 
-    responsive_visibility = forms.MultipleChoiceField(
+    responsive_visibility = OptionalDeviceChoiceField(
         label=_("Show element on device"),
         required=False,
-        choices=settings.DEVICE_CHOICES,
-        initial=[value for value, _ in settings.DEVICE_CHOICES],
         help_text=_("Select only devices on which this element should be shown."),
         widget=IconMultiselect(),
     )

@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.background import BackgroundMixin
+from ...common.responsive import ResponsiveMixin
+from ...common.spacing import SpacingMixin
 from .. import content
 from . import forms, models
 
@@ -11,7 +14,14 @@ mixin_factory = settings.get_renderer(content)
 
 
 @plugin_pool.register_plugin
-class CodePlugin(mixin_factory("Code"), AttributesMixin, CMSUIPlugin):
+class CodePlugin(
+    mixin_factory("Code"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
+):
     """
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
@@ -38,7 +48,14 @@ class CodePlugin(mixin_factory("Code"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class BlockquotePlugin(mixin_factory("Blockquote"), AttributesMixin, CMSUIPlugin):
+class BlockquotePlugin(
+    mixin_factory("Blockquote"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
+):
     """
     Content > "Blockquote" Plugin
     https://getbootstrap.com/docs/5.0/content/typography/#blockquotes
@@ -66,7 +83,14 @@ class BlockquotePlugin(mixin_factory("Blockquote"), AttributesMixin, CMSUIPlugin
 
 
 @plugin_pool.register_plugin
-class FigurePlugin(mixin_factory("Figure"), AttributesMixin, CMSUIPlugin):
+class FigurePlugin(
+    mixin_factory("Figure"),
+    AttributesMixin,
+    ResponsiveMixin,
+    SpacingMixin,
+    BackgroundMixin,
+    CMSUIPlugin,
+):
     """
     Content > "Figure" Plugin
     https://getbootstrap.com/docs/5.0/content/figures/
