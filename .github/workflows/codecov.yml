@@ -10,6 +10,8 @@ jobs:
       matrix:
         python-version: [ 3.7, 3.8, 3.9, ]  # latest release minus two
         requirements-file: [
+            dj22_cms38.txt,
+            dj22_cms39.txt,
             dj32_cms38.txt,
             dj32_cms39.txt,
         ]

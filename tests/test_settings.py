@@ -1,5 +1,7 @@
 import os
 
+from cms.utils.compat import DJANGO_3_1
+
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.auth",
@@ -31,6 +33,10 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.tabs",
     "djangocms_frontend.contrib.utilities",
 ]
+
+if DJANGO_3_1:
+    INSTALLED_APPS += ["django_jsonfield_backport"]
+
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",

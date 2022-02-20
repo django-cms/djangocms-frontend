@@ -152,6 +152,11 @@ For a manual install:
 
 -  run ``python manage.py migrate``
 
+If you use **Django < 3.2** please also add ``django-jsonfield-backport`` to
+your ``requirements.txt`` and ``django_jsonfield_backport`` to your
+``INSTALLED_APPS`` list.
+
+
 Documentation
 =============
 
