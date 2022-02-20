@@ -12,7 +12,4 @@ python:
   version: 3.8
 
   install:
-      - method: pip
-        path: sphinx==4.4.0
-      - method: pip
-        path: furo==2022.1.2
+      - requirements: docs/requirements.txt
