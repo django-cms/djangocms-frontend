@@ -9,8 +9,12 @@ formats:
   - pdf
 
 python:
-  version: 3.8
+  version: 3.9
+
   install:
-      - Sphinx==4.4.0
-      - furo==2022.1.2
-  system_packages: false
+      - method: pip
+        path: .
+        extra_requirements:
+            - sphinx==4.4.0
+            - furo==2022.1.2
+
