@@ -3,6 +3,7 @@ from importlib import import_module
 from cms.forms.utils import get_page_choices
 from cms.models import Page
 from django.conf import settings as django_settings
+from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError
 from django.utils.encoding import force_text
@@ -13,7 +14,7 @@ LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
 
 def create_querysets(link_models):
     querysets = []
-    for item in LINK_MODELS:
+    for item in link_models:
         if item["class_path"] != "cms.models.Page":
             # CMS pages are collected using a cms function to preserve hierarchy
             section = item["type"]
@@ -38,14 +39,14 @@ def create_querysets(link_models):
                     queryset = queryset.all()
             if "order_by" in item:
                 queryset = queryset.order_by(item["order_by"])
-            querysets.append((section, queryset, item.get("search", None)))
+            querysets.append((section, queryset, item.get("search", None), cls))
     return querysets
 
 
 _querysets = create_querysets(LINK_MODELS)
 
 
-def get_link_choices(term="", lang=None, nbsp=""):
+def get_link_choices(request, term="", lang=None, nbsp=""):
     global _querysets
 
     available_objects = []
@@ -70,12 +71,12 @@ def get_link_choices(term="", lang=None, nbsp=""):
             available_objects.append(dict(id=f"{type_id}-{value}"))
 
     # Add list of additional non-cms pages
-    for section, qs, search in _querysets:
+    for section, qs, search, cls in _querysets:
         objects = None
+        model_admin = site._registry.get(cls, None)
         if search:
             try:
                 objects = qs.filter(**{search: term})
-                print(objects)
             except FieldError:
                 pass
         if objects is None:
@@ -92,13 +93,16 @@ def get_link_choices(term="", lang=None, nbsp=""):
                     "children": [
                         dict(id=f"{type_class.id}-{obj.id}", text=str(obj))
                         for obj in objects
+                        if request is None
+                        or model_admin
+                        and model_admin.has_view_permission(request, obj=obj)
                     ],
                 }
             )
     return available_objects
 
 
-def get_choices(term="", lang=None):
+def get_choices(request, term="", lang=None):
     def to_choices(json):
         return list(
             (elem["text"], to_choices(elem["children"]))
@@ -107,4 +111,4 @@ def get_choices(term="", lang=None):
             for elem in json
         )
 
-    return to_choices(get_link_choices(term, lang, "&nbsp;"))
+    return to_choices(get_link_choices(request, term, lang, "&nbsp;"))

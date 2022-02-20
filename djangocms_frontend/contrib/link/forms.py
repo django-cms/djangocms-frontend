@@ -69,7 +69,8 @@ class SmartLinkField(forms.ChoiceField):
 
     def __init__(self, *args, **kwargs):
         if MINIMUM_INPUT_LENGTH == 0:
-            kwargs["choices"] = get_choices
+            kwargs["choices"] = lambda: get_choices(None)
+            # TODO: Add request object to allow for model_admim permission check
         else:
             pass
             # TODO: Load description of current value and make it available as a
