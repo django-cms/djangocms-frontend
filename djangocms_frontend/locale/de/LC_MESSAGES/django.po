@@ -91,11 +91,11 @@ msgstr "Abstand"
 
 #: common/spacing.py:185
 msgid "Horizontal margin"
-msgstr "Horizontaler Rand außen"
+msgstr "Horizontaler Abstand außen"
 
 #: common/spacing.py:191
 msgid "Vertical margin"
-msgstr "Vertikaler Rand außen"
+msgstr "Vertikaler Abstand außen"
 
 #: common/spacing.py:197
 msgid "Apply margin on device"
