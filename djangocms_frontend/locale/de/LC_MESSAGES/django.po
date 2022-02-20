@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 15:35+0100\n"
+"POT-Creation-Date: 2022-02-20 22:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Peter Wischer <peter.wischer@lwl.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
@@ -18,74 +18,162 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contrib/accordion/cms_plugins.py:19 contrib/accordion/models.py:14
-msgid "Accordion"
-msgstr "Akkordion"
+#: common/attributes.py:11
+msgid ""
+"Advanced settings lets you add html attributes to render this element. Use "
+"them wisely and rarely."
+msgstr "Die erweiterten Einstellungen erlaubt Ihnen, HTML-Attribute des Elements "
+"direkt anzugeben."
 
-#: contrib/accordion/cms_plugins.py:20 contrib/accordion/cms_plugins.py:80
-#: contrib/alert/cms_plugins.py:20 contrib/badge/cms_plugins.py:20
-#: contrib/card/cms_plugins.py:20 contrib/card/cms_plugins.py:82
-#: contrib/card/cms_plugins.py:145 contrib/carousel/cms_plugins.py:23
-#: contrib/carousel/cms_plugins.py:68 contrib/collapse/cms_plugins.py:20
-#: contrib/collapse/cms_plugins.py:57 contrib/collapse/cms_plugins.py:91
-#: contrib/content/cms_plugins.py:20 contrib/content/cms_plugins.py:48
-#: contrib/content/cms_plugins.py:76 contrib/forms/cms_plugins.py:243
-#: contrib/grid/cms_plugins.py:21 contrib/grid/cms_plugins.py:50
-#: contrib/grid/cms_plugins.py:119 contrib/image/cms_plugins.py:20
-#: contrib/jumbotron/cms_plugins.py:20 contrib/link/cms_plugins.py:53
-#: contrib/listgroup/cms_plugins.py:20 contrib/listgroup/cms_plugins.py:51
-#: contrib/media/cms_plugins.py:20 contrib/media/cms_plugins.py:48
-#: contrib/tabs/cms_plugins.py:23 contrib/tabs/cms_plugins.py:65
-#: contrib/utilities/cms_plugins.py:21 contrib/utilities/cms_plugins.py:57
-#: contrib/utilities/cms_plugins.py:67 contrib/utilities/cms_plugins.py:133
-msgid "Frontend"
-msgstr "Frontend"
-
-#: contrib/accordion/cms_plugins.py:42 contrib/accordion/cms_plugins.py:99
-#: contrib/alert/cms_plugins.py:37 contrib/badge/cms_plugins.py:38
-#: contrib/card/cms_plugins.py:48 contrib/card/cms_plugins.py:109
-#: contrib/card/cms_plugins.py:171 contrib/carousel/cms_plugins.py:42
-#: contrib/carousel/cms_plugins.py:96 contrib/collapse/cms_plugins.py:36
-#: contrib/collapse/cms_plugins.py:71 contrib/collapse/cms_plugins.py:105
-#: contrib/content/cms_plugins.py:36 contrib/content/cms_plugins.py:64
-#: contrib/content/cms_plugins.py:92 contrib/forms/cms_plugins.py:270
-#: contrib/grid/cms_plugins.py:30 contrib/grid/cms_plugins.py:74
-#: contrib/grid/cms_plugins.py:154 contrib/image/cms_plugins.py:39
-#: contrib/jumbotron/cms_plugins.py:29 contrib/link/cms_plugins.py:61
-#: contrib/listgroup/cms_plugins.py:31 contrib/listgroup/cms_plugins.py:70
-#: contrib/media/cms_plugins.py:28 contrib/media/cms_plugins.py:57
-#: contrib/tabs/cms_plugins.py:41 contrib/tabs/cms_plugins.py:89
-#: contrib/utilities/cms_plugins.py:41 contrib/utilities/cms_plugins.py:85
-#: contrib/utilities/cms_plugins.py:143
+#: common/attributes.py:24 contrib/accordion/cms_plugins.py:90
 msgid "Advanced settings"
 msgstr "Erweiterte Einstellungen"
 
-#: contrib/accordion/cms_plugins.py:65
+#: common/bootstrap5/background.py:32
+msgid "Background"
+msgstr "Hintergrund"
+
+#: common/bootstrap5/background.py:47
+msgid "Background context"
+msgstr "Hintergrund-Kontext"
+
+#: common/bootstrap5/background.py:51 contrib/card/forms.py:33
+#: contrib/card/models.py:7
+msgid "Transparent"
+msgstr "Transparent"
+
+#: common/bootstrap5/background.py:56
+msgid "Background opacity"
+msgstr "Deckkraft des Hintergrundes"
+
+#: common/bootstrap5/background.py:61
+msgid "Opacity of card background color (only if no outline selected)"
+msgstr ""
+"Gibt die Deckkraft der Hintergrundfarbe an (nur wirksam, wenn Kontur nicht "
+"angewählt ist)."
+
+#: common/bootstrap5/background.py:65 contrib/alert/frameworks/bootstrap5.py:42
+msgid "Shadow"
+msgstr "Schatten"
+
+#: common/bootstrap5/background.py:70
+msgid "Use shadows to optically lift cards from the background."
+msgstr "Schatten heben Karten optisch vom Hintergrund ab."
+
+#: common/bootstrap5/responsive.py:54
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+#: common/bootstrap5/responsive.py:68
+msgid "Show element on device"
+msgstr "Zeige Element auf diesen Bildschirmgrößen"
+
+#: common/bootstrap5/responsive.py:70
+msgid "Select only devices on which this element should be shown."
+msgstr "Nur die Bildschirmgrößen auswählen, auf denen dieses Element angezeigt werden soll."
+
+#: common/spacing.py:15 contrib/utilities/forms.py:39
+msgid "Auto"
+msgstr "Auto"
+
+#: common/spacing.py:109
+msgid "Margin"
+msgstr "Abstand außen"
+
+#: common/spacing.py:135 common/spacing.py:156
+msgid "Padding"
+msgstr "Abstand zum Rand innen"
+
+#: common/spacing.py:171 contrib/utilities/cms_plugins.py:21
+#: contrib/utilities/models.py:14
+msgid "Spacing"
+msgstr "Abstand"
+
+#: common/spacing.py:185
+msgid "Horizontal margin"
+msgstr "Horizontaler Rand außen"
+
+#: common/spacing.py:191
+msgid "Vertical margin"
+msgstr "Vertikaler Rand außen"
+
+#: common/spacing.py:197
+msgid "Apply margin on device"
+msgstr "Anzuwenden auf diesen Geräten"
+
+#: common/spacing.py:200
+msgid ""
+"Select only devices on which the margin should be applied. On other devices "
+"larger than the first selected device the margin will be set to zero."
+msgstr ""
+
+#: common/spacing.py:217
+msgid "Horizontal padding"
+msgstr "Horizontaler Abstand zum Rand"
+
+#: common/spacing.py:223
+msgid "Vertical padding"
+msgstr "Vertikaler Abstand zum Rand"
+
+#: common/spacing.py:229
+msgid "Apply padding on device"
+msgstr "Anzuwenden auf diesen Geräten"
+
+#: common/spacing.py:232
+msgid ""
+"Select only devices on which the padding should be applied. On other devices "
+"larger than the first selected device the padding will be set to zero."
+msgstr ""
+
+#: contrib/accordion/cms_plugins.py:20 contrib/accordion/models.py:14
+msgid "Accordion"
+msgstr "Akkordion"
+
+#: contrib/accordion/cms_plugins.py:21 contrib/accordion/cms_plugins.py:71
+#: contrib/alert/cms_plugins.py:25 contrib/badge/cms_plugins.py:21
+#: contrib/card/cms_plugins.py:24 contrib/card/cms_plugins.py:83
+#: contrib/card/cms_plugins.py:143 contrib/carousel/cms_plugins.py:25
+#: contrib/carousel/cms_plugins.py:60 contrib/collapse/cms_plugins.py:21
+#: contrib/collapse/cms_plugins.py:50 contrib/collapse/cms_plugins.py:76
+#: contrib/content/cms_plugins.py:31 contrib/content/cms_plugins.py:65
+#: contrib/content/cms_plugins.py:100 contrib/forms/cms_plugins.py:244
+#: contrib/grid/cms_plugins.py:32 contrib/grid/cms_plugins.py:57
+#: contrib/grid/cms_plugins.py:119 contrib/image/cms_plugins.py:24
+#: contrib/jumbotron/cms_plugins.py:32 contrib/link/cms_plugins.py:58
+#: contrib/listgroup/cms_plugins.py:29 contrib/listgroup/cms_plugins.py:56
+#: contrib/media/cms_plugins.py:24 contrib/media/cms_plugins.py:41
+#: contrib/tabs/cms_plugins.py:25 contrib/tabs/cms_plugins.py:59
+#: contrib/utilities/cms_plugins.py:22 contrib/utilities/cms_plugins.py:49
+#: contrib/utilities/cms_plugins.py:59 contrib/utilities/cms_plugins.py:118
+msgid "Frontend"
+msgstr "Frontend"
+
+#: contrib/accordion/cms_plugins.py:56
 msgid "Item {}"
 msgstr "Element {}"
 
-#: contrib/accordion/cms_plugins.py:79 contrib/accordion/models.py:29
+#: contrib/accordion/cms_plugins.py:70 contrib/accordion/models.py:30
 msgid "Accordion item"
 msgstr "Akkordion-Element"
 
-#: contrib/accordion/forms.py:35
+#: contrib/accordion/forms.py:34
 msgid "Create accordion items"
 msgstr "Akkordion-Element erstellen"
 
-#: contrib/accordion/forms.py:36
+#: contrib/accordion/forms.py:35
 msgid "Number of accordion items to create when saving."
 msgstr ""
 "Anzahl der Akkordion-Elemente, die beim Speichern erstellt werden soll."
 
-#: contrib/accordion/forms.py:43
+#: contrib/accordion/forms.py:42
 msgid "Header type"
 msgstr "Überschritften-Typ"
 
-#: contrib/accordion/forms.py:49
+#: contrib/accordion/forms.py:48
 msgid "Integrate into parent"
 msgstr "In Eltern-Element einfügen"
 
-#: contrib/accordion/forms.py:53
+#: contrib/accordion/forms.py:52
 msgid ""
 "Removes the default background-color, some borders, and some rounded corners "
 "to render accordions edge-to-edge with their parent container "
@@ -93,15 +181,15 @@ msgstr ""
 "Entfernt die Hintergrundfarbe, Rahmen und ausgewählte abgerundete Ecken, um "
 "Akkordions direkt in ihren Eltern-Elementen anzuzeigen."
 
-#: contrib/accordion/forms.py:79 contrib/card/constants.py:16
+#: contrib/accordion/forms.py:78 contrib/card/constants.py:16
 msgid "Header"
 msgstr "Überschrift"
 
-#: contrib/accordion/forms.py:83
+#: contrib/accordion/forms.py:82
 msgid "Item open"
 msgstr "Offenes element"
 
-#: contrib/accordion/forms.py:86
+#: contrib/accordion/forms.py:85
 msgid "Initially shows this accordion item on page load."
 msgstr "Zeigt nach dem Laden dieses Akkordion-Element."
 
@@ -109,32 +197,26 @@ msgstr "Zeigt nach dem Laden dieses Akkordion-Element."
 msgid "({} entries)"
 msgstr "({} Einträge)"
 
-#: contrib/accordion/models.py:25
+#: contrib/accordion/models.py:26
 msgid "AccordionItem"
 msgstr "Akkordion-Element"
 
-#: contrib/alert/cms_plugins.py:19 contrib/alert/models.py:14
+#: contrib/alert/cms_plugins.py:24 contrib/alert/models.py:14
 msgid "Alert"
 msgstr "Warnung"
 
-#: contrib/alert/forms.py:32 contrib/badge/forms.py:34
-#: contrib/link/forms.py:320 contrib/listgroup/forms.py:63
+#: contrib/alert/forms.py:40 contrib/badge/forms.py:37
+#: contrib/link/forms.py:271 contrib/listgroup/forms.py:71
 msgid "Context"
 msgstr "Kontext"
 
-#: contrib/alert/forms.py:38
+#: contrib/alert/forms.py:46
 msgid "Dismissible"
 msgstr "Schließbar"
 
-#: contrib/alert/forms.py:41
+#: contrib/alert/forms.py:49
 msgid "Allows the alert to be closed."
 msgstr "Erlaubt, die Warnung zu schliessen."
-
-#: contrib/alert/frameworks/bootstrap5.py:42
-#: contrib/card/frameworks/bootstrap5.py:68
-#: contrib/grid/frameworks/bootstrap5.py:77
-msgid "Shadow"
-msgstr "Schatten"
 
 #: contrib/alert/frameworks/bootstrap5.py:47
 msgid "Use shadows to optically lift alerts from the background."
@@ -144,36 +226,36 @@ msgstr "Schatten heben Warnungen optisch vom Hintergrund ab."
 msgid "Close"
 msgstr "Schliessen"
 
-#: contrib/badge/cms_plugins.py:19 contrib/badge/models.py:14
+#: contrib/badge/cms_plugins.py:20 contrib/badge/models.py:14
 msgid "Badge"
 msgstr "Badge"
 
-#: contrib/badge/forms.py:30
+#: contrib/badge/forms.py:33
 msgid "Badge text"
 msgstr "Badge-Text"
 
-#: contrib/badge/forms.py:40
+#: contrib/badge/forms.py:43
 msgid "Pills style"
 msgstr "Pillen-Stil"
 
-#: contrib/badge/forms.py:43
+#: contrib/badge/forms.py:46
 msgid "Activates the pills style."
 msgstr "Aktiviert den Pillen-Stil."
 
-#: contrib/card/cms_plugins.py:19
+#: contrib/card/cms_plugins.py:23 contrib/card/models.py:20
 msgid "Card layout"
 msgstr "Karten-Layout"
 
-#: contrib/card/cms_plugins.py:42 contrib/grid/cms_plugins.py:68
+#: contrib/card/cms_plugins.py:46 contrib/grid/cms_plugins.py:75
 #: contrib/grid/cms_plugins.py:142
 msgid "Responsive settings"
 msgstr "Responsive-Hilfsmittel"
 
-#: contrib/card/cms_plugins.py:81 contrib/card/models.py:34
+#: contrib/card/cms_plugins.py:82 contrib/card/models.py:35
 msgid "Card"
 msgstr "Karte"
 
-#: contrib/card/cms_plugins.py:144 contrib/card/models.py:56
+#: contrib/card/cms_plugins.py:142 contrib/card/models.py:57
 msgid "Card inner"
 msgstr "Karten-Inhalt"
 
@@ -185,15 +267,15 @@ msgstr "Karten-Gruppe"
 msgid "Grid cards"
 msgstr "Karten-Gitter"
 
-#: contrib/card/constants.py:9 settings.py:35
+#: contrib/card/constants.py:9 frameworks/bootstrap5.py:61 settings.py:47
 msgid "Left"
 msgstr "Links"
 
-#: contrib/card/constants.py:10 settings.py:36
+#: contrib/card/constants.py:10 settings.py:48
 msgid "Center"
 msgstr "Mitte"
 
-#: contrib/card/constants.py:11 settings.py:37
+#: contrib/card/constants.py:11 frameworks/bootstrap5.py:62 settings.py:49
 msgid "Right"
 msgstr "Rechts"
 
@@ -209,129 +291,100 @@ msgstr "Footer"
 msgid "Image overlay"
 msgstr "Bild-Überlagerung"
 
-#: contrib/card/forms.py:24 contrib/card/models.py:7
-msgid "Transparent"
-msgstr "Transparent"
-
-#: contrib/card/forms.py:27 contrib/card/models.py:9
+#: contrib/card/forms.py:36 contrib/card/models.py:9
 msgid "White"
 msgstr "Weiss"
 
-#: contrib/card/forms.py:53
+#: contrib/card/forms.py:62
 msgid "Create cards"
 msgstr "Karten erstellen"
 
-#: contrib/card/forms.py:54
+#: contrib/card/forms.py:63
 msgid "Number of cards to create when saving."
 msgstr "Anzahl der Karten, die beim Speichern erstellt werden soll."
 
-#: contrib/card/forms.py:60
+#: contrib/card/forms.py:69
 msgid "Card type"
 msgstr "Card-Typ"
 
-#: contrib/card/forms.py:108 contrib/card/forms.py:179
-#: contrib/grid/frameworks/bootstrap5.py:60
-msgid "Background context"
-msgstr "Hintergrund-Kontext"
+#: contrib/card/forms.py:123
+msgid "Card outline context"
+msgstr "Kontext Kartenrand"
 
-#: contrib/card/forms.py:116 contrib/content/forms.py:75
-#: contrib/content/forms.py:106 contrib/image/forms.py:131
-#: contrib/tabs/forms.py:48
+#: contrib/card/forms.py:127
+msgid "Uses the border to indicate context."
+msgstr "Färbt den Rand gemäß dem Kontext"
+
+#: contrib/card/forms.py:133 contrib/content/forms.py:81
+#: contrib/content/forms.py:115 contrib/image/forms.py:135
+#: contrib/tabs/forms.py:51
 msgid "Alignment"
 msgstr "Ausrichtung"
 
-#: contrib/card/forms.py:124 contrib/link/forms.py:333
-msgid "Outline"
-msgstr "Kontur"
-
-#: contrib/card/forms.py:127
-msgid "Uses the border context instead of the background."
-msgstr "Färbt den Rand statt den Hintergrund."
-
-#: contrib/card/forms.py:133
+#: contrib/card/forms.py:141
 msgid "Text context"
 msgstr "Text-Kontext"
 
-#: contrib/card/forms.py:141
+#: contrib/card/forms.py:149
 msgid "Full height"
 msgstr "Volle Höhe"
 
-#: contrib/card/forms.py:145
+#: contrib/card/forms.py:153
 msgid ""
 "If checked cards in one row will automatically extend to the full row height."
 msgstr "Wenn angewählt, erhalten alle Cards in einer Reihe die volle Höhe."
 
-#: contrib/card/forms.py:173
+#: contrib/card/forms.py:187
 msgid "Inner type"
 msgstr "Inhalts-Typ"
 
-#: contrib/card/forms.py:176
+#: contrib/card/forms.py:190
 msgid "Define the structure of the plugin."
 msgstr "Definiert die Struktur des Plugins."
 
-#: contrib/card/forms.py:187 contrib/grid/forms.py:134
+#: contrib/card/forms.py:194 contrib/grid/forms.py:155
 msgid "Content alignment"
 msgstr "Inhalts-Ausrichtung"
 
-#: contrib/card/frameworks/bootstrap5.py:59
-#: contrib/card/frameworks/bootstrap5.py:106
-#: contrib/grid/frameworks/bootstrap5.py:68
-msgid "Background opacity"
-msgstr "Deckkraft des Hintergrundes"
-
-#: contrib/card/frameworks/bootstrap5.py:64
-#: contrib/grid/frameworks/bootstrap5.py:73
-msgid "Opacity of card background color (only if no outline selected)"
-msgstr ""
-"Gibt die Deckkraft der Hintergrundfarbe an (nur wirksam, wenn Kontur nicht "
-"angewählt ist)."
-
-#: contrib/card/frameworks/bootstrap5.py:73
-#: contrib/grid/frameworks/bootstrap5.py:82
-msgid "Use shadows to optically lift cards from the background."
-msgstr "Schatten heben Karten optisch vom Hintergrund ab."
-
-#: contrib/card/frameworks/bootstrap5.py:111
-msgid "Opacity of card inner background color"
-msgstr "Deckkraft der Hintergrund-Farbe"
-
 #: contrib/card/templates/djangocms_frontend/admin/card_layout.html:14
-#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:14
+#: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:13
 msgid "Colums per row"
 msgstr "Splaten pro Zeile"
 
-#: contrib/carousel/cms_plugins.py:22 contrib/carousel/models.py:20
+#: contrib/carousel/cms_plugins.py:24 contrib/carousel/models.py:20
 msgid "Carousel"
 msgstr "Karussell"
 
-#: contrib/carousel/cms_plugins.py:67 contrib/carousel/models.py:42
+#: contrib/carousel/cms_plugins.py:59 contrib/carousel/models.py:42
 msgid "Carousel slide"
 msgstr "Karussell-Eintrag"
 
-#: contrib/carousel/cms_plugins.py:85 contrib/image/cms_plugins.py:53
-#: contrib/link/cms_plugins.py:32
+#: contrib/carousel/cms_plugins.py:77 contrib/image/cms_plugins.py:56
+#: contrib/link/cms_plugins.py:37
 msgid "Link settings"
 msgstr "Link-Einstellungen"
 
-#: contrib/carousel/constants.py:19 contrib/image/forms.py:32
-#: contrib/link/forms.py:30 contrib/tabs/constants.py:23 settings.py:44
+#: contrib/carousel/constants.py:19 contrib/image/forms.py:34
+#: contrib/link/forms.py:32 contrib/tabs/constants.py:27 settings.py:56
+#: settings.py:64
 msgid "Default"
 msgstr "Standard"
 
-#: contrib/carousel/forms.py:47 contrib/image/forms.py:95
-#: contrib/link/forms.py:308 contrib/tabs/forms.py:37
+#: contrib/carousel/forms.py:47 contrib/image/forms.py:98
+#: contrib/jumbotron/forms.py:42 contrib/link/forms.py:258
+#: contrib/tabs/forms.py:38
 msgid "Template"
 msgstr "Vorlage"
 
-#: contrib/carousel/forms.py:50 contrib/tabs/forms.py:40
+#: contrib/carousel/forms.py:50 contrib/tabs/forms.py:41
 msgid "This is the template that will be used for the component."
 msgstr "Dies ist das Template das für die Komponente genutzt wird."
 
-#: contrib/carousel/forms.py:53 contrib/carousel/models.py:24
+#: contrib/carousel/forms.py:56 contrib/carousel/models.py:24
 msgid "Interval"
 msgstr "Intervall"
 
-#: contrib/carousel/forms.py:56
+#: contrib/carousel/forms.py:59
 msgid ""
 "The amount of time to delay between automatically cycling an item. If false, "
 "carousel will not automatically cycle."
@@ -339,35 +392,35 @@ msgstr ""
 "Die Zeitspanne zwischen dem automatischen Wechseln der Einträge. Wenn false, "
 "dann wird nicht automatisch gewechselt."
 
-#: contrib/carousel/forms.py:61 contrib/carousel/models.py:25
+#: contrib/carousel/forms.py:64 contrib/carousel/models.py:25
 msgid "Controls"
 msgstr "Steuerelemente"
 
-#: contrib/carousel/forms.py:64
+#: contrib/carousel/forms.py:67
 msgid "Adding in the previous and next controls."
 msgstr "Fügt die Weiter und Zurück Steuerelemente hinzu."
 
-#: contrib/carousel/forms.py:67 contrib/carousel/models.py:26
+#: contrib/carousel/forms.py:70 contrib/carousel/models.py:26
 msgid "Indicators"
 msgstr "Indikatoren"
 
-#: contrib/carousel/forms.py:70
+#: contrib/carousel/forms.py:73
 msgid "Adding in the indicators to the carousel."
 msgstr "Fügt dem Karussell Positions-Indikatoren hinzu."
 
-#: contrib/carousel/forms.py:73 contrib/carousel/models.py:27
+#: contrib/carousel/forms.py:76 contrib/carousel/models.py:27
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: contrib/carousel/forms.py:76
+#: contrib/carousel/forms.py:79
 msgid "Whether the carousel should react to keyboard events."
 msgstr "Soll das Karussell mit der Tastatur bedienbar sein."
 
-#: contrib/carousel/forms.py:79 contrib/carousel/models.py:28
+#: contrib/carousel/forms.py:82 contrib/carousel/models.py:28
 msgid "Pause"
 msgstr "Pause"
 
-#: contrib/carousel/forms.py:83
+#: contrib/carousel/forms.py:86
 msgid ""
 "If set to \"hover\", pauses the cycling of the carousel on \"mouseenter\" "
 "and resumes the cycling of the carousel on \"mouseleave\". If set to \"false"
@@ -376,48 +429,48 @@ msgstr ""
 "Pausiert das Karussells, sobald sich die Maus über dem Karussell befindet. "
 "Startet wieder, nachdem die Maus das Karussell verlassen hat."
 
-#: contrib/carousel/forms.py:90 contrib/carousel/models.py:29
+#: contrib/carousel/forms.py:93 contrib/carousel/models.py:29
 msgid "Ride"
 msgstr "Autostart"
 
-#: contrib/carousel/forms.py:94
+#: contrib/carousel/forms.py:97
 msgid ""
 "Autoplays the carousel after the user manually cycles the first item. If "
 "\"carousel\", autoplays the carousel on load."
 msgstr "Startet das Karussell direkt nach dem Laden."
 
-#: contrib/carousel/forms.py:99 contrib/carousel/models.py:30
+#: contrib/carousel/forms.py:102 contrib/carousel/models.py:30
 msgid "Wrap"
 msgstr "Endlos"
 
-#: contrib/carousel/forms.py:103
+#: contrib/carousel/forms.py:106
 msgid "Whether the carousel should cycle continuously or have hard stops."
 msgstr "Startet nach einem Durchlauf wieder von vorne."
 
-#: contrib/carousel/forms.py:107
+#: contrib/carousel/forms.py:110
 msgid "Aspect ratio"
 msgstr "Seitenverhältnis"
 
-#: contrib/carousel/forms.py:112
+#: contrib/carousel/forms.py:115
 msgid ""
 "Determines width and height of the image according to the selected ratio."
 msgstr ""
 "Bestimmt die Höhe und Breite der Bilder anhand des ausgewählten "
 "Seitenverhältnises."
 
-#: contrib/carousel/forms.py:151
+#: contrib/carousel/forms.py:155
 msgid "Slide image"
 msgstr "Karussell-Bild"
 
-#: contrib/carousel/forms.py:154 contrib/contact_form/forms.py:86
+#: contrib/carousel/forms.py:158 contrib/contact_form/forms.py:86
 msgid "Content"
 msgstr "Inhalt"
 
-#: contrib/carousel/forms.py:157
+#: contrib/carousel/forms.py:161
 msgid "Content may also be added using child plugins."
 msgstr "Inhalt kann auch über weitere Plugins hinzugefügt werden."
 
-#: contrib/carousel/models.py:51 contrib/image/models.py:134
+#: contrib/carousel/models.py:51 contrib/image/models.py:133
 msgid "<file is missing>"
 msgstr "<Datei fehlt>"
 
@@ -429,15 +482,15 @@ msgstr "Zurück"
 msgid "Next"
 msgstr "Weiter"
 
-#: contrib/collapse/cms_plugins.py:19 contrib/collapse/models.py:21
+#: contrib/collapse/cms_plugins.py:20 contrib/collapse/models.py:21
 msgid "Collapse"
 msgstr "Collapse"
 
-#: contrib/collapse/cms_plugins.py:56 contrib/collapse/models.py:35
+#: contrib/collapse/cms_plugins.py:49 contrib/collapse/models.py:35
 msgid "Collapse trigger"
 msgstr "Collapse-Auslöser"
 
-#: contrib/collapse/cms_plugins.py:90 contrib/collapse/models.py:49
+#: contrib/collapse/cms_plugins.py:75 contrib/collapse/models.py:49
 msgid "Collapse container"
 msgstr "Collapse-Kontainer"
 
@@ -449,11 +502,11 @@ msgstr "Geschwister"
 msgid "Element to be used to create accordions."
 msgstr "Element, welches genutzt wird, um Akkordions zu erstellen."
 
-#: contrib/collapse/forms.py:58 contrib/collapse/forms.py:82
+#: contrib/collapse/forms.py:59 contrib/collapse/forms.py:84
 msgid "Unique identifier"
 msgstr "Einzigartige Kennung (ID)"
 
-#: contrib/collapse/forms.py:60 contrib/collapse/forms.py:84
+#: contrib/collapse/forms.py:61 contrib/collapse/forms.py:86
 msgid "Identifier to connect trigger with container."
 msgstr "Kennung, welche den Auslöser mit dem Collapse-Kontainer verbindet."
 
@@ -495,15 +548,15 @@ msgstr "Danke"
 msgid "Your message has been sent."
 msgstr "Die Nachricht wurde verschickt."
 
-#: contrib/content/cms_plugins.py:19 contrib/content/forms.py:31
+#: contrib/content/cms_plugins.py:30 contrib/content/forms.py:35
 msgid "Code"
 msgstr "Code"
 
-#: contrib/content/cms_plugins.py:47 contrib/content/models.py:28
+#: contrib/content/cms_plugins.py:64 contrib/content/models.py:28
 msgid "Blockquote"
 msgstr "Blockquote"
 
-#: contrib/content/cms_plugins.py:75 contrib/content/models.py:42
+#: contrib/content/cms_plugins.py:99 contrib/content/models.py:42
 msgid "Figure"
 msgstr "Abbildung"
 
@@ -527,53 +580,53 @@ msgstr "Benutzer-Eingabe"
 msgid "Sample output"
 msgstr "Muster-Ausgabe"
 
-#: contrib/content/forms.py:37
+#: contrib/content/forms.py:41
 msgid "Code type"
 msgstr "Code-Typ"
 
-#: contrib/content/forms.py:64
+#: contrib/content/forms.py:70
 msgid "Quote"
 msgstr "Quote"
 
-#: contrib/content/forms.py:70
+#: contrib/content/forms.py:76
 msgid "Cite"
 msgstr "Zitat"
 
-#: contrib/content/forms.py:101
+#: contrib/content/forms.py:110
 msgid "Caption"
 msgstr "Bildlegende"
 
-#: contrib/forms/cms_plugins.py:93
+#: contrib/forms/cms_plugins.py:94
 msgid "No content in response from"
 msgstr "Kein Inhalt"
 
-#: contrib/forms/cms_plugins.py:242 contrib/forms/forms.py:68
+#: contrib/forms/cms_plugins.py:243 contrib/forms/forms.py:72
 #: contrib/forms/models.py:9
 msgid "Form"
 msgstr "Formular"
 
-#: contrib/forms/cms_plugins.py:260
+#: contrib/forms/cms_plugins.py:261
 msgid "Submit button"
 msgstr "Absende-Button"
 
-#: contrib/forms/forms.py:37
+#: contrib/forms/forms.py:41
 msgid "No forms registered"
 msgstr "Keine Formulare registriert"
 
-#: contrib/forms/forms.py:75
+#: contrib/forms/forms.py:79
 msgid "Submit message"
 msgstr "Absende-Aufforderung"
 
-#: contrib/forms/forms.py:76
+#: contrib/forms/forms.py:80
 #: contrib/forms/templates/djangocms_frontend/bootstrap5/form.html:11
 msgid "Submit"
 msgstr "Absenden"
 
-#: contrib/forms/forms.py:80
+#: contrib/forms/forms.py:84
 msgid "Submit context"
 msgstr "Kontext Absende-Button"
 
-#: contrib/forms/forms.py:87
+#: contrib/forms/forms.py:91
 msgid "Submit button alignment"
 msgstr "Ausrichtung Absende-Button"
 
@@ -589,12 +642,12 @@ msgstr ""
 msgid "Only unique slugs accepted for form views"
 msgstr "Nur eindeutige Slugs für Formular-Anschten akzeptiert."
 
-#: contrib/grid/cms_plugins.py:20 contrib/grid/constants.py:19
+#: contrib/grid/cms_plugins.py:31 contrib/grid/constants.py:19
 #: contrib/grid/models.py:24
 msgid "Container"
 msgstr "Kontainer"
 
-#: contrib/grid/cms_plugins.py:49 contrib/grid/models.py:49
+#: contrib/grid/cms_plugins.py:56 contrib/grid/models.py:49
 msgid "Row"
 msgstr "Zeile"
 
@@ -655,11 +708,11 @@ msgstr "Selbst-Ausrichtung Mittig"
 msgid "Align self end"
 msgstr "Selbst-Ausrichtung Ende"
 
-#: contrib/grid/forms.py:41
+#: contrib/grid/forms.py:50
 msgid "Container type"
 msgstr "Kontainer-Typ"
 
-#: contrib/grid/forms.py:46
+#: contrib/grid/forms.py:55
 msgid ""
 "Defines if the grid should use fixed width (<code>.container</code>) or "
 "fluid width (<code>.container-fluid</code>)."
@@ -667,41 +720,33 @@ msgstr ""
 "Definiert ob das Grid eine fixe Breite (<code>.container</code>) oder "
 "fließende Breite (<code>.container-fluid</code>) haben soll."
 
-#: contrib/grid/forms.py:71
+#: contrib/grid/forms.py:83
 msgid "Create columns"
 msgstr "Spalten erstellen"
 
-#: contrib/grid/forms.py:72
+#: contrib/grid/forms.py:84
 msgid "Number of columns to create when saving."
 msgstr "Anzahl der Spalten, die beim Speichern erstellt werden soll."
 
-#: contrib/grid/forms.py:78
+#: contrib/grid/forms.py:90
 msgid "Vertical alignment"
 msgstr "Vertikale Ausrichtung"
 
-#: contrib/grid/forms.py:84
+#: contrib/grid/forms.py:97
 msgid "Horizontal alignment"
 msgstr "Horizontale Ausrichtung"
 
-#: contrib/grid/forms.py:90
+#: contrib/grid/forms.py:104
 msgid "Remove gutters"
 msgstr "Zwischenräume entfernen"
 
-#: contrib/grid/forms.py:93
+#: contrib/grid/forms.py:107
 msgid "Removes the marginal gutters from the grid."
 msgstr "Entfernt die Zwischenräume im Grid,"
 
-#: contrib/grid/forms.py:129
+#: contrib/grid/forms.py:149
 msgid "Column alignment"
 msgstr "Spalten-Ausrichtung"
-
-#: contrib/grid/frameworks/bootstrap5.py:45
-msgid "Background"
-msgstr "Hintergrund"
-
-#: contrib/grid/frameworks/bootstrap5.py:64
-msgid "Covers image."
-msgstr ""
 
 #: contrib/grid/models.py:25
 msgid "GridContainer"
@@ -746,161 +791,169 @@ msgstr "Rand rechts"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: contrib/image/cms_plugins.py:19
+#: contrib/image/cms_plugins.py:23
 msgid "Picture / Image"
 msgstr "Bild"
 
-#: contrib/image/cms_plugins.py:66
+#: contrib/image/cms_plugins.py:44
+msgid "Format"
+msgstr "Format"
+
+#: contrib/image/cms_plugins.py:69
 msgid "Cropping settings"
 msgstr "Einstellungen zu Zuschneiden"
 
-#: contrib/image/forms.py:21
+#: contrib/image/forms.py:23
 msgid "Align left"
 msgstr "Links ausrichten"
 
-#: contrib/image/forms.py:22
+#: contrib/image/forms.py:24
 msgid "Align right"
 msgstr "Rechts ausrichten"
 
-#: contrib/image/forms.py:23
+#: contrib/image/forms.py:25
 msgid "Align center"
 msgstr "Zentriert ausrichten"
 
-#: contrib/image/forms.py:47 contrib/link/constants.py:22
+#: contrib/image/forms.py:49 contrib/link/constants.py:22
 msgid "Open in new window"
 msgstr "In neuem Fenster öffnen"
 
-#: contrib/image/forms.py:48 contrib/link/constants.py:23
+#: contrib/image/forms.py:50 contrib/link/constants.py:23
 msgid "Open in same window"
 msgstr "Im selben Fenster öffnen"
 
-#: contrib/image/forms.py:49 contrib/link/constants.py:24
+#: contrib/image/forms.py:51 contrib/link/constants.py:24
 msgid "Delegate to parent"
 msgstr ""
 
-#: contrib/image/forms.py:50 contrib/link/constants.py:25
+#: contrib/image/forms.py:52 contrib/link/constants.py:25
 msgid "Delegate to top"
 msgstr ""
 
-#: contrib/image/forms.py:54
+#: contrib/image/forms.py:56
 msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
 msgstr ""
 "Gemäß Einstellungen in <code>settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES</"
 "code>"
 
-#: contrib/image/forms.py:55
+#: contrib/image/forms.py:57
 msgid "Yes"
 msgstr "Ja"
 
-#: contrib/image/forms.py:56
+#: contrib/image/forms.py:58
 msgid "No"
 msgstr "Nein"
 
-#: contrib/image/forms.py:103 contrib/image/models.py:64
+#: contrib/image/forms.py:107 contrib/image/models.py:63
 msgid "Image"
 msgstr "Bild"
 
-#: contrib/image/forms.py:107
+#: contrib/image/forms.py:111
 msgid "External image"
 msgstr "Externes Bild"
 
-#: contrib/image/forms.py:110
+#: contrib/image/forms.py:114
 msgid ""
 "If provided, overrides the embedded image. Certain options such as cropping "
 "are not applicable to external images."
-msgstr ""
+msgstr "Wenn ein Verweis auf ein externes Bild angegeben wird, ersetzt es ein "
+"internes. Bestimmte Optionen (wie Auschnitte) können nicht auf externe Bilder "
+"angewendet werden."
 
-#: contrib/image/forms.py:115
+#: contrib/image/forms.py:119
 msgid "Width"
 msgstr "Breite"
 
-#: contrib/image/forms.py:119
+#: contrib/image/forms.py:123
 msgid ""
 "The image width as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 "Bild-Breite in Pixeln (ohne Enheit). Beispiel: \"720\" and not \"720px\"."
 
-#: contrib/image/forms.py:123
+#: contrib/image/forms.py:127
 msgid "Height"
 msgstr "Höhe"
 
-#: contrib/image/forms.py:127
+#: contrib/image/forms.py:131
 msgid ""
 "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 "Bild-Höhe in Pixeln (ohne Enheit). Beispiel: \"720\" and not \"720px\"."
 
-#: contrib/image/forms.py:134
+#: contrib/image/forms.py:138
 msgid "Aligns the image according to the selected option."
 msgstr "Richtet das Bild entsprechend der ausgewählten Option aus."
 
-#: contrib/image/forms.py:137
+#: contrib/image/forms.py:141
 msgid "Caption text"
 msgstr "Text für Bildlegende"
 
-#: contrib/image/forms.py:141
+#: contrib/image/forms.py:145
 msgid "Provide a description, attribution, copyright or other information."
 msgstr ""
 "Eine Beschreibung, Zuschreibung, Urheberschaft oder andere Information."
 
-#: contrib/image/forms.py:145 contrib/utilities/forms.py:110
+#: contrib/image/forms.py:149 contrib/utilities/forms.py:116
 msgid "Link attributes"
 msgstr "Link-Attribute"
 
-#: contrib/image/forms.py:146
+#: contrib/image/forms.py:150
 msgid "Attributes apply to the <b>link</b>."
 msgstr "Attribute werden auf den <b>Link</b> angewendet."
 
-#: contrib/image/forms.py:152
+#: contrib/image/forms.py:156
 msgid "Automatic scaling"
 msgstr "Automatische Skalierung"
 
-#: contrib/image/forms.py:155
+#: contrib/image/forms.py:159
 msgid "Uses the placeholder dimensions to automatically calculate the size."
-msgstr ""
+msgstr "Skaliert das Bild autmatisch auf die Größe des Platzhalters."
 
-#: contrib/image/forms.py:161
+#: contrib/image/forms.py:165
 msgid "Use original image"
 msgstr "Original-Bild nutzen"
 
-#: contrib/image/forms.py:163
+#: contrib/image/forms.py:167
 msgid "Outputs the raw image without cropping."
 msgstr "Erzeugt das Originalbild ohne Zuschneiden"
 
-#: contrib/image/forms.py:168
+#: contrib/image/forms.py:172
 msgid "Crop image"
 msgstr "Bild beschneiden"
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:175
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr "Schneidet das Bild gemäß der Vorschau-Einstellungen in der Vorlage zu."
 
-#: contrib/image/forms.py:175
+#: contrib/image/forms.py:179
 msgid "Upscale image"
 msgstr "Bildgröße anpassen"
 
-#: contrib/image/forms.py:178
+#: contrib/image/forms.py:182
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr "Passt die Bildgröße auf die Vorschau-Einstellungen in der Vorlage"
 
-#: contrib/image/forms.py:182
+#: contrib/image/forms.py:186
 msgid "Use responsive image"
 msgstr "Bild responsive darstellen"
 
-#: contrib/image/forms.py:186
+#: contrib/image/forms.py:190
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
-msgstr ""
+msgstr "Nutzt Responsive-Technologie, um die optimale Bildgröße auf Basis der "
+"Bildschirmgröße des Nutzers auszuwählen. Dies erfolgt nur bei hochgeladenen "
+"Bildern."
 
-#: contrib/image/forms.py:195
+#: contrib/image/forms.py:199
 msgid "Thumbnail options"
 msgstr "Optionen für Vorschaubilder"
 
-#: contrib/image/forms.py:198
+#: contrib/image/forms.py:202
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
@@ -908,41 +961,42 @@ msgstr ""
 "Überschreibt Breite, Höhe und Zuschneide-Einstellungen. Passt die Bildgröße "
 "auf die Voreingestellung an."
 
-#: contrib/image/forms.py:202
+#: contrib/image/forms.py:206
 msgid "Responsive"
 msgstr "Responsive"
 
-#: contrib/image/forms.py:205
+#: contrib/image/forms.py:209
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Fügt die Klasse .img-fluid hinzu um das Bild responsiv zu machen."
 
-#: contrib/image/forms.py:208
+#: contrib/image/forms.py:212
 msgid "Rounded"
 msgstr "Abgerundet"
 
-#: contrib/image/forms.py:211
+#: contrib/image/forms.py:215
 msgid "Adds the .rounded class for round corners."
 msgstr "Fügt die Klasse .rounded für abgerundete Ecken hinzu."
 
-#: contrib/image/forms.py:214
+#: contrib/image/forms.py:218
 msgid "Thumbnail"
 msgstr "Vorschaubild"
 
-#: contrib/image/forms.py:217
+#: contrib/image/forms.py:221
 msgid "Adds the .img-thumbnail class."
 msgstr "Fügt die Klasse .img-thumbnail hinzu."
 
-#: contrib/image/forms.py:236
+#: contrib/image/forms.py:242
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
-msgstr ""
+msgstr "Nur ein Ziel kann angegbenen werden: Extern, intern oder eine Datei. "
+"Es ist mehr als ein Ziel ausgewählt."
 
-#: contrib/image/forms.py:245
+#: contrib/image/forms.py:251
 msgid "You need to add either an image, or a URL linking to an external image."
-msgstr ""
+msgstr "Entweder ein Bild oder eine URL für ein externed Bild angeben."
 
-#: contrib/image/forms.py:271
+#: contrib/image/forms.py:277
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -951,24 +1005,24 @@ msgstr ""
 "Ungültige Zuschnitts-Einstellungen: \"{field_a}\" und \"{field_b}\" können "
 "nicht kombiniert werden."
 
-#: contrib/jumbotron/cms_plugins.py:19 contrib/jumbotron/models.py:14
+#: contrib/jumbotron/cms_plugins.py:31 contrib/jumbotron/models.py:14
 msgid "Jumbotron"
 msgstr "Jumbotron"
 
-#: contrib/jumbotron/forms.py:24 contrib/jumbotron/models.py:19
+#: contrib/jumbotron/forms.py:50 contrib/jumbotron/models.py:19
 msgid "Fluid"
 msgstr "Fließend"
 
-#: contrib/jumbotron/forms.py:27
-msgid "Adds the .jumbotron-fluid class."
-msgstr "Erstellt einen Kontainer mit fließender Breite"
+#: contrib/jumbotron/forms.py:54
+msgid "Makes the jumbotron fill the full width of the container or window."
+msgstr "Erweitert Jas Jumbotron auf die volle Breite des Kontainers oder Fensters."
 
-#: contrib/link/cms_plugins.py:52
+#: contrib/link/cms_plugins.py:57
 msgid "Link / Button"
 msgstr "Link / Button"
 
-#: contrib/link/constants.py:5 contrib/link/models.py:10
-#: contrib/link/models.py:91
+#: contrib/link/constants.py:5 contrib/link/models.py:11
+#: contrib/link/models.py:92
 msgid "Link"
 msgstr "Link"
 
@@ -977,56 +1031,56 @@ msgid "Button"
 msgstr "Button"
 
 #: contrib/link/constants.py:10 frameworks/bootstrap5.py:8
-#: frameworks/bootstrap5.py:98 frameworks/foundation6.py:7
+#: frameworks/bootstrap5.py:109 frameworks/foundation6.py:7
 #: frameworks/foundation6.py:69
 msgid "Small"
 msgstr "Klein"
 
 #: contrib/link/constants.py:11 frameworks/bootstrap5.py:9
-#: frameworks/bootstrap5.py:99 frameworks/foundation6.py:8
+#: frameworks/bootstrap5.py:110 frameworks/foundation6.py:8
 #: frameworks/foundation6.py:70
 msgid "Medium"
 msgstr "Mittel"
 
 #: contrib/link/constants.py:12 frameworks/bootstrap5.py:10
-#: frameworks/bootstrap5.py:100 frameworks/foundation6.py:9
+#: frameworks/bootstrap5.py:111 frameworks/foundation6.py:9
 #: frameworks/foundation6.py:71
 msgid "Large"
 msgstr "Groß"
 
-#: contrib/link/forms.py:171
+#: contrib/link/forms.py:133
 msgid "Display name"
 msgstr "Anzeige-Text"
 
-#: contrib/link/forms.py:175
+#: contrib/link/forms.py:137
 msgid "External link"
 msgstr "Externer Link"
 
-#: contrib/link/forms.py:178
+#: contrib/link/forms.py:140
 msgid "Provide a link to an external source."
 msgstr "Vollständiger Link zu einer externen Quelle"
 
-#: contrib/link/forms.py:181
+#: contrib/link/forms.py:143
 msgid "Internal link"
 msgstr "Interner Link"
 
-#: contrib/link/forms.py:183
+#: contrib/link/forms.py:145
 msgid "If provided, overrides the external link."
 msgstr "Wenn angegeben, wird ein externer Link überschrieben."
 
-#: contrib/link/forms.py:189
+#: contrib/link/forms.py:151
 msgid "File link"
 msgstr "Datei-Link"
 
-#: contrib/link/forms.py:191
+#: contrib/link/forms.py:153
 msgid "If provided links a file from the filer app."
 msgstr "Verlink eine Datei der Filer-App."
 
-#: contrib/link/forms.py:195
+#: contrib/link/forms.py:157
 msgid "Anchor"
 msgstr "Anker"
 
-#: contrib/link/forms.py:198
+#: contrib/link/forms.py:160
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
 "include a preceding \"&#35;\" symbol."
@@ -1034,28 +1088,28 @@ msgstr ""
 "Hängt bei internen oder externen Links einen Anker an. <em>Ohne</em> "
 "führendes \"&#35;\"-Symbol."
 
-#: contrib/link/forms.py:203
+#: contrib/link/forms.py:165
 msgid "Email address"
 msgstr "Email-Adresse"
 
-#: contrib/link/forms.py:207
+#: contrib/link/forms.py:169
 msgid "Phone"
 msgstr "Telefonnummer"
 
-#: contrib/link/forms.py:212
+#: contrib/link/forms.py:174
 msgid "Target"
 msgstr "Ziel"
 
-#: contrib/link/forms.py:258
+#: contrib/link/forms.py:208
 #, python-brace-format
 msgid "Only one of {0} or {1} may be given."
 msgstr "Nur einer aus {0} oder {1} können ausgewählt werden."
 
-#: contrib/link/forms.py:270
+#: contrib/link/forms.py:220
 msgid "Please provide a link."
 msgstr "Bitte geben Sie ein Ziel an."
 
-#: contrib/link/forms.py:276
+#: contrib/link/forms.py:226
 #, python-format
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
@@ -1063,51 +1117,56 @@ msgstr ""
 "%(anchor_field_verbose_name)s kann nicht zusammen mit %(field_name)s gewählt "
 "werden."
 
-#: contrib/link/forms.py:313 contrib/tabs/forms.py:43
+#: contrib/link/forms.py:264 contrib/tabs/forms.py:45
 msgid "Type"
 msgstr "Typ"
 
-#: contrib/link/forms.py:317
-msgid "Adds either the .btn-* or .text-* classes."
-msgstr "Fügt entweder die Klassen .btn-* oder .text-* hinzu."
+#: contrib/link/forms.py:268
+msgid "Adds either a text link or a button which links to the target."
+msgstr "Fügt entweder einen regulären Link oder einen Button hinzu, der das "
+"Ziel verlinkt."
 
-#: contrib/link/forms.py:327 contrib/utilities/forms.py:36
-msgid "Size"
-msgstr "Größe"
+#: contrib/link/forms.py:278
+msgid "Button size"
+msgstr "Button-Größe"
 
-#: contrib/link/forms.py:336
-msgid "Applies the .btn-outline class to the elements."
-msgstr "Fügt die Klasse .btn-outline bei allen Elementen hinzu."
+#: contrib/link/forms.py:287
+msgid "Outline"
+msgstr "Kontur"
 
-#: contrib/link/forms.py:339
+#: contrib/link/forms.py:290
+msgid "Removes the coloring from a button and keeps the outline."
+msgstr "Beschränkt die Färbung auf den Umriß der Schaltfläche."
+
+#: contrib/link/forms.py:293
 msgid "Block"
 msgstr "Block"
 
-#: contrib/link/forms.py:342
+#: contrib/link/forms.py:296
 msgid "Extends the button to the width of its container."
 msgstr "Erweitert die Breite des Buttons auf den Kontainer."
 
-#: contrib/link/forms.py:345
+#: contrib/link/forms.py:299
 msgid "Icon left"
 msgstr "Icon links"
 
-#: contrib/link/forms.py:350
+#: contrib/link/forms.py:304
 msgid "Icon right"
 msgstr "Icon rechts"
 
-#: contrib/link/models.py:96
+#: contrib/link/models.py:97
 msgid "<link is missing>"
 msgstr "<Link fehlt>"
 
-#: contrib/link/templates/djangocms_frontend/admin/link.html:7
+#: contrib/link/templates/djangocms_frontend/admin/link.html:12
 msgid "Preview"
 msgstr "Vorschau"
 
-#: contrib/listgroup/cms_plugins.py:19 contrib/listgroup/models.py:14
+#: contrib/listgroup/cms_plugins.py:28 contrib/listgroup/models.py:14
 msgid "List group"
 msgstr "Listen-Gruppe"
 
-#: contrib/listgroup/cms_plugins.py:50
+#: contrib/listgroup/cms_plugins.py:55
 msgid "List item"
 msgstr "Listen-Eintrag"
 
@@ -1119,26 +1178,26 @@ msgstr "Aktiv"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: contrib/listgroup/forms.py:29
+#: contrib/listgroup/forms.py:36
 msgid "List group flush"
 msgstr "Eingebettete Listen-Gruppe"
 
-#: contrib/listgroup/forms.py:32
+#: contrib/listgroup/forms.py:39
 msgid "Create lists of content in a card with a flush list group."
 msgstr ""
 "Erstellt eine Listengruppe, die in einer Karte eingebettet werden kann."
 
-#: contrib/listgroup/forms.py:56
+#: contrib/listgroup/forms.py:64
 msgid "One line content"
 msgstr "Inhalt (eine Zeile)"
 
-#: contrib/listgroup/forms.py:59
+#: contrib/listgroup/forms.py:67
 msgid "List item text. Is only show if this list item has no child plugins."
 msgstr ""
 "Text des Listen-Eintrags. Wird nur angezeigt, wenn der Listen-Eintrag keine "
 "Töchter-Plugins hat."
 
-#: contrib/listgroup/forms.py:70
+#: contrib/listgroup/forms.py:78
 msgid "State"
 msgstr "Zustand"
 
@@ -1146,25 +1205,21 @@ msgstr "Zustand"
 msgid "List group item"
 msgstr "Listen-Eintrag"
 
-#: contrib/media/cms_plugins.py:19 contrib/media/models.py:14
+#: contrib/media/cms_plugins.py:23 contrib/media/models.py:14
 msgid "Media"
 msgstr "Medien"
 
-#: contrib/media/cms_plugins.py:47 contrib/media/models.py:28
+#: contrib/media/cms_plugins.py:40 contrib/media/models.py:28
 msgid "Media body"
 msgstr "Medienkörper"
 
-#: contrib/tabs/cms_plugins.py:22 contrib/tabs/constants.py:5
+#: contrib/tabs/cms_plugins.py:24 contrib/tabs/constants.py:5
 msgid "Tabs"
 msgstr "Reiter"
 
-#: contrib/tabs/cms_plugins.py:64 contrib/tabs/models.py:27
+#: contrib/tabs/cms_plugins.py:58 contrib/tabs/models.py:27
 msgid "Tab item"
 msgstr "Reiter-Eintrag"
-
-#: contrib/tabs/cms_plugins.py:78
-msgid "Tab item border"
-msgstr "Rand für Reiter-Eintrag"
 
 #: contrib/tabs/constants.py:6
 msgid "Pills"
@@ -1190,62 +1245,50 @@ msgstr "Ausrichtung Mittig"
 msgid "Justify end"
 msgstr "Ausrichtung Ende"
 
-#: contrib/tabs/constants.py:18
+#: contrib/tabs/constants.py:21
 msgid "Fade"
 msgstr "Fading"
 
-#: contrib/tabs/forms.py:53
+#: contrib/tabs/forms.py:58
 msgid "Index"
 msgstr "Index"
 
-#: contrib/tabs/forms.py:56
+#: contrib/tabs/forms.py:61
 msgid "Index of element to open on page load starting at 1."
 msgstr ""
 "Index des Elementes, das beim Öffnen der Seite gezeigt werden soll, startet "
 "bei 1."
 
-#: contrib/tabs/forms.py:59
+#: contrib/tabs/forms.py:64
 msgid "Animation effect"
 msgstr "Animationseffekt"
 
-#: contrib/tabs/forms.py:86
+#: contrib/tabs/forms.py:90
 msgid "Tab title"
 msgstr "Reiter-Titel"
 
-#: contrib/tabs/forms.py:89
+#: contrib/tabs/forms.py:93
 msgid "Bordered"
 msgstr "Mit Rand"
 
-#: contrib/tabs/forms.py:91
+#: contrib/tabs/forms.py:95
 msgid "Add borders to the tab item"
 msgstr "Füge einen Rand zum Tab-Element hinzu"
-
-#: contrib/tabs/forms.py:94
-msgid "Internal padding size"
-msgstr "Innerer Abstand zum Rand"
-
-#: contrib/tabs/forms.py:99
-msgid "Internal padding sides"
-msgstr "Seiten mit innerem Abstand"
 
 #: contrib/tabs/models.py:9
 msgid "Tab"
 msgstr "Reiter"
 
-#: contrib/utilities/cms_plugins.py:20 contrib/utilities/models.py:14
-msgid "Spacing"
-msgstr "Abstand"
-
-#: contrib/utilities/cms_plugins.py:56
+#: contrib/utilities/cms_plugins.py:48
 msgid "Editor note"
 msgstr "Autoren-Anmerkung"
 
-#: contrib/utilities/cms_plugins.py:66 contrib/utilities/forms.py:76
+#: contrib/utilities/cms_plugins.py:58 contrib/utilities/forms.py:82
 #: contrib/utilities/models.py:44
 msgid "Heading"
 msgstr "Überschrift"
 
-#: contrib/utilities/cms_plugins.py:132 contrib/utilities/models.py:59
+#: contrib/utilities/cms_plugins.py:117 contrib/utilities/models.py:59
 msgid "Table of contents"
 msgstr "Inhaltsverzeichnis"
 
@@ -1253,72 +1296,76 @@ msgstr "Inhaltsverzeichnis"
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: contrib/utilities/forms.py:30
+#: contrib/utilities/forms.py:31
 msgid "Sides"
 msgstr "Seiten"
 
-#: contrib/utilities/forms.py:41
+#: contrib/utilities/forms.py:38
+msgid "Size"
+msgstr "Größe"
+
+#: contrib/utilities/forms.py:44
 msgid "Device"
 msgstr "Gerät"
 
-#: contrib/utilities/forms.py:62 settings.py:26
+#: contrib/utilities/forms.py:68 settings.py:38
 msgid "Heading 1"
 msgstr "Überschrift 1"
 
-#: contrib/utilities/forms.py:63 settings.py:27
+#: contrib/utilities/forms.py:69 settings.py:39
 msgid "Heading 2"
 msgstr "Überschrift 2"
 
-#: contrib/utilities/forms.py:64 settings.py:28
+#: contrib/utilities/forms.py:70 settings.py:40
 msgid "Heading 3"
 msgstr "Überschrift 3"
 
-#: contrib/utilities/forms.py:65 settings.py:29
+#: contrib/utilities/forms.py:71 settings.py:41
 msgid "Heading 4"
 msgstr "Überschrift 4"
 
-#: contrib/utilities/forms.py:66 settings.py:30
+#: contrib/utilities/forms.py:72 settings.py:42
 msgid "Heading 5"
 msgstr "Überschrift 5"
 
-#: contrib/utilities/forms.py:70
+#: contrib/utilities/forms.py:76
 msgid "Heading level"
 msgstr "Überschrifts-Stufe"
 
-#: contrib/utilities/forms.py:81
+#: contrib/utilities/forms.py:87
 msgid "ID"
 msgstr "ID"
 
-#: contrib/utilities/forms.py:84
+#: contrib/utilities/forms.py:90
 msgid ""
 "Fill in unique ID for table of contents. If empty heading will not appear in "
 "table of contents."
 msgstr ""
 "Eine eindeutige ID nimmt die Überschrift in das Inhaltsverzeichnis auf."
 
-#: contrib/utilities/forms.py:103
+#: contrib/utilities/forms.py:109
 msgid "List attributes"
 msgstr "Listen-Attribute"
 
-#: contrib/utilities/forms.py:105
+#: contrib/utilities/forms.py:111
 msgid ""
 "Attributes apply to the <b>list</b> for each level in the table of contents."
 msgstr ""
 "Attribute werden auf die auf die Liste für jede Einrückungstiefe im "
 "Inhaltesverzeichnis angewendet."
 
-#: contrib/utilities/forms.py:112
+#: contrib/utilities/forms.py:118
 msgid ""
 "Attributes apply to the <b>link</b> for each entry in the table of contents."
 msgstr ""
 "Attribute werden auf die auf die Links für jeden Eintrag im "
 "Inhaltesverzeichnis angewendet."
 
-#: contrib/utilities/forms.py:116
+#: contrib/utilities/forms.py:122
 msgid "Item attributes"
 msgstr "Listen-Element-Attribute"
 
-#: contrib/utilities/forms.py:118
+#: contrib/utilities/forms.py:124
 msgid ""
 "Attributes apply to the <b>list items</b> for each entry in the table of "
 "contents."
@@ -1326,23 +1373,27 @@ msgstr ""
 "Attribute werden auf die auf die Listen-Elemente für jeden Eintrag im "
 "Inhaltesverzeichnis angewendet."
 
-#: fields.py:12 fields.py:20
+#: fields.py:75
+msgid "Please select at least one device size"
+msgstr "Bitte mindestens eine Bildschirmgröße auswählen."
+
+#: fields.py:83 fields.py:91
 msgid "Attributes"
 msgstr "Attribute"
 
-#: fields.py:30
+#: fields.py:101 fields.py:115
 msgid "Tag type"
 msgstr "HTML-Tag"
 
-#: fields.py:38
+#: fields.py:109
 msgid "Select the HTML tag to be used."
 msgstr "HTML-Tag auswählen, der genutzt werden soll."
 
-#: frameworks/bootstrap5.py:7 frameworks/bootstrap5.py:97
+#: frameworks/bootstrap5.py:7 frameworks/bootstrap5.py:108
 msgid "Extra small"
 msgstr "Sehr klein"
 
-#: frameworks/bootstrap5.py:11 frameworks/bootstrap5.py:101
+#: frameworks/bootstrap5.py:11 frameworks/bootstrap5.py:112
 msgid "Extra large"
 msgstr "Sehr groß"
 
@@ -1382,59 +1433,98 @@ msgstr "Hell"
 msgid "Dark"
 msgstr "Dunkel"
 
-#: frameworks/bootstrap5.py:88
-msgid "None"
-msgstr "Ohne"
+#: frameworks/bootstrap5.py:60 frameworks/bootstrap5.py:66
+msgid "Both"
+msgstr "Beide Seiten"
 
-#: frameworks/bootstrap5.py:102
+#: frameworks/bootstrap5.py:67
+msgid "Top"
+msgstr "Oben"
+
+#: frameworks/bootstrap5.py:68
+msgid "Bottom"
+msgstr "Unten"
+
+#: frameworks/bootstrap5.py:100
+msgctxt "shadow"
+msgid "None"
+msgstr "Keiner"
+
+#: frameworks/bootstrap5.py:113
 msgid "XX large"
 msgstr "Sehr sehr groß"
 
-#: helpers.py:108
+#: helpers.py:111
 #, python-brace-format
 msgid ""
 "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr "Mehr in der <a href=\"{link}\" target=\"_blank\">Dokumentation</a>."
 
-#: models.py:17
+#: models.py:23
 msgid "UI item"
 msgstr "Frontend-Element"
 
-#: settings.py:50
+#: settings.py:14
+msgid "There are no further settings for this plugin. Please press save."
+msgstr "Für dieses Plugin gibt es keine weiteren Einstellungen. Bitte klicken "
+"Sie \"Speichern\"."
+
+#: settings.py:70
 msgid "Fully Centered"
 msgstr "Zentriert"
 
-#: settings.py:51
+#: settings.py:71
 msgid "Top left"
 msgstr "Oben links"
 
-#: settings.py:52
+#: settings.py:72
 msgid "Top center"
 msgstr "Oben Mitte"
 
-#: settings.py:53
+#: settings.py:73
 msgid "Top right"
 msgstr "Oben rechts"
 
-#: settings.py:54
+#: settings.py:74
 msgid "Center left"
 msgstr "Mitte links"
 
-#: settings.py:55
+#: settings.py:75
 msgid "Center right"
 msgstr "Mitte rechts"
 
-#: settings.py:56
+#: settings.py:76
 msgid "Bottom left"
 msgstr "Unten links"
 
-#: settings.py:57
+#: settings.py:77
 msgid "Bottom center"
 msgstr "Unten Mitte"
 
-#: settings.py:58
+#: settings.py:78
 msgid "Bottom right"
 msgstr "Unten rechts"
+
+#~ msgid "Applies the .btn-outline class to the elements."
+#~ msgstr "Fügt die Klasse .btn-outline bei allen Elementen hinzu."
+
+#~ msgid "Adds either the .btn-* or .text-* classes."
+#~ msgstr "Fügt entweder die Klassen .btn-* oder .text-* hinzu."
+
+#~ msgid "Opacity of card inner background color"
+#~ msgstr "Deckkraft der Hintergrund-Farbe"
+
+#~ msgid "Adds the .jumbotron-fluid class."
+#~ msgstr "Erstellt einen Kontainer mit fließender Breite"
+
+#~ msgid "Tab item border"
+#~ msgstr "Rand für Reiter-Eintrag"
+
+#~ msgid "Internal padding size"
+#~ msgstr "Innerer Abstand zum Rand"
+
+#~ msgid "Internal padding sides"
+#~ msgstr "Seiten mit innerem Abstand"
 
 #~ msgid "sm container"
 #~ msgstr "sm-Kontainer"

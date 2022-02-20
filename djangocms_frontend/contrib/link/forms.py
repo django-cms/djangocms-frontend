@@ -265,7 +265,7 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
         choices=LINK_CHOICES,
         initial=LINK_CHOICES[0][0],
         widget=forms.RadioSelect(attrs={"class": "inline-block"}),
-        help_text=_("Adds either the .btn-* or .text-* classes."),
+        help_text=_("Adds either a text link or a button which links to the target."),
     )
     link_context = forms.ChoiceField(
         label=_("Context"),
@@ -287,7 +287,7 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
         label=_("Outline"),
         initial=False,
         required=False,
-        help_text=_("Applies the .btn-outline class to the elements."),
+        help_text=_("Removes the coloring from a button and keeps the outline."),
     )
     link_block = forms.BooleanField(
         label=_("Block"),

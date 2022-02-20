@@ -51,7 +51,7 @@ class JumbotronForm(
         initial=False,
         required=False,
         help_text=_(
-            "Makes the jumbotron full the will width of the container or window."
+            "Makes the jumbotron fill the full width of the container or window."
         ),
     )
     attributes = AttributesFormField()

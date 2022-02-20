@@ -2,6 +2,7 @@ import json
 
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext
 
 DEVICE_CHOICES = (
     ("xs", _("Extra small")),  # default <576px
@@ -97,7 +98,7 @@ SHADOW_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_SHADOW_CHOICES",
     (
-        ("none", _("None")),
+        ("none", pgettext("shadow", "None")),
         ("sm", "S"),
         ("reg", "M"),
         ("lg", "L"),
