@@ -47,6 +47,14 @@ Add the following entries to your ``INSTALLED_APPS``:
       'djangocms_frontend.contrib.tabs',
       'djangocms_frontend.contrib.utilities',
 
+.. note :: Using Django 2.2 to 3.1
+
+    You will need to add ``django-jsonfield-backport`` to your
+    ``requirements.txt`` and add ``"django_jsonfield_backport"`` to your
+    ``INSTALLED_APPS``.
+
+
+
 Create necessary database table
 ===============================
 
@@ -230,3 +238,80 @@ tables of djangocms-bootstrap4. You identify them by their name pattern:
 
 
 
+************************
+Using djangocms-frontend
+************************
+
+**djangocms-frontend** offers a set of plugins to allow for an easy and clean
+structure of your CMS contents.
+
+All plugins are listed in the section "Frontend" when adding a plugin to
+a placeholder:
+
+.. image:: screenshots/add_plugin.png
+
+Frontend editing of plugins has been updated compared to **djangocms-bootstrap4**
+with three aims:
+
+* Keep the essential editing required minimal and well-arranged on the editing
+  forms.
+* Eliminate the need for regularly adding html classes or other attributes like
+  styles.
+* Keep the possibility to change the html classes or tags in the rare case it
+  is needed.
+
+The editing has therefore been categorized in tabs starting with a plugin's
+key tab for its most important information. Other tabs add general modifications
+to the plugin, their availabilty depending on the plugin type. The well-known
+"advanced settings" is available to all plugins, however, its use should in most
+case be covered by the new other tabs:
+
+.. image:: screenshots/tabs-main.png
+
+Background tab
+==============
+
+The background tab allows to set a background context leading to the background
+being colored appropriately.
+
+The background properties can be modified by changing **opacity** and its ability
+cast a **shadow**. Shadows allow the whole element to appear elevanted from the
+background.
+
+.. image:: screenshots/tabs-background.png
+
+Spacing tab
+===========
+
+The spacing tab is used to set margins and paddings and to select which
+devices they should be applied.
+
+For both margin and paddings the settings can be made independently for
+horizontal and vertical paddings.
+
+.. image:: screenshots/tabs-spacing.png
+
+Visibility tab
+==============
+
+The visibility tab controls on which devices the elements and its children
+should be visible. Use this to design different content for different devices.
+
+.. image:: screenshots/tabs-visibility.png
+
+Advanced settings tab
+=====================
+
+The advanced tab lets you chose which tag (typically a ``div``) should be used
+to render the element. You may also add attributes like additional classes as a
+``class`` attribute, an ``id`` or styles in the ``style`` attribute.
+
+.. image:: screenshots/tabs-advanced.png
+
+.. warning::
+
+    Using the advanced tab requires some technical knowlege on the sites
+    installation, e.g., what css classes are available. This is why the advanced
+    settings tab should only be used rarely. If you find yourself using it
+    regularly, extending **djangocms-frontend** using a theme might be the more
+    editor-friendly and more maintainable solution.

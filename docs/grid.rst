@@ -3,11 +3,6 @@
  Grid plugins
 ##############
 
-All plugins are listed in the section "Frontend" when adding a plugin to
-a placeholder:
-
-.. image:: screenshots/add_plugin.png
-
 For details on how grids work, see, e.g. the `Bootstrap 5 documentation
 <https://getbootstrap.com/docs/5.1/layout/grid/>`_.
 
