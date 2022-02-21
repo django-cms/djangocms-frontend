@@ -90,7 +90,7 @@ def get_link_choices(request, term="", lang=None, nbsp=""):
         model_admin = site._registry.get(cls, None)
         if search:
             try:
-                objects = qs.filter(**{search: term})
+                objects = qs.filter(**{search + "__icontains": term})
             except FieldError:
                 pass
         if objects is None:
