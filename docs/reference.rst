@@ -91,6 +91,14 @@ changed:
            ('custom', _('Custom')),
        )
 
+.. py:attribute:: DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH
+
+    If unset or smaller than ``1`` the link plugin will render all link options
+    into its form. If ``1`` or bigger the link form will wait for the user to
+    type at least this many letters and search link targets matching this search
+    string using an ajax request.
+
+
 .. py:attribute:: TEXT_SAVE_IMAGE_FUNCTION
 
     Requirement: ``TEXT_SAVE_IMAGE_FUNCTION = None``
@@ -101,6 +109,8 @@ changed:
         djangocms-text-ckeditor's `Drag & Drop Images
         <https://github.com/divio/djangocms-text-ckeditor/#drag--drop-images>`_
         so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION = None``.
+
+
 
 
 ******
@@ -185,11 +195,11 @@ Models
 for ``forms.ChoiceField``. They might turn out helpful when adding custom
 plugins.
 
-.. py:class:: ButtonGroup()
+.. py:class:: ButtonGroup(forms.RadioSelect)
 
     Import from ``djangocms_frontend.fields``
 
-    Button group displays a set of buttons for the user to chose. Usable for up
+    The button group widget displays a set of buttons for the user to chose. Usable for up
     to roughly five options.
 
 .. py:class:: ColoredButtonGroup(ButtonGroup)
@@ -202,10 +212,40 @@ plugins.
 
     Import from ``djangocms_frontend.fields``.
 
-    Displays icons in stead of text for the options. Each icon is rendered
+    This widget displays icons in stead of text for the options. Each icon is rendered
     by ``<span class="icon icon-{{value}}"></span>``. Add css in the ``Media``
     subclass to ensure that for each option's value the span renders the
     appropriate icon.
+
+.. py:class:: IconMultiselect(forms.CheckboxSelectMultiple)
+
+    Import from ``djangocms_frontend.fields``.
+
+    Like ``IconGroup`` this widget displays a choice of icons. Since it inherits
+    from ``CheckboxSelectMultiple`` the icons work like checkboxes and not radio
+    buttons.
+
+.. py:class:: OptionalDeviceChoiceField(forms.MultipleChoiceField):
+
+    Import from ``djangocms_frontend.fields``.
+
+    This form field displays a choice of devices corresponding to breakpoints
+    in the responsive grid. The user can select any combination of devices
+    including none and all.
+
+    The result is a list of values of the selected choices or None for all devices
+    selected.
+
+.. py:class:: DeviceChoiceField(OptionalDeviceChoiceField)
+
+    Import from ``djangocms_frontend.fields``.
+
+    This form field is identical to the ``OptionalDeviceChoiceField`` above,
+    but requires the user to select at least one device.
+
+
+
+
 
 *********************
  Management commands

@@ -177,9 +177,27 @@ Granting rights
 
 If you have restricted rights for users our groups in your projects make
 sure that editors have the right to to add, change, delete, and - of
-course - view instances of djangocms_frontend UI item.
+course - view instances of all djangocms_frontend UI items:
 
-Otherwise the plugins will not appear in the editors' frontend.
+* Accordion
+* Alert
+* Badge
+* Card
+* Carousel
+* Collapse
+* Content
+* Forms
+* Grid
+* Image
+* Jumbotron
+* Link
+* Listgroup
+* Media
+* Tabs
+* Utilities
+
+Otherwise the plugins will not be editable and will not appear in the editors'
+plugin selection when adding a plugin in the frontend.
 
 
 .. index::
@@ -315,3 +333,23 @@ to render the element. You may also add attributes like additional classes as a
     settings tab should only be used rarely. If you find yourself using it
     regularly, extending **djangocms-frontend** using a theme might be the more
     editor-friendly and more maintainable solution.
+
+The advanced tab label carries a blue-ish dot to indicate that attributes are
+set in the advanced settings tab. These attributes can change the appearance of
+the element significantly which is why the dot reminds the editor that
+there are advanced settings present.
+
+.. image:: screenshots/adv-settings-active.png
+
+
+Error indicators
+================
+
+In case the form is not valid when the user tries to save all fields that
+are marked invalid will have an error message attached. Since not all fields
+are visible in tabbed editing tabs containing an error have a red badge at
+the upper right corner:
+
+.. image::  screenshots/tab-error-indicator.png
+
+

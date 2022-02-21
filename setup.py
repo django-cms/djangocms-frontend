@@ -16,7 +16,7 @@ REQUIREMENTS = [
 
 
 CLASSIFIERS = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
@@ -27,6 +27,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Framework :: Django",
+    "Framework :: Django :: 2.2",
     "Framework :: Django :: 3.2",
     "Framework :: Django CMS",
     "Framework :: Django CMS :: 3.8",

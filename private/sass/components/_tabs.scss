@@ -11,17 +11,16 @@ ul.nav {
             border-radius: 50%;
             &.error {
                 background-color: var(--bs-danger);
-                left: 100%;
             }
             &.attributes {
                 background-color: var(--bs-info);
                 display: block;
-                left: 0%;
             }
             padding: .5rem;
             border: 1px solid var(--dca-black, $white);
             transform: translate(-50%, -50%);
             top: 0;
+            left: 100%;
             position: absolute;
         }
         &.error > span.indicator {

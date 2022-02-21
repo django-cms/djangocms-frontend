@@ -44,6 +44,10 @@ setting to the project's ``.settings.py`` file.
        queryset. If this is not provided, the objects will be ordered in the
        natural order of your model, if any.
 
+    ``search``:
+        Specifies which (text) field of the model should be searched when
+        the user types a search string.
+
 .. note::
 
    Each of the defined models must define a ``get_absolute_url()``
@@ -60,11 +64,13 @@ different page types from two djangocms-blog apps called "Blog" and
            "type": _("Blog pages"),
            "class_path": "djangocms_blog.models.Post",
            "filter": {"publish": True, "app_config_id": 1},
+            "search": "translations__title",
        },
        {
            "type": _("Content hub pages"),
            "class_path": "djangocms_blog.models.Post",
            "filter": {"publish": True, "app_config_id": 2},
+            "search": "translations__title",
        },
    ]
 
@@ -99,12 +105,12 @@ This allows you to search the page titles.
 
 .. warning::
 
-   If you have a huge number (> 10,000) of link target (i.e., pages or
+   If you have a huge number (> 1,000) of link target (i.e., pages or
    blog entries or whatever) the current implementation might slow down
-   the editing process. **Future** implementation might get link targets
-   dynamically from the server to allow a practically limitless number
-   of link targets. Volunteers who want to implement dynamic link target
-   loading are welcome!
+   the editing process. In your ``settings`` file you can set
+   ``DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH`` to a value greater than 1 and
+   **djangocms-frontend** will wait until the user inputs at least this many
+   characters before querying potential link targets.
 
 ********************************
  How to extend existing plugins
@@ -307,6 +313,30 @@ will do one or more of the following:
 -  Extend standard plugins
 -  Add custom plugins
 
-********************************************
- How to add support for a new css framework
-********************************************
+******************************************************
+ How to add the tab editing style to my other plugins
+******************************************************
+
+If you prefer the tabbed frontend editing style of **djangocms-frontend** you
+can easily add it to your own plugins.
+
+If you use the standard editing form, just add a line specifying the
+``change_form_template`` to your plugin class:
+
+.. code-block::
+
+    class MyCoolPlugin(CMSPluginBase):
+        ...
+        change_form_template = "djangocms_frontend/admin/base.html"
+        ...
+
+
+If you already have your own ``change_form_template``, make sure it extends
+``djangocms_frontend/admin/base.html``:
+
+.. code-block::
+
+    {% extends "djangocms_frontend/admin/base.html" %}
+    {% block ...%}
+        ...
+    {% endblock %}

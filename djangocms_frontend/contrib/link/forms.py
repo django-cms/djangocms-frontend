@@ -1,10 +1,12 @@
 from django import forms
 from django.conf import settings as django_settings
+from django.contrib.admin.widgets import SELECT2_TRANSLATIONS
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.encoding import force_text
+from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from django_select2.forms import HeavySelect2Widget, Select2Widget
 from djangocms_icon.fields import IconField
@@ -55,6 +57,25 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
     class Media:
         js = ("admin/js/vendor/jquery/jquery.js",)
         css = {"screen": ("djangocms_frontend/css/select2.css",)}
+
+    @property
+    def media(self):
+        extra = ".min"
+        i18n_name = SELECT2_TRANSLATIONS.get(get_language())
+        i18n_file = (
+            ("admin/js/vendor/select2/i18n/%s.js" % i18n_name,) if i18n_name else ()
+        )
+        return forms.Media(
+            js=("admin/js/vendor/select2/select2.full%s.js" % extra,)
+            + i18n_file
+            + ("djangocms_frontend/js/django_select2.js",),
+            css={
+                "screen": (
+                    "admin/css/vendor/select2/select2%s.css" % extra,
+                    "djangocms_frontend/css/select2.css",
+                ),
+            },
+        )
 
     def __init__(self, *args, **kwargs):
         if MINIMUM_INPUT_LENGTH:

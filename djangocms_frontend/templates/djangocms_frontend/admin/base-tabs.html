@@ -18,11 +18,10 @@
                            {% if forloop.counter == 1 and original %}title="{{ original.pk|safe }}"{% endif %}
                            data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
                            data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
-                              <span class="indicator error">
-                              </span>
                               {% if "attributes" in fieldset.classes and original.attributes %}
                                  <span class="indicator attributes"></span>
                               {% endif %}
+                              <span class="indicator error"></span>
                         </a>
                     </li>
                 {% endif %}

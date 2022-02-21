@@ -31,7 +31,6 @@ Full container
    to add a background color or shadow to another DOM element, like, e.g.,
    the contents of a column.
 
-.. image:: screenshots/container.png
 
 .. note::
 
@@ -65,10 +64,10 @@ row** are distributed horizontally.
 
     New feature:
 
-        The section "Row-cols settings" defines how many columns should be next
-        to each other for a given display size. The "row-cols" entry defines the
-        number of columns on mobile devices (and above if no other setting is
-        given), the "row-cols-xl" entry the number of columns on a xl screen.
+    The section "Row-cols settings" defines how many columns should be next
+    to each other for a given display size. The "row-cols" entry defines the
+    number of columns on mobile devices (and above if no other setting is
+    given), the "row-cols-xl" entry the number of columns on a xl screen.
 
 .. image:: screenshots/row.png
 

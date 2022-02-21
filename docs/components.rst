@@ -124,7 +124,7 @@ options.
 .. image:: screenshots/card.png
 
 Content is added to the card plugin by creating child plugins. These can be of
-the type `Card inner`_, `Picture / Image`_, `List group`_, or `Row`_.
+the type `Card inner`_, `Picture / Image`_, `List group`_, or Row.
 
 .. note::
 
@@ -141,7 +141,7 @@ space for a card image.
 
 .. image:: screenshots/card-inner.png
 
-Here is an example of the new card overlay feature:
+Here is an example of the new card **Image overlay** feature:
 
 .. image:: screenshots/card-overlay-example.png
     :width: 298
@@ -219,6 +219,12 @@ blog entries of `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
 For more information, see
 :ref:`How to add internal link targets outside of the CMS`
+
+.. note::
+
+    Only those destinations (outside the CMS) are shown for which a model admin
+    is registered and the logged in user has view permissions: A user will only
+    see a destination if they can view it in the admin site.
 
 ********************
 List group component
