@@ -326,23 +326,31 @@ def m001_spacing_mixin(obj, new_obj):
                 classes.append(f"px-{size}")
                 classes.append(f"py-{size}")
             for side, _ in settings.SPACER_X_SIDES_CHOICES:
-                if f"m{side}-{size}" in classes:
+                if f"m{side}-{size}" in classes and not new_obj.config.get(
+                    "margin_x", None
+                ):
                     new_obj.config["margin_x"] = f"m{side}-{size}"
                     new_obj.config["margin_devices"] = None
                     classes.remove(f"m{side}-{size}")
             for side, _ in settings.SPACER_Y_SIDES_CHOICES:
-                if f"m{side}-{size}" in classes:
+                if f"m{side}-{size}" in classes and not new_obj.config.get(
+                    "margin_y", None
+                ):
                     new_obj.config["margin_y"] = f"m{side}-{size}"
                     new_obj.config["margin_devices"] = None
                     classes.remove(f"m{side}-{size}")
             for side, _ in settings.SPACER_X_SIDES_CHOICES:
-                if f"p{side}-{size}" in classes:
+                if f"p{side}-{size}" in classes and not new_obj.config.get(
+                    "padding_x", None
+                ):
                     new_obj.config["padding_x"] = f"p{side}-{size}"
                     new_obj.config["padding_devices"] = None
                     classes.remove(f"p{side}-{size}")
             for side, _ in settings.SPACER_Y_SIDES_CHOICES:
-                if f"p{side}-{size}" in classes:
-                    new_obj.config["margin_y"] = f"p{side}-{size}"
+                if f"p{side}-{size}" in classes and not new_obj.config.get(
+                    "padding_y", None
+                ):
+                    new_obj.config["padding_y"] = f"p{side}-{size}"
                     new_obj.config["padding_devices"] = None
                     classes.remove(f"p{side}-{size}")
         if classes:
