@@ -8,6 +8,7 @@ from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from .. import carousel
+from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
 from .constants import CAROUSEL_TEMPLATE_CHOICES
 
@@ -50,7 +51,9 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class CarouselSlidePlugin(mixin_factory("CarouselSlide"), AttributesMixin, CMSUIPlugin):
+class CarouselSlidePlugin(
+    mixin_factory("CarouselSlide"), AttributesMixin, LinkPluginMixin, CMSUIPlugin
+):
     """
     Components > "Carousel Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/

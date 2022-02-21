@@ -22,9 +22,10 @@ from ...fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
+from ...helpers import get_related_object
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-from .helpers import get_choices
+from .helpers import get_choices, get_object_for_value
 
 
 def get_templates():
@@ -49,6 +50,8 @@ MINIMUM_INPUT_LENGTH = getattr(
 class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Widget):
     """Make jQuery available to Select2 widget"""
 
+    empty_label = _("Select a destination")
+
     class Media:
         js = ("/static/admin/js/vendor/jquery/jquery.js",)
         css = {"screen": ("djangocms_frontend/css/select2.css",)}
@@ -68,16 +71,6 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
 class SmartLinkField(forms.ChoiceField):
     widget = Select2jqWidget()
 
-    def __init__(self, *args, **kwargs):
-        if MINIMUM_INPUT_LENGTH == 0:
-            kwargs["choices"] = lambda: get_choices(None)
-            # TODO: Add request object to allow for model_admim permission check
-        else:
-            pass
-            # TODO: Load description of current value and make it available as a
-            # single choice so that the widget can present the current value
-        super().__init__(*args, **kwargs)
-
     def prepare_value(self, value):
         if value:
             if isinstance(value, dict):  # Entangled dictionary?
@@ -95,16 +88,9 @@ class SmartLinkField(forms.ChoiceField):
         return ""
 
     def clean(self, value):
-        if isinstance(value, str) and "-" in value:
-            type_id, obj_id = value.split("-", 1)
-            try:
-                content_type = ContentType.objects.get(id=type_id)
-                return dict(
-                    model=f"{content_type.app_label}.{content_type.model}",
-                    pk=int(obj_id),
-                )  # Exists? Validated!
-            except (ObjectDoesNotExist, TypeError):
-                pass
+        obj = get_object_for_value(value)
+        if obj is not None:
+            return obj
         return super().clean(value)
 
 
@@ -175,6 +161,23 @@ class AbstractLinkForm(EntangledModelForm):
         choices=settings.EMPTY_CHOICE + TARGET_CHOICES,
         required=False,
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["internal_link"].choices = self.get_choices
+
+    def get_choices(self):
+        if MINIMUM_INPUT_LENGTH == 0:
+            return get_choices(self.request)
+        if not self.is_bound:  # find inital value
+            int_link_field = self.fields["internal_link"]
+            initial = self.get_initial_for_field(int_link_field, "internal_link")
+            if initial:  # Initial set?
+                obj = get_related_object(dict(obj=initial), "obj")  # get it!
+                if obj is not None:
+                    value = int_link_field.prepare_value(initial)
+                    return ((value, str(obj)),)
+        return ()  # nothing found
 
     def clean(self):
         super().clean()

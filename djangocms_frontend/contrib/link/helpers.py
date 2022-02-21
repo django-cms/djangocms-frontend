@@ -5,7 +5,7 @@ from cms.models import Page
 from django.conf import settings as django_settings
 from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import FieldError
+from django.core.exceptions import FieldError, ObjectDoesNotExist
 from django.utils.encoding import force_text
 from django.utils.html import mark_safe
 
@@ -44,6 +44,20 @@ def create_querysets(link_models):
 
 
 _querysets = create_querysets(LINK_MODELS)
+
+
+def get_object_for_value(value):
+    if isinstance(value, str) and "-" in value:
+        type_id, obj_id = value.split("-", 1)
+        try:
+            content_type = ContentType.objects.get(id=type_id)
+            return dict(
+                model=f"{content_type.app_label}.{content_type.model}",
+                pk=int(obj_id),
+            )
+        except (ObjectDoesNotExist, TypeError):
+            pass
+    return None
 
 
 def get_link_choices(request, term="", lang=None, nbsp=""):

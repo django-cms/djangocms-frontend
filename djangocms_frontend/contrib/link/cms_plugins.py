@@ -47,8 +47,18 @@ UILINK_FIELDSET = [
 ]
 
 
+class LinkPluginMixin:
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        """The link form needs the request object to check permissions"""
+        form = super().get_form(request, obj, change, **kwargs)
+        form.request = request
+        return form
+
+
 @plugin_pool.register_plugin
-class LinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, CMSUIPlugin):
+class LinkPlugin(
+    mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin
+):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/

@@ -6,6 +6,7 @@ from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from ...common.responsive import ResponsiveMixin
 from .. import image
+from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
 
 mixin_factory = settings.get_renderer(image)
@@ -13,7 +14,11 @@ mixin_factory = settings.get_renderer(image)
 
 @plugin_pool.register_plugin
 class ImagePlugin(
-    mixin_factory("Image"), AttributesMixin, ResponsiveMixin, CMSUIPlugin
+    mixin_factory("Image"),
+    AttributesMixin,
+    ResponsiveMixin,
+    LinkPluginMixin,
+    CMSUIPlugin,
 ):
     """
     Content > "Image" Plugin
