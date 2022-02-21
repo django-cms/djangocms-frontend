@@ -9,11 +9,18 @@ ul.nav {
         span.indicator {
             display:    none;
             border-radius: 50%;
-            background-color: var(--bs-danger);
+            &.error {
+                background-color: var(--bs-danger);
+                left: 100%;
+            }
+            &.attributes {
+                background-color: var(--bs-info);
+                display: block;
+                left: 0%;
+            }
             padding: .5rem;
             border: 1px solid var(--dca-black, $white);
             transform: translate(-50%, -50%);
-            left: 100%;
             top: 0;
             position: absolute;
         }
@@ -46,4 +53,11 @@ body.djangocms-admin-style .colM ul:not(.object-tools) li {
     a.active {
         border-bottom: 1px solid #dee2e6;
     }
+}
+
+div.tab-pk {
+    align-self: center;
+    color: var(--dca-gray-darker, $django-fg);
+    font-size: 80%;
+    margin-left: auto;
 }

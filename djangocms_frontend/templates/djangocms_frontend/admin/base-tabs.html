@@ -15,14 +15,21 @@
                 {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="#tab-{{ forloop.counter }}"
+                           {% if forloop.counter == 1 and original %}title="{{ original.pk|safe }}"{% endif %}
                            data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
                            data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
                               <span class="indicator error">
                               </span>
+                              {% if "attributes" in fieldset.classes and original.attributes %}
+                                 <span class="indicator attributes"></span>
+                              {% endif %}
                         </a>
                     </li>
                 {% endif %}
             {% endfor %}
+            {% if original %}
+                <div class="tab-pk">{{ original.pk|safe }}</div>
+            {% endif %}
         </ul>
         <div class="djangocms-frontend tab-content">
             {% for fieldset in adminform %}

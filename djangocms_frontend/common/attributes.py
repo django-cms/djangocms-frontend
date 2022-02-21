@@ -9,7 +9,11 @@ class AttributesMixin:
     block_attr = {
         "description": _(
             "Advanced settings lets you add html attributes to render this element. Use them wisely and rarely."
-        )
+        ),
+        "classes": (
+            "collapse",
+            "attributes",
+        ),
     }
 
     def get_fieldsets(self, request, obj=None):

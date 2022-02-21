@@ -1,0 +1,23 @@
+a[data-pk] {
+    position: relative;
+    &::after {
+        content: attr(data-pk);
+        visibility: hidden;
+        width: auto;
+        font-weight: normal;
+        font-size: 80%;
+        background-color: var(--dca-white, $white);
+        color: var(--dca-gray, $django-fg);
+        border: solid 1px var(--dca-gray, $django-fg);
+        text-align: center;
+        padding: 5px 10px;
+        position: absolute;
+        z-index: 1;
+        top: 110%;
+        left: 50%;
+        margin-left: -50%;
+    }
+    &:hover::after {
+        visibility: visible;
+    }
+}
