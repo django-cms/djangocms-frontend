@@ -252,6 +252,7 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
                 "link_block",
                 "icon_left",
                 "icon_right",
+                "link_stretched",
                 "attributes",
             ]
         }
@@ -262,6 +263,14 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
         choices=get_templates(),
         initial=get_templates()[0][0],
         widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
+    )
+    link_stretched = forms.BooleanField(
+        label=_("Stretch link"),
+        required=False,
+        initial=False,
+        help_text=_(
+            "Stretches the active link area to the containing block (with position: relative)."
+        ),
     )
     link_type = forms.ChoiceField(
         label=_("Type"),

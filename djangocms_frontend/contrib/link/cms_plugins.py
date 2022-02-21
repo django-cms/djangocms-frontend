@@ -19,6 +19,7 @@ UILINK_FIELDS = (
     ("external_link", "internal_link"),
     ("link_context", "link_size"),
     ("link_outline", "link_block"),
+    "link_stretched",
 )
 
 UILINK_FIELDSET = [

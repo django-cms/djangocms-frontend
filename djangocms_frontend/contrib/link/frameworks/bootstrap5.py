@@ -13,7 +13,7 @@ class LinkRenderMixin:
             link_classes.append("card-link")
         else:
             background_prefix = "btn"
-        if instance.link_context:
+        if instance.config.get("link_context", None):
             if getattr(instance, "link_type", "link") == "link":
                 link_classes.append(f"link-{instance.link_context}")
             else:
@@ -22,11 +22,12 @@ class LinkRenderMixin:
                     link_classes.append(f"{background_prefix}-{instance.link_context}")
                 else:
                     link_classes.append(f"btn-outline-{instance.link_context}")
-        if instance.link_size:
+        if instance.config.get("link_size", False):
             link_classes.append(instance.link_size)
-        if instance.link_block:
+        if instance.config.get("link_block", False):
             link_classes.append("d-block")
-
+        if instance.config.get("link_stretched", False):
+            link_classes.append("stretched-link")
         context["link"] = instance.get_link()
         instance.add_classes(link_classes)
         return super().render(context, instance, placeholder)
