@@ -8,18 +8,6 @@ from djangocms_frontend.helpers import insert_fields
 
 
 class BackgroundMixin:
-    def render(self, context, instance, placeholder):
-        if getattr(instance, "background_context", ""):
-            instance.add_classes(f"bg-{instance.background_context}")
-        if getattr(instance, "background_opacity", "100") != "100":
-            instance.add_classes(f"bg-opacity-{instance.background_opacity}")
-        if getattr(instance, "background_shadow", ""):
-            if instance.background_shadow == "reg":
-                instance.add_classes("shadow")
-            else:
-                instance.add_classes(f"shadow-{instance.background_shadow}")
-        return super().render(context, instance, placeholder)
-
     def get_fieldsets(self, request, obj=None):
         return insert_fields(
             super().get_fieldsets(request, obj),
@@ -31,6 +19,18 @@ class BackgroundMixin:
             position=-1,
             blockname=_("Background"),
         )
+
+    def render(self, context, instance, placeholder):
+        if getattr(instance, "background_context", ""):
+            instance.add_classes(f"bg-{instance.background_context}")
+        if getattr(instance, "background_opacity", "100") != "100":
+            instance.add_classes(f"bg-opacity-{instance.background_opacity}")
+        if getattr(instance, "background_shadow", ""):
+            if instance.background_shadow == "reg":
+                instance.add_classes("shadow")
+            else:
+                instance.add_classes(f"shadow-{instance.background_shadow}")
+        return super().render(context, instance, placeholder)
 
 
 class BackgroundFormMixin(EntangledModelFormMixin):

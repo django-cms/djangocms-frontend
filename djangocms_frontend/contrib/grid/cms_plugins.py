@@ -2,12 +2,13 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
+from djangocms_frontend.common.attributes import AttributesMixin
+from djangocms_frontend.common.background import BackgroundMixin
+from djangocms_frontend.common.responsive import ResponsiveMixin
+from djangocms_frontend.common.sizing import SizingMixin
+from djangocms_frontend.common.spacing import SpacingMixin
 
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundMixin
-from ...common.responsive import ResponsiveMixin
-from ...common.spacing import SpacingMixin
 from .. import grid
 from . import forms, models
 
@@ -21,6 +22,7 @@ class GridContainerPlugin(
     ResponsiveMixin,
     SpacingMixin,
     BackgroundMixin,
+    SizingMixin,
     CMSUIPlugin,
 ):
     """

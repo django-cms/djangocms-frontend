@@ -4,14 +4,15 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
+from djangocms_frontend import settings
+from djangocms_frontend.common.background import BackgroundFormMixin
+from djangocms_frontend.common.responsive import ResponsiveFormMixin
+from djangocms_frontend.common.sizing import SizingFormMixin
+from djangocms_frontend.common.spacing import SpacingFormMixin
+from djangocms_frontend.fields import AttributesFormField, IconGroup, TagTypeFormField
 from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
+from djangocms_frontend.models import FrontendUIItem
 
-from ... import settings
-from ...common.background import BackgroundFormMixin
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import SpacingFormMixin
-from ...fields import AttributesFormField, IconGroup, TagTypeFormField
-from ...models import FrontendUIItem
 from .. import grid
 from .constants import (
     GRID_COLUMN_ALIGNMENT_CHOICES,
@@ -29,6 +30,7 @@ class GridContainerForm(
     BackgroundFormMixin,
     ResponsiveFormMixin,
     SpacingFormMixin,
+    SizingFormMixin,
     EntangledModelForm,
 ):
     """

@@ -3,12 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.fields import (
-    ButtonGroup,
-    DeviceChoiceField,
-    IconGroup,
-    IconMultiselect,
-)
+from djangocms_frontend.fields import DeviceChoiceField, IconGroup
 from djangocms_frontend.helpers import insert_fields
 from djangocms_frontend.settings import DEVICE_CHOICES
 
@@ -108,6 +103,15 @@ def get_spacing_classes(spacing_set, active_set=None):
 class MarginMixin:
     blockname = _("Margin")
 
+    def get_fieldsets(self, request, obj=None):
+        return insert_fields(
+            super().get_fieldsets(request, obj),
+            (("margin_x", "margin_y"), "margin_devices"),
+            block=None,
+            position=-1,
+            blockname=self.blockname,
+        )
+
     def render(self, context, instance, placeholder):
         instance.add_classes(
             get_spacing_classes(
@@ -121,31 +125,9 @@ class MarginMixin:
         )
         return super().render(context, instance, placeholder)
 
-    def get_fieldsets(self, request, obj=None):
-        return insert_fields(
-            super().get_fieldsets(request, obj),
-            (("margin_x", "margin_y"), "margin_devices"),
-            block=None,
-            position=-1,
-            blockname=self.blockname,
-        )
-
 
 class PaddingMixin:
     blockname = _("Padding")
-
-    def render(self, context, instance, placeholder):
-        instance.add_classes(
-            get_spacing_classes(
-                [
-                    instance.config[field]
-                    for field in ("padding_x", "padding_y")
-                    if field in instance.config and instance.config[field]
-                ],
-                instance.config.get("padding_devices", None),
-            )
-        )
-        return super().render(context, instance, placeholder)
 
     def get_fieldsets(self, request, obj=None):
         blockname = self.blockname
@@ -165,6 +147,19 @@ class PaddingMixin:
             blockname=blockname,
             blockattrs=blockattrs,
         )
+
+    def render(self, context, instance, placeholder):
+        instance.add_classes(
+            get_spacing_classes(
+                [
+                    instance.config[field]
+                    for field in ("padding_x", "padding_y")
+                    if field in instance.config and instance.config[field]
+                ],
+                instance.config.get("padding_devices", None),
+            )
+        )
+        return super().render(context, instance, placeholder)
 
 
 class SpacingMixin(PaddingMixin, MarginMixin):

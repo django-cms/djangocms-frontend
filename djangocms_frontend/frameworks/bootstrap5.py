@@ -82,6 +82,33 @@ SPACER_SIZE_CHOICES = getattr(
     ),
 )
 
+SIZE_X_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_SIZE_X_CHOICES",
+    (
+        ("25", "25%"),
+        ("50", "50%"),
+        ("75", "75%"),
+        ("100", "100%"),
+        ("auto", _("Auto")),
+        ("vw-100", _("Screen")),
+    ),
+)
+
+SIZE_Y_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_SIZE_Y_CHOICES",
+    (
+        ("25", "25%"),
+        ("50", "50%"),
+        ("75", "75%"),
+        ("100", "100%"),
+        ("auto", _("Auto")),
+        ("min-vh-100", _("Screen (minimum)")),
+    ),
+)
+
+
 OPACITY_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_OPACITY_CHOICES",

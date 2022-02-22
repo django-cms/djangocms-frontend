@@ -70,6 +70,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             "picture": "",
             "external_picture": "https://www.django-cms.com/",
             "use_responsive_image": "yes",
+            "margin_devices": ["xs"],
         }
         form = ImageForm(request.POST)
         self.assertTrue(form.is_valid())
@@ -82,5 +83,4 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             }
         )
         form = ImageForm(request.POST)
-        self.assertFalse(form.is_valid())
         self.assertFalse(form.is_valid())

@@ -17,6 +17,20 @@ class SyncPermissions(SubcommandsCommand):
         parser.add_argument("scope", choices=["users", "groups"])
 
     def handle(self, *args, **options):
+        if options["interactive"]:
+            self.stdout.write(
+                """This command changes permissions for djangocms-frontend plugins.
+Changes cannot be undone. Are you sure you want to proceed?
+"""
+            )
+            ok_to_delete = input("Type 'yes' to continue, or 'no' to cancel: ")
+        else:
+            ok_to_delete = "yes"
+
+        if ok_to_delete != "yes":
+            self.stdout.write(self.style.ERROR("Aborted."))
+            return
+
         dcf_models = [
             m
             for m in apps.get_models()

@@ -28,12 +28,14 @@ def get_display_classes(visibility_set, visibility_class="block"):
 
 
 class ResponsiveMixin:
-    blockattrs = {
-        #     "description": _(
-        #         "Use the responsive tools to tailor your content to the device "
-        #         "the user is using."
-        #     )
-    }
+    def get_fieldsets(self, request, obj=None):
+        return insert_fields(
+            super().get_fieldsets(request, obj),
+            ("responsive_visibility",),
+            block=None,
+            position=-1,
+            blockname=_("Visibility"),
+        )
 
     def render(self, context, instance, placeholder):
         if instance.config.get("responsive_visibility", None) is not None:
@@ -44,16 +46,6 @@ class ResponsiveMixin:
                 )
             )
         return super().render(context, instance, placeholder)
-
-    def get_fieldsets(self, request, obj=None):
-        return insert_fields(
-            super().get_fieldsets(request, obj),
-            ("responsive_visibility",),
-            block=None,
-            position=-1,
-            blockname=_("Visibility"),
-            blockattrs=self.blockattrs,
-        )
 
 
 class ResponsiveFormMixin(EntangledModelFormMixin):
