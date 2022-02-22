@@ -199,6 +199,30 @@ course - view instances of all djangocms_frontend UI items:
 Otherwise the plugins will not be editable and will not appear in the editors'
 plugin selection when adding a plugin in the frontend.
 
+Since changing them for each of the plugins manually can become tiresome a
+management command can support you.
+
+**First** manually define the permissions for the model ``FrontendUIItem`` of
+the app ``djangocms_frontend``. **Then** you can synchronize
+all permissions of the installed UI items by typing
+
+.. code-block::
+
+    ./manage.py frontend sync_permissions users
+    ./manage.py frontend sync_permissions groups
+
+These commands transfer the permissions for ``FrontendUIItem`` to all installed
+plugins for each user or group, respectively.
+
+The first command is only necessary of you define by-user permissions. Depending
+on the number of users it may take some time.
+
+
+
+.. attention::
+
+    If in doubt, please make a backup of your database tables. This operation
+    cannot be undone!
 
 .. index::
     single: Migration from Bootstrap 4
