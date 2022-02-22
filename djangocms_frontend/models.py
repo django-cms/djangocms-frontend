@@ -1,5 +1,5 @@
 from cms.models import CMSPlugin
-from cms.utils.compat import DJANGO_3_1
+from cms.utils.compat import DJANGO_3_0
 from django.db import models
 from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext
@@ -7,7 +7,7 @@ from django.utils.translation import gettext
 from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
 
-if DJANGO_3_1:
+if DJANGO_3_0:
     from django_jsonfield_backport.models import JSONField
 else:
     JSONField = models.JSONField
