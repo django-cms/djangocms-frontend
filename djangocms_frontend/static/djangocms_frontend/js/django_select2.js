@@ -1,6 +1,10 @@
 'use strict';
 jQuery(document).ready(function () {
-    const $ = jQuery;
+    if (jQuery.fn.jquery == CMS.$.fn.jquery) {
+        const $ = CMS.$;
+    } else {
+        const $ = jQuery;
+    }
 
     var init = function ($element, options) {
         $element.select2(options)
