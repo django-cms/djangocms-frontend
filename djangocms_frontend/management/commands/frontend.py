@@ -6,6 +6,7 @@ from .subcommands.base import SubcommandsCommand
 from .subcommands.frequency_analysis import FrequencyAnalysis
 from .subcommands.migrate import Migrate
 from .subcommands.stale_references import StaleReferences
+from .subcommands.sync_permissions import SyncPermissions
 
 
 class Command(SubcommandsCommand):
@@ -14,6 +15,7 @@ class Command(SubcommandsCommand):
         "migrate": Migrate,
         "frequency_analysis": FrequencyAnalysis,
         "stale_references": StaleReferences,
+        "sync_permissions": SyncPermissions,
     }
     missing_args_message = "one of the available sub commands must be provided"
 

@@ -5,6 +5,7 @@ from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from ...common.responsive import ResponsiveMixin
+from ...common.spacing import MarginMixin
 from .. import image
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
@@ -17,6 +18,7 @@ class ImagePlugin(
     mixin_factory("Image"),
     AttributesMixin,
     ResponsiveMixin,
+    MarginMixin,
     LinkPluginMixin,
     CMSUIPlugin,
 ):

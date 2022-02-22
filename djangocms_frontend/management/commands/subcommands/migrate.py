@@ -2,8 +2,6 @@ from django.apps import apps
 from django.conf import settings
 from django.db import connection, models
 
-from djangocms_frontend.management import bootstrap4_migration, styled_link_migration
-
 from .base import SubcommandsCommand
 
 plugin_names = {}
@@ -14,10 +12,14 @@ data_migration = {}
 
 # Bootstrap 4
 if "djangocms_bootstrap4" in apps.all_models:
+    from djangocms_frontend.management import bootstrap4_migration
+
     plugin_migrations.update(bootstrap4_migration.plugin_migrations)
     data_migration.update(bootstrap4_migration.data_migration)
 # Styled link
 if "djangocms_styledlink" in apps.all_models:
+    from djangocms_frontend.management import styled_link_migration
+
     plugin_migrations.update(styled_link_migration.plugin_migrations)
     data_migration.update(styled_link_migration.data_migration)
 
@@ -140,9 +142,9 @@ class Migrate(SubcommandsCommand):
         self.stdout.write(self.style.SUCCESS("Successfully migrated plugins"))
         self.stdout.write()
         if getattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS", None) is None:
-            self.check_for_link_target()
+            self.check_for_link_targets()
 
-    def check_for_link_target(self):
+    def check_for_link_targets(self):
         self.stdout.write(
             self.style.SUCCESS(
                 "Checking installed apps for potential link destinations"

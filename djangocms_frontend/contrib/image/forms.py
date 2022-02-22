@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings as django_settings
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
@@ -7,8 +8,8 @@ from filer.models import Image, ThumbnailOption
 
 from djangocms_frontend import settings
 
-from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import MarginFormMixin
 from ...fields import AttributesFormField, TagTypeFormField
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
@@ -30,13 +31,12 @@ def get_alignment():
 
 def get_templates():
     """Add additional choices through the ``settings.py``."""
-    choices = [
-        ("default", _("Default")),
-    ]
-    choices += getattr(
-        settings,
+    choices = getattr(
+        django_settings,
         "DJANGOCMS_PICTURE_TEMPLATES",
-        [],
+        [
+            ("default", _("Default")),
+        ],
     )
     return choices
 
@@ -60,7 +60,7 @@ RESPONSIVE_IMAGE_CHOICES = (
 
 
 class ImageForm(
-    AbstractLinkForm, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+    AbstractLinkForm, ResponsiveFormMixin, MarginFormMixin, EntangledModelForm
 ):
     """
     Content > "Image" Plugin

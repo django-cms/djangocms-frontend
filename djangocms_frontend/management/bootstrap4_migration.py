@@ -23,7 +23,8 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",  # additional data migration, see below
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
     ],
     "bootstrap4_badge.Bootstrap4Badge -> badge.Badge": [
@@ -45,7 +46,7 @@ plugin_migrations = {
         "X002",  # Replace v4 card deck
         "X003",  # Align card_outline and background_context
         "A001_card",  # fix alignment
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -53,7 +54,7 @@ plugin_migrations = {
         "inner_type",
         "tag_type",
         "attributes",
-        "M001",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -82,7 +83,8 @@ plugin_migrations = {
         "attributes",
         "P001",
         "A001_quote",  # fix alignment
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -90,7 +92,8 @@ plugin_migrations = {
         "code_content",
         "attributes",
         "P001",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -98,7 +101,8 @@ plugin_migrations = {
         "figure_caption",
         "figure_alignment",
         "attributes",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -107,7 +111,8 @@ plugin_migrations = {
         "attributes",
         "P001",
         "tag_type",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -118,7 +123,8 @@ plugin_migrations = {
         "attributes",
         "P001",
         "tag_type",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -129,7 +135,8 @@ plugin_migrations = {
         "P001",
         "G001",  # fill text_alignment from attributes if possible
         "tag_type",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ]
@@ -142,7 +149,8 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
@@ -165,14 +173,15 @@ plugin_migrations = {
         "file_link",
         "attributes",
         "P001",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
+        "M001-p",  # SpacingMixin
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroup -> listgroup.ListGroup": [
         "list_group_flush",
         "tag_type",
         "attributes",
         "P001",
-        "M001",  # SpacingMixin
+        "M001-m",  # SpacingMixin
         "M002",  # ResponsiveMixin
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroupItem -> listgroup.ListGroupItem": [
@@ -181,6 +190,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "M001-p",  # SpacingMixin
     ],
     "bootstrap4_media.Bootstrap4Media -> media.Media": [
         "tag_type",
@@ -215,6 +225,7 @@ plugin_migrations = {
         "attributes",
         "P001",
         "A001_picture",  # fix alignment
+        "M001-m",  # MarginMixin
         "M002",  # ResponsiveMixin
     ],
     "bootstrap4_tabs.Bootstrap4Tab -> tabs.Tab": [
@@ -226,14 +237,13 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
-        "M001",  # SpacingMixin
     ],
     "bootstrap4_tabs.Bootstrap4TabItem -> tabs.TabItem": [
         "tab_title",
         "tag_type",
         "attributes",
-        "M001",  # SpacingMixin
         "P001",
+        "M001-p",  # SpacingMixin
     ],
     "bootstrap4_utilities.Bootstrap4Spacing -> utilities.Spacing": [
         "space_property",
@@ -313,46 +323,30 @@ def a001_alignment(obj, new_obj, field):
         new_obj.config[field].replace("text-right", "end")
 
 
-def m001_spacing_mixin(obj, new_obj):
+def m001_spacing_mixin(obj, new_obj, type):
     classes = new_obj.config["attributes"].get("class", "").split()
     if classes:
-        for size, _ in list(settings.SPACER_SIZE_CHOICES) + [("auto", "auto")]:
-            if f"m-{size}" in classes:
-                classes.remove(f"m-{size}")
-                classes.append(f"mx-{size}")
-                classes.append(f"my-{size}")
-            if f"p-{size}" in classes:
-                classes.remove(f"p-{size}")
-                classes.append(f"px-{size}")
-                classes.append(f"py-{size}")
+        for size, _ in list(settings.SPACER_SIZE_CHOICES) + (
+            [("auto", "auto")] if type[0] == "m" else []
+        ):
+            if f"{type[0]}-{size}" in classes:
+                classes.remove(f"{type[0]}-{size}")
+                classes.append(f"{type[0]}x-{size}")
+                classes.append(f"{type[0]}y-{size}")
             for side, _ in settings.SPACER_X_SIDES_CHOICES:
-                if f"m{side}-{size}" in classes and not new_obj.config.get(
-                    "margin_x", None
+                if f"{type}{side}-{size}" in classes and not new_obj.config.get(
+                    "{type}_x", None
                 ):
-                    new_obj.config["margin_x"] = f"m{side}-{size}"
-                    new_obj.config["margin_devices"] = None
-                    classes.remove(f"m{side}-{size}")
+                    new_obj.config["{type}_x"] = f"type[0]{side}-{size}"
+                    new_obj.config["{type}_devices"] = None
+                    classes.remove(f"type[0]{side}-{size}")
             for side, _ in settings.SPACER_Y_SIDES_CHOICES:
-                if f"m{side}-{size}" in classes and not new_obj.config.get(
-                    "margin_y", None
+                if f"type[0]{side}-{size}" in classes and not new_obj.config.get(
+                    "{type}_y", None
                 ):
-                    new_obj.config["margin_y"] = f"m{side}-{size}"
-                    new_obj.config["margin_devices"] = None
+                    new_obj.config["{type}_y"] = f"type[0]{side}-{size}"
+                    new_obj.config["{type}_devices"] = None
                     classes.remove(f"m{side}-{size}")
-            for side, _ in settings.SPACER_X_SIDES_CHOICES:
-                if f"p{side}-{size}" in classes and not new_obj.config.get(
-                    "padding_x", None
-                ):
-                    new_obj.config["padding_x"] = f"p{side}-{size}"
-                    new_obj.config["padding_devices"] = None
-                    classes.remove(f"p{side}-{size}")
-            for side, _ in settings.SPACER_Y_SIDES_CHOICES:
-                if f"p{side}-{size}" in classes and not new_obj.config.get(
-                    "padding_y", None
-                ):
-                    new_obj.config["padding_y"] = f"p{side}-{size}"
-                    new_obj.config["padding_devices"] = None
-                    classes.remove(f"p{side}-{size}")
         if classes:
             new_obj.config["attributes"]["class"] = " ".join(classes)
         else:
@@ -447,7 +441,8 @@ data_migration = {
     "A001_picture": lambda x, y: a001_alignment(x, y, "alignment"),
     "A001_card": lambda x, y: a001_alignment(x, y, "card_alignment"),
     "G001": g001_col_text_alignment,
-    "M001": m001_spacing_mixin,
+    "M001-m": lambda x, y: m001_spacing_mixin(x, y, "margin"),
+    "M001-p": lambda x, y: m001_spacing_mixin(x, y, "padding"),
     "M002": m002_responsive_mixin,
     "M003": m003_background_mixin,
 }
