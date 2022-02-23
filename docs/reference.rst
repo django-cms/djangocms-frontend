@@ -6,8 +6,8 @@
  Settings
 **********
 
-Available settings will be revised. For now only the following can be
-changed:
+**djangocms-frontend** can be configured by putting the appropriate settings
+in your project's ``settings.py``.
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
@@ -16,9 +16,13 @@ changed:
     Lists the choices for the tag field of all djangocms-frontend plugins.
     ``div`` is the default tag.
 
+    These tags appear in Advanced Settings of some elements for editors to
+    chose from.
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_GRID_SIZE
 
     Defaults to ``12``.
+
 
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_GRID_CONTAINERS
@@ -28,13 +32,10 @@ changed:
     .. code::
 
         (
-           ('container', _('Container')),
-           ('container-fluid', _('Fluid container')),
-           ("container-sm", _("sx container")),
-           ("container-md", _("md container")),
-           ("container-lg", _("lg container")),
-           ("container-xl", _("xl container")),
-       )
+            ("container", _("Container")),
+            ("container-fluid", _("Fluid container")),
+            ("container-full", _("Full container")),
+        )
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_USE_ICONS
 
@@ -44,12 +45,57 @@ changed:
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES
 
-   Defaults to ``(('default', _('Default')),)``
+    Defaults to ``(('default', _('Default')),)``
+
+    If more than one option is given editors can select which template a
+    carousel uses for rendering. Carousel expects the templates in a template
+    folder under ``djangocms_frontend/bootstrap5/carousel/{{ name }}/``.
+    ``{{ name }}`` denotes the value of the template, i.e. ``default`` in the
+    default example.
+
+    Carousel requires at least two files: ``carousel.html`` and ``slide.html``.
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAB_TEMPLATES
 
-   Defaults to ``(('default', _('Default')),)``
+    Defaults to ``(('default', _('Default')),)``
 
+    If more than one option is given editors can select which template a
+    tab element uses for rendering. Tabs expects the templates in a template
+    folder under ``djangocms_frontend/bootstrap5/tabs/{{ name }}/``.
+    ``{{ name }}`` denotes the value of the template, i.e. ``default`` in the
+    default example.
+
+    Tabs requires at least two files: ``tabs.html`` and ``item.html``.
+
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_LINK_TEMPLATES
+
+    Defaults to ``(('default', _('Default')),)``
+
+    If more than one option is given editors can select which template a
+    link or button element uses for rendering. Link expects the templates in a template
+    folder under ``djangocms_frontend/bootstrap5/link/{{ name }}/``.
+    ``{{ name }}`` denotes the value of the template, i.e. ``default`` in the
+    default example.
+
+    Link requires at least one file: ``link.html``.
+
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_JUMBOTRON_TEMPLATES
+
+    Defaults to ``(('default', _('Default')),)``
+
+    Jumbotrons have been discontinued form Bootstrap 5 (and are not present
+    in other frameworks either). The default template mimics the Bootstrap 4's
+    jumbotron.
+
+    If more than one option is given editors can select which template a
+    jumbotron element uses for rendering. Jumotron expects the template in a template
+    folder under ``djangocms_frontend/bootstrap5/jumbotron/{{ name }}/``.
+    ``{{ name }}`` denotes the value of the template, i.e. ``default`` in the
+    default example.
+
+    Link requires at least one file: ``jumbotron.html``.
 
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_SPACER_SIZES
@@ -80,18 +126,42 @@ changed:
     .. code::
 
         (
-           ('primary', _('Primary')),
-           ('secondary', _('Secondary')),
-           ('success', _('Success')),
-           ('danger', _('Danger')),
-           ('warning', _('Warning')),
-           ('info', _('Info')),
-           ('light', _('Light')),
-           ('dark', _('Dark')),
-           ('custom', _('Custom')),
-       )
+            ("primary", _("Primary")),
+            ("secondary", _("Secondary")),
+            ("success", _("Success")),
+            ("danger", _("Danger")),
+            ("warning", _("Warning")),
+            ("info", _("Info")),
+            ("light", _("Light")),
+            ("dark", _("Dark")),
+        )
 
-.. py:attribute:: DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_ADMIN_CSS
+
+    Default: ``None``
+
+    Adds css format files to the frontend editing forms of
+    **djangocms-frontend**. The syntax is with a ``ModelForm``'s
+    ``css`` attribute of its ``Media`` class, e.g.,
+    ``DJANGOCMS_FRONTEND_ADMIN_CSS = {"all": ("css/admin.min.css",)}``.
+
+    This css might be used to style have theme-specific colors available
+    in the frontend editing forms. The included css file is custom made and
+    should only contain color settings in the form of
+
+    .. code-block::
+
+        .frontend-button-group .btn-primary {
+            color: #123456;  // add !important here if using djangocms-admin-style
+            background-color: #abcdef;
+        }
+
+    .. note::
+
+        Changing the ``color`` attribute might require a ``!important`` statement
+        if you are using **djangocms-admin-style**.
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH
 
     If unset or smaller than ``1`` the link plugin will render all link options
     into its form. If ``1`` or bigger the link form will wait for the user to
@@ -99,7 +169,7 @@ changed:
     string using an ajax request.
 
 
-.. py:attribute:: TEXT_SAVE_IMAGE_FUNCTION
+.. py:attribute:: settings.TEXT_SAVE_IMAGE_FUNCTION
 
     Requirement: ``TEXT_SAVE_IMAGE_FUNCTION = None``
 
@@ -251,20 +321,29 @@ plugins.
  Management commands
 *********************
 
-Management commands are run by typing ``./manage.py command`` in the project
-directory.
+Management commands are run by typing ``./manage.py frontend command`` in the
+project directory. ``command`` can be one of the following:
 
-``migrate_frontend``
+``migrate``
     Migrates plugins from other frontend packages to **djangocms-frontend**.
-    Currently supports **djangocms-bootstrap4** and **djangocms_styled_link**.
+    Currently supports **djangocms_bootstrap4** and **djangocms_styled_link**.
 
-``stale_frontend_references``
-    If references in a UI item are moved or removed, the UI items are designed to
+``stale_references``
+    If references in a UI item are moved or removed the UI items are designed to
     fall back gracefully and both not throw errors or be deleted themselves
     (by a db cascade).
 
     The drawback is, that references might become stale. This command prints all
     stale references, their plugins and pages/placeholder they belong to.
+
+``sync_permissions users`` or ``sync_permissions groups``
+    Django allows to set permissions for each user and group on a per plugin
+    level. This might become somewhat tedious which is why this command
+    will snyc permissions. For each user or group it will copy the permissions
+    of ``djangocms_frontend.models.FrontendUIItem`` to all installed
+    djangocms-frontend plugins. If you need to change permissions for all
+    plugins this requires you only to change them for ``FrontendUIItem`` and
+    then syncing the new permission with these commands.
 
 
 ***************

@@ -305,7 +305,7 @@ plugins it just provides the amount of space specified on the specified sides.
 Blockquote component
 ********************
 
-Creates a ``<blockquote>``tag.
+Creates a ``<blockquote>`` tag.
 
 .. note::
 
