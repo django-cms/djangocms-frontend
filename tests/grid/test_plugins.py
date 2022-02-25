@@ -140,5 +140,5 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
             # `get_add_plugin_uri` to get cleaner test results
             warnings.simplefilter("ignore")
             response = self.client.post(request_url, data)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<div class="success">')

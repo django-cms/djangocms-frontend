@@ -14,7 +14,7 @@ class B5ConstantsTestCase(TestCase):
     # when changing any values in these
 
     def test_constants(self):
-        self.assertEquals(
+        self.assertEqual(
             DEVICE_CHOICES,
             (
                 ("xs", "Extra small"),  # default <576px
@@ -25,8 +25,8 @@ class B5ConstantsTestCase(TestCase):
                 ("xxl", "Extra-extra large"),
             ),
         )
-        self.assertEquals(DEVICE_SIZES, ("xs", "sm", "md", "lg", "xl", "xxl"))
-        self.assertEquals(
+        self.assertEqual(DEVICE_SIZES, ("xs", "sm", "md", "lg", "xl", "xxl"))
+        self.assertEqual(
             TAG_CHOICES,
             (
                 ("div", "div"),
@@ -37,7 +37,7 @@ class B5ConstantsTestCase(TestCase):
                 ("aside", "aside"),
             ),
         )
-        self.assertEquals(
+        self.assertEqual(
             COLOR_STYLE_CHOICES,
             (
                 ("primary", "Primary"),
@@ -50,7 +50,7 @@ class B5ConstantsTestCase(TestCase):
                 ("dark", "Dark"),
             ),
         )
-        self.assertEquals(
+        self.assertEqual(
             ALIGN_CHOICES,
             (
                 ("start", "Left"),
