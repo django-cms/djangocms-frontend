@@ -1,3 +1,6 @@
+.. index::
+    single: How-to
+
 ###############
  How-to guides
 ###############
@@ -57,7 +60,7 @@ Example for a configuration that allows linking CMS pages plus two
 different page types from two djangocms-blog apps called "Blog" and
 "Content hub" (having the ``app_config_id`` 1 and 2, respectively):
 
-.. code::
+.. code:: python
 
    DJANGOCMS_FRONTEND_LINK_MODELS = [
        {
@@ -77,7 +80,7 @@ different page types from two djangocms-blog apps called "Blog" and
 Another example might be (taken from djangocms-styledlink
 documentation):
 
-.. code::
+.. code:: python
 
    DJANGOCMS_FRONTEND_LINK_MODELS = [
        {
@@ -112,6 +115,9 @@ This allows you to search the page titles.
    **djangocms-frontend** will wait until the user inputs at least this many
    characters before querying potential link targets.
 
+.. index::
+    single: Extend plugins
+
 ********************************
  How to extend existing plugins
 ********************************
@@ -124,7 +130,7 @@ Existing plugins can be extended through two type of class mixins.
    For a theme app called ``theme`` and the bootstrap5 framework this
    would be ``theme.frontends.bootstrap5.py``.
 
-#. In djangocms_frontend.contrib.*app*.frontends.*framework*.py. For the
+#. In ``djangocms_frontend.contrib.*app*.frontends.*framework*.py``. For the
    alert app and the bootstrap5 framework this would be
    ``djangocms_frontend.contrib.alert.frontends.bootstrap5.py``.
 
@@ -138,17 +144,23 @@ extensions in terms of functionality and/or design.
 The framework module is primarily thought to allow for adaptation of
 ``djangocms-frontend`` to other css frameworks besides Bootstrap 5.
 
+.. index::
+    single: RenderMixins
+
 RenderMixins
 ============
 
-The render mixins are called "*PluginName*RenderMixin", e.g.
+The render mixins are called "``*PluginName*RenderMixin``", e.g.
 ``AlertRenderMixin`` and are applied to the plugin class. This allows
 for the redefinition of the ``CMSPlugin.render`` method, especially to
 prepare the context for rendering.
 
-Also it can add fields to the front end editiong form by subclassing
+Also it can add fields to the front end editing form by subclassing
 ``CMSPlugin.get_fieldsets``. This allows for extension or change of the
 plugin's admin form. The admin form is used to edit or create a plugin.
+
+.. index::
+    single: FormMixins
 
 FormMixins
 ==========
@@ -157,10 +169,12 @@ Form mixins are used to add fields to a plugin's admin form. These
 fields are available to the render mixins and, of course, to the plugin
 templates.
 
-Form mixins are calle "*PluginName*FormMixin", e.g. ``AlertFormMixin`` and are
+Form mixins are called "``*PluginName*FormMixin``", e.g. ``AlertFormMixin`` and are
 applied to the editing form class. Form mixins are a subclass of
 ``entangled.EntangeldModelFormMixin``.
 
+.. index::
+    single: Working example
 
 Working example
 ===============
@@ -169,9 +183,9 @@ Let's say you wanted to extend the ``GridContainerPlugin`` to offer the
 option for a background image, and say a blur effect.
 
 First, you add some fields to the ``GridContainerForm`` (in
-*theme*.forms):
+``*theme*.forms.py``):
 
-.. code:: forms.py
+.. code:: python
 
     from django import forms
     from django.db.models import ManyToOneRel
@@ -217,7 +231,7 @@ First, you add some fields to the ``GridContainerForm`` (in
 
 Then, add a ``GridContainerMixin`` in ``*theme*.bootstrap5.py``:
 
-.. code:: bootstrap5.py
+.. code:: python
 
     from django.utils.translation import gettext as _
     from djangocms_frontend.helpers import insert_fields
@@ -262,14 +276,14 @@ functionality. In this case it adds "imagecontainer" to the list of
 classes for the container, processes the background colors, as well as
 opacity and blur.
 
-The ``get_fieldsets`` methed is used to make Django-CMS show the new
+The ``get_fieldsets`` method is used to make Django-CMS show the new
 form fields in the plugin's edit modal (admin form, technically
 speaking).
 
 Lastly, a new template is needed (in
 ``"djangocms_frontend/bootstrap5/grid_container.html"``):
 
-.. code:: grid_container.html
+.. code::
 
     {% load cms_tags %}{% spaceless %}
         <{{ instance.tag_type }}{{ instance.get_attributes }}
@@ -315,6 +329,10 @@ to its basic functionality, i.e. the background images will not be
 shown. As long as plugins are not edited the background image
 information will be preserved.
 
+.. index::
+    single: Create a theme
+    single: Themes
+
 ***************************
  How to create a theme app
 ***************************
@@ -336,7 +354,7 @@ can easily add it to your own plugins.
 If you use the standard editing form, just add a line specifying the
 ``change_form_template`` to your plugin class:
 
-.. code-block::
+.. code-block:: python
 
     class MyCoolPlugin(CMSPluginBase):
         ...

@@ -6,6 +6,8 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
+VENV = env/bin/activate
+PORT = 8001
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -23,6 +25,8 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  install    to create a virtualenv and install the requirements"
+	@echo "  clean      to delete the build directory"
 	@echo "  html       to make standalone HTML files"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
@@ -47,6 +51,15 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  coverage   to run coverage check of the documentation (if enabled)"
+	@echo "  run        to build the docs, watch for changes, and serve them at http://0.0.0.0:8001"
+
+install:
+	@echo "... setting up docs virtualenv"
+	python3 -m venv env
+	. $(VENV); pip install -r requirements.txt
+	@echo "\n" \
+	      "-------------------------------------------------------------------------------------------------- \n" \
+		    "* to build and serve the documentation: make run \n"
 
 clean:
 	rm -rf $(BUILDDIR)/*
@@ -190,3 +203,6 @@ pseudoxml:
 	$(SPHINXBUILD) -b pseudoxml $(ALLSPHINXOPTS) $(BUILDDIR)/pseudoxml
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
+
+run:
+	. $(VENV); sphinx-autobuild $(ALLSPHINXOPTS) build/html --host 0.0.0.0 --port $(PORT)
