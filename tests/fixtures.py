@@ -20,7 +20,9 @@ class TestFixture:
         self.page.publish(self.language)
         self.placeholder = self.page.placeholders.get(slot="content")
         self.superuser = self.get_superuser()
-        self.request_url = self.page.get_absolute_url(self.language) + "?toolbar_off=true"
+        self.request_url = (
+            self.page.get_absolute_url(self.language) + "?toolbar_off=true"
+        )
 
         return super().setUp()
 
