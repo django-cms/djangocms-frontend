@@ -66,18 +66,6 @@ JUMBOTRON_TEMPLATE_CHOICES = getattr(
 )
 
 
-IMAGE_POSITIONING = (
-    ("center center", _("Fully Centered")),
-    ("left top", _("Top left")),
-    ("center top", _("Top center")),
-    ("right top", _("Top right")),
-    ("left center", _("Center left")),
-    ("right center", _("Center right")),
-    ("left bottom", _("Bottom left")),
-    ("center bottom", _("Bottom center")),
-    ("right bottom", _("Bottom right")),
-)
-
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
