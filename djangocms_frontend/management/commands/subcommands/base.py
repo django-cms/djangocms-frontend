@@ -76,9 +76,9 @@ class SubcommandsCommand(BaseCommand):
     def create_parser(self, prog_name, subcommand, **kwargs):
         kwargs = {}
         parser = CommandParser(
-            prog="%s %s" % (os.path.basename(prog_name), subcommand),
+            prog=f"{os.path.basename(prog_name)} {subcommand}",
             description=self.help or None,
-            **kwargs
+            **kwargs,
         )
         add_builtin_arguments(parser)
         self.add_arguments(parser)
@@ -98,7 +98,7 @@ class SubcommandsCommand(BaseCommand):
                     name=instance.command_name,
                     help=instance.help_string,
                     description=instance.help_string,
-                    **kwargs
+                    **kwargs,
                 )
 
                 add_builtin_arguments(parser=parser_sub)

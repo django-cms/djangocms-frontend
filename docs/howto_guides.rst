@@ -176,14 +176,41 @@ applied to the editing form class. Form mixins are a subclass of
 .. index::
     single: Working example
 
+.. index::
+    single: Create a theme
+    single: Themes
+
 Working example
 ===============
 
 Let's say you wanted to extend the ``GridContainerPlugin`` to offer the
-option for a background image, and say a blur effect.
+option for a background image, and say a blur effect. The way to do it
+is to create a theme app. You are free to chose its name. For this example
+we take it to be "theme". Please replace "theme" by your own theme's name.
 
-First, you add some fields to the ``GridContainerForm`` (in
-``*theme*.forms.py``):
+Frist, create a directory structure like this:
+
+.. code-block::
+
+    theme
+    ├── __init__.py
+    ├── forms.py
+    ├── frameworks
+    │   ├── __init__.py
+    │   └── bootstrap5.py
+    ├── static
+    │   └── css
+    │       └── background_image.css
+    └── templates
+        └── djangocms_frontend
+            └── bootstrap5
+                └── grid_container.html
+
+
+All ``__init__.py`` files remain empty.
+
+Next, you add some fields to the ``GridContainerForm`` (in
+``theme/forms.py``):
 
 .. code:: python
 
@@ -194,6 +221,19 @@ First, you add some fields to the ``GridContainerForm`` (in
     from entangled.forms import EntangledModelFormMixin
     from filer.fields.image import AdminImageFormField, FilerImageField
     from filer.models import Image
+
+
+    IMAGE_POSITIONING = (
+        ("center center", _("Fully Centered")),
+        ("left top", _("Top left")),
+        ("center top", _("Top center")),
+        ("right top", _("Top right")),
+        ("left center", _("Center left")),
+        ("right center", _("Center right")),
+        ("left bottom", _("Bottom left")),
+        ("center bottom", _("Bottom center")),
+        ("right bottom", _("Bottom right")),
+    )
 
 
     class GridContainerFormMixin(EntangledModelFormMixin):
@@ -216,7 +256,7 @@ First, you add some fields to the ``GridContainerForm`` (in
         )
         image_position = forms.ChoiceField(
             required=False,
-            choices=settings.EMPTY_CHOICE + settings.IMAGE_POSITIONING,
+            choices=settings.EMPTY_CHOICE + IMAGE_POSITIONING,
             initial="",
             label=_("Background image position"),
         )
@@ -225,11 +265,26 @@ First, you add some fields to the ``GridContainerForm`` (in
             initial=0,
             min_value=0,
             max_value=10,
-            #       widget=forms.TextInput(attrs=dict(type="range", min=0, max=10)),
             help_text=_("Blur of container image (in px)."),
         )
 
-Then, add a ``GridContainerMixin`` in ``*theme*.bootstrap5.py``:
+.. warning::
+
+    These form fields are mixed to the original form. Please make sure to
+    avoid name collisions for the fields.
+
+.. note::
+
+    If you need to add many form mixins, consider turning ``forms.py`` into a
+    package, i.e. create a directory ``forms`` and distribute the mixins over
+    several files, e.g., ``forms/marketing_forms.py`` etc., and importing the
+    all mixins relevant to **djangocms-frontend** into the directory's
+    ``__init__.py``.
+
+Rendering should be done with the Bootstrap 5 framework. Hence all rendering
+mixins go into ``theme/bootstrap5.py``. Since we are extending the
+``GridContainer`` plugin the appropriate mixin to define is
+``GridContainerMixin``:
 
 .. code:: python
 
@@ -241,6 +296,8 @@ Then, add a ``GridContainerMixin`` in ``*theme*.bootstrap5.py``:
         render_template = "djangocms_frontend/bootstrap5/grid_container.html"
 
         def get_fieldsets(self, request, obj=None):
+            """Extend the fieldset of the plugin to contain the new fields
+            defined in forms.py"""
             return insert_fields(
                 super().get_fieldsets(request, obj),
                 (
@@ -250,75 +307,108 @@ Then, add a ``GridContainerMixin`` in ``*theme*.bootstrap5.py``:
                         "container_blur",
                     ),
                 ),
-                block=None,
-                position=1,
-                blockname=_("Image"),
+                block=None,  # Create a new fieldset (called block here)
+                position=1,  # at position 1 (i.e. directly after the mail fieldset)
+                blockname=_("Image"),  # and call the fieldset "Image"
             )
 
         def render(self, context, instance, placeholder):
+            """Render should process the form fields and turn them into appropriate
+            context items or add corresponding classes to the instance"""
             if getattr(instance, "container_image", None):
                 instance.add_classes("imagecontainer")
                 context["bg_color"] = (
-                    f"bg-{instance.container_context}"
-                    if getattr(instance, "container_context", False)
+                    f"bg-{instance.background_context}"
+                    if getattr(instance, "background_context", False)
                     else ""
                 )
-            elif getattr(instance, "container_context", False):
-                instance.add_classes(f"bg-{instance.container_context}")
-                if getattr(instance, "container_opacity", "100") != "100":
-                    instance.add_classes(f"bg-opacity-{instance.container_opacity}")
-                context["bg_color"] = False
             return super().render(context, instance, placeholder)
+
+.. warning::
+
+    Do not forget to call ``super()`` in both the ``get_fieldsets`` and the
+    ``render`` method.
 
 
 The ``render`` method provides required context data for the extended
-functionality. In this case it adds "imagecontainer" to the list of
-classes for the container, processes the background colors, as well as
-opacity and blur.
+functionality. In this case it adds ``imagecontainer`` to the list of
+classes for the container, processes the background colors since it should
+appear above the image (and not below), as well as blur.
 
-The ``get_fieldsets`` method is used to make Django-CMS show the new
+The ``get_fieldsets`` method is used to make django CMS show the new
 form fields in the plugin's edit modal (admin form, technically
 speaking).
 
-Lastly, a new template is needed (in
-``"djangocms_frontend/bootstrap5/grid_container.html"``):
+Then, a new template is needed (in
+``theme/templates/djangocms_frontend/bootstrap5/grid_container.html``):
+
+.. code:: 
+
+    {% load cms_tags static %}{% spaceless %}
+      <{{ instance.tag_type }}{{ instance.get_attributes }}
+      {% if instance.background_opacity and not instance.image %}
+        {% if instance.container_blur %}
+          backdrop-filter: blur({{ instance.container_blur }}px);
+        {% endif %}"
+      {% endif %}>
+      {% if instance.image %}
+        <div class="image"
+          style="background-image: url('{{ instance.image.url }}');
+                 background-position: {{ instance.image_position|default:'center center' }};
+                 background-repeat: no-repeat;background-size: cover;
+                 {% if instance.container_blur %}
+                   filter: blur({{ instance.container_blur }}px);
+                 {% endif %}">
+        </div>
+      {% elif instance.container_image %}
+        <div class="image placeholder placeholder-wave"></div>
+      {% endif %}
+      {% if bg_color %}
+        <div class="cover {{ bg_color }}"{% if instance.background_opacity %}
+             style="opacity: {{ instance.background_opacity }}%"{% endif %}></div>
+      {% endif %}
+      {% if instance.container_image %}
+        <div class="content">
+      {% endif %}
+        {% for plugin in instance.child_plugin_instances %}
+          {% render_plugin plugin %}
+        {% endfor %}
+      {% if instance.container_image %}</div>{% endif %}
+    </{{ instance.tag_type }}>{% endspaceless %}
+    {# Only add if the css is not included in your site's global css #}
+    {% addtoblock 'css' %}
+        <link rel="stylesheet" href="{% static 'css/background_image.css' %}">
+    {% endaddtoblock
+
+
+Finally, a set of css style complement the new template. The styles can either
+be added to the css block in the template (if used scarcely and as done in
+the above example) or directly to your project's css files.
+
+The required styles are:
 
 .. code::
 
-    {% load cms_tags %}{% spaceless %}
-        <{{ instance.tag_type }}{{ instance.get_attributes }}
-            {% if instance.container_opacity and not instance.image %}
-                style="opacity: {{ instance.container_opacity }}%;
-                       {% if instance.container_blur %}
-                          backdrop-filter: blur({{ instance.container_blur }}px);
-                       {% endif %}"
-            {% endif %}
-        >
-          {% if instance.image %}
-            <div class="image"
-                style="background-image: url('{{ instance.image.url }}');
-                       background-position: {{ instance.image_position|default:'center center' }};
-                       background-repeat: no-repeat;
-                       background-size: cover;
-                       {% if instance.container_blur %}
-                         filter: blur({{instance.container_blur}}px);
-                       {% endif %}">
-            </div>
-          {% elif instance.container_image %}
-            <div class="image placeholder placeholder-wave"></div>
-          {% endif %}
-          {% if bg_color %}
-            <div class="cover {{bg_color}}"{% if instance.container_opacity %}
-                 style="opacity: {{ instance.container_opacity }}%"{% endif %}>
-            </div>
-          {% endif %}
-          {% if "imagecontainer" in add_classes %}<div class="content">{% endif %}
-            {% for plugin in instance.child_plugin_instances %}
-                {% render_plugin plugin %}
-            {% endfor %}
-          {% if "imagecontainer" in add_classes %}</div>{% endif %}
-        </{{ instance.tag_type }}>
-    {% endspaceless %}
+    /* Image Container */
+
+    div.imagecontainer {
+        position: relative;
+        min-height: 112px;
+    }
+
+    div.imagecontainer > div.cover,
+    div.imagecontainer > div.image {
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+    }
+
+    div.imagecontainer > div.content {
+        position: relative;
+    }
+
 
 With these three additions, all grid container plugins will now have
 additional fields to define abckground images to cover the container
@@ -329,9 +419,21 @@ to its basic functionality, i.e. the background images will not be
 shown. As long as plugins are not edited the background image
 information will be preserved.
 
-.. index::
-    single: Create a theme
-    single: Themes
+.. note::
+
+    A few suggestions on extending **djangocms-frontend**:
+
+    *   You may think of customizing bootstrap by including a folder ``sass`` in
+        your theme app. For more see `Bootstrap 5 documentation on customizing
+        <https://getbootstrap.com/docs/5.1/customize/overview/>`_.
+
+    *   If you need entirely new plugins, create a file ``cms_plugins.py`` and
+        import ``CMSUIPlugin`` (import from ``djangocms_frontend.cms_plugins``)
+        as base class for the plugins.
+
+    *   Create ``models.py``
+        file for the models (which need to be proxy models of ``FrontendUIItem``
+        (import from ``djangocms_frontend.models``).
 
 ***************************
  How to create a theme app

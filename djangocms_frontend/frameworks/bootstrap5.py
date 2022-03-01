@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
@@ -34,7 +32,6 @@ COLOR_CODES = getattr(
     "DJANGOCMS_FRONTEND_COLOR_CODES",
     dict(),
 )
-
 
 FORM_TEMPLATE = getattr(
     settings,
@@ -107,7 +104,6 @@ SIZE_Y_CHOICES = getattr(
         ("min-vh-100", _("Screen (minimum)")),
     ),
 )
-
 
 OPACITY_CHOICES = getattr(
     settings,
