@@ -12,7 +12,7 @@
  djangocms-frontend
 ********************
 
-**djangocms-frontend** is a blugin bundle based on `djangocms_bootstrap5
+**djangocms-frontend** is a plugin bundle based on `djangocms_bootstrap5
 <https://github.com/gl-agnx/djangocms-bootstrap5>`_. Its objective is to
 provide a set of popular frontend components independent of the
 currently used frontend framework such as Bootstrap, or its specific
