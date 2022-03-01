@@ -329,12 +329,19 @@ Then, a new template is needed (in
 
     {% load cms_tags static %}{% spaceless %}
       <{{ instance.tag_type }}{{ instance.get_attributes }}
-      {% if instance.background_opacity and not instance.image %}{% if instance.container_blur %}backdrop-filter: blur(
-        {{ instance.container_blur }}px);{% endif %}" {% endif %}
-      >
+      {% if instance.background_opacity and not instance.image %}
+        {% if instance.container_blur %}
+          backdrop-filter: blur({{ instance.container_blur }}px);
+        {% endif %}"
+      {% endif %}>
       {% if instance.image %}
         <div class="image"
-             style="background-image: url('{{ instance.image.url }}'); background-position: {{ instance.image_position|default:'center center' }};background-repeat: no-repeat;background-size: cover;{% if instance.container_blur %} filter: blur({{ instance.container_blur }}px);{% endif %}">
+          style="background-image: url('{{ instance.image.url }}');
+                 background-position: {{ instance.image_position|default:'center center' }};
+                 background-repeat: no-repeat;background-size: cover;
+                 {% if instance.container_blur %}
+                   filter: blur({{ instance.container_blur }}px);
+                 {% endif %}">
         </div>
       {% elif instance.container_image %}
         <div class="image placeholder placeholder-wave"></div>
