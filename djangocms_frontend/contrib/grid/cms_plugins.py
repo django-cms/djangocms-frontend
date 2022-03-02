@@ -96,7 +96,6 @@ class GridRowPlugin(
                 parent=obj,
                 placeholder=obj.placeholder,
                 language=obj.language,
-                position=obj.numchild,
                 plugin_type=GridColumnPlugin.__name__,
                 ui_item=models.GridColumn.__class__.__name__,
                 config=extra,

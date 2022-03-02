@@ -58,7 +58,6 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
                 parent=obj,
                 placeholder=obj.placeholder,
                 language=obj.language,
-                position=obj.numchild,
                 plugin_type=CardPlugin.__name__,
                 ui_item=models.Card.__class__.__name__,
             ).initialize_from_form(forms.CardForm)
@@ -116,7 +115,6 @@ class CardPlugin(
                 instance=models.CardInner(
                     parent=obj,
                     placeholder=obj.placeholder,
-                    position=obj.numchild,
                     language=obj.language,
                     plugin_type=CardInnerPlugin.__name__,
                     ui_item=models.CardInner.__class__.__name__,

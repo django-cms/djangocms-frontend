@@ -133,6 +133,7 @@ For a manual install:
    .. code::
 
       'djangocms_icon',
+      'easy_thumbnails',
       'djangocms_frontend',
       'djangocms_frontend.contrib.accordion',
       'djangocms_frontend.contrib.alert',

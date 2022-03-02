@@ -49,7 +49,6 @@ class AccordionPlugin(mixin_factory("Accordion"), AttributesMixin, CMSUIPlugin):
                 parent=obj,
                 placeholder=obj.placeholder,
                 language=obj.language,
-                position=obj.numchild,
                 plugin_type=AccordionItemPlugin.__name__,
                 ui_item=models.AccordionItem.__class__.__name__,
                 config=dict(
