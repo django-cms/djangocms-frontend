@@ -115,7 +115,7 @@ class CardPlugin(
                 obj.placeholder,
                 models.CardInner(
                     parent=obj,
-                    position=0,
+                    position=obj.position + 1,
                     placeholder=obj.placeholder,
                     language=obj.language,
                     plugin_type=CardInnerPlugin.__name__,
