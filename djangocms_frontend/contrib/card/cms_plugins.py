@@ -7,6 +7,7 @@ from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
 from ...common.responsive import ResponsiveMixin
 from ...common.spacing import MarginMixin, PaddingMixin
+from ...helpers import add_plugin
 from .. import card
 from . import forms, models
 
@@ -110,15 +111,18 @@ class CardPlugin(
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         if not change:
-            models.CardInner(
-                parent=obj,
-                position=0,
-                placeholder=obj.placeholder,
-                language=obj.language,
-                plugin_type=CardInnerPlugin.__name__,
-                ui_item=models.CardInner.__class__.__name__,
-                config=dict(inner_type="card-body"),
-            ).save()
+            add_plugin(
+                obj.placeholder,
+                models.CardInner(
+                    parent=obj,
+                    position=0,
+                    placeholder=obj.placeholder,
+                    language=obj.language,
+                    plugin_type=CardInnerPlugin.__name__,
+                    ui_item=models.CardInner.__class__.__name__,
+                    config=dict(inner_type="card-body"),
+                ),
+            )
 
 
 @plugin_pool.register_plugin

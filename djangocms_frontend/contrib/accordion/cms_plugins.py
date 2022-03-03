@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...helpers import add_plugin
 from .. import accordion
 from . import forms, models
 
@@ -57,7 +58,7 @@ class AccordionPlugin(mixin_factory("Accordion"), AttributesMixin, CMSUIPlugin):
                     accordion_item_open=(pos == 0),
                 ),
             ).initialize_from_form(forms.AccordionItemForm)
-            item.save()
+            add_plugin(obj.placeholder, item)
 
 
 @plugin_pool.register_plugin

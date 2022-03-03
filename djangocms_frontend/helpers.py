@@ -112,3 +112,14 @@ def link_to_framework_doc(ui_item, topic):
             ).format(link=link)
         )
     return None
+
+
+def add_plugin(placeholder, plugin):
+    if hasattr(placeholder, "add_plugin"):  # CMS v4?
+        placeholder.add_plugin(plugin)
+    else:  # CMS < v4
+        if plugin.parent:
+            plugin.position -= plugin.parent.position + 1
+        else:
+            plugin.position = 0
+        plugin.save()
