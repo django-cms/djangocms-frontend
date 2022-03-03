@@ -61,7 +61,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
                 plugin_type=CardPlugin.__name__,
                 ui_item=models.Card.__class__.__name__,
             ).initialize_from_form(forms.CardForm)
-            obj.add_child(instance=col)
+            col.save()
 
 
 @plugin_pool.register_plugin
@@ -108,19 +108,17 @@ class CardPlugin(
     ]
 
     def save_model(self, request, obj, form, change):
-        new_card = obj.id is None
         super().save_model(request, obj, form, change)
-        if new_card:
-            obj.add_child(
-                instance=models.CardInner(
-                    parent=obj,
-                    placeholder=obj.placeholder,
-                    language=obj.language,
-                    plugin_type=CardInnerPlugin.__name__,
-                    ui_item=models.CardInner.__class__.__name__,
-                    config=dict(inner_type="card-body"),
-                )
-            )
+        if not change:
+            models.CardInner(
+                parent=obj,
+                position=0,
+                placeholder=obj.placeholder,
+                language=obj.language,
+                plugin_type=CardInnerPlugin.__name__,
+                ui_item=models.CardInner.__class__.__name__,
+                config=dict(inner_type="card-body"),
+            ).save()
 
 
 @plugin_pool.register_plugin

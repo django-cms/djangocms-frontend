@@ -44,19 +44,20 @@ class AccordionPlugin(mixin_factory("Accordion"), AttributesMixin, CMSUIPlugin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        for x in range(data["create"] if data["create"] is not None else 0):
+        for pos in range(data["create"] if data["create"] is not None else 0):
             item = models.AccordionItem(
                 parent=obj,
+                position=pos,
                 placeholder=obj.placeholder,
                 language=obj.language,
                 plugin_type=AccordionItemPlugin.__name__,
                 ui_item=models.AccordionItem.__class__.__name__,
                 config=dict(
-                    accordion_item_header=_("Item {}").format(x + 1),
-                    accordion_item_open=(x == 0),
+                    accordion_item_header=_("Item {}").format(pos + 1),
+                    accordion_item_open=(pos == 0),
                 ),
             ).initialize_from_form(forms.AccordionItemForm)
-            obj.add_child(instance=item)
+            item.save()
 
 
 @plugin_pool.register_plugin
