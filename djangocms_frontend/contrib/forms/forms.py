@@ -23,7 +23,7 @@ def verbose_name(form_class):
     """returns the verbose_name property of a Meta class if present or else
     splits the camel-cased form class name"""
     if hasattr(form_class, "Meta") and hasattr(form_class.Meta, "verbose_name"):
-        return getattr(form_class.Meta, "verbose_name")
+        return getattr(form_class.Meta, "verbose_name")  # noqa
     class_name = form_class.__name__.rsplit(".", 1)[-1]
     from re import finditer
 

@@ -16,7 +16,7 @@ selected language as internal links.
 
 The developer may extend this setting to include other page-generating
 Django models as well by adding the ``DJANGOCMS_FRONTEND_LINK_MODELS``
-setting to the project's ``.settings.py`` file.
+setting to the project's ``settings.py`` file.
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_LINK_MODELS
 
@@ -188,7 +188,7 @@ option for a background image, and say a blur effect. The way to do it
 is to create a theme app. You are free to chose its name. For this example
 we take it to be "theme". Please replace "theme" by your own theme's name.
 
-Frist, create a directory structure like this:
+First, create a directory structure like this:
 
 .. code-block::
 
@@ -342,7 +342,7 @@ speaking).
 Then, a new template is needed (in
 ``theme/templates/djangocms_frontend/bootstrap5/grid_container.html``):
 
-.. code:: 
+.. code::
 
     {% load cms_tags static %}{% spaceless %}
       <{{ instance.tag_type }}{{ instance.get_attributes }}
