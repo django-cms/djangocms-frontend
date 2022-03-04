@@ -9,6 +9,7 @@ from djangocms_frontend.common.sizing import SizingMixin
 from djangocms_frontend.common.spacing import SpacingMixin
 
 from ...cms_plugins import CMSUIPlugin
+from ...helpers import add_plugin
 from .. import grid
 from . import forms, models
 
@@ -92,15 +93,18 @@ class GridRowPlugin(
                 extra[f"{size}_offset"] = None
                 extra[f"{size}_ml"] = None
                 extra[f"{size}_mr"] = None
-            models.GridColumn(
-                parent=obj,
-                placeholder=obj.placeholder,
-                position=pos,
-                language=obj.language,
-                plugin_type=GridColumnPlugin.__name__,
-                ui_item=models.GridColumn.__class__.__name__,
-                config=extra,
-            ).save()
+            add_plugin(
+                obj.placeholder,
+                models.GridColumn(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    position=obj.position + pos + 1,
+                    language=obj.language,
+                    plugin_type=GridColumnPlugin.__name__,
+                    ui_item=models.GridColumn.__class__.__name__,
+                    config=extra,
+                ),
+            )
 
 
 @plugin_pool.register_plugin

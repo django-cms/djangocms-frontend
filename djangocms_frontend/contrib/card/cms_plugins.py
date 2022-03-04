@@ -7,6 +7,7 @@ from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
 from ...common.responsive import ResponsiveMixin
 from ...common.spacing import MarginMixin, PaddingMixin
+from ...helpers import add_plugin
 from .. import card
 from . import forms, models
 
@@ -53,15 +54,18 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        for x in range(data["create"] if data["create"] is not None else 0):  # noqa
-            col = models.Card(
-                parent=obj,
-                placeholder=obj.placeholder,
-                language=obj.language,
-                plugin_type=CardPlugin.__name__,
-                ui_item=models.Card.__class__.__name__,
-            ).initialize_from_form(forms.CardForm)
-            col.save()
+        for pos in range(data["create"] if data["create"] is not None else 0):
+            add_plugin(
+                obj.placeholder,
+                models.Card(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    position=obj.position + 1 + pos,
+                    language=obj.language,
+                    plugin_type=CardPlugin.__name__,
+                    ui_item=models.Card.__class__.__name__,
+                ).initialize_from_form(forms.CardForm),
+            )
 
 
 @plugin_pool.register_plugin
@@ -110,15 +114,18 @@ class CardPlugin(
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         if not change:
-            models.CardInner(
-                parent=obj,
-                position=0,
-                placeholder=obj.placeholder,
-                language=obj.language,
-                plugin_type=CardInnerPlugin.__name__,
-                ui_item=models.CardInner.__class__.__name__,
-                config=dict(inner_type="card-body"),
-            ).save()
+            add_plugin(
+                obj.placeholder,
+                models.CardInner(
+                    parent=obj,
+                    position=obj.position + 1,
+                    placeholder=obj.placeholder,
+                    language=obj.language,
+                    plugin_type=CardInnerPlugin.__name__,
+                    ui_item=models.CardInner.__class__.__name__,
+                    config=dict(inner_type="card-body"),
+                ),
+            )
 
 
 @plugin_pool.register_plugin
