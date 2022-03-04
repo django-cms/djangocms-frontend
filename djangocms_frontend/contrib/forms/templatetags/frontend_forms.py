@@ -38,7 +38,7 @@ def get_option(form, option, default=None):
 @register.filter
 def add_placeholder(form):
     """Adds placeholder based on a form field's title"""
-    for field_name, field in form.fields.items():
+    for field_name, _ in form.fields.items():
         form.fields[field_name].widget.attrs["placeholder"] = form.fields[
             field_name
         ].label

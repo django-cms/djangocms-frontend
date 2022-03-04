@@ -154,7 +154,7 @@ class Migrate(SubcommandsCommand):
         count = 0
         for app, app_models in apps.all_models.items():
             if app != "cms":
-                for name, model in app_models.items():
+                for _, model in app_models.items():
                     if hasattr(model, "get_absolute_url"):
                         count += 1
                         self.stdout.write(

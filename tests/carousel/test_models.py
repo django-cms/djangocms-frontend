@@ -47,5 +47,7 @@ class CarouselModelTestCase(TestCase):
         # instance.config["carousel_content"] = None
         # instance.config["carousel_image"] = dict(pk=get_filer_image(name="image").id, model="filer.Image")
         # self.assertEqual(instance.get_short_description(), "image")
-        # instance.config["carousel_image"] = dict(pk=get_filer_image(name="image", original_filename=False).id, model="filer.Image")
+        # instance.config["carousel_image"] = dict(
+        #     pk=get_filer_image(name="image", original_filename=False).id, model="filer.Image"
+        # )
         # self.assertEqual(instance.get_short_description(), "Image")

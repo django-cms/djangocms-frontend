@@ -133,7 +133,7 @@ class PaddingMixin:
         blockname = self.blockname
         blockattrs = dict()
         fs = super().get_fieldsets(request, obj)
-        for label, fields in fs:
+        for label, fields in fs:  # noqa
             if label == blockname:  # already included MarginMixin
                 blockname = _("Padding")
                 blockattrs = dict(classes=())

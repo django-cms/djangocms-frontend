@@ -53,7 +53,7 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        for x in range(data["create"] if data["create"] is not None else 0):
+        for x in range(data["create"] if data["create"] is not None else 0):  # noqa
             col = models.Card(
                 parent=obj,
                 placeholder=obj.placeholder,
