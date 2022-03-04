@@ -54,15 +54,18 @@ class CardLayoutPlugin(mixin_factory("CardLayout"), AttributesMixin, CMSUIPlugin
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
-        for x in range(data["create"] if data["create"] is not None else 0):
-            col = models.Card(
-                parent=obj,
-                placeholder=obj.placeholder,
-                language=obj.language,
-                plugin_type=CardPlugin.__name__,
-                ui_item=models.Card.__class__.__name__,
-            ).initialize_from_form(forms.CardForm)
-            col.save()
+        for pos in range(data["create"] if data["create"] is not None else 0):
+            add_plugin(
+                obj.placeholder,
+                models.Card(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    position=obj.position + 1 + pos,
+                    language=obj.language,
+                    plugin_type=CardPlugin.__name__,
+                    ui_item=models.Card.__class__.__name__,
+                ).initialize_from_form(forms.CardForm),
+            )
 
 
 @plugin_pool.register_plugin
