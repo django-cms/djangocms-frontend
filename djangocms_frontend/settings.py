@@ -69,7 +69,9 @@ JUMBOTRON_TEMPLATE_CHOICES = getattr(
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
-framework_settings = importlib.import_module(f"{theme}.frameworks.{framework}")
+framework_settings = importlib.import_module(
+    f"djangocms_frontend.frameworks.{framework}"
+)
 
 DEVICE_SIZES = framework_settings.DEVICE_SIZES
 DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
