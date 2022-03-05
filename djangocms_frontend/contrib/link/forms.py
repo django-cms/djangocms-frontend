@@ -54,10 +54,6 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
 
     empty_label = _("Select a destination")
 
-    class Media:
-        js = ("admin/js/vendor/jquery/jquery.js",)
-        css = {"screen": ("djangocms_frontend/css/select2.css",)}
-
     @property
     def media(self):
         extra = ".min"

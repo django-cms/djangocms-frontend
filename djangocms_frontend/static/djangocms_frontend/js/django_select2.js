@@ -1,9 +1,22 @@
 'use strict';
-jQuery(document).ready(function () {
-    if (jQuery.fn.jquery == CMS.$.fn.jquery) {
-        const $ = CMS.$;
+django.jQuery(document).ready(function () {
+    var $;
+    if(django.jQuery.fn.select2 != "undefined") {
+        $ = django.jQuery;
+        console.log("Select2 found in django.jQuery", $.fn.jquery);
     } else {
-        const $ = jQuery;
+        if(CMS.$.fn.select2 != "undefined") {
+            $ = CMS.$;
+            console.log("Select2 found in CMS.$", $.fn.jquery);
+        } else {
+            if (jQuery.fn.select2 != "undefined") {
+                $ = jQuery;
+                console.log("Select2 found in window.jQuery", $.fn.jquery);
+            } else {
+                console.error("no Select2 widget found");
+                return ;
+            }
+        }
     }
 
     var init = function ($element, options) {
@@ -11,8 +24,6 @@ jQuery(document).ready(function () {
     }
 
     var initHeavy = function ($element, options) {
-        console.log("initHeavy", $.fn.jquery);
-
         var settings = $.extend({
             ajax: {
                 data: function (params) {
@@ -49,7 +60,6 @@ jQuery(document).ready(function () {
     $.fn.djangoSelect2 = function (options) {
         var settings = $.extend({}, options)
         $.each(this, function (i, element) {
-            console.log("$element", $.fn.jquery);
             var $element = $(element)
             if ($element.hasClass('django-select2-heavy')) {
                 initHeavy($element, settings)
