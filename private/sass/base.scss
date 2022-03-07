@@ -14,10 +14,6 @@
     @include visually-hidden
 }
 
-:root {
-    color-scheme: dark light;
-}
-
 ul.nav {
     margin-bottom: 1em;
     & > li.nav-item {

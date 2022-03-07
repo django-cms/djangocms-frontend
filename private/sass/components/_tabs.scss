@@ -47,13 +47,6 @@ body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs+div.tab-content 
     }
 }
 
-body.djangocms-admin-style .colM ul:not(.object-tools) li {
-    border: none;
-    a.active {
-        border-bottom: 1px solid #dee2e6;
-    }
-}
-
 div.tab-pk {
     align-self: center;
     color: var(--dca-gray-darker, $django-fg);
