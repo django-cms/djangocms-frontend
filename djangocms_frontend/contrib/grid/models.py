@@ -2,11 +2,11 @@ from djangocms_frontend.helpers import get_related_object
 
 try:
     from functools import cached_property
-except ImportError:  # Only available since Pyhton 3.8
+except ImportError:  # Only available since Python 3.8
     cached_property = property
 
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ungettext
+from django.utils.translation import ngettext
 
 from djangocms_frontend.models import FrontendUIItem
 
@@ -51,7 +51,7 @@ class GridRow(FrontendUIItem):
 
     def get_short_description(self):
         column_count = len(self.child_plugin_instances or [])
-        column_count_str = ungettext(
+        column_count_str = ngettext(
             "(1 column)", "(%(count)i columns)", column_count
         ) % {"count": column_count}
 
