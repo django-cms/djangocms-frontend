@@ -9,7 +9,7 @@ from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 from ... import settings
 from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import MarginFormMixin, PaddingFormMixin, SpacingFormMixin
+from ...common.spacing import MarginFormMixin, PaddingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -21,7 +21,6 @@ from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
 from .. import card
 from ..grid.constants import GRID_SIZE
-from ..grid.forms import GridColumnForm
 from .constants import (
     CARD_ALIGNMENT_CHOICES,
     CARD_INNER_TYPE_CHOICES,

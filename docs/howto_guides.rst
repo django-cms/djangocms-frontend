@@ -171,7 +171,7 @@ templates.
 
 Form mixins are called "``*PluginName*FormMixin``", e.g. ``AlertFormMixin`` and are
 applied to the editing form class. Form mixins are a subclass of
-``entangled.EntangeldModelFormMixin``.
+``entangled.EntangledModelFormMixin``.
 
 .. index::
     single: Working example
