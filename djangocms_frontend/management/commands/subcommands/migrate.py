@@ -44,8 +44,6 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                 new_obj.language = obj.language
                 new_obj.creation_date = obj.creation_date
                 new_obj.depth = obj.depth
-                new_obj.path = obj.path
-                new_obj.numchild = obj.numchild
                 new_obj.plugin_type = (
                     plugin_names[new_model]
                     if new_model in plugin_names
