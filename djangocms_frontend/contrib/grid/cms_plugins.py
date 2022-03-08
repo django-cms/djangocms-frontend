@@ -111,6 +111,7 @@ class GridRowPlugin(
 class GridColumnPlugin(
     mixin_factory("GridColumn"),
     AttributesMixin,
+    BackgroundMixin,
     ResponsiveMixin,
     SpacingMixin,
     CMSUIPlugin,

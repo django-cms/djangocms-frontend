@@ -132,6 +132,7 @@ GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 class GridColumnBaseForm(
     mixin_factory("GridColumn"),
+    BackgroundFormMixin,
     ResponsiveFormMixin,
     SpacingFormMixin,
     EntangledModelForm,
