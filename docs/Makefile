@@ -206,7 +206,7 @@ pseudoxml:
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
 spelling:
-	$(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) $(BUILDDIR)
+	$(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) $(BUILDDIR)/spelling
 
 run:
 	. $(VENV); sphinx-autobuild $(ALLSPHINXOPTS) $(BUILDDIR)/html --host 0.0.0.0 --port $(PORT)
