@@ -353,7 +353,7 @@ to render the element. You may also add attributes like additional classes as a
 
 .. warning::
 
-    Using the advanced tab requires some technical knowledge on the sites
+    Using the adanced tab requires some technical knowledge on the sites
     installation, e.g., what css classes are available. This is why the advanced
     settings tab should only be used rarely. If you find yourself using it
     regularly, extending **djangocms-frontend** using a theme might be the more
