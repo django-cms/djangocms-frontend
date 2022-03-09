@@ -18,7 +18,7 @@ provide a set of popular frontend components independent of the
 currently used frontend framework such as Bootstrap, or its specific
 version.
 
-.. image:: ../preview.png
+.. image:: ../../preview.png
 
 **************
  Key features
