@@ -29,4 +29,6 @@ jobs:
       - name: Build docs
         run: |
           cd docs
-          sphinx-build -b dirhtml -n -d build/doctrees . build/dirhtml
+          make docs
+          make spelling
+
