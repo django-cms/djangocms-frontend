@@ -7,11 +7,7 @@ from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.common.responsive import ResponsiveFormMixin
 from djangocms_frontend.common.spacing import SpacingFormMixin
 from djangocms_frontend.contrib import jumbotron
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    ColoredButtonGroup,
-    TagTypeFormField,
-)
+from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 
 mixin_factory = settings.get_forms(jumbotron)
 

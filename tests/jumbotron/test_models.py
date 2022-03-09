@@ -1,6 +1,5 @@
 from django.test import TestCase
 
-from djangocms_frontend.contrib.jumbotron.forms import JumbotronForm
 from djangocms_frontend.contrib.jumbotron.models import Jumbotron
 
 
