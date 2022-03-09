@@ -7,9 +7,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
-    name: docs
+    name: build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,5 +30,29 @@ jobs:
         run: |
           cd docs
           make html
+
+  spelling:
+    runs-on: ubuntu-latest
+    name: spelling
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('docs/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - run: python -m pip install -r docs/requirements.txt
+      - name: Build docs
+        run: |
+          cd docs
           make spelling
 
