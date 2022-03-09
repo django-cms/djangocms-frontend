@@ -29,6 +29,6 @@ jobs:
       - name: Build docs
         run: |
           cd docs
-          make docs
+          make html
           make spelling
 
