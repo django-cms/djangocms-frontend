@@ -54,7 +54,7 @@ To automatically create not only a row but also some columns within that
 row, enter the number of columns you will be using. You can always later
 add more columns to the row or delete columns from the row.
 
-Vertical alignmend defines how columns of different height are
+Vertical aligned defines how columns of different height are
 positioned against each other.
 
 Horizontal alignment defines how columns **that do not fill an entire

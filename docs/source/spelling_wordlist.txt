@@ -7,6 +7,7 @@ cms
 collapsable
 config
 css
+customisable
 dismissible
 django
 djangocms
@@ -35,6 +36,7 @@ styledlink
 subclasses
 subclassing
 themable
+un
 url
 viewport
 xl

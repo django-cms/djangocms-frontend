@@ -90,7 +90,7 @@ in your project's ``settings.py``.
     jumbotron.
 
     If more than one option is given editors can select which template a
-    jumbotron element uses for rendering. Jumotron expects the template in a template
+    jumbotron element uses for rendering. Jumbotron expects the template in a template
     folder under ``djangocms_frontend/bootstrap5/jumbotron/{{ name }}/``.
     ``{{ name }}`` denotes the value of the template, i.e. ``default`` in the
     default example.
@@ -239,7 +239,7 @@ Models
 .. py:method:: FrontendUIItem.get_attributes(self)
 
     This method renders all attributes given in the optional ``attributes``
-    field (stored in ``.config``). The ``class`` attriubte reflects all
+    field (stored in ``.config``). The ``class`` attribute reflects all
     additional classes that have been passed to the model instance by means
     of the ``.add_classes`` method.
 
@@ -339,7 +339,7 @@ project directory. ``command`` can be one of the following:
 ``sync_permissions users`` or ``sync_permissions groups``
     Django allows to set permissions for each user and group on a per plugin
     level. This might become somewhat tedious which is why this command
-    will snyc permissions. For each user or group it will copy the permissions
+    will sync permissions. For each user or group it will copy the permissions
     of ``djangocms_frontend.models.FrontendUIItem`` to all installed
     djangocms-frontend plugins. If you need to change permissions for all
     plugins this requires you only to change them for ``FrontendUIItem`` and

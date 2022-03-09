@@ -100,7 +100,7 @@ following base template (``base.html``)
     are
 
     * **djangocms-frontend** does not contain CSS or JS files from Bootstrap
-      or any other framework for that matter. The example tempaltes load
+      or any other framework for that matter. The example templates load
       CSS and JS from a CDN.
     * It is considered safer to host CSS and JS files yourself. Otherwise you
       do not have control over the CSS and/or JS that is delivered.
@@ -108,7 +108,7 @@ following base template (``base.html``)
       brand colors.
 
 
-The example template is customizable by a set of template blocks:
+The example template is customisable by a set of template blocks:
 
 ``{% block title %}``
     Renders the page title. Defaults to ``{% page_attribute "page_title" %}``
@@ -305,7 +305,7 @@ with three aims:
 
 The editing has therefore been categorized in tabs starting with a plugin's
 key tab for its most important information. Other tabs add general modifications
-to the plugin, their availabilty depending on the plugin type. The well-known
+to the plugin, their availability depending on the plugin type. The well-known
 "advanced settings" is available to all plugins, however, its use should in most
 case be covered by the new other tabs:
 
@@ -318,7 +318,7 @@ The background tab allows to set a background context leading to the background
 being colored appropriately.
 
 The background properties can be modified by changing **opacity** and its ability
-cast a **shadow**. Shadows allow the whole element to appear elevanted from the
+cast a **shadow**. Shadows allow the whole element to appear elevated from the
 background.
 
 .. image:: screenshots/tabs-background.png
@@ -326,11 +326,11 @@ background.
 Spacing tab
 ===========
 
-The spacing tab is used to set margins and paddings and to select which
+The spacing tab is used to set margins and padding and to select which
 devices they should be applied.
 
-For both margin and paddings the settings can be made independently for
-horizontal and vertical paddings.
+For both margin and padding the settings can be made independently for
+horizontal and vertical padding.
 
 .. image:: screenshots/tabs-spacing.png
 
@@ -353,7 +353,7 @@ to render the element. You may also add attributes like additional classes as a
 
 .. warning::
 
-    Using the advanced tab requires some technical knowlege on the sites
+    Using the advanced tab requires some technical knowledge on the sites
     installation, e.g., what css classes are available. This is why the advanced
     settings tab should only be used rarely. If you find yourself using it
     regularly, extending **djangocms-frontend** using a theme might be the more
