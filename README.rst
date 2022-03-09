@@ -4,7 +4,7 @@
 
 |pypi| |coverage|
 
-**django CMS Frontend** is a blugin bundle based on
+**django CMS Frontend** is a plugin bundle based on
 `djangocms_bootstrap5
 <https://github.com/gl-agnx/djangocms-bootstrap5>`_. Its objective is to
 provide a set of popular frontend components independent of the
