@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 import djangocms_frontend
 
 from .subcommands.base import SubcommandsCommand

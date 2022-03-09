@@ -1,5 +1,3 @@
-import copy
-
 from cms.api import add_plugin, create_page
 from django.template.loader import select_template
 from django.test import TestCase

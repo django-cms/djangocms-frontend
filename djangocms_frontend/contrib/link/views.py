@@ -1,7 +1,5 @@
-from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import FieldDoesNotExist, PermissionDenied
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.views.generic import View
 
 from .helpers import get_link_choices

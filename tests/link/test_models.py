@@ -1,6 +1,5 @@
 from django.test import TestCase
 
-from djangocms_frontend.contrib.link.forms import LinkForm
 from djangocms_frontend.contrib.link.models import Link
 
 
