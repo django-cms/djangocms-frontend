@@ -12,7 +12,7 @@ bootstrap 5.
 
 While ``djangocoms-frontend`` is set up to become framework agnostic its
 heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
-Hence  for the timne being, this documentation references the Bootstrap 5
+Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
 
 .. index::
@@ -157,7 +157,7 @@ Carousel component
 ******************
 
 A `Carousel <https://getbootstrap.com/docs/5.0/components/carousel/>`_
-is a set of images (pontentially with some description) that slide in
+is a set of images (potentially with some description) that slide in
 (or fade in) one after the other after a certain amount of time.
 
 ******************
@@ -234,7 +234,7 @@ List groups are a flexible and powerful component for displaying a series of
 content. Modify and extend them to support just about any content within.
 
 The component consists of a wrapper - ListGroup Plugin - and the items of the
-list - ListGroupItem Plugin. If the list item is a link it suffices to instert
+list - ListGroupItem Plugin. If the list item is a link it suffices to insert
 a Link Plugin directly as a child of the ListGroup Plugin.
 
 List group
@@ -310,7 +310,7 @@ Creates a ``<blockquote>`` tag.
 .. note::
 
     New feature:
-        Alternatively to the unformatted quote text, child plugins can be used
+        Alternatively to the un-formatted quote text, child plugins can be used
         to fill the content of the blockquote.
 
 .. index::

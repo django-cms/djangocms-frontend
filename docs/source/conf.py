@@ -14,14 +14,14 @@
 # fmt: off
 import os
 import sys
+from pathlib import Path
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('.'))
-parent = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-sys.path.insert(0, parent)
-sys.path.insert(0, os.path.join(parent, "tests"))
+HERE = Path(__file__).parent
+sys.path.insert(0, str(HERE.parent.parent))  # this way, we don't have to install the app
 
 #import cms_helper  # isort:skip  # noqa
 import djangocms_frontend  # isort:skip  # noqa
@@ -45,6 +45,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx_copybutton",
+    "sphinxcontrib.spelling",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

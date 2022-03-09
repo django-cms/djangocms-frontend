@@ -411,7 +411,7 @@ The required styles are:
 
 
 With these three additions, all grid container plugins will now have
-additional fields to define abckground images to cover the container
+additional fields to define background images to cover the container
 area.
 
 If the theme is taken out of the path djangocms-frontend will fall back
