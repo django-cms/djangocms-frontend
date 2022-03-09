@@ -176,7 +176,7 @@ for size in settings.DEVICE_SIZES:
     extra_fields_column[f"{size}_order"] = forms.IntegerField(
         label="order" if size == "xs" else f"order-{size}",
         required=False,
-        min_value=0,
+        min_value=1,
         max_value=GRID_SIZE,
         widget=forms.HiddenInput()
         if "{size}_order" in getattr(settings, "EXCL_COL_PROP", ())

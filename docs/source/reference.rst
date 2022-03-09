@@ -295,7 +295,7 @@ plugins.
     from ``CheckboxSelectMultiple`` the icons work like checkboxes and not radio
     buttons.
 
-.. py:class:: OptionalDeviceChoiceField(forms.MultipleChoiceField):
+.. py:class:: OptionalDeviceChoiceField(forms.MultipleChoiceField)
 
     Import from ``djangocms_frontend.fields``.
 
