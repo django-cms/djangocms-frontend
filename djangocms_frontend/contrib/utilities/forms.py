@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
@@ -49,6 +50,25 @@ class SpacingForm(EntangledModelForm):
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+    def clean(self):
+        super().clean()
+        if (
+            self.cleaned_data["space_property"] == "p"
+            and self.cleaned_data["space_size"] == "auto"
+        ):
+            raise ValidationError(
+                {
+                    "space_property": _(
+                        "Padding does not have an auto spacing. Either "
+                        "switch to margin or a defined size."
+                    ),
+                    "space_size": _(
+                        "Padding does not have an auto spacing. Either "
+                        "switch to a defined size or change the spacing property."
+                    ),
+                }
+            )
 
 
 class HeadingForm(EntangledModelForm):

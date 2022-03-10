@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-21 18:14+0100\n"
+"POT-Creation-Date: 2022-03-10 11:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: common/attributes.py:11
+#: common/attributes.py:9
 msgid ""
 "Advanced settings lets you add html attributes to render this element. Use "
 "them wisely and rarely."
 msgstr ""
 
-#: common/attributes.py:28 contrib/accordion/cms_plugins.py:90
+#: common/attributes.py:26 contrib/accordion/cms_plugins.py:91
 msgid "Advanced settings"
 msgstr ""
 
-#: common/bootstrap5/background.py:32
+#: common/bootstrap5/background.py:20
 msgid "Background"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Background context"
 msgstr ""
 
-#: common/bootstrap5/background.py:51 contrib/card/forms.py:33
+#: common/bootstrap5/background.py:51 contrib/card/forms.py:32
 #: contrib/card/models.py:7
 msgid "Transparent"
 msgstr ""
@@ -57,85 +57,106 @@ msgstr ""
 msgid "Use shadows to optically lift cards from the background."
 msgstr ""
 
-#: common/bootstrap5/responsive.py:54
+#: common/bootstrap5/responsive.py:35
 msgid "Visibility"
 msgstr ""
 
-#: common/bootstrap5/responsive.py:68
+#: common/bootstrap5/responsive.py:58
 msgid "Show element on device"
 msgstr ""
 
-#: common/bootstrap5/responsive.py:70
+#: common/bootstrap5/responsive.py:60
 msgid "Select only devices on which this element should be shown."
 msgstr ""
 
-#: common/spacing.py:15 contrib/utilities/forms.py:39
+#: common/bootstrap5/sizing.py:8 common/spacing.py:10
+#: contrib/utilities/forms.py:40 frameworks/bootstrap5.py:90
+#: frameworks/bootstrap5.py:103
 msgid "Auto"
 msgstr ""
 
-#: common/spacing.py:109
+#: common/bootstrap5/sizing.py:44
+msgid "Horizontal size"
+msgstr ""
+
+#: common/bootstrap5/sizing.py:50
+msgid ""
+"Sets the horizontal size relative to the surrounding container or the "
+"viewport."
+msgstr ""
+
+#: common/bootstrap5/sizing.py:54
+msgid "Vertical size"
+msgstr ""
+
+#: common/bootstrap5/sizing.py:60
+msgid ""
+"Sets the vertical size relative to the surrounding container or the viewport."
+msgstr ""
+
+#: common/spacing.py:104
 msgid "Margin"
 msgstr ""
 
-#: common/spacing.py:135 common/spacing.py:156
+#: common/spacing.py:130 common/spacing.py:138
 msgid "Padding"
 msgstr ""
 
-#: common/spacing.py:171 contrib/utilities/cms_plugins.py:21
+#: common/spacing.py:166 contrib/utilities/cms_plugins.py:21
 #: contrib/utilities/models.py:14
 msgid "Spacing"
 msgstr ""
 
-#: common/spacing.py:185
+#: common/spacing.py:180
 msgid "Horizontal margin"
 msgstr ""
 
-#: common/spacing.py:191
+#: common/spacing.py:186
 msgid "Vertical margin"
 msgstr ""
 
-#: common/spacing.py:197
+#: common/spacing.py:192
 msgid "Apply margin on device"
 msgstr ""
 
-#: common/spacing.py:200
+#: common/spacing.py:195
 msgid ""
 "Select only devices on which the margin should be applied. On other devices "
 "larger than the first selected device the margin will be set to zero."
 msgstr ""
 
-#: common/spacing.py:217
+#: common/spacing.py:212
 msgid "Horizontal padding"
 msgstr ""
 
-#: common/spacing.py:223
+#: common/spacing.py:218
 msgid "Vertical padding"
 msgstr ""
 
-#: common/spacing.py:229
+#: common/spacing.py:224
 msgid "Apply padding on device"
 msgstr ""
 
-#: common/spacing.py:232
+#: common/spacing.py:227
 msgid ""
 "Select only devices on which the padding should be applied. On other devices "
 "larger than the first selected device the padding will be set to zero."
 msgstr ""
 
-#: contrib/accordion/cms_plugins.py:20 contrib/accordion/models.py:14
+#: contrib/accordion/cms_plugins.py:21 contrib/accordion/models.py:14
 msgid "Accordion"
 msgstr ""
 
-#: contrib/accordion/cms_plugins.py:21 contrib/accordion/cms_plugins.py:71
+#: contrib/accordion/cms_plugins.py:22 contrib/accordion/cms_plugins.py:72
 #: contrib/alert/cms_plugins.py:25 contrib/badge/cms_plugins.py:21
-#: contrib/card/cms_plugins.py:24 contrib/card/cms_plugins.py:83
-#: contrib/card/cms_plugins.py:143 contrib/carousel/cms_plugins.py:26
-#: contrib/carousel/cms_plugins.py:63 contrib/collapse/cms_plugins.py:21
+#: contrib/card/cms_plugins.py:25 contrib/card/cms_plugins.py:86
+#: contrib/card/cms_plugins.py:146 contrib/carousel/cms_plugins.py:25
+#: contrib/carousel/cms_plugins.py:62 contrib/collapse/cms_plugins.py:21
 #: contrib/collapse/cms_plugins.py:50 contrib/collapse/cms_plugins.py:76
 #: contrib/content/cms_plugins.py:31 contrib/content/cms_plugins.py:65
 #: contrib/content/cms_plugins.py:100 contrib/forms/cms_plugins.py:244
-#: contrib/grid/cms_plugins.py:32 contrib/grid/cms_plugins.py:57
-#: contrib/grid/cms_plugins.py:119 contrib/image/cms_plugins.py:29
+#: contrib/grid/cms_plugins.py:35 contrib/grid/cms_plugins.py:60
+#: contrib/grid/cms_plugins.py:125 contrib/image/cms_plugins.py:31
 #: contrib/jumbotron/cms_plugins.py:32 contrib/link/cms_plugins.py:69
 #: contrib/listgroup/cms_plugins.py:29 contrib/listgroup/cms_plugins.py:56
 #: contrib/media/cms_plugins.py:24 contrib/media/cms_plugins.py:41
@@ -145,11 +166,11 @@ msgstr ""
 msgid "Frontend"
 msgstr ""
 
-#: contrib/accordion/cms_plugins.py:56
+#: contrib/accordion/cms_plugins.py:57
 msgid "Item {}"
 msgstr ""
 
-#: contrib/accordion/cms_plugins.py:70 contrib/accordion/models.py:30
+#: contrib/accordion/cms_plugins.py:71 contrib/accordion/models.py:33
 msgid "Accordion item"
 msgstr ""
 
@@ -187,11 +208,11 @@ msgstr ""
 msgid "Initially shows this accordion item on page load."
 msgstr ""
 
-#: contrib/accordion/models.py:17
+#: contrib/accordion/models.py:20
 msgid "({} entries)"
 msgstr ""
 
-#: contrib/accordion/models.py:26
+#: contrib/accordion/models.py:29
 msgid "AccordionItem"
 msgstr ""
 
@@ -199,8 +220,8 @@ msgstr ""
 msgid "Alert"
 msgstr ""
 
-#: contrib/alert/forms.py:40 contrib/badge/forms.py:37
-#: contrib/link/forms.py:283 contrib/listgroup/forms.py:71
+#: contrib/alert/forms.py:40 contrib/badge/forms.py:36
+#: contrib/link/forms.py:300 contrib/listgroup/forms.py:71
 msgid "Context"
 msgstr ""
 
@@ -224,32 +245,32 @@ msgstr ""
 msgid "Badge"
 msgstr ""
 
-#: contrib/badge/forms.py:33
+#: contrib/badge/forms.py:32
 msgid "Badge text"
 msgstr ""
 
-#: contrib/badge/forms.py:43
+#: contrib/badge/forms.py:42
 msgid "Pills style"
 msgstr ""
 
-#: contrib/badge/forms.py:46
+#: contrib/badge/forms.py:45
 msgid "Activates the pills style."
 msgstr ""
 
-#: contrib/card/cms_plugins.py:23 contrib/card/models.py:20
+#: contrib/card/cms_plugins.py:24 contrib/card/models.py:20
 msgid "Card layout"
 msgstr ""
 
-#: contrib/card/cms_plugins.py:46 contrib/grid/cms_plugins.py:75
-#: contrib/grid/cms_plugins.py:142
+#: contrib/card/cms_plugins.py:47 contrib/grid/cms_plugins.py:78
+#: contrib/grid/cms_plugins.py:148
 msgid "Responsive settings"
 msgstr ""
 
-#: contrib/card/cms_plugins.py:82 contrib/card/models.py:35
+#: contrib/card/cms_plugins.py:85 contrib/card/models.py:35
 msgid "Card"
 msgstr ""
 
-#: contrib/card/cms_plugins.py:142 contrib/card/models.py:57
+#: contrib/card/cms_plugins.py:145 contrib/card/models.py:57
 msgid "Card inner"
 msgstr ""
 
@@ -261,7 +282,7 @@ msgstr ""
 msgid "Grid cards"
 msgstr ""
 
-#: contrib/card/constants.py:9 frameworks/bootstrap5.py:62 settings.py:47
+#: contrib/card/constants.py:9 frameworks/bootstrap5.py:59 settings.py:47
 msgid "Left"
 msgstr ""
 
@@ -269,7 +290,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: contrib/card/constants.py:11 frameworks/bootstrap5.py:63 settings.py:49
+#: contrib/card/constants.py:11 frameworks/bootstrap5.py:60 settings.py:49
 msgid "Right"
 msgstr ""
 
@@ -285,58 +306,58 @@ msgstr ""
 msgid "Image overlay"
 msgstr ""
 
-#: contrib/card/forms.py:36 contrib/card/models.py:9
+#: contrib/card/forms.py:35 contrib/card/models.py:9
 msgid "White"
 msgstr ""
 
-#: contrib/card/forms.py:62
+#: contrib/card/forms.py:61
 msgid "Create cards"
 msgstr ""
 
-#: contrib/card/forms.py:63
+#: contrib/card/forms.py:62
 msgid "Number of cards to create when saving."
 msgstr ""
 
-#: contrib/card/forms.py:69
+#: contrib/card/forms.py:68
 msgid "Card type"
 msgstr ""
 
-#: contrib/card/forms.py:123
+#: contrib/card/forms.py:122
 msgid "Card outline context"
 msgstr ""
 
-#: contrib/card/forms.py:127
+#: contrib/card/forms.py:126
 msgid "Uses the border to indicate context."
 msgstr ""
 
-#: contrib/card/forms.py:133 contrib/content/forms.py:81
+#: contrib/card/forms.py:132 contrib/content/forms.py:81
 #: contrib/content/forms.py:115 contrib/image/forms.py:135
 #: contrib/tabs/forms.py:51
 msgid "Alignment"
 msgstr ""
 
-#: contrib/card/forms.py:141
+#: contrib/card/forms.py:140
 msgid "Text context"
 msgstr ""
 
-#: contrib/card/forms.py:149
+#: contrib/card/forms.py:148
 msgid "Full height"
 msgstr ""
 
-#: contrib/card/forms.py:153
+#: contrib/card/forms.py:152
 msgid ""
 "If checked cards in one row will automatically extend to the full row height."
 msgstr ""
 
-#: contrib/card/forms.py:187
+#: contrib/card/forms.py:186
 msgid "Inner type"
 msgstr ""
 
-#: contrib/card/forms.py:190
+#: contrib/card/forms.py:189
 msgid "Define the structure of the plugin."
 msgstr ""
 
-#: contrib/card/forms.py:194 contrib/grid/forms.py:155
+#: contrib/card/forms.py:193 contrib/grid/forms.py:158
 msgid "Content alignment"
 msgstr ""
 
@@ -345,27 +366,27 @@ msgstr ""
 msgid "Colums per row"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:25 contrib/carousel/models.py:20
+#: contrib/carousel/cms_plugins.py:24 contrib/carousel/models.py:20
 msgid "Carousel"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:62 contrib/carousel/models.py:42
+#: contrib/carousel/cms_plugins.py:61 contrib/carousel/models.py:42
 msgid "Carousel slide"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:80 contrib/image/cms_plugins.py:61
+#: contrib/carousel/cms_plugins.py:79 contrib/image/cms_plugins.py:63
 #: contrib/link/cms_plugins.py:38
 msgid "Link settings"
 msgstr ""
 
-#: contrib/carousel/constants.py:19 contrib/image/forms.py:34
-#: contrib/link/forms.py:33 contrib/tabs/constants.py:27 settings.py:56
+#: contrib/carousel/constants.py:19 contrib/image/forms.py:38
+#: contrib/link/forms.py:35 contrib/tabs/constants.py:27 settings.py:56
 #: settings.py:64
 msgid "Default"
 msgstr ""
 
 #: contrib/carousel/forms.py:47 contrib/image/forms.py:98
-#: contrib/jumbotron/forms.py:42 contrib/link/forms.py:262
+#: contrib/jumbotron/forms.py:38 contrib/link/forms.py:279
 #: contrib/tabs/forms.py:38
 msgid "Template"
 msgstr ""
@@ -628,16 +649,16 @@ msgstr ""
 msgid "Only unique slugs accepted for form views"
 msgstr ""
 
-#: contrib/grid/cms_plugins.py:31 contrib/grid/constants.py:19
+#: contrib/grid/cms_plugins.py:34 contrib/grid/constants.py:19
 #: contrib/grid/models.py:24
 msgid "Container"
 msgstr ""
 
-#: contrib/grid/cms_plugins.py:56 contrib/grid/models.py:49
+#: contrib/grid/cms_plugins.py:59 contrib/grid/models.py:49
 msgid "Row"
 msgstr ""
 
-#: contrib/grid/cms_plugins.py:118 contrib/grid/models.py:69
+#: contrib/grid/cms_plugins.py:124 contrib/grid/models.py:69
 #: contrib/tabs/constants.py:15
 msgid "Column"
 msgstr ""
@@ -694,41 +715,41 @@ msgstr ""
 msgid "Align self end"
 msgstr ""
 
-#: contrib/grid/forms.py:50
+#: contrib/grid/forms.py:52
 msgid "Container type"
 msgstr ""
 
-#: contrib/grid/forms.py:55
+#: contrib/grid/forms.py:57
 msgid ""
 "Defines if the grid should use fixed width (<code>.container</code>) or "
 "fluid width (<code>.container-fluid</code>)."
 msgstr ""
 
-#: contrib/grid/forms.py:83
+#: contrib/grid/forms.py:85
 msgid "Create columns"
 msgstr ""
 
-#: contrib/grid/forms.py:84
+#: contrib/grid/forms.py:86
 msgid "Number of columns to create when saving."
 msgstr ""
 
-#: contrib/grid/forms.py:90
+#: contrib/grid/forms.py:92
 msgid "Vertical alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:97
+#: contrib/grid/forms.py:99
 msgid "Horizontal alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:104
+#: contrib/grid/forms.py:106
 msgid "Remove gutters"
 msgstr ""
 
-#: contrib/grid/forms.py:107
+#: contrib/grid/forms.py:109
 msgid "Removes the marginal gutters from the grid."
 msgstr ""
 
-#: contrib/grid/forms.py:149
+#: contrib/grid/forms.py:152
 msgid "Column alignment"
 msgstr ""
 
@@ -775,27 +796,27 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: contrib/image/cms_plugins.py:28
+#: contrib/image/cms_plugins.py:30
 msgid "Picture / Image"
 msgstr ""
 
-#: contrib/image/cms_plugins.py:49
+#: contrib/image/cms_plugins.py:51
 msgid "Format"
 msgstr ""
 
-#: contrib/image/cms_plugins.py:74
+#: contrib/image/cms_plugins.py:76
 msgid "Cropping settings"
 msgstr ""
 
-#: contrib/image/forms.py:23
+#: contrib/image/forms.py:24
 msgid "Align left"
 msgstr ""
 
-#: contrib/image/forms.py:24
+#: contrib/image/forms.py:25
 msgid "Align right"
 msgstr ""
 
-#: contrib/image/forms.py:25
+#: contrib/image/forms.py:26
 msgid "Align center"
 msgstr ""
 
@@ -871,7 +892,7 @@ msgstr ""
 msgid "Provide a description, attribution, copyright or other information."
 msgstr ""
 
-#: contrib/image/forms.py:149 contrib/utilities/forms.py:116
+#: contrib/image/forms.py:149 contrib/utilities/forms.py:136
 msgid "Link attributes"
 msgstr ""
 
@@ -979,11 +1000,11 @@ msgstr ""
 msgid "Jumbotron"
 msgstr ""
 
-#: contrib/jumbotron/forms.py:50 contrib/jumbotron/models.py:19
+#: contrib/jumbotron/forms.py:46 contrib/jumbotron/models.py:19
 msgid "Fluid"
 msgstr ""
 
-#: contrib/jumbotron/forms.py:54
+#: contrib/jumbotron/forms.py:50
 msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 
@@ -1000,136 +1021,136 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: contrib/link/constants.py:10 frameworks/bootstrap5.py:9
-#: frameworks/bootstrap5.py:110 frameworks/foundation6.py:7
+#: contrib/link/constants.py:10 frameworks/bootstrap5.py:7
+#: frameworks/bootstrap5.py:133 frameworks/foundation6.py:7
 #: frameworks/foundation6.py:69
 msgid "Small"
 msgstr ""
 
-#: contrib/link/constants.py:11 frameworks/bootstrap5.py:10
-#: frameworks/bootstrap5.py:111 frameworks/foundation6.py:8
+#: contrib/link/constants.py:11 frameworks/bootstrap5.py:8
+#: frameworks/bootstrap5.py:134 frameworks/foundation6.py:8
 #: frameworks/foundation6.py:70
 msgid "Medium"
 msgstr ""
 
-#: contrib/link/constants.py:12 frameworks/bootstrap5.py:11
-#: frameworks/bootstrap5.py:112 frameworks/foundation6.py:9
+#: contrib/link/constants.py:12 frameworks/bootstrap5.py:9
+#: frameworks/bootstrap5.py:135 frameworks/foundation6.py:9
 #: frameworks/foundation6.py:71
 msgid "Large"
 msgstr ""
 
-#: contrib/link/forms.py:53
+#: contrib/link/forms.py:55
 msgid "Select a destination"
 msgstr ""
 
-#: contrib/link/forms.py:119
-msgid "Display name"
-msgstr ""
-
-#: contrib/link/forms.py:123
+#: contrib/link/forms.py:135
 msgid "External link"
 msgstr ""
 
-#: contrib/link/forms.py:126
+#: contrib/link/forms.py:138
 msgid "Provide a link to an external source."
 msgstr ""
 
-#: contrib/link/forms.py:129
+#: contrib/link/forms.py:141
 msgid "Internal link"
 msgstr ""
 
-#: contrib/link/forms.py:131
+#: contrib/link/forms.py:143
 msgid "If provided, overrides the external link."
 msgstr ""
 
-#: contrib/link/forms.py:137
+#: contrib/link/forms.py:149
 msgid "File link"
 msgstr ""
 
-#: contrib/link/forms.py:139
+#: contrib/link/forms.py:151
 msgid "If provided links a file from the filer app."
 msgstr ""
 
-#: contrib/link/forms.py:143
+#: contrib/link/forms.py:155
 msgid "Anchor"
 msgstr ""
 
-#: contrib/link/forms.py:146
+#: contrib/link/forms.py:158
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
 "include a preceding \"&#35;\" symbol."
 msgstr ""
 
-#: contrib/link/forms.py:151
+#: contrib/link/forms.py:163
 msgid "Email address"
 msgstr ""
 
-#: contrib/link/forms.py:155
+#: contrib/link/forms.py:167
 msgid "Phone"
 msgstr ""
 
-#: contrib/link/forms.py:160
+#: contrib/link/forms.py:172
 msgid "Target"
 msgstr ""
 
-#: contrib/link/forms.py:211
+#: contrib/link/forms.py:223
 #, python-brace-format
 msgid "Only one of {0} or {1} may be given."
 msgstr ""
 
-#: contrib/link/forms.py:223
+#: contrib/link/forms.py:235
 msgid "Please provide a link."
 msgstr ""
 
-#: contrib/link/forms.py:229
+#: contrib/link/forms.py:241
 #, python-format
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
 msgstr ""
 
-#: contrib/link/forms.py:268
+#: contrib/link/forms.py:275
+msgid "Display name"
+msgstr ""
+
+#: contrib/link/forms.py:285
 msgid "Stretch link"
 msgstr ""
 
-#: contrib/link/forms.py:272
+#: contrib/link/forms.py:289
 msgid ""
 "Stretches the active link area to the containing block (with position: "
 "relative)."
 msgstr ""
 
-#: contrib/link/forms.py:276 contrib/tabs/forms.py:45
+#: contrib/link/forms.py:293 contrib/tabs/forms.py:45
 msgid "Type"
 msgstr ""
 
-#: contrib/link/forms.py:280
+#: contrib/link/forms.py:297
 msgid "Adds either a text link or a button which links to the target."
 msgstr ""
 
-#: contrib/link/forms.py:290
+#: contrib/link/forms.py:307
 msgid "Button size"
 msgstr ""
 
-#: contrib/link/forms.py:299
+#: contrib/link/forms.py:316
 msgid "Outline"
 msgstr ""
 
-#: contrib/link/forms.py:302
+#: contrib/link/forms.py:319
 msgid "Removes the coloring from a button and keeps the outline."
 msgstr ""
 
-#: contrib/link/forms.py:305
+#: contrib/link/forms.py:322
 msgid "Block"
 msgstr ""
 
-#: contrib/link/forms.py:308
+#: contrib/link/forms.py:325
 msgid "Extends the button to the width of its container."
 msgstr ""
 
-#: contrib/link/forms.py:311
+#: contrib/link/forms.py:328
 msgid "Icon left"
 msgstr ""
 
-#: contrib/link/forms.py:316
+#: contrib/link/forms.py:333
 msgid "Icon right"
 msgstr ""
 
@@ -1257,7 +1278,7 @@ msgstr ""
 msgid "Editor note"
 msgstr ""
 
-#: contrib/utilities/cms_plugins.py:58 contrib/utilities/forms.py:82
+#: contrib/utilities/cms_plugins.py:58 contrib/utilities/forms.py:102
 #: contrib/utilities/models.py:44
 msgid "Heading"
 msgstr ""
@@ -1266,75 +1287,87 @@ msgstr ""
 msgid "Table of contents"
 msgstr ""
 
-#: contrib/utilities/forms.py:25
+#: contrib/utilities/forms.py:26
 msgid "Property"
 msgstr ""
 
-#: contrib/utilities/forms.py:31
+#: contrib/utilities/forms.py:32
 msgid "Sides"
 msgstr ""
 
-#: contrib/utilities/forms.py:38
+#: contrib/utilities/forms.py:39
 msgid "Size"
 msgstr ""
 
-#: contrib/utilities/forms.py:44
+#: contrib/utilities/forms.py:45
 msgid "Device"
 msgstr ""
 
-#: contrib/utilities/forms.py:68 settings.py:38
+#: contrib/utilities/forms.py:63
+msgid ""
+"Padding does not have an auto spacing. Either switch to margin or a defined "
+"size."
+msgstr ""
+
+#: contrib/utilities/forms.py:67
+msgid ""
+"Padding does not have an auto spacing. Either switch to a defined size or "
+"change the spacing property."
+msgstr ""
+
+#: contrib/utilities/forms.py:88 settings.py:38
 msgid "Heading 1"
 msgstr ""
 
-#: contrib/utilities/forms.py:69 settings.py:39
+#: contrib/utilities/forms.py:89 settings.py:39
 msgid "Heading 2"
 msgstr ""
 
-#: contrib/utilities/forms.py:70 settings.py:40
+#: contrib/utilities/forms.py:90 settings.py:40
 msgid "Heading 3"
 msgstr ""
 
-#: contrib/utilities/forms.py:71 settings.py:41
+#: contrib/utilities/forms.py:91 settings.py:41
 msgid "Heading 4"
 msgstr ""
 
-#: contrib/utilities/forms.py:72 settings.py:42
+#: contrib/utilities/forms.py:92 settings.py:42
 msgid "Heading 5"
 msgstr ""
 
-#: contrib/utilities/forms.py:76
+#: contrib/utilities/forms.py:96
 msgid "Heading level"
 msgstr ""
 
-#: contrib/utilities/forms.py:87
+#: contrib/utilities/forms.py:107
 msgid "ID"
 msgstr ""
 
-#: contrib/utilities/forms.py:90
+#: contrib/utilities/forms.py:110
 msgid ""
 "Fill in unique ID for table of contents. If empty heading will not appear in "
 "table of contents."
 msgstr ""
 
-#: contrib/utilities/forms.py:109
+#: contrib/utilities/forms.py:129
 msgid "List attributes"
 msgstr ""
 
-#: contrib/utilities/forms.py:111
+#: contrib/utilities/forms.py:131
 msgid ""
 "Attributes apply to the <b>list</b> for each level in the table of contents."
 msgstr ""
 
-#: contrib/utilities/forms.py:118
+#: contrib/utilities/forms.py:138
 msgid ""
 "Attributes apply to the <b>link</b> for each entry in the table of contents."
 msgstr ""
 
-#: contrib/utilities/forms.py:122
+#: contrib/utilities/forms.py:142
 msgid "Item attributes"
 msgstr ""
 
-#: contrib/utilities/forms.py:124
+#: contrib/utilities/forms.py:144
 msgid ""
 "Attributes apply to the <b>list items</b> for each entry in the table of "
 "contents."
@@ -1356,68 +1389,76 @@ msgstr ""
 msgid "Select the HTML tag to be used."
 msgstr ""
 
-#: frameworks/bootstrap5.py:8 frameworks/bootstrap5.py:109
+#: frameworks/bootstrap5.py:6 frameworks/bootstrap5.py:132
 msgid "Extra small"
 msgstr ""
 
-#: frameworks/bootstrap5.py:12 frameworks/bootstrap5.py:113
+#: frameworks/bootstrap5.py:10 frameworks/bootstrap5.py:136
 msgid "Extra large"
 msgstr ""
 
-#: frameworks/bootstrap5.py:13
+#: frameworks/bootstrap5.py:11
 msgid "Extra-extra large"
 msgstr ""
 
-#: frameworks/bootstrap5.py:21 frameworks/foundation6.py:17
+#: frameworks/bootstrap5.py:19 frameworks/foundation6.py:17
 msgid "Primary"
 msgstr ""
 
-#: frameworks/bootstrap5.py:22 frameworks/foundation6.py:18
+#: frameworks/bootstrap5.py:20 frameworks/foundation6.py:18
 msgid "Secondary"
 msgstr ""
 
-#: frameworks/bootstrap5.py:23 frameworks/foundation6.py:19
+#: frameworks/bootstrap5.py:21 frameworks/foundation6.py:19
 msgid "Success"
 msgstr ""
 
-#: frameworks/bootstrap5.py:24 frameworks/foundation6.py:20
+#: frameworks/bootstrap5.py:22 frameworks/foundation6.py:20
 msgid "Danger"
 msgstr ""
 
-#: frameworks/bootstrap5.py:25 frameworks/foundation6.py:21
+#: frameworks/bootstrap5.py:23 frameworks/foundation6.py:21
 msgid "Warning"
 msgstr ""
 
-#: frameworks/bootstrap5.py:26
+#: frameworks/bootstrap5.py:24
 msgid "Info"
 msgstr ""
 
-#: frameworks/bootstrap5.py:27
+#: frameworks/bootstrap5.py:25
 msgid "Light"
 msgstr ""
 
-#: frameworks/bootstrap5.py:28
+#: frameworks/bootstrap5.py:26
 msgid "Dark"
 msgstr ""
 
-#: frameworks/bootstrap5.py:61 frameworks/bootstrap5.py:67
+#: frameworks/bootstrap5.py:58 frameworks/bootstrap5.py:64
 msgid "Both"
 msgstr ""
 
-#: frameworks/bootstrap5.py:68
+#: frameworks/bootstrap5.py:65
 msgid "Top"
 msgstr ""
 
-#: frameworks/bootstrap5.py:69
+#: frameworks/bootstrap5.py:66
 msgid "Bottom"
 msgstr ""
 
-#: frameworks/bootstrap5.py:101
+#: frameworks/bootstrap5.py:91
+msgid "Screen"
+msgstr ""
+
+#: frameworks/bootstrap5.py:104
+msgid "Screen (minimum)"
+msgstr ""
+
+#: frameworks/bootstrap5.py:124
 msgctxt "shadow"
 msgid "None"
 msgstr ""
 
-#: frameworks/bootstrap5.py:114
+#: frameworks/bootstrap5.py:137
 msgid "XX large"
 msgstr ""
 
@@ -1433,40 +1474,4 @@ msgstr ""
 
 #: settings.py:14
 msgid "There are no further settings for this plugin. Please press save."
-msgstr ""
-
-#: settings.py:70
-msgid "Fully Centered"
-msgstr ""
-
-#: settings.py:71
-msgid "Top left"
-msgstr ""
-
-#: settings.py:72
-msgid "Top center"
-msgstr ""
-
-#: settings.py:73
-msgid "Top right"
-msgstr ""
-
-#: settings.py:74
-msgid "Center left"
-msgstr ""
-
-#: settings.py:75
-msgid "Center right"
-msgstr ""
-
-#: settings.py:76
-msgid "Bottom left"
-msgstr ""
-
-#: settings.py:77
-msgid "Bottom center"
-msgstr ""
-
-#: settings.py:78
-msgid "Bottom right"
 msgstr ""
