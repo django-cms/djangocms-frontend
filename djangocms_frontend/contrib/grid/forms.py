@@ -1,6 +1,7 @@
 from copy import copy
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
@@ -163,15 +164,35 @@ class GridColumnBaseForm(
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
 
+    def clean(self):
+        super().clean()
+        for size in settings.DEVICE_SIZES:
+            if f"{size}_col" in self.cleaned_data:
+                if self.cleaned_data[f"{size}_col"].isnumeric():
+                    self.cleaned_data[f"{size}_col"] = int(
+                        self.cleaned_data[f"{size}_col"]
+                    )
+            else:
+                raise ValidationError(
+                    _(
+                        'Column size needs to be empty, "auto", or a '
+                        "number between 1 and %(cols)d"
+                    ),
+                    params=dict(cols=GRID_SIZE),
+                    code="invalid_column",
+                )
+
 
 # convert regular text type fields to number
+col_choices = [(col + 1, str(col + 1)) for col in range(GRID_SIZE)] + [("auto", "Auto")]
 extra_fields_column = {}
 for size in settings.DEVICE_SIZES:
-    extra_fields_column[f"{size}_col"] = forms.IntegerField(
+    extra_fields_column[f"{size}_col"] = forms.ChoiceField(
         label="col" if size == "xs" else f"col-{size}",
         required=False,
-        min_value=0,
-        max_value=GRID_SIZE,
+        initial="",
+        choices=col_choices,
+        widget=forms.TextInput(),
     )
     extra_fields_column[f"{size}_order"] = forms.IntegerField(
         label="order" if size == "xs" else f"order-{size}",

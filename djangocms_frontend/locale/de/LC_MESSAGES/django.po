@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 11:43+0100\n"
+"POT-Creation-Date: 2022-03-10 18:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Peter Wischer <peter.wischer@lwl.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
@@ -89,8 +89,9 @@ msgstr "Horizontaler Abstand"
 msgid ""
 "Sets the horizontal size relative to the surrounding container or the "
 "viewport."
-msgstr "Legt die horizontale Größe im Verhältnis zum umgebenden Kontainer "
-"oder dem Fenster fest."
+msgstr ""
+"Legt die horizontale Größe im Verhältnis zum umgebenden Kontainer oder dem "
+"Fenster fest."
 
 #: common/bootstrap5/sizing.py:54
 msgid "Vertical size"
@@ -99,8 +100,9 @@ msgstr "Vertikaler Abstand"
 #: common/bootstrap5/sizing.py:60
 msgid ""
 "Sets the vertical size relative to the surrounding container or the viewport."
-msgstr "Legt die vertikale Größe im Verhältnis zum umgebenden Kontainer oder "
-"dem Fenster fest."
+msgstr ""
+"Legt die vertikale Größe im Verhältnis zum umgebenden Kontainer oder dem "
+"Fenster fest."
 
 #: common/spacing.py:104
 msgid "Margin"
@@ -374,7 +376,7 @@ msgstr "Inhalts-Typ"
 msgid "Define the structure of the plugin."
 msgstr "Definiert die Struktur des Plugins."
 
-#: contrib/card/forms.py:193 contrib/grid/forms.py:158
+#: contrib/card/forms.py:193 contrib/grid/forms.py:159
 msgid "Content alignment"
 msgstr "Inhalts-Ausrichtung"
 
@@ -740,11 +742,11 @@ msgstr "Selbst-Ausrichtung Mittig"
 msgid "Align self end"
 msgstr "Selbst-Ausrichtung Ende"
 
-#: contrib/grid/forms.py:52
+#: contrib/grid/forms.py:53
 msgid "Container type"
 msgstr "Kontainer-Typ"
 
-#: contrib/grid/forms.py:57
+#: contrib/grid/forms.py:58
 msgid ""
 "Defines if the grid should use fixed width (<code>.container</code>) or "
 "fluid width (<code>.container-fluid</code>)."
@@ -752,33 +754,40 @@ msgstr ""
 "Definiert ob das Grid eine fixe Breite (<code>.container</code>) oder "
 "fließende Breite (<code>.container-fluid</code>) haben soll."
 
-#: contrib/grid/forms.py:85
+#: contrib/grid/forms.py:86
 msgid "Create columns"
 msgstr "Spalten erstellen"
 
-#: contrib/grid/forms.py:86
+#: contrib/grid/forms.py:87
 msgid "Number of columns to create when saving."
 msgstr "Anzahl der Spalten, die beim Speichern erstellt werden soll."
 
-#: contrib/grid/forms.py:92
+#: contrib/grid/forms.py:93
 msgid "Vertical alignment"
 msgstr "Vertikale Ausrichtung"
 
-#: contrib/grid/forms.py:99
+#: contrib/grid/forms.py:100
 msgid "Horizontal alignment"
 msgstr "Horizontale Ausrichtung"
 
-#: contrib/grid/forms.py:106
+#: contrib/grid/forms.py:107
 msgid "Remove gutters"
 msgstr "Zwischenräume entfernen"
 
-#: contrib/grid/forms.py:109
+#: contrib/grid/forms.py:110
 msgid "Removes the marginal gutters from the grid."
 msgstr "Entfernt die Zwischenräume im Grid,"
 
-#: contrib/grid/forms.py:152
+#: contrib/grid/forms.py:153
 msgid "Column alignment"
 msgstr "Spalten-Ausrichtung"
+
+#: contrib/grid/forms.py:178
+#, python-format
+msgid ""
+"Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
+msgstr "Spaltengröße muss entweder leer, \"auto\" oder eine Zahl zwischen 1 "
+"und %(cols)d sein."
 
 #: contrib/grid/models.py:25
 msgid "GridContainer"
@@ -1365,15 +1374,17 @@ msgstr "Gerät"
 msgid ""
 "Padding does not have an auto spacing. Either switch to margin or a defined "
 "size."
-msgstr "\"Padding\" (innerer Abständ) hat keine automatische Größe. Entweder \"margin\" "
-"(äußerer Abstand) oder eine feste Größe wählen."
+msgstr ""
+"\"Padding\" (innerer Abständ) hat keine automatische Größe. Entweder \"margin"
+"\" (äußerer Abstand) oder eine feste Größe wählen."
 
 #: contrib/utilities/forms.py:67
 msgid ""
 "Padding does not have an auto spacing. Either switch to a defined size or "
 "change the spacing property."
-msgstr "\"Padding\" (innerer Abständ) hat keine automatische Größe. Entweder "
-"eine feste Größe oder \"marin\" (äußerer Abstand) wählen."
+msgstr ""
+"\"Padding\" (innerer Abständ) hat keine automatische Größe. Entweder eine "
+"feste Größe oder \"marin\" (äußerer Abstand) wählen."
 
 #: contrib/utilities/forms.py:88 settings.py:38
 msgid "Heading 1"

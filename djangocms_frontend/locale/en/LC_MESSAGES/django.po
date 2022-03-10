@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 11:43+0100\n"
+"POT-Creation-Date: 2022-03-10 18:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Define the structure of the plugin."
 msgstr ""
 
-#: contrib/card/forms.py:193 contrib/grid/forms.py:158
+#: contrib/card/forms.py:193 contrib/grid/forms.py:159
 msgid "Content alignment"
 msgstr ""
 
@@ -715,42 +715,48 @@ msgstr ""
 msgid "Align self end"
 msgstr ""
 
-#: contrib/grid/forms.py:52
+#: contrib/grid/forms.py:53
 msgid "Container type"
 msgstr ""
 
-#: contrib/grid/forms.py:57
+#: contrib/grid/forms.py:58
 msgid ""
 "Defines if the grid should use fixed width (<code>.container</code>) or "
 "fluid width (<code>.container-fluid</code>)."
 msgstr ""
 
-#: contrib/grid/forms.py:85
+#: contrib/grid/forms.py:86
 msgid "Create columns"
 msgstr ""
 
-#: contrib/grid/forms.py:86
+#: contrib/grid/forms.py:87
 msgid "Number of columns to create when saving."
 msgstr ""
 
-#: contrib/grid/forms.py:92
+#: contrib/grid/forms.py:93
 msgid "Vertical alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:99
+#: contrib/grid/forms.py:100
 msgid "Horizontal alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:106
+#: contrib/grid/forms.py:107
 msgid "Remove gutters"
 msgstr ""
 
-#: contrib/grid/forms.py:109
+#: contrib/grid/forms.py:110
 msgid "Removes the marginal gutters from the grid."
 msgstr ""
 
-#: contrib/grid/forms.py:152
+#: contrib/grid/forms.py:153
 msgid "Column alignment"
+msgstr ""
+
+#: contrib/grid/forms.py:178
+#, python-format
+msgid ""
+"Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
 msgstr ""
 
 #: contrib/grid/models.py:25
