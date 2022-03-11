@@ -1,29 +1,29 @@
 'use strict';
 django.jQuery(document).ready(function () {
-    let $;
-    if(django.jQuery.fn.select2 != "undefined") {
-        $ = django.jQuery;
-        console.log("Select2 found in django.jQuery", $.fn.jquery);
+    var $;
+
+    if(jQuery.fn.select2 !== "undefined") {
+        $ = jQuery;
+        console.log("Select2 found in jQuery", $.fn.jquery);
     } else {
-        if(CMS.$.fn.select2 != "undefined") {
+        if(CMS.$.fn.select2 !== "undefined") {
             $ = CMS.$;
             console.log("Select2 found in CMS.$", $.fn.jquery);
         } else {
-            if (jQuery.fn.select2 != "undefined") {
-                $ = jQuery;
-                console.log("Select2 found in window.jQuery", $.fn.jquery);
+            if (django.jQuery.fn.select2 !== "undefined") {
+                $ = django.jQuery;
+                console.log("Select2 found in django.jQuery", $.fn.jquery);
             } else {
                 console.error("no Select2 widget found");
                 return ;
             }
         }
     }
-
-    const init = function ($element, options) {
+    var init = function ($element, options) {
         $element.select2(options)
     };
 
-    const initHeavy = function ($element, options) {
+    var initHeavy = function ($element, options) {
         var settings = $.extend({
             ajax: {
                 data: function (params) {
