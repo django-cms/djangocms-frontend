@@ -23,3 +23,24 @@ ul.nav {
 }
 
 @import "components/tabs";
+
+
+input[type="number"].auto-field + span {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    margin-right: 32px;
+    margin-bottom: 23px;
+    background: var(--dca-white, var(--body-bg, white));
+    cursor: pointer;
+}
+
+input[type="number"].auto-field + span:after {
+    content: "auto";
+}
+
+input[type="number"].auto-field.auto + span {
+    display: block;
+}

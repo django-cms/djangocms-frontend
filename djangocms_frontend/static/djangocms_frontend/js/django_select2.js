@@ -1,6 +1,6 @@
 'use strict';
 django.jQuery(document).ready(function () {
-    var $;
+    let $;
     if(django.jQuery.fn.select2 != "undefined") {
         $ = django.jQuery;
         console.log("Select2 found in django.jQuery", $.fn.jquery);
@@ -19,11 +19,11 @@ django.jQuery(document).ready(function () {
         }
     }
 
-    var init = function ($element, options) {
+    const init = function ($element, options) {
         $element.select2(options)
-    }
+    };
 
-    var initHeavy = function ($element, options) {
+    const initHeavy = function ($element, options) {
         var settings = $.extend({
             ajax: {
                 data: function (params) {
@@ -55,7 +55,7 @@ django.jQuery(document).ready(function () {
         }, options)
 
         $element.select2(settings)
-    }
+    };
 
     $.fn.djangoSelect2 = function (options) {
         var settings = $.extend({}, options)

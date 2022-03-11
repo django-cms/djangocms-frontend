@@ -10,7 +10,12 @@ from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.common.responsive import ResponsiveFormMixin
 from djangocms_frontend.common.sizing import SizingFormMixin
 from djangocms_frontend.common.spacing import SpacingFormMixin
-from djangocms_frontend.fields import AttributesFormField, IconGroup, TagTypeFormField
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    AutoNumberInput,
+    IconGroup,
+    TagTypeFormField,
+)
 from djangocms_frontend.helpers import (
     first_choice,
     link_to_framework_doc,
@@ -172,7 +177,10 @@ class GridColumnBaseForm(
         super().clean()
         for size in settings.DEVICE_SIZES:
             if f"{size}_col" in self.cleaned_data:
-                if self.cleaned_data[f"{size}_col"].isnumeric():
+                if (
+                    isinstance(self.cleaned_data[f"{size}_col"], str)
+                    and self.cleaned_data[f"{size}_col"].isnumeric()
+                ):
                     self.cleaned_data[f"{size}_col"] = int(
                         self.cleaned_data[f"{size}_col"]
                     )
@@ -188,20 +196,21 @@ class GridColumnBaseForm(
 
 
 # convert regular text type fields to number
-col_choices = [(col + 1, str(col + 1)) for col in range(GRID_SIZE)] + [("auto", "Auto")]
+# col_choices = [(col + 1, str(col + 1)) for col in range(GRID_SIZE)] + [("auto", "Auto")]
 extra_fields_column = {}
 for size in settings.DEVICE_SIZES:
-    extra_fields_column[f"{size}_col"] = forms.ChoiceField(
+    extra_fields_column[f"{size}_col"] = forms.IntegerField(
         label="col" if size == "xs" else f"col-{size}",
         required=False,
         initial="",
-        choices=col_choices,
-        widget=forms.TextInput(),
+        min_value=0,
+        max_value=GRID_SIZE,
+        widget=AutoNumberInput(),
     )
     extra_fields_column[f"{size}_order"] = forms.IntegerField(
         label="order" if size == "xs" else f"order-{size}",
         required=False,
-        min_value=1,
+        min_value=0,
         max_value=GRID_SIZE,
         widget=forms.HiddenInput()
         if "{size}_order" in getattr(settings, "EXCL_COL_PROP", ())

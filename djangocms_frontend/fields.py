@@ -119,3 +119,12 @@ class TagTypeFormField(forms.ChoiceField):
         kwargs.setdefault("required", False)
         kwargs.setdefault("widget", ButtonGroup(attrs=dict(property="text")))
         super().__init__(*args, **kwargs)
+
+
+class AutoNumberInput(forms.NumberInput):
+    class Media:
+        js = ("djangocms_frontend/js/auto_input.js",)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("attrs", {"class": "auto-field"})
+        super().__init__(*args, **kwargs)
