@@ -11,6 +11,7 @@ from djangocms_frontend.fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
+from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
@@ -39,7 +40,7 @@ class AlertForm(
     alert_context = forms.ChoiceField(
         label=_("Context"),
         choices=COLOR_STYLE_CHOICES,
-        initial=COLOR_STYLE_CHOICES[0][0],
+        initial=first_choice(COLOR_STYLE_CHOICES),
         widget=ColoredButtonGroup(),
     )
     alert_dismissible = forms.BooleanField(

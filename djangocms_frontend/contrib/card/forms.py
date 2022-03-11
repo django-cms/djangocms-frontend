@@ -185,7 +185,7 @@ class CardInnerForm(
     inner_type = forms.ChoiceField(
         label=_("Inner type"),
         choices=CARD_INNER_TYPE_CHOICES,
-        initial=CARD_INNER_TYPE_CHOICES[0][0],
+        initial=first_choice(CARD_INNER_TYPE_CHOICES),
         help_text=_("Define the structure of the plugin."),
         widget=ButtonGroup(attrs=dict(label_class="btn-secondary")),
     )

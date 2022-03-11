@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelForm
 from ... import settings
 from ...common.spacing import PaddingFormMixin
 from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .constants import (
     TAB_ALIGNMENT_CHOICES,
@@ -37,14 +38,14 @@ class TabForm(EntangledModelForm):
     template = forms.ChoiceField(
         label=_("Template"),
         choices=TAB_TEMPLATE_CHOICES,
-        initial=TAB_TEMPLATE_CHOICES[0][0],
+        initial=first_choice(TAB_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
         widget=forms.HiddenInput if len(TAB_TEMPLATE_CHOICES) < 2 else forms.Select,
     )
     tab_type = forms.ChoiceField(
         label=_("Type"),
         choices=TAB_TYPE_CHOICES,
-        initial=TAB_TYPE_CHOICES[0][0],
+        initial=first_choice(TAB_TYPE_CHOICES),
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     tab_alignment = forms.ChoiceField(

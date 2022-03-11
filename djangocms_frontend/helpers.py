@@ -69,23 +69,6 @@ def insert_fields(
     return fs
 
 
-def get_template_path(prefix, template, name):
-    return f"djangocms_frontend/{settings.framework}/{prefix}/{template}/{name}.html"
-
-
-def get_plugin_template(instance, prefix, name, templates):
-    template = getattr(instance, "template", templates[0][0])
-    template_path = get_template_path(prefix, template, name)
-
-    try:
-        select_template([template_path])
-    except TemplateDoesNotExist:
-        # TODO render a warning inside the template
-        template_path = get_template_path(prefix, "default", name)
-
-    return template_path
-
-
 def first_choice(choices):
     for value, verbose in choices:
         if not isinstance(verbose, (tuple, list)):
@@ -95,6 +78,23 @@ def first_choice(choices):
             if first is not None:
                 return first
     return None
+
+
+def get_template_path(prefix, template, name):
+    return f"djangocms_frontend/{settings.framework}/{prefix}/{template}/{name}.html"
+
+
+def get_plugin_template(instance, prefix, name, templates):
+    template = getattr(instance, "template", first_choice(templates))
+    template_path = get_template_path(prefix, template, name)
+
+    try:
+        select_template([template_path])
+    except TemplateDoesNotExist:
+        # TODO render a warning inside the template
+        template_path = get_template_path(prefix, "default", name)
+
+    return template_path
 
 
 # use mark_safe_lazy to delay the translation when using mark_safe

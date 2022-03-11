@@ -24,7 +24,7 @@ from ...fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
-from ...helpers import get_related_object
+from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 from .helpers import get_choices, get_object_for_value
@@ -278,7 +278,7 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
     template = forms.ChoiceField(
         label=_("Template"),
         choices=get_templates(),
-        initial=get_templates()[0][0],
+        initial=first_choice(get_templates()),
         widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     link_stretched = forms.BooleanField(
@@ -292,7 +292,7 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
     link_type = forms.ChoiceField(
         label=_("Type"),
         choices=LINK_CHOICES,
-        initial=LINK_CHOICES[0][0],
+        initial=first_choice(LINK_CHOICES),
         widget=forms.RadioSelect(attrs={"class": "inline-block"}),
         help_text=_("Adds either a text link or a button which links to the target."),
     )

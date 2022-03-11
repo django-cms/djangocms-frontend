@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelForm
 
 from ... import settings
 from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 
 
@@ -25,20 +26,20 @@ class SpacingForm(EntangledModelForm):
     space_property = forms.ChoiceField(
         label=_("Property"),
         choices=settings.SPACER_PROPERTY_CHOICES,
-        initial=settings.SPACER_PROPERTY_CHOICES[0][0],
+        initial=first_choice(settings.SPACER_PROPERTY_CHOICES),
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_sides = forms.ChoiceField(
         label=_("Sides"),
         choices=settings.SPACER_SIDE_CHOICES,
-        initial=settings.SPACER_SIDE_CHOICES[0][0],
+        initial=first_choice(settings.SPACER_SIDE_CHOICES),
         required=False,
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_size = forms.ChoiceField(
         label=_("Size"),
         choices=settings.SPACER_SIZE_CHOICES + (("auto", _("Auto")),),
-        initial=settings.SPACER_SIZE_CHOICES[0][0],
+        initial=first_choice(settings.SPACER_SIZE_CHOICES),
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     space_device = forms.ChoiceField(

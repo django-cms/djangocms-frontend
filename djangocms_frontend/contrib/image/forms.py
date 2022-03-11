@@ -11,6 +11,7 @@ from djangocms_frontend import settings
 from ...common.responsive import ResponsiveFormMixin
 from ...common.spacing import MarginFormMixin
 from ...fields import AttributesFormField, TagTypeFormField
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
 
@@ -97,7 +98,7 @@ class ImageForm(
     template = forms.ChoiceField(
         label=_("Template"),
         choices=get_templates(),
-        initial=get_templates()[0][0],
+        initial=first_choice(get_templates()),
         widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     picture = AdminImageFormField(
@@ -185,7 +186,7 @@ class ImageForm(
     use_responsive_image = forms.ChoiceField(
         label=_("Use responsive image"),
         choices=RESPONSIVE_IMAGE_CHOICES,
-        initial=RESPONSIVE_IMAGE_CHOICES[0][0],
+        initial=first_choice(RESPONSIVE_IMAGE_CHOICES),
         help_text=_(
             "Uses responsive image technique to choose better image to display based upon screen viewport. "
             "This configuration only applies to uploaded images (external pictures will not be affected). "

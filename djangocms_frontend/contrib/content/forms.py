@@ -9,6 +9,7 @@ from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
 from ...common.spacing import SpacingFormMixin
 from ...fields import AttributesFormField, IconGroup, TagTypeFormField
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .constants import CODE_TYPE_CHOICES
 
@@ -40,7 +41,7 @@ class CodeForm(
     code_type = forms.ChoiceField(
         label=_("Code type"),
         choices=CODE_TYPE_CHOICES,
-        initial=CODE_TYPE_CHOICES[0][0],
+        initial=first_choice(CODE_TYPE_CHOICES),
         required=True,
     )
     attributes = AttributesFormField()

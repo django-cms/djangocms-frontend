@@ -11,7 +11,11 @@ from djangocms_frontend.common.responsive import ResponsiveFormMixin
 from djangocms_frontend.common.sizing import SizingFormMixin
 from djangocms_frontend.common.spacing import SpacingFormMixin
 from djangocms_frontend.fields import AttributesFormField, IconGroup, TagTypeFormField
-from djangocms_frontend.helpers import link_to_framework_doc, mark_safe_lazy
+from djangocms_frontend.helpers import (
+    first_choice,
+    link_to_framework_doc,
+    mark_safe_lazy,
+)
 from djangocms_frontend.models import FrontendUIItem
 
 from .. import grid
@@ -52,7 +56,7 @@ class GridContainerForm(
     container_type = forms.ChoiceField(
         label=_("Container type"),
         choices=GRID_CONTAINER_CHOICES,
-        initial=GRID_CONTAINER_CHOICES[0][0],
+        initial=first_choice(GRID_CONTAINER_CHOICES),
         help_text=mark_safe_lazy(
             _(
                 "Defines if the grid should use fixed width (<code>.container</code>) "

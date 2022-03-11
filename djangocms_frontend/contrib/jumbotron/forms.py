@@ -8,6 +8,7 @@ from djangocms_frontend.common.responsive import ResponsiveFormMixin
 from djangocms_frontend.common.spacing import SpacingFormMixin
 from djangocms_frontend.contrib import jumbotron
 from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
+from djangocms_frontend.helpers import first_choice
 
 mixin_factory = settings.get_forms(jumbotron)
 
@@ -37,7 +38,7 @@ class JumbotronForm(
     template = forms.ChoiceField(
         label=_("Template"),
         choices=settings.JUMBOTRON_TEMPLATE_CHOICES,
-        initial=settings.JUMBOTRON_TEMPLATE_CHOICES[0][0],
+        initial=first_choice(settings.JUMBOTRON_TEMPLATE_CHOICES),
         widget=forms.HiddenInput
         if len(settings.JUMBOTRON_TEMPLATE_CHOICES) < 2
         else forms.Select,

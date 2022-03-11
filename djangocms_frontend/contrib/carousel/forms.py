@@ -9,6 +9,7 @@ from filer.models import Image
 from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 
 from ... import settings
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
 from .constants import (
@@ -46,7 +47,7 @@ class CarouselForm(EntangledModelForm):
     template = forms.ChoiceField(
         label=_("Template"),
         choices=CAROUSEL_TEMPLATE_CHOICES,
-        initial=CAROUSEL_TEMPLATE_CHOICES[0][0],
+        initial=first_choice(CAROUSEL_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
         widget=forms.HiddenInput
         if len(CAROUSEL_TEMPLATE_CHOICES) < 2
@@ -81,7 +82,7 @@ class CarouselForm(EntangledModelForm):
     carousel_pause = forms.ChoiceField(
         label=_("Pause"),
         choices=CAROUSEL_PAUSE_CHOICES,
-        initial=CAROUSEL_PAUSE_CHOICES[0][0],
+        initial=first_choice(CAROUSEL_PAUSE_CHOICES),
         help_text=_(
             'If set to "hover", pauses the cycling of the carousel on '
             '"mouseenter" and resumes the cycling of the carousel on '
@@ -92,7 +93,7 @@ class CarouselForm(EntangledModelForm):
     carousel_ride = forms.ChoiceField(
         label=_("Ride"),
         choices=CAROUSEL_RIDE_CHOICES,
-        initial=CAROUSEL_RIDE_CHOICES[0][0],
+        initial=first_choice(CAROUSEL_RIDE_CHOICES),
         help_text=_(
             "Autoplays the carousel after the user manually cycles the "
             'first item. If "carousel", autoplays the carousel on load.'

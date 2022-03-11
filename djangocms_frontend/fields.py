@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
 from . import settings
+from .helpers import first_choice
 
 
 class ButtonGroup(forms.RadioSelect):
@@ -102,7 +103,7 @@ class TagTypeField(models.CharField):
         if "choices" not in kwargs:
             kwargs["choices"] = settings.TAG_CHOICES
         if "default" not in kwargs:
-            kwargs["default"] = settings.TAG_CHOICES[0][0]
+            kwargs["default"] = first_choice(settings.TAG_CHOICES)
         if "max_length" not in kwargs:
             kwargs["max_length"] = 255
         if "help_text" not in kwargs:
@@ -114,7 +115,7 @@ class TagTypeFormField(forms.ChoiceField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label", _("Tag type"))
         kwargs.setdefault("choices", settings.TAG_CHOICES)
-        kwargs.setdefault("initial", settings.TAG_CHOICES[0][0])
+        kwargs.setdefault("initial", first_choice(settings.TAG_CHOICES))
         kwargs.setdefault("required", False)
         kwargs.setdefault("widget", ButtonGroup(attrs=dict(property="text")))
         super().__init__(*args, **kwargs)

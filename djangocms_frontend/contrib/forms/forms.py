@@ -11,6 +11,7 @@ from djangocms_frontend.fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
+from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(forms_module)
@@ -83,7 +84,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     form_submit_context = forms.ChoiceField(
         label=_("Submit context"),
         choices=settings.COLOR_STYLE_CHOICES,
-        initial=settings.COLOR_STYLE_CHOICES[0][0],
+        initial=first_choice(settings.COLOR_STYLE_CHOICES),
         required=True,
         widget=ColoredButtonGroup(),
     )

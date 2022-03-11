@@ -7,6 +7,7 @@ from djangocms_frontend.fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
+from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 
@@ -35,7 +36,7 @@ class BadgeForm(EntangledModelForm):
     badge_context = forms.ChoiceField(
         label=_("Context"),
         choices=COLOR_STYLE_CHOICES,
-        initial=COLOR_STYLE_CHOICES[0][0],
+        initial=first_choice(COLOR_STYLE_CHOICES),
         widget=ColoredButtonGroup(),
     )
     badge_pills = forms.BooleanField(
