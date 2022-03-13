@@ -20,7 +20,7 @@ class DivSelectWidget(forms.Select):
 
 
 class SizeSideWidget(forms.MultiWidget):
-    """2 component widget allowing to chose a side and the size of a spacing"""
+    """2 component widget allowing to choose a side and the size of a spacing"""
 
     def __init__(self, **kwargs):
         self.property = kwargs.pop("property")

@@ -4,6 +4,7 @@ from django.http import HttpRequest
 
 from djangocms_frontend.contrib.image.cms_plugins import ImagePlugin
 from djangocms_frontend.contrib.image.forms import ImageForm, get_templates
+from djangocms_frontend.helpers import first_choice
 
 from ..fixtures import TestFixture
 from ..helpers import get_filer_image
@@ -66,7 +67,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
     def test_image_form(self):
         request = HttpRequest()
         request.POST = {
-            "template": get_templates()[0][0],
+            "template": first_choice(get_templates()),
             "picture": "",
             "external_picture": "https://www.django-cms.com/",
             "use_responsive_image": "yes",

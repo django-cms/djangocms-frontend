@@ -7,8 +7,10 @@ CMS.$(document).ready(function () {
             item.removeClass("auto");
         }
     }
-    CMS.$('input[type="number"].auto-field')
-        .after("<span></span>")
+    var input_fields = CMS.$('input[type="number"].auto-field');
+    var span = $("<span></span>").css("font-size", input_fields.css("font-size"));
+    input_fields
+        .after(span)
         .keypress(function(event) {
                 if(event.which === 97 || event.which === 65) {
                     CMS.$(this).val("0");

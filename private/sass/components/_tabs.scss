@@ -17,7 +17,7 @@ ul.nav {
                 display: block;
             }
             padding: .5rem;
-            border: 1px solid var(--dca-white, $white);
+            border: 1px solid var(--dca-white, var(--body-bg, $white));
             transform: translate(-50%, -50%);
             top: 0;
             left: 100%;
@@ -49,7 +49,7 @@ body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs+div.tab-content 
 
 div.tab-pk {
     align-self: center;
-    color: var(--dca-gray-darker, $django-fg);
+    color: var(--dca-gray-darker, var(--body-fg, $django-fg));
     font-size: 80%;
     margin-left: auto;
 }

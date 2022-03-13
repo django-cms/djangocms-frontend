@@ -43,7 +43,7 @@ class SizingFormMixin(EntangledModelFormMixin):
     size_x = forms.ChoiceField(
         label=_("Horizontal size"),
         required=False,
-        initial=settings.EMPTY_CHOICE,
+        initial=settings.EMPTY_CHOICE[0][0],
         choices=settings.EMPTY_CHOICE + settings.SIZE_X_CHOICES,
         #        widget=ButtonGroup(attrs=dict(property="text")),
         help_text=_(
@@ -53,7 +53,7 @@ class SizingFormMixin(EntangledModelFormMixin):
     size_y = forms.ChoiceField(
         label=_("Vertical size"),
         required=False,
-        initial=settings.EMPTY_CHOICE,
+        initial=settings.EMPTY_CHOICE[0][0],
         choices=settings.EMPTY_CHOICE + settings.SIZE_Y_CHOICES,
         #       widget=ButtonGroup(attrs=dict(property="text")),
         help_text=_(

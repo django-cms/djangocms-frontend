@@ -24,12 +24,12 @@
         position: relative;
         display: flex;
         padding: 0;
-        min-width: 860px;
+        min-width: 800px;
 
         .field-box,
         .fieldBox {
             position: relative;
-            width: 110px !important;
+            width: 100px !important;
             padding: 15px 10px;
             margin: 0 !important;
             border-bottom: 1px solid #eee;
@@ -38,6 +38,7 @@
             input {
                 text-align: right;
                 padding-right: 5px !important;
+                width: 100%;
             }
 
             label {
@@ -91,12 +92,12 @@
         position: relative;
         display: flex;
         padding: 0;
-        min-width: 860px;
+        min-width: 800px;
 
         .field-box,
         .fieldBox {
             position: relative;
-            width: 110px !important;
+            width: 100px !important;
             padding: 15px 10px;
             margin: 0 !important;
             border-bottom: 1px solid #eee;
@@ -105,6 +106,7 @@
             input {
                 text-align: right;
                 padding-right: 5px !important;
+                width: 100%;
             }
 
             label {
@@ -168,11 +170,13 @@
         .field-md_ms,
         .field-lg_ms,
         .field-xl_ms,
+        .field-xxl_ms,
         .field-xs_me,
         .field-sm_me,
         .field-md_me,
         .field-lg_me,
-        .field-xl_me {
+        .field-xl_me,
+        .field-xxl_me {
             text-align: left;
 
             label {

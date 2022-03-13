@@ -9,12 +9,12 @@
     text-align: center;
     border-radius: 0 0 0 3px;
     padding: 10px 20px 27px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--dca-gray, var(--hairline-color, #ccc));
     border-top: none;
     border-right: none;
-    background: white;
+    background: var(--body-bg, white);
     @media (prefers-color-scheme: dark) {
-        background: black;
+        background: var(--body-bg, black);
     }
 
     h2 {
