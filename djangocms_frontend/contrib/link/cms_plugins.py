@@ -1,4 +1,5 @@
 from cms.plugin_pool import plugin_pool
+from django.apps import apps
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
@@ -16,7 +17,9 @@ mixin_factory = settings.get_renderer(link)
 
 UILINK_FIELDS = (
     ("name", "link_type"),
-    ("external_link", "internal_link"),
+    ("site", "url_grouper")
+    if apps.is_installed("djangocms_url_manager")
+    else ("external_link", "internal_link"),
     ("link_context", "link_size"),
     ("link_outline", "link_block"),
     "link_stretched",
@@ -34,17 +37,17 @@ UILINK_FIELDSET = [
             )
         },
     ),
-    (
-        _("Link settings"),
-        {
-            "classes": ("collapse",),
-            "fields": (
-                ("mailto", "phone"),
-                ("anchor", "target"),
-                ("file_link",),
-            ),
-        },
-    ),
+    # (
+    #     _("Link settings"),
+    #     {
+    #         "classes": ("collapse",),
+    #         "fields": (
+    #             ("mailto", "phone"),
+    #             ("anchor", "target"),
+    #             ("file_link",),
+    #         ),
+    #     },
+    # ),
 ]
 
 

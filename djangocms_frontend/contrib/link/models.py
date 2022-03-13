@@ -13,6 +13,27 @@ COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 
 class GetLinkMixin:
     def get_link(self):
+        if getattr(self, "url_grouper", None):
+            url_grouper = get_related_object(self.config, "url_grouper")
+            url = url_grouper.get_content(show_draft_content=True)
+            # simulate the call to the unauthorized CMSPlugin.page property
+            cms_page = self.placeholder.page if self.placeholder_id else None
+
+            # first, we check if the placeholder the plugin is attached to
+            # has a page. Thus the check "is not None":
+            if cms_page is not None:
+                if getattr(cms_page, "node", None):
+                    cms_page_site_id = getattr(cms_page.node, "site_id", None)
+                else:
+                    cms_page_site_id = getattr(cms_page, "site_id", None)
+            # a plugin might not be attached to a page and thus has no site
+            # associated with it. This also applies to plugins inside
+            # static placeholders
+            else:
+                cms_page_site_id = None
+            print("XXX", cms_page_site_id)
+            return url.get_url(cms_page_site_id) or ""
+
         if getattr(self, "internal_link", None):
             try:
                 ref_page = get_related_object(self.config, "internal_link")

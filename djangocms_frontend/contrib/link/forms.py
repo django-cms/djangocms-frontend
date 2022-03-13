@@ -1,7 +1,8 @@
-from django import forms
+from django import apps, forms
 from django.conf import settings as django_settings
 from django.contrib.admin.widgets import SELECT2_TRANSLATIONS
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.fields.related import ManyToOneRel
@@ -111,144 +112,178 @@ class SmartLinkField(forms.ChoiceField):
         return super().clean(value)
 
 
-class AbstractLinkForm(EntangledModelForm):
-    class Meta:
-        entangled_fields = {
-            "config": [
+if apps.apps.is_installed("djangocms_url_manager"):
+    from djangocms_url_manager.forms import (
+        HtmlLinkSiteSelectWidget,
+        HtmlLinkUrlSelectWidget,
+    )
+    from djangocms_url_manager.models import UrlGrouper
+
+    class AbstractLinkForm(EntangledModelForm):
+        class Meta:
+            entangled_fields = {
+                "config": [
+                    "site",
+                    "url_grouper",
+                ]
+            }
+
+        site = forms.ModelChoiceField(
+            label=_("Site"),
+            queryset=Site.objects.all(),
+            widget=HtmlLinkSiteSelectWidget(
+                attrs={"data-placeholder": _("Select site")}
+            ),
+            required=False,
+        )
+        url_grouper = forms.ModelChoiceField(
+            label=_("Url"),
+            queryset=UrlGrouper.objects.all(),
+            widget=HtmlLinkUrlSelectWidget(
+                attrs={"data-placeholder": _("Select URL object from list")}
+            ),
+        )
+
+else:
+
+    class AbstractLinkForm(EntangledModelForm):
+        class Meta:
+            entangled_fields = {
+                "config": [
+                    "external_link",
+                    "internal_link",
+                    "file_link",
+                    "anchor",
+                    "mailto",
+                    "phone",
+                    "target",
+                ]
+            }
+
+        link_is_optional = False
+
+        # url_validators = [
+        #     IntranetURLValidator(intranet_host_re=HOSTNAME),
+        # ]
+
+        external_link = forms.URLField(
+            label=_("External link"),
+            required=False,
+            #        validators=url_validators,
+            help_text=_("Provide a link to an external source."),
+        )
+        internal_link = SmartLinkField(
+            label=_("Internal link"),
+            required=False,
+            help_text=_("If provided, overrides the external link."),
+        )
+        file_link = AdminFileFormField(
+            rel=ManyToOneRel(FilerFileField, File, "id"),
+            queryset=File.objects.all(),
+            to_field_name="id",
+            label=_("File link"),
+            required=False,
+            help_text=_("If provided links a file from the filer app."),
+        )
+        # other link types
+        anchor = forms.CharField(
+            label=_("Anchor"),
+            required=False,
+            help_text=_(
+                "Appends the value only after the internal or external link. "
+                'Do <em>not</em> include a preceding "&#35;" symbol.'
+            ),
+        )
+        mailto = forms.EmailField(
+            label=_("Email address"),
+            required=False,
+        )
+        phone = forms.CharField(
+            label=_("Phone"),
+            required=False,
+        )
+        # advanced options
+        target = forms.ChoiceField(
+            label=_("Target"),
+            choices=settings.EMPTY_CHOICE + TARGET_CHOICES,
+            required=False,
+        )
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields["internal_link"].choices = self.get_choices
+
+        def get_choices(self):
+            if MINIMUM_INPUT_LENGTH == 0:
+                return get_choices(self.request)
+            if not self.is_bound:  # find inital value
+                int_link_field = self.fields["internal_link"]
+                initial = self.get_initial_for_field(int_link_field, "internal_link")
+                if initial:  # Initial set?
+                    obj = get_related_object(dict(obj=initial), "obj")  # get it!
+                    if obj is not None:
+                        value = int_link_field.prepare_value(initial)
+                        return ((value, str(obj)),)
+            return ()  # nothing found
+
+        def clean(self):
+            super().clean()
+            link_field_names = (
                 "external_link",
                 "internal_link",
-                "file_link",
-                "anchor",
                 "mailto",
                 "phone",
-                "target",
-            ]
-        }
-
-    link_is_optional = False
-
-    # url_validators = [
-    #     IntranetURLValidator(intranet_host_re=HOSTNAME),
-    # ]
-
-    external_link = forms.URLField(
-        label=_("External link"),
-        required=False,
-        #        validators=url_validators,
-        help_text=_("Provide a link to an external source."),
-    )
-    internal_link = SmartLinkField(
-        label=_("Internal link"),
-        required=False,
-        help_text=_("If provided, overrides the external link."),
-    )
-    file_link = AdminFileFormField(
-        rel=ManyToOneRel(FilerFileField, File, "id"),
-        queryset=File.objects.all(),
-        to_field_name="id",
-        label=_("File link"),
-        required=False,
-        help_text=_("If provided links a file from the filer app."),
-    )
-    # other link types
-    anchor = forms.CharField(
-        label=_("Anchor"),
-        required=False,
-        help_text=_(
-            "Appends the value only after the internal or external link. "
-            'Do <em>not</em> include a preceding "&#35;" symbol.'
-        ),
-    )
-    mailto = forms.EmailField(
-        label=_("Email address"),
-        required=False,
-    )
-    phone = forms.CharField(
-        label=_("Phone"),
-        required=False,
-    )
-    # advanced options
-    target = forms.ChoiceField(
-        label=_("Target"),
-        choices=settings.EMPTY_CHOICE + TARGET_CHOICES,
-        required=False,
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["internal_link"].choices = self.get_choices
-
-    def get_choices(self):
-        if MINIMUM_INPUT_LENGTH == 0:
-            return get_choices(self.request)
-        if not self.is_bound:  # find inital value
-            int_link_field = self.fields["internal_link"]
-            initial = self.get_initial_for_field(int_link_field, "internal_link")
-            if initial:  # Initial set?
-                obj = get_related_object(dict(obj=initial), "obj")  # get it!
-                if obj is not None:
-                    value = int_link_field.prepare_value(initial)
-                    return ((value, str(obj)),)
-        return ()  # nothing found
-
-    def clean(self):
-        super().clean()
-        link_field_names = (
-            "external_link",
-            "internal_link",
-            "mailto",
-            "phone",
-            "file_link",
-        )
-        anchor_field_name = "anchor"
-        field_names_allowed_with_anchor = (
-            "external_link",
-            "internal_link",
-        )
-        anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
-        anchor_field_value = self.cleaned_data.get(anchor_field_name, None)
-        link_fields = {
-            key: self.cleaned_data.get(key, None) for key in link_field_names
-        }
-        link_field_verbose_names = {
-            key: force_text(self.fields[key].label) for key in link_fields.keys()
-        }
-        provided_link_fields = {
-            key: value for key, value in link_fields.items() if value
-        }
-
-        if len(provided_link_fields) > 1:
-            # Too many fields have a value.
-            verbose_names = sorted(link_field_verbose_names.values())
-            error_msg = _("Only one of {0} or {1} may be given.").format(
-                ", ".join(verbose_names[:-1]),
-                verbose_names[-1],
+                "file_link",
             )
-            errors = {}.fromkeys(provided_link_fields.keys(), error_msg)
-            raise ValidationError(errors)
+            anchor_field_name = "anchor"
+            field_names_allowed_with_anchor = (
+                "external_link",
+                "internal_link",
+            )
+            anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
+            anchor_field_value = self.cleaned_data.get(anchor_field_name, None)
+            link_fields = {
+                key: self.cleaned_data.get(key, None) for key in link_field_names
+            }
+            link_field_verbose_names = {
+                key: force_text(self.fields[key].label) for key in link_fields.keys()
+            }
+            provided_link_fields = {
+                key: value for key, value in link_fields.items() if value
+            }
 
-        if (
-            len(provided_link_fields) == 0
-            and not self.cleaned_data.get(anchor_field_name, None)
-            and not self.link_is_optional
-        ):
-            raise ValidationError(_("Please provide a link."))
+            if len(provided_link_fields) > 1:
+                # Too many fields have a value.
+                verbose_names = sorted(link_field_verbose_names.values())
+                error_msg = _("Only one of {0} or {1} may be given.").format(
+                    ", ".join(verbose_names[:-1]),
+                    verbose_names[-1],
+                )
+                errors = {}.fromkeys(provided_link_fields.keys(), error_msg)
+                raise ValidationError(errors)
 
-        if anchor_field_value:
-            for field_name in provided_link_fields.keys():
-                if field_name not in field_names_allowed_with_anchor:
-                    error_msg = _(
-                        "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
-                    ) % {
-                        "anchor_field_verbose_name": anchor_field_verbose_name,
-                        "field_name": link_field_verbose_names.get(field_name),
-                    }
-                    raise ValidationError(
-                        {
-                            anchor_field_name: error_msg,
-                            field_name: error_msg,
+            if (
+                len(provided_link_fields) == 0
+                and not self.cleaned_data.get(anchor_field_name, None)
+                and not self.link_is_optional
+            ):
+                raise ValidationError(_("Please provide a link."))
+
+            if anchor_field_value:
+                for field_name in provided_link_fields.keys():
+                    if field_name not in field_names_allowed_with_anchor:
+                        error_msg = _(
+                            "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
+                        ) % {
+                            "anchor_field_verbose_name": anchor_field_verbose_name,
+                            "field_name": link_field_verbose_names.get(field_name),
                         }
-                    )
+                        raise ValidationError(
+                            {
+                                anchor_field_name: error_msg,
+                                field_name: error_msg,
+                            }
+                        )
 
 
 class LinkForm(SpacingFormMixin, AbstractLinkForm):
