@@ -24,7 +24,6 @@ ul.nav {
 
 @import "components/tabs";
 
-
 input[type="number"].auto-field + span {
     display: none;
     position: absolute;
@@ -35,6 +34,16 @@ input[type="number"].auto-field + span {
     margin-bottom: 23px;
     background: var(--dca-white, var(--body-bg, white));
     cursor: pointer;
+}
+
+/* Pixel pushing for standard django admin */
+:not(.djangocms-admin-style) input[type="number"].auto-field + span {
+    margin-bottom: 21px;
+}
+@media (max-width: 1024px) {
+    :not(.djangocms-admin-style) input[type="number"].auto-field + span {
+        margin-bottom: 25px;
+    }
 }
 
 input[type="number"].auto-field + span:after {

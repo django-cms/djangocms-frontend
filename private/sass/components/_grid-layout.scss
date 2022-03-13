@@ -38,6 +38,7 @@
             input {
                 text-align: right;
                 padding-right: 5px !important;
+                box-sizing: border-box;
                 width: 100%;
             }
 
@@ -106,6 +107,7 @@
             input {
                 text-align: right;
                 padding-right: 5px !important;
+                box-sizing: border-box;
                 width: 100%;
             }
 
@@ -186,6 +188,7 @@
 
             input {
                 position: relative;
+                box-sizing: border-box;
                 top: -3px;
             }
         }
