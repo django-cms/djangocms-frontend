@@ -31,7 +31,6 @@ class GetLinkMixin:
             # static placeholders
             else:
                 cms_page_site_id = None
-            print("XXX", cms_page_site_id)
             return url.get_url(cms_page_site_id) or ""
 
         if getattr(self, "internal_link", None):
