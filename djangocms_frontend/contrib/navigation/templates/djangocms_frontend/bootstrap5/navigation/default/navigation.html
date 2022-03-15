@@ -1,0 +1,15 @@
+{% load cms_tags frontend %}{% spaceless %}
+    <nav {{ instance.get_attributes }}>
+        {% if instance.container %}<div class="container">{% endif %}
+            <a class="navbar-brand" href="/">{% block brand %}{% endblock %}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               {% for plugin in instance.child_plugin_instances %}
+                    {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
+               {% endfor %}
+            </div>
+        {% if instance.container %}</div>{% endif %}
+    </nav>
+{% endspaceless %}

@@ -1,0 +1,2 @@
+{% load menu_tags %}
+<ul {{ instance.get_attributes }}>{% block menubar %}{% show_menu 0 100 0 100 'bootstrap5/menu.html' %}{% endblock %}</ul>

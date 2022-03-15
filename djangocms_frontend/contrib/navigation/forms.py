@@ -1,0 +1,87 @@
+from django import forms
+from django.utils.translation import gettext_lazy as _
+from entangled.forms import EntangledModelForm
+
+from djangocms_frontend import settings
+from djangocms_frontend.common.background import BackgroundFormMixin
+from djangocms_frontend.contrib import navigation
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ButtonGroup,
+    IconGroup,
+    TagTypeFormField,
+)
+from djangocms_frontend.helpers import first_choice
+from djangocms_frontend.settings import NAVBAR_DESIGNS
+
+mixin_factory = settings.get_forms(navigation)
+
+
+class NavigationForm(
+    mixin_factory("Navigation"),
+    BackgroundFormMixin,
+    EntangledModelForm,
+):
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "template",
+                "navbar_container",
+                "navbar_design",
+                "navbar_breakpoint",
+                "attributes",
+            ]
+        }
+        untangled_fields = ("tag_type",)
+
+    template = forms.ChoiceField(
+        label=_("Template"),
+        choices=settings.NAVIGATION_TEMPLATE_CHOICES,
+        initial=first_choice(settings.NAVIGATION_TEMPLATE_CHOICES),
+        widget=forms.HiddenInput
+        if len(settings.NAVIGATION_TEMPLATE_CHOICES) < 2
+        else forms.Select,
+    )
+    navbar_container = forms.BooleanField(
+        label=_("Container"),
+        required=False,
+        initial=True,
+    )
+    navbar_design = forms.ChoiceField(
+        label=_("Design"),
+        required=True,
+        choices=NAVBAR_DESIGNS,
+        initial=first_choice(NAVBAR_DESIGNS),
+        widget=ButtonGroup(attrs=dict(property="nav-design")),
+    )
+    navbar_breakpoint = forms.ChoiceField(
+        label=_("Expand on device (and larger)"),
+        required=False,
+        choices=settings.EMPTY_CHOICE + settings.DEVICE_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
+        widget=IconGroup(),
+    )
+    attributes = AttributesFormField()
+    tag_type = TagTypeFormField()
+
+
+class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "template",
+                "attributes",
+            ]
+        }
+        untangled_fields = ("tag_type",)
+
+    template = forms.ChoiceField(
+        label=_("Template"),
+        choices=settings.NAVIGATION_TEMPLATE_CHOICES,
+        initial=first_choice(settings.NAVIGATION_TEMPLATE_CHOICES),
+        widget=forms.HiddenInput
+        if len(settings.NAVIGATION_TEMPLATE_CHOICES) < 2
+        else forms.Select,
+    )
+    attributes = AttributesFormField()
+    tag_type = TagTypeFormField()

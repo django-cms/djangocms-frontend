@@ -126,6 +126,16 @@ form .form-row  div.frontend-button-group {
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
     }
 
+    & > input[property="nav-design"][value="light"]+label.btn-grp {
+        background: var(--bs-light);
+        color: var(--bs-gray-900) !important;
+    }
+    & > input[property="nav-design"][value="dark"]+label.btn-grp {
+        background: var(--bs-dark);
+        color: var(--bs-white);
+    }
+
+
     $btn-colors: [
         "primary",
         "secondary",

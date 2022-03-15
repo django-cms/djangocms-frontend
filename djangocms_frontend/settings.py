@@ -65,6 +65,14 @@ JUMBOTRON_TEMPLATE_CHOICES = getattr(
     ],
 )
 
+NAVIGATION_TEMPLATE_CHOICES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_NAVIGATION_TEMPLATE_CHOICES",
+    [
+        ("default", _("Default")),
+    ],
+)
+
 
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
@@ -85,6 +93,7 @@ SPACER_X_SIDES_CHOICES = framework_settings.SPACER_X_SIDES_CHOICES
 SPACER_Y_SIDES_CHOICES = framework_settings.SPACER_Y_SIDES_CHOICES
 SIZE_X_CHOICES = framework_settings.SIZE_X_CHOICES
 SIZE_Y_CHOICES = framework_settings.SIZE_Y_CHOICES
+NAVBAR_DESIGNS = framework_settings.NAVBAR_DESIGNS
 
 FRAMEWORK_PLUGIN_INFO = getattr(framework_settings, "FRAMEWORK_PLUGIN_INFO", dict())
 

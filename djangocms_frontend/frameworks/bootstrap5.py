@@ -170,3 +170,12 @@ FRAMEWORK_PLUGIN_INFO = {
         ],
     },
 }
+
+NAVBAR_DESIGNS = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_NAVBAR_DESIGN",
+    (
+        ("light", _("Light")),
+        ("dark", _("Dark")),
+    ),
+)
