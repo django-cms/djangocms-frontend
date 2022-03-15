@@ -12,3 +12,9 @@ class PageTreeRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes("navbar-nav")
         return super().render(context, instance, placeholder)
+
+
+class BrandRenderMixin:
+    def render(self, context, instance, placeholder):
+        instance.add_classes("navbar-brand")
+        return super().render(context, instance, placeholder)

@@ -95,19 +95,15 @@ class BrandPlugin(
 
     name = _("Brand")
     module = _("Frontend")
-    model = models.Navigation
-    form = forms.NavigationForm
+    model = models.Brand
+    form = forms.BrandForm
     change_form_template = "djangocms_frontend/admin/brand.html"
     allow_children = True
+    parent_classes = ["NavigationPlugin"]
 
     fieldsets = [
         (
             None,
-            {"fields": ("template",)},
+            {"fields": ("simple_content",)},
         ),
     ]
-
-    def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "navigation", "page_tree", settings.NAVIGATION_TEMPLATE_CHOICES
-        )

@@ -21,3 +21,9 @@ class PageTree(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Page tree")
+
+
+class Brand(FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Brand")

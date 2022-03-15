@@ -5,12 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend import settings
 from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.contrib import navigation
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    ButtonGroup,
-    IconGroup,
-    TagTypeFormField,
-)
+from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.settings import NAVBAR_DESIGNS
 
@@ -32,7 +27,7 @@ class NavigationForm(
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
+        untangled_fields = ()
 
     template = forms.ChoiceField(
         label=_("Template"),
@@ -62,7 +57,6 @@ class NavigationForm(
         widget=IconGroup(),
     )
     attributes = AttributesFormField()
-    tag_type = TagTypeFormField()
 
 
 class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
@@ -73,7 +67,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
+        untangled_fields = ()
 
     template = forms.ChoiceField(
         label=_("Template"),
@@ -84,4 +78,20 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
         else forms.Select,
     )
     attributes = AttributesFormField()
-    tag_type = TagTypeFormField()
+
+
+class BrandForm(mixin_factory("Brand"), EntangledModelForm):
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "simple_content",
+                "attributes",
+            ]
+        }
+        untangled_fields = ()
+
+    simple_content = forms.CharField(
+        label=_("Brand"),
+        required=True,
+    )
+    attributes = AttributesFormField()
