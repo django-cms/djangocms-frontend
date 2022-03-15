@@ -1,4 +1,5 @@
 from cms.plugin_pool import plugin_pool
+from django.apps import apps
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
@@ -63,11 +64,10 @@ class ImagePlugin(
             _("Link settings"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    (
-                        "external_link",
-                        "internal_link",
-                    ),
+                "fields": (("site", "url_grouper"),)
+                if apps.is_installed("djangocms_url_manager")
+                else (
+                    ("external_link", "internal_link"),
                     "file_link",
                 ),
             },

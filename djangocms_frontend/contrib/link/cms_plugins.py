@@ -37,18 +37,21 @@ UILINK_FIELDSET = [
             )
         },
     ),
-    # (
-    #     _("Link settings"),
-    #     {
-    #         "classes": ("collapse",),
-    #         "fields": (
-    #             ("mailto", "phone"),
-    #             ("anchor", "target"),
-    #             ("file_link",),
-    #         ),
-    #     },
-    # ),
 ]
+if not apps.is_installed("djangocms_url_manager"):
+    UILINK_FIELDSET += [
+        (
+            _("Link settings"),
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    ("mailto", "phone"),
+                    ("anchor", "target"),
+                    ("file_link",),
+                ),
+            },
+        ),
+    ]
 
 
 class LinkPluginMixin:
