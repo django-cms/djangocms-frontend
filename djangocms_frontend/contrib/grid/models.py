@@ -1,5 +1,3 @@
-from djangocms_frontend.helpers import get_related_object
-
 try:
     from functools import cached_property
 except ImportError:  # Only available since Python 3.8
@@ -25,17 +23,15 @@ class GridContainer(FrontendUIItem):
         _("GridContainer")
 
     def get_short_description(self):
-        text = ""
+        text = self.config.get("container_name", "")
+        if not text:
+            text = self.config.get("attributes", {}).get("id", "")
+        if text:
+            return text
         for item in GRID_CONTAINER_CHOICES:
             if item[0] == self.container_type:
                 text = item[1]
         return f"({text})"
-
-    @cached_property
-    def image(self):
-        if getattr(self, "container_image", False):
-            return get_related_object(self.config, "container_image")
-        return None
 
 
 class GridRow(FrontendUIItem):

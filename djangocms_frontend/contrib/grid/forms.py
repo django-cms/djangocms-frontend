@@ -52,20 +52,30 @@ class GridContainerForm(
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "container_name",
                 "container_type",
                 "attributes",
             ]
         }
         untangled_fields = ("tag_type",)
 
+    container_name = forms.CharField(
+        label=_("Name"),
+        required=False,
+        help_text=_(
+            "Optional name of container for easier identification in the "
+            "structure tree. Not visible on the published page."
+        ),
+    )
     container_type = forms.ChoiceField(
         label=_("Container type"),
         choices=GRID_CONTAINER_CHOICES,
         initial=first_choice(GRID_CONTAINER_CHOICES),
         help_text=mark_safe_lazy(
             _(
-                "Defines if the grid should use fixed width (<code>.container</code>) "
-                "or fluid width (<code>.container-fluid</code>)."
+                "Defines if the grid should use fixed width, "
+                "fluid width or the container should fill the full width without "
+                "margins or padding."
             )
         ),
     )

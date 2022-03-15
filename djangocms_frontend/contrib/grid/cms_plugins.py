@@ -39,7 +39,17 @@ class GridContainerPlugin(
     allow_children = True
 
     fieldsets = [
-        (None, {"fields": ("container_type",)}),
+        (
+            None,
+            {
+                "fields": (
+                    (
+                        "container_type",
+                        "container_name",
+                    ),
+                )
+            },
+        ),
     ]
 
 
