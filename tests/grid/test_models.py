@@ -9,8 +9,8 @@ class GridModelTestCase(TestCase):
         instance = GridContainer.objects.create()
         instance.initialize_from_form(GridContainerForm)
         self.assertEqual(str(instance), "GridContainer (1)")
-        self.assertEqual(instance.get_short_description(), "(Container)")
-        instance.config["container_name"] = "test container"
+        self.assertEqual(instance.get_short_description(), "")
+        instance.config["plugin_title"] = {"show": False, "title": "test container"}
         self.assertEqual(instance.get_short_description(), "test container")
 
     def test_row_instance(self):
