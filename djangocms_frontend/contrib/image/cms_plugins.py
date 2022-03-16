@@ -71,7 +71,7 @@ class ImagePlugin(
             },
         ),
     ]
-    link_fieldset_position = 2
+    link_fieldset_position = -1
 
     def get_render_template(self, context, instance, placeholder):
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"
