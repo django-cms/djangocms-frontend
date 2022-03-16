@@ -9,6 +9,7 @@ from djangocms_frontend.common.sizing import SizingMixin
 from djangocms_frontend.common.spacing import SpacingMixin
 
 from ...cms_plugins import CMSUIPlugin
+from ...common.title import TitleMixin
 from ...helpers import add_plugin
 from .. import grid
 from . import forms, models
@@ -24,6 +25,7 @@ class GridContainerPlugin(
     SpacingMixin,
     BackgroundMixin,
     SizingMixin,
+    TitleMixin,
     CMSUIPlugin,
 ):
     """
@@ -45,7 +47,7 @@ class GridContainerPlugin(
                 "fields": (
                     (
                         "container_type",
-                        "container_name",
+                        "plugin_title",
                     ),
                 )
             },
@@ -59,6 +61,7 @@ class GridRowPlugin(
     AttributesMixin,
     ResponsiveMixin,
     SpacingMixin,
+    TitleMixin,
     CMSUIPlugin,
 ):
     """
@@ -79,7 +82,10 @@ class GridRowPlugin(
             None,
             {
                 "fields": (
-                    "create",
+                    (
+                        "create",
+                        "plugin_title",
+                    ),
                     ("vertical_alignment", "horizontal_alignment"),
                 )
             },
@@ -124,6 +130,7 @@ class GridColumnPlugin(
     ResponsiveMixin,
     SpacingMixin,
     BackgroundMixin,
+    TitleMixin,
     CMSUIPlugin,
 ):
     """
@@ -166,4 +173,5 @@ class GridColumnPlugin(
                 )
             },
         ),
+        (_("Title settings"), {"fields": ("plugin_title",)}),
     ]

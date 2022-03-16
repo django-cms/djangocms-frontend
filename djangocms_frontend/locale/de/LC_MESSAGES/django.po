@@ -83,7 +83,7 @@ msgstr "Auto"
 
 #: common/bootstrap5/sizing.py:44
 msgid "Horizontal size"
-msgstr "Horizontaler Abstand"
+msgstr "Horizontale Größe"
 
 #: common/bootstrap5/sizing.py:50
 msgid ""
@@ -95,7 +95,7 @@ msgstr ""
 
 #: common/bootstrap5/sizing.py:54
 msgid "Vertical size"
-msgstr "Vertikaler Abstand"
+msgstr "Vertikale Größe"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
@@ -1477,7 +1477,7 @@ msgstr "Sehr groß"
 
 #: frameworks/bootstrap5.py:11
 msgid "Extra-extra large"
-msgstr "Sehr, sehr groß"
+msgstr "XXL"
 
 #: frameworks/bootstrap5.py:19 frameworks/foundation6.py:17
 msgid "Primary"
@@ -1538,7 +1538,7 @@ msgstr "Keiner"
 
 #: frameworks/bootstrap5.py:137
 msgid "XX large"
-msgstr "Sehr, sehr groß"
+msgstr "XXL"
 
 #: helpers.py:111
 #, python-brace-format

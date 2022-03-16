@@ -13,7 +13,11 @@ from djangocms_frontend.models import FrontendUIItem
 from .constants import GRID_CONTAINER_CHOICES
 
 
-class GridContainer(FrontendUIItem):
+class TitelModelMixin:
+    pass
+
+
+class GridContainer(TitelModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -25,15 +29,13 @@ class GridContainer(FrontendUIItem):
         _("GridContainer")
 
     def get_short_description(self):
-        text = self.config.get("container_name", "")
-        if not text:
-            text = self.config.get("attributes", {}).get("id", "")
-        if text:
-            return text
-        for item in GRID_CONTAINER_CHOICES:
+        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
+            "attributes", {}
+        ).get("id", "")
+        for item in GRID_CONTAINER_CHOICES[1:]:
             if item[0] == self.container_type:
-                text = item[1]
-        return f"({text})"
+                text += f" ({item[1]})"
+        return text
 
     @cached_property
     def image(self):
@@ -42,7 +44,7 @@ class GridContainer(FrontendUIItem):
         return None
 
 
-class GridRow(FrontendUIItem):
+class GridRow(TitelModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -54,11 +56,15 @@ class GridRow(FrontendUIItem):
         _("GridRow")
 
     def get_short_description(self):
+        descr = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
+            "attributes", {}
+        ).get("id", "")
         column_count = len(self.child_plugin_instances or [])
         column_count_str = ngettext(
             "(1 column)", "(%(count)i columns)", column_count
         ) % {"count": column_count}
-
+        if descr:
+            column_count_str = f"{descr} {column_count_str}"
         return column_count_str
 
 
@@ -74,9 +80,12 @@ class GridColumn(FrontendUIItem):
         _("GridColumn")
 
     def get_short_description(self):
-        text = ""
+        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
+            "attributes", {}
+        ).get("id", "")
+
         if self.xs_col:
-            text += f"(col-{self.xs_col}) "
+            text += f" (col-{self.xs_col}) "
         else:
             text += "(auto) "
         return text.strip()

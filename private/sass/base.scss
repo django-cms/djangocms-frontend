@@ -9,6 +9,7 @@
 @import "components/preview-generator";
 @import "components/forms";
 @import "components/tooltip";
+@import "components/title";
 
 .sr-only {
     @include visually-hidden

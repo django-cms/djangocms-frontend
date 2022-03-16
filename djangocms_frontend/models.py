@@ -88,7 +88,7 @@ class FrontendUIItem(CMSPlugin):
 
     def get_short_description(self):
         """Plugin-specific short description (to be defined by subclasses)"""
-        pass
+        return ""
 
     @property
     def framework_info(self):

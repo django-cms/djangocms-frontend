@@ -23,6 +23,7 @@ from djangocms_frontend.helpers import (
 )
 from djangocms_frontend.models import FrontendUIItem
 
+from ...common.title import TitleFormMixin
 from .. import grid
 from .constants import (
     GRID_COLUMN_ALIGNMENT_CHOICES,
@@ -37,6 +38,7 @@ mixin_factory = settings.get_forms(grid)
 
 class GridContainerForm(
     mixin_factory("GridContainer"),
+    TitleFormMixin,
     BackgroundFormMixin,
     ResponsiveFormMixin,
     SpacingFormMixin,
@@ -52,21 +54,12 @@ class GridContainerForm(
         model = FrontendUIItem
         entangled_fields = {
             "config": [
-                "container_name",
                 "container_type",
                 "attributes",
             ]
         }
         untangled_fields = ("tag_type",)
 
-    container_name = forms.CharField(
-        label=_("Name"),
-        required=False,
-        help_text=_(
-            "Optional name of container for easier identification in the "
-            "structure tree. Not visible on the published page."
-        ),
-    )
     container_type = forms.ChoiceField(
         label=_("Container type"),
         choices=GRID_CONTAINER_CHOICES,
@@ -84,7 +77,11 @@ class GridContainerForm(
 
 
 class GridRowBaseForm(
-    mixin_factory("GridRow"), ResponsiveFormMixin, SpacingFormMixin, EntangledModelForm
+    mixin_factory("GridRow"),
+    TitleFormMixin,
+    ResponsiveFormMixin,
+    SpacingFormMixin,
+    EntangledModelForm,
 ):
     class Meta:
         model = FrontendUIItem
@@ -152,6 +149,7 @@ GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 class GridColumnBaseForm(
     mixin_factory("GridColumn"),
+    TitleFormMixin,
     BackgroundFormMixin,
     ResponsiveFormMixin,
     SpacingFormMixin,
