@@ -22,5 +22,7 @@ class NavBrandRenderMixin:
 
 class NavLinkRenderMixin:
     def render(self, context, instance, placeholder):
-        instance.add_classes("navbar-nav")
+        instance.add_classes("nav-link")
+        if instance.child_plugin_instances:
+            instance.add_classes("dropdown-toggle")
         return super().render(context, instance, placeholder)

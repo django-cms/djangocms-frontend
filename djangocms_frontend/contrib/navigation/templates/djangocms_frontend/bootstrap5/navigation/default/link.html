@@ -1,8 +1,12 @@
-{% load cms_tags %}{% spaceless %}
+
+
+
+
+{% load cms_tags sekizai_tags %}{% spaceless %}
 {% if instance.child_plugin_instances %}
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ instance.get_link }}"
-           {% if parent.plugin_type != "NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
+    <li class="nav-item {% if parent.plugin_type == "NavLinkPlugin" %}dropend{% else %}dropdown{% endif %}">
+        <a {{ instance.get_attributes }} href="{{ instance.get_link }}"
+           {% if parent.plugin_type != "NavLinkPluginx" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
         <ul class="dropdown-menu">
             {% for plugin in instance.child_plugin_instances %}
                {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
@@ -10,6 +14,17 @@
         </ul>
     </li>
 {% else %}
-    <li class="nav-item"><a class="{{ link_classes }} nav-link href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a></li>
+    <li class="nav-item"><a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a></li>
 {% endif %}
 {% endspaceless %}
+{% addtoblock "css" %}
+    <style>
+        .dropdown-menu > li:hover > .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu .dropdown-menu {
+          left: calc(100% - 0.3rem);
+          top: calc(0.3rem - 8px);
+        }
+    </style>
+{% endaddtoblock %}

@@ -102,13 +102,11 @@ class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
     class Meta:
         entangled_fields = {
             "config": [
-                "empty",
                 "attributes",
             ]
         }
         untangled_fields = ()
 
-    empty = forms.CharField(required=None, widget=forms.HiddenInput())
     attributes = AttributesFormField()
 
 
