@@ -112,6 +112,6 @@ class Link(GetLinkMixin, FrontendUIItem):
         verbose_name = _("Link")
 
     def get_short_description(self):
-        if self.name and self.get_link():
+        if self.config.get("name", "") and self.get_link():
             return f"{self.name} ({self.get_link()})"
-        return self.name or self.get_link() or _("<link is missing>")
+        return self.config.get("name", "") or self.get_link() or _("<link is missing>")

@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend import settings
 from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.contrib import navigation
+from djangocms_frontend.contrib.link.forms import LinkForm
 from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.settings import NAVBAR_DESIGNS
@@ -80,7 +81,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
     attributes = AttributesFormField()
 
 
-class BrandForm(mixin_factory("Brand"), EntangledModelForm):
+class NavBrandForm(mixin_factory("NavBrand"), EntangledModelForm):
     class Meta:
         entangled_fields = {
             "config": [
@@ -95,3 +96,22 @@ class BrandForm(mixin_factory("Brand"), EntangledModelForm):
         required=True,
     )
     attributes = AttributesFormField()
+
+
+class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "empty",
+                "attributes",
+            ]
+        }
+        untangled_fields = ()
+
+    empty = forms.CharField(required=None, widget=forms.HiddenInput())
+    attributes = AttributesFormField()
+
+
+class NavLinkForm(mixin_factory("NavLink"), LinkForm):
+    link_is_optional = True
+    pass

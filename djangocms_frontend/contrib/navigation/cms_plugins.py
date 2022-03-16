@@ -7,6 +7,7 @@ from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
 from ...helpers import get_plugin_template
 from .. import navigation
+from ..link.cms_plugins import LinkPlugin
 from . import forms, models
 
 mixin_factory = settings.get_renderer(navigation)
@@ -29,7 +30,12 @@ class NavigationPlugin(
     form = forms.NavigationForm
     change_form_template = "djangocms_frontend/admin/navigation.html"
     allow_children = True
-    child_classes = ["LinkPlugin", "PageTreePlugin", "BrandPlugin"]
+    child_classes = [
+        "NavLinkPlugin",
+        "PageTreePlugin",
+        "NavBrandPlugin",
+        "NavContainerPlugin",
+    ]
 
     fieldsets = [
         (
@@ -59,17 +65,13 @@ class PageTreePlugin(
     AttributesMixin,
     CMSUIPlugin,
 ):
-    """
-    Creates a Navbar
-    """
-
     name = _("Page tree")
     module = _("Frontend")
     model = models.PageTree
     form = forms.PageTreeForm
     change_form_template = "djangocms_frontend/admin/page_tree.html"
     allow_children = False
-    parent_classes = ["NavigationPlugin"]
+    parent_classes = ["NavigationPlugin", "NavContainerPlugin"]
     fieldsets = [
         (
             None,
@@ -84,22 +86,18 @@ class PageTreePlugin(
 
 
 @plugin_pool.register_plugin
-class BrandPlugin(
-    mixin_factory("Brand"),
+class NavBrandPlugin(
+    mixin_factory("NavBrand"),
     AttributesMixin,
     CMSUIPlugin,
 ):
-    """
-    Creates a Navbar
-    """
-
     name = _("Brand")
     module = _("Frontend")
-    model = models.Brand
-    form = forms.BrandForm
+    model = models.NavBrand
+    form = forms.NavBrandForm
     change_form_template = "djangocms_frontend/admin/brand.html"
     allow_children = True
-    parent_classes = ["NavigationPlugin"]
+    parent_classes = ["NavigationPlugin", "NavContainerPlugin"]
 
     fieldsets = [
         (
@@ -107,3 +105,63 @@ class BrandPlugin(
             {"fields": ("simple_content",)},
         ),
     ]
+
+
+@plugin_pool.register_plugin
+class NavContainerPlugin(
+    mixin_factory("NavLink"),
+    AttributesMixin,
+    CMSUIPlugin,
+):
+    name = _("Navigation container")
+    module = _("Frontend")
+    model = models.NavContainer
+    form = forms.NavContainerForm
+    change_form_template = "djangocms_frontend/admin/nav_container.html"
+    allow_children = True
+    parent_classes = ["NavigationPlugin"]
+    child_classes = [
+        "NavLinkPlugin",
+        "PageTreePlugin",
+        "NavBrandPlugin",
+    ]
+
+    fieldsets = [
+        (
+            None,
+            {"fields": ()},
+        ),
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return get_plugin_template(
+            instance,
+            "navigation",
+            "nav_container",
+            settings.NAVIGATION_TEMPLATE_CHOICES,
+        )
+
+
+@plugin_pool.register_plugin
+class NavLinkPlugin(
+    mixin_factory("NavLink"),
+    LinkPlugin,
+):
+    name = _("Navigation link")
+    module = _("Frontend")
+    model = models.NavLink
+    form = forms.NavLinkForm
+    change_form_template = "djangocms_frontend/admin/navlink.html"
+    allow_children = True
+    parent_classes = ["NavigationPlugin", "NavContainerPlugin", "NavLinkPlugin"]
+    child_classes = [
+        "NavLinkPlugin",
+        "GridContainerPlugin",
+        "GridRowPlugin",
+        "ListGroupPlugin",
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return get_plugin_template(
+            instance, "navigation", "link", settings.NAVIGATION_TEMPLATE_CHOICES
+        )

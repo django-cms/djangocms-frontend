@@ -1,5 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
+from djangocms_frontend.contrib.link.models import Link
 from djangocms_frontend.models import FrontendUIItem
 
 
@@ -17,13 +18,25 @@ class Navigation(FrontendUIItem):
         return f'({self.config.get("navbar_design", "-")})'
 
 
+class NavContainer(FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Navigation container")
+
+
+class NavLink(Link):
+    class Meta:
+        proxy = True
+        verbose_name = _("Navigation Link")
+
+
 class PageTree(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Page tree")
 
 
-class Brand(FrontendUIItem):
+class NavBrand(FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Brand")

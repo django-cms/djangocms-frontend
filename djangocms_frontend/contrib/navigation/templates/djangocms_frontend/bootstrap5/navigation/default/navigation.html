@@ -6,16 +6,11 @@
                     {% render_plugin plugin %}
                 {% endif %}
             {% endfor %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               {% for plugin in instance.child_plugin_instances %}
-                   {% if plugin.plugin_type != "BrandPlugin" %}
-                       {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}
-                   {% endif %}
-               {% endfor %}
-            </div>
+           {% for plugin in instance.child_plugin_instances %}
+               {% if plugin.plugin_type != "BrandPlugin" %}
+                   {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+               {% endif %}
+           {% endfor %}
         {% if instance.navbar_container %}</div>{% endif %}
     </nav>
 {% endspaceless %}

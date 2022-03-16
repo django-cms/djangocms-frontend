@@ -1,0 +1,15 @@
+{% load cms_tags %}{% spaceless %}
+{% if instance.child_plugin_instances %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{{ instance.get_link }}"
+           {% if parent.plugin_type != "NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
+        <ul class="dropdown-menu">
+            {% for plugin in instance.child_plugin_instances %}
+               {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+            {% endfor %}
+        </ul>
+    </li>
+{% else %}
+    <li class="nav-item"><a class="{{ link_classes }} nav-link href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a></li>
+{% endif %}
+{% endspaceless %}
