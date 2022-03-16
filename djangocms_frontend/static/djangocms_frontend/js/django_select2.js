@@ -1,16 +1,16 @@
 'use strict';
-django.jQuery(document).ready(function () {
+(function () {
     var $;
 
-    if(django.jQuery.fn.select2 !== "undefined") {
+    if(django.jQuery.fn.select2 != undefined) {
         $ = django.jQuery;
-        console.log("Select2 found in django.jQuery", $.fn.jquery);
+        console.log("Select2 found in django.jQuery", $.fn.jquery, $.fn.select2);
     } else {
-        if(CMS.$.fn.select2 !== "undefined") {
+        if(CMS.$.fn.select2 != undefined) {
             $ = CMS.$;
             console.log("Select2 found in CMS.$", $.fn.jquery);
         } else {
-            if (jQuery.fn.select2 !== "undefined") {
+            if (jQuery.fn.select2 != undefined) {
                 $ = jQuery;
                 console.log("Select2 found in jQuery", $.fn.jquery);
             } else {
@@ -76,7 +76,8 @@ django.jQuery(document).ready(function () {
         return this
     }
 
+
     $(function () {
         $('.django-select2').djangoSelect2()
-    })
-})
+    });
+})();
