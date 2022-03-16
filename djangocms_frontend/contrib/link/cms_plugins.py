@@ -2,7 +2,7 @@ from cms.plugin_pool import plugin_pool
 from django.apps import apps
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.helpers import get_plugin_template
+from djangocms_frontend.helpers import get_plugin_template, insert_fields
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
@@ -55,11 +55,35 @@ if not apps.is_installed("djangocms_url_manager"):
 
 
 class LinkPluginMixin:
+    link_fieldset_position = None
+    link_fields = (
+        (("site", "url_grouper"),)
+        if apps.is_installed("djangocms_url_manager")
+        else (
+            ("external_link", "internal_link"),
+            ("mailto", "phone"),
+            ("anchor", "target"),
+            "file_link",
+        )
+    )
+
     def get_form(self, request, obj=None, change=False, **kwargs):
         """The link form needs the request object to check permissions"""
         form = super().get_form(request, obj, change, **kwargs)
         form.request = request
         return form
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if self.link_fieldset_position is not None:
+            fieldsets = insert_fields(
+                fieldsets,
+                self.link_fields,
+                blockname=_("Link settings"),
+                position=self.link_fieldset_position,
+            )
+        print(fieldsets)
+        return fieldsets
 
 
 @plugin_pool.register_plugin

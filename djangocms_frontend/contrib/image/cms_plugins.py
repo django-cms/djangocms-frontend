@@ -1,5 +1,4 @@
 from cms.plugin_pool import plugin_pool
-from django.apps import apps
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
@@ -61,18 +60,6 @@ class ImagePlugin(
             },
         ),
         (
-            _("Link settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (("site", "url_grouper"),)
-                if apps.is_installed("djangocms_url_manager")
-                else (
-                    ("external_link", "internal_link"),
-                    "file_link",
-                ),
-            },
-        ),
-        (
             _("Cropping settings"),
             {
                 "classes": ("collapse",),
@@ -84,6 +71,7 @@ class ImagePlugin(
             },
         ),
     ]
+    link_fieldset_position = 2
 
     def get_render_template(self, context, instance, placeholder):
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"
