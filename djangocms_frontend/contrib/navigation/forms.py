@@ -8,6 +8,7 @@ from djangocms_frontend.contrib import navigation
 from djangocms_frontend.contrib.link.forms import LinkForm
 from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup
 from djangocms_frontend.helpers import first_choice
+from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import NAVBAR_DESIGNS
 
 mixin_factory = settings.get_forms(navigation)
@@ -19,6 +20,7 @@ class NavigationForm(
     EntangledModelForm,
 ):
     class Meta:
+        model = FrontendUIItem
         entangled_fields = {
             "config": [
                 "template",
@@ -62,6 +64,7 @@ class NavigationForm(
 
 class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
     class Meta:
+        model = FrontendUIItem
         entangled_fields = {
             "config": [
                 "template",
@@ -83,6 +86,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
 
 class NavBrandForm(mixin_factory("NavBrand"), EntangledModelForm):
     class Meta:
+        model = FrontendUIItem
         entangled_fields = {
             "config": [
                 "simple_content",
@@ -100,6 +104,7 @@ class NavBrandForm(mixin_factory("NavBrand"), EntangledModelForm):
 
 class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
     class Meta:
+        model = FrontendUIItem
         entangled_fields = {
             "config": [
                 "attributes",
