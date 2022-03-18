@@ -18,7 +18,7 @@ class AccordionPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         parent.initialize_from_form(AccordionForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -33,7 +33,7 @@ class AccordionPluginTestCase(TestFixture, CMSTestCase):
             config=dict(attributes={"class": "test-class"}),
         )
         plugin.initialize_from_form(AccordionItemForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -66,4 +66,4 @@ class AccordionPluginTestCase(TestFixture, CMSTestCase):
             ),
             f'<div class="collapse accordion-collapse test-class"> not found in {response.content.decode("utf-8")}',
         )
-        self.assertContains(response, 'id="heading-3"')
+        self.assertContains(response, 'id="heading-')

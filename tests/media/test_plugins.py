@@ -13,7 +13,7 @@ class MediaPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=MediaPlugin.__name__,
             language=self.language,
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -26,7 +26,7 @@ class MediaPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=MediaBodyPlugin.__name__,
             language=self.language,
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

@@ -142,6 +142,7 @@ if apps.apps.is_installed("djangocms_url_manager"):
             widget=HtmlLinkUrlSelectWidget(
                 attrs={"data-placeholder": _("Select URL object from list")}
             ),
+            required=False,
         )
 
 else:

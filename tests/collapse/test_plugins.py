@@ -23,7 +23,7 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         plugin.initialize_from_form(CollapseForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -41,7 +41,7 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(CollapseTriggerForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -68,7 +68,7 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(CollapseContainerForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

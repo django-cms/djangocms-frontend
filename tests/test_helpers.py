@@ -1,6 +1,6 @@
-from cms.api import add_plugin, create_page
+from cms.api import add_plugin
+from cms.test_utils.testcases import CMSTestCase
 from django.template.loader import select_template
-from django.test import TestCase
 
 from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
@@ -12,8 +12,10 @@ from djangocms_frontend.helpers import (
     link_to_framework_doc,
 )
 
+from .fixtures import TestFixture
 
-class HelpersTestCase(TestCase):
+
+class HelpersTestCase(TestFixture, CMSTestCase):
     def test_get_template_path(self):
         template = get_template_path("carousel", "default", "slide")
         result = "djangocms_frontend/bootstrap5/carousel/default/slide.html"
@@ -22,13 +24,10 @@ class HelpersTestCase(TestCase):
         self.assertEqual(status.template.name, result)
 
     def test_get_plugin_template(self):
-        page = create_page(
-            title="home",
-            template="page.html",
-            language="en",
-        )
+        self.superuser = self.get_superuser()
+        self.language = "en"
         instance = add_plugin(
-            placeholder=page.placeholders.get(slot="content"),
+            placeholder=self.placeholder,
             plugin_type=CarouselPlugin.__name__,
             language="en",
         )
@@ -52,7 +51,7 @@ class HelpersTestCase(TestCase):
             template, "djangocms_frontend/bootstrap5/does_not/default/exist.html"
         )
         # cleanup
-        page.delete()
+        self.page.delete()
 
     def test_insert_fields(self):
         fieldsets = (

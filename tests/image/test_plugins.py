@@ -33,7 +33,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         plugin.save()
         self.assertTrue(plugin.is_responsive_image)
 
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
@@ -53,7 +53,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         )
         plugin.initialize_from_form(ImageForm)
         plugin.save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

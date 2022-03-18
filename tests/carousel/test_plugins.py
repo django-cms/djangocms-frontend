@@ -27,7 +27,7 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         plugin.initialize_from_form(CarouselForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -58,7 +58,7 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
         )
         plugin.initialize_from_form(CarouselSlideForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -94,7 +94,7 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
             config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
         ).initialize_from_form(CarouselSlideForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

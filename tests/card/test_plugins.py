@@ -15,7 +15,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         plugin.initialize_from_form(CardForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -34,7 +34,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(CardForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -53,7 +53,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(CardForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -73,7 +73,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         plugin.initialize_from_form(CardInnerForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -90,7 +90,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(CardInnerForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

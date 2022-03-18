@@ -10,7 +10,7 @@ from djangocms_frontend.contrib.link.forms import (
 )
 from djangocms_frontend.contrib.link.helpers import get_choices
 
-from ..fixtures import TestFixture
+from ..fixtures import DJANGO_CMS4, TestFixture
 
 
 class LinkPluginTestCase(TestFixture, CMSTestCase):
@@ -23,7 +23,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 external_link="https://www.divio.com",
             ),
         ).initialize_from_form(LinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -44,7 +44,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(LinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -66,7 +66,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(LinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -88,7 +88,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(LinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -108,7 +108,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(LinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -132,7 +132,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(slf.prepare_value(dict(model="cms.page", pk=1)), "2-1")
         self.assertEqual(slf.prepare_value(self.home), "2-1")
 
-    def test_image_form(self):
+    def test_link_form(self):
         request = HttpRequest()
         request.POST = {
             "template": get_templates()[0][0],
@@ -143,17 +143,28 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         request.POST.update(
             {
                 "name": "One of the world's most advanced open source CMS",
-                "external_link": "https://www.django-cms.com/",
                 "anchor": "allowed-here",
                 "margin_devices": ["xs"],
                 "padding_devices": ["xs"],
+                **(
+                    dict(
+                        url_grouper=str(
+                            self.create_url(manual_url="https://www.django-cms.org/").id
+                        )
+                    )
+                    if DJANGO_CMS4
+                    else dict(external_link="https://www.django-cms.com/")
+                ),
             }
         )
         form = LinkForm(request.POST)
         self.assertTrue(form.is_valid())
-        request.POST.update({"mailto": "none@nowhere.com"})
-        form = LinkForm(request.POST)
-        self.assertFalse(form.is_valid())  # Two targets
-        request.POST["external_link"] = None
-        form = LinkForm(request.POST)
-        self.assertFalse(form.is_valid())  # no anchor for mail
+        if DJANGO_CMS4:
+            self.delete_urls()
+        else:
+            request.POST.update({"mailto": "none@nowhere.com"})
+            form = LinkForm(request.POST)
+            self.assertFalse(form.is_valid())  # Two targets
+            request.POST["external_link"] = None
+            form = LinkForm(request.POST)
+            self.assertFalse(form.is_valid())  # no anchor for mail

@@ -18,7 +18,7 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
             config=dict(list_group_flush=False),
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -33,7 +33,7 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
             config=dict(list_group_flush=True),
         )
         plugin.initialize_from_form(ListGroupForm)
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -57,7 +57,7 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         plugin.initialize_from_form(ListGroupItemForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -74,7 +74,7 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
                 list_state="active",
             ),
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

@@ -24,7 +24,7 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
                 "space_sides": "",
             },
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -74,7 +74,7 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
             config=dict(list_attributes={"class": "test-class"}),
         ).initialize_from_form(TableOfContentsForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

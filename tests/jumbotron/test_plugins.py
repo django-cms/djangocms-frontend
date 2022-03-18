@@ -13,7 +13,7 @@ class JumbotronPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=JumbotronPlugin.__name__,
             language=self.language,
         )
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -30,7 +30,7 @@ class JumbotronPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.full_clean()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
