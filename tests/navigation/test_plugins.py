@@ -67,7 +67,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<ul class="navbar-nav"></ul>')
         self.assertContains(response, '<button class="navbar-toggler"')
-        self.assertContains(response, 'id="nav3"')
+        self.assertContains(response, 'id="nav')
 
         plugin = add_plugin(
             placeholder=self.placeholder,
