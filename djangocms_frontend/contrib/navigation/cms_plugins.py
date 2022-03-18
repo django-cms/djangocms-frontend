@@ -7,7 +7,7 @@ from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
 from ...helpers import get_plugin_template
 from .. import navigation
-from ..link.cms_plugins import LinkPlugin
+from ..link.cms_plugins import LinkPlugin, LinkPluginMixin
 from . import forms, models
 
 mixin_factory = settings.get_renderer(navigation)
@@ -89,6 +89,7 @@ class PageTreePlugin(
 class NavBrandPlugin(
     mixin_factory("NavBrand"),
     AttributesMixin,
+    LinkPluginMixin,
     CMSUIPlugin,
 ):
     name = _("Brand")
@@ -98,6 +99,7 @@ class NavBrandPlugin(
     change_form_template = "djangocms_frontend/admin/brand.html"
     allow_children = True
     parent_classes = ["NavigationPlugin", "NavContainerPlugin"]
+    link_fieldset_position = -1
 
     fieldsets = [
         (
@@ -105,6 +107,11 @@ class NavBrandPlugin(
             {"fields": ("simple_content",)},
         ),
     ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return get_plugin_template(
+            instance, "navigation", "brand", settings.NAVIGATION_TEMPLATE_CHOICES
+        )
 
 
 @plugin_pool.register_plugin

@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend.contrib.link.models import Link
+from djangocms_frontend.contrib.link.models import GetLinkMixin, Link
 from djangocms_frontend.models import FrontendUIItem
 
 
@@ -36,7 +36,7 @@ class PageTree(FrontendUIItem):
         verbose_name = _("Page tree")
 
 
-class NavBrand(FrontendUIItem):
+class NavBrand(GetLinkMixin, FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Brand")

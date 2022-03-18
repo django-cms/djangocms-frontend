@@ -5,7 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend import settings
 from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.contrib import navigation
-from djangocms_frontend.contrib.link.forms import LinkForm
+from djangocms_frontend.contrib.link.forms import AbstractLinkForm, LinkForm
 from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
@@ -84,7 +84,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
     attributes = AttributesFormField()
 
 
-class NavBrandForm(mixin_factory("NavBrand"), EntangledModelForm):
+class NavBrandForm(mixin_factory("NavBrand"), AbstractLinkForm, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -98,6 +98,7 @@ class NavBrandForm(mixin_factory("NavBrand"), EntangledModelForm):
     simple_content = forms.CharField(
         label=_("Brand"),
         required=True,
+        help_text=_("Enter brand name or add child plugins for brand icon or image"),
     )
     attributes = AttributesFormField()
 
