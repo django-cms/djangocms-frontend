@@ -1,5 +1,5 @@
 {% load cms_tags frontend %}{% spaceless %}
-    <nav {{ instance.get_attributes }}>
+    <nav{{ instance.get_attributes }}>
         {% if instance.navbar_container %}<div class="container">{% endif %}
             {% for plugin in instance.child_plugin_instances %}
                 {% if plugin.plugin_type == "BrandPlugin" %}

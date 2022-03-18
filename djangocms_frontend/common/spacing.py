@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
@@ -55,7 +56,7 @@ class SpacingSizeSideField(forms.MultiValueField):
             "fields",
             (
                 forms.ChoiceField(
-                    choices=[(prop + side, verbose) for side, verbose in side_choices]
+                    choices=[(prop + side, verbose) for side, verbose in side_choices],
                 ),
                 forms.ChoiceField(choices=size_choices, required=False),
             ),
@@ -76,6 +77,14 @@ class SpacingSizeSideField(forms.MultiValueField):
         if data_list and data_list[1]:  # Size selected?
             return f"{data_list[0]}-{data_list[1]}"
         return ""
+
+    def clean(self, value):
+        if value[1] and not value[0]:
+            raise ValidationError(
+                _("Please chose a side to which the spacing should be applied."),
+                code="incomplete",
+            )
+        return super().clean(value)
 
 
 def get_spacing_classes(spacing_set, active_set=None):

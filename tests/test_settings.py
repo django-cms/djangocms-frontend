@@ -29,9 +29,11 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.link",
     "djangocms_frontend.contrib.listgroup",
     "djangocms_frontend.contrib.media",
+    "djangocms_frontend.contrib.navigation",
     "djangocms_frontend.contrib.image",
     "djangocms_frontend.contrib.tabs",
     "djangocms_frontend.contrib.utilities",
+    "sekizai",
 ]
 
 if DJANGO_3_1:
