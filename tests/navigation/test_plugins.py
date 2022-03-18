@@ -29,7 +29,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             ),
         ).initialize_from_form(NavigationForm)
         nav.save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -59,7 +59,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             config=dict(),
         )
         container.initialize_from_form(NavContainerForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -82,7 +82,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             ),
         )
         plugin.initialize_from_form(NavLinkForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
@@ -99,7 +99,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             config=dict(),
         )
         plugin.initialize_from_form(PageTreeForm).save()
-        self.page.publish(self.language)
+        self.publish(self.page, self.language)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
