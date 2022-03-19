@@ -3,7 +3,7 @@ import json
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
 
@@ -44,7 +44,7 @@ def get_related_object(reference):
 class LazyEncoder(DjangoJSONEncoder):
     def default(self, obj):
         if isinstance(obj, Promise):
-            return force_text(obj)
+            return force_str(obj)
         return super().default(obj)
 
 

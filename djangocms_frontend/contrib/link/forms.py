@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.fields.related import ManyToOneRel
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from django_select2.forms import HeavySelect2Widget, Select2Widget
@@ -241,13 +241,13 @@ else:
                 "external_link",
                 "internal_link",
             )
-            anchor_field_verbose_name = force_text(self.fields[anchor_field_name].label)
+            anchor_field_verbose_name = force_str(self.fields[anchor_field_name].label)
             anchor_field_value = self.cleaned_data.get(anchor_field_name, None)
             link_fields = {
                 key: self.cleaned_data.get(key, None) for key in link_field_names
             }
             link_field_verbose_names = {
-                key: force_text(self.fields[key].label) for key in link_fields.keys()
+                key: force_str(self.fields[key].label) for key in link_fields.keys()
             }
             provided_link_fields = {
                 key: value for key, value in link_fields.items() if value

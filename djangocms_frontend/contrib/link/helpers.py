@@ -6,7 +6,7 @@ from django.conf import settings as django_settings
 from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError, ObjectDoesNotExist
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import mark_safe
 
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
@@ -103,7 +103,7 @@ def get_link_choices(request, term="", lang=None, nbsp=""):
             type_class = ContentType.objects.get_for_model(objects[0].__class__)
             available_objects.append(
                 {
-                    "text": force_text(section),
+                    "text": force_str(section),
                     "children": [
                         dict(id=f"{type_class.id}-{obj.id}", text=str(obj))
                         for obj in objects

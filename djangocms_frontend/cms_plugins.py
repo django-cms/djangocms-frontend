@@ -1,5 +1,5 @@
 from cms.plugin_base import CMSPluginBase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 
 class CMSUIPlugin(CMSPluginBase):
@@ -7,4 +7,4 @@ class CMSUIPlugin(CMSPluginBase):
     change_form_template = "djangocms_frontend/admin/base.html"
 
     def __str__(self):
-        return force_text(super().__str__())
+        return force_str(super().__str__())
