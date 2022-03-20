@@ -18,7 +18,7 @@ def register_form_view(cls, slug=None):
     :type slug: string to instantiate dashboard_widget
     """
     if not slug:
-        slug = get_random_string()
+        slug = get_random_string(length=12)
     key = hashlib.sha384(slug.encode("utf-8")).hexdigest()
     if key in _formview_pool:
         assert _formview_pool[key][0] == cls, _(
