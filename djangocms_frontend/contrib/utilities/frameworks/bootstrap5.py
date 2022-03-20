@@ -20,4 +20,7 @@ class HeadingRenderMixin:
         heading_context = instance.config.get("heading_context", None)
         if heading_context:
             instance.add_classes(f"text-{heading_context}")
+        heading_alignment = instance.config.get("heading_alignment", None)
+        if heading_alignment:
+            instance.add_classes(f"text-{heading_alignment}")
         return super().render(context, instance, placeholder)

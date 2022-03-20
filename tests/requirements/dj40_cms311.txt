@@ -1,7 +1,6 @@
 -r base.txt
 
 -e git+https://github.com/fsbraun/django-filer.git@master#egg=django-filer
--e git+https://github.com/django-cms/django-cms.git@develop-4#egg=django-cms
 
 Django>=4.0,<4.1
 -e git+https://github.com/django-cms/django-cms.git@develop#egg=django-cms

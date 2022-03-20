@@ -91,6 +91,7 @@ class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm
                 "heading",
                 "heading_id",
                 "heading_context",
+                "heading_alignment",
                 "attributes",
             ],
         }
@@ -102,6 +103,11 @@ class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm
         ("h3", _("Heading 3")),
         ("h4", _("Heading 4")),
         ("h5", _("Heading 5")),
+    )
+    ALIGNMENT_CHOICES = (
+        ("start", _("Left")),
+        ("center", _("Center")),
+        ("end", _("Right")),
     )
 
     heading_level = forms.ChoiceField(
@@ -128,6 +134,12 @@ class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm
         choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
         initial=settings.EMPTY_CHOICE,
         widget=ColoredButtonGroup(),
+    )
+    heading_alignment = forms.ChoiceField(
+        label=_("Alignment"),
+        choices=settings.EMPTY_CHOICE + ALIGNMENT_CHOICES,
+        required=False,
+        widget=IconGroup(),
     )
     attributes = AttributesFormField()
 
