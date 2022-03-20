@@ -4,12 +4,22 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
+from ...common.spacing import SpacingFormMixin
+from ...fields import (
+    AttributesFormField,
+    ButtonGroup,
+    ColoredButtonGroup,
+    IconGroup,
+    TagTypeFormField,
+)
 from ...helpers import first_choice
 from ...models import FrontendUIItem
+from .. import utilities
+
+mixin_factory = settings.get_forms(utilities)
 
 
-class SpacingForm(EntangledModelForm):
+class SpacingForm(mixin_factory("Spacing"), EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -72,7 +82,7 @@ class SpacingForm(EntangledModelForm):
             )
 
 
-class HeadingForm(EntangledModelForm):
+class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -80,6 +90,7 @@ class HeadingForm(EntangledModelForm):
                 "heading_level",
                 "heading",
                 "heading_id",
+                "heading_context",
                 "attributes",
             ],
         }
@@ -111,10 +122,17 @@ class HeadingForm(EntangledModelForm):
             "Fill in unique ID for table of contents. If empty heading will not appear in table of contents."
         ),
     )
+    heading_context = forms.ChoiceField(
+        label=_("Heading context"),
+        required=False,
+        choices=settings.EMPTY_CHOICE + settings.COLOR_STYLE_CHOICES,
+        initial=settings.EMPTY_CHOICE,
+        widget=ColoredButtonGroup(),
+    )
     attributes = AttributesFormField()
 
 
-class TableOfContentsForm(EntangledModelForm):
+class TableOfContentsForm(mixin_factory("TableOfContents"), EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {

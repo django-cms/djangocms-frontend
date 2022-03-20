@@ -5,6 +5,7 @@ from djangocms_frontend import settings
 
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.spacing import SpacingMixin
 from .. import utilities
 from . import forms, models
 
@@ -52,7 +53,9 @@ class EditorNotePlugin(mixin_factory("EditorNote"), CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, CMSUIPlugin):
+class HeadingPlugin(
+    mixin_factory("Heading"), AttributesMixin, SpacingMixin, CMSUIPlugin
+):
     """Room for notes for editor only visible in edit mode"""
 
     name = _("Heading")
@@ -70,6 +73,7 @@ class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, CMSUIPlugin):
                 "fields": (
                     ("heading_level", "heading_id"),
                     "heading",
+                    "heading_context",
                 )
             },
         ),
@@ -88,7 +92,7 @@ class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, CMSUIPlugin):
                 )
             )
         context["instance"] = instance
-        return context
+        return super().render(context, instance, placeholder)
 
 
 def create_tree(request_toc):
@@ -125,7 +129,7 @@ class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
 
     fieldsets = settings.EMPTY_FIELDSET
 
-    def render(self, context, instance, palceholder):
+    def render(self, context, instance, placeholder):
         if hasattr(context["request"], "TOC"):
             toc_tree = create_tree(context["request"].TOC)
             context["toc"] = toc_tree
@@ -133,4 +137,4 @@ class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
             context["toc"] = []
         context["template"] = self.render_template
         context["instance"] = instance
-        return context
+        return super().render(context, instance, placeholder)

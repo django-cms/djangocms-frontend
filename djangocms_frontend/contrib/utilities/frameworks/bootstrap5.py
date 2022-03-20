@@ -13,3 +13,11 @@ class SpacingRenderMixin:
 
 class EditorNoteRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/editor_note.html"
+
+
+class HeadingRenderMixin:
+    def render(self, context, instance, placeholder):
+        heading_context = instance.config.get("heading_context", None)
+        if heading_context:
+            instance.add_classes(f"text-{heading_context}")
+        return super().render(context, instance, placeholder)
