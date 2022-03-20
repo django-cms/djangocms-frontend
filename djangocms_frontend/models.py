@@ -54,20 +54,16 @@ class FrontendUIItem(CMSPlugin):
         self.config["attributes"] = attrs
 
     def get_attributes(self):
-        classes = (
-            set(self.config["attributes"].get("class", "").split())
-            if "attributes" in self.config
-            else set()
-        )
+        attributes = self.config.get("attributes", {})
+        classes = set(attributes.get("class", "").split())
         classes.update(self._additional_classes)
+        if classes:
+            attributes["class"] = " ".join(classes)
         parts = (
             f'{item}="{conditional_escape(value)}"' if value else f"{item}"
-            for item, value in {
-                **self.config.get("attributes", {}),
-                **{"class": " ".join(classes)},
-            }.items()
+            for item, value in attributes.items()
         )
-        return mark_safe(" " + " ".join(parts))
+        return mark_safe(" " + " ".join(parts)) if parts else ""
 
     def save(self, *args, **kwargs):
         self.ui_item = self.__class__.__name__
