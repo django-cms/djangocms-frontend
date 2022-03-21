@@ -298,6 +298,76 @@ class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelFo
     attributes = AttributesFormField()
 
 
+class EmailFieldForm(mixin_factory("EmailField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "attributes",
+            ]
+        }
+
+    attributes = AttributesFormField()
+
+
+class UrlFieldForm(mixin_factory("URLField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "attributes",
+            ]
+        }
+
+    attributes = AttributesFormField()
+
+
+class DecimalFieldForm(
+    mixin_factory("DecimalField"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "min_value",
+                "max_value",
+                "decimal_places",
+                "attributes",
+            ]
+        }
+
+    min_value = forms.DecimalField(
+        label=_("Minimum value"),
+        required=False,
+        initial=None,
+    )
+    max_value = forms.DecimalField(
+        label=_("Maximum value"), required=False, initial=None
+    )
+    decimal_places = forms.IntegerField(
+        label=_("Decimal places"),
+        required=False,
+        initial=None,
+        min_value=0,
+    )
+
+    attributes = AttributesFormField()
+
+
+class IntegerFieldForm(
+    mixin_factory("IntegerField"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "attributes",
+            ]
+        }
+
+    attributes = AttributesFormField()
+
+
 class TextareaFieldForm(
     mixin_factory("TextareaField"), FormFieldMixin, EntangledModelForm
 ):

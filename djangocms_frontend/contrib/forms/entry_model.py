@@ -1,3 +1,5 @@
+import decimal
+
 from cms.utils.compat import DJANGO_3_0
 from django import forms
 from django.conf import settings
@@ -73,6 +75,12 @@ class FormEntry(models.Model):
             elif isinstance(value, bool):
                 entangled_fields.append(key)
                 fields[key] = forms.BooleanField(
+                    label=key,
+                    required=False,
+                )
+            elif isinstance(value, decimal.Decimal):
+                entangled_fields.append(key)
+                fields[key] = forms.DecimalField(
                     label=key,
                     required=False,
                 )

@@ -34,10 +34,38 @@ class FormElementPlugin(CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class CharFieldPlugin(FormElementPlugin):
+class CharFieldPlugin(mixin_factory("CharField"), FormElementPlugin):
     name = _("Text line")
     model = models.CharField
     form = forms.CharFieldForm
+
+
+@plugin_pool.register_plugin
+class EmailFieldPlugin(mixin_factory("EmailField"), FormElementPlugin):
+    name = _("Email field")
+    model = models.EmailField
+    form = forms.EmailFieldForm
+
+
+@plugin_pool.register_plugin
+class URLFieldPlugin(mixin_factory("URLField"), FormElementPlugin):
+    name = _("URL field")
+    model = models.UrlField
+    form = forms.UrlFieldForm
+
+
+@plugin_pool.register_plugin
+class DecimalFieldPlugin(mixin_factory("DecimalField"), FormElementPlugin):
+    name = _("Decimal field")
+    model = models.DecimalField
+    form = forms.DecimalFieldForm
+
+
+@plugin_pool.register_plugin
+class IntegerFieldPlugin(mixin_factory("IntegerField"), FormElementPlugin):
+    name = _("Integer field")
+    model = models.IntegerField
+    form = forms.IntegerFieldForm
 
 
 @plugin_pool.register_plugin
