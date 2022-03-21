@@ -111,8 +111,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("form_name", models.SlugField(verbose_name="Form")),
-                ("entry_data", models.JSONField(default=dict)),
-                ("html_headers", models.JSONField(default={})),
+                ("entry_data", models.JSONField(blank=True, default=dict)),
+                ("html_headers", models.JSONField(blank=True, default=dict)),
                 ("entry_created_at", models.DateTimeField(auto_now_add=True)),
                 ("entry_updated_at", models.DateTimeField(auto_now=True)),
                 (
@@ -126,5 +126,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            options={
+                "verbose_name": "Form entry",
+                "verbose_name_plural": "Form entries",
+            },
         ),
     ]

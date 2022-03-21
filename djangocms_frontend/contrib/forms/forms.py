@@ -56,13 +56,15 @@ def register(form_class):
 
 
 class SimpleFrontendForm(forms.Form):
-    # def __init__(self, data=None, *args, **kwargs):
-    #     if data is None:
-    #         if hasattr(self, "_request") and get_option(self, "unqiue", False):
-    #             ...
-    #
-    #     super().__init__(self, data=data, *args, **kwargs)
-    #
+    def __init__(self, *args, **kwargs):
+        if hasattr(self, "_request") and get_option(self, "unqiue", False):
+            qs = FormEntry.objects.filter(
+                form_user=self._request.user, form_name=get_option(self, "form_name")
+            )
+            if qs:
+                kwargs["initial"] = qs.last().entry_data
+        super().__init__(*args, **kwargs)
+
     def clean(self):
         if get_option(self, "login_required", False):
             if not hasattr(self, "_request") or not self._request.user.is_authenticated:
@@ -88,10 +90,7 @@ class SimpleFrontendForm(forms.Form):
             }
         defaults.update(
             {
-                "entry_data": {
-                    key: self.serialize(value)
-                    for key, value in self.cleaned_data.items()
-                },
+                "entry_data": self.cleaned_data,
                 "html_headers": dict(
                     user_agent=self._request.headers["User-Agent"],
                     referer=self._request.headers["Referer"],

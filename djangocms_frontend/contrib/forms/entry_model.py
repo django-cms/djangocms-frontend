@@ -11,6 +11,21 @@ else:
     JSONField = models.JSONField
 
 
+class CSValues(forms.CharField):
+    class CSVWidget(forms.TextInput):
+        def format_value(self, value):
+            return ", ".join(value)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", CSValues.CSVWidget())
+        super().__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        value = value.split(",")
+        value = list(map(lambda x: x.strip(), value))
+        return value
+
+
 class FormEntry(models.Model):
     class Meta:
         verbose_name = _("Form entry")
@@ -48,6 +63,11 @@ class FormEntry(models.Model):
                     label=key,
                     widget=forms.TextInput if len(value) < 80 else forms.Textarea,
                 )
+            elif isinstance(value, (list, tuple)):
+                entangled_fields.append(key)
+                fields[key] = CSValues(
+                    label=key,
+                )
         fields["Meta"] = type(
             "Meta",
             (),
@@ -77,7 +97,7 @@ class FormEntry(models.Model):
                     "fields": tuple(
                         key
                         for key, value in self.entry_data.items()
-                        if isinstance(value, str)
+                        if isinstance(value, (str, tuple, list))
                     )
                 },
             ),

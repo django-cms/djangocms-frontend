@@ -141,7 +141,7 @@ class AjaxFormMixin(FormMixin):
         slug = slug or getattr(self, "parameter", {}).get("s", "")
         initial = "initial_" + slug
         if hasattr(self, initial):
-            return getattr(self, initial)
+            return getattr(self, initial).copy()
         return super().get_initial()
 
     def get_form_kwargs(self, slug=None):
