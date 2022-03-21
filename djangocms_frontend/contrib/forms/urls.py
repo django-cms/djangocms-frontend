@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
@@ -17,3 +17,6 @@ urlpatterns = [
         name="ajaxview",
     ),
 ]
+
+
+urls = include("djangocms_frontend.contrib.forms.urls", namespace="dcf_forms")

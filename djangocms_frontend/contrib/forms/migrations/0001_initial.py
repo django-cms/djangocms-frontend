@@ -23,4 +23,59 @@ class Migration(migrations.Migration):
             },
             bases=("djangocms_frontend.frontenduiitem",),
         ),
+        migrations.CreateModel(
+            name="FormTag",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+                "verbose_name": "Form tag",
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
+        migrations.CreateModel(
+            name="Input",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+                "verbose_name": "Input",
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
+        migrations.CreateModel(
+            name="MultiSelect",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+                "verbose_name": "Select multiple",
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
+        migrations.CreateModel(
+            name="Select",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+                "verbose_name": "Select",
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
+        migrations.CreateModel(
+            name="SubmitButton",
+            fields=[],
+            options={
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+                "verbose_name": "Submit button",
+            },
+            bases=("djangocms_frontend.frontenduiitem",),
+        ),
     ]

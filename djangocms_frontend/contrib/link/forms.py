@@ -82,7 +82,7 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
                 )
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
-            kwargs.setdefault("data_view", "autocomplete:ac_view")
+            kwargs.setdefault("data_view", "dcf_autocomplete:ac_view")
         super().__init__(*args, **kwargs)
 
 

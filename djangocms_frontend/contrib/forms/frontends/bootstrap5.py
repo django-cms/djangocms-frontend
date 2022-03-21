@@ -2,6 +2,7 @@ default_attr = dict(
     input="form-control",
     label="form-label",
     div="",
+    group="",
 )
 
 attr_dict = dict(
@@ -9,10 +10,13 @@ attr_dict = dict(
     SelectMultiple=dict(input="form-select"),
     NullBooleanSelect=dict(input="form-select"),
     RadioSelect=dict(
-        input="form-check-input", label="form-check-label", div="form-check"
+        input="form-check-input", label="form-check-label", group="form-check"
     ),
     CheckboxInput=dict(
         input="form-check-input", label="form-check-label", div="form-check"
+    ),
+    CheckboxSelectMultiple=dict(
+        input="form-check-input", label="form-check-label", group="form-check"
     ),
     ButtonRadio=dict(input="btn-check", label="btn btn-outline-primary"),
     ButtonCheckbox=dict(input="btn-check", label="btn btn-outline-primary"),

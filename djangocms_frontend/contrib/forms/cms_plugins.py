@@ -15,6 +15,7 @@ from djangocms_frontend.contrib import forms as forms_module
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from . import forms, models
+from .helper import get_option
 
 
 class CMSAjaxBase(CMSUIPlugin):
@@ -46,11 +47,14 @@ class AjaxFormMixin(FormMixin):
 
     def form_valid(self, form):
         save = getattr(form, "save", None)
-        redirect = getattr(form, "redirect", None)
-        try:
-            redirect = reverse(redirect)
-        except NoReverseMatch:
-            pass
+        redirect = get_option(form, "redirect", None)
+        if isinstance(redirect, str):
+            try:
+                redirect = reverse(redirect)
+            except NoReverseMatch:
+                pass
+        elif hasattr(redirect, "get_absolute_url"):
+            redirect = redirect.get_absolute_url()
 
         if callable(save):
             form.save()
@@ -60,7 +64,7 @@ class AjaxFormMixin(FormMixin):
             get_success_context += "_" + form.slug
             render_success += "_" + form.slug
 
-        if hasattr(form, render_success):
+        if get_option(form, render_success, None):
             context = SekizaiContext(
                 {
                     "form": form,
@@ -79,7 +83,7 @@ class AjaxFormMixin(FormMixin):
                 context.get("result", "success"),
                 "" if self.replace else "result",
                 render_to_string(
-                    getattr(form, render_success), context.flatten(), self.request
+                    get_option(form, render_success), context.flatten(), self.request
                 ),
             )
         elif redirect:
@@ -164,7 +168,7 @@ class AjaxFormMixin(FormMixin):
             if self.instance:
                 for field in form.base_fields:
                     form.fields[field].widget.attrs.update(
-                        {"id": field + str(self.instance.id)}
+                        {"id": (field or "") + str(self.instance.id)}
                     )
             return form
         return None
@@ -245,8 +249,9 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     model = models.Form
 
     form = forms.FormsForm
+    render_template = f"djangocms_frontend/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/forms.html"
-    allow_children = False
+    allow_children = True
 
     fieldsets = [
         (
@@ -254,6 +259,7 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
             {
                 "fields": [
                     "form_selection",
+                    "form_floating_labels",
                 ],
             },
         ),
@@ -270,6 +276,104 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     ]
 
     def get_form_class(self, slug=None):
+        if self.instance.child_plugin_instances is None:  # not set if in ajax_post
+            self.instance.child_plugin_instances = [
+                child.get_plugin_instance()[0] for child in self.instance.get_children()
+            ]
+        if self.instance.child_plugin_instances:
+            return self.create_form_class_from_plugins()
         if self.instance.config.get("form_selection", None):
             return forms._form_registry.get(self.instance.form_selection, None)
         return None
+
+    def create_form_class_from_plugins(self):
+        def traverse(instance):
+            nonlocal fields
+            if hasattr(instance, "get_form_field"):
+                name, field = instance.get_form_field()
+                fields[name] = field
+            if (
+                instance.child_plugin_instances is None
+            ):  # children already fetched from db?
+                instance.child_plugin_instances = [
+                    child.get_plugin_instance()[0] for child in instance.get_children()
+                ]
+            for child in instance.child_plugin_instances:
+                traverse(child)
+
+        fields = {}
+
+        traverse(self.instance)
+        meta_options = dict()
+        if self.instance.config.get("form_floating_labels", False):
+            meta_options["floating_labels"] = True
+        meta_options[
+            "redirect"
+        ] = self.instance.page  # Default behavior: redirect to same page
+
+        fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
+
+        return type(
+            "FrontendAutoForm",
+            (forms.forms.Form,),
+            fields,
+        )
+
+    @classmethod
+    def get_parent_classes(cls, slot, page, instance=None):
+        """Avoid form in a form"""
+        if instance is None:
+            return super().get_parent_classes(slot, page, instance)
+        parent = instance
+        while parent is not None:
+            if parent.plugin_type == "FormPlugin":
+                return [""]
+            parent = parent.parent
+        return super().get_parent_classes(slot, page, instance)
+
+    def render(self, context, instance, placeholder):
+        self.instance = instance
+        return super().render(context, instance, placeholder)
+
+
+class FormElementPlugin(CMSUIPlugin):
+    top_element = "FormPlugin"
+    module = _("Forms")
+    render_template = f"djangocms_frontend/{settings.framework}/widgets/base.html"
+
+    @classmethod
+    def get_parent_classes(cls, slot, page, instance=None):
+        """Only valid as indirect child of the cls.top_element"""
+        if instance is None:
+            return [""]
+        parent = instance
+        while parent is not None:
+            if parent.plugin_type == cls.top_element:
+                return super().get_parent_classes(slot, page, instance)
+            parent = parent.parent
+        return [""]
+
+    def render(self, context, instance, placeholder):
+        instance.add_classes("form-control")
+        return super().render(context, instance, placeholder)
+
+
+@plugin_pool.register_plugin
+class CharFieldPlugin(FormElementPlugin):
+    name = _("Text line")
+    model = models.CharField
+    form = forms.CharFieldForm
+
+
+@plugin_pool.register_plugin
+class TextareaPlugin(FormElementPlugin):
+    name = _("Text area")
+    model = models.TextareaField
+    form = forms.TextareaFieldForm
+
+
+@plugin_pool.register_plugin
+class SelectPlugin(FormElementPlugin):
+    name = _("Select field")
+    model = models.Select
+    form = forms.SelectFieldForm

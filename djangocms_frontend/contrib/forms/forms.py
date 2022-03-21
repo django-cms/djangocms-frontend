@@ -1,13 +1,16 @@
 import hashlib
 
 from django import forms
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_slug
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
+from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
 from djangocms_frontend.fields import (
     AttributesFormField,
+    ChoicesFormField,
     ColoredButtonGroup,
     TagTypeFormField,
 )
@@ -52,8 +55,8 @@ def register(form_class):
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
     """
-    Components > "Alerts" Plugin
-    https://getbootstrap.com/docs/5.0/components/alerts/
+    Components > "Forms" Plugin
+    https://getbootstrap.com/docs/5.1/forms/overview/
     """
 
     class Meta:
@@ -61,6 +64,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         entangled_fields = {
             "config": [
                 "form_selection",
+                "form_floating_labels",
                 "form_submit_message",
                 "form_submit_context",
                 "form_submit_align",
@@ -71,11 +75,15 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
 
     form_selection = forms.ChoiceField(
         label=_("Form"),
-        required=True,
+        required=False,
         initial="",
         choices=get_registered_forms,
     )
-
+    form_floating_labels = forms.BooleanField(
+        label=_("Floating labels"),
+        required=False,
+        initial=False,
+    )
     form_submit_message = forms.CharField(
         label=_("Submit message"),
         initial=_("Submit"),
@@ -96,3 +104,114 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+
+FORBIDDEN_FORM_NAMES = ["Meta", "get_success_context"] + dir(forms.Form)
+
+
+def validate_form_name(value):
+    if value in FORBIDDEN_FORM_NAMES:
+        raise ValidationError(
+            _("This name is reserved. Please chose a different one."), code="illegal"
+        )
+
+
+class FormFieldMixin(EntangledModelFormMixin):
+    """
+    Components > "Forms" Plugin
+    https://getbootstrap.com/docs/5.1/forms/overview/
+    """
+
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "field_name",
+                "field_label",
+                "field_placeholder",
+                "field_required",
+            ]
+        }
+
+    field_name = forms.CharField(
+        label=_("Field name"),
+        required=True,
+        validators=[validate_slug, validate_form_name],
+    )
+    field_label = forms.CharField(
+        label=_("Label"),
+        required=False,
+    )
+    field_placeholder = forms.CharField(
+        label=_("Placeholder"),
+        required=False,
+    )
+    field_required = forms.BooleanField(
+        label=_("Required"),
+        initial=False,
+        required=False,
+    )
+
+
+class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "attributes",
+            ]
+        }
+
+    attributes = AttributesFormField()
+
+
+class TextareaFieldForm(
+    mixin_factory("TextareaField"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "field_rows",
+                "attributes",
+            ]
+        }
+
+    field_rows = forms.IntegerField(
+        label=_("Rows"),
+        min_value=1,
+        max_value=40,
+        initial=10,
+        help_text=_("Defines the vertical size of the text area in number of rows."),
+    )
+    attributes = AttributesFormField()
+
+
+class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "field_choices",
+                "field_select",
+                "attributes",
+            ]
+        }
+
+    field_select = forms.ChoiceField(
+        label=_("Selection type"),
+        required=True,
+        choices=(
+            ("select", _("Drop down (single choice)")),
+            ("multiselect", _("List (multiple choice)")),
+            ("radio", _("Radio buttons (single choice)")),
+            ("checkbox", _("Checkboxes (multiple choice")),
+        ),
+    )
+    field_choices = ChoicesFormField(
+        required=True,
+        help_text=_(
+            "Please provide the choices. Add with <code>+</code>. In the left field enter the "
+            "value to be stored. In the right field enter the text to be shown to the user."
+        ),
+    )
+    attributes = AttributesFormField()

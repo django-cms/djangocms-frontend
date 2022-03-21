@@ -1,4 +1,4 @@
-{% load frontend_forms %}{% spaceless %}
+{% load frontend_form_tags %}{% spaceless %}
     {% if form_field|stringformat:"s" == form_field %}
         {% render_widget form form_field  %}
     {% else %}

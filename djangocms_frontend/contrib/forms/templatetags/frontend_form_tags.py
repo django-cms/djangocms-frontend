@@ -1,9 +1,10 @@
 from django import template
-from django.conf import settings
+from django.apps import apps
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
 
 from djangocms_frontend.contrib.forms import constants
+from djangocms_frontend.contrib.forms.helper import get_option
 from djangocms_frontend.settings import FORM_TEMPLATE
 
 register = template.Library()
@@ -11,12 +12,12 @@ attr_dict = constants.attr_dict
 default_attr = constants.default_attr
 
 
-try:
+if apps.is_installed("crispy_forms"):
     from crispy_forms.helper import FormHelper
     from crispy_forms.utils import render_crispy_form as render_form_implementation
 
     crispy_forms_installed = True
-except ImportError:
+else:
     crispy_forms_installed = False
 
     def render_form_implementation(form, helper=None, context=None):
@@ -25,14 +26,6 @@ except ImportError:
     class FormHelper:
         def __init__(self, form):
             self.form = form
-
-
-global_options = getattr(settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
-
-
-def get_option(form, option, default=None):
-    form_options = getattr(getattr(form, "Meta", None), "options", {})
-    return form_options.get(option, global_options.get(option, default))
 
 
 @register.filter
@@ -70,7 +63,7 @@ def get_bound_field(form, formfield):
 
 def attrs_for_widget(widget, item, additional_classes=None):
     if widget.__class__.__name__ in constants.attr_dict:
-        cls = attr_dict[widget.__class__.__name__].get(item, None)
+        cls = attr_dict[widget.__class__.__name__].get(item, default_attr[item])
     else:
         cls = default_attr[item]
     if cls:
@@ -107,13 +100,40 @@ def render_widget(context, form, form_field, **kwargs):
         field_sep += " form-floating"
     div_attrs = attrs_for_widget(field.field.widget, "div", field_sep)
     div_attrs = " ".join([f'{key}="{value}"' for key, value in div_attrs.items()])
+    grp_attrs = attrs_for_widget(field.field.widget, "group")
     label = field.label_tag(attrs=label_attr)
-    widget = field.as_widget(attrs=widget_attr)
     input_type = getattr(field.field.widget, "input_type", None)
     errors = "".join(
         f'<div class="invalid-feedback">{error}</div>' for error in field.errors
     )
-    if floating_labels or input_type == "checkbox" or input_type == "select":
+    if field.field.widget.template_name.rsplit("/", 1)[-1] in (
+        "radio.html",
+        "checkbox_select.html",
+    ):
+        """For multi-valued widgets use own templates to ensure classes appear at the right nesting"""
+        field.field.widget.template_name = (
+            "djangocms_frontend/widgets/mutliple_input.html"
+        )
+        field.field.widget.option_template_name = (
+            "djangocms_frontend/widgets/input_option.html"
+        )
+        widget_attr["label_class"] = label_attr.pop(
+            "class", None
+        )  # pass through label classes
+        widget_attr["div_class"] = grp_attrs.pop(
+            "class", None
+        )  # pass through label classes
+        input_first = False
+    else:
+        input_first = (
+            floating_labels
+            or input_type == "checkbox"
+            or input_type == "select"
+            and floating_labels
+        )
+
+    widget = field.as_widget(attrs=widget_attr)
+    if input_first:
         render = f"<div {div_attrs}>{widget}{label}{errors}{help_text}</div>"
     else:
         render = f"<div {div_attrs}>{label}{widget}{errors}{help_text}</div>"

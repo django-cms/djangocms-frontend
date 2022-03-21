@@ -73,6 +73,8 @@ NAVIGATION_TEMPLATE_CHOICES = getattr(
     ],
 )
 
+FORM_OPTIONS = getattr(settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
+
 
 framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")

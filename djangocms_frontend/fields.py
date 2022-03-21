@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
@@ -94,6 +95,35 @@ class AttributesFormField(fields.AttributesFormField):
         kwargs.setdefault("widget", fields.AttributesWidget)
         self.excluded_keys = kwargs.pop("excluded_keys", [])
         super().__init__(*args, **kwargs)
+
+
+class ChoicesFormField(fields.AttributesFormField):
+    """Simple choices field based on attributes field. Needs to be extended to
+    allow to sort choices"""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label", _("Choices"))
+        kwargs.setdefault("required", True)
+        kwargs.setdefault("widget", fields.AttributesWidget)
+        self.excluded_keys = kwargs.pop("excluded_keys", [])
+        super().__init__(*args, **kwargs)
+
+    def clean(self, value):
+        if not value:
+            raise ValidationError(
+                mark_safe(
+                    _(
+                        "Please enter at least one choice. Use the <code>+</code> symbol to add a choice."
+                    )
+                ),
+                code="empty",
+            )
+        return [(key, value) for key, value in value.items()]
+
+    def prepare_value(self, value):
+        if not value:
+            return {}
+        return super().prepare_value({key: value for key, value in value})
 
 
 class TagTypeField(models.CharField):

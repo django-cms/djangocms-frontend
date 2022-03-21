@@ -1,10 +1,14 @@
-{% load sekizai_tags i18n frontend_forms %}{% spaceless %}
+{% load sekizai_tags i18n frontend_form_tags cms_tags %}{% spaceless %}
     <div id="data{{ instance.id|safe }}{{ form.slug }}" class="form-div{% if form.bound %} was-validated{% endif %}">
         <div class="all-invalid alert alert-block alert-danger d-none">
             <ul class="m-0">
             </ul>
         </div>
-        {% render_form form %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% empty %}
+            {% render_form form %}
+        {% endfor %}
     </div>{% endspaceless %}
 {% addtoblock 'js' %}{% spaceless %}
     <script>
