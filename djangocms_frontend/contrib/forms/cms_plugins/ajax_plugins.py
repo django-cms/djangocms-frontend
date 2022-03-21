@@ -164,7 +164,10 @@ class AjaxFormMixin(FormMixin):
     def get_ajax_form(self, slug=None):
         form_class = self.get_form_class(slug)
         if form_class:
-            form = form_class(**self.get_form_kwargs(slug))
+            if getattr(form_class, "takes_request", False):
+                form = form_class(request=self.request, **self.get_form_kwargs(slug))
+            else:
+                form = form_class(**self.get_form_kwargs(slug))
             if self.instance:
                 for field in form.base_fields:
                     form.fields[field].widget.attrs.update(
@@ -181,7 +184,6 @@ class AjaxFormMixin(FormMixin):
         self.parameter = parameter
 
         form = self.get_ajax_form()
-        form._request = request
         if form.is_valid():
             return self.form_valid(form)
         else:
@@ -261,6 +263,10 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
                 "fields": [
                     "form_selection",
                     "form_name",
+                    (
+                        "form_login_required",
+                        "form_unique",
+                    ),
                     "form_floating_labels",
                     "form_spacing",
                 ],
@@ -316,7 +322,10 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         meta_options[
             "redirect"
         ] = self.instance.page  # Default behavior: redirect to same page
-
+        meta_options["login_required"] = self.instance.config.get(
+            "form_login_required", False
+        )
+        meta_options["unique"] = self.instance.config.get("form_unique", False)
         fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
 
         return type(

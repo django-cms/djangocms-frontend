@@ -17,7 +17,7 @@ from djangocms_frontend.fields import (
     TagTypeFormField,
 )
 from djangocms_frontend.helpers import first_choice
-from djangocms_frontend.models import FrontendUIItem, models
+from djangocms_frontend.models import FrontendUIItem
 
 mixin_factory = settings.get_forms(forms_module)
 
@@ -56,8 +56,11 @@ def register(form_class):
 
 
 class SimpleFrontendForm(forms.Form):
+    takes_request = True
+
     def __init__(self, *args, **kwargs):
-        if hasattr(self, "_request") and get_option(self, "unqiue", False):
+        self._request = kwargs.pop("request")
+        if get_option(self, "unique", False) and self._request.user.is_authenticated:
             qs = FormEntry.objects.filter(
                 form_user=self._request.user, form_name=get_option(self, "form_name")
             )
@@ -67,7 +70,7 @@ class SimpleFrontendForm(forms.Form):
 
     def clean(self):
         if get_option(self, "login_required", False):
-            if not hasattr(self, "_request") or not self._request.user.is_authenticated:
+            if not self._request.user.is_authenticated:
                 raise ValidationError(
                     _("Please login before submitting this form."), code="unauthorized"
                 )
@@ -98,24 +101,15 @@ class SimpleFrontendForm(forms.Form):
             }
         )
         if keys:  # update_or_create only works if at least one key is given
-            obj, created = FormEntry.objects.update_or_create(
-                **keys, defaults=defaults
-            )  # noqa
+            try:
+                FormEntry.objects.update_or_create(**keys, defaults=defaults)
+            except FormEntry.MultipleObjectsReturned:  # Delete outdated objects
+                FormEntry.objects.filter(**keys).delete()
+                FormEntry.objects.create(**keys, **defaults)
         else:
-            obj, created = FormEntry.objects.create(**defaults), True  # noqa
+            FormEntry.objects.create(**defaults), True
         if get_option(self, "email", []):
             raise NotImplementedError("email notification for forms")
-
-    def serialize(self, value):
-        if isinstance(value, str):
-            return value
-        if isinstance(value, models.Model):
-            return "Not implemented"
-        if isinstance(value, (list, tuple)):
-            return ", ".join(map(self.serialize, value))
-        if hasattr(value, "__str__"):
-            return str(value)
-        return "Cannot save"
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
@@ -130,6 +124,8 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
             "config": [
                 "form_selection",
                 "form_name",
+                "form_login_required",
+                "form_unique",
                 "form_floating_labels",
                 "form_spacing",
                 "form_submit_message",
@@ -154,6 +150,23 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
             validate_slug,
         ],
     )
+    form_login_required = forms.BooleanField(
+        label=_("Login required to submit form"),
+        required=False,
+        initial=False,
+        help_text=_(
+            "To avoid issues with user experience use this type of form only on pages, "
+            "which require login."
+        ),
+    )
+
+    form_unique = forms.BooleanField(
+        label=_("User can reopen form"),
+        required=False,
+        initial=False,
+        help_text=_('Requires "Login required" to be checked to work.'),
+    )
+
     form_floating_labels = forms.BooleanField(
         label=_("Floating labels"),
         required=False,
@@ -193,7 +206,7 @@ FORBIDDEN_FORM_NAMES = [
     "form_user",
     "entry_data",
     "html_header",
-] + dir(SimpleFrontendForm())
+] + dir(SimpleFrontendForm(request=None))
 
 
 def validate_form_name(value):
