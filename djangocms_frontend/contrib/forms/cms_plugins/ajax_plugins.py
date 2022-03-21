@@ -10,12 +10,12 @@ from django.views.generic.edit import FormMixin
 from sekizai.context import SekizaiContext
 
 from djangocms_frontend import settings
+from djangocms_frontend.cms_plugins import CMSUIPlugin
+from djangocms_frontend.common.attributes import AttributesMixin
 from djangocms_frontend.contrib import forms as forms_module
-
-from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from . import forms, models
-from .helper import get_option
+from djangocms_frontend.contrib.forms import forms, models
+from djangocms_frontend.contrib.forms.forms import SimpleFrontendForm
+from djangocms_frontend.contrib.forms.helper import get_option
 
 
 class CMSAjaxBase(CMSUIPlugin):
@@ -181,6 +181,7 @@ class AjaxFormMixin(FormMixin):
         self.parameter = parameter
 
         form = self.get_ajax_form()
+        form._request = request
         if form.is_valid():
             return self.form_valid(form)
         else:
@@ -259,7 +260,9 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
             {
                 "fields": [
                     "form_selection",
+                    "form_name",
                     "form_floating_labels",
+                    "form_spacing",
                 ],
             },
         ),
@@ -304,9 +307,12 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         fields = {}
 
         traverse(self.instance)
-        meta_options = dict()
+        meta_options = dict(form_name=self.instance.config.get("form_name", "unset"))
         if self.instance.config.get("form_floating_labels", False):
             meta_options["floating_labels"] = True
+        meta_options[
+            "field_sep"
+        ] = f'mb-{self.instance.config.get("form_spacing", "3")}'
         meta_options[
             "redirect"
         ] = self.instance.page  # Default behavior: redirect to same page
@@ -315,7 +321,7 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
 
         return type(
             "FrontendAutoForm",
-            (forms.forms.Form,),
+            (SimpleFrontendForm,),
             fields,
         )
 
@@ -334,46 +340,3 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     def render(self, context, instance, placeholder):
         self.instance = instance
         return super().render(context, instance, placeholder)
-
-
-class FormElementPlugin(CMSUIPlugin):
-    top_element = FormPlugin.__name__
-    module = _("Forms")
-    render_template = f"djangocms_frontend/{settings.framework}/widgets/base.html"
-
-    @classmethod
-    def get_parent_classes(cls, slot, page, instance=None):
-        """Only valid as indirect child of the cls.top_element"""
-        if instance is None:
-            return [""]
-        parent = instance
-        while parent is not None:
-            if parent.plugin_type == cls.top_element:
-                return super().get_parent_classes(slot, page, instance)
-            parent = parent.parent
-        return [""]
-
-    def render(self, context, instance, placeholder):
-        instance.add_classes("form-control")
-        return super().render(context, instance, placeholder)
-
-
-@plugin_pool.register_plugin
-class CharFieldPlugin(FormElementPlugin):
-    name = _("Text line")
-    model = models.CharField
-    form = forms.CharFieldForm
-
-
-@plugin_pool.register_plugin
-class TextareaPlugin(FormElementPlugin):
-    name = _("Text area")
-    model = models.TextareaField
-    form = forms.TextareaFieldForm
-
-
-@plugin_pool.register_plugin
-class SelectPlugin(FormElementPlugin):
-    name = _("Select field")
-    model = models.Select
-    form = forms.SelectFieldForm

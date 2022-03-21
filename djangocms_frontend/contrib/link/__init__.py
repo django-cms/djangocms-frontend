@@ -1,6 +1,3 @@
-__all__ = ["site"]
-
-
 class FormsSite:
     @property
     def urls(self):
@@ -10,3 +7,5 @@ class FormsSite:
 
 
 site = FormsSite()
+
+__all__ = ["site"]

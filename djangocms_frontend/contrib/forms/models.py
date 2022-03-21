@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.models import FrontendUIItem
 
+from .entry_model import FormEntry  # noqa
+
 
 class Form(FrontendUIItem):
     class Meta:
@@ -19,7 +21,7 @@ class FormFieldMixin:
 class CharField(FormFieldMixin, FrontendUIItem):
     class Meta:
         proxy = True
-        verbose_name = _("Character field   ")
+        verbose_name = _("Character field")
 
     def get_form_field(self):
         return self.field_name, forms.CharField(
@@ -34,7 +36,7 @@ class CharField(FormFieldMixin, FrontendUIItem):
 class TextareaField(FormFieldMixin, FrontendUIItem):
     class Meta:
         proxy = True
-        verbose_name = _("Character field   ")
+        verbose_name = _("Text field")
 
     def get_form_field(self):
         return self.field_name, forms.CharField(
@@ -60,7 +62,7 @@ class Select(FormFieldMixin, FrontendUIItem):
     def get_form_field(self):
         multiple_choice = self.config.get("field_select", "") in (
             "mutliselect",
-            "radio",
+            "checkbox",
         )
         field = forms.MultipleChoiceField if multiple_choice else forms.ChoiceField
         required = self.config.get("field_required", False)

@@ -8,6 +8,8 @@ from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.contrib import forms as forms_module
+from djangocms_frontend.contrib.forms.entry_model import FormEntry
+from djangocms_frontend.contrib.forms.helper import get_option
 from djangocms_frontend.fields import (
     AttributesFormField,
     ChoicesFormField,
@@ -15,7 +17,7 @@ from djangocms_frontend.fields import (
     TagTypeFormField,
 )
 from djangocms_frontend.helpers import first_choice
-from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.models import FrontendUIItem, models
 
 mixin_factory = settings.get_forms(forms_module)
 
@@ -53,6 +55,70 @@ def register(form_class):
     return form_class
 
 
+class SimpleFrontendForm(forms.Form):
+    # def __init__(self, data=None, *args, **kwargs):
+    #     if data is None:
+    #         if hasattr(self, "_request") and get_option(self, "unqiue", False):
+    #             ...
+    #
+    #     super().__init__(self, data=data, *args, **kwargs)
+    #
+    def clean(self):
+        if get_option(self, "login_required", False):
+            if not hasattr(self, "_request") or not self._request.user.is_authenticated:
+                raise ValidationError(
+                    _("Please login before submitting this form."), code="unauthorized"
+                )
+        super().clean()
+
+    def save(self):
+        if get_option(self, "unique", False) and get_option(
+            self, "login_required", False
+        ):
+            keys = {
+                "form_name": get_option(self, "form_name"),
+                "form_user": self._request.user,
+            }
+            defaults = {}
+        else:
+            keys = {}
+            defaults = {
+                "form_name": get_option(self, "form_name"),
+                "form_user": self._request.user,
+            }
+        defaults.update(
+            {
+                "entry_data": {
+                    key: self.serialize(value)
+                    for key, value in self.cleaned_data.items()
+                },
+                "html_headers": dict(
+                    user_agent=self._request.headers["User-Agent"],
+                    referer=self._request.headers["Referer"],
+                ),
+            }
+        )
+        if keys:  # update_or_create only works if at least one key is given
+            obj, created = FormEntry.objects.update_or_create(
+                **keys, defaults=defaults
+            )  # noqa
+        else:
+            obj, created = FormEntry.objects.create(**defaults), True  # noqa
+        if get_option(self, "email", []):
+            raise NotImplementedError("email notification for forms")
+
+    def serialize(self, value):
+        if isinstance(value, str):
+            return value
+        if isinstance(value, models.Model):
+            return "Not implemented"
+        if isinstance(value, (list, tuple)):
+            return ", ".join(map(self.serialize, value))
+        if hasattr(value, "__str__"):
+            return str(value)
+        return "Cannot save"
+
+
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
     """
     Components > "Forms" Plugin
@@ -64,7 +130,9 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         entangled_fields = {
             "config": [
                 "form_selection",
+                "form_name",
                 "form_floating_labels",
+                "form_spacing",
                 "form_submit_message",
                 "form_submit_context",
                 "form_submit_align",
@@ -79,10 +147,23 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         initial="",
         choices=get_registered_forms,
     )
+    form_name = forms.CharField(
+        label=_("Form name"),
+        required=False,
+        initial="",
+        validators=[
+            validate_slug,
+        ],
+    )
     form_floating_labels = forms.BooleanField(
         label=_("Floating labels"),
         required=False,
         initial=False,
+    )
+    form_spacing = forms.ChoiceField(
+        label=_("Margin between fields"),
+        choices=settings.SPACER_SIZE_CHOICES,
+        initial=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
     form_submit_message = forms.CharField(
         label=_("Submit message"),
@@ -106,7 +187,14 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-FORBIDDEN_FORM_NAMES = ["Meta", "get_success_context"] + dir(forms.Form)
+FORBIDDEN_FORM_NAMES = [
+    "Meta",
+    "get_success_context",
+    "form_name",
+    "form_user",
+    "entry_data",
+    "html_header",
+] + dir(SimpleFrontendForm())
 
 
 def validate_form_name(value):

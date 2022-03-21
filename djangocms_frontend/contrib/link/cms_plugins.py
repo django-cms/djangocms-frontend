@@ -82,7 +82,6 @@ class LinkPluginMixin:
                 blockname=_("Link settings"),
                 position=self.link_fieldset_position,
             )
-        print(fieldsets)
         return fieldsets
 
 

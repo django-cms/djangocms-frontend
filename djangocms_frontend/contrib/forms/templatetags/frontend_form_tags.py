@@ -95,14 +95,14 @@ def render_widget(context, form, form_field, **kwargs):
         help_text = f'<div id="hints_{field.id_for_label}" class="form-text">{field.help_text}</div>'
     else:
         help_text = ""
+    input_type = getattr(field.field.widget, "input_type", None)
     if floating_labels:
         widget_attr.setdefault("placeholder", "-")
-        field_sep += " form-floating"
+        if input_type != "checkbox":
+            field_sep += " form-floating"  # TODO: Only true for Bootstrap5
     div_attrs = attrs_for_widget(field.field.widget, "div", field_sep)
     div_attrs = " ".join([f'{key}="{value}"' for key, value in div_attrs.items()])
     grp_attrs = attrs_for_widget(field.field.widget, "group")
-    label = field.label_tag(attrs=label_attr)
-    input_type = getattr(field.field.widget, "input_type", None)
     errors = "".join(
         f'<div class="invalid-feedback">{error}</div>' for error in field.errors
     )
@@ -133,6 +133,7 @@ def render_widget(context, form, form_field, **kwargs):
         )
 
     widget = field.as_widget(attrs=widget_attr)
+    label = field.label_tag(attrs=label_attr)
     if input_first:
         render = f"<div {div_attrs}>{widget}{label}{errors}{help_text}</div>"
     else:
