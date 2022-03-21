@@ -326,7 +326,7 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
             return super().get_parent_classes(slot, page, instance)
         parent = instance
         while parent is not None:
-            if parent.plugin_type == "FormPlugin":
+            if parent.plugin_type == cls.__name__:
                 return [""]
             parent = parent.parent
         return super().get_parent_classes(slot, page, instance)
@@ -337,7 +337,7 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
 
 
 class FormElementPlugin(CMSUIPlugin):
-    top_element = "FormPlugin"
+    top_element = FormPlugin.__name__
     module = _("Forms")
     render_template = f"djangocms_frontend/{settings.framework}/widgets/base.html"
 
