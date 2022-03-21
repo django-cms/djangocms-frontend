@@ -19,6 +19,8 @@ from djangocms_frontend.fields import (
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 
+from . import constants
+
 mixin_factory = settings.get_forms(forms_module)
 
 
@@ -140,7 +142,6 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         label=_("Form"),
         required=False,
         initial="",
-        choices=get_registered_forms,
     )
     form_name = forms.CharField(
         label=_("Form name"),
@@ -197,6 +198,39 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        registered_forms = get_registered_forms()
+        self.fields["form_selection"].widget = (
+            forms.Select() if _form_registry else forms.HiddenInput()
+        )
+        self.fields["form_selection"].choices = registered_forms
+
+    def clean(self):
+        if self.cleaned_data["form_selection"] == "":
+            if not self.cleaned_data["form_name"]:
+                raise ValidationError(
+                    {
+                        "form_name": _(
+                            "Please provide a form name to be able to evaluate form submissions."
+                        )
+                    },
+                    code="incomplete",
+                )
+        if (
+            self.cleaned_data["form_unique"]
+            and not self.cleaned_data["form_login_required"]
+        ):
+            error = _("Users can only reopen forms if they are logged in. %(remedy)s")
+            raise ValidationError(
+                {
+                    "form_login_required": error
+                    % dict(remedy=_("Either enable this.")),
+                    "form_unique": _("Or disable this."),
+                },
+                code="inconsistent",
+            )
 
 
 FORBIDDEN_FORM_NAMES = [
@@ -300,12 +334,7 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
     field_select = forms.ChoiceField(
         label=_("Selection type"),
         required=True,
-        choices=(
-            ("select", _("Drop down (single choice)")),
-            ("multiselect", _("List (multiple choice)")),
-            ("radio", _("Radio buttons (single choice)")),
-            ("checkbox", _("Checkboxes (multiple choice")),
-        ),
+        choices=constants.CHOICE_FIELDS,
     )
     field_choices = ChoicesFormField(
         required=True,
@@ -313,5 +342,26 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
             "Please provide the choices. Add with <code>+</code>. In the left field enter the "
             "value to be stored. In the right field enter the text to be shown to the user."
         ),
+    )
+    attributes = AttributesFormField()
+
+
+class BooleanFieldForm(
+    mixin_factory("BooleanField"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "field_as_switch",
+                "attributes",
+            ]
+        }
+
+    field_as_switch = forms.BooleanField(
+        label=_("As switch"),
+        initial=False,
+        required=False,
+        help_text=_("If set the boolean field will offer a switch widget."),
     )
     attributes = AttributesFormField()

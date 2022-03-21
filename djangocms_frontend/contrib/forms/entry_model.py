@@ -62,12 +62,21 @@ class FormEntry(models.Model):
                 fields[key] = forms.CharField(
                     label=key,
                     widget=forms.TextInput if len(value) < 80 else forms.Textarea,
+                    required=False,
                 )
             elif isinstance(value, (list, tuple)):
                 entangled_fields.append(key)
                 fields[key] = CSValues(
                     label=key,
+                    required=False,
                 )
+            elif isinstance(value, bool):
+                entangled_fields.append(key)
+                fields[key] = forms.BooleanField(
+                    label=key,
+                    required=False,
+                )
+
         fields["Meta"] = type(
             "Meta",
             (),
@@ -97,7 +106,7 @@ class FormEntry(models.Model):
                     "fields": tuple(
                         key
                         for key, value in self.entry_data.items()
-                        if isinstance(value, (str, tuple, list))
+                        if isinstance(value, (str, tuple, list, bool))
                     )
                 },
             ),

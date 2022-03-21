@@ -52,3 +52,10 @@ class SelectPlugin(FormElementPlugin):
     name = _("Select field")
     model = models.Select
     form = forms.SelectFieldForm
+
+
+@plugin_pool.register_plugin
+class BooleanFieldPlugin(FormElementPlugin):
+    name = _("Boolean field")
+    model = models.BooleanField
+    form = forms.BooleanFieldForm

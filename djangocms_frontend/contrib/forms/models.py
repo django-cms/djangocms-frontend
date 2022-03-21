@@ -61,7 +61,7 @@ class Select(FormFieldMixin, FrontendUIItem):
 
     def get_form_field(self):
         multiple_choice = self.config.get("field_select", "") in (
-            "mutliselect",
+            "multiselect",
             "checkbox",
         )
         field = forms.MultipleChoiceField if multiple_choice else forms.ChoiceField
@@ -75,7 +75,7 @@ class Select(FormFieldMixin, FrontendUIItem):
         elif widget_choice == "radio":
             widget = forms.RadioSelect()
         elif widget_choice == "multiselect":
-            widget = forms.SelectMultiple()
+            widget = forms.SelectMultiple(attrs=dict(style="min-height: 6em;"))
         else:
             widget = forms.CheckboxSelectMultiple()
 
@@ -87,10 +87,23 @@ class Select(FormFieldMixin, FrontendUIItem):
         )
 
 
-class MultiSelect(FormFieldMixin, FrontendUIItem):
+class SwitchInput(forms.CheckboxInput):
+    pass
+
+
+class BooleanField(FormFieldMixin, FrontendUIItem):
     class Meta:
         proxy = True
-        verbose_name = _("Select multiple")
+        verbose_name = _("Boolean field")
+
+    def get_form_field(self):
+        return self.field_name, forms.BooleanField(
+            label=self.config.get("field_label", ""),
+            required=self.config.get("field_required", False),
+            widget=SwitchInput()
+            if self.config.get("field_as_switch", False)
+            else forms.CheckboxInput(),
+        )
 
 
 class SubmitButton(FormFieldMixin, FrontendUIItem):

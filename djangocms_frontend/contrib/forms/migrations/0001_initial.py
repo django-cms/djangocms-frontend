@@ -43,10 +43,10 @@ class Migration(migrations.Migration):
             bases=("djangocms_frontend.frontenduiitem",),
         ),
         migrations.CreateModel(
-            name="MultiSelect",
+            name="BooleanField",
             fields=[],
             options={
-                "verbose_name": "Select multiple",
+                "verbose_name": "Boolean field",
                 "proxy": True,
                 "indexes": [],
                 "constraints": [],

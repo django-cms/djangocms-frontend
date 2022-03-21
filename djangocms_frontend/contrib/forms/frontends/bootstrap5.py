@@ -15,6 +15,9 @@ attr_dict = dict(
     CheckboxInput=dict(
         input="form-check-input", label="form-check-label", div="form-check"
     ),
+    SwitchInput=dict(
+        input="form-check-input", label="form-check-label", div="form-check form-switch"
+    ),
     CheckboxSelectMultiple=dict(
         input="form-check-input", label="form-check-label", group="form-check"
     ),
