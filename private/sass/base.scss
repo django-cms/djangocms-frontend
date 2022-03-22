@@ -33,17 +33,16 @@ input[type="number"].auto-field + span {
     text-align: right;
     margin-right: 31px;
     margin-bottom: 23px;
-    background: var(--dca-white, var(--body-bg, white));
     cursor: pointer;
 }
 
 /* Pixel pushing for standard django admin */
-:not(.djangocms-admin-style) input[type="number"].auto-field + span {
-    margin-bottom: 21px;
+body:not(.djangocms-admin-style) input[type="number"].auto-field + span {
+    margin-bottom: 23px;
 }
 @media (max-width: 1024px) {
-    :not(.djangocms-admin-style) input[type="number"].auto-field + span {
-        margin-bottom: 25px;
+    body:not(.djangocms-admin-style) input[type="number"].auto-field + span {
+        margin-bottom: 24px;
     }
 }
 
@@ -51,6 +50,10 @@ input[type="number"].auto-field + span:after {
     content: "auto";
 }
 
-input[type="number"].auto-field.auto + span {
-    display: block;
+input[type="number"].auto-field.auto {
+    color:  var(--dca-white, var(--body-bg, white));
+    caret-color: var(--dca-black, var(--body-fg, black));
+    & + span {
+        display: block;
+    }
 }

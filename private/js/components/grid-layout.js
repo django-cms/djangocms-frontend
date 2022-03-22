@@ -70,7 +70,7 @@ export default class GridLayout {
 
         button.on('click', function (event) {
             event.preventDefault();
-            wrapper.find('input').val('');
+            wrapper.find('input').removeClass("auto").val('');
             wrapper.find('input[type="checkbox"]').prop('checked', false);
         });
 

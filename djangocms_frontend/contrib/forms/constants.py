@@ -13,8 +13,18 @@ attr_dict = framework.attr_dict  # NOQA
 DEFAULT_FIELD_SEP = framework.DEFAULT_FIELD_SEP  # NOQA
 
 CHOICE_FIELDS = (
-    ("select", _("Drop down (single choice)")),
-    ("radio", _("Radio buttons (single choice)")),
-    ("checkbox", _("Checkboxes (multiple choice)")),
-    ("multiselect", _("List (multiple choice)")),
+    (
+        _("Single choice"),
+        (
+            ("select", _("Drop down")),
+            ("radio", _("Radio buttons")),
+        ),
+    ),
+    (
+        _("Multiple choice"),
+        (
+            ("checkbox", _("Checkboxes")),
+            ("multiselect", _("List")),
+        ),
+    ),
 )

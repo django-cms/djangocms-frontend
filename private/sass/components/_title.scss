@@ -1,10 +1,15 @@
-.form-row.field-plugin_title {
+.djangocms-admin-style .form-row.field-plugin_title {
     input[name="plugin_title_0"] {
-        margin: 1em 1em 1em 0 !important;
-        top: 0;
-        background: gray;
+        margin-bottom: 0.5em!important;
     }
     input[name="plugin_title_1"] {
         width: calc(100% - 2em) !important;
+    }
+}
+
+body:not(.djangocms-admin-style) .form-row.field-plugin_title {
+    input[name="plugin_title_1"] {
+        width: calc(100% - 200px - 1em) !important;
+        margin-left: 1em;
     }
 }

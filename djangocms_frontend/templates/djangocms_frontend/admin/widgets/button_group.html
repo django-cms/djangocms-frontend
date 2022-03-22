@@ -1,4 +1,4 @@
-<div id="{{ widget.attrs.id }}" class="frontend-button-group{% if "block" in widget.attrs %} frontend-button-group-block{% endif %}{% if widget.attrs.property == "icon" %} frontend-button-group-icons{% endif %}">{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
-    <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
-        {% include option.template_name with widget=option %}{% endfor %}{% if group_name %}
-    </optgroup>{% endif %}{% endfor %}</div>
+<div{% if widget.attrs.id %} id="{{ widget.attrs.id }}"{% endif %} class="frontend-button-group{% if "block" in widget.attrs %} frontend-button-group-block{% endif %}{% if widget.attrs.property == "icon" %} frontend-button-group-icons{% endif %}{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">{% for group, options, index in widget.optgroups %}{% if group %}
+  <div class="optgroup fieldBox"><label>{{ group }}</label>{% endif %}{% for option in options %}{% include option.template_name with widget=option %}{% endfor %}{% if group %}
+  </div>{% endif %}{% endfor %}
+</div>

@@ -12,6 +12,7 @@ from djangocms_frontend.contrib.forms.entry_model import FormEntry
 from djangocms_frontend.contrib.forms.helper import get_option
 from djangocms_frontend.fields import (
     AttributesFormField,
+    ButtonGroup,
     ChoicesFormField,
     ColoredButtonGroup,
     TagTypeFormField,
@@ -380,6 +381,9 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
         label=_("Selection type"),
         required=True,
         choices=constants.CHOICE_FIELDS,
+        widget=ButtonGroup(
+            attrs=dict(property="text", label_class="btn-outline-secondary")
+        ),
     )
     field_choices = ChoicesFormField(
         required=True,
