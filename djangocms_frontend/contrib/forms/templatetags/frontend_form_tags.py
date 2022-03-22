@@ -98,7 +98,7 @@ def render_widget(context, form, form_field, **kwargs):
     input_type = getattr(field.field.widget, "input_type", None)
     if floating_labels:
         widget_attr.setdefault("placeholder", "-")
-        if input_type != "checkbox":
+        if input_type not in ("checkbox", "radio"):
             field_sep += " form-floating"  # TODO: Only true for Bootstrap5
     div_attrs = attrs_for_widget(field.field.widget, "div", field_sep)
     div_attrs = " ".join([f'{key}="{value}"' for key, value in div_attrs.items()])
@@ -122,7 +122,7 @@ def render_widget(context, form, form_field, **kwargs):
         )  # pass through label classes
         widget_attr["div_class"] = grp_attrs.pop(
             "class", None
-        )  # pass through label classes
+        )  # pass through div classes
         input_first = False
     else:
         input_first = (

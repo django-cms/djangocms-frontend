@@ -97,6 +97,13 @@ class AttributesFormField(fields.AttributesFormField):
         super().__init__(*args, **kwargs)
 
 
+try:
+    fields.AttributesWidget(sorted=True)
+    CHOICESWIDGETPARAMS = dict(sorted=False)
+except TypeError:
+    CHOICESWIDGETPARAMS = dict()
+
+
 class ChoicesFormField(fields.AttributesFormField):
     """Simple choices field based on attributes field. Needs to be extended to
     allow to sort choices"""
@@ -104,7 +111,7 @@ class ChoicesFormField(fields.AttributesFormField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label", _("Choices"))
         kwargs.setdefault("required", True)
-        kwargs.setdefault("widget", fields.AttributesWidget)
+        kwargs.setdefault("widget", fields.AttributesWidget(**CHOICESWIDGETPARAMS))
         self.excluded_keys = kwargs.pop("excluded_keys", [])
         super().__init__(*args, **kwargs)
 

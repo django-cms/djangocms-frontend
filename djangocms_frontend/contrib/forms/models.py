@@ -133,7 +133,19 @@ class Select(FormFieldMixin, FrontendUIItem):
         proxy = True
         verbose_name = _("Select")
 
+    _choices = None
     no_selection = [("", _("No selection"))]
+
+    def get_choices(self):
+        if self._choices is None:
+            descendants = self.get_children().order_by("position")
+            self._choices = []
+            for child in descendants:
+                instance = child.djangocms_frontend_frontenduiitem
+                self._choices.append(
+                    (instance.config["value"], instance.config["verbose"])
+                )
+        return self._choices
 
     def get_form_field(self):
         multiple_choice = self.config.get("field_select", "") in (
@@ -142,7 +154,7 @@ class Select(FormFieldMixin, FrontendUIItem):
         )
         field = forms.MultipleChoiceField if multiple_choice else forms.ChoiceField
         required = self.config.get("field_required", False)
-        choices = self.config.get("field_choices", ())
+        choices = self.get_choices()
         if not required and not multiple_choice:
             choices = self.no_selection + choices
         widget_choice = self.config.get("field_select", "")
@@ -161,6 +173,15 @@ class Select(FormFieldMixin, FrontendUIItem):
             choices=choices,
             widget=widget,
         )
+
+
+class Choice(FormFieldMixin, FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Choice")
+
+    def get_short_description(self):
+        return f'{self.config.get("verbose", "-")} ("{self.config.get("value", "")}")'
 
 
 class SwitchInput(forms.CheckboxInput):

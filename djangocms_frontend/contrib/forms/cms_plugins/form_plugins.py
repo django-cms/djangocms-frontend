@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.contrib.forms import forms, models
+from djangocms_frontend.helpers import add_plugin, delete_plugin
 
 from .. import forms as forms_module
 from .ajax_plugins import FormPlugin
@@ -15,6 +16,19 @@ class FormElementPlugin(CMSUIPlugin):
     top_element = FormPlugin.__name__
     module = _("Forms")
     render_template = f"djangocms_frontend/{settings.framework}/widgets/base.html"
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    ("field_name", "field_label"),
+                    "field_placeholder",
+                    "field_required",
+                )
+            },
+        ),
+    )
 
     @classmethod
     def get_parent_classes(cls, slot, page, instance=None):
@@ -35,55 +49,119 @@ class FormElementPlugin(CMSUIPlugin):
 
 @plugin_pool.register_plugin
 class CharFieldPlugin(mixin_factory("CharField"), FormElementPlugin):
-    name = _("Text line")
+    name = _("Text")
     model = models.CharField
     form = forms.CharFieldForm
 
 
 @plugin_pool.register_plugin
 class EmailFieldPlugin(mixin_factory("EmailField"), FormElementPlugin):
-    name = _("Email field")
+    name = _("Email")
     model = models.EmailField
     form = forms.EmailFieldForm
 
 
 @plugin_pool.register_plugin
 class URLFieldPlugin(mixin_factory("URLField"), FormElementPlugin):
-    name = _("URL field")
+    name = _("URL")
     model = models.UrlField
     form = forms.UrlFieldForm
 
 
 @plugin_pool.register_plugin
 class DecimalFieldPlugin(mixin_factory("DecimalField"), FormElementPlugin):
-    name = _("Decimal field")
+    name = _("Decimal")
     model = models.DecimalField
     form = forms.DecimalFieldForm
 
 
 @plugin_pool.register_plugin
 class IntegerFieldPlugin(mixin_factory("IntegerField"), FormElementPlugin):
-    name = _("Integer field")
+    name = _("Integer")
     model = models.IntegerField
     form = forms.IntegerFieldForm
 
 
 @plugin_pool.register_plugin
 class TextareaPlugin(FormElementPlugin):
-    name = _("Text area")
+    name = _("Textarea")
     model = models.TextareaField
     form = forms.TextareaFieldForm
 
 
 @plugin_pool.register_plugin
-class SelectPlugin(FormElementPlugin):
-    name = _("Select field")
+class SelectPlugin(mixin_factory("SelectField"), FormElementPlugin):
+    name = _("Select")
+
     model = models.Select
     form = forms.SelectFieldForm
+    allow_children = True
+    child_classes = ["ChoicePlugin"]
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    ("field_name", "field_label"),
+                    "field_select",
+                    "field_required",
+                )
+            },
+        ),
+        (
+            _("Quick edit choices"),
+            {"classes": ("collapse",), "fields": ("field_choices",)},
+        ),
+    )
+
+    def save_model(self, request, obj, form, change):
+        """Reflects the quick edit changes in the plugin tree"""
+        super().save_model(request, obj, form, change)
+        child_plugins = obj.get_children()
+        children = {}
+        for child in child_plugins:
+            child_ui = child.djangocms_frontend_frontenduiitem
+            children[child_ui.config["value"]] = child_ui
+        position = len(child_plugins)
+        data = form.cleaned_data
+        for value, verbose in data["field_choices"]:
+            child = children.pop(value, None)
+            if child is not None:  # Need to update?
+                if verbose != child.config["verbose"]:
+                    child.config["verbose"] = verbose
+                    child.save()
+            else:  # Not in there, add it!
+                add_plugin(
+                    obj.placeholder,
+                    models.Choice(
+                        parent=obj,
+                        placeholder=obj.placeholder,
+                        position=obj.position + position + 1,
+                        language=obj.language,
+                        plugin_type=ChoicePlugin.__name__,
+                        ui_item=models.Choice.__class__.__name__,
+                        config=dict(value=value, verbose=verbose),
+                    ),
+                )
+                position += 1
+        for _key, child in children.items():  # Delete remaining
+            delete_plugin(child)
+
+
+@plugin_pool.register_plugin
+class ChoicePlugin(CMSUIPlugin):
+    name = _("Choice")
+    module = _("Forms")
+    fieldsets = ((None, {"fields": (("value", "verbose"),)}),)
+    model = models.Choice
+    form = forms.ChoiceForm
+    require_parent = True
+    parent_classes = ["SelectPlugin"]
 
 
 @plugin_pool.register_plugin
 class BooleanFieldPlugin(FormElementPlugin):
-    name = _("Boolean field")
+    name = _("Boolean")
     model = models.BooleanField
     form = forms.BooleanFieldForm

@@ -289,37 +289,19 @@ class FormFieldMixin(EntangledModelFormMixin):
 class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
-
-    attributes = AttributesFormField()
+        entangled_fields = {"config": []}
 
 
 class EmailFieldForm(mixin_factory("EmailField"), FormFieldMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
-
-    attributes = AttributesFormField()
+        entangled_fields = {"config": []}
 
 
 class UrlFieldForm(mixin_factory("URLField"), FormFieldMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
-
-    attributes = AttributesFormField()
+        entangled_fields = {"config": []}
 
 
 class DecimalFieldForm(
@@ -332,7 +314,6 @@ class DecimalFieldForm(
                 "min_value",
                 "max_value",
                 "decimal_places",
-                "attributes",
             ]
         }
 
@@ -351,21 +332,13 @@ class DecimalFieldForm(
         min_value=0,
     )
 
-    attributes = AttributesFormField()
-
 
 class IntegerFieldForm(
     mixin_factory("IntegerField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
-
-    attributes = AttributesFormField()
+        entangled_fields = {"config": []}
 
 
 class TextareaFieldForm(
@@ -376,7 +349,6 @@ class TextareaFieldForm(
         entangled_fields = {
             "config": [
                 "field_rows",
-                "attributes",
             ]
         }
 
@@ -387,19 +359,22 @@ class TextareaFieldForm(
         initial=10,
         help_text=_("Defines the vertical size of the text area in number of rows."),
     )
-    attributes = AttributesFormField()
 
 
 class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if "instance" in kwargs and kwargs["instance"] is not None:
+            self.fields["field_choices"].initial = kwargs["instance"].get_choices()
+
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
             "config": [
-                "field_choices",
                 "field_select",
-                "attributes",
             ]
         }
+        untangled_fields = ("field_choices",)
 
     field_select = forms.ChoiceField(
         label=_("Selection type"),
@@ -409,11 +384,34 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
     field_choices = ChoicesFormField(
         required=True,
         help_text=_(
-            "Please provide the choices. Add with <code>+</code>. In the left field enter the "
-            "value to be stored. In the right field enter the text to be shown to the user."
+            "Use this field to quick edit choices. Choices can be added (<kbd>+</kbd>), deleted (<kbd>&times;</kbd>) "
+            "and updated. On the left side enter the value to be stored in the database. On the right side enter the "
+            "text to be shown to the user. The order of choices can be adjusted in the structure tree after saving "
+            "the edits."
         ),
     )
-    attributes = AttributesFormField()
+
+
+class ChoiceForm(EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "value",
+                "verbose",
+            ]
+        }
+
+    value = forms.CharField(
+        label=_("Value"),
+        required=True,
+        help_text=_("Stored in database if the choice is selected."),
+    )
+    verbose = forms.CharField(
+        label=_("Display text"),
+        required=True,
+        help_text=_("Representation of choice displayed to the user."),
+    )
 
 
 class BooleanFieldForm(
@@ -424,7 +422,6 @@ class BooleanFieldForm(
         entangled_fields = {
             "config": [
                 "field_as_switch",
-                "attributes",
             ]
         }
 
@@ -434,4 +431,3 @@ class BooleanFieldForm(
         required=False,
         help_text=_("If set the boolean field will offer a switch widget."),
     )
-    attributes = AttributesFormField()

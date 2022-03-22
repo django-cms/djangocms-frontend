@@ -14,7 +14,7 @@ DEFAULT_FIELD_SEP = framework.DEFAULT_FIELD_SEP  # NOQA
 
 CHOICE_FIELDS = (
     ("select", _("Drop down (single choice)")),
-    ("multiselect", _("List (multiple choice)")),
     ("radio", _("Radio buttons (single choice)")),
     ("checkbox", _("Checkboxes (multiple choice)")),
+    ("multiselect", _("List (multiple choice)")),
 )
