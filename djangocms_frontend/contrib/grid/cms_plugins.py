@@ -86,7 +86,6 @@ class GridRowPlugin(
                         "create",
                         "plugin_title",
                     ),
-                    ("vertical_alignment", "horizontal_alignment"),
                 )
             },
         ),
@@ -94,6 +93,15 @@ class GridRowPlugin(
             _("Responsive settings"),
             {
                 "fields": ([f"row_cols_{size}" for size in settings.DEVICE_SIZES],),
+            },
+        ),
+        (
+            _("Alignment"),
+            {
+                "fields": (
+                    ("vertical_alignment", "horizontal_alignment"),
+                    "gutters",
+                ),
             },
         ),
     ]

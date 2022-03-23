@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.contrib.forms import forms, models
-from djangocms_frontend.helpers import add_plugin, delete_plugin
+from djangocms_frontend.helpers import add_plugin, delete_plugin, insert_fields
 
 from .. import forms as forms_module
 from .ajax_plugins import FormPlugin
@@ -16,6 +16,7 @@ class FormElementPlugin(CMSUIPlugin):
     top_element = FormPlugin.__name__
     module = _("Forms")
     render_template = f"djangocms_frontend/{settings.framework}/widgets/base.html"
+    settings_name = _("Settings")
 
     fieldsets = (
         (
@@ -23,8 +24,7 @@ class FormElementPlugin(CMSUIPlugin):
             {
                 "fields": (
                     ("field_name", "field_label"),
-                    "field_placeholder",
-                    "field_required",
+                    ("field_required", "field_placeholder"),
                 )
             },
         ),
@@ -42,6 +42,18 @@ class FormElementPlugin(CMSUIPlugin):
             parent = parent.parent
         return [""]
 
+    def get_fieldsets(self, request, obj=None):
+        if hasattr(self, "settings_fields"):
+            return insert_fields(
+                super().get_fieldsets(request, obj),
+                self.settings_fields,
+                block=None,
+                position=-1,
+                blockname=self.settings_name,
+                blockattrs=dict(classes=()),
+            )
+        return super().get_fieldsets(request, obj)
+
     def render(self, context, instance, placeholder):
         instance.add_classes("form-control")
         return super().render(context, instance, placeholder)
@@ -52,6 +64,7 @@ class CharFieldPlugin(mixin_factory("CharField"), FormElementPlugin):
     name = _("Text")
     model = models.CharField
     form = forms.CharFieldForm
+    settings_fields = (("min_length", "max_length"),)
 
 
 @plugin_pool.register_plugin
@@ -73,6 +86,7 @@ class DecimalFieldPlugin(mixin_factory("DecimalField"), FormElementPlugin):
     name = _("Decimal")
     model = models.DecimalField
     form = forms.DecimalFieldForm
+    settings_fields = ("decimal_places", ("min_value", "max_value"))
 
 
 @plugin_pool.register_plugin
@@ -80,6 +94,7 @@ class IntegerFieldPlugin(mixin_factory("IntegerField"), FormElementPlugin):
     name = _("Integer")
     model = models.IntegerField
     form = forms.IntegerFieldForm
+    settings_fields = (("min_value", "max_value"),)
 
 
 @plugin_pool.register_plugin
@@ -87,6 +102,28 @@ class TextareaPlugin(FormElementPlugin):
     name = _("Textarea")
     model = models.TextareaField
     form = forms.TextareaFieldForm
+    settings_fields = (("min_length", "max_length"),)
+
+
+@plugin_pool.register_plugin
+class DateFieldPlugin(FormElementPlugin):
+    name = _("Date")
+    model = models.DateField
+    form = forms.DateFieldForm
+
+
+@plugin_pool.register_plugin
+class DateTimeFieldPlugin(FormElementPlugin):
+    name = _("Date and time")
+    model = models.DateTimeField
+    form = forms.DateTimeFieldForm
+
+
+@plugin_pool.register_plugin
+class TimeFieldPlugin(FormElementPlugin):
+    name = _("Time")
+    model = models.TimeField
+    form = forms.TimeFieldForm
 
 
 @plugin_pool.register_plugin

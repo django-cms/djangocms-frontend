@@ -28,10 +28,10 @@ class GridRowRenderMixin:
             instance.vertical_alignment,
             instance.horizontal_alignment,
         )
-        if instance.gutters or (
-            instance.parent and instance.parent.plugin_type == "CardPlugin"
-        ):  # no gutters if inside card
-            instance.add_classes("g-0")
+        if instance.parent and instance.parent.plugin_type == "CardPlugin":
+            instance.add_classes("g-0")  # no gutters if inside card
+        if instance.config.get("gutters", ""):
+            instance.add_classes(f"g-{instance.gutters}")
         instance.add_classes(get_row_cols_grid_values(instance))
         return super().render(context, instance, placeholder)
 

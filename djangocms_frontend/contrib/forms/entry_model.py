@@ -3,6 +3,7 @@ import decimal
 from cms.utils.compat import DJANGO_3_0
 from django import forms
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
@@ -47,6 +48,7 @@ class FormEntry(models.Model):
     entry_data = JSONField(
         default=dict,
         blank=True,
+        encoder=DjangoJSONEncoder,
     )
     html_headers = JSONField(
         default=dict,

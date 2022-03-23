@@ -13,6 +13,7 @@ from djangocms_frontend.common.spacing import SpacingFormMixin
 from djangocms_frontend.fields import (
     AttributesFormField,
     AutoNumberInput,
+    ButtonGroup,
     IconGroup,
     TagTypeFormField,
 )
@@ -119,11 +120,13 @@ class GridRowBaseForm(
         help_text=link_to_framework_doc("GridRow", "horizontal_alignment_link"),
         widget=IconGroup(),
     )
-    gutters = forms.BooleanField(
-        label=_("Remove gutters"),
-        initial=False,
+    gutters = forms.ChoiceField(
+        label=_("Gutters"),
+        initial=settings.EMPTY_CHOICE[0][0],
+        choices=settings.EMPTY_CHOICE + settings.SPACER_SIZE_CHOICES,
         required=False,
-        help_text=_("Removes the marginal gutters from the grid."),
+        help_text=_("To remove all spaces between rows set gutters to 0."),
+        widget=ButtonGroup(attrs=dict(property="text")),
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()

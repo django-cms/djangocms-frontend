@@ -290,7 +290,23 @@ class FormFieldMixin(EntangledModelFormMixin):
 class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {"config": []}
+        entangled_fields = {
+            "config": [
+                "min_length",
+                "max_length",
+            ]
+        }
+
+    min_length = forms.IntegerField(
+        label=_("Minimum text length"),
+        required=False,
+        initial=None,
+    )
+    max_length = forms.IntegerField(
+        label=_("Minimum text length"),
+        required=False,
+        initial=None,
+    )
 
 
 class EmailFieldForm(mixin_factory("EmailField"), FormFieldMixin, EntangledModelForm):
@@ -339,7 +355,21 @@ class IntegerFieldForm(
 ):
     class Meta:
         model = FrontendUIItem
-        entangled_fields = {"config": []}
+        entangled_fields = {
+            "config": [
+                "min_value",
+                "max_value",
+            ]
+        }
+
+    min_value = forms.IntegerField(
+        label=_("Minimum value"),
+        required=False,
+        initial=None,
+    )
+    max_value = forms.IntegerField(
+        label=_("Maximum value"), required=False, initial=None
+    )
 
 
 class TextareaFieldForm(
@@ -349,6 +379,8 @@ class TextareaFieldForm(
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "min_length",
+                "max_length",
                 "field_rows",
             ]
         }
@@ -360,6 +392,36 @@ class TextareaFieldForm(
         initial=10,
         help_text=_("Defines the vertical size of the text area in number of rows."),
     )
+    min_length = forms.IntegerField(
+        label=_("Minimum text length"),
+        required=False,
+        initial=None,
+    )
+    max_length = forms.IntegerField(
+        label=_("Minimum text length"),
+        required=False,
+        initial=None,
+    )
+
+
+class DateFieldForm(mixin_factory("DateField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {"config": []}
+
+
+class DateTimeFieldForm(
+    mixin_factory("DateTimeField"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {"config": []}
+
+
+class TimeFieldForm(mixin_factory("TimeField"), FormFieldMixin, EntangledModelForm):
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {"config": []}
 
 
 class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledModelForm):

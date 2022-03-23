@@ -70,8 +70,13 @@ class DecimalField(FormFieldMixin, FrontendUIItem):
             super().__init__(**kwargs)
 
         def format_value(self, value):
+            if value is None:
+                return ""
             value = str(value)
-            l, r = value.rsplit(".", 1)
+            if "." in value:
+                l, r = value.rsplit(".", 1)
+            else:
+                l, r = value, ""
             if self.decimal_places == 0:
                 return l
             r = (r + self.decimal_places * "0")[: self.decimal_places]
@@ -125,6 +130,62 @@ class TextareaField(FormFieldMixin, FrontendUIItem):
                     style="height: inherit;",
                 )
             ),
+        )
+
+
+class DateField(FormFieldMixin, FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Date field")
+
+    class DateInput(forms.DateInput):
+        input_type = "date"
+
+    def get_form_field(self):
+        return self.field_name, forms.DateField(
+            label=self.config.get("field_label", ""),
+            required=self.config.get("field_required", False),
+            widget=DateField.DateInput(),
+        )
+
+
+class DateTimeField(FormFieldMixin, FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Date field")
+
+    class DateTimeField(forms.DateTimeField):
+        def prepare_value(self, value):
+            if isinstance(value, str):
+                from django.utils import dateparse
+
+                return super().prepare_value(dateparse.parse_datetime(value))
+            return super().prepare_value(value)
+
+    class DateTimeInput(forms.DateTimeInput):
+        input_type = "datetime-local"
+
+    def get_form_field(self):
+        return self.field_name, DateTimeField.DateTimeField(
+            label=self.config.get("field_label", ""),
+            required=self.config.get("field_required", False),
+            widget=DateTimeField.DateTimeInput(),
+        )
+
+
+class TimeField(FormFieldMixin, FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("Date field")
+
+    class TimeInput(forms.TimeInput):
+        input_type = "time"
+
+    def get_form_field(self):
+        return self.field_name, forms.TimeField(
+            label=self.config.get("field_label", ""),
+            required=self.config.get("field_required", False),
+            widget=TimeField.TimeInput(),
         )
 
 
