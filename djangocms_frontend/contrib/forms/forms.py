@@ -492,8 +492,18 @@ class BooleanFieldForm(
         }
 
     field_as_switch = forms.BooleanField(
-        label=_("As switch"),
+        label=_("Layout"),
         initial=False,
         required=False,
-        help_text=_("If set the boolean field will offer a switch widget."),
+        widget=ButtonGroup(
+            choices=((False, _("Checkbox")), (True, _("Switch"))),
+            attrs=dict(property="text", label_class="btn-outline-secondary"),
+        ),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["field_required"].help_text = _(
+            "If checked, the form can only be submitted if the "
+            "checkbox is checked or the switch set to on."
+        )

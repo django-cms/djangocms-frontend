@@ -202,3 +202,15 @@ class BooleanFieldPlugin(FormElementPlugin):
     name = _("Boolean")
     model = models.BooleanField
     form = forms.BooleanFieldForm
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    ("field_name", "field_label"),
+                    ("field_as_switch", "field_required"),
+                )
+            },
+        ),
+    )
