@@ -386,7 +386,7 @@ class TextareaFieldForm(
         initial=None,
     )
     max_length = forms.IntegerField(
-        label=_("Minimum text length"),
+        label=_("Maximum text length"),
         required=False,
         initial=None,
     )
