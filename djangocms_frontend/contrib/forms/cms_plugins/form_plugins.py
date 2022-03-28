@@ -102,7 +102,10 @@ class TextareaPlugin(FormElementPlugin):
     name = _("Textarea")
     model = models.TextareaField
     form = forms.TextareaFieldForm
-    settings_fields = (("min_length", "max_length"),)
+    settings_fields = (
+        "field_rows",
+        ("min_length", "max_length"),
+    )
 
 
 @plugin_pool.register_plugin
