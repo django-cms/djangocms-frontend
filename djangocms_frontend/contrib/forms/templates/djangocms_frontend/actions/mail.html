@@ -1,0 +1,32 @@
+{% load i18n %}
+<h1>{% trans "Form submission" %}</h1>
+<p>{% if user %}{% trans "by" %} {{ user.firstname }} {{ user.lastname }} ({{ user.username }}){% else %}{% trans "by anonymous" %}{% endif %}</p>
+<table>
+    <thead>
+    <tr>
+        <th>{% trans "Field" %}</th>
+        <th>{% trans "Value" %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for field, value in cleaned_data.items %}
+    <tr>
+        <td>{{ field }}</td>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td>{% trans "time" %}</td>
+        <td>{% now "H:i d/m/Y" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "user agent" %}</td>
+        <td>{{ user_agent }}</td>
+    </tr>
+    <tr>
+        <td>{% trans "referer" %}</td>
+        <td>{{ referer }}</td>
+    </tr>
+    </tbody>
+</table>
+

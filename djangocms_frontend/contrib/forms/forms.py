@@ -20,7 +20,7 @@ from djangocms_frontend.fields import (
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 
-from . import constants
+from . import actions, constants
 
 mixin_factory = settings.get_forms(forms_module)
 
@@ -80,39 +80,16 @@ class SimpleFrontendForm(forms.Form):
         super().clean()
 
     def save(self):
-        if get_option(self, "unique", False) and get_option(
-            self, "login_required", False
-        ):
-            keys = {
-                "form_name": get_option(self, "form_name"),
-                "form_user": self._request.user,
-            }
-            defaults = {}
+        results = {}
+        for action in get_option(self, "form_actions", []):
+            print("action", action)
+            Action = actions.get_action_class(action)
+            if Action is not None:
+                results[action] = Action().execute(self, self._request)
+            else:
+                results[action] = _("Action not available any more")
         else:
-            keys = {}
-            defaults = {
-                "form_name": get_option(self, "form_name"),
-                "form_user": self._request.user,
-            }
-        defaults.update(
-            {
-                "entry_data": self.cleaned_data,
-                "html_headers": dict(
-                    user_agent=self._request.headers["User-Agent"],
-                    referer=self._request.headers["Referer"],
-                ),
-            }
-        )
-        if keys:  # update_or_create only works if at least one key is given
-            try:
-                FormEntry.objects.update_or_create(**keys, defaults=defaults)
-            except FormEntry.MultipleObjectsReturned:  # Delete outdated objects
-                FormEntry.objects.filter(**keys).delete()
-                FormEntry.objects.create(**keys, **defaults)
-        else:
-            FormEntry.objects.create(**defaults), True
-        if get_option(self, "email", []):
-            raise NotImplementedError("email notification for forms")
+            results[None] = _("No action registered")
 
 
 class FormsForm(mixin_factory("Form"), EntangledModelForm):
@@ -134,6 +111,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                 "form_submit_message",
                 "form_submit_context",
                 "form_submit_align",
+                "form_actions",
                 "attributes",
             ]
         }
@@ -197,6 +175,16 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         initial=settings.EMPTY_CHOICE[0][0],
         required=False,
     )
+
+    _available_form_actions = actions.get_registered_actions()
+    form_actions = forms.MultipleChoiceField(
+        label=_("Actions to be taken after form submission"),
+        choices=_available_form_actions,
+        initial=first_choice(_available_form_actions),
+        required=True,
+        widget=forms.CheckboxSelectMultiple(),
+    )
+
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
 

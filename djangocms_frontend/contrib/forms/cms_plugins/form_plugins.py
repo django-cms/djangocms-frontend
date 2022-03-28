@@ -209,7 +209,8 @@ class BooleanFieldPlugin(FormElementPlugin):
             {
                 "fields": (
                     ("field_name", "field_label"),
-                    ("field_as_switch", "field_required"),
+                    "field_as_switch",
+                    "field_required",
                 )
             },
         ),

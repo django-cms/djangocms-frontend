@@ -282,6 +282,13 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
                 ],
             },
         ),
+        (
+            _("Actions"),
+            {
+                "classes": ("collapse",),
+                "fields": ["form_actions"],
+            },
+        ),
     ]
 
     def get_form_class(self, slug=None):
@@ -321,11 +328,12 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         ] = f'mb-{self.instance.config.get("form_spacing", "3")}'
         meta_options[
             "redirect"
-        ] = self.instance.page  # Default behavior: redirect to same page
+        ] = self.instance.placeholder.page  # Default behavior: redirect to same page
         meta_options["login_required"] = self.instance.config.get(
             "form_login_required", False
         )
         meta_options["unique"] = self.instance.config.get("form_unique", False)
+        meta_options["form_actions"] = self.instance.config.get("form_actions", [])
         fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
 
         return type(
