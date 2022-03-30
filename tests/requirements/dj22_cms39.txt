@@ -1,5 +1,0 @@
--r base.txt
-
-django-jsonfield-backport
-Django>=2.2,<3
-django-cms>=3.9,<4.0
