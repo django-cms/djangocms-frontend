@@ -6,6 +6,11 @@
 
     Forms a available as of version 0.9.1
 
+.. warning::
+
+    Currently, for forms to work they require **jQuery** to be installed by
+    the user.
+
 
 **djangocms-frontend** supports rendering of styled forms which is part of
 all major frontend frameworks, like Bootstrap 5. The objective is to tightly
