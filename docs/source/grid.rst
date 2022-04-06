@@ -95,7 +95,7 @@ Specifically sized columns
 
 Natural width:
     If you need a column to take its natural width, enter ``0`` for its
-    column size.
+    column size. This will display ``auto`` for columns size.
 
 Also, you can adjust the vertical alignment of the specific column from
 the row's default setting.

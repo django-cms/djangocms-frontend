@@ -13,6 +13,12 @@ class Form(FrontendUIItem):
         proxy = True
         verbose_name = _("Form")
 
+    def get_short_description(self):
+        name = self.config.get("form_name", None)
+        if name:
+            return f"({name})"
+        return "<unnamed>"
+
 
 class FormFieldMixin:
     def get_short_description(self):

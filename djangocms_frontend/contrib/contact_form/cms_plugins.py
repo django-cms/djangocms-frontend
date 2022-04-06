@@ -1,5 +1,5 @@
-from djangocms_frontend.contrib.forms import forms
+from djangocms_frontend.contrib.forms import register_with_frontend
 
 from .forms import ContactForm
 
-forms.register(ContactForm)
+register_with_frontend(ContactForm)

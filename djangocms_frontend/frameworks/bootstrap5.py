@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 DEVICE_CHOICES = (
     ("xs", _("Extra small")),  # default <576px
@@ -121,7 +121,7 @@ SHADOW_CHOICES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_SHADOW_CHOICES",
     (
-        ("none", pgettext("shadow", "None")),
+        ("none", pgettext_lazy("shadow", "None")),
         ("sm", "S"),
         ("reg", "M"),
         ("lg", "L"),

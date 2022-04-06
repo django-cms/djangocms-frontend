@@ -98,10 +98,12 @@ class AttributesFormField(fields.AttributesFormField):
 
 
 try:
-    fields.AttributesWidget(sorted=True)
-    CHOICESWIDGETPARAMS = dict(sorted=False)
+    fields.AttributesWidget(
+        sorted=True
+    )  # does djangocms-attributes-field support sorted param?
+    CHOICESWIDGETPARAMS = dict(sorted=False)  # use unsorted variant
 except TypeError:
-    CHOICESWIDGETPARAMS = dict()
+    CHOICESWIDGETPARAMS = dict()  # Fallback for djangocms-attributes-field < 2.1
 
 
 class ChoicesFormField(fields.AttributesFormField):

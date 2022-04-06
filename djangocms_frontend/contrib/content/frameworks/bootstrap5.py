@@ -1,5 +1,4 @@
 class BlockquoteRenderMixin:
-
     render_template = "djangocms_frontend/bootstrap5/blockquote.html"
 
     def render(self, context, instance, placeholder):

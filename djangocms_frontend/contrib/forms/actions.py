@@ -88,6 +88,9 @@ class SaveToDBAction(FormAction):
             FormEntry.objects.create(**defaults), True
 
 
+SAVE_TO_DB_ACTION = next(iter(_action_registry)) if _action_registry else None
+
+
 @register
 class SendMailAction(FormAction):
     verbose_name = _("Send email to administrators")

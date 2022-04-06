@@ -1,5 +1,3 @@
-import hashlib
-
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
@@ -20,42 +18,9 @@ from djangocms_frontend.fields import (
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 
-from . import actions, constants
+from . import _form_registry, actions, constants, get_registered_forms
 
 mixin_factory = settings.get_forms(forms_module)
-
-
-_form_registry = {}
-
-
-def verbose_name(form_class):
-    """returns the verbose_name property of a Meta class if present or else
-    splits the camel-cased form class name"""
-    if hasattr(form_class, "Meta") and hasattr(form_class.Meta, "verbose_name"):
-        return getattr(form_class.Meta, "verbose_name")  # noqa
-    class_name = form_class.__name__.rsplit(".", 1)[-1]
-    from re import finditer
-
-    matches = finditer(
-        ".+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)", class_name
-    )
-    return " ".join(m.group(0) for m in matches)
-
-
-def get_registered_forms():
-    """Creates a tuple for a ChoiceField to select form"""
-    result = tuple(
-        (hash, verbose_name(form_class)) for hash, form_class in _form_registry.items()
-    )
-    return result if result else ((_("No forms registered"), ()),)
-
-
-def register(form_class):
-    """Function to call or decorator for a Form class to make it available for the
-    djangocms_frontend.contrib.forms plugin"""
-    hash = hashlib.sha1(form_class.__name__.encode("utf-8")).hexdigest()
-    _form_registry.update({hash: form_class})
-    return form_class
 
 
 class SimpleFrontendForm(forms.Form):
@@ -207,6 +172,41 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                     },
                     code="incomplete",
                 )
+
+        if "form_actions" in self.cleaned_data:
+            if (
+                self.cleaned_data["form_unique"]
+                and actions.SAVE_TO_DB_ACTION not in self.cleaned_data["form_actions"]
+            ):
+                if actions.SAVE_TO_DB_ACTION:
+                    raise ValidationError(
+                        {
+                            "form_actions": _(
+                                'Please select "Save form submission" to allow users to reopen forms.'
+                            ),
+                            "form_unique": _(
+                                'Please select the action "Save form submission" to allow users to reopen forms.'
+                            ),
+                        }
+                    )
+                else:
+                    raise ValidationError(
+                        {
+                            "form_unique": _(
+                                "No form action to save form contents available. Users will not be "
+                                "able to reopen a form."
+                            ),
+                        }
+                    )
+        else:
+            raise ValidationError(
+                {
+                    "form_actions": _(
+                        "At least one action needs to be selected for the form to have an effect."
+                    ),
+                }
+            )
+
         if (
             self.cleaned_data["form_unique"]
             and not self.cleaned_data["form_login_required"]

@@ -32,7 +32,6 @@ class CodePlugin(
     model = models.CodeBlock
     form = forms.CodeForm
     change_form_template = "djangocms_frontend/admin/code.html"
-    text_enabled = True
 
     fieldsets = [
         (
@@ -66,7 +65,6 @@ class BlockquotePlugin(
     model = models.Blockquote
     form = forms.BlockquoteForm
     change_form_template = "djangocms_frontend/admin/blockquote.html"
-    text_enabled = True
     allow_children = True
 
     fieldsets = [
