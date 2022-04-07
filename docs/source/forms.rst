@@ -87,3 +87,46 @@ or Select/Choice) offer options on the specific input widget.
 
 Djangocms frontend will use framework specific widgets or fall back to standard
 widgets browsers offer (e.g., date picker).
+
+***************************
+Using forms from other apps
+***************************
+
+Other apps can register forms to be used by **djangocms-frontend**. Once at
+least one form is registered, the form will appear as a option in the Form
+plugin.
+
+Registration is can simply be done by a decorator or function call:
+
+.. code:: python
+
+    from django import forms
+    from djangocms_frontend.contrib.forms import register_with_frontend
+
+    @register_with_frontend
+    class MyCoolForm(forms.Form):
+        ...
+
+    class MyOtherCoolForm(forms.Form):
+        ...
+
+    register_with_frontend(MyOtherCoolForm)
+
+
+
+There are three ways **djangocms-frontend** can render registered forms:
+
+1. **Regular form rendering**: all fields a shown below one another.
+
+2. **Adding a ``fieldsets`` argument to the form**: The ``fieldsets`` work as you
+   know them from ``ModelAdmin``. See `Django documentation
+   <https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets>`_.
+   This may be the most convenient way of building not-too-complex forms.
+   **djangocms-frontend** uses the grid system to generate the form layout.
+
+3. **Using the third party package `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_**:
+   If installed and the form has a property ``helper`` the form is automatically
+   rendered using **django-crispy-forms**. Note, however, that the submit button
+   is rendered by the plugin. Hence do not include it into the form (which is
+   possible with **django-crispy-forms**).
+
