@@ -11,6 +11,7 @@ from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 from ... import settings
 from ...helpers import first_choice
 from ...models import FrontendUIItem
+from .. import carousel
 from ..link.forms import AbstractLinkForm
 from .constants import (
     CAROUSEL_ASPECT_RATIO_CHOICES,
@@ -19,8 +20,10 @@ from .constants import (
     CAROUSEL_TEMPLATE_CHOICES,
 )
 
+mixin_factory = settings.get_forms(carousel)
 
-class CarouselForm(EntangledModelForm):
+
+class CarouselForm(mixin_factory("Carousel"), EntangledModelForm):
     """
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -130,7 +133,9 @@ class CarouselForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class CarouselSlideForm(AbstractLinkForm, EntangledModelForm):
+class CarouselSlideForm(
+    mixin_factory("CarouselSlide"), AbstractLinkForm, EntangledModelForm
+):
     """
     Components > "Slide" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/

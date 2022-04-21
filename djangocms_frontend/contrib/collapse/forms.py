@@ -2,8 +2,10 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
+from ... import settings
 from ...fields import AttributesFormField, TagTypeFormField
 from ...models import FrontendUIItem
+from .. import collapse
 
 # TODO leaving this comment for now
 # data-bs-toggle="collapse" data-bs-target="#collapseExample"
@@ -12,8 +14,10 @@ from ...models import FrontendUIItem
 # data-bs-parent links to the wrapper collapse
 # <div class="collapse" id="collapseExample">
 
+mixin_factory = settings.get_forms(collapse)
 
-class CollapseForm(EntangledModelForm):
+
+class CollapseForm(mixin_factory("Collapse"), EntangledModelForm):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -39,7 +43,7 @@ class CollapseForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class CollapseTriggerForm(EntangledModelForm):
+class CollapseTriggerForm(mixin_factory("CollapseTrigger"), EntangledModelForm):
     """
     Component > "Collapse Trigger" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -64,7 +68,7 @@ class CollapseTriggerForm(EntangledModelForm):
     tag_type = TagTypeFormField()
 
 
-class CollapseContainerForm(EntangledModelForm):
+class CollapseContainerForm(mixin_factory("CollapseContainer"), EntangledModelForm):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
