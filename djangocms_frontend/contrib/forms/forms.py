@@ -15,7 +15,7 @@ from djangocms_frontend.fields import (
     ColoredButtonGroup,
     TagTypeFormField,
 )
-from djangocms_frontend.helpers import first_choice
+from djangocms_frontend.helpers import first_choice, mark_safe_lazy
 from djangocms_frontend.models import FrontendUIItem
 
 from . import _form_registry, actions, constants, get_registered_forms
@@ -42,12 +42,11 @@ class SimpleFrontendForm(forms.Form):
                 raise ValidationError(
                     _("Please login before submitting this form."), code="unauthorized"
                 )
-        super().clean()
+        return super().clean()
 
     def save(self):
         results = {}
         for action in get_option(self, "form_actions", []):
-            print("action", action)
             Action = actions.get_action_class(action)
             if Action is not None:
                 results[action] = Action().execute(self, self._request)
@@ -220,6 +219,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                 },
                 code="inconsistent",
             )
+        return self.cleaned_data
 
 
 FORBIDDEN_FORM_NAMES = [
@@ -397,6 +397,10 @@ class DateFieldForm(mixin_factory("DateField"), FormFieldMixin, EntangledModelFo
         model = FrontendUIItem
         entangled_fields = {"config": []}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["field_placeholder"].help_text = _("Not visible on most browsers.")
+
 
 class DateTimeFieldForm(
     mixin_factory("DateTimeField"), FormFieldMixin, EntangledModelForm
@@ -405,11 +409,19 @@ class DateTimeFieldForm(
         model = FrontendUIItem
         entangled_fields = {"config": []}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["field_placeholder"].help_text = _("Not visible on most browsers.")
+
 
 class TimeFieldForm(mixin_factory("TimeField"), FormFieldMixin, EntangledModelForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {"config": []}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["field_placeholder"].help_text = _("Not visible on most browsers.")
 
 
 class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledModelForm):
@@ -495,3 +507,52 @@ class BooleanFieldForm(
             "If checked, the form can only be submitted if the "
             "checkbox is checked or the switch set to on."
         )
+
+
+RECAPTCHA_CHOICES = (
+    ("v2-checkbox", _("v2 checkbox")),
+    ("v2-invisible", _("v2 invisible")),
+    ("v3", _("v3")),
+)
+
+
+class CaptchaFieldForm(EntangledModelForm):
+    """
+    reCaptcha Plugin
+    https://github.com/torchbox/django-recaptcha
+    """
+
+    class Meta:
+        model = FrontendUIItem
+        entangled_fields = {
+            "config": [
+                "captcha_widget",
+                "captcha_requirement",
+                "attributes",
+            ]
+        }
+
+    captcha_widget = forms.ChoiceField(
+        label=_("reCaptcha widget"),
+        required=True,
+        initial="v2-invisible",
+        choices=RECAPTCHA_CHOICES,
+        help_text=mark_safe_lazy(
+            _(
+                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
+            ).format(link="https://developers.google.com/recaptcha")
+        ),
+    )
+
+    captcha_requirement = forms.DecimalField(
+        label=_("Minimum score requirement"),
+        required=True,
+        initial=0.5,
+        min_value=0,
+        max_value=1,
+        help_text=_(
+            "Only for reCaptcha v3: Minimum score required to accept challenge."
+        ),
+    )
+
+    attributes = AttributesFormField()

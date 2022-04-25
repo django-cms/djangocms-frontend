@@ -1,4 +1,5 @@
 import copy
+import decimal
 
 from django.apps import apps
 from django.db.models import ObjectDoesNotExist
@@ -129,3 +130,10 @@ def add_plugin(placeholder, plugin):
 def delete_plugin(plugin):
     """CMS version save function to delete a plugin (and its descendants) from a placeholder"""
     return plugin.placeholder.delete_plugin(plugin)
+
+
+def coerce_decimal(value):
+    try:
+        return decimal.Decimal(value)
+    except TypeError:
+        return None

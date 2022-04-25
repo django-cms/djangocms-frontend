@@ -116,7 +116,9 @@ Registration is can simply be done by a decorator or function call:
 
 There are three ways **djangocms-frontend** can render registered forms:
 
-1. **Regular form rendering**: all fields a shown below one another.
+1. **Regular form rendering**: all fields a shown below one another. This is
+   only advisable for very simple forms (e.g. a contact form with name, email,
+   and text body).
 
 2. **Adding a ``fieldsets`` argument to the form**: The ``fieldsets`` work as you
    know them from ``ModelAdmin``. See `Django documentation

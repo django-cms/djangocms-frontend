@@ -1,5 +1,6 @@
 from cms.models import CMSPlugin
 from cms.utils.compat import DJANGO_3_0
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext
@@ -24,7 +25,7 @@ class FrontendUIItem(CMSPlugin):
 
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)
-    config = JSONField(default=dict)
+    config = JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     def __init__(self, *args, **kwargs):
         self._additional_classes = []

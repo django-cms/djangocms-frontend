@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.models import FrontendUIItem
 
+from ...helpers import coerce_decimal
 from .entry_model import FormEntry  # noqa
 
 
@@ -99,8 +100,8 @@ class DecimalField(FormFieldMixin, FrontendUIItem):
         return self.field_name, DecimalField.StrDecimalField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
-            min_value=self.config.get("min_value", None),
-            max_value=self.config.get("max_value", None),
+            min_value=coerce_decimal(self.config.get("min_value", None)),
+            max_value=coerce_decimal(self.config.get("max_value", None)),
             decimal_places=self.config.get("decimal_places", None),
             widget=DecimalField.NumberInput(
                 decimal_places=self.config.get("decimal_places", None)
@@ -274,3 +275,67 @@ class SubmitButton(FormFieldMixin, FrontendUIItem):
     class Meta:
         proxy = True
         verbose_name = _("Submit button")
+
+
+try:
+    """Soft dependency on django-captcha for reCaptchaField"""
+
+    from captcha.fields import ReCaptchaField  # NOQA
+    from captcha.widgets import (  # NOQA
+        ReCaptchaV2Checkbox,
+        ReCaptchaV2Invisible,
+        ReCaptchaV3,
+    )
+except ImportError:
+    ReCaptchaV2Invisible = forms.HiddenInput  # NOQA
+    ReCaptchaV2Checkbox = forms.HiddenInput  # NOQA
+    ReCaptchaV3 = forms.HiddenInput  # NOQA
+
+    class ReCaptchaField:  # NOQA
+        def __init__(self, *args, **kwargs):
+            pass
+
+
+class CaptchaField(FormFieldMixin, FrontendUIItem):
+    class Meta:
+        proxy = True
+        verbose_name = _("reCaptcha field")
+
+    field_name = "captcha_field"
+
+    WIDGETS = {
+        "v2-checkbox": ReCaptchaV2Checkbox,
+        "v2-invisible": ReCaptchaV2Invisible,
+        "v3": ReCaptchaV3,
+    }
+
+    def get_short_description(self):
+        return f'{self.config.get("captcha_widget", "-")}' + (
+            f' (>={self.config.get("captcha_requirement", 0.5)})'
+            if self.config.get("captcha_widget", "-") == "v3"
+            else ""
+        )
+
+    def get_form_field(self):
+        widget_params = {
+            "attrs": {
+                key: value
+                for key, value in self.config.get("attributes", {}).items()
+                if key.startswith("data-")
+            },
+            "api_params": {
+                key: value
+                for key, value in self.config.get("attributes", {}).items()
+                if not key.startswith("data-")
+            },
+        }
+        if self.config.get("captcha_widget", "") == "v3":
+            widget_params["attrs"]["required_score"] = (
+                self.config.get("captcha_requirement", 0.5),
+            )
+        return self.config.get("field_name", self.field_name), ReCaptchaField(
+            label=self.config.get("field_label", ""),
+            widget=self.WIDGETS[self.config.get("captcha_widget", "v2-invisible")](
+                **widget_params,
+            ),
+        )

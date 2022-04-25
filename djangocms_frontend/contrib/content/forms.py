@@ -11,11 +11,18 @@ from ...common.spacing import SpacingFormMixin
 from ...fields import AttributesFormField, IconGroup, TagTypeFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
+from .. import content
 from .constants import CODE_TYPE_CHOICES
+
+mixin_factory = settings.get_forms(content)
 
 
 class CodeForm(
-    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+    mixin_factory("Code"),
+    SpacingFormMixin,
+    ResponsiveFormMixin,
+    BackgroundFormMixin,
+    EntangledModelForm,
 ):
     """
     Content > "Code" Plugin
@@ -49,7 +56,11 @@ class CodeForm(
 
 
 class BlockquoteForm(
-    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+    mixin_factory("Blockquote"),
+    SpacingFormMixin,
+    ResponsiveFormMixin,
+    BackgroundFormMixin,
+    EntangledModelForm,
 ):
     """
     Content > "Blockquote" Plugin
@@ -90,7 +101,11 @@ class BlockquoteForm(
 
 
 class FigureForm(
-    SpacingFormMixin, ResponsiveFormMixin, BackgroundFormMixin, EntangledModelForm
+    mixin_factory("Figure"),
+    SpacingFormMixin,
+    ResponsiveFormMixin,
+    BackgroundFormMixin,
+    EntangledModelForm,
 ):
     """
     Content > "Figure" Plugin
