@@ -43,6 +43,7 @@ class ImagePlugin(
                     "template",
                     "picture",
                     "external_picture",
+                    "lazy_loading",
                     ("picture_fluid", "picture_rounded", "picture_thumbnail"),
                 )
             },
@@ -75,3 +76,8 @@ class ImagePlugin(
 
     def get_render_template(self, context, instance, placeholder):
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"
+
+    def render(self, context, instance, placeholder):
+        if instance.config.get("lazy_loading", False):
+            instance.add_attribute("loading", "lazy")
+        return super().render(context, instance, placeholder)

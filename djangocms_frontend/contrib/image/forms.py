@@ -75,6 +75,7 @@ class ImageForm(
                 "template",
                 "picture",
                 "external_picture",
+                "lazy_loading",
                 "width",
                 "height",
                 "alignment",
@@ -116,6 +117,14 @@ class ImageForm(
             "Certain options such as cropping are not applicable to external images."
         ),
     )
+    lazy_loading = forms.BooleanField(
+        label=_("Load lazily"),
+        required=False,
+        help_text=_(
+            "Use for images below the fold. This will load images only if user scrolls them into view. "
+        ),
+    )
+
     width = forms.IntegerField(
         label=_("Width"),
         required=False,
