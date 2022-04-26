@@ -156,8 +156,17 @@ class SelectPlugin(mixin_factory("SelectField"), FormElementPlugin):
             },
         ),
         (
-            _("Quick edit choices"),
-            {"classes": ("collapse",), "fields": ("field_choices",)},
+            _("Choices"),
+            {
+                "classes": ("collapse",),
+                "description": _(
+                    "Use this field to quick edit choices. Choices can be added (<kbd>+</kbd>), deleted "
+                    "(<kbd>&times;</kbd>) and updated. On the left side enter the value to be stored in the database. "
+                    "On the right side enter the text to be shown to the user. The order of choices can be adjusted "
+                    "in the structure tree <b>after saving</b> the edits."
+                ),
+                "fields": ("field_choices",),
+            },
         ),
     )
 

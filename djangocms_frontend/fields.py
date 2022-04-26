@@ -132,6 +132,9 @@ class ChoicesFormField(fields.AttributesFormField):
     def prepare_value(self, value):
         if not value:
             return {}
+        if isinstance(value, dict):  # Already dict? OK!
+            return super().prepare_value(value)
+        # Turn items into dict
         return super().prepare_value({key: value for key, value in value})
 
 

@@ -356,4 +356,5 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
 
     def render(self, context, instance, placeholder):
         self.instance = instance
+        instance.add_classes("djangocms-frontend-ajax-form")
         return super().render(context, instance, placeholder)

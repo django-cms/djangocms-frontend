@@ -449,13 +449,26 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
     )
     field_choices = ChoicesFormField(
         required=True,
-        help_text=_(
-            "Use this field to quick edit choices. Choices can be added (<kbd>+</kbd>), deleted (<kbd>&times;</kbd>) "
-            "and updated. On the left side enter the value to be stored in the database. On the right side enter the "
-            "text to be shown to the user. The order of choices can be adjusted in the structure tree after saving "
-            "the edits."
-        ),
     )
+
+    def clean(self):
+        if (
+            self.cleaned_data.get("field_required", False)
+            and self.cleaned_data.get("field_select", "") == "checkbox"
+        ):
+            raise ValidationError(
+                {
+                    "field_select": mark_safe_lazy(
+                        _(
+                            "For a required multiple choice fild select the <b>list</b> selection type."
+                        )
+                    ),
+                    "field_required": mark_safe_lazy(
+                        _("Checkbox multiple choice field <b>must not be required</b>.")
+                    ),
+                }
+            )
+        return self.cleaned_data
 
 
 class ChoiceForm(EntangledModelForm):
