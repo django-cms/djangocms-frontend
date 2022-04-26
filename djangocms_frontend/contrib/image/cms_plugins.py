@@ -43,8 +43,12 @@ class ImagePlugin(
                     "template",
                     "picture",
                     "external_picture",
-                    "lazy_loading",
-                    ("picture_fluid", "picture_rounded", "picture_thumbnail"),
+                    (
+                        "picture_fluid",
+                        "lazy_loading",
+                        "picture_rounded",
+                        "picture_thumbnail",
+                    ),
                 )
             },
         ),

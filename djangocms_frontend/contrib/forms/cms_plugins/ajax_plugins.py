@@ -13,9 +13,10 @@ from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.common.attributes import AttributesMixin
 from djangocms_frontend.contrib import forms as forms_module
-from djangocms_frontend.contrib.forms import forms, models
+from djangocms_frontend.contrib.forms import forms, models, recaptcha
 from djangocms_frontend.contrib.forms.forms import SimpleFrontendForm
 from djangocms_frontend.contrib.forms.helper import get_option
+from djangocms_frontend.helpers import insert_fields
 
 
 class CMSAjaxBase(CMSUIPlugin):
@@ -291,6 +292,17 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         ),
     ]
 
+    def get_fieldsets(self, request, obj=None):
+        if recaptcha.installed:
+            return insert_fields(
+                super().get_fieldsets(request, obj),
+                ("captcha_widget", "captcha_requirement", "captcha_config"),
+                block=None,
+                position=1,
+                blockname=_("reCaptcha"),
+            )
+        return super().get_fieldsets(request, obj)
+
     def get_form_class(self, slug=None):
         if self.instance.child_plugin_instances is None:  # not set if in ajax_post
             self.instance.child_plugin_instances = [
@@ -304,6 +316,8 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
 
     def create_form_class_from_plugins(self):
         def traverse(instance):
+            """Recursively traverse children to identify form fields (by them having a method called
+            "get_form_field" """
             nonlocal fields
             if hasattr(instance, "get_form_field"):
                 name, field = instance.get_form_field()
@@ -318,14 +332,15 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
                 traverse(child)
 
         fields = {}
-
         traverse(self.instance)
+
+        # Collect meta options for Meta class
         meta_options = dict(form_name=self.instance.config.get("form_name", "unset"))
         if self.instance.config.get("form_floating_labels", False):
             meta_options["floating_labels"] = True
         meta_options[
             "field_sep"
-        ] = f'mb-{self.instance.config.get("form_spacing", "3")}'
+        ] = f'mb-{self.instance.config.get("form_spacing", "3")}'  # TODO: This is bootstrap-specific
         meta_options[
             "redirect"
         ] = self.instance.placeholder.page  # Default behavior: redirect to same page
@@ -335,6 +350,12 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         meta_options["unique"] = self.instance.config.get("form_unique", False)
         meta_options["form_actions"] = self.instance.config.get("form_actions", [])
         fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
+
+        # Add recaptcha field in necessary
+        if recaptcha.installed and self.instance.config.get("captcha_widget"):
+            fields["recaptcha_field"] = recaptcha.get_recaptcha_field(
+                self.instance.config
+            )
 
         return type(
             "FrontendAutoForm",

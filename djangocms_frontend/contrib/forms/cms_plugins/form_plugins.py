@@ -3,14 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
-from djangocms_frontend.common.attributes import AttributesMixin
 from djangocms_frontend.contrib.forms import forms, models
-from djangocms_frontend.helpers import (
-    add_plugin,
-    delete_plugin,
-    insert_fields,
-    mark_safe_lazy,
-)
+from djangocms_frontend.helpers import add_plugin, delete_plugin, insert_fields
 
 from .. import forms as forms_module
 from .ajax_plugins import FormPlugin
@@ -233,49 +227,3 @@ class BooleanFieldPlugin(mixin_factory("BooleanField"), FormElementPlugin):
             },
         ),
     )
-
-
-@plugin_pool.register_plugin
-class reCaptchaFieldPlugin(
-    mixin_factory("CaptchaField"), AttributesMixin, FormElementPlugin
-):
-    name = _("reCaptcha")
-    model = models.CaptchaField
-    form = forms.CaptchaFieldForm
-
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "captcha_widget",
-                    "captcha_requirement",
-                )
-            },
-        ),
-    )
-
-    @classmethod
-    def get_parent_classes(cls, slot, page, instance=None):
-        if (
-            hasattr(settings.settings, "RECAPTCHA_PUBLIC_KEY")
-            and hasattr(settings.settings, "RECAPTCHA_PRIVATE_KEY")
-            or True
-        ):
-            return super().get_parent_classes(slot, page, instance)
-        return [""]
-
-    def __init__(self, *args, **kwargs):
-        self.block_attr["description"] = mark_safe_lazy(
-            _(
-                'The reCAPTCHA widget supports several <a href="{attr_link}" target="_blank">data attributes</a> '
-                "that customize the behaviour of the widget, such as <code>data-theme</code>, "
-                "<code>data-size</code>. "
-                'The reCAPTCHA api supports several <a href="{api_link}" target="_blank">parameters</a>. '
-                "Add these api parameters as attributes, e.g. <code>hl</code> to set the language."
-            ).format(
-                attr_link="https://developers.google.com/recaptcha/docs/display#render_param",
-                api_link="https://developers.google.com/recaptcha/docs/display#javascript_resource_apijs_parameters",
-            )
-        )
-        super().__init__(*args, **kwargs)

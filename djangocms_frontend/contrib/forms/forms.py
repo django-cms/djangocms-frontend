@@ -18,7 +18,7 @@ from djangocms_frontend.fields import (
 from djangocms_frontend.helpers import first_choice, mark_safe_lazy
 from djangocms_frontend.models import FrontendUIItem
 
-from . import _form_registry, actions, constants, get_registered_forms
+from . import _form_registry, actions, constants, get_registered_forms, recaptcha
 
 mixin_factory = settings.get_forms(forms_module)
 
@@ -77,6 +77,9 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                 "form_submit_align",
                 "form_actions",
                 "attributes",
+                "captcha_widget",
+                "captcha_requirement",
+                "captcha_config",
             ]
         }
         untangled_fields = ("tag_type",)
@@ -150,6 +153,43 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     )
 
     attributes = AttributesFormField()
+
+    captcha_widget = forms.ChoiceField(
+        label=_("reCaptcha widget"),
+        required=True,
+        initial="v2-invisible" if recaptcha.installed else "",
+        choices=settings.EMPTY_CHOICE + recaptcha.RECAPTCHA_CHOICES,
+        help_text=mark_safe_lazy(
+            _(
+                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
+            ).format(link="https://developers.google.com/recaptcha")
+        ),
+    )
+    captcha_requirement = forms.DecimalField(
+        label=_("Minimum score requirement"),
+        required=True,
+        initial=0.5,
+        min_value=0,
+        max_value=1,
+        help_text=_(
+            "Only for reCaptcha v3: Minimum score required to accept challenge."
+        ),
+    )
+    captcha_config = AttributesFormField(
+        label=_("Recaptcha configuration parameters"),
+        help_text=mark_safe_lazy(
+            _(
+                'The reCAPTCHA widget supports several <a href="{attr_link}" target="_blank">data attributes</a> '
+                "that customize the behaviour of the widget, such as <code>data-theme</code>, "
+                "<code>data-size</code>. "
+                'The reCAPTCHA api supports several <a href="{api_link}" target="_blank">parameters</a>. '
+                "Add these api parameters as attributes, e.g. <code>hl</code> to set the language."
+            ).format(
+                attr_link="https://developers.google.com/recaptcha/docs/display#render_param",
+                api_link="https://developers.google.com/recaptcha/docs/display#javascript_resource_apijs_parameters",
+            )
+        ),
+    )
     tag_type = TagTypeFormField()
 
     def __init__(self, *args, **kwargs):
@@ -520,52 +560,3 @@ class BooleanFieldForm(
             "If checked, the form can only be submitted if the "
             "checkbox is checked or the switch set to on."
         )
-
-
-RECAPTCHA_CHOICES = (
-    ("v2-checkbox", _("v2 checkbox")),
-    ("v2-invisible", _("v2 invisible")),
-    ("v3", _("v3")),
-)
-
-
-class CaptchaFieldForm(EntangledModelForm):
-    """
-    reCaptcha Plugin
-    https://github.com/torchbox/django-recaptcha
-    """
-
-    class Meta:
-        model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "captcha_widget",
-                "captcha_requirement",
-                "attributes",
-            ]
-        }
-
-    captcha_widget = forms.ChoiceField(
-        label=_("reCaptcha widget"),
-        required=True,
-        initial="v2-invisible",
-        choices=RECAPTCHA_CHOICES,
-        help_text=mark_safe_lazy(
-            _(
-                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
-            ).format(link="https://developers.google.com/recaptcha")
-        ),
-    )
-
-    captcha_requirement = forms.DecimalField(
-        label=_("Minimum score requirement"),
-        required=True,
-        initial=0.5,
-        min_value=0,
-        max_value=1,
-        help_text=_(
-            "Only for reCaptcha v3: Minimum score required to accept challenge."
-        ),
-    )
-
-    attributes = AttributesFormField()
