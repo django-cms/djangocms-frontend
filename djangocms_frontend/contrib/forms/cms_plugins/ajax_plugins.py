@@ -16,7 +16,7 @@ from djangocms_frontend.contrib import forms as forms_module
 from djangocms_frontend.contrib.forms import forms, models, recaptcha
 from djangocms_frontend.contrib.forms.forms import SimpleFrontendForm
 from djangocms_frontend.contrib.forms.helper import get_option
-from djangocms_frontend.helpers import insert_fields
+from djangocms_frontend.helpers import insert_fields, mark_safe_lazy
 
 
 class CMSAjaxBase(CMSUIPlugin):
@@ -300,6 +300,19 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
                 block=None,
                 position=1,
                 blockname=_("reCaptcha"),
+                blockattrs={}
+                if recaptcha.keys_available
+                else dict(
+                    description=mark_safe_lazy(
+                        _(
+                            '<blockquote style="color: var(--error-fg);">Please get a public and secret '
+                            'key from <a href="{key_link}" target="_blank">Google</a> '
+                            "and ensure that they are available through django settings "
+                            "<code>RECAPTCHA_PUBLIC_KEY</code> and <code>RECAPTCHA_PRIVATE_KEY</code>. "
+                            "Without these keys captcha protection will not work.</blockquote>"
+                        ).format(key_link="https://developers.google.com/recaptcha")
+                    )
+                ),
             )
         return super().get_fieldsets(request, obj)
 
@@ -366,9 +379,9 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     @classmethod
     def get_parent_classes(cls, slot, page, instance=None):
         """Avoid form in a form"""
-        if instance is None:
+        if instance is None or instance.parent is None:
             return super().get_parent_classes(slot, page, instance)
-        parent = instance
+        parent = instance.parent
         while parent is not None:
             if parent.plugin_type == cls.__name__:
                 return [""]
