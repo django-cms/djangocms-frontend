@@ -14,6 +14,11 @@ REQUIREMENTS = [
     "django-entangled==0.4",
 ]
 
+EXTRA_REQUIREMENTS = {
+    "reCaptcha": [
+        "django-recaptcha",
+    ]
+}
 
 CLASSIFIERS = [
     "Development Status :: 4 - Beta",
@@ -53,6 +58,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=REQUIREMENTS,
+    extras_require=EXTRA_REQUIREMENTS,
     classifiers=CLASSIFIERS,
     test_suite="run_tests.run",
 )
