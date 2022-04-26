@@ -5,7 +5,7 @@
               novalidate action="{% url 'dcf_forms:ajaxview' instance.id %}"
               method="post">
             {% csrf_token %}
-            {% include 'djangocms_frontend/ajax_form.html' with form=form instance=instance tracking=instance.tracking_code %}
+            {% include 'djangocms_frontend/ajax_form.html' with form=form instance=instance tracking=instance.tracking_code RECAPTCHA_PUBLIC_KEY=RECAPTCHA_PUBLIC_KEY %}
             {% if instance.form_submit_message %}
                 {% if instance.form_submit_align == "center" %}
                     <div class="text-center">

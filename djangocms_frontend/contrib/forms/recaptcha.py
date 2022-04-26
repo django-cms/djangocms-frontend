@@ -1,3 +1,4 @@
+from django import forms
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
@@ -29,14 +30,12 @@ except ImportError:
 WIDGETS = {
     "v2-checkbox": ReCaptchaV2Checkbox,
     "v2-invisible": ReCaptchaV2Invisible,
-    "v3": ReCaptchaV3,
 }
 
 
 RECAPTCHA_CHOICES = (
     ("v2-checkbox", _("v2 checkbox")),
     ("v2-invisible", _("v2 invisible")),
-    ("v3", _("v3")),
 )
 
 
@@ -71,3 +70,6 @@ installed = installed and (
     and hasattr(settings, "RECAPTCHA_PRIVATE_KEY")
     or True
 )
+
+field_name = "recaptcha_field"
+RECAPTCHA_PUBLIC_KEY = getattr(settings, "RECAPTCHA_PUBLIC_KEY", "")

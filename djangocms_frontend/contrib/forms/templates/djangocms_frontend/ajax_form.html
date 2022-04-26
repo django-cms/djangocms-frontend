@@ -9,7 +9,24 @@
         {% empty %}
             {% render_form form %}
         {% endfor %}
+        {% if instance.child_plugin_instances %}
+            {% if instance.captcha_widget == "v2-checkbox" %}
+                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+            {% elif instance.captcha_widget == "v2-invisible" %}
+                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}" data-size="invisible"></div>
+            {% endif %}
+        {% endif %}
     </div>{% endspaceless %}
+{% if instance.config.captcha_widget %}
+{% addtoblock 'js' %}{% spaceless %}
+    <script type="text/javascript">
+      var reCaptchaOnLoadCallback = function () {
+          window.recaptcha_loaded = true;
+      };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=reCaptchaOnLoadCallback&render=explicit" async defer></script>
+{% endspaceless %}{% endaddtoblock %}
+{% endif %}
 {% addtoblock 'js' %}{% spaceless %}
     <script>
         function djangocmsfrontend_form() {
@@ -79,7 +96,7 @@
             }
 
             let form = $(this);
-            let recaptcha = form.find('.g-recaptcha[data-size="invisible"]');
+            let recaptcha = form.find('.g-recaptcha');
             if (recaptcha.length === 1) {
                 let checkExist = setInterval(function () {
                     if (window.hasOwnProperty("recaptcha_loaded")) {

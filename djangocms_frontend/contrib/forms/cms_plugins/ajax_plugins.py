@@ -334,6 +334,12 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         fields = {}
         traverse(self.instance)
 
+        # Add recaptcha field in necessary
+        if recaptcha.installed and self.instance.config.get("captcha_widget"):
+            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(
+                self.instance.config
+            )
+
         # Collect meta options for Meta class
         meta_options = dict(form_name=self.instance.config.get("form_name", "unset"))
         if self.instance.config.get("form_floating_labels", False):
@@ -350,12 +356,6 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
         meta_options["unique"] = self.instance.config.get("form_unique", False)
         meta_options["form_actions"] = self.instance.config.get("form_actions", [])
         fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
-
-        # Add recaptcha field in necessary
-        if recaptcha.installed and self.instance.config.get("captcha_widget"):
-            fields["recaptcha_field"] = recaptcha.get_recaptcha_field(
-                self.instance.config
-            )
 
         return type(
             "FrontendAutoForm",
@@ -378,4 +378,5 @@ class FormPlugin(mixin_factory("Form"), AttributesMixin, CMSAjaxForm):
     def render(self, context, instance, placeholder):
         self.instance = instance
         instance.add_classes("djangocms-frontend-ajax-form")
+        context["RECAPTCHA_PUBLIC_KEY"] = recaptcha.RECAPTCHA_PUBLIC_KEY
         return super().render(context, instance, placeholder)
