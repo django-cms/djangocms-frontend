@@ -329,13 +329,15 @@ class CaptchaField(FormFieldMixin, FrontendUIItem):
                 if not key.startswith("data-")
             },
         }
+        widget_params["attrs"]["no_field_sep"] = True
         if self.config.get("captcha_widget", "") == "v3":
-            widget_params["attrs"]["required_score"] = (
-                self.config.get("captcha_requirement", 0.5),
+            widget_params["attrs"]["required_score"] = coerce_decimal(
+                self.config.get("captcha_requirement", 0.5)
             )
-        return self.config.get("field_name", self.field_name), ReCaptchaField(
+        field = ReCaptchaField(
             label=self.config.get("field_label", ""),
             widget=self.WIDGETS[self.config.get("captcha_widget", "v2-invisible")](
                 **widget_params,
             ),
         )
+        return self.config.get("field_name", self.field_name), field

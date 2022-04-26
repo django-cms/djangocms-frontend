@@ -1,0 +1,27 @@
+{# The provided implementation caters for only one reCAPTCHA on a page. Override this template and its logic as needed. #}
+<script defer async src="https://{{ recaptcha_domain }}/recaptcha/api.js?render=explicit&onload=onCaptchaLoad{% if api_params %}&{{ api_params }}{% endif %}"></script>
+<script type="text/javascript">
+    // Submit function to be called, after reCAPTCHA was successful.
+    var onSubmit_{{ widget_uuid }} = function(token) {
+        document.querySelector('.g-recaptcha[data-widget-uuid="{{ widget_uuid }}"]').closest('form').submit();
+    };
+
+    var onCaptchaLoad = function() {
+      window.recaptcha_loaded = true;
+    }
+
+    // Helper function to prevent form submission and execute verification.
+    var verifyCaptcha_{{ widget_uuid}} = function(e) {
+        e.preventDefault();
+        grecaptcha.execute();
+    };
+
+    // Bind the helper function to the form submit action.
+    document.addEventListener( 'DOMContentLoaded', function () {
+        var element = document.querySelector('.g-recaptcha[data-widget-uuid="{{ widget_uuid }}"]');
+        var form = element.closest('form');
+        if (!form.action.includes("ajax")) {
+          element.closest('form').addEventListener('submit', verifyCaptcha_{{ widget_uuid}});
+        }
+    });
+</script>

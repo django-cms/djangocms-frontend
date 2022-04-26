@@ -80,7 +80,10 @@ def render_widget(context, form, form_field, **kwargs):
     if field is None:
         return ""
     floating_labels = get_option(form, "floating_labels")
-    field_sep = get_option(form, "field_sep", constants.DEFAULT_FIELD_SEP)
+    if field.field.widget.attrs.pop("no_field_sep", False):
+        field_sep = ""
+    else:
+        field_sep = get_option(form, "field_sep", constants.DEFAULT_FIELD_SEP)
     widget_attr = kwargs
     if form.is_bound:
         add_classes = "is_invalid" if field.errors else "is_valid"
