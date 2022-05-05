@@ -2,7 +2,7 @@
  django CMS Frontend
 #####################
 
-|pypi| |coverage|
+|pypi| |docs| |coverage| |python| |django| |djangocms|
 
 **django CMS Frontend** is a plugin bundle based on
 `djangocms_bootstrap5
@@ -97,8 +97,6 @@ See ``REQUIREMENTS`` in the `setup.py
 <https://github.com/fsbraun/djangocms-frontend/blob/master/setup.py>`_
 file for additional dependencies:
 
-|python| |django| |djangocms|
-
 -  django-cms, version 3.7 or later
 -  django-filer, version 1.7 or later
 -  djangocms-attributes-field, version 1.0 or later
@@ -164,6 +162,10 @@ See readthedocs for the `documentation
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
+
+.. |docs| image:: https://readthedocs.org/projects/djangocms-frontend/badge/?version=latest
+    :target: https://djangocms-frontend.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/fsbraun/djangocms-frontend
