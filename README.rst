@@ -2,14 +2,12 @@
  django CMS Frontend
 #####################
 
-|pypi| |coverage|
+|pypi| |docs| |coverage| |python| |django| |djangocms|
 
-**django CMS Frontend** is a plugin bundle based on
-`djangocms_bootstrap5
-<https://github.com/gl-agnx/djangocms-bootstrap5>`_. Its objective is to
-provide a set of popular frontend components independent of the
-currently used frontend framework such as Bootstrap, or its specific
-version.
+**django CMS Frontend** is a plugin bundle which builds on from & improves
+the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
+Its objective is to provide a set of popular frontend components independent of the
+currently used frontend framework such as Bootstrap, or its specific version.
 
 .. image:: preview.png
 
@@ -19,9 +17,9 @@ version.
 
 -  Support of `Bootstrap 5 <https://getbootstrap.com>`_.
 
--  **Separation of plugins from css framework**, i.e., no need to
+-  **Separation of plugins from css framework**, i.e. no need to
    rebuild you site's plugin tree if css framework is changed in the
-   future, e.g., from Bootstrap 5 to a future version.
+   future, e.g. from Bootstrap 5 to a future version.
 
 -  **New link plugin** allowing to link to internal pages provided by
    other applications, such as `djangocms-blog
@@ -30,11 +28,11 @@ version.
 -  **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
    <https://github.com/django-cms/djangocms-bootstrap4>`_
 
--  Management command to **migrate from djangocms-bootstrap4**. This
-   command automatically migrates all djangocms-bootstrap4 plugins to
-   djangocms-frontend.
+-  A management command to **migrate from djangocms-bootstrap4**. This
+   command automatically migrates all ``djangocms-bootstrap4`` plugins to
+   ``djangocms-frontend``.
 
--  **Extensible** within the project and with separate project (e.g., a
+-  **Extensible** within the project and with separate project (e.g. a
    theme app)
 
 -  **Accordion** plugin
@@ -81,23 +79,18 @@ pull request, please review our `contribution guidelines
 
 We're grateful to all contributors who have helped create and maintain
 this package. Contributors are listed at the `contributors
-<https://github.com/fsbraun/djangocms-frontend/graphs/contributors>`_
+<https://github.com/django-cms/djangocms-frontend/graphs/contributors>`_
 section.
 
-..
-   One of the easiest contributions you can make is helping to translate this addon on
-
-..
-   `Transifex <https://www.transifex.com/projects/p/djangocms-bootstrap5/>`_.
+One of the easiest contributions you can make is helping to translate this addon on
+`Transifex <https://www.transifex.com/divio/djangocms-frontend/dashboard/>`_.
 
 Requirements
 ============
 
 See ``REQUIREMENTS`` in the `setup.py
-<https://github.com/fsbraun/djangocms-frontend/blob/master/setup.py>`_
+<https://github.com/django-cms/djangocms-frontend/blob/master/setup.py>`_
 file for additional dependencies:
-
-|python| |django| |djangocms|
 
 -  django-cms, version 3.7 or later
 -  django-filer, version 1.7 or later
@@ -119,7 +112,7 @@ Installation
 For a manual install:
 
 -  run ``pip install
-   https://github.com/fsbraun/djangocms-frontend/archive/master.zip``
+   https://github.com/django-cms/djangocms-frontend/archive/master.zip``
 
 -  add the following entries to your ``INSTALLED_APPS``:
 
@@ -164,6 +157,10 @@ See readthedocs for the `documentation
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
+
+.. |docs| image:: https://readthedocs.org/projects/djangocms-frontend/badge/?version=latest
+    :target: https://djangocms-frontend.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/fsbraun/djangocms-frontend
