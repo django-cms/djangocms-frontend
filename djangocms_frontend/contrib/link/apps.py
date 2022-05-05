@@ -26,4 +26,3 @@ class LinkConfig(AppConfig):
                 )
             ] + urlconf_module.urlpatterns
             clear_url_caches()
-            print("XXX", urlconf_module.urlpatterns)
