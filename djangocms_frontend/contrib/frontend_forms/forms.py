@@ -5,9 +5,9 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.contrib import forms as forms_module
-from djangocms_frontend.contrib.forms.entry_model import FormEntry
-from djangocms_frontend.contrib.forms.helper import get_option
+from djangocms_frontend.contrib import frontend_forms
+from djangocms_frontend.contrib.frontend_forms.entry_model import FormEntry
+from djangocms_frontend.contrib.frontend_forms.helper import get_option
 from djangocms_frontend.fields import (
     AttributesFormField,
     ButtonGroup,
@@ -20,7 +20,7 @@ from djangocms_frontend.models import FrontendUIItem
 
 from . import _form_registry, actions, constants, get_registered_forms, recaptcha
 
-mixin_factory = settings.get_forms(forms_module)
+mixin_factory = settings.get_forms(frontend_forms)
 
 
 class SimpleFrontendForm(forms.Form):
@@ -167,7 +167,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     )
     captcha_requirement = forms.DecimalField(
         label=_("Minimum score requirement"),
-        required=True,
+        required=recaptcha.installed,
         initial=0.5,
         min_value=0,
         max_value=1,
@@ -260,6 +260,11 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                 code="inconsistent",
             )
         return self.cleaned_data
+
+    def is_valid(self):
+        valid = super().is_valid()
+        print("XXX", self.errors, self.non_field_errors())
+        return valid
 
 
 FORBIDDEN_FORM_NAMES = [

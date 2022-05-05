@@ -5,7 +5,7 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import djangocms_frontend.contrib.forms.models
+import djangocms_frontend.contrib.frontend_forms.models
 
 
 class Migration(migrations.Migration):
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -95,7 +95,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -149,7 +149,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -163,7 +163,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -177,7 +177,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -191,7 +191,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -205,7 +205,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -219,7 +219,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -233,7 +233,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -247,7 +247,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),
@@ -261,7 +261,7 @@ class Migration(migrations.Migration):
                 "constraints": [],
             },
             bases=(
-                djangocms_frontend.contrib.forms.models.FormFieldMixin,
+                djangocms_frontend.contrib.frontend_forms.models.FormFieldMixin,
                 "djangocms_frontend.frontenduiitem",
             ),
         ),

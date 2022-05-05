@@ -1,3 +1,0 @@
-{% load i18n %}{% trans "Message from" %}: {{ email }}
-
-{{ content|safe }}

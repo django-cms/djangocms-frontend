@@ -3,8 +3,8 @@ from django.apps import apps
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
 
-from djangocms_frontend.contrib.forms import constants
-from djangocms_frontend.contrib.forms.helper import get_option
+from djangocms_frontend.contrib.frontend_forms import constants
+from djangocms_frontend.contrib.frontend_forms.helper import get_option
 from djangocms_frontend.settings import FORM_TEMPLATE
 
 register = template.Library()
