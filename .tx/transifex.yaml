@@ -1,0 +1,7 @@
+git:
+  filters:
+  - filter_type: file
+    file_format: PO
+    source_file: djangocms_frontend/locale/en/LC_MESSAGES/django.po
+    source_language: en
+    translation_files_expression: 'djangocms_frontend/locale/<lang>/LC_MESSAGES/django.po'
