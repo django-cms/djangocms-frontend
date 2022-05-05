@@ -218,7 +218,7 @@ Next, you add some fields to the ``GridContainerForm`` (in
     from django.db.models import ManyToOneRel
     from django.utils.translation import gettext as _
     from djangocms_frontend import settings
-    from entangled.forms import EntangledModelFormMixin
+    from entangled.frontend_forms import EntangledModelFormMixin
     from filer.fields.image import AdminImageFormField, FilerImageField
     from filer.models import Image
 

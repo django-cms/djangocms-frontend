@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 
 framework = importlib.import_module(
-    f"djangocms_frontend.contrib.forms.frontends.{settings.framework}",
+    f"djangocms_frontend.contrib.frontend_forms.frontends.{settings.framework}",
 )
 
 default_attr = framework.default_attr  # NOQA

@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
-from djangocms_frontend.contrib.forms import forms, models
+from djangocms_frontend.contrib.frontend_forms import forms, models
 from djangocms_frontend.helpers import add_plugin, delete_plugin, insert_fields
 
 from .. import forms as forms_module

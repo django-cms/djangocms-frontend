@@ -37,8 +37,11 @@ version.
 -  **Extensible** within the project and with separate project (e.g., a
    theme app)
 
--  **Accordion** plugin and simple **forms** plugin w/ Bootstrap-styled
-   forms on your cms page.
+-  **Accordion** plugin
+
+-  **Forms** plugin for Bootstrap-styled forms on your cms page. Use django-cms'
+   versatile plugin system to generate your own forms.
+
 
 *************
  Description
@@ -68,23 +71,13 @@ mail me at fsbraun(at)gmx.de
 
 Also, all contributions are welcome.
 
-..
-   Contributing
+Contributing
+============
 
-..
-   ============
-
-..
-   This is a an open-source project. We'll be delighted to receive your
-
-..
-   feedback in the form of issues and pull requests. Before submitting your
-
-..
-   pull request, please review our `contribution guidelines
-
-..
-   <http://docs.django-cms.org/en/latest/contributing/index.html>`_.
+This is a an open-source project. We'll be delighted to receive your
+feedback in the form of issues and pull requests. Before submitting your
+pull request, please review our `contribution guidelines
+<http://docs.django-cms.org/en/latest/contributing/index.html>`_.
 
 We're grateful to all contributors who have helped create and maintain
 this package. Contributors are listed at the `contributors
@@ -142,6 +135,7 @@ For a manual install:
       'djangocms_frontend.contrib.carousel',
       'djangocms_frontend.contrib.collapse',
       'djangocms_frontend.contrib.content',
+      'djangocms_frontend.contrib.frontend_forms',
       'djangocms_frontend.contrib.grid',
       'djangocms_frontend.contrib.image',
       'djangocms_frontend.contrib.jumbotron',
@@ -156,6 +150,10 @@ For a manual install:
 If you use **Django < 3.2** please also add ``django-jsonfield-backport`` to
 your ``requirements.txt`` and ``django_jsonfield_backport`` to your
 ``INSTALLED_APPS`` list.
+
+To use the forms app ``djangocms_frontend.contrib.frontend_forms`` you will have to have
+jQuery installed in your project. ``djangocms_frontend`` does not include
+jQuery.
 
 
 Documentation

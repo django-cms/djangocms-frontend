@@ -2,17 +2,6 @@ import hashlib
 
 from django.utils.translation import gettext_lazy as _
 
-
-class FormsSite:
-    @property
-    def urls(self):
-        from .urls import urls
-
-        return urls
-
-
-site = FormsSite()
-
 _form_registry = {}
 
 
@@ -40,10 +29,10 @@ def get_registered_forms():
 
 def register_with_frontend(form_class):
     """Function to call or decorator for a Form class to make it available for the
-    djangocms_frontend.contrib.forms plugin"""
+    djangocms_frontend.contrib.frontend_forms plugin"""
     hash = hashlib.sha1(form_class.__name__.encode("utf-8")).hexdigest()
     _form_registry.update({hash: form_class})
     return form_class
 
 
-__all__ = ["site", "register_with_frontend", "get_registered_forms"]
+__all__ = ["register_with_frontend", "get_registered_forms"]

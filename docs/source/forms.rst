@@ -35,8 +35,9 @@ There are two different ways to manage forms with **djangocms-frontend**:
    their alias.
 
 2. **Registering an application-specific form with djangocms-frontend.** If you
-   already have forms you may register them with djangecms-frontend and allow
-   editors to use them in the form plugin. If you use **django-crispy-forms**
+   already have forms you may register them with djangocms-frontend and allow
+   editors to use them in the form plugin. If you use
+   `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
    all form layouts will be retained. If you only have simpler design
    requirements, **djangocms-frontend** allows you to use fieldsets as with
    admin forms.
@@ -101,7 +102,7 @@ Registration is can simply be done by a decorator or function call:
 .. code:: python
 
     from django import forms
-    from djangocms_frontend.contrib.forms import register_with_frontend
+    from djangocms_frontend.contrib.frontend_forms import register_with_frontend
 
     @register_with_frontend
     class MyCoolForm(forms.Form):
@@ -120,13 +121,13 @@ There are three ways **djangocms-frontend** can render registered forms:
    only advisable for very simple forms (e.g. a contact form with name, email,
    and text body).
 
-2. **Adding a ``fieldsets`` argument to the form**: The ``fieldsets`` work as you
+2. **Adding a fieldsets argument to the form**: The ``fieldsets`` work as you
    know them from ``ModelAdmin``. See `Django documentation
    <https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets>`_.
    This may be the most convenient way of building not-too-complex forms.
    **djangocms-frontend** uses the grid system to generate the form layout.
 
-3. **Using the third party package `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_**:
+3. **Using the third party package** `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_:
    If installed and the form has a property ``helper`` the form is automatically
    rendered using **django-crispy-forms**. Note, however, that the submit button
    is rendered by the plugin. Hence do not include it into the form (which is

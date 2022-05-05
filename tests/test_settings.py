@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.carousel",
     "djangocms_frontend.contrib.collapse",
     "djangocms_frontend.contrib.content",
-    "djangocms_frontend.contrib.forms",
+    "djangocms_frontend.contrib.frontend_forms",
     "djangocms_frontend.contrib.grid",
     "djangocms_frontend.contrib.jumbotron",
     "djangocms_frontend.contrib.link",

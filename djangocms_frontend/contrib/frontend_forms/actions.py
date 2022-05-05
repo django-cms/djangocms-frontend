@@ -23,12 +23,12 @@ def get_registered_actions():
 
 def register(action_class):
     """Function to call or decorator for an Action class to make it available for the
-    djangocms_frontend.contrib.forms plugin"""
+    djangocms_frontend.contrib.frontend_forms plugin"""
 
     if not issubclass(action_class, FormAction):
         raise ImproperlyConfigured(
-            "djangocms_frontend.contrib.forms.actions.register only "
-            "accets subclasses of djangocms_frontend.contrib.forms.actions.FormAction"
+            "djangocms_frontend.contrib.frontend_forms.actions.register only "
+            "accets subclasses of djangocms_frontend.contrib.frontend_forms.actions.FormAction"
         )
     if not action_class.verbose_name:
         raise ImproperlyConfigured(

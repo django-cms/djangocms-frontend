@@ -12,10 +12,10 @@ from sekizai.context import SekizaiContext
 from djangocms_frontend import settings
 from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.common.attributes import AttributesMixin
-from djangocms_frontend.contrib import forms as forms_module
-from djangocms_frontend.contrib.forms import forms, models, recaptcha
-from djangocms_frontend.contrib.forms.forms import SimpleFrontendForm
-from djangocms_frontend.contrib.forms.helper import get_option
+from djangocms_frontend.contrib import frontend_forms as forms_module
+from djangocms_frontend.contrib.frontend_forms import forms, models, recaptcha
+from djangocms_frontend.contrib.frontend_forms.forms import SimpleFrontendForm
+from djangocms_frontend.contrib.frontend_forms.helper import get_option
 from djangocms_frontend.helpers import insert_fields, mark_safe_lazy
 
 

@@ -2,8 +2,14 @@
 Changelog
 =========
 
-unreleased
-==========
+0.9.1
+=====
+
+* Added forms app
+* Several bux fixes
+
+0.9.0
+=====
 
 * Added shadow options for containers, cards, alerts, ...
 * Added background color and opacity options for containers and cards
