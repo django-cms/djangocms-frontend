@@ -2,10 +2,8 @@
 branch = True
 source = djangocms_frontend
 omit =
-    djangocms_frontend/contrib/forms/*
     djangocms_frontend/migrations/*
     djangocms_frontend/management/*
-    djangocms_frontend/contrib/contact_form/*
     */foundation6.py
     tests/*
 
