@@ -75,6 +75,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
         untangled_fields = ()
 
     start_level = forms.IntegerField(
+        label=_("Start level"),
         initial=0,
         help_text=_("Start level for the menu tag")
     )
