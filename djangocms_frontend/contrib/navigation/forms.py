@@ -67,11 +67,17 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "start_level",
                 "template",
                 "attributes",
             ]
         }
         untangled_fields = ()
+
+    start_level = forms.IntegerField(
+        initial=0,
+        help_text=_("Start level for the menu tag")
+    )
 
     template = forms.ChoiceField(
         label=_("Template"),

@@ -75,7 +75,7 @@ class PageTreePlugin(
     fieldsets = [
         (
             None,
-            {"fields": ("template",)},
+            {"fields": ("start_level", "template",)},
         ),
     ]
 
@@ -83,6 +83,10 @@ class PageTreePlugin(
         return get_plugin_template(
             instance, "navigation", "page_tree", settings.NAVIGATION_TEMPLATE_CHOICES
         )
+
+    def render(self, context, instance, placeholder):
+        context['start_level'] = instance.config.get("start_level", 0)
+        return super().render(context, instance, placeholder)
 
 
 @plugin_pool.register_plugin
