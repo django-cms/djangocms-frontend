@@ -140,7 +140,7 @@ class NavContainerPlugin(
     fieldsets = [
         (
             None,
-            {"fields": ()},
+            {"fields": ("template",)},
         ),
     ]
 
