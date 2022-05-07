@@ -118,4 +118,3 @@ class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
 
 class NavLinkForm(mixin_factory("NavLink"), LinkForm):
     link_is_optional = True
-    pass
