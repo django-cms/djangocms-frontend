@@ -67,11 +67,18 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "start_level",
                 "template",
                 "attributes",
             ]
         }
         untangled_fields = ()
+
+    start_level = forms.IntegerField(
+        label=_("Start level"),
+        initial=0,
+        help_text=_("Start level for the menu tag")
+    )
 
     template = forms.ChoiceField(
         label=_("Template"),
@@ -108,11 +115,20 @@ class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
         model = FrontendUIItem
         entangled_fields = {
             "config": [
+                "template",
                 "attributes",
             ]
         }
         untangled_fields = ()
 
+    template = forms.ChoiceField(
+        label=_("Template"),
+        choices=settings.NAVIGATION_TEMPLATE_CHOICES,
+        initial=first_choice(settings.NAVIGATION_TEMPLATE_CHOICES),
+        widget=forms.HiddenInput
+        if len(settings.NAVIGATION_TEMPLATE_CHOICES) < 2
+        else forms.Select,
+    )
     attributes = AttributesFormField()
 
 

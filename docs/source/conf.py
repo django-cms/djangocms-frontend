@@ -12,7 +12,6 @@
 # serve to show the default.
 
 # fmt: off
-import os
 import sys
 from pathlib import Path
 
