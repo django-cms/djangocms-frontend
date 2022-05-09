@@ -5,12 +5,14 @@ from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
-from ...helpers import get_plugin_template
+from ...helpers import first_choice, get_plugin_template, get_template_path
 from .. import navigation
 from ..link.cms_plugins import LinkPlugin, LinkPluginMixin
 from . import forms, models
 
 mixin_factory = settings.get_renderer(navigation)
+
+default_template = first_choice(settings.NAVIGATION_TEMPLATE_CHOICES)
 
 
 @plugin_pool.register_plugin
@@ -58,6 +60,10 @@ class NavigationPlugin(
             instance, "navigation", "navigation", settings.NAVIGATION_TEMPLATE_CHOICES
         )
 
+    def render(self, context, instance, placeholder):
+        context["nav_template"] = instance.config.get("template", default_template)
+        return super().render(context, instance, placeholder)
+
 
 @plugin_pool.register_plugin
 class PageTreePlugin(
@@ -75,17 +81,17 @@ class PageTreePlugin(
     fieldsets = [
         (
             None,
-            {"fields": ("start_level", "template",)},
+            {"fields": ("start_level",)},
         ),
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "navigation", "page_tree", settings.NAVIGATION_TEMPLATE_CHOICES
+        return get_template_path(
+            "navigation", context.get("nav_template", default_template), "page_tree"
         )
 
     def render(self, context, instance, placeholder):
-        context['start_level'] = instance.config.get("start_level", 0)
+        context["start_level"] = instance.config.get("start_level", 0)
         return super().render(context, instance, placeholder)
 
 
@@ -113,8 +119,8 @@ class NavBrandPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "navigation", "brand", settings.NAVIGATION_TEMPLATE_CHOICES
+        return get_template_path(
+            "navigation", context.get("nav_template", default_template), "brand"
         )
 
 
@@ -140,16 +146,13 @@ class NavContainerPlugin(
     fieldsets = [
         (
             None,
-            {"fields": ("template",)},
+            {"fields": ()},
         ),
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance,
-            "navigation",
-            "nav_container",
-            settings.NAVIGATION_TEMPLATE_CHOICES,
+        return get_template_path(
+            "navigation", context.get("nav_template", default_template), "nav_container"
         )
 
 
@@ -173,6 +176,6 @@ class NavLinkPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "navigation", "link", settings.NAVIGATION_TEMPLATE_CHOICES
+        return get_template_path(
+            "navigation", context.get("nav_template", default_template), "link"
         )

@@ -1,0 +1,6 @@
+{% load cms_tags sekizai_tags %}{% spaceless %}{% with link=instance.get_link %}{% if link %}<a {{ instance.get_attributes }} href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{% else %}    <{{ instance.tag_type }}{{ instance.get_attributes }}>{% endif %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+    {% empty %}{{ instance.simple_content }}{% endfor %}
+{% if link %}</a>{% else %}</{{ instance.tag_type }}>{% endif %}{% endwith %}
+{% endspaceless %}
