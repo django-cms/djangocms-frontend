@@ -1,0 +1,14 @@
+{% load cms_tags i18n menu_tags %}{% spaceless %}
+    <ul {{ instance.get_attributes }}>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button"
+               data-bs-toggle="dropdown" href="#"
+               id="menu-{{instance.id}}">{{ instance.title }}</a>
+                <div class="dropdown-menu" aria-labelledby="menu-{{instance.id}}">
+                    {% for plugin in instance.child_plugin_instances %}
+                        {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+                    {% endfor %}
+                </div>
+        </li>
+    </ul>
+{% endspaceless %}

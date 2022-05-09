@@ -70,6 +70,7 @@ NAVIGATION_TEMPLATE_CHOICES = getattr(
     "DJANGOCMS_FRONTEND_NAVIGATION_TEMPLATE_CHOICES",
     [
         ("default", _("Default")),
+        ("offcanvas", _("Offcanvas")),
     ],
 )
 

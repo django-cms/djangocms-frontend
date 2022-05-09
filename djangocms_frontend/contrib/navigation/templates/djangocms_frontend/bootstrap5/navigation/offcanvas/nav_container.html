@@ -1,0 +1,17 @@
+{% load cms_tags frontend %}{% spaceless %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#nav{{ instance.id|safe }}" aria-controls="nav{{ instance.id|safe }}" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" id="nav{{ instance.id|safe }}">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+               {% for plugin in instance.child_plugin_instances %}
+                   {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+               {% endfor %}
+           </ul>
+        </div>
+    </div>
+ {% endspaceless %}
