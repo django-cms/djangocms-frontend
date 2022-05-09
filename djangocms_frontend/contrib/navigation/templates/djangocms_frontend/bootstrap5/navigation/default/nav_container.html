@@ -2,11 +2,11 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav{{ instance.id|safe }}" aria-controls="nav{{ instance.id|safe }}" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="nav{{ instance.id|safe }}">
-        <ul class="navbar-nav">
+   <div class="collapse navbar-collapse" id="nav{{ instance.id|safe }}">
+       <ul class="navbar-nav">
            {% for plugin in instance.child_plugin_instances %}
                {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
            {% endfor %}
-        </ul>
+       </ul>
     </div>
 {% endspaceless %}

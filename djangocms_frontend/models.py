@@ -70,8 +70,10 @@ class FrontendUIItem(CMSPlugin):
         self.ui_item = self.__class__.__name__
         return super().save(*args, **kwargs)
 
-    def initialize_from_form(self, form):
+    def initialize_from_form(self, form=None):
         """Populates the config JSON field based on initial values provided by the fields of form"""
+        if form is None:
+            form = self.get_plugin_class().form
         if isinstance(form, type):  # if is class
             form = form()  # instantiate
         entangled_fields = getattr(

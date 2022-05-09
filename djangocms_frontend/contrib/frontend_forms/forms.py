@@ -46,13 +46,14 @@ class SimpleFrontendForm(forms.Form):
 
     def save(self):
         results = {}
-        for action in get_option(self, "form_actions", []):
+        form_actions = get_option(self, "form_actions", [])
+        for action in form_actions:
             Action = actions.get_action_class(action)
             if Action is not None:
                 results[action] = Action().execute(self, self._request)
             else:
                 results[action] = _("Action not available any more")
-        else:
+        if not form_actions:
             results[None] = _("No action registered")
 
 
