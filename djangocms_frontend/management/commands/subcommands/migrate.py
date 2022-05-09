@@ -101,7 +101,9 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                 # Copy any many to many field after save:`new_plugin.many2many.set(old_plugin.many2many.all())`
         else:
             print(f"{old_app} not installed.")
-    print()
+    if cnt:
+        print(f"Migrated {cnt} plugins.")
+    return cnt
 
 
 blog_example = """
@@ -138,17 +140,39 @@ class Migrate(SubcommandsCommand):
     command_name = "migrate"
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.SUCCESS("Migrating plugins"))
-        migrate_to_djangocms_frontend(apps, None)
-        self.stdout.write(self.style.SUCCESS("Successfully migrated plugins"))
-        self.stdout.write()
+        self.migrate_to_djangocms_frontend()
         if getattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS", None) is None:
             self.check_for_link_targets()
 
+    def migrate_to_djangocms_frontend(self):
+        from cms.models.pluginmodel import CMSPlugin
+        self.stdout.write(self.style.SUCCESS("Migrating plugins"))
+        self.stdout.write(self.style.SUCCESS("================="))
+        changes = migrate_to_djangocms_frontend(apps, None)
+        not_migrated = []
+        for plugin in CMSPlugin.objects.all():
+            if "Bootstrap4" in plugin.plugin_type:
+                if plugin.plugin_type not in not_migrated:
+                    not_migrated.append(plugin.plugin_type)
+                    self.stdout.write(
+                        self.style.WARNING(f"{plugin.plugin_type} not migrated.")
+                    )
+        if not not_migrated:
+            if changes:
+                self.stdout.write(self.style.SUCCESS("Successfully migrated plugins."))
+            else:
+                self.stdout.write("Nothing to migrate")
+
     def check_for_link_targets(self):
+        self.stdout.write()
         self.stdout.write(
             self.style.SUCCESS(
                 "Checking installed apps for potential link destinations"
+            )
+        )
+        self.stdout.write(
+            self.style.SUCCESS(
+                "======================================================="
             )
         )
         blog = False
@@ -175,8 +199,4 @@ class Migrate(SubcommandsCommand):
                 self.stdout.write(self.style.WARNING(doc_reference))
 
         else:
-            self.stdout.write(
-                self.style.SUCCESS(
-                    "No further link destinations found. Setup complete."
-                )
-            )
+            self.stdout.write("No further link destinations found. Setup complete.")
