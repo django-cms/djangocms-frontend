@@ -58,7 +58,7 @@ plugin_migrations = {
         "M002",  # ResponsiveMixin
         "M003",  # BackgroundMixin
     ],
-    # carousel
+    # collapse
     "bootstrap4_collapse.Bootstrap4Collapse -> collapse.Collapse": [
         "siblings",
         "tag_type",
@@ -250,6 +250,28 @@ plugin_migrations = {
         "space_sides",
         "space_device",
         "space_size",
+        "tag_type",
+        "attributes",
+        "P001",
+    ],
+    "bootstrap4_carousel.Bootstrap4Carousel -> carousel.Carousel": [
+        "template",
+        "carousel_interval",
+        "carousel_controls",
+        "carousel_indicators",
+        "carousel_keyboard",
+        "carousel_pause",
+        "carousel_ride",
+        "carousel_wrap",
+        "carousel_aspect_ratio",
+        "tag_type",
+        "attributes",
+        "P001",
+    ],
+    "bootstrap4_carousel.Bootstrap4CarouselSlide -> carousel.CarouselSlide": [
+        "template",
+        "carousel_image",
+        "carousel_content",
         "tag_type",
         "attributes",
         "P001",
