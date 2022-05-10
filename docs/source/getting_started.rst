@@ -278,11 +278,44 @@ djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
 
 .. code::
 
+   ./manage.py cms delete-orphaned-plugins
    ./manage.py frontend migrate
 
-After you finish the migration you can remove all djangocms-bootstrap4
-apps from ``INSTALLED_APPS`` and you may delete the now empty database
-tables of djangocms-bootstrap4. You identify them by their name pattern:
+The migration process displays a counter indicating how many plugins were
+converted (an integer like `2133` depending how many bootstrap4 plugins you have.):
+
+        Migrating plugins
+        =================
+        Migrated 2133 plugins.
+        Successfully migrated plugins.
+
+        Checking installed apps for potential link destinations
+        =======================================================
+        No further link destinations found. Setup complete.
+
+In the case that no plugins were migrated the output looks very similar but does
+not contain the counter.
+
+        Migrating plugins
+        =================
+        Nothing to migrate
+
+        Checking installed apps for potential link destinations
+        =======================================================
+        No further link destinations found. Setup complete.
+
+Only plugins managed by apps listed in ``INSTALLED_APPS`` will be migrated.
+
+.. warning::
+
+    Spin up your development server and test at this point if the migration
+    has succeeded. Open a former djangocms-bootstrap4 plugin and check that
+    it has the appearance of a dajngocms-frontend plugin.
+
+Therefore only after you finish the migration you can remove all
+djangocms-bootstrap4 apps from ``INSTALLED_APPS`` and you may delete the now
+empty database tables of djangocms-bootstrap4. You identify them by their
+name pattern:
 
 .. code::
 
