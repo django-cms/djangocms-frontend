@@ -281,7 +281,7 @@ djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
    ./manage.py cms delete-orphaned-plugins
    ./manage.py frontend migrate
 
-The migration process display a counter indicating how many plugins were
+The migration process displays a counter indicating how many plugins were
 converted (an integer like `2133` depending how many bootstrap4 plugins you have.):
 
         Migrating plugins
