@@ -20,7 +20,7 @@ EXTRA_REQUIREMENTS = {
     "djangocms-icon": [
         "djangocms-icon>=1.4.0",
     ],
-    "full": [  # All of the above
+    "all": [  # All of the above
         "django-recaptcha",
         "djangocms-icon>=1.4.0",
     ]
