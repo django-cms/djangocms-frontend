@@ -9,7 +9,6 @@ REQUIREMENTS = [
     "django-filer>=1.7",
     "djangocms-attributes-field>=1",
     "djangocms-text-ckeditor>=3.1.0",
-    "djangocms-icon>=1.4.0",
     "django-select2",
     "django-entangled==0.4",
 ]
@@ -17,6 +16,13 @@ REQUIREMENTS = [
 EXTRA_REQUIREMENTS = {
     "reCaptcha": [
         "django-recaptcha",
+    ],
+    "djangocms-icon": [
+        "djangocms-icon>=1.4.0",
+    ],
+    "full": [  # All of the above
+        "django-recaptcha",
+        "djangocms-icon>=1.4.0",
     ]
 }
 
