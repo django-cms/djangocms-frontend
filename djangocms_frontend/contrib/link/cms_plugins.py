@@ -85,7 +85,6 @@ class LinkPluginMixin:
         return fieldsets
 
 
-@plugin_pool.register_plugin
 class LinkPlugin(
     mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin
 ):
@@ -108,3 +107,8 @@ class LinkPlugin(
         return get_plugin_template(
             instance, "link", "link", settings.LINK_TEMPLATE_CHOICES
         )
+
+
+if "djangocms_frontend.contrib.link" in settings.settings.INSTALLED_APPS:
+    #  Only register plugin if in INSTALLED_APPS
+    plugin_pool.register(LinkPlugin)
