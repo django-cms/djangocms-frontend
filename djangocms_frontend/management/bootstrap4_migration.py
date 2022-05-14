@@ -323,8 +323,8 @@ def p001_left_right_migration(obj, new_obj):
 
 def x002_replace_card_deck(obj, new_obj):
     if obj.card_type == "card-deck":
-        print("* Detected bootstrap v4 card-deck which is not part of bootstrap5")
-        print("  Replaced it with Card Layout, grid cards")
+        print("=> Detected bootstrap v4 card-deck which is not part of bootstrap5")
+        print("   Replaced it with Card Layout, grid cards")
         new_obj.config["card_type"] = "row"
     if obj.card_type == "card-deck" or obj.card_type == "card-group":
         new_obj.plugin_type = "CardLayoutPlugin"
@@ -481,10 +481,11 @@ def t001_template(obj, new_obj, bs4_setting, dcf_setting):
     BS4 = getattr(django_setting, bs4_setting, ())
     DCF = getattr(django_setting, dcf_setting, ())
     if not in_choices(obj.template, BS4):
-        print(f"* Template '{obj.template}' in {obj.plugin_type}")
-        print(f"  but not declared in {bs4_setting}")
+        print(f"=> Template '{obj.template}' in {obj.plugin_type} (id: {obj.id})")
+        print(f"   but not declared in {bs4_setting}")
+        print("   You will be able to edit the plugin but up saving the template will be changed.")
         if not DCF and bs4_setting != dcf_setting:
-            print(f"  Remember to put {dcf_setting} in your settings.py")
+            print(f"   Remember to put {dcf_setting} in your settings.py")
 
 
 data_migration = {
