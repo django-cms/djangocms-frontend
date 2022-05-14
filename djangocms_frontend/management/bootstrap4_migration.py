@@ -1,3 +1,4 @@
+from django.conf import settings as django_setting
 from djangocms_bootstrap4.constants import DEVICE_SIZES
 
 from djangocms_frontend import settings
@@ -175,6 +176,7 @@ plugin_migrations = {
         "P001",
         "M001-m",  # SpacingMixin
         "M001-p",  # SpacingMixin
+        "T001_LINK",
     ],
     "bootstrap4_listgroup.Bootstrap4ListGroup -> listgroup.ListGroup": [
         "list_group_flush",
@@ -227,6 +229,7 @@ plugin_migrations = {
         "A001_picture",  # fix alignment
         "M001-m",  # MarginMixin
         "M002",  # ResponsiveMixin
+        "T001_PICTURE",
     ],
     "bootstrap4_tabs.Bootstrap4Tab -> tabs.Tab": [
         "template",
@@ -237,6 +240,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "T001_TABS",
     ],
     "bootstrap4_tabs.Bootstrap4TabItem -> tabs.TabItem": [
         "tab_title",
@@ -267,6 +271,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "T001_CAROUSEL",
     ],
     "bootstrap4_carousel.Bootstrap4CarouselSlide -> carousel.CarouselSlide": [
         "template",
@@ -279,6 +284,7 @@ plugin_migrations = {
         "tag_type",
         "attributes",
         "P001",
+        "T001_CAROUSEL_SLIDE",
     ],
 }
 
@@ -458,6 +464,31 @@ def g001_col_text_alignment(obj, new_obj):
         new_obj.config["attributes"].pop("class")
 
 
+def in_choices(choice, choices):
+    for key, value in choices:
+        if isinstance(value, (tuple, list)):
+            if in_choices(choice, value):
+                return True
+        else:
+            if key == choice:
+                return True
+    return False
+
+
+def t001_template(obj, new_obj, bs4_setting, dcf_setting):
+    if obj.template == "default":
+        return
+    BS4 = getattr(django_setting, bs4_setting, ())
+    DCF = getattr(django_setting, dcf_setting, ())
+    if not in_choices(obj.template, BS4):
+        print(
+            f"* WARNING: Template '{obj.template}' in {obj.plugin_type} "
+            f"           but not declared in {bs4_setting}"
+        )
+        if not DCF and bs4_setting != dcf_setting:
+            print(f"           Remember to put {dcf_setting} in your settings.py")
+
+
 data_migration = {
     "P001": p001_left_right_migration,
     "X002": x002_replace_card_deck,
@@ -471,4 +502,19 @@ data_migration = {
     "M001-p": lambda x, y: m001_spacing_mixin(x, y, "padding"),
     "M002": m002_responsive_mixin,
     "M003": m003_background_mixin,
+    "T001_PICTURE": lambda x, y: t001_template(
+        x, y, "DJANGOCMS_PICTURE_TEMPLATES", "DJANGOCMS_PICTURE_TEMPLATES"
+    ),
+    "T001_LINK": lambda x, y: t001_template(
+        x, y, "DJANGOCMS_LINK_TEMPLATES", "DJANGOCMS_LINK_TEMPLATES"
+    ),
+    "T001_TABS": lambda x, y: t001_template(
+        x, y, "DJANGOCMS_BOOTSTRAP4_TAB_TEMPLATES", "DJANGOCMS_FRONTEND_TAB_TEMPLATES"
+    ),
+    "T001_CAROUSEL": lambda x, y: t001_template(
+        x, y, "DJANGOCMS_BOOTSTRAP4_CAROUSEL_TEMPLATES", "DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES"
+    ),
+    "T001_CAROUSEL_SLIDE": lambda x, y: t001_template(
+        x, y, "DJANGOCMS_BOOTSTRAP4_CAROUSEL_TEMPLATES", "DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES"
+    ),
 }
