@@ -481,12 +481,10 @@ def t001_template(obj, new_obj, bs4_setting, dcf_setting):
     BS4 = getattr(django_setting, bs4_setting, ())
     DCF = getattr(django_setting, dcf_setting, ())
     if not in_choices(obj.template, BS4):
-        print(
-            f"* WARNING: Template '{obj.template}' in {obj.plugin_type} "
-            f"           but not declared in {bs4_setting}"
-        )
+        print(f"* Template '{obj.template}' in {obj.plugin_type}")
+        print(f"  but not declared in {bs4_setting}")
         if not DCF and bs4_setting != dcf_setting:
-            print(f"           Remember to put {dcf_setting} in your settings.py")
+            print(f"  Remember to put {dcf_setting} in your settings.py")
 
 
 data_migration = {
