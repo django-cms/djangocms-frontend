@@ -110,6 +110,8 @@ blog_example = """
 You have djangocms_blog installed. Consider adding the following
 lines to your settings.py:
 
+    from django.utils.translation import getext_lazy as _
+
     DJANGOCMS_FRONTEND_LINK_MODELS = [
         {
             "type": _("Blog pages"),

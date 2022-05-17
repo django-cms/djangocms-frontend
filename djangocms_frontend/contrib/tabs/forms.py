@@ -4,7 +4,13 @@ from entangled.forms import EntangledModelForm
 
 from ... import settings
 from ...common.spacing import PaddingFormMixin
-from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField
+from ...fields import (
+    AttributesFormField,
+    ButtonGroup,
+    IconGroup,
+    TagTypeFormField,
+    TemplateChoiceMixin,
+)
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .constants import (
@@ -15,7 +21,7 @@ from .constants import (
 )
 
 
-class TabForm(EntangledModelForm):
+class TabForm(TemplateChoiceMixin, EntangledModelForm):
     """
     Components > "Navs - Tab" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/
@@ -40,7 +46,6 @@ class TabForm(EntangledModelForm):
         choices=TAB_TEMPLATE_CHOICES,
         initial=first_choice(TAB_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
-        widget=forms.HiddenInput if len(TAB_TEMPLATE_CHOICES) < 2 else forms.Select,
     )
     tab_type = forms.ChoiceField(
         label=_("Type"),

@@ -9,6 +9,22 @@ from . import settings
 from .helpers import first_choice
 
 
+class TemplateChoiceMixin:
+    """Mixin that hides the template field if only one template is available and is selected"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if "template" in self.fields:
+            template_field = self.fields["template"]
+            choices = template_field.choices
+            instance = kwargs.get("instance", None)
+            if len(choices) == 1 and (
+                instance is None
+                or instance.config.get("template", "") == choices[0][0]
+            ):
+                template_field.widget = forms.HiddenInput()
+
+
 class ButtonGroup(forms.RadioSelect):
     template_name = "djangocms_frontend/admin/widgets/button_group.html"
     option_template_name = "djangocms_frontend/admin/widgets/button_group_option.html"
