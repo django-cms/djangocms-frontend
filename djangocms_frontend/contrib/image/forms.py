@@ -10,7 +10,7 @@ from djangocms_frontend import settings
 
 from ...common.responsive import ResponsiveFormMixin
 from ...common.spacing import MarginFormMixin
-from ...fields import AttributesFormField, TagTypeFormField
+from ...fields import AttributesFormField, TagTypeFormField, TemplateChoiceMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
@@ -61,6 +61,7 @@ RESPONSIVE_IMAGE_CHOICES = (
 
 
 class ImageForm(
+    TemplateChoiceMixin,
     AbstractLinkForm, ResponsiveFormMixin, MarginFormMixin, EntangledModelForm
 ):
     """
@@ -100,7 +101,6 @@ class ImageForm(
         label=_("Template"),
         choices=get_templates(),
         initial=first_choice(get_templates()),
-        widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     picture = AdminImageFormField(
         rel=ManyToOneRel(FilerImageField, Image, "id"),

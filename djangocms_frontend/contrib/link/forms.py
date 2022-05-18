@@ -23,6 +23,7 @@ from ...fields import (
     ButtonGroup,
     ColoredButtonGroup,
     TagTypeFormField,
+    TemplateChoiceMixin,
 )
 from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
@@ -297,7 +298,7 @@ else:
                         )
 
 
-class LinkForm(SpacingFormMixin, AbstractLinkForm):
+class LinkForm(SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -325,7 +326,6 @@ class LinkForm(SpacingFormMixin, AbstractLinkForm):
         label=_("Template"),
         choices=get_templates(),
         initial=first_choice(get_templates()),
-        widget=forms.HiddenInput if len(get_templates()) < 2 else forms.Select,
     )
     link_stretched = forms.BooleanField(
         label=_("Stretch link"),
