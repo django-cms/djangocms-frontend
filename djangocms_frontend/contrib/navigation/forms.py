@@ -6,7 +6,12 @@ from djangocms_frontend import settings
 from djangocms_frontend.common.background import BackgroundFormMixin
 from djangocms_frontend.contrib import navigation
 from djangocms_frontend.contrib.link.forms import AbstractLinkForm, LinkForm
-from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ButtonGroup,
+    IconGroup,
+    TemplateChoiceMixin,
+)
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import NAVBAR_DESIGNS
@@ -17,6 +22,7 @@ mixin_factory = settings.get_forms(navigation)
 class NavigationForm(
     mixin_factory("Navigation"),
     BackgroundFormMixin,
+    TemplateChoiceMixin,
     EntangledModelForm,
 ):
     class Meta:
@@ -36,9 +42,6 @@ class NavigationForm(
         label=_("Template"),
         choices=settings.NAVIGATION_TEMPLATE_CHOICES,
         initial=first_choice(settings.NAVIGATION_TEMPLATE_CHOICES),
-        widget=forms.HiddenInput
-        if len(settings.NAVIGATION_TEMPLATE_CHOICES) < 2
-        else forms.Select,
         help_text=_("Defines the whole template set for this navigation."),
     )
     navbar_container = forms.BooleanField(

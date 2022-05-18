@@ -6,7 +6,11 @@ from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
 
-from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    TagTypeFormField,
+    TemplateChoiceMixin,
+)
 
 from ... import settings
 from ...helpers import first_choice
@@ -23,7 +27,7 @@ from .constants import (
 mixin_factory = settings.get_forms(carousel)
 
 
-class CarouselForm(mixin_factory("Carousel"), EntangledModelForm):
+class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledModelForm):
     """
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/5.0/components/carousel/
@@ -52,9 +56,6 @@ class CarouselForm(mixin_factory("Carousel"), EntangledModelForm):
         choices=CAROUSEL_TEMPLATE_CHOICES,
         initial=first_choice(CAROUSEL_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
-        widget=forms.HiddenInput
-        if len(CAROUSEL_TEMPLATE_CHOICES) < 2
-        else forms.Select,
     )
     carousel_interval = forms.IntegerField(
         label=_("Interval"),
