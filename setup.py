@@ -20,10 +20,6 @@ EXTRA_REQUIREMENTS = {
     "djangocms-icon": [
         "djangocms-icon>=1.4.0",
     ],
-    "all": [  # All of the above
-        "django-recaptcha",
-        "djangocms-icon>=1.4.0",
-    ]
 }
 
 CLASSIFIERS = [

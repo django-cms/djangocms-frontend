@@ -152,7 +152,6 @@ by adding an option:
 
     pip install djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     pip install djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icon support in links
-    pip install djangocms-frontend[all]  # Installs all of the above
 
 
 

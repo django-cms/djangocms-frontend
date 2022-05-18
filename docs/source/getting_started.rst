@@ -28,7 +28,6 @@ by adding an option:
 
     djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
-    djangocms-frontend[all]  # Installs all of the above
 
 
 Make apps available to your django project
