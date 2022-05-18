@@ -28,7 +28,7 @@ by adding an option:
 
     djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
-    djangocms-frontend[reCaptcha, djangocms]  # comma-separate multiple dependencies
+    djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
 
 
 Make apps available to your django project
