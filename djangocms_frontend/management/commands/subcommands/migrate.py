@@ -142,6 +142,14 @@ class Migrate(SubcommandsCommand):
     command_name = "migrate"
 
     def handle(self, *args, **options):
+        tables = connection.introspection.table_names()
+        if "djangocms_frontend_frontenduiitem" not in tables:
+            self.stdout.write(self.style.ERROR(
+                "I cannot find djangocms-frontend's tables in the database. Did you run\n"
+                "./manage.py migrate ?"
+            ))
+            return
+
         self.migrate_to_djangocms_frontend()
         if getattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS", None) is None:
             self.check_for_link_targets()
