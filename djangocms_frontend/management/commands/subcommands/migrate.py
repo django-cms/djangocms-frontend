@@ -93,9 +93,11 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                 new_obj.save()
                 # Now delete old plugin from its table w/o checking for child plugins
                 with connection.cursor() as cursor:
-                    cursor.execute(
-                        f"DELETE FROM `{obj._meta.db_table}` WHERE cmsplugin_ptr_id={obj.id};"
-                    )
+                    sql_command = f"DELETE FROM `{obj._meta.db_table}` WHERE cmsplugin_ptr_id={obj.id};"
+                    if connection.vendor not in ("mysql", "sqlite"):
+                        # ANSI: Use double quotes instead of backticks
+                        sql_command = sql_command.replace("`", '"')
+                    cursor.execute(sql_command)
                 cnt += 1
                 print(f"{cnt:7}", end="\r")
                 # Copy any many to many field after save:`new_plugin.many2many.set(old_plugin.many2many.all())`
