@@ -33,7 +33,7 @@ from .helpers import get_choices, get_object_for_value
 # Weak dependency on djangocms_icon
 # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
 # templates if it's not in INSTALLED_APPS)
-if "djangocms_icon" in settings.settings.INSTALLED_APPS:
+if "djangocms_icon" in django_settings.INSTALLED_APPS:
     from djangocms_icon.fields import IconField
 else:
     class IconField(forms.CharField):

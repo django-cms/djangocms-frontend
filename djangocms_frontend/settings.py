@@ -1,6 +1,6 @@
 import importlib
 
-from django.conf import settings
+from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
 
 EMPTY_CHOICE = (("", "-----"),)
@@ -19,20 +19,20 @@ EMPTY_FIELDSET = [
 
 # Only adding block elements
 TAG_CHOICES = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_TAG_CHOICES",
     ["div", "section", "article", "header", "footer", "aside"],
 )
 TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 
 ADMIN_CSS = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_ADMIN_CSS",
     {},
 )
 
 HEADER_CHOICES = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_HEADER_CHOICES",
     (
         ("h1", _("Heading 1")),
@@ -50,7 +50,7 @@ ALIGN_CHOICES = (
 )
 
 LINK_TEMPLATE_CHOICES = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_LINK_TEMPLATE_CHOICES",
     [
         ("default", _("Default")),
@@ -58,7 +58,7 @@ LINK_TEMPLATE_CHOICES = getattr(
 )
 
 JUMBOTRON_TEMPLATE_CHOICES = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_JUMBOTRON_TEMPLATE_CHOICES",
     [
         ("default", _("Default")),
@@ -66,7 +66,7 @@ JUMBOTRON_TEMPLATE_CHOICES = getattr(
 )
 
 NAVIGATION_TEMPLATE_CHOICES = getattr(
-    settings,
+    django_settings,
     "DJANGOCMS_FRONTEND_NAVIGATION_TEMPLATE_CHOICES",
     [
         ("default", _("Default")),
@@ -74,11 +74,11 @@ NAVIGATION_TEMPLATE_CHOICES = getattr(
     ],
 )
 
-FORM_OPTIONS = getattr(settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
+FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
 
 
-framework = getattr(settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
-theme = getattr(settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
+framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
+theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
 framework_settings = importlib.import_module(
     f"djangocms_frontend.frameworks.{framework}"
