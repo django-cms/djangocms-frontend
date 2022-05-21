@@ -10,7 +10,6 @@ from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from django_select2.forms import HeavySelect2Widget, Select2Widget
-from djangocms_icon.fields import IconField
 
 # from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
@@ -30,6 +29,17 @@ from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 from .helpers import get_choices, get_object_for_value
+
+# Weak dependency on djangocms_icon
+# (Even if djangocms_icon is in the python path, the admin form will fail due to missing
+# templates if it's not in INSTALLED_APPS)
+if "djangocms_icon" in django_settings.INSTALLED_APPS:
+    from djangocms_icon.fields import IconField
+else:
+    class IconField(forms.CharField):
+        def __init__(self, *args, **kwargs):
+            kwargs["widget"] = forms.HiddenInput
+            super().__init__(*args, **kwargs)
 
 
 def get_templates():

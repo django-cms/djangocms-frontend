@@ -21,6 +21,15 @@ Alternatively, add the following line to your project's
 
    djangocms-frontend
 
+**djangocms-frontend** has weak dependencies you can install separately or
+by adding an option:
+
+.. code::
+
+    djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
+    djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
+    djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
+
 
 Make apps available to your django project
 ==========================================
@@ -29,7 +38,8 @@ Add the following entries to your ``INSTALLED_APPS``:
 
    .. code::
 
-      'djangocms_icon',
+      'djangocms_icon',  # optional
+      'django_recaptcha',  # optional
       'easy_thumbnails',
       'djangocms_frontend',
       'djangocms_frontend.contrib.accordion',
