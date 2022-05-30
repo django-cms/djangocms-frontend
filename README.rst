@@ -96,7 +96,6 @@ file for additional dependencies:
 -  django-filer, version 1.7 or later
 -  djangocms-attributes-field, version 1.0 or later
 -  djangocms-text-ckeditor, version 3.1 or later
--  djangocms-icon, version 1.4 or later
 -  django-select2
 -  django-entangled
 
@@ -111,14 +110,12 @@ Installation
 
 For a manual install:
 
--  run ``pip install
-   https://github.com/django-cms/djangocms-frontend/archive/master.zip``
+-  run ``pip install djangocms-frontend``
 
 -  add the following entries to your ``INSTALLED_APPS``:
 
    .. code::
 
-      'djangocms_icon',
       'easy_thumbnails',
       'djangocms_frontend',
       'djangocms_frontend.contrib.accordion',
@@ -147,6 +144,16 @@ your ``requirements.txt`` and ``django_jsonfield_backport`` to your
 To use the forms app ``djangocms_frontend.contrib.frontend_forms`` you will have to have
 jQuery installed in your project. ``djangocms_frontend`` does not include
 jQuery.
+
+**djangocms-frontend** has weak dependencies you can install separately or
+by adding an option:
+
+.. code::
+
+    pip install djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
+    pip install djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icon support in links
+    pip install djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
+
 
 
 Documentation

@@ -93,9 +93,11 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                 new_obj.save()
                 # Now delete old plugin from its table w/o checking for child plugins
                 with connection.cursor() as cursor:
-                    cursor.execute(
-                        f"DELETE FROM `{obj._meta.db_table}` WHERE cmsplugin_ptr_id={obj.id};"
-                    )
+                    sql_command = f"DELETE FROM `{obj._meta.db_table}` WHERE cmsplugin_ptr_id={obj.id};"
+                    if connection.vendor not in ("mysql", "sqlite"):
+                        # ANSI: Use double quotes instead of backticks
+                        sql_command = sql_command.replace("`", '"')
+                    cursor.execute(sql_command)
                 cnt += 1
                 print(f"{cnt:7}", end="\r")
                 # Copy any many to many field after save:`new_plugin.many2many.set(old_plugin.many2many.all())`
@@ -109,6 +111,8 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
 blog_example = """
 You have djangocms_blog installed. Consider adding the following
 lines to your settings.py:
+
+    from django.utils.translation import getext_lazy as _
 
     DJANGOCMS_FRONTEND_LINK_MODELS = [
         {
@@ -140,6 +144,14 @@ class Migrate(SubcommandsCommand):
     command_name = "migrate"
 
     def handle(self, *args, **options):
+        tables = connection.introspection.table_names()
+        if "djangocms_frontend_frontenduiitem" not in tables:
+            self.stdout.write(self.style.ERROR(
+                "I cannot find djangocms-frontend's tables in the database. Did you run\n"
+                "./manage.py migrate ?"
+            ))
+            return
+
         self.migrate_to_djangocms_frontend()
         if getattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS", None) is None:
             self.check_for_link_targets()

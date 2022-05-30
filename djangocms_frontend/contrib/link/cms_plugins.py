@@ -1,5 +1,6 @@
 from cms.plugin_pool import plugin_pool
 from django.apps import apps
+from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template, insert_fields
@@ -85,7 +86,6 @@ class LinkPluginMixin:
         return fieldsets
 
 
-@plugin_pool.register_plugin
 class LinkPlugin(
     mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin
 ):
@@ -108,3 +108,8 @@ class LinkPlugin(
         return get_plugin_template(
             instance, "link", "link", settings.LINK_TEMPLATE_CHOICES
         )
+
+
+if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
+    #  Only register plugin if in INSTALLED_APPS
+    plugin_pool.register_plugin(LinkPlugin)
