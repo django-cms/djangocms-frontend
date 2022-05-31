@@ -162,12 +162,8 @@ form .form-row  div.frontend-button-group {
       color: white !important;
     }
 
-
     .btn-transparent {
-        color:  black;
-        @media (prefers-color-scheme: dark) {
-            color: white;
-        }
+        color:  var(--dca-black, var(--body-fg, #000));
     }
 
 }

@@ -19,8 +19,14 @@
 
             // init editor with settings
             var editor = ace.edit(div[0]);
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                // dark mode
+            var darkMode;
+            if (CMS.API.Toolbar.get_color_scheme) {
+                darkMode = CMS.API.Toolbar.get_color_scheme() === 'dark';
+            } else {
+                // django CMS pre-3.11
+                darkMode =  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            if (darkMode) {
                 editor.setTheme('ace/theme/tomorrow_night');
             }  else {
                 editor.setTheme('ace/theme/github');
