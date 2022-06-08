@@ -15,7 +15,7 @@ currently used frontend framework such as Bootstrap, or its specific version.
  Key features
 **************
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_.
+-  Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3 and 4.
 
 -  **Separation of plugins from css framework**, i.e. no need to
    rebuild you site's plugin tree if css framework is changed in the
