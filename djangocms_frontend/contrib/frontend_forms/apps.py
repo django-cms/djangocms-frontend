@@ -12,6 +12,20 @@ class FormsConfig(AppConfig):
 
     def ready(self):
         """Install the URLs"""
+
+        from django.core.checks import Warning, register
+
+        @register()
+        def deprecation_check(app_configs, **kwargs):
+            return [
+                Warning(
+                    "djangocms_frontend.contrib.frontend_forms will be removed in version 1.0",
+                    obj=self,
+                    hint="Use djangocms-frontend-forms instead.",
+                    id="djangocms_frontend.W001",
+                )
+            ]
+
         try:
             reverse("dcf_forms:ajax_form")
         except NoReverseMatch:  # Not installed yet
