@@ -21,7 +21,7 @@ class FormsConfig(AppConfig):
                 Warning(
                     "djangocms_frontend.contrib.frontend_forms will be removed in version 1.0",
                     obj=self,
-                    hint="Use djangocms-frontend-forms instead.",
+                    hint="Use djangocms-form-builder instead.",
                     id="djangocms_frontend.W001",
                 )
             ]

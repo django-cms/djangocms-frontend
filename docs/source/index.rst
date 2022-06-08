@@ -82,7 +82,7 @@ Components
 
 Forms
    To nicely integrate formss into your page we recommend
-   **djangocms-frontend-forms** which works stand-alone but also nicely
+   **djangocms-form-builder** which works stand-alone but also nicely
    integrates with **djangocms-frontend**.
 
 Contents
