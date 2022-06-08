@@ -13,10 +13,19 @@ class FormsConfig(AppConfig):
     def ready(self):
         """Install the URLs"""
 
-        from django.core.checks import Warning, register
+        from django.core.checks import Error, Warning, register
 
         @register()
         def deprecation_check(app_configs, **kwargs):
+            if "djangocms_form_builder" in settings.INSTALLED_APPS:
+                return [
+                    Error(
+                        "djangocms_frontend.contrib.frontend_forms and djangocms_form_builder are installed.",
+                        obj=self,
+                        hint="Remove djangocms_frontend.contrib.frontend_forms",
+                        id="djangocms_frontend.E001",
+                    )
+                ]
             return [
                 Warning(
                     "djangocms_frontend.contrib.frontend_forms will be removed in version 1.0",
