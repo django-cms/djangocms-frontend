@@ -2,13 +2,14 @@
 Changelog
 =========
 
-0.9.3
+0.9.4
 =====
 
 * Refactor forms app into independent project
 * Deprecation warning for forms app
 * Add dark mode compatibility with django CMS 3.11
 * Remove strong dependency on djangocms-icon
+* Sync github and pypi releases
 
 0.9.1
 =====
