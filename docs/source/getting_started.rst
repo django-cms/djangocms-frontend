@@ -49,7 +49,6 @@ Add the following entries to your ``INSTALLED_APPS``:
       'djangocms_frontend.contrib.carousel',
       'djangocms_frontend.contrib.collapse',
       'djangocms_frontend.contrib.content',
-      'djangocms_frontend.contrib.frontend_forms',
       'djangocms_frontend.contrib.grid',
       'djangocms_frontend.contrib.image',
       'djangocms_frontend.contrib.jumbotron',
@@ -64,18 +63,6 @@ Add the following entries to your ``INSTALLED_APPS``:
     You will need to add ``django-jsonfield-backport`` to your
     ``requirements.txt`` and add ``"django_jsonfield_backport"`` to your
     ``INSTALLED_APPS``.
-
-.. note :: jQuery required for forms app to work
-
-    You will have to make jQuery available to your project form the forms app
-    to work with ajax/xhr calls. A simple way of doing this is to include the
-    following line in your projects base template.
-
-    .. code::
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    For all versions see `code.jQuery.com <https://code.jQuery.com>`_
 
 
 Create necessary database table

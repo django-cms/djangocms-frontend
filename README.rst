@@ -37,9 +37,6 @@ currently used frontend framework such as Bootstrap, or its specific version.
 
 -  **Accordion** plugin
 
--  **Forms** plugin for Bootstrap-styled forms on your cms page. Use django-cms'
-   versatile plugin system to generate your own forms.
-
 
 *************
  Description
@@ -125,7 +122,6 @@ For a manual install:
       'djangocms_frontend.contrib.carousel',
       'djangocms_frontend.contrib.collapse',
       'djangocms_frontend.contrib.content',
-      'djangocms_frontend.contrib.frontend_forms',
       'djangocms_frontend.contrib.grid',
       'djangocms_frontend.contrib.image',
       'djangocms_frontend.contrib.jumbotron',
@@ -141,18 +137,12 @@ If you use **Django < 3.2** please also add ``django-jsonfield-backport`` to
 your ``requirements.txt`` and ``django_jsonfield_backport`` to your
 ``INSTALLED_APPS`` list.
 
-To use the forms app ``djangocms_frontend.contrib.frontend_forms`` you will have to have
-jQuery installed in your project. ``djangocms_frontend`` does not include
-jQuery.
-
-**djangocms-frontend** has weak dependencies you can install separately or
-by adding an option:
+**djangocms-frontend** has a weak dependencies on **djangocms-icon** you can
+install separately or by adding an option:
 
 .. code::
 
-    pip install djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     pip install djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icon support in links
-    pip install djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
 
 
 

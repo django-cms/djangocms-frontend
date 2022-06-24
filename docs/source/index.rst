@@ -44,8 +44,7 @@ version.
 -  **Extensible** within the project and with separate project (e.g., a
    theme app)
 
--  **Accordion** plugin and simple **forms** plugin w/ Bootstrap-styled
-   forms on your cms page.
+-  **Accordion** plugin.
 
 *************
  Description
@@ -81,14 +80,10 @@ Components
    to grasp and easy to use look. Alerts or cards are examples of
    components.
 
-Forms (work in progress)
-   Finally, djangocms-frontend lets you display forms in a nice way.
-   Also, it handles form submit actions, validation etc. Forms can be
-   easily structured using fieldsets known from django's admin app. But
-   djangocms-frontend also works with third-party apps like
-   `django-crispy-forms
-   <https://github.com/django-crispy-forms/django-crispy-forms>`_ for
-   even more complex layouts.
+Forms
+   To nicely integrate formss into your page we recommend
+   **djangocms-form-builder** which works stand-alone but also nicely
+   integrates with **djangocms-frontend**.
 
 Contents
 ========
@@ -99,7 +94,6 @@ Contents
    getting_started
    grid
    components
-   forms
    howto_guides
    reference
 
