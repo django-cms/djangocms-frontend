@@ -1309,8 +1309,8 @@ msgid "Format"
 msgstr "Format"
 
 #: contrib/image/cms_plugins.py:68
-msgid "Cropping settings"
-msgstr "Einstellungen zu Zuschneiden"
+msgid "Cropping"
+msgstr "Zuschneiden"
 
 #: contrib/image/forms.py:25
 msgid "Align left"

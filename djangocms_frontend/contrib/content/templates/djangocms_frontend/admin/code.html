@@ -1,9 +1,7 @@
 {% extends "djangocms_frontend/admin/base.html" %}
 
 {% block object-tools %}
-    {{ block.super }}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js" integrity="sha512-6ts6Fu561/yzWvD6uwQp3XVYwiWNpWnZ0hdeQrETqtnQiGjTfOS06W76aUDnq51hl1SxXtJaqy7IsZ3oP/uZEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{ block.super }}{% spaceless %}
     <script>
         django.jQuery(function () {
             // ace editor cannot be attached directly to a textarea
@@ -20,10 +18,10 @@
             // init editor with settings
             var editor = ace.edit(div[0]);
             var darkMode;
-            if (CMS.API.Toolbar.get_color_scheme) {
-                darkMode = CMS.API.Toolbar.get_color_scheme() === 'dark';
+            if (CMS.API.Helpers.getColorScheme) {
+                darkMode = CMS.API.Helpers.getColorScheme() === 'dark';
             } else {
-                // django CMS pre-3.11
+                // django CMS pre-3.11.1
                 darkMode =  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             }
             if (darkMode) {
@@ -49,5 +47,5 @@
                 textarea.val(editor.getSession().getValue());
             });
         });
-    </script>
+    </script>{% endspaceless %}
 {% endblock %}
