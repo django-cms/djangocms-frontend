@@ -14,9 +14,6 @@ REQUIREMENTS = [
 ]
 
 EXTRA_REQUIREMENTS = {
-    "reCaptcha": [
-        "django-recaptcha",
-    ],
     "djangocms-icon": [
         "djangocms-icon>=1.4.0",
     ],
