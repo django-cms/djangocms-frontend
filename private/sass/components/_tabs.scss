@@ -6,23 +6,28 @@ ul.nav {
     .nav-link {
         position: relative;
         text-decoration: none;
+
         span.indicator {
-            display:    none;
+            display: none;
             border-radius: 50%;
+
             &.error {
                 background-color: var(--bs-danger);
             }
+
             &.attributes {
                 background-color: var(--bs-info);
                 display: block;
             }
-            padding: .5rem;
+
+            padding: 0.5rem;
             border: 1px solid var(--dca-white, var(--body-bg, $white));
             transform: translate(-50%, -50%);
             top: 0;
             left: 100%;
             position: absolute;
         }
+
         &.error > span.indicator {
             display: block;
         }
@@ -34,7 +39,7 @@ ul.nav.nav-pills .nav-link:not(.active) {
     border-width: 1px;
 }
 
-body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs+div.tab-content .tab-pane {
+body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs + div.tab-content .tab-pane {
     border-left-style: solid;
     border-bottom-style: solid;
     border-right-style: solid;
@@ -42,6 +47,7 @@ body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs+div.tab-content 
     border-bottom-color: var(--hairline-color);
     border-right-color: var(--hairline-color);
     border-width: 1px;
+
     fieldset:last-child {
         margin-bottom: 0;
     }

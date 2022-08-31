@@ -113,7 +113,7 @@ export default class PreviewGenerator {
 
         // handle type, context and outline
         if (this.elements.type.eq(0).is(':checked')) {
-            this.button.addClass('text-' + context);
+            this.button.addClass('link-' + context);
         } else {
             if (this.elements.outline.is(':checked')) {
                 this.button.addClass('btn btn-outline-' + context);

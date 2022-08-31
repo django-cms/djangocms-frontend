@@ -15,7 +15,7 @@ const gulp = require('gulp');
 // #############################################################################
 // SETTINGS
 const PROJECT_ROOT = __dirname;
-const PROJECT_STATIC = '/djangocms_frontend/static/djangocms_frontend/'
+const PROJECT_STATIC = '/djangocms_frontend/static/djangocms_frontend/';
 const PROJECT_PATH = {
     css: PROJECT_ROOT + PROJECT_STATIC + '/css',
     js: PROJECT_ROOT + PROJECT_STATIC + '/js',
@@ -71,13 +71,13 @@ function task(id, extra) {
 // #############################################################################
 // TASKS
 gulp.task('sass', task('sass'));
-gulp.task('webpack', task('webpack'));
+gulp.task('bundle', task('webpack'));
 gulp.task('webpack:watch', task('webpack', { watch: true }));
 
 gulp.task('lint', task('lint'));
 gulp.task('icons', task('svg', { svg: 'icons' }));
 
-gulp.task('default', ['sass', 'webpack', 'watch']);
+// gulp.task('default', ['sass', 'webpack', 'watch']);
 
 gulp.task('watch', function () {
     gulp.start('webpack:watch');
