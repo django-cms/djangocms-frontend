@@ -37,7 +37,7 @@ const PROJECT_PATTERNS = {
         '!' + PROJECT_PATH.webpack + '/**/*.min.js',
     ],
     sass: [
-        PROJECT_PATH.sass + '/**/*.{scss,sass}',
+        PROJECT_PATH.sass + '/*.{scss,sass}',
         '!' + PROJECT_PATH.sass + '/libs/_svgsprite.scss',
     ],
     svg: {
