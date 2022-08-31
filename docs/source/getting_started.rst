@@ -28,7 +28,11 @@ by adding an option:
 
     djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
+    djangocms-frontend[static-ace]  # Installs djangocms-static-ace to include the ace code editor in static files
     djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
+
+`djangocms-frontend[static-ace]` is useful if your project cannot or should not
+access a CDN to load the code editor ace (https://ace.c9.io) for the code plugin.
 
 
 Make apps available to your django project

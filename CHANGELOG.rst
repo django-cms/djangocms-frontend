@@ -2,6 +2,13 @@
 Changelog
 =========
 
+Unreleased
+==========
+* Fix packages.json, gulpfile.js to allow automatic build of js and css
+* Fix dark mode for select2 widget
+* Fix lint errors in scss files
+* removed forms app
+
 0.9.4
 =====
 

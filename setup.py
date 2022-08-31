@@ -14,16 +14,16 @@ REQUIREMENTS = [
 ]
 
 EXTRA_REQUIREMENTS = {
-    "reCaptcha": [
-        "django-recaptcha",
-    ],
     "djangocms-icon": [
         "djangocms-icon>=1.4.0",
     ],
+    "static-ace": [
+        "djangocms-static-ace",
+    ]
 }
 
 CLASSIFIERS = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",

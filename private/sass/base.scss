@@ -12,11 +12,12 @@
 @import "components/title";
 
 .sr-only {
-    @include visually-hidden
+    @include visually-hidden;
 }
 
 ul.nav {
     margin-bottom: 1em;
+
     & > li.nav-item {
         list-style-type: none;
         padding: inherit;
@@ -40,6 +41,7 @@ input[type="number"].auto-field + span {
 body:not(.djangocms-admin-style) input[type="number"].auto-field + span {
     margin-bottom: 23px;
 }
+
 @media (max-width: 1024px) {
     body:not(.djangocms-admin-style) input[type="number"].auto-field + span {
         margin-bottom: 24px;
@@ -51,8 +53,9 @@ input[type="number"].auto-field + span:after {
 }
 
 input[type="number"].auto-field.auto {
-    color:  var(--dca-white, var(--body-bg, white));
+    color: var(--dca-white, var(--body-bg, white));
     caret-color: var(--dca-black, var(--body-fg, black));
+
     & + span {
         display: block;
     }
