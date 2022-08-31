@@ -65,6 +65,7 @@
         .errors {
             margin-bottom: 0;
         }
+
         .field-box-label {
             display: flex;
             margin-top: auto;
@@ -80,11 +81,11 @@
                 top: 3px;
             }
         }
-
     }
 }
 
-.djangocms-frontend-row, .djangocms-frontend-column {
+.djangocms-frontend-row,
+.djangocms-frontend-column {
     .form-row.field-xs_col,
     .form-row.field-xs_order,
     .form-row.field-xs_offset,

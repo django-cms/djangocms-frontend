@@ -6,9 +6,10 @@
 }
 
 */
-form .form-row  div.frontend-button-group.frontend-button-group-block {
+form .form-row div.frontend-button-group.frontend-button-group-block {
     display: flex;
     flex-wrap: wrap;
+
     label {
         overflow: hidden;
         white-space: nowrap;
@@ -20,87 +21,99 @@ form .form-row  div.frontend-button-group.frontend-button-group-block {
     }
 }
 
-form .form-row  div.frontend-button-group {
+form .form-row div.frontend-button-group {
     label.btn-grp {
         margin: 3px;
         padding: 4px 7px;
         text-transform: none;
         text-align: center !important;
         //border-color: transparent !important;
-        outline:  2px solid transparent;
+        outline: 2px solid transparent;
         width: auto !important;
         font-weight: normal !important;
     }
-    input[property="color"]+label.btn-grp[style="--fe-value: ;"] {
+
+    input[property="color"] + label.btn-grp[style="--fe-value: ;"] {
         color: var(--dca-black, $django-fg) !important;
         @media (prefers-color-scheme: dark) {
             color: var(--dca-black, $django-dark-color) !important;
         }
     }
-    input[property="color"][value="transparent"]+label.btn-grp {
+
+    input[property="color"][value="transparent"] + label.btn-grp {
         color: var(--dca-black, $django-fg) !important;
         @media (prefers-color-scheme: dark) {
             color: var(--dca-black, $django-dark-color) !important;
         }
     }
-    input[property="text"]+label.btn-grp {
+
+    input[property="text"] + label.btn-grp {
         color: var(--dca-black, $django-fg) !important;
         @media (prefers-color-scheme: dark) {
             color: var(--dca-black, $django-dark-color) !important;
         }
     }
-    input[type="radio"]:checked+label.btn-grp,
-    input[type="checkbox"]:checked+label.btn-grp {
-        outline:  2px solid $cms-primary;
+
+    input[type="radio"]:checked + label.btn-grp,
+    input[type="checkbox"]:checked + label.btn-grp {
+        outline: 2px solid $cms-primary;
         border-color: white;
         border-radius: 0;
     }
-    input[property="text"]:checked+label.btn-grp,
-    input[property="icon"]:checked+label.btn-grp {
+
+    input[property="text"]:checked + label.btn-grp,
+    input[property="icon"]:checked + label.btn-grp {
         background: $cms-primary;
     }
-    input[property="opacity"]+label.btn-grp {
+
+    input[property="opacity"] + label.btn-grp {
         width: 3.5em !important;
-        padding-left: 0 !important;;
+        padding-left: 0 !important;
         padding-right: 0 !important;
         color: var(--dca-black, $django-dark-color) !important;
         overflow: hidden;
         white-space: nowrap;
         background: rgba(var(--bs-secondary-rgb), calc(var(--fe-value) / 100));
     }
-    input[property="opacity"][value="50"]+label.btn-grp,
-    input[property="opacity"][value="25"]+label.btn-grp,
-    input[property="opacity"][value="10"]+label.btn-grp {
+
+    input[property="opacity"][value="50"] + label.btn-grp,
+    input[property="opacity"][value="25"] + label.btn-grp,
+    input[property="opacity"][value="10"] + label.btn-grp {
         @media (prefers-color-scheme: light) {
             color: black !important;
         }
     }
-    input[property="link-size"][value="btn-lg"]+label.btn-grp {
+
+    input[property="link-size"][value="btn-lg"] + label.btn-grp {
         padding: 0.5rem 1rem !important;
         font-size: 1.25rem;
-        border-radius: 0.3rem
+        border-radius: 0.3rem;
     }
-    input[property="link-size"][value="btn-sm"]+label.btn-grp {
+
+    input[property="link-size"][value="btn-sm"] + label.btn-grp {
         padding: 0.25rem 0.5rem !important;
         font-size: 0.875rem;
         border-radius: 0.2rem;
     }
-    input[property="list_state"]+label.btn-grp[style="--fe-value: ;"] {
-        color: var(--dca-black, $django-fg) ! important;
+
+    input[property="list_state"] + label.btn-grp[style="--fe-value: ;"] {
+        color: var(--dca-black, $django-fg) !important;
         @media (prefers-color-scheme: dark) {
             color: var(--dca-black, $django-dark-color);
         }
     }
-    input[property="list_state"][value="active"]+label.btn-grp {
+
+    input[property="list_state"][value="active"] + label.btn-grp {
         background: var(--bs-primary);
         color: white;
     }
-    input[property="list_state"][value="disabled"]+label.btn-grp {
+
+    input[property="list_state"][value="disabled"] + label.btn-grp {
         color: var(--bs-gray-600) !important;
         background: white;
     }
 
-    input[property="shadow"]+label.btn-grp {
+    input[property="shadow"] + label.btn-grp {
         margin-right: 1em;
         width: 3.5em !important;
         padding-left: 0 !important;
@@ -111,63 +124,47 @@ form .form-row  div.frontend-button-group {
         border: var(--bs-secondary) 1px solid !important;
         overflow: hidden;
         white-space: nowrap;
-
     }
 
-    input[property="shadow"][value="lg"]+label.btn-grp {
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    input[property="shadow"][value="lg"] + label.btn-grp {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
     }
 
-    input[property="shadow"][value="reg"]+label.btn-grp {
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    input[property="shadow"][value="reg"] + label.btn-grp {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     }
 
-    input[property="shadow"][value="sm"]+label.btn-grp {
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    input[property="shadow"][value="sm"] + label.btn-grp {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
     }
 
-    input[property="nav-design"][value="light"]+label.btn-grp {
+    input[property="nav-design"][value="light"] + label.btn-grp {
         background: var(--bs-light);
         color: var(--bs-gray-900) !important;
     }
-    input[property="nav-design"][value="dark"]+label.btn-grp {
+
+    input[property="nav-design"][value="dark"] + label.btn-grp {
         background: var(--bs-dark);
         color: var(--bs-white);
     }
 
-
-    $btn-colors: [
-        "primary",
-        "secondary",
-        "success",
-        "danger",
-        "warning",
-        "info",
-        "light"
-        "dark"
-    ];
-    @each $key in $btn-colors {
-        .btn-#{$key} {
-
-        }
-    }
     .btn-white {
         background: white;
         color: black !important;
     }
+
     .btn-light {
-      color: black !important;
+        color: black !important;
     }
+
     .btn-dark {
-      color: white !important;
+        color: white !important;
     }
 
     .btn-transparent {
-        color:  var(--dca-black, var(--body-fg, #000));
+        color: var(--dca-black, var(--body-fg, #000));
     }
-
 }
-
 
 body:not(.djangocms-admin-style) .frontend-button-group .optgroup {
     clear: left;  // Bug in django 3.2?

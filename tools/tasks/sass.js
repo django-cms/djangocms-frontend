@@ -4,11 +4,9 @@ const concat = require('gulp-concat-util');
 const gulpif = require('gulp-if');
 const gutil = require('gulp-util');
 const postcss = require('gulp-postcss');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));;
 const sourcemaps = require('gulp-sourcemaps');
 const styleLint = require('gulp-stylelint');
-const { importer } = require('npm-sass');
-
 
 module.exports = function (gulp, opts) {
     return function () {
@@ -23,10 +21,7 @@ module.exports = function (gulp, opts) {
                 this.emit('end');
             })
             .pipe(gulpif(opts.argv.debug, sourcemaps.init()))
-            .pipe(sass({
-                importer: importer,
-                precision: 10,
-            }))
+            .pipe(sass())
             .on('error', function (error) {
                 gutil.log(gutil.colors.red(
                     'Error (' + error.plugin + '): ' + error.messageFormatted)
