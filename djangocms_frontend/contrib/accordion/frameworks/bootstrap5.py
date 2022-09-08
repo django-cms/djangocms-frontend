@@ -2,6 +2,7 @@ class AccordionRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/accordion.html"
 
     def render(self, context, instance, placeholder):
+        instance.add_classes("accordion")
         if instance.accordion_flush:
             instance.add_classes("accordion-flush")
         return super().render(context, instance, placeholder)
