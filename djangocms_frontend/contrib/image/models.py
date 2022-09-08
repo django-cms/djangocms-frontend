@@ -31,14 +31,19 @@ class ImageMixin:
         # calculate height when not given according to the
         # golden ratio or fallback to the image size
         if not height and width:
-            height = int(width / PICTURE_RATIO)
+            height = width / PICTURE_RATIO
         elif not width and height:
-            width = int(height * PICTURE_RATIO)
+            width = height * PICTURE_RATIO
         elif not width and not height and getattr(self, "picture", None):
             if self.rel_image:
-                width = int(self.rel_image.width)
-                height = int(self.rel_image.height)
-
+                width = self.rel_image.width
+                height = self.rel_image.height
+        else:
+            # If no information is available on the image size whatsoever,
+            # make it 640px wide and use PICTURE_RATIO
+            width, height = 640, 640 / PICTURE_RATIO
+        width = int(width)
+        height = int(height)
         return {
             "size": (width, height),
             "crop": crop,

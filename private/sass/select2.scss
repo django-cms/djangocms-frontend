@@ -1,7 +1,7 @@
 @import "components/variables";
 
 @media screen {
-    .cms-admin-modal {
+    .change-form {
         .select2-container--default .select2-selection--single,
         .select2-dropdown {
             background: var(--dca-white, var(--body-bg, white));
