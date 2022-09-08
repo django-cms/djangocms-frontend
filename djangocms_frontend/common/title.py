@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
 
-class TitleWidget(forms.MultiWidget):
+class TitleWidget(forms.MultiWidget):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault(
             "widgets",
@@ -21,7 +21,7 @@ class TitleWidget(forms.MultiWidget):
         return [False, ""]
 
 
-class TitleField(forms.MultiValueField):
+class TitleField(forms.MultiValueField):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault(
             "fields",

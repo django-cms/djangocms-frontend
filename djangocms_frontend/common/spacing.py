@@ -20,7 +20,7 @@ class DivSelectWidget(forms.Select):
         css = {"all": ("djangocms_frontend/css/div_select.css",)}
 
 
-class SizeSideWidget(forms.MultiWidget):
+class SizeSideWidget(forms.MultiWidget):  # lgtm [py/missing-call-to-init]
     """2 component widget allowing to choose a side and the size of a spacing"""
 
     def __init__(self, **kwargs):
@@ -45,7 +45,7 @@ class SizeSideWidget(forms.MultiWidget):
         return ["", ""]  # [self.property+self.side_choices[0][0], ""]
 
 
-class SpacingSizeSideField(forms.MultiValueField):
+class SpacingSizeSideField(forms.MultiValueField):  # lgtm [py/missing-call-to-init]
     """Field for spacing information using SizeSideWidget"""
 
     def __init__(self, **kwargs):
