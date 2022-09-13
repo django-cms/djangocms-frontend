@@ -20,7 +20,4 @@ jobs:
       - name: Install djlint
         run: pip install --upgrade djlint
       - name: Run djlint
-        uses: liskin/gh-problem-matcher-wrap@v1
-        with:
-          linters: djlint
-          run: djlint djangocms_frontend --lint
+        run: djlint djangocms_frontend --lint
