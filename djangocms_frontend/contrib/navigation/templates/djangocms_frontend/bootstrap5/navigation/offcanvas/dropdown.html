@@ -3,8 +3,8 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button"
                data-bs-toggle="dropdown" href="#"
-               id="menu-{{instance.id}}">{{ instance.title }}</a>
-                <div class="dropdown-menu" aria-labelledby="menu-{{instance.id}}">
+               id="menu-{{ instance.id|safe }}">{{ instance.title }}</a>
+                <div class="dropdown-menu" aria-labelledby="menu-{{ instance.id|safe }}">
                     {% for plugin in instance.child_plugin_instances %}
                         {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
                     {% endfor %}

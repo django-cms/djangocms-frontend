@@ -8,7 +8,7 @@
                     id="tab-label-{{ plugin.pk|safe }}"
                     data-bs-toggle="tab"
                     data-bs-target="#tab-{{ plugin.pk|safe }}"
-                    aria-controls="tab-{{ plugin.pk }}"
+                    aria-controls="tab-{{ plugin.pk|safe }}"
                     aria-selected="{% if instance.tab_index == forloop.counter %}true{% else %}false{% endif %}"
                     type="button"
                     role="tab">
