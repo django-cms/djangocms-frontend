@@ -10,3 +10,7 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.djlint]
+ignore="H023,T003"
+profile="django"
