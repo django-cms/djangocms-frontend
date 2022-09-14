@@ -12,6 +12,7 @@ Changelog
 * Minor docs corrections
 * For the boostrap5 base template include bootstrap v5.2.1, jQuery 3.6.1
 * Base template respects admin color scheme
+* Fix for ``Image`` plugin where the associated ``filer.Image`` has been deleted.
 
 0.9.4
 =====
