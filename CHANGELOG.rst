@@ -8,6 +8,7 @@ Unreleased
 * Fix dark mode for select2 widget
 * Fix lint errors in scss files
 * removed forms app
+* Fix for ``Image`` plugin where the associated ``filer.Image`` has been deleted.
 
 0.9.4
 =====
