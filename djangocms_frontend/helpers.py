@@ -116,14 +116,14 @@ def link_to_framework_doc(ui_item, topic):
 
 
 def add_plugin(placeholder, plugin):
-    """CMS version save function to add a plugin to a placeholder"""
-    if hasattr(placeholder, "add_plugin"):  # CMS v4?
+    """CMS version-save function to add a plugin to a placeholder"""
+    if hasattr(placeholder, "add_plugin"):  # available as of CMS v4
         placeholder.add_plugin(plugin)
     else:  # CMS < v4
         if plugin.parent:
-            plugin.position -= plugin.parent.position + 1
+            plugin.position -= plugin.parent.position + 1  # Restart position counting at 0
         else:
-            plugin.position = 0
+            plugin.position -= 1  # 0-based counting in v3
         plugin.save()
 
 

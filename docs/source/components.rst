@@ -321,6 +321,17 @@ Code component
 **************
 
 Have code snippets on your site using this plugin, either inline or as a code block.
+djangocms-frontend offers the `ace code editor <https://ace.c9.io>`_
+to enter code bits.
+
+.. warning::
+    By default the ace code editor javascript code is retrieved over the internet
+    from a cdn. If you do not want this to happen, e.g., for data privacy reasons
+    or because your system is not connected to the internet, please use the
+    weak dependency on `djangocms-static-ace <https://github.com/django-cms/djangocms-static-ace>`_
+    by chaning your requirement from ``djangocms-frontend`` to
+    ``djangocms-frontend[static-ace]`` and include
+    ``"djangocms_static_ace"`` in your ``INSTALLED_APPS``.
 
 .. index::
     single: Figure
