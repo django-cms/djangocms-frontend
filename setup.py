@@ -42,6 +42,7 @@ CLASSIFIERS = [
     "Framework :: Django CMS :: 3.9",
     "Framework :: Django CMS :: 3.10",
     "Framework :: Django CMS :: 3.11",
+    "Framework :: Django CMS :: 4.0",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development",
