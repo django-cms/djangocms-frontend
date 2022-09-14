@@ -49,12 +49,21 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries",
 ]
 
+project_urls={
+        'Documentation': 'https://djangocms-frontend.readthedocs.io',
+        'Release notes': 'https://github.com/django-cms/djangocms-frontend/blob/master/CHANGELOG.rst',
+        'Issues': 'https://github.com/django-cms/djangocms-frontend/issues',
+        'Source': 'https://github.com/django-cms/djangocms-frontend',
+    }
+
 
 setup(
     name="djangocms-frontend",
     version=__version__,
-    author="Django CMS Association and contributors",
-    author_email="info@django-cms.org",
+    author="fsbraun",
+    author_email="fsbraun@gmx.de",
+    maintainer="Django CMS Association and contributors",
+    maintainer_email="info@django-cms.org",
     url="https://github.com/django-cms/djangocms-frontend",
     license="BSD-3-Clause",
     description="Adds abstract User Interface items as plugins.",
@@ -66,5 +75,6 @@ setup(
     install_requires=REQUIREMENTS,
     extras_require=EXTRA_REQUIREMENTS,
     classifiers=CLASSIFIERS,
+    project_urls=project_urls,
     test_suite="run_tests.run",
 )
