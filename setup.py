@@ -75,6 +75,6 @@ setup(
     install_requires=REQUIREMENTS,
     extras_require=EXTRA_REQUIREMENTS,
     classifiers=CLASSIFIERS,
-    project_urls=project_urls,
+    project_urls=PROJECT_URLS,
     test_suite="run_tests.run",
 )
