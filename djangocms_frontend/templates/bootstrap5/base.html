@@ -1,10 +1,9 @@
-{% extends "djangocms_frontend.html" %}{% load cms_tags menu_tags%}
+{% extends "djangocms_frontend.html" %}{% load cms_tags menu_tags %}
 {% block base_css %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 {% endblock %}
 {% block base_js %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 {% endblock %}
 {% block navbar %}
     <nav class="navbar {% block navbar_options %}navbar-expand-lg navbar-dark bg-dark{% endblock %}">
@@ -34,6 +33,18 @@
                 --bs-light-rgb: 196, 196, 196;
             }
         }
+        :root[data-color-scheme="dark"] {
+                --bs-body-bg: #1e1e1e;
+                --bs-body-bg-rgb: 30, 30, 30;
+                --bs-body-color: #FFF;
+                --bs-body-color-rgb: 255, 255, 255;
+                --bs-dark: #3D3D3D;
+                --bs-dark-rgb: 61, 61, 61;
+                --bs-light: #c4c4c4;
+                --bs-light-rgb: 196, 196, 196;
+            }
+        }
+
     </style>
     {{ block.super }}
 {% endblock %}
