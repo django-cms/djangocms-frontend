@@ -49,7 +49,7 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries",
 ]
 
-project_urls = {
+PROJECT_URLS = {
     "Documentation": "https://djangocms-frontend.readthedocs.io",
     "Release notes": "https://github.com/django-cms/djangocms-frontend/blob/master/CHANGELOG.rst",
     "Issues": "https://github.com/django-cms/djangocms-frontend/issues",
