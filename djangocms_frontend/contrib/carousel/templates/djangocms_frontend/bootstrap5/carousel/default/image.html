@@ -2,7 +2,7 @@
     {% if instance.rel_image %}
         {% thumbnail instance.rel_image options.size crop=options.crop upscale=options.upscale subject_location=instance.rel_image.subject_location as thumbnail %}
 
-        <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.rel_image.default_alt_text|default:'' }}" >
+        <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.rel_image.default_alt_text|default:'' }}" />
     {% else %}
         <div class="placeholder placeholder-wave d-block w-100"
             style="aspect-ratio: {{ aspect_ratio }}"></div>

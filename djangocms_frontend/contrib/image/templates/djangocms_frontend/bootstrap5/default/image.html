@@ -9,7 +9,7 @@
             srcset="{% for size, thumb in img_srcset_data %}{{ thumb.url }} {{ size|safe }}w,{% endfor %}{{ instance.img_src }} {{ picture_size.size.0|safe }}w"
             sizes="{% for size, thumb in img_srcset_data %}(max-width: {{ size|safe }}px) {{ size|safe }}px, {% endfor %} {{ picture_size.size.0|safe }}px"
         {% endif %}
-        {{ instance.get_attributes }}>
+        {{ instance.get_attributes }} />
     {% if picture_link %}
         </a>
     {% endif %}
