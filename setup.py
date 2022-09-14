@@ -52,9 +52,9 @@ CLASSIFIERS = [
 setup(
     name="djangocms-frontend",
     version=__version__,
-    author="fsbraun",
-    author_email="fsbraun@gmx.de",
-    url="https://github.com/fsbraun/djangocms-frontend",
+    author="Django CMS Association and contributors",
+    author_email="info@django-cms.org",
+    url="https://github.com/django-cms/djangocms-frontend",
     license="BSD-3-Clause",
     description="Adds abstract User Interface items as plugins.",
     long_description=open("README.rst").read(),
