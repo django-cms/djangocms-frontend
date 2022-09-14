@@ -19,7 +19,7 @@ EXTRA_REQUIREMENTS = {
     ],
     "static-ace": [
         "djangocms-static-ace",
-    ]
+    ],
 }
 
 CLASSIFIERS = [
@@ -49,12 +49,12 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries",
 ]
 
-project_urls={
-        'Documentation': 'https://djangocms-frontend.readthedocs.io',
-        'Release notes': 'https://github.com/django-cms/djangocms-frontend/blob/master/CHANGELOG.rst',
-        'Issues': 'https://github.com/django-cms/djangocms-frontend/issues',
-        'Source': 'https://github.com/django-cms/djangocms-frontend',
-    }
+project_urls = {
+    "Documentation": "https://djangocms-frontend.readthedocs.io",
+    "Release notes": "https://github.com/django-cms/djangocms-frontend/blob/master/CHANGELOG.rst",
+    "Issues": "https://github.com/django-cms/djangocms-frontend/issues",
+    "Source": "https://github.com/django-cms/djangocms-frontend",
+}
 
 
 setup(
