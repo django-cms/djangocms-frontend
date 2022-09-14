@@ -1,4 +1,4 @@
-{% load cms_tags sekizai_tags %}{% spaceless %}
+{% load cms_tags sekizai_tags %}{% spaceless %}{# djlint:off #}
 {% if instance.child_plugin_instances %}
     {% if parent.plugin_type != "NavigationPlugin" %}<li class="nav-item">
         <li class="{{ item|default:"nav" }}-item {{ drop|default:"dropdown" }}">
@@ -21,7 +21,7 @@
     {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
         <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
     {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
-{% endif %}
+{% endif %}{# djlint:on #}
 {% endspaceless %}
 {% addtoblock "css" %}
     <style>

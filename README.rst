@@ -160,16 +160,16 @@ See readthedocs for the `documentation
     :alt: Documentation Status
 
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/fsbraun/djangocms-frontend
+   :target: https://codecov.io/gh/django-cms/djangocms-frontend
 
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
    :target: https://pypi.org/project/djangocms-frontend/
 
-.. |django| image:: https://img.shields.io/badge/django-3.2-blue.svg
+.. |django| image:: https://img.shields.io/badge/django-3.2%204.0-blue.svg
    :target: https://www.djangoproject.com/
 
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
    :target: https://www.django-cms.org/
 
 .. |djangocms4| image:: https://img.shields.io/badge/django%20CMS-4-blue.svg
-   :target: https://www.django-cms.org/
+   :target: https://www.django-cms.org/en/preview-django-cms-40/
