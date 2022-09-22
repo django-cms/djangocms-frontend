@@ -9,7 +9,7 @@ from ... import settings
 from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
 from ...common.spacing import SpacingFormMixin
-from ...fields import AttributesFormField, IconGroup, TagTypeFormField, HTMLFormField
+from ...fields import AttributesFormField, HTMLFormField, IconGroup, TagTypeFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import content

@@ -55,6 +55,7 @@ def json_dumps(data):
     """Converts data to JSON forcing text on lazy gettext translation"""
     return mark_safe(json.dumps(data, cls=LazyEncoder))
 
+
 @register.filter
 def html_safe(data):
     if HTMLsanitized:
@@ -65,13 +66,12 @@ def html_safe(data):
 @register.filter
 def safe_caption(data):
     if data[:3] == "<p>" and data[-4:] == "</p>":
-        block = data [3:-4]
+        block = data[3:-4]
         if "<p>" not in block:
             data = block
     if HTMLsanitized:
         return safe(data)
     return data
-
 
 
 @register.simple_tag(takes_context=True)

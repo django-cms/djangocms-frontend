@@ -12,8 +12,8 @@ from djangocms_frontend.fields import (
 )
 
 from ... import settings
-from ...helpers import first_choice
 from ...fields import HTMLFormField
+from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import carousel
 from ..link.forms import AbstractLinkForm
