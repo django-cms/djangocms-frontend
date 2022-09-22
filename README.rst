@@ -4,18 +4,18 @@
 
 |pypi| |docs| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**django CMS Frontend** is a plugin bundle which builds on from & improves
+**django CMS Frontend** is a plugin bundle which builds on and improves
 the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
 Its objective is to provide a set of popular frontend components independent of the
 currently used frontend framework such as Bootstrap, or its specific version.
 
 .. image:: preview.png
 
-**************
- Key features
-**************
+Key features
+============
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3 and 4.
+-  Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
+   and the new upcoming major django CMS 4.
 
 -  **Separation of plugins from css framework**, i.e. no need to
    rebuild you site's plugin tree if css framework is changed in the
@@ -35,12 +35,9 @@ currently used frontend framework such as Bootstrap, or its specific version.
 -  **Extensible** within the project and with separate project (e.g. a
    theme app)
 
--  **Accordion** plugin
 
-
-*************
- Description
-*************
+Description
+===========
 
 The plugins are framework agnostic and the framework can be changed by
 adapting your project's settings. Also, it is designed to avoid having
@@ -58,21 +55,22 @@ The link plugin has been rewritten to not only allow internal links to other
 CMS pages, but also to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
-Feedback
-========
-
-This project is in a early stage. All feedback is welcome! Please
-mail me at fsbraun(at)gmx.de
-
-Also, all contributions are welcome.
-
 Contributing
 ============
 
-This is a an open-source project. We'll be delighted to receive your
+Because this is a an open-source project, we welcome everyone to
+`get involved in the project <https://www.django-cms.org/en/contribute/>`_ and
+`receive a reward <https://www.django-cms.org/en/bounty-program/>`_ for their contribution.
+Become part of a fantastic community and help us make django CMS the best CMS in the world.
+
+We'll be delighted to receive your
 feedback in the form of issues and pull requests. Before submitting your
 pull request, please review our `contribution guidelines
 <http://docs.django-cms.org/en/latest/contributing/index.html>`_.
+
+The project makes use of git pre-commit hooks to maintain code quality.
+Please follow the installation steps to get `pre-commit <https://pre-commit.com/#installation>`_
+setup in your development environment.
 
 We're grateful to all contributors who have helped create and maintain
 this package. Contributors are listed at the `contributors
