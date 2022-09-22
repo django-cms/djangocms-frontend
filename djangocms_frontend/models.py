@@ -64,7 +64,8 @@ class FrontendUIItem(CMSPlugin):
             f'{item}="{conditional_escape(value)}"' if value else f"{item}"
             for item, value in attributes.items()
         )
-        return mark_safe(" " + " ".join(parts)) if parts else ""
+        attributes_string = " ".join(parts)
+        return mark_safe(" " + attributes_string) if attributes_string else ""
 
     def save(self, *args, **kwargs):
         self.ui_item = self.__class__.__name__

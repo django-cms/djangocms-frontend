@@ -9,7 +9,7 @@ from ... import settings
 from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
 from ...common.spacing import SpacingFormMixin
-from ...fields import AttributesFormField, IconGroup, TagTypeFormField
+from ...fields import AttributesFormField, IconGroup, TagTypeFormField, HTMLFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import content
@@ -86,16 +86,14 @@ class BlockquoteForm(
             ]
         }
 
-    quote_content = forms.CharField(
+    quote_content = HTMLFormField(
         label=_("Quote"),
         initial="",
         required=True,
-        widget=forms.Textarea(),
     )
-    quote_origin = forms.CharField(
-        label=_("Cite"),
+    quote_origin = HTMLFormField(
+        label=_("Source"),
         required=False,
-        widget=forms.Textarea(),
     )
     quote_alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -130,7 +128,7 @@ class FigureForm(
             ]
         }
 
-    figure_caption = forms.CharField(
+    figure_caption = HTMLFormField(
         label=_("Caption"),
         initial="",
         required=True,

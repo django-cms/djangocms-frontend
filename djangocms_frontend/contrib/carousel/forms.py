@@ -1,7 +1,6 @@
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
-from djangocms_text_ckeditor.fields import HTMLFormField
 from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
@@ -14,6 +13,7 @@ from djangocms_frontend.fields import (
 
 from ... import settings
 from ...helpers import first_choice
+from ...fields import HTMLFormField
 from ...models import FrontendUIItem
 from .. import carousel
 from ..link.forms import AbstractLinkForm

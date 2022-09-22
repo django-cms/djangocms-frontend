@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.forms import TextInput
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
@@ -186,3 +187,11 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("attrs", {"class": "auto-field"})
         super().__init__(*args, **kwargs)
+
+
+try:
+    from djangocms_text_ckeditor.fields import HTMLFormField
+    HTMLsanitized = True
+except ModuleNotFoundError:
+    HTMLFormField = forms.CharField
+    HTMLsanitized = False

@@ -3,11 +3,13 @@ import json
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
+from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
 
 from djangocms_frontend import settings
+from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
 
 register = template.Library()
@@ -52,6 +54,24 @@ class LazyEncoder(DjangoJSONEncoder):
 def json_dumps(data):
     """Converts data to JSON forcing text on lazy gettext translation"""
     return mark_safe(json.dumps(data, cls=LazyEncoder))
+
+@register.filter
+def html_safe(data):
+    if HTMLsanitized:
+        return safe(data)
+    return data
+
+
+@register.filter
+def safe_caption(data):
+    if data[:3] == "<p>" and data[-4:] == "</p>":
+        block = data [3:-4]
+        if "<p>" not in block:
+            data = block
+    if HTMLsanitized:
+        return safe(data)
+    return data
+
 
 
 @register.simple_tag(takes_context=True)

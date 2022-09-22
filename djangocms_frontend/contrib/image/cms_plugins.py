@@ -60,7 +60,6 @@ class ImagePlugin(
                     "use_responsive_image",
                     ("width", "height"),
                     "alignment",
-                    "caption_text",
                 ),
             },
         ),
