@@ -189,7 +189,7 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
 
 
 try:
-    from djangocms_text_ckeditor.fields import HTMLFormField
+    from djangocms_text_ckeditor.fields import HTMLFormField  # noqa
     HTMLsanitized = True
 except ModuleNotFoundError:
     HTMLFormField = forms.CharField
