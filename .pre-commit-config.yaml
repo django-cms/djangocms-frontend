@@ -1,14 +1,20 @@
 ci:
-  autofix_prs: false
+    autofix_commit_msg: |
+        ci: auto fixes from pre-commit hooks
+
+        for more information, see https://pre-commit.ci
+    autofix_prs: false
+    autoupdate_commit_msg: 'ci: pre-commit autoupdate'
+    autoupdate_schedule: monthly
 
 repos:
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.34.0
+  rev: v2.38.0
   hooks:
     - id: pyupgrade
       args: [ "--py37-plus" ]
 - repo: https://github.com/adamchainz/django-upgrade
-  rev: '1.7.0'
+  rev: '1.10.0'
   hooks:
     - id: django-upgrade
       args: [ --target-version, "2.2" ]
@@ -18,7 +24,7 @@ repos:
     - id: isort
       name: isort (python)
 - repo: https://github.com/PyCQA/flake8
-  rev: 4.0.1
+  rev: 5.0.4
   hooks:
     - id: flake8
       additional_dependencies:

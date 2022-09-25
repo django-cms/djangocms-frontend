@@ -1,6 +1,7 @@
 a[data-pk] {
     position: relative;
-    &::after {
+
+    &:after {
         content: attr(data-pk);
         visibility: hidden;
         width: auto;
@@ -17,7 +18,8 @@ a[data-pk] {
         left: 50%;
         margin-left: -50%;
     }
-    &:hover::after {
+
+    &:hover:after {
         visibility: visible;
     }
 }

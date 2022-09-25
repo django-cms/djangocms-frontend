@@ -2,6 +2,18 @@
 Changelog
 =========
 
+1.0.0
+==========
+* Fix packages.json, gulpfile.js to allow automatic build of js and css
+* Fix accordion markup
+* Fix dark mode for select2 widget
+* Fix lint errors in scss files
+* removed forms app
+* Minor docs corrections
+* For the boostrap5 base template include bootstrap v5.2.1, jQuery 3.6.1
+* Base template respects admin color scheme
+* Fix for ``Image`` plugin where the associated ``filer.Image`` has been deleted.
+
 0.9.4
 =====
 

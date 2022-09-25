@@ -33,7 +33,7 @@ class ButtonGroup(forms.RadioSelect):
         css = {"all": ("djangocms_frontend/css/button_group.css",)}
 
 
-class ColoredButtonGroup(ButtonGroup):
+class ColoredButtonGroup(ButtonGroup):  # lgtm [py/missing-call-to-init]
     option_template_name = (
         "djangocms_frontend/admin/widgets/button_group_color_option.html"
     )
@@ -46,7 +46,7 @@ class ColoredButtonGroup(ButtonGroup):
         super().__init__(*args, **kwargs)
 
 
-class IconGroup(ButtonGroup):
+class IconGroup(ButtonGroup):  # lgtm [py/missing-call-to-init]
     option_template_name = "djangocms_frontend/admin/widgets/icon_group_option.html"
 
     def __init__(self, *args, **kwargs):
@@ -54,7 +54,7 @@ class IconGroup(ButtonGroup):
         super().__init__(*args, **kwargs)
 
 
-class IconMultiselect(forms.CheckboxSelectMultiple):
+class IconMultiselect(forms.CheckboxSelectMultiple):  # lgtm [py/missing-call-to-init]
     template_name = "djangocms_frontend/admin/widgets/button_group.html"
     option_template_name = "djangocms_frontend/admin/widgets/icon_group_option.html"
 
@@ -66,7 +66,7 @@ class IconMultiselect(forms.CheckboxSelectMultiple):
         super().__init__(*args, **kwargs)
 
 
-class OptionalDeviceChoiceField(forms.MultipleChoiceField):
+class OptionalDeviceChoiceField(forms.MultipleChoiceField):  # lgtm [py/missing-call-to-init]
     def __init__(self, **kwargs):
         kwargs.setdefault("choices", settings.DEVICE_CHOICES)
         kwargs.setdefault("initial", None)
@@ -169,7 +169,7 @@ class TagTypeField(models.CharField):
         super().__init__(*args, **kwargs)
 
 
-class TagTypeFormField(forms.ChoiceField):
+class TagTypeFormField(forms.ChoiceField):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label", _("Tag type"))
         kwargs.setdefault("choices", settings.TAG_CHOICES)
@@ -179,7 +179,7 @@ class TagTypeFormField(forms.ChoiceField):
         super().__init__(*args, **kwargs)
 
 
-class AutoNumberInput(forms.NumberInput):
+class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
     class Media:
         js = ("djangocms_frontend/js/auto_input.js",)
 

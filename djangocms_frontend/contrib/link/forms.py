@@ -36,7 +36,7 @@ from .helpers import get_choices, get_object_for_value
 if "djangocms_icon" in django_settings.INSTALLED_APPS:
     from djangocms_icon.fields import IconField
 else:
-    class IconField(forms.CharField):
+    class IconField(forms.CharField):  # lgtm [py/missing-call-to-init]
         def __init__(self, *args, **kwargs):
             kwargs["widget"] = forms.HiddenInput
             super().__init__(*args, **kwargs)

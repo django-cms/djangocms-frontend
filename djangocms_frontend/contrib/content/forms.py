@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
@@ -28,6 +29,13 @@ class CodeForm(
     Content > "Code" Plugin
     https://getbootstrap.com/docs/5.0/content/code/
     """
+
+    class Media:
+        js = (
+            "admin/vendor/ace/ace.js"
+            if "djangocms_static_ace" in django_settings.INSTALLED_APPS
+            else "https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ace.js",
+        )
 
     class Meta:
         model = FrontendUIItem

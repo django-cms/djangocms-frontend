@@ -31,14 +31,22 @@ class ImageMixin:
         # calculate height when not given according to the
         # golden ratio or fallback to the image size
         if not height and width:
-            height = int(width / PICTURE_RATIO)
+            height = width / PICTURE_RATIO
         elif not width and height:
-            width = int(height * PICTURE_RATIO)
+            width = height * PICTURE_RATIO
         elif not width and not height and getattr(self, "picture", None):
             if self.rel_image:
-                width = int(self.rel_image.width)
-                height = int(self.rel_image.height)
-
+                width = self.rel_image.width
+                height = self.rel_image.height
+            else:
+                width = 0
+                height = 0
+        else:
+            # If no information is available on the image size whatsoever,
+            # make it 640px wide and use PICTURE_RATIO
+            width, height = 640, 640 / PICTURE_RATIO
+        width = int(width)
+        height = int(height)
         return {
             "size": (width, height),
             "crop": crop,
@@ -78,19 +86,26 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
             return None
 
         srcset = []
-        thumbnailer = get_thumbnailer(self.rel_image)
-        picture_options = self.get_size(self.width, self.height)
-        picture_width = picture_options["size"][0]
-        thumbnail_options = {"crop": picture_options["crop"]}
-        breakpoints = getattr(
-            settings,
-            "DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS",
-            [576, 768, 992],
-        )
 
-        for size in filter(lambda x: x < picture_width, breakpoints):
-            thumbnail_options["size"] = (size, size)
-            srcset.append((int(size), thumbnailer.get_thumbnail(thumbnail_options)))
+        try:
+            thumbnailer = get_thumbnailer(self.rel_image)
+
+            picture_options = self.get_size(self.width, self.height)
+            picture_width = picture_options["size"][0]
+            thumbnail_options = {"crop": picture_options["crop"]}
+            breakpoints = getattr(
+                settings,
+                "DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS",
+                [576, 768, 992],
+            )
+
+            for size in filter(lambda x: x < picture_width, breakpoints):
+                thumbnail_options["size"] = (size, size)
+                srcset.append((int(size), thumbnailer.get_thumbnail(thumbnail_options)))
+        except ValueError:
+            # get_thumbnailer() raises this if it can't establish a `relative_name`.
+            # This may mean that the filer image has been deleted
+            pass
 
         return srcset
 
@@ -122,8 +137,14 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
             else (),
         }
 
-        thumbnailer = get_thumbnailer(self.rel_image)
-        return thumbnailer.get_thumbnail(thumbnail_options).url
+        try:
+            thumbnailer = get_thumbnailer(self.rel_image)
+            url = thumbnailer.get_thumbnail(thumbnail_options).url
+        except ValueError:
+            # get_thumbnailer() raises this if it can't establish a `relative_name`.
+            # This may mean that the filer image has been deleted
+            url = ''
+        return url
 
     def get_short_description(self):
         if self.external_picture:

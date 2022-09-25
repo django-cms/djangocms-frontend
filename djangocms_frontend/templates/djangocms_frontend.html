@@ -2,8 +2,8 @@
     <html lang="{{ LANGUAGE_CODE }}">
         <head>
             <meta charset="utf-8"/>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
             {% block meta %}
                 <meta name="description" content="{% page_attribute meta_description %}"/>
                 <meta property="og:type" content="website"/>
@@ -33,7 +33,7 @@
     {% endblock content %}
     {% block base_js %}{% endblock %}
 {% endspaceless %}{% render_block 'js' %}{% spaceless %}
-    {% block end_js  %}{% endblock %}
+    {% block end_js %}{% endblock %}
     {% block bottom_css %}{% endblock %}
     </body>
     </html>{% endspaceless %}

@@ -26,10 +26,14 @@ by adding an option:
 
 .. code::
 
-    djangocms-frontend[reCaptcha]  # Installs django-recaptcha enabling reCaptcha for forms
     djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
-    djangocms-frontend[reCaptcha, djangocms-icon]  # comma-separate multiple dependencies
+    djangocms-frontend[static-ace]  # Installs djangocms-static-ace to include the ace code editor in static files
+    djangocms-frontend[static-ace, djangocms-icon]  # comma-separate multiple dependencies
 
+``djangocms-frontend[static-ace]`` is useful if your project cannot or should not
+access a CDN to load the `ace code editor <https://ace.c9.io>`_ for the code plugin.
+Please be sure to in this case also add ``"djangocms_static_ace"`` to your
+project's ``INSTALLED_APPS``.
 
 Make apps available to your django project
 ==========================================
@@ -38,25 +42,24 @@ Add the following entries to your ``INSTALLED_APPS``:
 
    .. code::
 
-      'djangocms_icon',  # optional
-      'django_recaptcha',  # optional
-      'easy_thumbnails',
-      'djangocms_frontend',
-      'djangocms_frontend.contrib.accordion',
-      'djangocms_frontend.contrib.alert',
-      'djangocms_frontend.contrib.badge',
-      'djangocms_frontend.contrib.card',
-      'djangocms_frontend.contrib.carousel',
-      'djangocms_frontend.contrib.collapse',
-      'djangocms_frontend.contrib.content',
-      'djangocms_frontend.contrib.grid',
-      'djangocms_frontend.contrib.image',
-      'djangocms_frontend.contrib.jumbotron',
-      'djangocms_frontend.contrib.link',
-      'djangocms_frontend.contrib.listgroup',
-      'djangocms_frontend.contrib.media',
-      'djangocms_frontend.contrib.tabs',
-      'djangocms_frontend.contrib.utilities',
+      "djangocms_icon",  # optional
+      "easy_thumbnails",
+      "djangocms_frontend",
+      "djangocms_frontend.contrib.accordion",
+      "djangocms_frontend.contrib.alert",
+      "djangocms_frontend.contrib.badge",
+      "djangocms_frontend.contrib.card",
+      "djangocms_frontend.contrib.carousel",
+      "djangocms_frontend.contrib.collapse",
+      "djangocms_frontend.contrib.content",
+      "djangocms_frontend.contrib.grid",
+      "djangocms_frontend.contrib.image",
+      "djangocms_frontend.contrib.jumbotron",
+      "djangocms_frontend.contrib.link",
+      "djangocms_frontend.contrib.listgroup",
+      "djangocms_frontend.contrib.media",
+      "djangocms_frontend.contrib.tabs",
+      "djangocms_frontend.contrib.utilities",
 
 .. note :: Using Django 2.2 to 3.1
 
@@ -275,12 +278,12 @@ djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
 
 .. warning::
 
-    The order of the apps in ``INSTALLED_APPS`` is cruicial.
+    The order of the apps in ``INSTALLED_APPS`` is **cruicial**.
 
     1. First is ``djangocms_link`` which is needed by ``djangocms_bootstrap4``,
     2. second come all ``djangocms_bootstrap4`` plugins.
         ``djangocms_bootstrap4.contrib.bootstrap4_link`` uninstalls the Link
-        plugin of ``djangocms_link```
+        plugin of ``djangocms_link``
     3. At last come all ``djangocms_frontend`` apps.
 
 .. code::

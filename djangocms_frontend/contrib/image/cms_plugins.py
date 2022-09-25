@@ -65,7 +65,7 @@ class ImagePlugin(
             },
         ),
         (
-            _("Cropping settings"),
+            _("Cropping"),
             {
                 "classes": ("collapse",),
                 "fields": (

@@ -1,8 +1,7 @@
 {% extends "admin/cms/page/plugin/change_form.html" %}
 {% load static %}
-
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}"/>
     <script src="{% static 'djangocms_frontend/js/bundle.base.js' %}"></script>
     {{ block.super }}
 {% endblock %}
@@ -33,11 +32,11 @@
         <div class="djangocms-frontend tab-content">
             {% for fieldset in adminform %}
                 {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
-                    {% if  forloop.counter != 1 %}</div>{% endif %}
+                    {% if forloop.counter != 1 %}</div>{% endif %}
                     <div class="tab-pane fade" id="tab-{{ forloop.counter }}" role="tabpanel">
                 {% endif %}
                 {% include "djangocms_frontend/admin/includes/fieldset.html" %}
-            {% endfor %}</div>
+            {% endfor %}{# djlint:off #}</div>
         </div>
-    </div>
+    </div>{# djlint:on #}
 {% endblock %}

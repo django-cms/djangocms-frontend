@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.carousel",
     "djangocms_frontend.contrib.collapse",
     "djangocms_frontend.contrib.content",
-    "djangocms_frontend.contrib.frontend_forms",
     "djangocms_frontend.contrib.grid",
     "djangocms_frontend.contrib.jumbotron",
     "djangocms_frontend.contrib.link",
@@ -120,3 +119,5 @@ SITE_ID = 1
 ROOT_URLCONF = "tests.urls"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CMS_CONFIRM_VERSION4 = True  # Needed for v4, neglected in v3
