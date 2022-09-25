@@ -48,7 +48,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             or '<nav class="navbar-light navbar-expand-xl navbar">'
             in response.content.decode("utf-8")
         )
-        self.assertContains(response, '<div class="container"></div>')
+        self.assertContains(response, '<div class="container"><ul class="navbar-nav"></ul></div>')
 
         # add more options
         container = add_plugin(
