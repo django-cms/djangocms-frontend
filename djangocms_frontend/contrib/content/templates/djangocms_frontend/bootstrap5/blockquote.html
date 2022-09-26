@@ -1,8 +1,8 @@
-{% load cms_tags %}
+{% load cms_tags frontend %}
 {% spaceless %}
     {# djlint:off #}
     {% if instance.quote_origin %}
-        <figure {{ instance.get_attributes }}>
+        <figure{{ instance.get_attributes }}>
         <blockquote class="blockquote">
     {% else %}
         <blockquote{{ instance.get_attributes }}>
@@ -10,13 +10,13 @@
     {# djlint:on #}
         {% for plugin in instance.child_plugin_instances %}
             {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
-        {% empty %}{{ instance.quote_content }}{% endfor %}
+        {% empty %}{{ instance.quote_content|html_safe }}{% endfor %}
     {# djlint:off #}
     </blockquote>
     {# djlint:on #}
     {% if instance.quote_origin %}
         <figcaption class="blockquote-footer">
-            <cite title="{{ instance.quote_origin }}">{{ instance.quote_origin }}</cite>
+            {{ instance.quote_origin|safe_caption }}
         </figcaption>
         </figure>
     {% endif %}

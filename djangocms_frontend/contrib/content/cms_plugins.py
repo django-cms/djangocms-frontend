@@ -72,7 +72,8 @@ class BlockquotePlugin(
             None,
             {
                 "fields": (
-                    ("quote_content", "quote_origin"),
+                    "quote_content",
+                    "quote_origin",
                     "quote_alignment",
                 )
             },

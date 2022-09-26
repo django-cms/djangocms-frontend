@@ -11,8 +11,8 @@
                 <meta property="og:description" content="{% page_attribute meta_description %}"/>
             {% endblock meta %}
             {% block canonical_url %}
-                <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
-                <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+                <link rel="canonical" href="{{ request.build_absolute_uri|urlencode:"&?" }}"/>
+                <meta property="og:url" content="{{ request.build_absolute_uri|urlencode:"&?" }}"/>
             {% endblock canonical_url %}
             {% block fb_meta %}{% endblock fb_meta %}
             <title>{% block title %}{% page_attribute "page_title" %}{% endblock %}</title>

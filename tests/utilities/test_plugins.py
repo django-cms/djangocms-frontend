@@ -80,9 +80,9 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<ul class="empty-toc"></ul>')
-        self.assertContains(response, '<h2 id="id1" >Welcome to django CMS!</h2>')
+        self.assertContains(response, '<h2 id="id1">Welcome to django CMS!</h2>')
         self.assertContains(
-            response, '<h3 id="id2" >How you can benefit from django CMS</h3>'
+            response, '<h3 id="id2">How you can benefit from django CMS</h3>'
         )
         self.assertContains(response, '<ul class="test-class"><li ><a href="#id2" >')
         self.assertContains(response, '<a href="#id1" >')

@@ -2,6 +2,12 @@
 Changelog
 =========
 
+* Remove superflous space in some tags
+* Fix figure and blockquote caption
+* Fix HTML injection security bug
+* Removed caption from Image plugin (use figure instead)
+
+
 1.0.0
 ==========
 * Fix packages.json, gulpfile.js to allow automatic build of js and css

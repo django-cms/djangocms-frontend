@@ -80,7 +80,6 @@ class ImageForm(
                 "width",
                 "height",
                 "alignment",
-                "caption_text",
                 "link_attributes",
                 "use_automatic_scaling",
                 "use_crop",
@@ -146,14 +145,6 @@ class ImageForm(
         choices=get_alignment(),
         required=False,
         help_text=_("Aligns the image according to the selected option."),
-    )
-    caption_text = forms.CharField(
-        label=_("Caption text"),
-        required=False,
-        widget=forms.Textarea(attrs=dict(rows=2)),
-        help_text=_(
-            "Provide a description, attribution, copyright or other information."
-        ),
     )
     link_attributes = AttributesFormField(
         label=_("Link attributes"),
