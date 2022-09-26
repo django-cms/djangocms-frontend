@@ -160,7 +160,7 @@ See readthedocs for the `documentation
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/django-cms/djangocms-frontend
 
-.. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
+.. |python| image:: https://img.shields.io/badge/python-3.8+-blue.svg
    :target: https://pypi.org/project/djangocms-frontend/
 
 .. |django| image:: https://img.shields.io/badge/django-3.2%204.0-blue.svg
