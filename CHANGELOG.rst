@@ -2,6 +2,7 @@
 Changelog
 =========
 
+* Add Django 4 and Python 3.10 support
 * Remove superflous space in some tags
 * Fix figure and blockquote caption
 * Fix HTML injection security bug
