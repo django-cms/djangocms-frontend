@@ -2,11 +2,12 @@
 Changelog
 =========
 
-* Add Django 4 and Python 3.10 support
+* Add Django 4.0, 4.1 and Python 3.10 support
 * Remove superflous space in some tags
 * Fix figure and blockquote caption
 * Fix HTML injection security bug
 * Removed caption from Image plugin (use figure instead)
+* Fixed js bug which for icon preview
 
 
 1.0.0

@@ -1,11 +1,23 @@
+from importlib import import_module
+
 from djangocms_frontend import settings
 
-if settings.framework == "bootstrap5":
-    from .bootstrap5.responsive import ResponsiveFormMixin, ResponsiveMixin
-else:
+try:
+    module = import_module(f"..{settings.framework}.responsive", __name__)
+    ResponsiveFormMixin = module.ResponsiveFormMixin
+    ResponsiveMixin = module.ResponsiveMixin
+except ModuleNotFoundError:
 
     class ResponsiveMixin:
         pass
 
     class ResponsiveFormMixin:
         pass
+
+
+def export(*args):
+    """Dummy function to avoid linters to complain about unused imports"""
+    return args
+
+
+export(ResponsiveFormMixin, ResponsiveMixin)
