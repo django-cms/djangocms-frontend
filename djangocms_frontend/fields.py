@@ -190,8 +190,6 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
 
 def export(*args):
     """Dummy function to avoid linters to complain about unused imports"""
-    if len(args) == 1:
-        return args[0]
     return args
 
 
@@ -201,5 +199,4 @@ try:
 except ModuleNotFoundError:
     HTMLFormField = forms.CharField
     HTMLsanitized = False
-
-export(HTMLsanitized, HTMLsanitized)
+export(HTMLFormField, HTMLsanitized)
