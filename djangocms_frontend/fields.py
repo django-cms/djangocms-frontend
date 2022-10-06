@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
 from . import settings
-from .helpers import first_choice, export
+from .helpers import export, first_choice
 
 
 class TemplateChoiceMixin:
