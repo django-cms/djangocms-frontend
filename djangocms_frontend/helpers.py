@@ -133,7 +133,15 @@ def delete_plugin(plugin):
 
 
 def coerce_decimal(value):
+    """Force value to be converted to decimal.Decimal or return None"""
     try:
         return decimal.Decimal(value)
     except TypeError:
         return None
+
+
+def export(*args):
+    """Dummy function to avoid linters to complain about unused imports"""
+    return args
+
+

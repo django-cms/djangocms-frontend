@@ -1,6 +1,7 @@
 from importlib import import_module
 
 from djangocms_frontend import settings
+from djangocms_frontend.helpers import export
 
 try:
     module = import_module(f"..{settings.framework}.responsive", __name__)
@@ -13,11 +14,6 @@ except ModuleNotFoundError:
 
     class ResponsiveFormMixin:
         pass
-
-
-def export(*args):
-    """Dummy function to avoid linters to complain about unused imports"""
-    return args
 
 
 export(ResponsiveFormMixin, ResponsiveMixin)

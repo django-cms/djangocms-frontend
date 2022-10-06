@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
 from . import settings
-from .helpers import first_choice
+from .helpers import first_choice, export
 
 
 class TemplateChoiceMixin:
@@ -186,11 +186,6 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("attrs", {"class": "auto-field"})
         super().__init__(*args, **kwargs)
-
-
-def export(*args):
-    """Dummy function to avoid linters to complain about unused imports"""
-    return args
 
 
 try:
