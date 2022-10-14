@@ -2,7 +2,6 @@ from importlib import import_module
 
 from djangocms_frontend import settings
 
-
 try:
     module = import_module(f"..{settings.framework}.background", __name__)
     BackgroundFormMixin = module.BackgroundFormMixin
