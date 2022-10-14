@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_attributes_field import fields
 
 from . import settings
-from .helpers import export, first_choice
+from .helpers import first_choice
 
 
 class TemplateChoiceMixin:
@@ -194,4 +194,3 @@ try:
 except ModuleNotFoundError:
     HTMLFormField = forms.CharField
     HTMLsanitized = False
-export(HTMLFormField, HTMLsanitized)

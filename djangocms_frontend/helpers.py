@@ -138,8 +138,3 @@ def coerce_decimal(value):
         return decimal.Decimal(value)
     except TypeError:
         return None
-
-
-def export(*args):
-    """Dummy function to avoid linters to complain about unused imports"""
-    return args
