@@ -1,10 +1,9 @@
 version: 2
 updates:
-- package-ecosystem: github-actions
+- package-ecosystem: "github-actions"
   directory: "/"
   commit-message:
       prefix: "ci:"
       include: "scope"
   schedule:
-    interval: weekly
-    
+    interval: "weekly"
