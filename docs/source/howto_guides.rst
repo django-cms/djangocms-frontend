@@ -218,7 +218,7 @@ Next, you add some fields to the ``GridContainerForm`` (in
     from django.db.models import ManyToOneRel
     from django.utils.translation import gettext as _
     from djangocms_frontend import settings
-    from entangled.frontend_forms import EntangledModelFormMixin
+    from entangled.forms import EntangledModelFormMixin
     from filer.fields.image import AdminImageFormField, FilerImageField
     from filer.models import Image
 
@@ -344,7 +344,7 @@ Then, a new template is needed (in
 
 .. code::
 
-    {% load cms_tags static %}{% spaceless %}
+    {% load cms_tags sekizai_tags static %}{% spaceless %}
       <{{ instance.tag_type }}{{ instance.get_attributes }}
       {% if instance.background_opacity and not instance.image %}
         {% if instance.container_blur %}
@@ -378,7 +378,7 @@ Then, a new template is needed (in
     {# Only add if the css is not included in your site's global css #}
     {% addtoblock 'css' %}
         <link rel="stylesheet" href="{% static 'css/background_image.css' %}">
-    {% endaddtoblock
+    {% endaddtoblock %}
 
 
 Finally, a set of css style complement the new template. The styles can either
