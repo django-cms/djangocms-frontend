@@ -11,7 +11,7 @@ REQUIREMENTS = [
     "djangocms-attributes-field>=1",
     "djangocms-text-ckeditor>=3.1.0",
     "django-select2",
-    "django-entangled==0.4",
+    "django-entangled",
 ]
 
 EXTRA_REQUIREMENTS = {
