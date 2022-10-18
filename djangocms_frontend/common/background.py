@@ -1,8 +1,12 @@
+from importlib import import_module
+
 from djangocms_frontend import settings
 
-if settings.framework == "bootstrap5":
-    from .bootstrap5.background import BackgroundFormMixin, BackgroundMixin
-else:
+try:
+    module = import_module(f"..{settings.framework}.background", __name__)
+    BackgroundFormMixin = module.BackgroundFormMixin
+    BackgroundMixin = module.BackgroundMixin
+except ModuleNotFoundError:
 
     class BackgroundMixin:
         pass

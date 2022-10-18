@@ -39,7 +39,7 @@ jobs:
         uses: liskin/gh-problem-matcher-wrap@v1
         with:
           linters: isort
-          run: isort -c -rc -df djangocms_frontend
+          run: isort -c --df djangocms_frontend
   djlint:
     name: djlint
     runs-on: ubuntu-latest

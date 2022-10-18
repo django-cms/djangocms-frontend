@@ -46,8 +46,6 @@ try:  # V4 test?
         "djangocms_versioning",
         "djangocms_alias",
         "djangocms_url_manager",
-        "djangocms_pageadmin",
-        "djangocms_version_locking",
     ]
 except ImportError:  # Nope
     pass

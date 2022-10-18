@@ -17,11 +17,7 @@ from djangocms_frontend.fields import (
     IconGroup,
     TagTypeFormField,
 )
-from djangocms_frontend.helpers import (
-    first_choice,
-    link_to_framework_doc,
-    mark_safe_lazy,
-)
+from djangocms_frontend.helpers import first_choice, link_to_framework_doc
 from djangocms_frontend.models import FrontendUIItem
 
 from ...common.title import TitleFormMixin
@@ -65,12 +61,10 @@ class GridContainerForm(
         label=_("Container type"),
         choices=GRID_CONTAINER_CHOICES,
         initial=first_choice(GRID_CONTAINER_CHOICES),
-        help_text=mark_safe_lazy(
-            _(
-                "Defines if the grid should use fixed width, "
-                "fluid width or the container should fill the full width without "
-                "margins or padding."
-            )
+        help_text=_(
+            "Defines if the grid should use fixed width, "
+            "fluid width or the container should fill the full width without "
+            "margins or padding."
         ),
     )
     attributes = AttributesFormField()

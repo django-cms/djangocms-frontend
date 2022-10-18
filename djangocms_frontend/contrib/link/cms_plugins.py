@@ -112,4 +112,5 @@ class LinkPlugin(
 
 if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     #  Only register plugin if in INSTALLED_APPS
+
     plugin_pool.register_plugin(LinkPlugin)
