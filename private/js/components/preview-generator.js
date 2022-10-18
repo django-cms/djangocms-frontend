@@ -171,7 +171,7 @@ export default class PreviewGenerator {
                                 <use></use>
                             </svg>
                         </span>
-                    `).find("use").attr("xlink:href","${staticPath}${spritePath}#${icon}");
+                    `).find("use").attr("xlink:href", `${staticPath}${spritePath}#${icon}`);
                 } else {
                     $(`.js-icon-${left ? 'left' : 'right'}`).html("<i></i>").find("i")
                     .addClass(iconSetPrefix).addClass(icon);
