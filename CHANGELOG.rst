@@ -2,16 +2,18 @@
 Changelog
 =========
 
+1.0.1
+=====
 * Add Django 4.0, 4.1 and Python 3.10 support
 * Remove superfluous space in some tags
 * Fix figure and blockquote caption
-* Fix HTML injection security bug
 * Removed caption from Image plugin (use figure instead)
 * Fixed js bug for icon preview
+* Fix HTML injection security bug
 
 
 1.0.0
-==========
+=====
 * Fix packages.json, gulpfile.js to allow automatic build of js and css
 * Fix accordion markup
 * Fix dark mode for select2 widget
