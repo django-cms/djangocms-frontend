@@ -5,7 +5,7 @@ Changelog
 1.0.1
 =====
 
-* Add Django 4.0, 4.1 and Python 3.10 support
+* Add Django 4.0, 4.1 and Python 3.10, 3.11 support
 * Remove superfluous space in some tags
 * Fix figure and blockquote caption
 * Fix HTML injection security bug
