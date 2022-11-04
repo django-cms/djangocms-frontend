@@ -18,7 +18,6 @@ jobs:
             dj32_cms39.txt,
             dj32_cms40.txt,
             dj40_cms311.txt,
-            dj41_cms311.txt,
         ]
         os: [
             ubuntu-20.04,
@@ -26,6 +25,8 @@ jobs:
         exclude:
           - python-version: 3.7
             requirements-file: dj40_cms311.txt
+          - python-version: 3.7
+            requirements-file: dj41_cms311.txt
           - python-version: "3.10"
             requirements-file: dj32_cms40.txt
           - python-version: "3.11"
