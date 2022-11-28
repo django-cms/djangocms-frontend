@@ -12,5 +12,5 @@ exclude = '''
 '''
 
 [tool.djlint]
-ignore="H023,T003,H006,H031,D018,H021"
+ignore="H023,T003,H006,H031,D018,H021,H025"
 profile="django"
