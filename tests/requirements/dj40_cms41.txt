@@ -3,6 +3,6 @@
 Django>=4.0,<4.1
 -e git+https://github.com/django-cms/djangocms-text-ckeditor.git@support/4.0.x#egg=djangocms-text-ckeditor
 -e git+https://github.com/django-cms/django-cms.git@develop-4#egg=django-cms
--e git+https://github.com/Aiky30/djangocms-alias.git@feature/django-32-compat#egg=djangocms-alias
--e git+https://github.com/django-cms/djangocms-url-manager.git@master#egg=djangocms-url-manager
+-e git+https://github.com/fsbraun/djangocms-alias.git@feature/master#egg=djangocms-alias
+-e git+https://github.com/fsbraun/djangocms-url-manager.git@master#egg=djangocms-url-manager
 https://github.com/django-cms/djangocms-versioning/tarball/master#egg=djangocms-versioning
