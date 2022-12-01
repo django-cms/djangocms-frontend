@@ -15,6 +15,8 @@ class GetLinkMixin:
     def get_link(self):
         if getattr(self, "url_grouper", None):
             url_grouper = get_related_object(self.config, "url_grouper")
+            if not url_grouper:
+                return ""
             url = url_grouper.get_content(show_draft_content=True)
             # simulate the call to the unauthorized CMSPlugin.page property
             cms_page = self.placeholder.page if self.placeholder_id else None
