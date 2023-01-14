@@ -1,6 +1,5 @@
 coverage
 django-app-helper
-django-treebeard<4.5
 tox
 coverage
 isort
