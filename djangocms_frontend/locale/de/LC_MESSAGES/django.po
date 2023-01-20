@@ -111,7 +111,7 @@ msgstr ""
 "Fenster fest."
 
 #: common/spacing.py:84
-msgid "Please chose a side to which the spacing should be applied."
+msgid "Please choose a side to which the spacing should be applied."
 msgstr "Bitte Seite auswählen, auf die der Abstand angewendet werden soll."
 
 #: common/spacing.py:113
