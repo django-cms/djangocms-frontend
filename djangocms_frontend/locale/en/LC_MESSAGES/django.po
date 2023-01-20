@@ -95,7 +95,7 @@ msgid ""
 msgstr ""
 
 #: common/spacing.py:84
-msgid "Please chose a side to which the spacing should be applied."
+msgid "Please choose a side to which the spacing should be applied."
 msgstr ""
 
 #: common/spacing.py:113
