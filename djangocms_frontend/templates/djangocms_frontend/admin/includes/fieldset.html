@@ -1,4 +1,4 @@
-<fieldset class="module aligned">
+<fieldset class="module aligned {{ fieldset.classes|cut:"collapse" }}">
     {% if fieldset.name and not "collapse" in fieldset.classes %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
