@@ -81,7 +81,7 @@ class SpacingSizeSideField(forms.MultiValueField):  # lgtm [py/missing-call-to-i
     def clean(self, value):
         if value[1] and not value[0]:
             raise ValidationError(
-                _("Please chose a side to which the spacing should be applied."),
+                _("Please choose a side to which the spacing should be applied."),
                 code="incomplete",
             )
         return super().clean(value)

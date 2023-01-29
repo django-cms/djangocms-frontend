@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Mark Walker <theshow@gmail.com>, 2022
-# Fabian Braun <fsbraun@gmx.de>, 2022
+# Mark Walker <theshow@gmail.com>, 2023
+# Fabian Braun <fsbraun@gmx.de>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-22 16:58+0200\n"
-"PO-Revision-Date: 2022-05-05 19:13+0000\n"
-"Last-Translator: Fabian Braun <fsbraun@gmx.de>, 2022\n"
+"PO-Revision-Date: 2023-01-20 15:48+0000\n"
+"Last-Translator: Fabian Braun <fsbraun@gmx.de>, 2023\n"
 "Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +111,7 @@ msgstr ""
 "Fenster fest."
 
 #: common/spacing.py:84
-msgid "Please chose a side to which the spacing should be applied."
+msgid "Please choose a side to which the spacing should be applied."
 msgstr "Bitte Seite auswählen, auf die der Abstand angewendet werden soll."
 
 #: common/spacing.py:113
@@ -625,7 +625,7 @@ msgstr "Quote"
 
 #: contrib/content/forms.py:95
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #: contrib/content/forms.py:132
 msgid "Caption"
@@ -802,7 +802,7 @@ msgstr "Format"
 
 #: contrib/image/cms_plugins.py:67
 msgid "Cropping"
-msgstr ""
+msgstr "Beschneiden"
 
 #: contrib/image/forms.py:25
 msgid "Align left"
@@ -1273,7 +1273,7 @@ msgstr "Navigationsverweis"
 
 #: contrib/navigation/forms.py:45
 msgid "Defines the whole template set for this navigation."
-msgstr ""
+msgstr "Legt die Vorlagen für die Navigation fest."
 
 #: contrib/navigation/forms.py:53
 msgid "Design"
@@ -1285,11 +1285,11 @@ msgstr "Aufgeklappt für Gerät (oder größer)"
 
 #: contrib/navigation/forms.py:81
 msgid "Start level"
-msgstr ""
+msgstr "Start-Ebene"
 
 #: contrib/navigation/forms.py:83
 msgid "Start level of this page tree (0: root, 1: level below root, etc.)"
-msgstr ""
+msgstr "Start-Ebene dieser Seite (0: Wurzel, 1: erste Ebene, ...)"
 
 #: contrib/navigation/forms.py:104
 msgid "Enter brand name or add child plugins for brand icon or image"
@@ -1597,4 +1597,4 @@ msgstr ""
 
 #: settings.py:73
 msgid "Offcanvas"
-msgstr ""
+msgstr "Off-Canvas"
