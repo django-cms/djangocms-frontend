@@ -168,6 +168,59 @@ in your project's ``settings.py``.
     type at least this many letters and search link targets matching this search
     string using an ajax request.
 
+.. note::
+
+    The following settings of djangocms-picture are respected.
+
+.. py:attribute:: settings.DJANGOCMS_PICTURE_ALIGN
+
+    You can override alignment styles with ``DJANGOCMS_PICTURE_ALIGN``, for example::
+
+        DJANGOCMS_PICTURE_ALIGN = [
+            ('top', _('Top Aligned')),
+        ]
+
+    This will generate a class prefixed with ``align-``. The example above
+    would produce a ``class="align-top"``. Adding a ``class`` key to the image
+    attributes automatically merges the alignment with the attribute class.
+
+.. py:attribute:: settings.DJANGOCMS_PICTURE_RATIO
+
+    You can use ``DJANGOCMS_PICTURE_RATIO`` to set the width/height ratio of images
+    if these values are not set explicitly on the image::
+
+        DJANGOCMS_PICTURE_RATIO = 1.618
+
+    We use the `golden ratio <https://en.wikipedia.org/wiki/golden_ratio>`_,
+    approximately 1.618, as a default value for this.
+
+.. py:attribute:: settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES
+
+    You can enable responsive images technique by setting``DJANGOCMS_PICTURE_RESPONSIVE_IMAGES`` to ``True``.
+
+.. py:attribute:: settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS
+
+    If settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES`` is set to ``True``,uploaded images will create thumbnails of 
+    different sizes according to ``DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS`` (which defaults to 
+    ``[576, 768, 992]``) and browser will be responsible for choosing the best image to display (based upon the 
+    screen viewport).
+
+
+.. py:attribute:: settings.DJANGOCMS_PICTURE_TEMPLATES
+
+    This addon provides a ``default`` template for all instances. You can provide
+    additional template choices by adding a ``DJANGOCMS_PICTURE_TEMPLATES``
+    setting::
+
+        DJANGOCMS_PICTURE_TEMPLATES = [
+            ('background', _('Background image')),
+        ]
+
+    You'll need to create the `background` folder inside ``templates/djangocms_picture/``
+    otherwise you will get a *template does not exist* error. You can do this by
+    copying the ``default`` folder inside that directory and renaming it to
+    ``background``.
+
 
 .. py:attribute:: settings.TEXT_SAVE_IMAGE_FUNCTION
 
