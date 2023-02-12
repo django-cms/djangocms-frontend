@@ -71,7 +71,7 @@ setup(
     maintainer_email="info@django-cms.org",
     url="https://github.com/django-cms/djangocms-frontend",
     license="BSD-3-Clause",
-    description="Adds abstract User Interface items as plugins.",
+    description="Adds abstract User Interface items as plugins to django CMS.",
     long_description=open("README.rst").read(),
     long_description_content_type="text/x-rst",
     packages=find_packages(),
