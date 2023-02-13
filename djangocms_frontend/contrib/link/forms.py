@@ -27,8 +27,11 @@ from ...fields import (
 )
 from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
+from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 from .helpers import get_choices, get_object_for_value
+
+mixin_factory = settings.get_forms(link)
 
 # Weak dependency on djangocms_icon
 # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
@@ -298,7 +301,7 @@ else:
                         )
 
 
-class LinkForm(SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
+class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
