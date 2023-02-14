@@ -2,6 +2,11 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Add missing form mixin for link plugin (allowing it to be extended)
+
 1.0.1
 =====
 
