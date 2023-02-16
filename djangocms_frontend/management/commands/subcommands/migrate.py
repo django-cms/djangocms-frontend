@@ -1,3 +1,5 @@
+import importlib
+
 from django.apps import apps
 from django.conf import settings
 from django.db import connection, models
@@ -9,6 +11,7 @@ plugin_names = {}
 
 plugin_migrations = {}
 data_migration = {}
+plugin_prefixes = []
 
 # Bootstrap 4
 if "djangocms_bootstrap4" in apps.all_models:
@@ -16,12 +19,30 @@ if "djangocms_bootstrap4" in apps.all_models:
 
     plugin_migrations.update(bootstrap4_migration.plugin_migrations)
     data_migration.update(bootstrap4_migration.data_migration)
+    plugin_prefixes.append(bootstrap4_migration.plugin_prefix)
 # Styled link
 if "djangocms_styledlink" in apps.all_models:
     from djangocms_frontend.management import styled_link_migration
 
     plugin_migrations.update(styled_link_migration.plugin_migrations)
     data_migration.update(styled_link_migration.data_migration)
+    plugin_prefixes.append(styled_link_migration.plugin_prefix)
+
+additional_migrations = getattr(
+    settings, "DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS", None
+)
+if additional_migrations:
+    if isinstance(additional_migrations, str):
+        additional_migrations = [additional_migrations]
+
+    for migration_module_path in additional_migrations:
+        try:
+            migration_module = importlib.import_module(migration_module_path)
+            plugin_migrations.update(migration_module.plugin_migrations)
+            data_migration.update(migration_module.data_migration)
+            plugin_prefixes.append(migration_module.plugin_prefix)
+        except ModuleNotFoundError:
+            print(f"Warning: can not import migration module: {migration_module_path}.")
 
 
 def migrate_to_djangocms_frontend(apps, schema_editor):
@@ -158,12 +179,13 @@ class Migrate(SubcommandsCommand):
 
     def migrate_to_djangocms_frontend(self):
         from cms.models.pluginmodel import CMSPlugin
+
         self.stdout.write(self.style.SUCCESS("Migrating plugins"))
         self.stdout.write(self.style.SUCCESS("================="))
         changes = migrate_to_djangocms_frontend(apps, None)
         not_migrated = []
         for plugin in CMSPlugin.objects.all():
-            if "Bootstrap4" in plugin.plugin_type:
+            if any([prefix in plugin.plugin_type for prefix in plugin_prefixes]):
                 if plugin.plugin_type not in not_migrated:
                     not_migrated.append(plugin.plugin_type)
                     self.stdout.write(
