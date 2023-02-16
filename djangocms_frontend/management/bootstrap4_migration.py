@@ -517,3 +517,5 @@ data_migration = {
         x, y, "DJANGOCMS_BOOTSTRAP4_CAROUSEL_TEMPLATES", "DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES"
     ),
 }
+
+plugin_prefix = "Bootstrap4"
