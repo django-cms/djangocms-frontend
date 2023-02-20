@@ -2,12 +2,9 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.http import HttpRequest
 
+from djangocms_frontend import settings
 from djangocms_frontend.contrib.link.cms_plugins import LinkPlugin
-from djangocms_frontend.contrib.link.forms import (
-    LinkForm,
-    SmartLinkField,
-    get_templates,
-)
+from djangocms_frontend.contrib.link.forms import LinkForm, SmartLinkField
 from djangocms_frontend.contrib.link.helpers import get_choices
 
 from ..fixtures import DJANGO_CMS4, TestFixture
@@ -135,7 +132,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
     def test_link_form(self):
         request = HttpRequest()
         request.POST = {
-            "template": get_templates()[0][0],
+            "template": settings.LINK_TEMPLATE_CHOICES[0][0],
             "link_type": "link",
         }
         form = LinkForm(request.POST)
