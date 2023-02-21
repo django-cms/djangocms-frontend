@@ -45,18 +45,6 @@ else:
             super().__init__(*args, **kwargs)
 
 
-def get_templates():
-    choices = [
-        ("default", _("Default")),
-    ]
-    choices += getattr(
-        settings,
-        "DJANGOCMS_LINK_TEMPLATES",
-        [],
-    )
-    return choices
-
-
 HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
 MINIMUM_INPUT_LENGTH = getattr(
@@ -327,8 +315,8 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
     )
     template = forms.ChoiceField(
         label=_("Template"),
-        choices=get_templates(),
-        initial=first_choice(get_templates()),
+        choices=settings.LINK_TEMPLATE_CHOICES,
+        initial=first_choice(settings.LINK_TEMPLATE_CHOICES),
     )
     link_stretched = forms.BooleanField(
         label=_("Stretch link"),
