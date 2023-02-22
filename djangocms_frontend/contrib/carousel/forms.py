@@ -7,8 +7,9 @@ from filer.models import Image
 
 from djangocms_frontend.fields import (
     AttributesFormField,
+    ButtonGroup,
     TagTypeFormField,
-    TemplateChoiceMixin, ButtonGroup,
+    TemplateChoiceMixin,
 )
 
 from ... import settings

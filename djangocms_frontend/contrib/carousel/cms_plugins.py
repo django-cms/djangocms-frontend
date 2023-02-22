@@ -6,11 +6,11 @@ from djangocms_frontend.helpers import get_plugin_template
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.background import BackgroundMixin
 from .. import carousel
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
 from .constants import CAROUSEL_TEMPLATE_CHOICES
-from ...common.background import BackgroundMixin
 
 mixin_factory = settings.get_renderer(carousel)
 
