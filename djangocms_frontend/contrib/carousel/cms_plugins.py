@@ -10,6 +10,7 @@ from .. import carousel
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
 from .constants import CAROUSEL_TEMPLATE_CHOICES
+from ...common.background import BackgroundMixin
 
 mixin_factory = settings.get_renderer(carousel)
 
@@ -38,6 +39,7 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
                     ("carousel_controls", "carousel_indicators"),
                     ("carousel_keyboard", "carousel_wrap"),
                     ("carousel_ride", "carousel_pause"),
+                    ("carousel_transition",),
                 )
             },
         ),
@@ -51,7 +53,7 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
 
 @plugin_pool.register_plugin
 class CarouselSlidePlugin(
-    mixin_factory("CarouselSlide"), AttributesMixin, LinkPluginMixin, CMSUIPlugin
+    mixin_factory("CarouselSlide"), AttributesMixin, BackgroundMixin, LinkPluginMixin, CMSUIPlugin
 ):
     """
     Components > "Carousel Slide" Plugin

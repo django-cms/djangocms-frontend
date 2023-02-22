@@ -4,6 +4,8 @@ from djangocms_frontend.contrib.carousel.constants import CAROUSEL_DEFAULT_SIZE
 class CarouselRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes("carousel slide")
+        if instance.config.get("carousel_transition", None):
+            instance.add_classes(instance.carousel_transition)
         return super().render(context, instance, placeholder)
 
 

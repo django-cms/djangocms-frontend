@@ -32,7 +32,7 @@ each collapsable section.
 .. image:: screenshots/accordion-plugins.png
     :width: 394
 
-Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.0/components/accordion/>`_
+Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.3/components/accordion/>`_
 documentation.
 
 .. index::
@@ -58,7 +58,7 @@ the right hand side.
     New features:
         Alerts can have **shadows** to optically lift them.
 
-Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.0/components/alerts/>`_
+Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.3/components/alerts/>`_
 documentation.
 
 .. index::
@@ -76,7 +76,7 @@ plugin, badges are useful, e.g., to mark featured or new headers.
 .. image:: screenshots/badge-example.png
     :width: 180
 
-Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.0/components/badge/>`_
+Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.3/components/badge/>`_
 documentation.
 
 .. index::
@@ -146,7 +146,7 @@ Here is an example of the new card **Image overlay** feature:
 .. image:: screenshots/card-overlay-example.png
     :width: 298
 
-Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.0/components/card/>`_
+Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.3/components/card/>`_
 documentation.
 
 .. index::
@@ -156,15 +156,20 @@ documentation.
 Carousel component
 ******************
 
-A `Carousel <https://getbootstrap.com/docs/5.0/components/carousel/>`_
+A `Carousel <https://getbootstrap.com/docs/5.3/components/carousel/>`_
 is a set of images (potentially with some description) that slide in
 (or fade in) one after the other after a certain amount of time.
+
+Each slide requires a Carousel Slide child plugin. The simplest case specifies an image, potentially a caption and a link which is followed once the slide is clicked.
+
+Since the design of carousels is somewhat opinionated template sets can be specified using the ``DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES`` setting.
+.. note:: A Carousel Slide plugin can have child plugins itself. If an image is specified the child plugins add to the caption. If no image is specified the child plugins make up the slide.
 
 ******************
 Collapse component
 ******************
 
-The `Collapse <https://getbootstrap.com/docs/5.0/components/collapse/>`_
+The `Collapse <https://getbootstrap.com/docs/5.3/components/collapse/>`_
 hides text behind its headline and offers the user a trigger (e.g., a
 button) to reveal itself.
 
