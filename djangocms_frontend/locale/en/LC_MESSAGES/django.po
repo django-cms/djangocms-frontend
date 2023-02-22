@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-22 16:58+0200\n"
+"POT-Creation-Date: 2023-02-22 12:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,8 +168,8 @@ msgstr ""
 #: contrib/accordion/cms_plugins.py:22 contrib/accordion/cms_plugins.py:72
 #: contrib/alert/cms_plugins.py:25 contrib/badge/cms_plugins.py:21
 #: contrib/card/cms_plugins.py:25 contrib/card/cms_plugins.py:86
-#: contrib/card/cms_plugins.py:146 contrib/carousel/cms_plugins.py:25
-#: contrib/carousel/cms_plugins.py:62 contrib/collapse/cms_plugins.py:21
+#: contrib/card/cms_plugins.py:146 contrib/carousel/cms_plugins.py:26
+#: contrib/carousel/cms_plugins.py:64 contrib/collapse/cms_plugins.py:21
 #: contrib/collapse/cms_plugins.py:50 contrib/collapse/cms_plugins.py:76
 #: contrib/content/cms_plugins.py:31 contrib/content/cms_plugins.py:64
 #: contrib/content/cms_plugins.py:99 contrib/grid/cms_plugins.py:37
@@ -241,7 +241,7 @@ msgid "Alert"
 msgstr ""
 
 #: contrib/alert/forms.py:41 contrib/badge/forms.py:37
-#: contrib/link/forms.py:346 contrib/listgroup/forms.py:71
+#: contrib/link/forms.py:337 contrib/listgroup/forms.py:71
 msgid "Context"
 msgstr ""
 
@@ -380,7 +380,7 @@ msgstr ""
 msgid "Define the structure of the plugin."
 msgstr ""
 
-#: contrib/card/forms.py:193 contrib/grid/forms.py:179
+#: contrib/card/forms.py:193 contrib/grid/forms.py:173
 msgid "Content alignment"
 msgstr ""
 
@@ -389,117 +389,144 @@ msgstr ""
 msgid "Colums per row"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:24 contrib/carousel/models.py:20
+#: contrib/carousel/cms_plugins.py:25 contrib/carousel/models.py:20
 msgid "Carousel"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:61 contrib/carousel/models.py:42
+#: contrib/carousel/cms_plugins.py:63 contrib/carousel/models.py:42
 msgid "Carousel slide"
 msgstr ""
 
-#: contrib/carousel/cms_plugins.py:79 contrib/link/cms_plugins.py:45
+#: contrib/carousel/cms_plugins.py:81 contrib/link/cms_plugins.py:45
 #: contrib/link/cms_plugins.py:83
 msgid "Link settings"
 msgstr ""
 
-#: contrib/carousel/constants.py:19 contrib/image/forms.py:39
-#: contrib/link/forms.py:47 contrib/tabs/constants.py:27 settings.py:56
-#: settings.py:64 settings.py:72
+#: contrib/carousel/constants.py:5
+msgid "On hover"
+msgstr ""
+
+#: contrib/carousel/constants.py:6
+msgid "Never"
+msgstr ""
+
+#: contrib/carousel/constants.py:12 contrib/image/forms.py:39
+#: contrib/tabs/constants.py:27 settings.py:56 settings.py:64 settings.py:72
 msgid "Default"
 msgstr ""
 
-#: contrib/carousel/forms.py:55 contrib/image/forms.py:100
-#: contrib/jumbotron/forms.py:44 contrib/link/forms.py:326
+#: contrib/carousel/constants.py:36
+msgid "Slide"
+msgstr ""
+
+#: contrib/carousel/constants.py:37 contrib/tabs/constants.py:21
+msgid "Fade"
+msgstr ""
+
+#: contrib/carousel/forms.py:58 contrib/image/forms.py:100
+#: contrib/jumbotron/forms.py:44 contrib/link/forms.py:317
 #: contrib/navigation/forms.py:42 contrib/tabs/forms.py:45
 msgid "Template"
 msgstr ""
 
-#: contrib/carousel/forms.py:58 contrib/tabs/forms.py:48
+#: contrib/carousel/forms.py:61 contrib/tabs/forms.py:48
 msgid "This is the template that will be used for the component."
 msgstr ""
 
-#: contrib/carousel/forms.py:61 contrib/carousel/models.py:24
+#: contrib/carousel/forms.py:64 contrib/carousel/models.py:24
 msgid "Interval"
 msgstr ""
 
-#: contrib/carousel/forms.py:64
+#: contrib/carousel/forms.py:67
 msgid ""
 "The amount of time to delay between automatically cycling an item. If false, "
 "carousel will not automatically cycle."
 msgstr ""
 
-#: contrib/carousel/forms.py:69 contrib/carousel/models.py:25
+#: contrib/carousel/forms.py:72 contrib/carousel/models.py:25
 msgid "Controls"
 msgstr ""
 
-#: contrib/carousel/forms.py:72
+#: contrib/carousel/forms.py:75
 msgid "Adding in the previous and next controls."
 msgstr ""
 
-#: contrib/carousel/forms.py:75 contrib/carousel/models.py:26
+#: contrib/carousel/forms.py:78 contrib/carousel/models.py:26
 msgid "Indicators"
 msgstr ""
 
-#: contrib/carousel/forms.py:78
+#: contrib/carousel/forms.py:81
 msgid "Adding in the indicators to the carousel."
 msgstr ""
 
-#: contrib/carousel/forms.py:81 contrib/carousel/models.py:27
+#: contrib/carousel/forms.py:84 contrib/carousel/models.py:27
 msgid "Keyboard"
 msgstr ""
 
-#: contrib/carousel/forms.py:84
+#: contrib/carousel/forms.py:87
 msgid "Whether the carousel should react to keyboard events."
 msgstr ""
 
-#: contrib/carousel/forms.py:87 contrib/carousel/models.py:28
+#: contrib/carousel/forms.py:90 contrib/carousel/models.py:28
 msgid "Pause"
 msgstr ""
 
-#: contrib/carousel/forms.py:91
+#: contrib/carousel/forms.py:94
 msgid ""
 "If set to \"hover\", pauses the cycling of the carousel on \"mouseenter\" "
-"and resumes the cycling of the carousel on \"mouseleave\". If set to \"false"
-"\", hovering over the carousel won't pause it."
-msgstr ""
-
-#: contrib/carousel/forms.py:98 contrib/carousel/models.py:29
-msgid "Ride"
+"and resumes the cycling of the carousel on \"mouseleave\". If set to "
+"\"false\", hovering over the carousel won't pause it."
 msgstr ""
 
 #: contrib/carousel/forms.py:102
+msgid "Auto start"
+msgstr ""
+
+#: contrib/carousel/forms.py:106
 msgid ""
 "Autoplays the carousel after the user manually cycles the first item. If "
 "\"carousel\", autoplays the carousel on load."
 msgstr ""
 
-#: contrib/carousel/forms.py:107 contrib/carousel/models.py:30
+#: contrib/carousel/forms.py:111 contrib/carousel/models.py:30
 msgid "Wrap"
 msgstr ""
 
-#: contrib/carousel/forms.py:111
+#: contrib/carousel/forms.py:115
 msgid "Whether the carousel should cycle continuously or have hard stops."
 msgstr ""
 
-#: contrib/carousel/forms.py:115
+#: contrib/carousel/forms.py:119
 msgid "Aspect ratio"
 msgstr ""
 
-#: contrib/carousel/forms.py:120
+#: contrib/carousel/forms.py:124
 msgid ""
 "Determines width and height of the image according to the selected ratio."
 msgstr ""
 
-#: contrib/carousel/forms.py:162
+#: contrib/carousel/forms.py:129
+msgid "Transition"
+msgstr ""
+
+#: contrib/carousel/forms.py:134
+msgid "Determines if slides change by sliding or fading."
+msgstr ""
+
+#: contrib/carousel/forms.py:176
 msgid "Slide image"
 msgstr ""
 
-#: contrib/carousel/forms.py:165
+#: contrib/carousel/forms.py:180
 msgid "Content"
 msgstr ""
 
-#: contrib/carousel/forms.py:168
+#: contrib/carousel/forms.py:183
 msgid "Content may also be added using child plugins."
+msgstr ""
+
+#: contrib/carousel/models.py:29
+msgid "Ride"
 msgstr ""
 
 #: contrib/carousel/models.py:51 contrib/image/models.py:154
@@ -666,45 +693,45 @@ msgstr ""
 msgid "Align self end"
 msgstr ""
 
-#: contrib/grid/forms.py:65
+#: contrib/grid/forms.py:61
 msgid "Container type"
 msgstr ""
 
-#: contrib/grid/forms.py:70
+#: contrib/grid/forms.py:65
 msgid ""
 "Defines if the grid should use fixed width, fluid width or the container "
 "should fill the full width without margins or padding."
 msgstr ""
 
-#: contrib/grid/forms.py:103
+#: contrib/grid/forms.py:97
 msgid "Create columns"
 msgstr ""
 
-#: contrib/grid/forms.py:104
+#: contrib/grid/forms.py:98
 msgid "Number of columns to create when saving."
 msgstr ""
 
-#: contrib/grid/forms.py:110
+#: contrib/grid/forms.py:104
 msgid "Vertical alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:117
+#: contrib/grid/forms.py:111
 msgid "Horizontal alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:124
+#: contrib/grid/forms.py:118
 msgid "Gutters"
 msgstr ""
 
-#: contrib/grid/forms.py:128
+#: contrib/grid/forms.py:122
 msgid "To remove all spaces between rows set gutters to 0."
 msgstr ""
 
-#: contrib/grid/forms.py:173
+#: contrib/grid/forms.py:167
 msgid "Column alignment"
 msgstr ""
 
-#: contrib/grid/forms.py:201
+#: contrib/grid/forms.py:195
 #, python-format
 msgid ""
 "Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
@@ -968,7 +995,7 @@ msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 
 #: contrib/link/apps.py:11 contrib/link/constants.py:5
-#: contrib/link/models.py:11 contrib/link/models.py:112
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr ""
 
@@ -995,138 +1022,138 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: contrib/link/forms.py:67
+#: contrib/link/forms.py:58
 msgid "Select a destination"
 msgstr ""
 
-#: contrib/link/forms.py:143
+#: contrib/link/forms.py:134
 msgid "Site"
 msgstr ""
 
-#: contrib/link/forms.py:146
+#: contrib/link/forms.py:137
 msgid "Select site"
 msgstr ""
 
-#: contrib/link/forms.py:151
+#: contrib/link/forms.py:142
 msgid "Url"
 msgstr ""
 
-#: contrib/link/forms.py:154
+#: contrib/link/forms.py:145
 msgid "Select URL object from list"
 msgstr ""
 
-#: contrib/link/forms.py:182
+#: contrib/link/forms.py:173
 msgid "External link"
 msgstr ""
 
-#: contrib/link/forms.py:185
+#: contrib/link/forms.py:176
 msgid "Provide a link to an external source."
 msgstr ""
 
-#: contrib/link/forms.py:188
+#: contrib/link/forms.py:179
 msgid "Internal link"
 msgstr ""
 
-#: contrib/link/forms.py:190
+#: contrib/link/forms.py:181
 msgid "If provided, overrides the external link."
 msgstr ""
 
-#: contrib/link/forms.py:196
+#: contrib/link/forms.py:187
 msgid "File link"
 msgstr ""
 
-#: contrib/link/forms.py:198
+#: contrib/link/forms.py:189
 msgid "If provided links a file from the filer app."
 msgstr ""
 
-#: contrib/link/forms.py:202
+#: contrib/link/forms.py:193
 msgid "Anchor"
 msgstr ""
 
-#: contrib/link/forms.py:205
+#: contrib/link/forms.py:196
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
 "include a preceding \"&#35;\" symbol."
 msgstr ""
 
-#: contrib/link/forms.py:210
+#: contrib/link/forms.py:201
 msgid "Email address"
 msgstr ""
 
-#: contrib/link/forms.py:214
+#: contrib/link/forms.py:205
 msgid "Phone"
 msgstr ""
 
-#: contrib/link/forms.py:219
+#: contrib/link/forms.py:210
 msgid "Target"
 msgstr ""
 
-#: contrib/link/forms.py:270
+#: contrib/link/forms.py:261
 #, python-brace-format
 msgid "Only one of {0} or {1} may be given."
 msgstr ""
 
-#: contrib/link/forms.py:282
+#: contrib/link/forms.py:273
 msgid "Please provide a link."
 msgstr ""
 
-#: contrib/link/forms.py:288
+#: contrib/link/forms.py:279
 #, python-format
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
 msgstr ""
 
-#: contrib/link/forms.py:322
+#: contrib/link/forms.py:313
 msgid "Display name"
 msgstr ""
 
-#: contrib/link/forms.py:331
+#: contrib/link/forms.py:322
 msgid "Stretch link"
 msgstr ""
 
-#: contrib/link/forms.py:335
+#: contrib/link/forms.py:326
 msgid ""
 "Stretches the active link area to the containing block (with position: "
 "relative)."
 msgstr ""
 
-#: contrib/link/forms.py:339 contrib/tabs/forms.py:51
+#: contrib/link/forms.py:330 contrib/tabs/forms.py:51
 msgid "Type"
 msgstr ""
 
-#: contrib/link/forms.py:343
+#: contrib/link/forms.py:334
 msgid "Adds either a text link or a button which links to the target."
 msgstr ""
 
-#: contrib/link/forms.py:353
+#: contrib/link/forms.py:344
 msgid "Button size"
 msgstr ""
 
-#: contrib/link/forms.py:362
+#: contrib/link/forms.py:353
 msgid "Outline"
 msgstr ""
 
-#: contrib/link/forms.py:365
+#: contrib/link/forms.py:356
 msgid "Removes the coloring from a button and keeps the outline."
 msgstr ""
 
-#: contrib/link/forms.py:368
+#: contrib/link/forms.py:359
 msgid "Block"
 msgstr ""
 
-#: contrib/link/forms.py:371
+#: contrib/link/forms.py:362
 msgid "Extends the button to the width of its container."
 msgstr ""
 
-#: contrib/link/forms.py:374
+#: contrib/link/forms.py:365
 msgid "Icon left"
 msgstr ""
 
-#: contrib/link/forms.py:379
+#: contrib/link/forms.py:370
 msgid "Icon right"
 msgstr ""
 
-#: contrib/link/models.py:117
+#: contrib/link/models.py:119
 msgid "<link is missing>"
 msgstr ""
 
@@ -1263,10 +1290,6 @@ msgstr ""
 msgid "Justify end"
 msgstr ""
 
-#: contrib/tabs/constants.py:21
-msgid "Fade"
-msgstr ""
-
 #: contrib/tabs/forms.py:64
 msgid "Index"
 msgstr ""
@@ -1398,29 +1421,29 @@ msgid ""
 "contents."
 msgstr ""
 
-#: fields.py:94
+#: fields.py:93
 msgid "Please select at least one device size"
 msgstr ""
 
-#: fields.py:102 fields.py:110
+#: fields.py:101 fields.py:109
 msgid "Attributes"
 msgstr ""
 
-#: fields.py:131
+#: fields.py:130
 msgid "Choices"
 msgstr ""
 
-#: fields.py:142
+#: fields.py:141
 msgid ""
 "Please enter at least one choice. Use the <code>+</code> symbol to add a "
 "choice."
 msgstr ""
 
-#: fields.py:161 fields.py:175
+#: fields.py:160 fields.py:174
 msgid "Tag type"
 msgstr ""
 
-#: fields.py:169
+#: fields.py:168
 msgid "Select the HTML tag to be used."
 msgstr ""
 
