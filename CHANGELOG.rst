@@ -2,11 +2,12 @@
 Changelog
 =========
 
-unpublished
-===========
+1.0.2
+=====
 
 * Add missing form mixin for link plugin (allowing it to be extended)
 * Fix Link template choices from correct setting
+* Improve carousel form, remove illegal options for Bootstrap 5
 
 1.0.1
 =====
