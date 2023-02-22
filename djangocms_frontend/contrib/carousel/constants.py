@@ -2,15 +2,8 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 CAROUSEL_PAUSE_CHOICES = (
-    ("hover", "hover"),
-    ("mouseenter", "mouseenter"),
-    ("mouseleave", "mouseleave"),
-    ("false", "off"),
-)
-
-CAROUSEL_RIDE_CHOICES = (
-    ("carousel", "carousel"),
-    ("false", "off"),
+    ("hover", _("On hover")),
+    ("false", _("Never")),
 )
 
 CAROUSEL_TEMPLATE_CHOICES = getattr(
@@ -37,4 +30,9 @@ CAROUSEL_ASPECT_RATIOS = (
 
 CAROUSEL_ASPECT_RATIO_CHOICES = tuple(
     (f"{x}x{y}", f"{x}x{y}") for x, y in CAROUSEL_ASPECT_RATIOS
+)
+
+CAROUSEL_TRANSITION_CHOICES = (
+    ("", _("Slide")),
+    ("carousel-fade", _("Fade")),
 )

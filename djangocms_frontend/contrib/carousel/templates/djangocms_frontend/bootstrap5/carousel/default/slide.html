@@ -13,13 +13,13 @@
     {% endif %}
 
     <div class="carousel-caption d-none d-md-block">
-        {{ instance.link_target }}
         {% if instance.carousel_content %}
             {{ instance.carousel_content|html_safe }}
         {% endif %}
-
-        {% for plugin in instance.child_plugin_instances %}
-            {% render_plugin plugin %}
-        {% endfor %}
+        {% if instance.rel_image %}
+            {% for plugin in instance.child_plugin_instances %}
+                {% render_plugin plugin %}
+            {% endfor %}
+        {% endif %}
     </div>
     </{{ instance.tag_type }}>{% endspaceless %}

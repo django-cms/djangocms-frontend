@@ -22,7 +22,7 @@ class CarouselModelTestCase(TestCase):
         self.assertEqual(
             instance.get_short_description(),
             "(default) Interval: 5000, Controls: True, Indicators: True, "
-            "Keyboard: True, Pause: hover, Ride: carouselWrap: True",
+            "Keyboard: True, Pause: hover, Ride: True, Wrap: True",
         )
 
     def test_carousel_slide_instance(self):

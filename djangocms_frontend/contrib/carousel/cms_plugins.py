@@ -6,6 +6,7 @@ from djangocms_frontend.helpers import get_plugin_template
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
+from ...common.background import BackgroundMixin
 from .. import carousel
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
@@ -37,7 +38,8 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
                     ("carousel_aspect_ratio", "carousel_interval"),
                     ("carousel_controls", "carousel_indicators"),
                     ("carousel_keyboard", "carousel_wrap"),
-                    ("carousel_ride", "carousel_pause"),
+                    ("carousel_ride",),
+                    ("carousel_transition", "carousel_pause",),
                 )
             },
         ),
@@ -51,7 +53,7 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
 
 @plugin_pool.register_plugin
 class CarouselSlidePlugin(
-    mixin_factory("CarouselSlide"), AttributesMixin, LinkPluginMixin, CMSUIPlugin
+    mixin_factory("CarouselSlide"), AttributesMixin, BackgroundMixin, LinkPluginMixin, CMSUIPlugin
 ):
     """
     Components > "Carousel Slide" Plugin
