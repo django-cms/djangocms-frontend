@@ -380,6 +380,8 @@ project directory. ``command`` can be one of the following:
 ``migrate``
     Migrates plugins from other frontend packages to **djangocms-frontend**.
     Currently supports **djangocms_bootstrap4** and **djangocms_styled_link**.
+    Other packages can be migrated adding custom migration modules to
+    the ``DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS`` setting.
 
 ``stale_references``
     If references in a UI item are moved or removed the UI items are designed to
