@@ -27,7 +27,7 @@ class Carousel(FrontendUIItem):
         text += ", {}: {}".format(_("Keyboard"), self.carousel_keyboard)
         text += ", {}: {}".format(_("Pause"), self.carousel_pause)
         text += ", {}: {}".format(_("Ride"), self.carousel_ride)
-        text += "{}: {}".format(_("Wrap"), self.carousel_wrap)
+        text += ", {}: {}".format(_("Wrap"), self.carousel_wrap)
         return text
 
 

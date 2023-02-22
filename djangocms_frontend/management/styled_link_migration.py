@@ -84,3 +84,5 @@ data_migration = {
     "S001": s001_migrate_styled_link,
     "S002": s002_migrate_image_container,
 }
+
+plugin_prefix = "StyledLink"

@@ -2,6 +2,12 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Add missing form mixin for link plugin (allowing it to be extended)
+* Fix Link template choices from correct setting
+
 1.0.1
 =====
 

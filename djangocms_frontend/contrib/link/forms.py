@@ -27,8 +27,11 @@ from ...fields import (
 )
 from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
+from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
 from .helpers import get_choices, get_object_for_value
+
+mixin_factory = settings.get_forms(link)
 
 # Weak dependency on djangocms_icon
 # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
@@ -40,18 +43,6 @@ else:
         def __init__(self, *args, **kwargs):
             kwargs["widget"] = forms.HiddenInput
             super().__init__(*args, **kwargs)
-
-
-def get_templates():
-    choices = [
-        ("default", _("Default")),
-    ]
-    choices += getattr(
-        settings,
-        "DJANGOCMS_LINK_TEMPLATES",
-        [],
-    )
-    return choices
 
 
 HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
@@ -298,7 +289,7 @@ else:
                         )
 
 
-class LinkForm(SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
+class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -324,8 +315,8 @@ class LinkForm(SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
     )
     template = forms.ChoiceField(
         label=_("Template"),
-        choices=get_templates(),
-        initial=first_choice(get_templates()),
+        choices=settings.LINK_TEMPLATE_CHOICES,
+        initial=first_choice(settings.LINK_TEMPLATE_CHOICES),
     )
     link_stretched = forms.BooleanField(
         label=_("Stretch link"),

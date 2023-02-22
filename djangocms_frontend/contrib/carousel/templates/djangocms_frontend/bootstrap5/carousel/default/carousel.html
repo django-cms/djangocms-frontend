@@ -4,7 +4,7 @@
     data-bs-interval="{{ instance.carousel_interval|lower }}"
     data-bs-keyboard="{{ instance.carousel_keyboard|lower }}"
     data-bs-pause="{{ instance.carousel_pause|lower }}"
-    data-bs-ride="{{ instance.carousel_ride|lower }}"
+    data-bs-ride="{% if instance.carousel_ride %}carousel{% else %}false{% endif %}"
     data-bs-wrap="{{ instance.carousel_wrap|lower }}"
     >
     {% if instance.carousel_indicators %}

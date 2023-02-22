@@ -4,6 +4,10 @@
 
         <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.rel_image.default_alt_text|default:'' }}" />
     {% else %}
-        <div class="placeholder placeholder-wave d-block w-100"
-            style="aspect-ratio: {{ aspect_ratio }}"></div>
+        <div class="d-block w-100"
+            style="aspect-ratio: {{ aspect_ratio }}">
+            {% for plugin in instance.child_plugin_instances %}
+                {% render_plugin plugin %}
+            {% endfor %}
+        </div>
     {% endif %}{% endspaceless %}
