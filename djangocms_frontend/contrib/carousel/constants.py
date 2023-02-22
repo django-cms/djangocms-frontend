@@ -2,13 +2,8 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 CAROUSEL_PAUSE_CHOICES = (
-    ("hover", "hover"),
-    ("false", "off"),
-)
-
-CAROUSEL_RIDE_CHOICES = (
-    ("carousel", "carousel"),
-    ("false", "off"),
+    ("hover", _("On hover")),
+    ("false", _("Never")),
 )
 
 CAROUSEL_TEMPLATE_CHOICES = getattr(

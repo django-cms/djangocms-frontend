@@ -38,8 +38,8 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
                     ("carousel_aspect_ratio", "carousel_interval"),
                     ("carousel_controls", "carousel_indicators"),
                     ("carousel_keyboard", "carousel_wrap"),
-                    ("carousel_ride", "carousel_pause"),
-                    ("carousel_transition",),
+                    ("carousel_ride",),
+                    ("carousel_transition", "carousel_pause",),
                 )
             },
         ),

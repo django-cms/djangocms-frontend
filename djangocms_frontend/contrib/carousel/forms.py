@@ -22,7 +22,6 @@ from ..link.forms import AbstractLinkForm
 from .constants import (
     CAROUSEL_ASPECT_RATIO_CHOICES,
     CAROUSEL_PAUSE_CHOICES,
-    CAROUSEL_RIDE_CHOICES,
     CAROUSEL_TEMPLATE_CHOICES,
     CAROUSEL_TRANSITION_CHOICES,
 )
@@ -99,15 +98,14 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
         ),
         widget=ButtonGroup(attrs=dict(property="text")),
     )
-    carousel_ride = forms.ChoiceField(
-        label=_("Ride"),
-        choices=CAROUSEL_RIDE_CHOICES,
-        initial=first_choice(CAROUSEL_RIDE_CHOICES),
+    carousel_ride = forms.BooleanField(
+        label=_("Auto start"),
+        initial=True,
+        required=False,
         help_text=_(
             "Autoplays the carousel after the user manually cycles the "
             'first item. If "carousel", autoplays the carousel on load.'
         ),
-        widget=ButtonGroup(attrs=dict(property="text")),
     )
     carousel_wrap = forms.BooleanField(
         label=_("Wrap"),
