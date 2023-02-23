@@ -2,6 +2,13 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Fix a bug which lets a carousel not start on django CMS 4.0+
+* Update translations
+* Add tests for Django 4.2
+
 1.0.2
 =====
 
