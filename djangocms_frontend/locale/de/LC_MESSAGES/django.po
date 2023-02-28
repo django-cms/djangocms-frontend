@@ -430,11 +430,11 @@ msgstr "Link-Einstellungen"
 
 #: contrib/carousel/constants.py:5
 msgid "On hover"
-msgstr ""
+msgstr "Mit Maus"
 
 #: contrib/carousel/constants.py:6
 msgid "Never"
-msgstr ""
+msgstr "Nie"
 
 #: contrib/carousel/constants.py:12 contrib/image/forms.py:39
 #: contrib/tabs/constants.py:27 settings.py:56 settings.py:64 settings.py:72
@@ -442,14 +442,12 @@ msgid "Default"
 msgstr "Standard"
 
 #: contrib/carousel/constants.py:36
-#, fuzzy
-#| msgid "Slide image"
 msgid "Slide"
-msgstr "Karussell-Bild"
+msgstr "Gleiten"
 
 #: contrib/carousel/constants.py:37 contrib/tabs/constants.py:21
 msgid "Fade"
-msgstr "Fading"
+msgstr "Überblenden"
 
 #: contrib/carousel/forms.py:58 contrib/image/forms.py:100
 #: contrib/jumbotron/forms.py:44 contrib/link/forms.py:317
@@ -511,10 +509,8 @@ msgstr ""
 "Startet wieder, nachdem die Maus das Karussell verlassen hat."
 
 #: contrib/carousel/forms.py:102
-#, fuzzy
-#| msgid "Justify start"
 msgid "Auto start"
-msgstr "Ausrichtung Anfang"
+msgstr "Autostart"
 
 #: contrib/carousel/forms.py:106
 msgid ""
@@ -542,14 +538,12 @@ msgstr ""
 "Seitenverhältnises."
 
 #: contrib/carousel/forms.py:129
-#, fuzzy
-#| msgid "Navigation"
 msgid "Transition"
-msgstr "Navigation"
+msgstr "Übergang"
 
 #: contrib/carousel/forms.py:134
 msgid "Determines if slides change by sliding or fading."
-msgstr ""
+msgstr "Legt fest, ob Karussell-Bild herein gleitet oder übergeblendet wird."
 
 #: contrib/carousel/forms.py:176
 msgid "Slide image"

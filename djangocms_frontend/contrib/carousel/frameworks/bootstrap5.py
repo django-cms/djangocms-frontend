@@ -1,4 +1,5 @@
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_DEFAULT_SIZE
+from djangocms_frontend.helpers import is_first_child
 
 
 class CarouselRenderMixin:
@@ -22,7 +23,7 @@ class CarouselSlideRenderMixin:
             height = width * aspect_height / aspect_width
 
         instance.add_classes("carousel-item")
-        if instance.position == 0:
+        if is_first_child(instance, parent):
             instance.add_classes("active")
         context["link"] = instance.get_link()
         context["aspect_ratio"] = str(width / height)
