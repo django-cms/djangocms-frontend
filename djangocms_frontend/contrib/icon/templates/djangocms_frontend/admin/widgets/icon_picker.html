@@ -1,0 +1,20 @@
+<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
+    <div class="icon-preview">{{ widget.preview|safe }}</div>
+    <input hidden type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}>
+</div>
+<script>
+    (function ($) {
+        var options = {
+            selector: '#{{ widget.attrs.id|safe }}',
+            onSelect: function (jsonIconData) {
+                console.log($('#{{ widget.attrs.id|safe }} .icon-preview' ), jsonIconData.iconHTML);
+                $('#{{ widget.attrs.id|safe }} .icon-preview' ).html(jsonIconData.iconHtml);
+                $('#{{ widget.attrs.id|safe }} input[hidden]').val(JSON.stringify(jsonIconData));
+                console.log(jsonIconData, JSON.stringify(jsonIconData));
+            },
+            iconLibraries: {{ widget.icon_libraries|safe }},
+            iconLibrariesCss: {{ widget.icon_libraries_css|safe }},
+        };
+        new UniversalIconPicker('#{{ widget.attrs.id|safe }}', options);
+    })(django.jQuery);
+</script>
