@@ -8,7 +8,7 @@ ICON_CDN = {
     "material-icons-outlined": "https://fonts.googleapis.com/css2?family=Material+Icons+Outlined",
     "material-icons-round": "https://fonts.googleapis.com/css2?family=Material+Icons+Round",
     "material-icons-sharp": "https://fonts.googleapis.com/css2?family=Material+Icons+Sharp",
-    "material-icons-two-tone":"https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone",
+    "material-icons-two-tone": "https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone",
     "fomantic-ui": "fomantic-ui-icons.css",
 }
 
@@ -40,7 +40,7 @@ ICON_LIBRARIES = getattr(
         for library in getattr(
             settings,
             "DJANGOCMS_ICON_SELECTION",
-        ICON_LIBRARIES_SHOWN
+            ICON_LIBRARIES_SHOWN
         )
     },
 )
