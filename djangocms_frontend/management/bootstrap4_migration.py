@@ -490,6 +490,35 @@ def t001_template(obj, new_obj, bs4_setting, dcf_setting):
             print(f"   Remember to put {dcf_setting} in your settings.py")
 
 
+def i001_icon(obj, new_obj):
+    """Convert icons (only works for font awesome)"""
+    classes = obj.icon.split()
+
+    if "fas" in classes:
+        library = "fa-solid"
+        classes.pop(classes.index("fas"))
+    elif "far" in obj.icon:
+        library = "fa-regular"
+        classes.pop(classes.index("far"))
+    elif "fab" in obj.icon:
+        library = "fa-brand"
+        classes.pop(classes.index("fab"))
+    else:
+        library = obj.icon.split()[0]
+        classes.pop(0)
+
+    icon_obj = {
+        "libraryId": library,
+        "libraryName": "fontAwesome",
+        "iconHtml": f'<i class="{library} {" ".join(classes)}"></i>',
+        "iconMarkup": "&",
+        "iconClass": f'{library} {" ".join(classes)}',
+        "iconText": "",
+        "library": "font-awesome",
+    }
+    new_obj.config["icon"] = icon_obj
+
+
 data_migration = {
     "P001": p001_left_right_migration,
     "X002": x002_replace_card_deck,

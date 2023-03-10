@@ -1,4 +1,5 @@
 from cms.plugin_pool import plugin_pool
+from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
@@ -12,7 +13,6 @@ from . import forms, models
 mixin_factory = settings.get_renderer(icon)
 
 
-@plugin_pool.register_plugin
 class IconPlugin(
     mixin_factory("Icon"),
     AttributesMixin,
@@ -46,3 +46,9 @@ class IconPlugin(
             },
         ),
     ]
+
+
+if "djangocms_frontend.contrib.icon" in django_settings.INSTALLED_APPS:
+    #  Only register plugin if in INSTALLED_APPS
+
+    plugin_pool.register_plugin(IconPlugin)

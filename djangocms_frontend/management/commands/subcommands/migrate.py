@@ -27,6 +27,13 @@ if "djangocms_styledlink" in apps.all_models:
     plugin_migrations.update(styled_link_migration.plugin_migrations)
     data_migration.update(styled_link_migration.data_migration)
     plugin_prefixes.append(styled_link_migration.plugin_prefix)
+# djangocms-icon
+if "djangocms_icon" in apps.all_models:
+    from djangocms_frontend.management import icon_migration
+
+    plugin_migrations.update(icon_migration.plugin_migration)
+    data_migration.update(icon_migration.data_migration)
+    plugin_prefixes.append(icon_migration.plugin_prefix)
 
 additional_migrations = getattr(
     settings, "DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS", None
