@@ -2,6 +2,7 @@ def i001_icon(obj, new_obj):
     """Convert icons (only works for font awesome)"""
     classes = obj.icon.split()
 
+    # Translate from fontawesome 5 to fontawsome 6
     if "fas" in classes:
         library = "fa-solid"
         classes.pop(classes.index("fas"))
@@ -9,13 +10,16 @@ def i001_icon(obj, new_obj):
         library = "fa-regular"
         classes.pop(classes.index("far"))
     elif "fab" in obj.icon:
-        library = "fa-brand"
+        library = "fa-brands"
         classes.pop(classes.index("fab"))
     else:
-        library = obj.icon.split()[0]
-        classes.pop(0)
+        # Not recognized. Keep classes. Icon, however, probably not visible in the admin.
+        new_obj.config["icon"] = {
+            "iconClass": obj.icon,
+        }
+        return
 
-    icon_obj = {
+    new_obj.config["icon"] = {
         "libraryId": library,
         "libraryName": "fontAwesome",
         "iconHtml": f'<i class="{library} {" ".join(classes)}"></i>',
@@ -24,7 +28,6 @@ def i001_icon(obj, new_obj):
         "iconText": "",
         "library": "font-awesome",
     }
-    new_obj.config["icon"] = icon_obj
 
 
 plugin_migration = {
