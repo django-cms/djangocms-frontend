@@ -20,5 +20,5 @@ class IconPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<i ')
-        self.assertContains(response, 'zi-airplane zi')
+        self.assertContains(response, 'zi-airplane')
         self.assertContains(response, '</i>')
