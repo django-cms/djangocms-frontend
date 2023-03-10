@@ -393,3 +393,7 @@ A version of it is bundled with djangocms-frontend. It currently contains suppor
 .. note::
 
     The icon picker needs a config file for each icon set. This requires regular update. Please be patient if new icons do not appear immediately in djangocms-frontend's icon picker.
+
+.. warning::
+
+    You may either use djangocms-icon or djangocms-frontent's icon contrib package but not both, since they both register an ``IconPlugin``.
