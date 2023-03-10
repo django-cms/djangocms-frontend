@@ -2,7 +2,6 @@ from django.test import TestCase
 
 from djangocms_frontend.contrib.icon.models import Icon
 
-
 icon_config = {
     "icon": {
         "libraryId": "zondicons",

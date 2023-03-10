@@ -2,8 +2,9 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_frontend.contrib.icon.cms_plugins import IconPlugin
-from .test_models import icon_config
+
 from ..fixtures import TestFixture
+from .test_models import icon_config
 
 
 class IconPluginTestCase(TestFixture, CMSTestCase):
