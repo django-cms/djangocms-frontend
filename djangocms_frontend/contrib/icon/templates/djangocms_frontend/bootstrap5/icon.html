@@ -1,4 +1,4 @@
-{% load cms_tags sekizai_tags%}{% spaceless %}
+{% load cms_tags sekizai_tags %}{% spaceless %}
     <i {{ instance.get_attributes }}>
     {% for plugin in instance.child_plugin_instances %}
         {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}

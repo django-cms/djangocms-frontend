@@ -5,7 +5,7 @@
             <option value="{{ value }}" data-json="{{ json }}" data-css="{{ css }}">{{ verbose }}</option>
         {% endfor %}
     </select>
-    <input hidden type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}>
+    <input hidden type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} />
 </div>
 <script>
     (function ($) {
