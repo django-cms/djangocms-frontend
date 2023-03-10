@@ -23,7 +23,8 @@
             },
             iconLibraries: [selectElement.find(':selected').data('json')],
             iconLibrariesCss: [selectElement.find(':selected').data('css')],
-            loadCustomCss: true
+            loadCustomCss: true,
+            allowEmpty: false
         };
         var uip = new UniversalIconPicker('#{{ widget.attrs.id|safe }}', options);
         selectElement.on('change', function () {

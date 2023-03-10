@@ -10,6 +10,7 @@ class IconRenderMixin:
         instance.tag_type = "span"
         classes = instance.config.get("icon", {}).get("iconClass", "")
         instance.add_classes(*classes.split())
+        context["icon_text"] = instance.config.get("icon", {}).get("iconText", "")
         size = instance.config.get("icon_size", "")
         if size:
             if size[-1] == "%":
