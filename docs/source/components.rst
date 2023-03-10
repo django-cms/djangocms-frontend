@@ -407,5 +407,38 @@ Icon fonts
 
 As marked in the overview above, some MIT licenced icon fonts are bundled for convenience. They are available to the web page through static files.
 
-For other icon sets source files are loaded from CDN through the internet by default. This is not necessarily a configuration you want to have in a production situation. To specify where to get the required css files from please use the :ref:`settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES` setting.
+For other icon sets source files are loaded from CDN through the internet by default. This is not necessarily a configuration you want to have in a production situation. To specify where to get the required css files from please use the :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES` setting.
+
+To just restrict the available choices of icon sets for the user use the :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN` setting.
+
+Adding custom icon fonts
+========================
+
+To add a custom icon font you need to generate a config file. This is a json file that tells the icon picker which icons are available. As an example check out the `config file for Bootstrap Icons <https://github.com/migliori/universal-icon-picker/blob/main/assets/icons-libraries/bootstrap-icons.json>`_::
+
+    {
+        "prefix": "bi bi-",
+        "icon-style": "bi",
+        "list-icon": "bi bi-badge1",
+        "icons": [
+            "123",
+            "alarm-fill",
+            "alarm",
+            "align-bottom",
+            "align-center",
+            "align-end",
+            ...
+       ]
+    }
+
+Icons are rendered as ``<i>>`` tags with classes.
+
+``.prefix`` defines a string that is prepended to all icons. For Bootstrap icons that's the class ``bi`` and the prefix for the icon selecting class ``bi-``.
+
+The list ``.icons`` contains all available icons in the set.
+
+``.list-icon`` contains the classes for the example icon. You can probably ignore it.
+
+``.icon-style`` currently is unused. It may in future determine how icons are rendered. Currently all icons a re rendered by ``<i class"bla"></i>`` except material design icon which are rendered by ``<i class="material-icon">bla</i>``.
+
 
