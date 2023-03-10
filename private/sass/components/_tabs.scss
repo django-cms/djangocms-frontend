@@ -1,3 +1,8 @@
+.colM ul:not(.object-tools).nav {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
 ul.nav {
     .nav-item {
         margin-right: 1rem;

@@ -361,3 +361,35 @@ Tabs component
     be provided by you or a third party. If you use a CSS animation library,
     you can make these animations available by adjusting the
     ``DJANGOCMS_FRONTEND_TAB_EFFECTS`` setting.
+
+
+.. index::
+    single: Icon
+
+**************
+Icon component
+**************
+
+.. versionadded:: 1.1
+
+djangocms-frontend's icon plugin supports a variety of popular icon fonts. The icon component is centered around Gilles Migliori's `universal icon picker <https://github.com/migliori/universal-icon-picker>`_.
+
+A version of it is bundled with djangocms-frontend. It currently contains support for the following icon sets:
+
+* `Bootstrap icons <https://icons.getbootstrap.com>`_
+* Elegant icons
+* Feather icons
+* Fomatic UI icons
+* `Font awesome (regular, solid and brands) <https://fontawesome.com>`_
+* `Foundation icons <https://zurb.com/playground/foundation-icon-fonts-3>`_
+* Happy icons
+* Icomoon
+* `Material icons (filled, outlined, sharp, two-tone) <https://fonts.google.com/icons>`_
+* Open iconic
+* Tabler icons
+* Weather icons
+* Steve Schoger's `Zondicons <https://www.zondicons.com/icons.html>`_
+
+.. note::
+
+    The icon picker needs a config file for each icon set. This requires regular update. Please be patient if new icons do not appear immediately in djangocms-frontend's icon picker.

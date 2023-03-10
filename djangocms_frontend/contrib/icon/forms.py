@@ -1,13 +1,24 @@
+from django import forms
+from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
-from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
+from djangocms_frontend.fields import (
+    AttributesFormField,
+    ColoredButtonGroup,
+    TagTypeFormField,
+)
+
+from ... import settings
+from ...common.background import BackgroundFormMixin
+from ...common.responsive import ResponsiveFormMixin
+from ...helpers import first_choice
+from ...models import FrontendUIItem
+from ...settings import COLOR_STYLE_CHOICES
+from .conf import ICON_SIZE_CHOICES
 from .fields import IconPickerField
 
-from ...common.responsive import ResponsiveFormMixin
-from ...models import FrontendUIItem
 
-
-class IconForm(ResponsiveFormMixin, EntangledModelForm):
+class IconForm(BackgroundFormMixin, ResponsiveFormMixin, EntangledModelForm):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/
@@ -18,12 +29,31 @@ class IconForm(ResponsiveFormMixin, EntangledModelForm):
         entangled_fields = {
             "config": [
                 "icon",
+                "icon_size",
+                "icon_foreground",
+                "icon_rounded",
                 "attributes",
             ]
         }
         untangled_fields = ("tag_type",)
 
     icon = IconPickerField()
+    icon_size = forms.ChoiceField(
+        label=_("Icon size"),
+        choices=ICON_SIZE_CHOICES,
+        initial=first_choice(ICON_SIZE_CHOICES),
+        required=False,
+    )
+    icon_foreground = forms.ChoiceField(
+        label=_("Foreground context"),
+        choices=settings.EMPTY_CHOICE + COLOR_STYLE_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
+        widget=ColoredButtonGroup(),
+        required=False,
+    )
+    icon_rounded = forms.BooleanField(
+        label=_("Circular icon"),
+        required=False,
+    )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
-

@@ -15,4 +15,3 @@ class Icon(FrontendUIItem):
 
     def get_short_description(self):
         return self.config.get("icon", {}).get("iconClass", _("undefined"))
-

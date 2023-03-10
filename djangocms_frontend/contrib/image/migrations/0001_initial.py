@@ -7,7 +7,6 @@ import djangocms_frontend.contrib.link.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
