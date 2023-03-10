@@ -48,7 +48,7 @@ class IconPlugin(
     ]
 
 
-if "djangocms_frontend.contrib.icon" in django_settings.INSTALLED_APPS:
-    #  Only register plugin if in INSTALLED_APPS
+if "IconPlugin" not in plugin_pool.plugins:
+    #  Only register plugin if not other Icon plugin is installed
 
     plugin_pool.register_plugin(IconPlugin)
