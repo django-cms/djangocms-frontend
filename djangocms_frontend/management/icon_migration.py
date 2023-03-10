@@ -1,6 +1,3 @@
-from django.apps import apps
-
-
 def i001_icon(obj, new_obj):
     """Convert icons (only works for font awesome)"""
     classes = obj.icon.split()
