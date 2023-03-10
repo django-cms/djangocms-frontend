@@ -17,9 +17,9 @@ icon_config = {
     "icon_foreground": "",
     "icon_rounded": False,
     "attributes": {},
-    "background_context": "",
-    "background_opacity": "100",
-    "background_shadow": "",
+    "background_context": "primary",
+    "background_opacity": "50",
+    "background_shadow": "reg",
     "responsive_visibility": None,
 }
 
