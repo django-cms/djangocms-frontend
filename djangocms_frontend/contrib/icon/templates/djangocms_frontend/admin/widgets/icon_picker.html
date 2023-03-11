@@ -1,0 +1,41 @@
+{% load i18n %}<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
+    {% if widget.preview %}
+        <div class="icon-preview">{{ widget.preview|safe }}</div>
+    {% else %}
+        <div class="icon-preview empty"><div>{% translate "Click to add icon" %}</div></div>
+    {% endif %}
+    <select{% if icon_libraries|length < 2 %} style="display: none;"{% endif %}>
+        {% for value, verbose, json, css in icon_libraries %}
+            <option value="{{ value }}" data-json="{{ json }}" data-css="{{ css }}">{{ verbose }}</option>
+        {% endfor %}
+    </select>
+    <input hidden type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} />
+</div>
+<script>
+    (function ($) {
+        var selectElement = $('#{{ widget.attrs.id|safe }} select');
+        selectElement.val("{{ widget.library }}");
+        if (!selectElement.val()) {
+            selectElement.val("{{ icon_libraries.0.0 }}");
+        }
+        var options = {
+            selector: '#{{ widget.attrs.id|safe }}',
+            onSelect: function (jsonIconData) {
+                jsonIconData.library = selectElement.val();
+                $('#{{ widget.attrs.id|safe }} .icon-preview' ).html(jsonIconData.iconHtml);
+                $('#{{ widget.attrs.id|safe }} input[hidden]').val(JSON.stringify(jsonIconData));
+            },
+            iconLibraries: [selectElement.find(':selected').data('json')],
+            iconLibrariesCss: [selectElement.find(':selected').data('css')],
+            loadCustomCss: true,
+            allowEmpty: false
+        };
+        var uip = new UniversalIconPicker('#{{ widget.attrs.id|safe }}', options);
+        selectElement.on('change', function () {
+            uip.setOptions({
+               iconLibraries: [this.options[this.selectedIndex].dataset.json],
+               iconLibrariesCss: [this.options[this.selectedIndex].dataset.css]
+            });
+        });
+    })(django.jQuery);
+</script>

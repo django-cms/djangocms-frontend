@@ -130,9 +130,7 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
         choices=CAROUSEL_TRANSITION_CHOICES,
         required=False,
         initial=CAROUSEL_TRANSITION_CHOICES[0][0],
-        help_text=_(
-            "Determines if slides change by sliding or fading."
-        ),
+        help_text=_("Determines if slides change by sliding or fading."),
         widget=ButtonGroup(attrs=dict(property="text")),
     )
     attributes = AttributesFormField(
@@ -149,7 +147,10 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
 
 
 class CarouselSlideForm(
-    mixin_factory("CarouselSlide"), AbstractLinkForm, BackgroundFormMixin, EntangledModelForm
+    mixin_factory("CarouselSlide"),
+    AbstractLinkForm,
+    BackgroundFormMixin,
+    EntangledModelForm,
 ):
     """
     Components > "Slide" Plugin

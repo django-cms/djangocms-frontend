@@ -51,6 +51,8 @@ class FrontendUIItem(CMSPlugin):
 
     def add_attribute(self, attr, value=None):
         attrs = self.config.get("attributes", {})
+        if attr == "style" and attr in attrs:
+            value += attrs[attr]
         attrs.update({attr: value})
         self.config["attributes"] = attrs
 

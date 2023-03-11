@@ -24,7 +24,8 @@ class BackgroundMixin:
         if getattr(instance, "background_context", ""):
             instance.add_classes(f"bg-{instance.background_context}")
         if getattr(instance, "background_opacity", "100") != "100":
-            instance.add_classes(f"bg-opacity-{instance.background_opacity}")
+            if instance.background_opacity:
+                instance.add_classes(f"bg-opacity-{instance.background_opacity}")
         if getattr(instance, "background_shadow", ""):
             if instance.background_shadow == "reg":
                 instance.add_classes("shadow")

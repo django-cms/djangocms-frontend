@@ -121,7 +121,9 @@ def add_plugin(placeholder, plugin):
         placeholder.add_plugin(plugin)
     else:  # CMS < v4
         if plugin.parent:
-            plugin.position -= plugin.parent.position + 1  # Restart position counting at 0
+            plugin.position -= (
+                plugin.parent.position + 1
+            )  # Restart position counting at 0
         else:
             plugin.position -= 1  # 0-based counting in v3
         plugin.save()

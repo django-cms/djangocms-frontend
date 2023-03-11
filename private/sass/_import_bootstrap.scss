@@ -1,7 +1,8 @@
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/maps";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/root";
 // @import "bootstrap/scss/print";
 // @import "bootstrap/scss/reboot";
 // @import "bootstrap/scss/type";
@@ -10,14 +11,14 @@
 // @import "bootstrap/scss/grid";
 // @import "bootstrap/scss/tables";
 // @import "bootstrap/scss/frontend_forms";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/helpers/colored-links";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/helpers/colored-links";
 // @import "bootstrap/scss/transitions";
 // @import "bootstrap/scss/dropdown";
 // @import "bootstrap/scss/button-group";
 // @import "bootstrap/scss/input-group";
 // @import "bootstrap/scss/custom-frontend_forms";
-@import "bootstrap/scss/nav";
+@import "node_modules/bootstrap/scss/nav";
 // @import "bootstrap/scss/navbar";
 // @import "bootstrap/scss/card";
 // @import "bootstrap/scss/breadcrumb";
@@ -33,5 +34,5 @@
 // @import "bootstrap/scss/tooltip";
 // @import "bootstrap/scss/popover";
 // @import "bootstrap/scss/carousel";
-@import "bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/utilities";
 // @import "bootstrap/scss/helpers";

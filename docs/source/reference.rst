@@ -200,9 +200,8 @@ in your project's ``settings.py``.
 
 .. py:attribute:: settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS
 
-    If settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES`` is set to ``True``,uploaded images will create thumbnails of 
-    different sizes according to ``DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS`` (which defaults to 
-    ``[576, 768, 992]``) and browser will be responsible for choosing the best image to display (based upon the 
+    If :py:attr:`~settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES` is set to ``True``,uploaded images will create thumbnails of different sizes according to :py:attr:`~settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS` (which defaults to
+    ``[576, 768, 992]``) and browser will be responsible for choosing the best image to display (based upon the
     screen viewport).
 
 
@@ -234,7 +233,77 @@ in your project's ``settings.py``.
         so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION = None``.
 
 
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES
 
+    Default::
+
+        DJANGOCMS_FRONTEND_ICON_LIBRARIES = {
+            'font-awesome': (
+                'font-awesome.min.json',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
+            ),
+            'bootstrap-icons': (
+                'bootstrap-icons.min.json',
+                'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css'
+             ),
+            'material-icons-filled': (
+                'material-icons-filled.min.json',
+                'https://fonts.googleapis.com/css2?family=Material+Icons'
+            ),
+            ...
+
+    For each available icon set there is an entry in this dictionary. The key is the basis for the displayed name. The value is a 2-tuple:
+
+    1. The name of the config file which is a static file with the path ``djangocms_frontend/icon/vendor/assets/icon-libraries/``.
+    2. The name of the css file defining the icons. It is either a path or a file name. If it is a file name the css file is fetched from ``djangocms_frontend/icon/vendor/assets/stylesheets/``.
+
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN
+
+    Default::
+
+        DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN = (
+            'font-awesome',
+            'bootstrap-icons',
+            'material-icons-filled',
+            'material-icons-outlined',
+            'material-icons-round',
+            'material-icons-sharp',
+            'material-icons-two-tone',
+            'fomantic-ui',
+            'foundation-icons',
+            'elegant-icons',
+            'feather-icons',
+            'happy-icons',
+            'icomoon',
+            'open-iconic',
+            'tabler-icons',
+            'zondicons',
+            'weather-icons'
+        )
+
+    This settings allows to restrict the number of icon sets shown to the user. Typically one or two icon sets should be sufficient to keep a consistent icon expierence.
+
+    .. warning::
+
+        This setting only has an effecet if :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES` is not explicitly set.
+
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES
+
+    Default::
+
+        DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES = (
+            ("", _("Regular")),
+            ("200%", _("x 2")),
+            ("300%", _("x 3")),
+            ("400%", _("x 4")),
+            ("500%", _("x 5")),
+            ("800%", _("x 8")),
+            ("1200%", _("x 12")),
+        )
+
+    This lost of options define the icon size choices a user can select. The values (first tuple element) are css units for the ``font-size`` css property. Besides relative units (``%``) any css unit can be used, e.g. ``112pt``.
 
 ******
 Models

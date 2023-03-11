@@ -62,7 +62,10 @@ RESPONSIVE_IMAGE_CHOICES = (
 
 class ImageForm(
     TemplateChoiceMixin,
-    AbstractLinkForm, ResponsiveFormMixin, MarginFormMixin, EntangledModelForm
+    AbstractLinkForm,
+    ResponsiveFormMixin,
+    MarginFormMixin,
+    EntangledModelForm,
 ):
     """
     Content > "Image" Plugin
