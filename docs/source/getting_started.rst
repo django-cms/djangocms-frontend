@@ -53,6 +53,7 @@ Add the following entries to your ``INSTALLED_APPS``:
       "djangocms_frontend.contrib.collapse",
       "djangocms_frontend.contrib.content",
       "djangocms_frontend.contrib.grid",
+      "djangocms_frontend.contrib.icon",
       "djangocms_frontend.contrib.image",
       "djangocms_frontend.contrib.jumbotron",
       "djangocms_frontend.contrib.link",
@@ -280,11 +281,15 @@ djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
 
     The order of the apps in ``INSTALLED_APPS`` is **cruicial**.
 
-    1. First is ``djangocms_link`` which is needed by ``djangocms_bootstrap4``,
-    2. second come all ``djangocms_bootstrap4`` plugins.
+    1. First is ``djangocms_link`` and ``djangocms_icon`` the first of which is needed by ``djangocms_bootstrap4``,
+    2. then come all ``djangocms_bootstrap4`` plugins.
         ``djangocms_bootstrap4.contrib.bootstrap4_link`` uninstalls the Link
         plugin of ``djangocms_link``
     3. At last come all ``djangocms_frontend`` apps.
+
+.. warning::
+
+    The migration process does also migrate ``djangocms-icon`` instances to ``djangocms-frontend``. If you prefer to use ``djangocms-icon`` instead, remove ``"djangocms_frontend.contrib.icon"`` from installed apps.
 
 .. code::
 

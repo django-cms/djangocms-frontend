@@ -4,7 +4,7 @@ const concat = require('gulp-concat-util');
 const gulpif = require('gulp-if');
 const gutil = require('gulp-util');
 const postcss = require('gulp-postcss');
-const sass = require('gulp-sass')(require('sass'));;
+const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const styleLint = require('gulp-stylelint');
 

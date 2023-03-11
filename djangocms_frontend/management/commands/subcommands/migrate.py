@@ -27,6 +27,13 @@ if "djangocms_styledlink" in apps.all_models:
     plugin_migrations.update(styled_link_migration.plugin_migrations)
     data_migration.update(styled_link_migration.data_migration)
     plugin_prefixes.append(styled_link_migration.plugin_prefix)
+# djangocms-icon
+if "djangocms_icon" in apps.all_models:
+    from djangocms_frontend.management import icon_migration
+
+    plugin_migrations.update(icon_migration.plugin_migration)
+    data_migration.update(icon_migration.data_migration)
+    plugin_prefixes.append(icon_migration.plugin_prefix)
 
 additional_migrations = getattr(
     settings, "DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS", None
@@ -167,10 +174,12 @@ class Migrate(SubcommandsCommand):
     def handle(self, *args, **options):
         tables = connection.introspection.table_names()
         if "djangocms_frontend_frontenduiitem" not in tables:
-            self.stdout.write(self.style.ERROR(
-                "I cannot find djangocms-frontend's tables in the database. Did you run\n"
-                "./manage.py migrate ?"
-            ))
+            self.stdout.write(
+                self.style.ERROR(
+                    "I cannot find djangocms-frontend's tables in the database. Did you run\n"
+                    "./manage.py migrate ?"
+                )
+            )
             return
 
         self.migrate_to_djangocms_frontend()

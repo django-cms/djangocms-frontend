@@ -26,7 +26,7 @@ def create_querysets(link_models):
                 queryset = getattr(queryset, item["manager_method"])()
 
             if "filter" in item:
-                for (k, v) in item["filter"].items():
+                for k, v in item["filter"].items():
                     try:
                         # Attempt to execute any callables in the filter dict.
                         item["filter"][k] = v()

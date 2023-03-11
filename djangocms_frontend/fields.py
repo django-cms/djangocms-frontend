@@ -19,8 +19,7 @@ class TemplateChoiceMixin:
             choices = template_field.choices
             instance = kwargs.get("instance", None)
             if len(choices) == 1 and (
-                instance is None
-                or instance.config.get("template", "") == choices[0][0]
+                instance is None or instance.config.get("template", "") == choices[0][0]
             ):
                 template_field.widget = forms.HiddenInput()
 
@@ -66,7 +65,9 @@ class IconMultiselect(forms.CheckboxSelectMultiple):  # lgtm [py/missing-call-to
         super().__init__(*args, **kwargs)
 
 
-class OptionalDeviceChoiceField(forms.MultipleChoiceField):  # lgtm [py/missing-call-to-init]
+class OptionalDeviceChoiceField(
+    forms.MultipleChoiceField
+):  # lgtm [py/missing-call-to-init]
     def __init__(self, **kwargs):
         kwargs.setdefault("choices", settings.DEVICE_CHOICES)
         kwargs.setdefault("initial", None)
@@ -190,6 +191,7 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
 
 try:
     from djangocms_text_ckeditor.fields import HTMLFormField  # noqa
+
     HTMLsanitized = True
 except ModuleNotFoundError:
     HTMLFormField = forms.CharField

@@ -143,7 +143,7 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
         except ValueError:
             # get_thumbnailer() raises this if it can't establish a `relative_name`.
             # This may mean that the filer image has been deleted
-            url = ''
+            url = ""
         return url
 
     def get_short_description(self):
