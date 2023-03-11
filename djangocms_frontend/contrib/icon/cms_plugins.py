@@ -1,5 +1,4 @@
 from cms.plugin_pool import plugin_pool
-from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
@@ -7,9 +6,9 @@ from ...cms_plugins import CMSUIPlugin
 from ...common.attributes import AttributesMixin
 from ...common.background import BackgroundMixin
 from ...common.responsive import ResponsiveMixin
+from ...common.spacing import SpacingMixin
 from .. import icon
 from . import forms, models
-from ...common.spacing import SpacingMixin
 
 mixin_factory = settings.get_renderer(icon)
 

@@ -59,7 +59,6 @@ def m003_background_mixin(obj, new_obj):
             new_obj.config["attributes"].pop("class")
 
 
-
 def i001_icon(obj, new_obj):
     """Convert icons (only works for fontawesome)"""
     classes = obj.icon.split()
@@ -90,6 +89,7 @@ def i001_icon(obj, new_obj):
         "iconText": "",
         "library": "font-awesome",
     }
+
 
 def m001_spacing_mixin(obj, new_obj, type):
     classes = new_obj.config["attributes"].get("class", "").split()
