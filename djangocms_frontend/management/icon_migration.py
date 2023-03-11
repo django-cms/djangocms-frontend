@@ -91,17 +91,50 @@ def i001_icon(obj, new_obj):
         "library": "font-awesome",
     }
 
+def m001_spacing_mixin(obj, new_obj, type):
+    classes = new_obj.config["attributes"].get("class", "").split()
+    if classes:
+        for size, _ in list(settings.SPACER_SIZE_CHOICES) + (
+            [("auto", "auto")] if type == "margin" else []
+        ):
+            if f"{type[0]}-{size}" in classes:
+                classes.remove(f"{type[0]}-{size}")
+                classes.append(f"{type[0]}x-{size}")
+                classes.append(f"{type[0]}y-{size}")
+            for side, _ in settings.SPACER_X_SIDES_CHOICES:
+                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(
+                    f"{type}_x", None
+                ):
+                    new_obj.config[f"{type}_x"] = f"{type[0]}{side}-{size}"
+                    new_obj.config[f"{type}_devices"] = None
+                    classes.remove(f"{type[0]}{side}-{size}")
+            for side, _ in settings.SPACER_Y_SIDES_CHOICES:
+                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(
+                    f"{type}_y", None
+                ):
+                    new_obj.config[f"{type}_y"] = f"{type[0]}{side}-{size}"
+                    new_obj.config[f"{type}_devices"] = None
+                    classes.remove(f"{type[0]}{side}-{size}")
+        if classes:
+            new_obj.config["attributes"]["class"] = " ".join(classes)
+        else:
+            new_obj.config["attributes"].pop("class")
+
 
 plugin_migration = {
     "djangocms_icon.Icon -> icon.Icon": [
-        "icon",
         "attributes",
+        "I001_ICON",
+        "M001-m",
+        "M001-p",
         "M002",
         "M003",
     ],
 }
 data_migration = {
     "I001_ICON": i001_icon,
+    "M001-m": lambda x, y: m001_spacing_mixin(x, y, "margin"),
+    "M001-p": lambda x, y: m001_spacing_mixin(x, y, "padding"),
     "M002": m002_responsive_mixin,
     "M003": m003_background_mixin,
 }

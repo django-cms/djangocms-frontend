@@ -11,6 +11,7 @@ from djangocms_frontend.fields import (
 from ... import settings
 from ...common.background import BackgroundFormMixin
 from ...common.responsive import ResponsiveFormMixin
+from ...common.spacing import SpacingFormMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ...settings import COLOR_STYLE_CHOICES
@@ -18,7 +19,7 @@ from .conf import ICON_SIZE_CHOICES
 from .fields import IconPickerField
 
 
-class IconForm(BackgroundFormMixin, ResponsiveFormMixin, EntangledModelForm):
+class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, EntangledModelForm):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/

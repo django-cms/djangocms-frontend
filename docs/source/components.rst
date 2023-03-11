@@ -411,6 +411,9 @@ For other icon sets source files are loaded from CDN through the internet by def
 
 To just restrict the available choices of icon sets for the user use the :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN` setting.
 
+Icons can be sized. Options for icon sizes are defined by the :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES` setting.
+
+
 Adding custom icon fonts
 ========================
 
@@ -442,3 +445,7 @@ The list ``.icons`` contains all available icons in the set.
 ``.icon-style`` currently is unused. It may in future determine how icons are rendered. Currently all icons a re rendered by ``<i class"bla"></i>`` except material design icon which are rendered by ``<i class="material-icon">bla</i>``.
 
 
+Using svg sprites
+=================
+
+Currently only font-based icons are supported.

@@ -9,6 +9,7 @@ from ...common.background import BackgroundMixin
 from ...common.responsive import ResponsiveMixin
 from .. import icon
 from . import forms, models
+from ...common.spacing import SpacingMixin
 
 mixin_factory = settings.get_renderer(icon)
 
@@ -17,6 +18,7 @@ class IconPlugin(
     mixin_factory("Icon"),
     AttributesMixin,
     ResponsiveMixin,
+    SpacingMixin,
     BackgroundMixin,
     CMSUIPlugin,
 ):
@@ -48,7 +50,8 @@ class IconPlugin(
     ]
 
 
-if "IconPlugin" not in plugin_pool.plugins:
-    #  Only register plugin if not other Icon plugin is installed
+if "IconPlugin" in plugin_pool.plugins:
+    #  Unregister already installed IconPlugin
+    del plugin_pool.plugins["IconPlugin"]
 
-    plugin_pool.register_plugin(IconPlugin)
+plugin_pool.register_plugin(IconPlugin)

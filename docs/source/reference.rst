@@ -200,8 +200,7 @@ in your project's ``settings.py``.
 
 .. py:attribute:: settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS
 
-    If settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES`` is set to ``True``,uploaded images will create thumbnails of
-    different sizes according to ``DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS`` (which defaults to
+    If :py:attr:`~settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES` is set to ``True``,uploaded images will create thumbnails of different sizes according to :py:attr:`~settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS` (which defaults to
     ``[576, 768, 992]``) and browser will be responsible for choosing the best image to display (based upon the
     screen viewport).
 
@@ -289,6 +288,22 @@ in your project's ``settings.py``.
 
         This setting only has an effecet if :py:attr:`~settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES` is not explicitly set.
 
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES
+
+    Default::
+
+        DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES = (
+            ("", _("Regular")),
+            ("200%", _("x 2")),
+            ("300%", _("x 3")),
+            ("400%", _("x 4")),
+            ("500%", _("x 5")),
+            ("800%", _("x 8")),
+            ("1200%", _("x 12")),
+        )
+
+    This lost of options define the icon size choices a user can select. The values (first tuple element) are css units for the ``font-size`` css property. Besides relative units (``%``) any css unit can be used, e.g. ``112pt``.
 
 ******
 Models

@@ -34,23 +34,20 @@ ICON_LIBRARIES_SHOWN = getattr(settings, "DJANGOCMS_FRONTEND_ICONS_LIBRARIES_SHO
 
 ICON_LIBRARIES = getattr(
     settings,
-    "DJANGOCMS_ICON_LIBRARIES",
+    "DJANGOCMS_FRONTEND_ICON_LIBRARIES",
     {
         library: (f"{library}.min.json", ICON_CDN.get(library, f"{library}.css"))
         for library in getattr(
             settings,
-            "DJANGOCMS_ICON_SELECTION",
+            "DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN",
             ICON_LIBRARIES_SHOWN
         )
     },
 )
 
-ICON_LIBRARIES_JSON = [value[0] for value in ICON_LIBRARIES.values()]
-ICON_LIBRARIES_CSS = [value[1] for value in ICON_LIBRARIES.values()]
-
 ICON_SIZE_CHOICES = getattr(
     settings,
-    "DJANGOCMS_ICON_SIZE_CHOICES",
+    "DJANGOCMS_FRONTEND_ICON_SIZE_CHOICES",
     (
         ("", _("Regular")),
         ("200%", _("x 2")),
