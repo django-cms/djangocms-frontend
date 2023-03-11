@@ -1,5 +1,9 @@
 {% load i18n %}<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
-    <div class="icon-preview" data-empty="{% translate "Click to add icon" %}">{{ widget.preview|safe }}</div>
+    {% if widget.preview %}
+        <div class="icon-preview">{{ widget.preview|safe }}</div>
+    {% else %}
+        <div class="icon-preview empty"><div>{% translate "Click to add icon" %}</div></div>
+    {% endif %}
     <select{% if icon_libraries|length < 2 %} style="display: none;"{% endif %}>
         {% for value, verbose, json, css in icon_libraries %}
             <option value="{{ value }}" data-json="{{ json }}" data-css="{{ css }}">{{ verbose }}</option>
