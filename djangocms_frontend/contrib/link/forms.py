@@ -37,10 +37,12 @@ mixin_factory = settings.get_forms(link)
 # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
 # templates if it's not in INSTALLED_APPS)
 if "djangocms_icon" in django_settings.INSTALLED_APPS:
-    from djangocms_icon.fields import IconField
+    from djangocms_icon.fields import IconField as IconPickerField
+elif "djangocms_frontend.contrib.icon" in django_settings.INSTALLED_APPS:
+    from djangocms_frontend.contrib.icon.fields import IconPickerField
 else:
 
-    class IconField(forms.CharField):  # lgtm [py/missing-call-to-init]
+    class IconPickerField(forms.CharField):  # lgtm [py/missing-call-to-init]
         def __init__(self, *args, **kwargs):
             kwargs["widget"] = forms.HiddenInput
             super().__init__(*args, **kwargs)
@@ -364,12 +366,12 @@ class LinkForm(
         required=False,
         help_text=_("Extends the button to the width of its container."),
     )
-    icon_left = IconField(
+    icon_left = IconPickerField(
         label=_("Icon left"),
         initial="",
         required=False,
     )
-    icon_right = IconField(
+    icon_right = IconPickerField(
         label=_("Icon right"),
         initial="",
         required=False,

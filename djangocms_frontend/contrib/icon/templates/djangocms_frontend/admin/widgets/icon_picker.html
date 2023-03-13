@@ -1,9 +1,12 @@
 {% load i18n %}<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
-    {% if widget.preview %}
-        <div class="icon-preview">{{ widget.preview|safe }}</div>
-    {% else %}
-        <div class="icon-preview empty"><div>{% translate "Click to add icon" %}</div></div>
-    {% endif %}
+    <span class="icon-box">
+        {% if widget.preview %}
+            <div class="icon-preview">{{ widget.preview|safe }}</div>
+        {% else %}
+            <div class="icon-preview empty"><div>{% translate "Click to add icon" %}</div></div>
+        {% endif %}
+        {% if not widget.required %}<div class="icon-close-indicator"></div>{% endif %}
+    </span>
     <select{% if icon_libraries|length < 2 %} style="display: none;"{% endif %}>
         {% for value, verbose, json, css in icon_libraries %}
             <option value="{{ value }}" data-json="{{ json }}" data-css="{{ css }}">{{ verbose }}</option>
@@ -19,18 +22,28 @@
             selectElement.val("{{ icon_libraries.0.0 }}");
         }
         var options = {
-            selector: '#{{ widget.attrs.id|safe }}',
+            selector: '#{{ widget.attrs.id|safe }} .icon-preview',
+            // resetSelector: '#{{ widget.attrs.id|safe }} .icon-close-indicator',
             onSelect: function (jsonIconData) {
-                jsonIconData.library = selectElement.val();
-                $('#{{ widget.attrs.id|safe }} .icon-preview' ).html(jsonIconData.iconHtml);
-                $('#{{ widget.attrs.id|safe }} input[hidden]').val(JSON.stringify(jsonIconData));
+                if (jsonIconData.iconHtml) {
+                    jsonIconData.library = selectElement.val();
+                    $('#{{ widget.attrs.id|safe }} .icon-preview' ).removeClass("empty").html(jsonIconData.iconHtml);
+                    $('#{{ widget.attrs.id|safe }} input[hidden]').val(JSON.stringify(jsonIconData));
+                } else {
+                    $('#{{ widget.attrs.id|safe }} .icon-preview' ).addClass("empty").html("");
+                    $('#{{ widget.attrs.id|safe }} input[hidden]').val("");
+                }
+            },
+            onReset: function () {
+                $('#{{ widget.attrs.id|safe }} .icon-preview' ).addClass("empty").html("");
+                $('#{{ widget.attrs.id|safe }} input[hidden]').val("");
             },
             iconLibraries: [selectElement.find(':selected').data('json')],
             iconLibrariesCss: [selectElement.find(':selected').data('css')],
             loadCustomCss: true,
-            allowEmpty: false
+            allowEmpty: {{ widget.required|yesno:"false,true" }}
         };
-        var uip = new UniversalIconPicker('#{{ widget.attrs.id|safe }}', options);
+        var uip = new UniversalIconPicker(options.selector, options);
         selectElement.on('change', function () {
             uip.setOptions({
                iconLibraries: [this.options[this.selectedIndex].dataset.json],
