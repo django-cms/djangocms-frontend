@@ -37,7 +37,7 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
             ]
         }
         untangled_fields = (
-            # "tag_type",
+            "tag_type",
         )
 
     icon = IconPickerField()
