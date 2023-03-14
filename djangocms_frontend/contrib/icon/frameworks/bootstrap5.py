@@ -2,7 +2,6 @@ class IconRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/icon.html"
 
     def render(self, context, instance, placeholder):
-        instance.tag_type = "span"
         classes = instance.config.get("icon", {}).get("iconClass", "")
         instance.add_classes(*classes.split())
         context["icon_text"] = instance.config.get("icon", {}).get("iconText", "")

@@ -9,11 +9,12 @@ from .test_models import icon_config
 
 class IconPluginTestCase(TestFixture, CMSTestCase):
     def test_icon_plugin(self):
-        add_plugin(
+        plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=IconPlugin.__name__,
             language=self.language,
             config=icon_config,
+            tag_type="i",
         )
         self.publish(self.page, self.language)
 
