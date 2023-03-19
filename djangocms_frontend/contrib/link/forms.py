@@ -36,11 +36,11 @@ mixin_factory = settings.get_forms(link)
 if "djangocms_frontend.contrib.icon" in django_settings.INSTALLED_APPS:
     # Weak dependency on djangocms_frontend.contrib.icon
     from djangocms_frontend.contrib.icon.fields import IconPickerField
-elif "djangocms_icon" in django_settings.INSTALLED_APPS:
+elif "djangocms_icon" in django_settings.INSTALLED_APPS:  # pragma: no cover
     # Weak dependency on djangocms_icon
     # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
     # templates if it's not in INSTALLED_APPS)
-    from djangocms_icon.fields import IconField as IconPickerField  # pragma: no cover
+    from djangocms_icon.fields import IconField as IconPickerField
 else:  # pragma: no cover
 
     class IconPickerField(forms.CharField):  # lgtm [py/missing-call-to-init]
