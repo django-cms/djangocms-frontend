@@ -37,10 +37,10 @@ mixin_factory = settings.get_forms(link)
 # (Even if djangocms_icon is in the python path, the admin form will fail due to missing
 # templates if it's not in INSTALLED_APPS)
 if "djangocms_icon" in django_settings.INSTALLED_APPS:
-    from djangocms_icon.fields import IconField as IconPickerField
+    from djangocms_icon.fields import IconField as IconPickerField  # noqa
 elif "djangocms_frontend.contrib.icon" in django_settings.INSTALLED_APPS:
     from djangocms_frontend.contrib.icon.fields import IconPickerField
-else:
+else:   # noqa
 
     class IconPickerField(forms.CharField):  # lgtm [py/missing-call-to-init]
         def __init__(self, *args, **kwargs):
