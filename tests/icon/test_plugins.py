@@ -24,3 +24,5 @@ class IconPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, '<i ')
         self.assertContains(response, 'zi-airplane')
         self.assertContains(response, '</i>')
+        self.assertContains(response, 'style=')
+        self.assertContains(response, '400%')
