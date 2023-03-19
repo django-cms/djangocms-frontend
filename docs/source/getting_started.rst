@@ -202,6 +202,7 @@ course - view instances of all djangocms_frontend UI items:
 * Content
 * Forms
 * Grid
+* Icon
 * Image
 * Jumbotron
 * Link
