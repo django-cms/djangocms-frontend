@@ -34,7 +34,9 @@
         };
         var options = {
             selector: '#{{ widget.attrs.id|safe }}-preview',
-            resetSelector: '#{{ widget.attrs.id|safe }} .icon-close-indicator',
+            {% if not widget.required %}
+                resetSelector: '#{{ widget.attrs.id|safe }} .icon-close-indicator',
+            {% endif %}
             onSelect: setIcon,
             onReset: setIcon,
             iconLibraries: [selectElement.find(':selected').data('json')],

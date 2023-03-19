@@ -47,6 +47,7 @@
         .icon-close-indicator {
             display: block;
             border-radius: 50%;
+            color: var(--dca-black, var(--body-fg, $black));
             background-color: var(--dca-white, var(--body-bg, $white));
             padding: 0.5rem;
             border: 1px solid var(--dca-black, var(--body-fg, $black));
@@ -65,8 +66,8 @@
             transition: background-color 0.15s;
 
             &:hover {
-                color: var(--dca-white, var(--body-bg, $white));
-                background: var(--dca-gray-light, var(--border-color, lightgray));
+                background: var(--delete-button-bg, red);
+                color: var(--delete-button-fg, white);
                 cursor: pointer;
             }
         }
