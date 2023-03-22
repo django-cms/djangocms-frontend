@@ -41,14 +41,6 @@ class Migration(migrations.Migration):
                     "tag_type",
                     djangocms_frontend.fields.TagTypeField(
                         blank=True,
-                        choices=[
-                            ("div", "div"),
-                            ("section", "section"),
-                            ("article", "article"),
-                            ("header", "header"),
-                            ("footer", "footer"),
-                            ("aside", "aside"),
-                        ],
                         default="div",
                         help_text="Select the HTML tag to be used.",
                         max_length=255,

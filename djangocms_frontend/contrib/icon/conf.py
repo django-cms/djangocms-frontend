@@ -58,3 +58,11 @@ ICON_SIZE_CHOICES = getattr(
         ("1200%", _("x 12")),
     ),
 )
+
+ICON_TAG_TYPES = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_ICON_TAG_TYPES",
+    ("i", "span"),
+)
+
+ICON_TAG_TYPES = tuple((entry, entry) for entry in ICON_TAG_TYPES)

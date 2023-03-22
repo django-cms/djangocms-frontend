@@ -25,5 +25,5 @@ class AttributesMixin:
             fields,
             blockname=_("Advanced settings"),
             blockattrs=self.block_attr,
-            position=-1,
+            position=-1,  # Always last
         )
