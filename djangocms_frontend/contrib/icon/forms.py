@@ -15,7 +15,7 @@ from ...common.spacing import SpacingFormMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ...settings import COLOR_STYLE_CHOICES
-from .conf import ICON_SIZE_CHOICES
+from .conf import ICON_SIZE_CHOICES, ICON_TAG_TYPES
 from .fields import IconPickerField
 
 
@@ -36,7 +36,9 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
                 "attributes",
             ]
         }
-        untangled_fields = ("tag_type",)
+        untangled_fields = (
+            "tag_type",
+        )
 
     icon = IconPickerField()
     icon_size = forms.ChoiceField(
@@ -57,4 +59,7 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
         required=False,
     )
     attributes = AttributesFormField()
-    tag_type = TagTypeFormField()
+    tag_type = TagTypeFormField(
+        choices=ICON_TAG_TYPES,
+        initial=first_choice(ICON_TAG_TYPES),
+    )

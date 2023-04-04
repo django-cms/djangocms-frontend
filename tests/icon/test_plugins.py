@@ -14,6 +14,7 @@ class IconPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=IconPlugin.__name__,
             language=self.language,
             config=icon_config,
+            tag_type="i",
         )
         self.publish(self.page, self.language)
 
@@ -23,3 +24,5 @@ class IconPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, '<i ')
         self.assertContains(response, 'zi-airplane')
         self.assertContains(response, '</i>')
+        self.assertContains(response, 'style=')
+        self.assertContains(response, '400%')

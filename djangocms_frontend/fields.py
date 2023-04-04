@@ -157,16 +157,11 @@ class ChoicesFormField(fields.AttributesFormField):
 
 class TagTypeField(models.CharField):
     def __init__(self, *args, **kwargs):
-        if "verbose_name" not in kwargs:
-            kwargs["verbose_name"] = _("Tag type")
-        if "choices" not in kwargs:
-            kwargs["choices"] = settings.TAG_CHOICES
-        if "default" not in kwargs:
-            kwargs["default"] = first_choice(settings.TAG_CHOICES)
-        if "max_length" not in kwargs:
-            kwargs["max_length"] = 255
-        if "help_text" not in kwargs:
-            kwargs["help_text"] = _("Select the HTML tag to be used.")
+        kwargs.setdefault("verbose_name", _("Tag type"))
+        # Choices are not defined at database level but in the form field below
+        kwargs.setdefault("default", first_choice(settings.TAG_CHOICES))
+        kwargs.setdefault("max_length", 255)
+        kwargs.setdefault("help_text", _("Select the HTML tag to be used."))
         super().__init__(*args, **kwargs)
 
 

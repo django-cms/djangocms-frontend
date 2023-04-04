@@ -19,8 +19,13 @@ class IconPickerWidget(TextInput):  # pragma: no cover
             json_obj = json.loads(value) or {}
         except ValueError:
             json_obj = {}
-        context["widget"]["preview"] = json_obj.get("iconHtml", "")
-        context["widget"]["library"] = json_obj.get("library", "")
+        if isinstance(json_obj, str):
+            # Probably djangocms_icon classes
+            context["widget"]["preview"] = f'<i class="{json_obj}"></i>'
+            context["widget"]["library"] = ""
+        else:
+            context["widget"]["preview"] = json_obj.get("iconHtml", "")
+            context["widget"]["library"] = json_obj.get("library", "")
         context["icon_libraries"] = [
             (key, key.title(), value[0], value[1])
             for key, value in ICON_LIBRARIES.items()
