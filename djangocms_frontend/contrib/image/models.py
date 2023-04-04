@@ -41,7 +41,7 @@ class ImageMixin:
             else:
                 width = 0
                 height = 0
-        else:
+        elif not width and not height:
             # If no information is available on the image size whatsoever,
             # make it 640px wide and use PICTURE_RATIO
             width, height = 640, 640 / PICTURE_RATIO
