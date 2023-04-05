@@ -1,7 +1,7 @@
 {% load cms_tags %}
 {% spaceless %}
     <div class="accordion-item">
-        <{{ parent.accordion_header_type|default:"h2" }} class="mb-0"
+        <{{ parent.accordion_header_type|default:"h2" }} class="accordion-header"
         id="heading-{{ instance.pk|safe }}"><button
             class="accordion-button{% if not instance.accordion_item_open %} collapsed{% endif %} {{ instance.font_size }}"
             type="button"
