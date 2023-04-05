@@ -1,7 +1,7 @@
 {% load cms_tags %}
 {% spaceless %}
     <div class="accordion-item">
-        <{{ parent.accordion_header_type }} class="mb-0"
+        <{{ parent.accordion_header_type|default:"h2" }} class="mb-0"
         id="heading-{{ instance.pk|safe }}"><button
             class="accordion-button{% if not instance.accordion_item_open %} collapsed{% endif %} {{ instance.font_size }}"
             type="button"
@@ -9,7 +9,7 @@
             data-bs-target="#item-{{ instance.pk|safe }}"
             aria-expanded="{{ instance.accordion_item_open|lower }}"
             aria-controls="item-{{ instance.pk|safe }}">{{ instance.accordion_item_header }}</button>
-    </{{ parent.accordion_header_type }}>
+    </{{ parent.accordion_header_type|default:"h2" }}>
     <{{ instance.tag_type }}{{ instance.get_attributes }} id="item-{{ instance.pk|safe }}" aria-labelledby="heading-{{ instance.pk|safe }}" data-bs-parent="#parent-{{ parent.pk|safe }}">
     <div class="accordion-body">
         {% with parent=instance %}
