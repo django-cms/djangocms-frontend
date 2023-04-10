@@ -2,6 +2,12 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Allow accordion header size to unset resulting in an accordion item header with
+  standard size.
+
 1.1.0
 =====
 

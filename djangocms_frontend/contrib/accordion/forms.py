@@ -40,9 +40,9 @@ class AccordionForm(mixin_factory("Accordion"), EntangledModelForm):
     )
     accordion_header_type = forms.ChoiceField(
         label=_("Header type"),
-        initial=settings.HEADER_CHOICES[-1][0],
-        choices=settings.HEADER_CHOICES,
-        required=True,
+        initial=settings.EMPTY_CHOICE[0][0],
+        choices=settings.EMPTY_CHOICE + settings.HEADER_CHOICES,
+        required=False,
     )
     accordion_flush = forms.BooleanField(
         label=_("Integrate into parent"),
