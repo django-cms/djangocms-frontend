@@ -2,11 +2,14 @@
 Changelog
 =========
 
-unpublished
-===========
+1.1.1
+=====
 
+* Django 4.2 compatibility
 * Allow accordion header size to unset resulting in an accordion item header with
-  standard size.
+  standard size (#119).
+* Fix a bug that overwrote image sizes by 640x400 if both width and height were given (#117).
+* Update of docs on how to correctly see IconPlugin instances in CKEDITOR (#115)
 
 1.1.0
 =====
