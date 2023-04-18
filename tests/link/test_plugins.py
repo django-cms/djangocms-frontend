@@ -150,7 +150,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                         )
                     )
                     if DJANGO_CMS4
-                    else dict(external_link="https://www.django-cms.com/")
+                    else dict(external_link="https://www.django-cms.org/")
                 ),
             }
         )
