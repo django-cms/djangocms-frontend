@@ -1,6 +1,5 @@
 import json
 
-from cms.utils.urlutils import static_with_version
 from django.forms.fields import JSONField, TextInput
 
 from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
@@ -9,7 +8,6 @@ from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
 class IconPickerWidget(TextInput):  # pragma: no cover
     class Media:
         js = ("djangocms_frontend/icon/vendor/assets/js/universal-icon-picker.min.js",)
-        css = {"all": (static_with_version("cms/css/cms.icons.css"),)}
 
     template_name = "djangocms_frontend/admin/widgets/icon_picker.html"
 
