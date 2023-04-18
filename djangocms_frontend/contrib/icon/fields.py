@@ -1,6 +1,5 @@
 import json
 
-from cms.utils.urlutils import static_with_version
 from django.forms.fields import JSONField, TextInput
 
 from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
