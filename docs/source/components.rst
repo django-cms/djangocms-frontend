@@ -449,3 +449,43 @@ Using svg sprites
 =================
 
 Currently only font-based icons are supported.
+
+
+Icon plugins inside text plugins
+================================
+
+The icon plugin is text-enabled, i.e., you can add it to a text plugin through djangocms-text-ckeditor's CKEDITOR. By default, however, CKEDITOR removes empty ``<span>`` or ``<i>`` tags which most icons use.
+
+To disable this behavior of CKEDITOR, you need to add a ``stylesSet`` entry in ``CKEDITOR_SETTINGS``, e.g.,
+
+.. code-block:: python
+
+    CKEDITOR_SETTINGS = {
+        ...,
+        "stylesSet": f"default:{STATIC_URL}djangocms_frontend/icon/ckeditor/ckeditor.icons.js",
+        ...,
+    }
+
+This will load the ``ckeditor.icons.js`` file which in turn will allow empty ``span``and ``i`` tags.
+
+If you already have a ``styleSet`` file specified it will suffice to add the following two lines to it.
+
+.. code-block:: javascript
+
+    CKEDITOR.dtd.$removeEmpty.span = 0;
+    CKEDITOR.dtd.$removeEmpty.i = 0;
+
+Finally, you potentially need to add the necessary icon css files to the ``contentCss`` property of ``CKEDITOR_SETTINGS``, e.g., for bootstrap icons from their cdn
+
+.. code-block:: python
+
+    CKEDITOR_SETTINGS = {
+        ...,
+        "contentsCss": [
+            ...,
+            "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css",
+            ...,
+        ],
+        ...,
+    }
+
