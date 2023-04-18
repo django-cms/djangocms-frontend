@@ -1,16 +1,35 @@
 [tool.black]
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.tox
-  | \venv
-  | _build
-  | build
-  | dist
-)/
-'''
+exclude = [
+    ".git",
+    ".hg",
+    ".tox",
+    "venv",
+    ".venv",
+    "_build",
+    "build",
+    "dist"
+]
 
 [tool.djlint]
 ignore="H023,T003,H006,H031,D018,H021,H025"
 profile="django"
+
+[tool.ruff]
+exclude = [
+    ".env",
+    ".venv",
+    "**/migrations/**",
+]
+ignore = [
+    "E501",  # line too long
+    "F403",  # 'from module import *' used; unable to detect undefined names
+    "E701",  # multiple statements on one line (colon)
+    "F401",  # module imported but unused
+]
+line-length = 119
+select = [
+    "I",
+    "E",
+    "F",
+    "W",
+]
