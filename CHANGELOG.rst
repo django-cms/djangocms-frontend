@@ -10,6 +10,7 @@ Changelog
   standard size (#119).
 * Fix a bug that overwrote image sizes by 640x400 if both width and height were given (#117).
 * Update of docs on how to correctly see IconPlugin instances in CKEDITOR (#115)
+* Add ruff as linter
 
 1.1.0
 =====
