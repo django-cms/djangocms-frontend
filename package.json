@@ -32,6 +32,7 @@
     "sass": "^1.54.7",
     "stylelint": "^13.13.1",
     "stylelint-config-twbs-bootstrap": "^2.2.4",
+    "uglify-js": "^3.17.4",
     "webpack": "^3.0.0",
     "webpack2-polyfill-plugin": "0.0.2"
   }
