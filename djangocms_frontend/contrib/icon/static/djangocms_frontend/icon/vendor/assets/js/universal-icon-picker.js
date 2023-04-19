@@ -104,7 +104,7 @@ var loadedDependencies = [];
         this.sideBarBtn = '';
         this.sideBarList = [];
 
-        this.universalWrap = '<div class="uip-modal uip-open" id="uip-modal' + this.idSuffix + '"><div class="uip-modal--content"><div class="uip-modal--header"><div class="uip-modal--header-logo-area"><span class="uip-modal--header-logo-title">Universal Icon Picker</span></div><div class="uip-modal--header-close-btn"><img src="' + iconPickerUrl + '/images/xmark-solid.svg" width="20" height="16" alt="Close" title="Close" /></div></div><div class="uip-modal--body"><div id="uip-modal--sidebar' + this.idSuffix + '" class="uip-modal--sidebar"><div class="uip-modal--sidebar-tabs"></div></div><div id="uip-modal--icon-preview-wrap' + this.idSuffix + '" class="uip-modal--icon-preview-wrap"><div class="uip-modal--icon-search"><input name="" value="" placeholder="Filter by name..."><img src="' + iconPickerUrl + '/images/magnifying-glass-solid.svg" width="20" height="16" alt="Search" title="Search" /></div><div class="uip-modal--icon-preview-inner"><div id="uip-modal--icon-preview' + this.idSuffix + '" class="uip-modal--icon-preview"></div></div></div></div><div class="uip-modal--footer"><button class="uip-insert-icon-button">Insert</button></div></div></div>';
+        this.universalWrap = '<div class="uip-modal uip-open" id="uip-modal' + this.idSuffix + '"><div class="uip-modal--content"><div class="uip-modal--header"><div class="uip-modal--header-logo-area"><span class="uip-modal--header-logo-title">Universal Icon Picker</span></div><div class="uip-modal--header-close-btn"><img src="' + (options.closeUrl || iconPickerUrl + '/images/xmark-solid.svg') + '" width="20" height="16" alt="Close" title="Close" /></div></div><div class="uip-modal--body"><div id="uip-modal--sidebar' + this.idSuffix + '" class="uip-modal--sidebar"><div class="uip-modal--sidebar-tabs"></div></div><div id="uip-modal--icon-preview-wrap' + this.idSuffix + '" class="uip-modal--icon-preview-wrap"><div class="uip-modal--icon-search"><input name="" value="" placeholder="Filter by name..."><img src="' + (options.searchUrl || iconPickerUrl + '/images/magnifying-glass-solid.svg') + '" width="20" height="16" alt="Search" title="Search" /></div><div class="uip-modal--icon-preview-inner"><div id="uip-modal--icon-preview' + this.idSuffix + '" class="uip-modal--icon-preview"></div></div></div></div><div class="uip-modal--footer"><button class="uip-insert-icon-button">Insert</button></div></div></div>';
 
         this.universalDomEle = createDomEle(this.universalWrap);
         this.sidebarTabs = this.universalDomEle.querySelector('.uip-modal--sidebar-tabs');
@@ -463,7 +463,7 @@ var loadedDependencies = [];
                     }
                     markup += '<div class="uip-modal--sidebar-tab-item' + activeClazz + '" data-library-id="' + item['library-id'] + '">' + iconTag + item['title'] + '</div>';
                 } else {
-                    markup += '<div class="uip-modal--sidebar-tab-item' + activeClazz + '" data-library-id="' + item['library-id'] + '"><img src="' + iconPickerUrl + '/images/star-of-life-solid.svg" width="13.125px" height="auto" alt="All" title="All" />' + item['title'] + '</div>';
+                    markup += '<div class="uip-modal--sidebar-tab-item' + activeClazz + '" data-library-id="' + item['library-id'] + '"><img src="' + (this.options.starUrl || iconPickerUrl + '/images/star-of-life-solid.svg') + '" width="13.125px" height="auto" alt="All" title="All" />' + item['title'] + '</div>';
                 }
             });
 
