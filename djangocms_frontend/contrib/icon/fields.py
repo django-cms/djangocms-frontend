@@ -1,13 +1,17 @@
 import json
 
 from django.forms.fields import JSONField, TextInput
+from django.templatetags.static import static
 
 from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
 
 
+VENDOR_PATH = "djangocms_frontend/icon/vendor/assets"
+
+
 class IconPickerWidget(TextInput):  # pragma: no cover
     class Media:
-        js = ("djangocms_frontend/icon/vendor/assets/js/universal-icon-picker.min.js",)
+        js = (f"{VENDOR_PATH}/js/universal-icon-picker.min.js",)
 
     template_name = "djangocms_frontend/admin/widgets/icon_picker.html"
 
@@ -25,7 +29,7 @@ class IconPickerWidget(TextInput):  # pragma: no cover
             context["widget"]["preview"] = json_obj.get("iconHtml", "")
             context["widget"]["library"] = json_obj.get("library", "")
         context["icon_libraries"] = [
-            (key, key.title(), value[0], value[1])
+            (key, key.title(), static(f'{VENDOR_PATH}/icons-libraries/{value[0]}'), value[1])
             for key, value in ICON_LIBRARIES.items()
         ]
         return context

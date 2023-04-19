@@ -307,9 +307,16 @@ var loadedDependencies = [];
                 });
             }
 
-            let iconLib = this.options.iconLibraries[i];
+            let iconLibUrl = this.options.iconLibraries[i];
+            let iconLib;
+            if (! iconLibUrl.includes('/')) {
+                iconLibUrl = iconPickerUrl + 'icons-libraries/' + iconLibUrl;
+                iconLib = iconLibUrl;
+            } else {
+                iconLib = /[^/]*$/.exec(iconLibUrl)[0];
+            }
 
-            await fetch(iconPickerUrl + 'icons-libraries/' + iconLib)
+            await fetch(iconLibUrl)
                 .then(response => response.json())
                 .then(data => {
                     // Success!
