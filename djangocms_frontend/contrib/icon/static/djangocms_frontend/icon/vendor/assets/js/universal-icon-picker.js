@@ -313,7 +313,7 @@ var loadedDependencies = [];
             let iconLib;
             if (iconLibUrl.includes('/')) {
                 iconLib = /[^/]*$/.exec(iconLibUrl)[0];
-                iconLib = /^[^.]*/.exec(iconLibUrl)[0];
+                iconLib = /^[^.]*/.exec(iconLib)[0];
             } else {
                 iconLibUrl = iconPickerUrl + 'icons-libraries/' + iconLibUrl;
                 iconLib = iconLibUrl;
