@@ -5,7 +5,6 @@ from django.templatetags.static import static
 
 from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
 
-
 VENDOR_PATH = "djangocms_frontend/icon/vendor/assets"
 
 
