@@ -1,4 +1,4 @@
-{% load i18n %}<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
+{% load i18n static %}<div{% if widget.attrs.id %} id="{{ widget.attrs.id|safe }}"{% endif %} class="frontend-icon-picker{% if widget.attrs.class %} {{ widget.attrs.class }}{% endif %}">
     <div class="icon-container">
         <div id="{{ widget.attrs.id|safe }}-preview" class="icon-preview">
             <div class="icon-box">{{ widget.preview|safe }}</div>
@@ -42,6 +42,9 @@
             iconLibraries: [selectElement.find(':selected').data('json')],
             iconLibrariesCss: [selectElement.find(':selected').data('css')],
             loadCustomCss: true,
+            searchUrl: '{% static "djangocms_frontend/icon/vendor/assets/images/magnifying-glass-solid.svg" %}',
+            starUrl: '{% static "djangocms_frontend/icon/vendor/assets/images/star-of-life-solid.svg" %}',
+            closeUrl: '{% static "djangocms_frontend/icon/vendor/assets/images/xmark-solid.svg" %}',
             allowEmpty: false
         };
         var uip = new UniversalIconPicker(options.selector, options);
