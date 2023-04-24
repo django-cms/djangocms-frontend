@@ -17,6 +17,6 @@ class IconRenderMixin:
             instance.add_classes("text-center", "rounded", "rounded-circle")
             instance.add_attribute(
                 "style",
-                "display:inline-block;line-height:1.42em;height:1.42em;width:1.42em;",
+                "display:inline-block;line-height:1.49em;height:1.42em;width:1.42em;",
             )
         return super().render(context, instance, placeholder)
