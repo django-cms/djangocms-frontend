@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.1.2 (2023-04-25)
+==================
+
+* Fix asset loading for icon picker with whitenoise or other static file servers
+
+
 1.1.1
 =====
 
