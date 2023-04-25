@@ -276,9 +276,11 @@ var loadedDependencies = [];
             if (this.options.iconLibrariesCss) {
                 this.options.iconLibrariesCss.forEach(cssFile => {
                     if (!loadedDependencies.includes(cssFile)) {
-                        let cssFileLink = iconPickerUrl + 'stylesheets/' + cssFile;
-                        if (cssFile.match(/^http|^\/\//)) {
+                        let cssFileLink;
+                        if (cssFile.includes('/')) {
                             cssFileLink = cssFile;
+                        } else {
+                            cssFileLink = iconPickerUrl + 'stylesheets/' + cssFile;
                         }
                         link = document.createElement('link');
                         link.rel = 'stylesheet';

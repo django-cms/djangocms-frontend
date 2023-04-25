@@ -1,8 +1,12 @@
 from django.conf import settings
+from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
 
+
+VENDOR_PATH = "djangocms_frontend/icon/vendor/assets"
+
 ICON_CDN = {
-    "bootstrap-icons": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css",
+    "bootstrap-icons": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css",
     "font-awesome": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
     "material-icons-filled": "https://fonts.googleapis.com/css2?family=Material+Icons",
     "material-icons-outlined": "https://fonts.googleapis.com/css2?family=Material+Icons+Outlined",
