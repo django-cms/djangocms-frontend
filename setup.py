@@ -21,6 +21,14 @@ EXTRA_REQUIREMENTS = {
     "static-ace": [
         "djangocms-static-ace",
     ],
+    "cms-4": [
+        "django-cms>=4.1.0rc2",
+        "django-parler",
+    ],
+    "cms-3": [
+        "django-cms<4",
+        "django-parler",
+    ],
 }
 
 CLASSIFIERS = [

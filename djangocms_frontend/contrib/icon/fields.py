@@ -3,9 +3,7 @@ import json
 from django.forms.fields import JSONField, TextInput
 from django.templatetags.static import static
 
-from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
-
-VENDOR_PATH = "djangocms_frontend/icon/vendor/assets"
+from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES, VENDOR_PATH
 
 
 class IconPickerWidget(TextInput):  # pragma: no cover
@@ -28,7 +26,12 @@ class IconPickerWidget(TextInput):  # pragma: no cover
             context["widget"]["preview"] = json_obj.get("iconHtml", "")
             context["widget"]["library"] = json_obj.get("library", "")
         context["icon_libraries"] = [
-            (key, key.title(), static(f'{VENDOR_PATH}/icons-libraries/{value[0]}'), value[1])
+            (
+                key,
+                key.title(),
+                static(f'{VENDOR_PATH}/icons-libraries/{value[0]}'),
+                value[1] if "/" in value[1] else static(f'{VENDOR_PATH}/stylesheets/{value[1]}')
+            )
             for key, value in ICON_LIBRARIES.items()
         ]
         return context
