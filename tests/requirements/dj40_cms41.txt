@@ -1,7 +1,7 @@
 -r base.txt
 
 Django>=4.0,<4.1
-django-cms==4.1rc1
+django-cms>=4.1rc2
 -e git+https://github.com/fsbraun/djangocms-alias.git@master#egg=djangocms-alias
 -e git+https://github.com/fsbraun/djangocms-url-manager.git@master#egg=djangocms-url-manager
 https://github.com/django-cms/djangocms-versioning/tarball/master#egg=djangocms-versioning
