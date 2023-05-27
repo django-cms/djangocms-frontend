@@ -29,7 +29,10 @@
         .field-box,
         .fieldBox {
             position: relative;
-            width: 100px !important;
+            width: 86px !important;
+            >:first-child {
+                with: 100px !important;
+            }
             flex: none;
             padding: 15px 10px;
             margin: 0 !important;
@@ -100,7 +103,10 @@
         .field-box,
         .fieldBox {
             position: relative;
-            width: 100px !important;
+            width: 86px !important;
+            >:first-child {
+                width: 100px !important;
+            }
             flex: none;
             padding: 15px 10px;
             margin: 0 !important;
