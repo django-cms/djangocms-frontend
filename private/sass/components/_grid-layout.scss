@@ -19,75 +19,6 @@
     }
 }
 
-.djangocms-frontend-row {
-    .form-row.field-row_cols_xs {
-        position: relative;
-        display: flex;
-        padding: 0;
-        min-width: 800px;
-
-        .field-box,
-        .fieldBox {
-            position: relative;
-            width: 86px !important;
-            >:first-child {
-                with: 100px !important;
-            }
-            flex: none;
-            padding: 15px 10px;
-            margin: 0 !important;
-            border-bottom: 1px solid #eee;
-            float: left !important;
-
-            input {
-                text-align: right;
-                padding-right: 5px !important;
-                box-sizing: border-box;
-                width: 100%;
-            }
-
-            label {
-                font-size: 12px !important;
-                font-weight: normal !important;
-                color: #ccc !important;
-                position: absolute;
-                left: 15px;
-                bottom: 17px;
-                text-transform: lowercase;
-            }
-
-            .disabled {
-                color: #ccc;
-                background: #eee;
-            }
-
-            &:last-child {
-                border-right: none;
-            }
-        }
-
-        .errors {
-            margin-bottom: 0;
-        }
-
-        .field-box-label {
-            display: flex;
-            margin-top: auto;
-            color: #999;
-
-            a {
-                width: 100%;
-                margin-top: auto;
-            }
-
-            .icon {
-                position: relative;
-                top: 3px;
-            }
-        }
-    }
-}
-
 .djangocms-frontend-row,
 .djangocms-frontend-column {
     .form-row.field-xs_col,
@@ -100,20 +31,21 @@
         padding: 0;
         min-width: 800px;
 
+        .field-box:first-child {
+            width: 100px !important;
+        }
         .field-box,
         .fieldBox {
             position: relative;
+            box-sizing: content-box;
             width: 86px !important;
-            >:first-child {
-                width: 100px !important;
-            }
             flex: none;
             padding: 15px 10px;
             margin: 0 !important;
             border-bottom: 1px solid #eee;
             float: left !important;
 
-            input {
+            input:not([type="checkbox"]) {
                 text-align: right;
                 padding-right: 5px !important;
                 box-sizing: border-box;
@@ -160,11 +92,6 @@
             a {
                 width: 100%;
                 margin-top: auto;
-            }
-
-            .icon {
-                position: relative;
-                top: 3px;
             }
         }
 
