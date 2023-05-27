@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.1.3 (2023-05-26)
+==================
+
+* Add: Image is not text-enabled
+* Fix row and column admin style to work with Django admin themes that use flexbox.
+
 1.1.2 (2023-04-25)
 ==================
 
