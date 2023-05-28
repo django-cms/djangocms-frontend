@@ -19,73 +19,77 @@
     }
 }
 
-.djangocms-frontend-row,
-.djangocms-frontend-column {
-    .form-row.field-xs_col,
-    .form-row.field-xs_order,
-    .form-row.field-xs_offset,
-    .form-row.field-xs_ms,
-    .form-row.field-xs_me {
+.djangocms-frontend-row .form-row.field-row_cols_xs,
+.djangocms-frontend-column .form-row.field-xs_col,
+.djangocms-frontend-column .form-row.field-xs_order,
+.djangocms-frontend-column .form-row.field-xs_offset,
+.djangocms-frontend-column .form-row.field-xs_ms,
+.djangocms-frontend-column .form-row.field-xs_me {
+    position: relative;
+    display: flex;
+    padding: 0;
+    min-width: 800px;
+
+    .field-box:first-child {
+        width: 115px !important;
+    }
+    .field-box,
+    .fieldBox {
         position: relative;
+        box-sizing: content-box;
+        width: 86px !important;
+        flex: none;
+        padding: 15px 10px;
+        margin: 0 !important;
+        border-bottom: 1px solid #eee;
+        float: left !important;
+
+        input:not([type="checkbox"]) {
+            text-align: right;
+            padding-right: 5px !important;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        label {
+            font-size: 12px !important;
+            font-weight: normal !important;
+            color: #ccc !important;
+            position: absolute;
+            left: 15px;
+            bottom: 17px;
+            text-transform: lowercase;
+        }
+
+        .disabled {
+            color: #ccc;
+            background: #eee;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    .errors {
+        margin-bottom: 0;
+    }
+
+    .errorlist {
+        @include visually-hidden;
+    }
+
+    &.field-xs_me .field-box {
+        border-bottom: none;
+    }
+
+    .field-box-label {
         display: flex;
-        padding: 0;
-        min-width: 800px;
+        margin-top: auto;
+        color: #999;
 
-        .field-box:first-child {
-            width: 100px !important;
-        }
-        .field-box,
-        .fieldBox {
-            position: relative;
-            box-sizing: content-box;
-            width: 86px !important;
-            flex: none;
-            padding: 15px 10px;
-            margin: 0 !important;
-            border-bottom: 1px solid #eee;
-            float: left !important;
-
-            input:not([type="checkbox"]) {
-                text-align: right;
-                padding-right: 5px !important;
-                box-sizing: border-box;
-                width: 100%;
-            }
-
-            label {
-                font-size: 12px !important;
-                font-weight: normal !important;
-                color: #ccc !important;
-                position: absolute;
-                left: 15px;
-                bottom: 17px;
-                text-transform: lowercase;
-            }
-
-            .disabled {
-                color: #ccc;
-                background: #eee;
-            }
-
-            &:last-child {
-                border-right: none;
-            }
-        }
-
-        .errors {
-            margin-bottom: 0;
-        }
-
-        .errorlist {
-            @include visually-hidden;
-        }
-
-        &.field-xs_me .field-box {
-            border-bottom: none;
-        }
-
-        .field-box-label {
-            display: flex;
+        a {
+            width: 100%;
             margin-top: auto;
             color: #999;
 
@@ -94,65 +98,65 @@
                 margin-top: auto;
             }
         }
-
-        //&.field-xs_col .field-box-label a,
-        //&.field-xs_offset .field-box-label a,
-        //&.field-xs_order .field-box-label a {
-        //    position: relative;
-        //    top: 8px;
-        //}
-
-        // ms/me checkbox
-        .field-xs_ms,
-        .field-sm_ms,
-        .field-md_ms,
-        .field-lg_ms,
-        .field-xl_ms,
-        .field-xxl_ms,
-        .field-xs_me,
-        .field-sm_me,
-        .field-md_me,
-        .field-lg_me,
-        .field-xl_me,
-        .field-xxl_me {
-            text-align: left;
-
-            label {
-                left: 30px;
-                bottom: 14px;
-            }
-
-            input {
-                position: relative;
-                box-sizing: border-box;
-                top: -3px;
-            }
-        }
     }
 
-    .grid-reset {
-        position: absolute;
-        right: 5px;
-        top: 0;
-    }
+    //&.field-xs_col .field-box-label a,
+    //&.field-xs_offset .field-box-label a,
+    //&.field-xs_order .field-box-label a {
+    //    position: relative;
+    //    top: 8px;
+    //}
 
-    .icon-thead {
-        text-align: center;
-        margin-bottom: 15px;
+    // ms/me checkbox
+    .field-xs_ms,
+    .field-sm_ms,
+    .field-md_ms,
+    .field-lg_ms,
+    .field-xl_ms,
+    .field-xxl_ms,
+    .field-xs_me,
+    .field-sm_me,
+    .field-md_me,
+    .field-lg_me,
+    .field-xl_me,
+    .field-xxl_me {
+        text-align: left;
 
-        .icon {
-            font-size: 30px;
+        label {
+            left: 30px;
+            bottom: 14px;
         }
 
-        .icon-size-sm {
-            transform: rotate(90deg);
+        input {
+            position: relative;
+            box-sizing: border-box;
+            top: -3px;
         }
     }
+}
 
-    .icon-title {
-        display: block;
-        font-size: 12px;
-        color: #999;
-        padding: 5px 0 0;
+.grid-reset {
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+
+.icon-thead {
+    text-align: center;
+    margin-bottom: 15px;
+
+    .icon {
+        font-size: 30px;
     }
+
+    .icon-size-sm {
+        transform: rotate(90deg);
+    }
+}
+
+.icon-title {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    padding: 5px 0 0;
 }
