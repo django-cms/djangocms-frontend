@@ -21,7 +21,7 @@ class TestUrlConfTestCase(TestFixture, CMSTestCase):
         with self.assertRaises(NoReverseMatch):
             reverse("dcf_autocomplete:ac_view")
 
-        form = LinkForm({})
+        form = LinkForm()
         form.request = None
         str(form)  # renders form
 

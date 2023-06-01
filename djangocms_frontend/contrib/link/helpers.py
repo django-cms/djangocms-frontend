@@ -139,7 +139,7 @@ def ensure_select2_url_is_available() -> None:
 
         urlconf_module.urlpatterns = [
             path(
-                "@dcf-frontend_link/",
+                "@dcf-links/",
                 include(
                     "djangocms_frontend.contrib.link.urls",
                     namespace="dcf_autocomplete",
