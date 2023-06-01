@@ -6,6 +6,7 @@ from django.conf import settings as django_settings
 from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError, ObjectDoesNotExist
+from django.urls import NoReverseMatch, reverse
 from django.utils.encoding import force_str
 from django.utils.html import mark_safe
 
@@ -116,7 +117,7 @@ def get_link_choices(request, term="", lang=None, nbsp=""):
     return available_objects
 
 
-def get_choices(request, term="", lang=None):
+def get_choices(request, term="", lang=None) -> list:
     def to_choices(json):
         return list(
             (elem["text"], to_choices(elem["children"]))
@@ -126,3 +127,22 @@ def get_choices(request, term="", lang=None):
         )
 
     return to_choices(get_link_choices(request, term, lang, "&nbsp;"))
+
+def ensure_select2_url_is_available() -> None:
+    """Install the URLs"""
+    try:
+        reverse("dcf_autocomplete:ac_view")
+    except NoReverseMatch:  # Not installed yet
+        urlconf_module = import_module(django_settings.ROOT_URLCONF)
+        from django.urls import clear_url_caches, include, path
+
+        urlconf_module.urlpatterns = [
+            path(
+                "@dcf-frontend_link/",
+                include(
+                    "djangocms_frontend.contrib.link.urls",
+                    namespace="dcf_autocomplete",
+                ),
+            )
+        ] + urlconf_module.urlpatterns
+        clear_url_caches()

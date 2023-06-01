@@ -29,7 +29,7 @@ from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
 from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-from .helpers import get_choices, get_object_for_value
+from .helpers import ensure_select2_url_is_available, get_choices, get_object_for_value
 
 mixin_factory = settings.get_forms(link)
 
@@ -89,11 +89,14 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
             kwargs.setdefault("data_view", "dcf_autocomplete:ac_view")
+            if kwargs["data_view"] == "dcf_autocomplete:ac_view":
+                # Might have been lost, e.g. after app hook installation
+                ensure_select2_url_is_available()
         super().__init__(*args, **kwargs)
 
 
 class SmartLinkField(forms.ChoiceField):
-    widget = Select2jqWidget()
+    widget = Select2jqWidget
 
     def prepare_value(self, value):
         if value:

@@ -1,9 +1,9 @@
 from importlib import import_module
 
 from django.apps import AppConfig
-from django.conf import settings
-from django.urls import NoReverseMatch, clear_url_caches, include, path, reverse
 from django.utils.translation import gettext_lazy as _
+
+from .helpers import ensure_select2_url_is_available
 
 
 class LinkConfig(AppConfig):
@@ -11,18 +11,4 @@ class LinkConfig(AppConfig):
     verbose_name = _("Link")
 
     def ready(self):
-        """Install the URLs"""
-        try:
-            reverse("dcf_autocomplete:ac_view")
-        except NoReverseMatch:  # Not installed yet
-            urlconf_module = import_module(settings.ROOT_URLCONF)
-            urlconf_module.urlpatterns = [
-                path(
-                    "@dcf-frontend_link/",
-                    include(
-                        "djangocms_frontend.contrib.link.urls",
-                        namespace="dcf_autocomplete",
-                    ),
-                )
-            ] + urlconf_module.urlpatterns
-            clear_url_caches()
+        ensure_select2_url_is_available()
