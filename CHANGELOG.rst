@@ -2,8 +2,8 @@
 Changelog
 =========
 
-1.1.5 (2023-06-02)
-==================
+unpublished
+===========
 
 * Fix bug where url for link select2 field was lost after app hook reload (#135)
 
