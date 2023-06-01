@@ -1,9 +1,5 @@
-from importlib import import_module
-
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
-
-from .helpers import ensure_select2_url_is_available
 
 
 class LinkConfig(AppConfig):
@@ -11,4 +7,5 @@ class LinkConfig(AppConfig):
     verbose_name = _("Link")
 
     def ready(self):
+        from .helpers import ensure_select2_url_is_available  # Only import after apps are ready
         ensure_select2_url_is_available()
