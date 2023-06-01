@@ -128,6 +128,7 @@ def get_choices(request, term="", lang=None) -> list:
 
     return to_choices(get_link_choices(request, term, lang, "&nbsp;"))
 
+
 def ensure_select2_url_is_available() -> None:
     """Install the URLs"""
     try:
