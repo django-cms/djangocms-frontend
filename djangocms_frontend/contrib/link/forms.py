@@ -89,9 +89,6 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
             kwargs.setdefault("data_view", "dcf_autocomplete:ac_view")
-            if kwargs["data_view"] == "dcf_autocomplete:ac_view":
-                # Might have been lost, e.g. after app hook installation
-                ensure_select2_url_is_available()
         super().__init__(*args, **kwargs)
 
 
@@ -221,6 +218,7 @@ else:
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
+            ensure_select2_url_is_available()
             self.fields["internal_link"].choices = self.get_choices
 
         def get_choices(self):
