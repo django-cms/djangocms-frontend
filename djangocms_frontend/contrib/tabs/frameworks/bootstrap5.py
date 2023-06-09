@@ -15,7 +15,7 @@ class TabItemRenderMixin:
             else:
                 instance.add_classes("border")
         if context["parent"].tab_type == "nav-tabs":
-            instance.add_classes("bg-white")
+            instance.add_classes("bg-body")
         if parent.tab_index == context["parentloop"]["counter"]:
             instance.add_classes("show active")
         return super().render(context, instance, placeholder)

@@ -6,6 +6,7 @@ unpublished
 ===========
 
 * Fix bug where url for link select2 field was lost after app hook reload (#135)
+* Use `bg-body` class on Bootstrap 5's tab navigation to support color modes (#138)
 
 1.1.4 (2023-05-28)
 ==================
