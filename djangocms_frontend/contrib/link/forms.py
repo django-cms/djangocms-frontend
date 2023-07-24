@@ -29,7 +29,7 @@ from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
 from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-from .helpers import get_choices, get_object_for_value
+from .helpers import ensure_select2_url_is_available, get_choices, get_object_for_value
 
 mixin_factory = settings.get_forms(link)
 
@@ -93,7 +93,7 @@ class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Wid
 
 
 class SmartLinkField(forms.ChoiceField):
-    widget = Select2jqWidget()
+    widget = Select2jqWidget
 
     def prepare_value(self, value):
         if value:
@@ -218,6 +218,7 @@ else:
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
+            ensure_select2_url_is_available()
             self.fields["internal_link"].choices = self.get_choices
 
         def get_choices(self):

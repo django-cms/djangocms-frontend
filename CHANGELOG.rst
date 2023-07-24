@@ -2,6 +2,18 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Fix incomplete migration of code plugins from djangocms-bootstrap4
+
+1.1.5 (2023-07-14)
+==================
+
+* Fix bug where url for link select2 field was lost after app hook reload (#135)
+* Use `bg-body` class on Bootstrap 5's tab navigation to support color modes (#138)
+* Fix styling of icon buttons for better usager with plain django admin style (#141)
+
 1.1.4 (2023-05-28)
 ==================
 
