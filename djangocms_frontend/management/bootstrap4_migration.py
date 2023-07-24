@@ -91,6 +91,7 @@ plugin_migrations = {
     ],
     "bootstrap4_content.Bootstrap4Code -> content.CodeBlock": [
         "code_content",
+        "tag_type -> code_type",
         "attributes",
         "P001",
         "M001-m",  # SpacingMixin
