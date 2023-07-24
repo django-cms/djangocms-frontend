@@ -11,7 +11,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "easy_thumbnails",
     "filer",
-    "mptt",
     "cms",
     "menus",
     "treebeard",

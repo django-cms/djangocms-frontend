@@ -31,6 +31,7 @@ form .form-row div.frontend-button-group {
         outline: 2px solid transparent;
         width: auto !important;
         font-weight: normal !important;
+        display: inline-block;
     }
 
     input[property="color"] + label.btn-grp[style="--fe-value: ;"] {
