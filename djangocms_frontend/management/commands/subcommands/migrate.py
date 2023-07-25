@@ -20,6 +20,7 @@ if "djangocms_bootstrap4" in apps.all_models:
     plugin_migrations.update(bootstrap4_migration.plugin_migrations)
     data_migration.update(bootstrap4_migration.data_migration)
     plugin_prefixes.append(bootstrap4_migration.plugin_prefix)
+    plugin_names.append(bootstrap4_migration.plugin_names)
 # Styled link
 if "djangocms_styledlink" in apps.all_models:
     from djangocms_frontend.management import styled_link_migration
@@ -48,6 +49,8 @@ if additional_migrations:
             plugin_migrations.update(migration_module.plugin_migrations)
             data_migration.update(migration_module.data_migration)
             plugin_prefixes.append(migration_module.plugin_prefix)
+            if hasattr(migration_module, "plugin_names"):
+                plugin_names.update(migration_module.plugin_names)
         except ModuleNotFoundError:
             print(f"Warning: can not import migration module: {migration_module_path}.")
 

@@ -17,6 +17,11 @@ def breakpoints(props):
     return lst
 
 
+plugin_names = {
+    "CodeBlock": "CodePlugin",
+}
+
+
 plugin_migrations = {
     "bootstrap4_alerts.Bootstrap4Alerts -> alert.Alert": [
         "alert_context",
