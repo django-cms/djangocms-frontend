@@ -20,7 +20,7 @@ if "djangocms_bootstrap4" in apps.all_models:
     plugin_migrations.update(bootstrap4_migration.plugin_migrations)
     data_migration.update(bootstrap4_migration.data_migration)
     plugin_prefixes.append(bootstrap4_migration.plugin_prefix)
-    plugin_names.append(bootstrap4_migration.plugin_names)
+    plugin_names.update(bootstrap4_migration.plugin_names)
 # Styled link
 if "djangocms_styledlink" in apps.all_models:
     from djangocms_frontend.management import styled_link_migration
