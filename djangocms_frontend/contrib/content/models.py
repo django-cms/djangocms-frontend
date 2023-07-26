@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 
 from ...models import FrontendUIItem
+from .constants import CODE_TYPE_CHOICES
 
 
 class CodeBlock(FrontendUIItem):
@@ -14,7 +15,7 @@ class CodeBlock(FrontendUIItem):
         verbose_name = _("Code block")
 
     def get_short_description(self):
-        return f"<{self.code_type}>"
+        return f'<{self.config.get("code_type", CODE_TYPE_CHOICES[0][0])}>'
 
 
 class Blockquote(FrontendUIItem):

@@ -17,6 +17,11 @@ def breakpoints(props):
     return lst
 
 
+plugin_names = {
+    "CodeBlock": "CodePlugin",
+}
+
+
 plugin_migrations = {
     "bootstrap4_alerts.Bootstrap4Alerts -> alert.Alert": [
         "alert_context",
@@ -91,6 +96,7 @@ plugin_migrations = {
     ],
     "bootstrap4_content.Bootstrap4Code -> content.CodeBlock": [
         "code_content",
+        "tag_type -> code_type",
         "attributes",
         "P001",
         "M001-m",  # SpacingMixin

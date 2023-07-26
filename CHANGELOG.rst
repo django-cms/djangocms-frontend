@@ -2,6 +2,11 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Fix incomplete migration of code plugins from djangocms-bootstrap4
+
 1.1.5 (2023-07-14)
 ==================
 
