@@ -2,10 +2,12 @@
 Changelog
 =========
 
-unpublished
-===========
+1.1.6 (2023-07-26)
+==================
 
 * Fix incomplete migration of code plugins from djangocms-bootstrap4
+* Add compiled French locale (*.mo)
+* Add partial Dutch locale
 
 1.1.5 (2023-07-14)
 ==================
