@@ -2,6 +2,11 @@
 Changelog
 =========
 
+unpublished
+===========
+
+* Fix bug: set proper image target link in template
+
 1.1.6 (2023-07-26)
 ==================
 
