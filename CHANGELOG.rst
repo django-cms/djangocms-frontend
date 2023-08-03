@@ -2,10 +2,11 @@
 Changelog
 =========
 
-unpublished
-===========
+1.1.7 (2023-08-03)
+==================
 
 * Fix bug: set proper image target link in template
+* Feature: Add Spanish translations
 
 1.1.6 (2023-07-26)
 ==================
