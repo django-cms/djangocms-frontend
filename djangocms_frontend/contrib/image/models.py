@@ -48,7 +48,6 @@ class ImageMixin:
             width, height = 640, 640 / PICTURE_RATIO
         width = int(width)
         height = int(height)
-        print(f"===> ({width=}, {height=})")
         return {
             "size": (width, height),
             "crop": crop,
