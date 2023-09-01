@@ -30,10 +30,11 @@ class ImageMixin:
 
         # calculate height when not given according to the
         # golden ratio or fallback to the image size
+        picture_ratio = self.rel_image.width / self.rel_image.height if self.rel_image else PICTURE_RATIO
         if not height and width:
-            height = width / PICTURE_RATIO
+            height = width / picture_ratio
         elif not width and height:
-            width = height * PICTURE_RATIO
+            width = height * picture_ratio
         elif not width and not height and getattr(self, "picture", None):
             if self.rel_image:
                 width = self.rel_image.width
