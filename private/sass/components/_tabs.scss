@@ -65,6 +65,9 @@ div.tab-pk {
     margin-left: auto;
 }
 
-.djangocms-admin-style .djangocms-frontend li.nav-item {
-    border-top: none;
+.djangocms-admin-style .colM ul.nav {
+    margin-top: 0;
+    li.nav-item {
+        border-top: none;
+    }
 }
