@@ -65,7 +65,7 @@ div.tab-pk {
     margin-left: auto;
 }
 
-.djangocms-admin-style .colM ul.nav {
+.djangocms-admin-style .colM ul.nav:not(.object-tools):not(.messagelist) {
     margin-top: 0;
     li.nav-item {
         border-top: none;
