@@ -39,7 +39,7 @@ class NavigationForm(
         untangled_fields = ()
 
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=settings.NAVIGATION_TEMPLATE_CHOICES,
         initial=first_choice(settings.NAVIGATION_TEMPLATE_CHOICES),
         help_text=_("Defines the whole template set for this navigation."),

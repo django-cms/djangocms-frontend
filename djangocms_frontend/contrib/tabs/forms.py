@@ -42,7 +42,7 @@ class TabForm(TemplateChoiceMixin, EntangledModelForm):
         untangled_fields = ("tag_type",)
 
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=TAB_TEMPLATE_CHOICES,
         initial=first_choice(TAB_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
