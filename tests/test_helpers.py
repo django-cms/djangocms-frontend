@@ -220,5 +220,3 @@ class HelpersTestCase(TestFixture, CMSTestCase):
 
         self.assertTrue(is_first_child(child_1, parent))
         self.assertFalse(is_first_child(child_2, parent))
-
-
