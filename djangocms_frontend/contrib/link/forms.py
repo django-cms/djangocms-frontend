@@ -321,7 +321,7 @@ class LinkForm(
         required=False,
     )
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=settings.LINK_TEMPLATE_CHOICES,
         initial=first_choice(settings.LINK_TEMPLATE_CHOICES),
     )
