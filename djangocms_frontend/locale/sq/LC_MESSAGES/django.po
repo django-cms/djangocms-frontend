@@ -2,24 +2,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Mark Walker <theshow@gmail.com>, 2023
 # Besnik Bleta <besnik@programeshqip.org>, 2023
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-11 17:20+0100\n"
+"POT-Creation-Date: 2023-10-04 07:43+0200\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2023\n"
 "Language-Team: Albanian (https://app.transifex.com/divio/teams/58664/sq/)\n"
+"Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: common/attributes.py:9
@@ -57,8 +57,7 @@ msgstr ""
 "Patejdukshmëri e ngjyrës së sfondit të kartës (nëse s’është përzgjedhur "
 "përvijim)"
 
-#: common/bootstrap5/background.py:66
-#: contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:66 contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Hije"
 
@@ -102,8 +101,7 @@ msgstr "Madhësi vertikale"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
-"Sets the vertical size relative to the surrounding container or the "
-"viewport."
+"Sets the vertical size relative to the surrounding container or the viewport."
 msgstr ""
 "Cakton madhësinë vertikale, relative ndaj kontejnerit ose pjesës së ekranit "
 "që e rrethon."
@@ -142,8 +140,8 @@ msgid ""
 "Select only devices on which the margin should be applied. On other devices "
 "larger than the first selected device the margin will be set to zero."
 msgstr ""
-"Përgjidhni një anë mbi të cilën duhet aplikuar hapësira. Select only devices"
-" on which the margin should be applied. On other devices larger than the "
+"Përgjidhni një anë mbi të cilën duhet aplikuar hapësira. Select only devices "
+"on which the margin should be applied. On other devices larger than the "
 "first selected device the margin will be set to zero."
 
 #: common/spacing.py:221
@@ -160,8 +158,8 @@ msgstr "Apliko mbushje te pajisja"
 
 #: common/spacing.py:236
 msgid ""
-"Select only devices on which the padding should be applied. On other devices"
-" larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices "
+"larger than the first selected device the padding will be set to zero."
 msgstr ""
 "Përzgjidhni vetëm pajisjet mbi të cilat duhet aplikuar mbushja. Në pajisje "
 "të tjera, më të mëdha se pajisja e parë e përzgjedhur, mbushja do të "
@@ -177,8 +175,8 @@ msgstr "Titull"
 
 #: common/title.py:67
 msgid ""
-"Optional title of the plugin for easier identification. Its "
-"<code>title</code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its <code>title</"
+"code> attribute will only be set if the checkbox is selected."
 msgstr ""
 "Titull i shtojcës, në daçi, për identifikim më të kollajtë. Atributi "
 "<code>title</code> për të do të ujdiset vetëm nëse përzgjidhet kutiza."
@@ -235,8 +233,8 @@ msgstr "Integroje te mëma"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners"
-" to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners "
+"to render accordions edge-to-edge with their parent container "
 msgstr ""
 "Bën heqjen e ngjyrës parazgjedhje për sfondin, disa anë dhe disa cepa të "
 "rrumbullakosur, për t’i shfaqur fizarmonikat nga skaji në skaj, me "
@@ -267,7 +265,7 @@ msgid "Alert"
 msgstr "Sinjalizim"
 
 #: contrib/alert/forms.py:41 contrib/badge/forms.py:37
-#: contrib/link/forms.py:340 contrib/listgroup/forms.py:71
+#: contrib/link/forms.py:344 contrib/listgroup/forms.py:71
 msgid "Context"
 msgstr "Kontekst"
 
@@ -395,8 +393,7 @@ msgstr "Lartësi e plotë"
 
 #: contrib/card/forms.py:152
 msgid ""
-"If checked cards in one row will automatically extend to the full row "
-"height."
+"If checked cards in one row will automatically extend to the full row height."
 msgstr ""
 "Në iu vëntë shenjë, kartat e një rreshti do të zgjerohen vetvetiu sa "
 "lartësia e plotë e rreshtit."
@@ -453,10 +450,10 @@ msgid "Fade"
 msgstr "Zbehje"
 
 #: contrib/carousel/forms.py:58 contrib/image/forms.py:103
-#: contrib/jumbotron/forms.py:44 contrib/link/forms.py:320
+#: contrib/jumbotron/forms.py:44 contrib/link/forms.py:324
 #: contrib/navigation/forms.py:42 contrib/tabs/forms.py:45
-msgid "Template"
-msgstr "Gjedhe"
+msgid "Layout"
+msgstr ""
 
 #: contrib/carousel/forms.py:61 contrib/tabs/forms.py:48
 msgid "This is the template that will be used for the component."
@@ -468,8 +465,8 @@ msgstr "Interval"
 
 #: contrib/carousel/forms.py:67
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false,"
-" carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false, "
+"carousel will not automatically cycle."
 msgstr ""
 "Sasia e kohës në sekonda për vonim zërash te kalimi automatikisht në ta. Në "
 "u vëntë 0, rrotullamja s’do të kalojë automatikisht nëpër ta."
@@ -523,8 +520,7 @@ msgid ""
 "\"carousel\", autoplays the carousel on load."
 msgstr ""
 "Vetëluhet rrotullamja, pasi përdoruesi vë në punë dorazi kuadrin e parë. Në "
-"u vëntë “carousel”, vetëluhet automatikisht rrotullamja, kur ngarkohet "
-"faqja."
+"u vëntë “carousel”, vetëluhet automatikisht rrotullamja, kur ngarkohet faqja."
 
 #: contrib/carousel/forms.py:111 contrib/carousel/models.py:30
 msgid "Wrap"
@@ -543,8 +539,8 @@ msgstr "Përpjesëtim"
 msgid ""
 "Determines width and height of the image according to the selected ratio."
 msgstr ""
-"Përcakton gjerësinë dhe lartësinë e fizarmonikës së figurave sa përpjesëtimi"
-" i përzgjedhur."
+"Përcakton gjerësinë dhe lartësinë e fizarmonikës së figurave sa përpjesëtimi "
+"i përzgjedhur."
 
 #: contrib/carousel/forms.py:129
 msgid "Transition"
@@ -570,7 +566,7 @@ msgstr "Lëndë mund të shtohet edhe duke përdorur shtojca pjellë."
 msgid "Ride"
 msgstr ""
 
-#: contrib/carousel/models.py:51 contrib/image/models.py:154
+#: contrib/carousel/models.py:51 contrib/image/models.py:155
 msgid "<file is missing>"
 msgstr "<kartela mungon>"
 
@@ -620,11 +616,11 @@ msgstr "S’lypset formësim këtu."
 msgid "Code"
 msgstr "Kod"
 
-#: contrib/content/cms_plugins.py:63 contrib/content/models.py:28
+#: contrib/content/cms_plugins.py:63 contrib/content/models.py:29
 msgid "Blockquote"
 msgstr "Citat"
 
-#: contrib/content/cms_plugins.py:98 contrib/content/models.py:42
+#: contrib/content/cms_plugins.py:98 contrib/content/models.py:43
 msgid "Figure"
 msgstr "Figurë"
 
@@ -632,7 +628,7 @@ msgstr "Figurë"
 msgid "Inline code"
 msgstr "Kod brendazi"
 
-#: contrib/content/constants.py:5 contrib/content/models.py:14
+#: contrib/content/constants.py:5 contrib/content/models.py:15
 msgid "Code block"
 msgstr "Bllok kodi"
 
@@ -830,43 +826,43 @@ msgstr "Riktheje te parazgjedhje"
 msgid "Icon"
 msgstr ""
 
-#: contrib/icon/conf.py:52
+#: contrib/icon/conf.py:54
 msgid "Regular"
 msgstr ""
 
-#: contrib/icon/conf.py:53
+#: contrib/icon/conf.py:55
 msgid "x 2"
 msgstr ""
 
-#: contrib/icon/conf.py:54
+#: contrib/icon/conf.py:56
 msgid "x 3"
 msgstr ""
 
-#: contrib/icon/conf.py:55
+#: contrib/icon/conf.py:57
 msgid "x 4"
 msgstr ""
 
-#: contrib/icon/conf.py:56
+#: contrib/icon/conf.py:58
 msgid "x 5"
 msgstr ""
 
-#: contrib/icon/conf.py:57
+#: contrib/icon/conf.py:59
 msgid "x 8"
 msgstr ""
 
-#: contrib/icon/conf.py:58
+#: contrib/icon/conf.py:60
 msgid "x 12"
 msgstr ""
 
-#: contrib/icon/forms.py:43
+#: contrib/icon/forms.py:45
 msgid "Icon size"
 msgstr ""
 
-#: contrib/icon/forms.py:49
+#: contrib/icon/forms.py:51
 msgid "Foreground context"
 msgstr ""
 
-#: contrib/icon/forms.py:56
+#: contrib/icon/forms.py:58
 msgid "Circular icon"
 msgstr ""
 
@@ -882,11 +878,11 @@ msgstr ""
 msgid "Picture / Image"
 msgstr "Foto / Figurë"
 
-#: contrib/image/cms_plugins.py:56
+#: contrib/image/cms_plugins.py:58
 msgid "Format"
 msgstr "Formatoje"
 
-#: contrib/image/cms_plugins.py:67
+#: contrib/image/cms_plugins.py:69
 msgid "Cropping"
 msgstr "Qethje"
 
@@ -930,7 +926,7 @@ msgstr "Po"
 msgid "No"
 msgstr "Jo"
 
-#: contrib/image/forms.py:111 contrib/image/models.py:71
+#: contrib/image/forms.py:111 contrib/image/models.py:72
 msgid "Image"
 msgstr "Figurë"
 
@@ -943,8 +939,8 @@ msgid ""
 "If provided, overrides the embedded image. Certain options such as cropping "
 "are not applicable to external images."
 msgstr ""
-"Nëse jepet, anashkalon figurën e trupëzuar. Disa mundësi, bie fjala, qethja,"
-" s’janë të zbatueshme mbi figura të jashtme."
+"Nëse jepet, anashkalon figurën e trupëzuar. Disa mundësi, bie fjala, qethja, "
+"s’janë të zbatueshme mbi figura të jashtme."
 
 #: contrib/image/forms.py:123
 msgid "Load lazily"
@@ -963,18 +959,18 @@ msgid "Width"
 msgstr "Gjerësi"
 
 #: contrib/image/forms.py:135
-msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr ""
-"Gjerësia e figurës si numër pikselash. Shembull: “720” dhe jo “720px”."
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr "Gjerësia e figurës si numër pikselash. Shembull: “720” dhe jo “720px”."
 
 #: contrib/image/forms.py:139
 msgid "Height"
 msgstr "Lartësi"
 
 #: contrib/image/forms.py:143
-msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr ""
-"Lartësia e figurës si numër pikselash. Shembull: “720” dhe jo “720px”."
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr "Lartësia e figurës si numër pikselash. Shembull: “720” dhe jo “720px”."
 
 #: contrib/image/forms.py:150
 msgid "Aligns the image according to the selected option."
@@ -1011,8 +1007,7 @@ msgstr "Qetheni figurën"
 
 #: contrib/image/forms.py:179
 msgid ""
-"Crops the image according to the thumbnail settings provided in the "
-"template."
+"Crops the image according to the thumbnail settings provided in the template."
 msgstr "E qeth figurën sipas rregullimeve miniaturash të dhëna te gjedhja."
 
 #: contrib/image/forms.py:183
@@ -1030,8 +1025,8 @@ msgstr "Përdor figurë reaguese"
 
 #: contrib/image/forms.py:194
 msgid ""
-"Uses responsive image technique to choose better image to display based upon"
-" screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 "Përdor teknikën e figurave reaguese për të zgjedhur figurë më të mirë për "
@@ -1079,12 +1074,11 @@ msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
 msgstr ""
-"Keni dhënë më shumë se një objektiv të jashtëm, të brendshëm, ose lidhje për"
-" te kartelë. Lejohet vetëm një mundësi."
+"Keni dhënë më shumë se një objektiv të jashtëm, të brendshëm, ose lidhje për "
+"te kartelë. Lejohet vetëm një mundësi."
 
 #: contrib/image/forms.py:255
-msgid ""
-"You need to add either an image, or a URL linking to an external image."
+msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 "Lypset të shtoni ose një figurë, ose një URL që shpie te një figurë e "
 "jashtme."
@@ -1111,8 +1105,8 @@ msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 "E bën jumbotron-in të mbushë krejt gjerësinë e kontejnerit ose dritares."
 
-#: contrib/link/apps.py:11 contrib/link/constants.py:5
-#: contrib/link/models.py:11 contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
+#: contrib/link/models.py:114
 msgid "Link"
 msgstr "Lidhje"
 
@@ -1139,55 +1133,55 @@ msgstr "Mesatar"
 msgid "Large"
 msgstr "I madh"
 
-#: contrib/link/forms.py:59
+#: contrib/link/forms.py:62
 msgid "Select a destination"
 msgstr "Përzgjidhni vendmbërritje"
 
-#: contrib/link/forms.py:135
+#: contrib/link/forms.py:138
 msgid "Site"
 msgstr "Sajt"
 
-#: contrib/link/forms.py:138
+#: contrib/link/forms.py:141
 msgid "Select site"
 msgstr "Përzgjidhni sajt"
 
-#: contrib/link/forms.py:143
+#: contrib/link/forms.py:146
 msgid "Url"
 msgstr "Url"
 
-#: contrib/link/forms.py:146
+#: contrib/link/forms.py:149
 msgid "Select URL object from list"
 msgstr "Përzgjidhni objekt URL nga lista"
 
-#: contrib/link/forms.py:174
+#: contrib/link/forms.py:177
 msgid "External link"
 msgstr "Lidhje e jashtme"
 
-#: contrib/link/forms.py:177
+#: contrib/link/forms.py:180
 msgid "Provide a link to an external source."
 msgstr "Jepni një lidhje për te një burim i jashtëm."
 
-#: contrib/link/forms.py:180
+#: contrib/link/forms.py:183
 msgid "Internal link"
 msgstr "Lidhje e brendshme"
 
-#: contrib/link/forms.py:182
+#: contrib/link/forms.py:185
 msgid "If provided, overrides the external link."
 msgstr "Në u dhëntë, anashkalon lidhjen e jashtme."
 
-#: contrib/link/forms.py:188
+#: contrib/link/forms.py:191
 msgid "File link"
 msgstr "Lidhje kartele"
 
-#: contrib/link/forms.py:190
+#: contrib/link/forms.py:193
 msgid "If provided links a file from the filer app."
 msgstr "Në u dhëntë, lidh një kartelë prej një aplikacioni kartelash."
 
-#: contrib/link/forms.py:194
+#: contrib/link/forms.py:197
 msgid "Anchor"
 msgstr "Spirancë"
 
-#: contrib/link/forms.py:197
+#: contrib/link/forms.py:200
 msgid ""
 "Appends the value only after the internal or external link. Do <em>not</em> "
 "include a preceding \"&#35;\" symbol."
@@ -1195,42 +1189,42 @@ msgstr ""
 "Shton vlerën vetëm pas lidhjes së brendshme, ose të jashtme. <em>Mos</em> "
 "përfshini një simbol paraprirës “&#35”."
 
-#: contrib/link/forms.py:202
+#: contrib/link/forms.py:205
 msgid "Email address"
 msgstr "Adresë email"
 
-#: contrib/link/forms.py:206
+#: contrib/link/forms.py:209
 msgid "Phone"
 msgstr "Telefon"
 
-#: contrib/link/forms.py:211
+#: contrib/link/forms.py:214
 msgid "Target"
 msgstr "Objektiv"
 
-#: contrib/link/forms.py:262
+#: contrib/link/forms.py:266
 #, python-brace-format
 msgid "Only one of {0} or {1} may be given."
 msgstr "Mund të jepet vetëm një nga {0} ose {1}."
 
-#: contrib/link/forms.py:274
+#: contrib/link/forms.py:278
 msgid "Please provide a link."
 msgstr "Ju lutemi, jepni një lidhje."
 
-#: contrib/link/forms.py:280
+#: contrib/link/forms.py:284
 #, python-format
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
 msgstr "%(anchor_field_verbose_name)s nuk lejohet tok me %(field_name)s"
 
-#: contrib/link/forms.py:316
+#: contrib/link/forms.py:320
 msgid "Display name"
 msgstr "Emër në ekran"
 
-#: contrib/link/forms.py:325
+#: contrib/link/forms.py:329
 msgid "Stretch link"
 msgstr "Shformoje lidhjen"
 
-#: contrib/link/forms.py:329
+#: contrib/link/forms.py:333
 msgid ""
 "Stretches the active link area to the containing block (with position: "
 "relative)."
@@ -1238,39 +1232,39 @@ msgstr ""
 "E tendos fushën e lidhjes aktive sa blloku që e përmban (me pozicionin: "
 "relative)."
 
-#: contrib/link/forms.py:333 contrib/tabs/forms.py:51
+#: contrib/link/forms.py:337 contrib/tabs/forms.py:51
 msgid "Type"
 msgstr "Lloj"
 
-#: contrib/link/forms.py:337
+#: contrib/link/forms.py:341
 msgid "Adds either a text link or a button which links to the target."
 msgstr "Shton ose një lidhje tekst, ose një buton që shpie te objektivi."
 
-#: contrib/link/forms.py:347
+#: contrib/link/forms.py:351
 msgid "Button size"
 msgstr "Madhësi butoni"
 
-#: contrib/link/forms.py:356
+#: contrib/link/forms.py:360
 msgid "Outline"
 msgstr "Përvijim"
 
-#: contrib/link/forms.py:359
+#: contrib/link/forms.py:363
 msgid "Removes the coloring from a button and keeps the outline."
 msgstr "Heq ngjyrimin prej një butoni dhe mban vetëm përvijimin."
 
-#: contrib/link/forms.py:362
+#: contrib/link/forms.py:366
 msgid "Block"
 msgstr ""
 
-#: contrib/link/forms.py:365
+#: contrib/link/forms.py:369
 msgid "Extends the button to the width of its container."
 msgstr "E zgjeron butonin sa gjerësia e kontejnerit përkatës."
 
-#: contrib/link/forms.py:368
+#: contrib/link/forms.py:372
 msgid "Icon left"
 msgstr "Ikonë majtas"
 
-#: contrib/link/forms.py:373
+#: contrib/link/forms.py:377
 msgid "Icon right"
 msgstr "Ikonë djathas"
 
@@ -1374,8 +1368,7 @@ msgstr ""
 
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
-msgstr ""
-"Jepni emër marke, ose shtoni shtojca pjellë për ikonë ose figurë marke"
+msgstr "Jepni emër marke, ose shtoni shtojca pjellë për ikonë ose figurë marke"
 
 #: contrib/navigation/models.py:30
 msgid "Navigation Link"
@@ -1419,8 +1412,7 @@ msgstr "Tregues"
 
 #: contrib/tabs/forms.py:67
 msgid "Index of element to open on page load starting at 1."
-msgstr ""
-"Tregues elementësh për t’u hapur në ngarkim faqeje, duke filluar me 1."
+msgstr "Tregues elementësh për t’u hapur në ngarkim faqeje, duke filluar me 1."
 
 #: contrib/tabs/forms.py:70
 msgid "Animation effect"
@@ -1517,8 +1509,8 @@ msgstr "ID"
 
 #: contrib/utilities/forms.py:128
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in"
-" table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in "
+"table of contents."
 msgstr ""
 "Plotësoni ID unike për tryezë lënde. Në u lëntë e zbrazët, kryet s’do të "
 "duken te tryezë e lëndës."
@@ -1549,8 +1541,7 @@ msgstr "Atribute objekti"
 msgid ""
 "Attributes apply to the <b>list items</b> for each entry in the table of "
 "contents."
-msgstr ""
-"Atribute aplikohen te <b>zëra liste</b> për çdo zë te tryeza e lëndës."
+msgstr "Atribute aplikohen te <b>zëra liste</b> për çdo zë te tryeza e lëndës."
 
 #: fields.py:94
 msgid "Please select at least one device size"
@@ -1569,14 +1560,14 @@ msgid ""
 "Please enter at least one choice. Use the <code>+</code> symbol to add a "
 "choice."
 msgstr ""
-"Ju lutemi, jepni të paktën një zgjedhje. Që të shtoni një zgjedhje, përdorni"
-" simbolin <code>+</code>."
+"Ju lutemi, jepni të paktën një zgjedhje. Që të shtoni një zgjedhje, përdorni "
+"simbolin <code>+</code>."
 
-#: fields.py:161 fields.py:175
+#: fields.py:160 fields.py:170
 msgid "Tag type"
 msgstr "Lloj etikete"
 
-#: fields.py:169
+#: fields.py:164
 msgid "Select the HTML tag to be used."
 msgstr "Përzgjidhni etiketë HTML për t’u përdorur."
 
@@ -1655,8 +1646,10 @@ msgstr ""
 
 #: helpers.py:112
 #, python-brace-format
-msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
-msgstr "Lexoni më tepër, te <a href=\"{link}\" target=\"_blank\">dokumentimi</a>."
+msgid ""
+"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgstr ""
+"Lexoni më tepër, te <a href=\"{link}\" target=\"_blank\">dokumentimi</a>."
 
 #: models.py:24
 msgid "UI item"
@@ -1664,9 +1657,11 @@ msgstr "Element UI"
 
 #: settings.py:14
 msgid "There are no further settings for this plugin. Please press save."
-msgstr ""
-"S’ka rregullime të tjera për këtë shtojcë. Ju lutemi, shtypni “Ruaje”."
+msgstr "S’ka rregullime të tjera për këtë shtojcë. Ju lutemi, shtypni “Ruaje”."
 
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
+
+#~ msgid "Template"
+#~ msgstr "Gjedhe"
