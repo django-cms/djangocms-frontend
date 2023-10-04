@@ -2,14 +2,18 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.template.loader import select_template
 
-from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin, CarouselSlidePlugin
+from djangocms_frontend.contrib.carousel.cms_plugins import (
+    CarouselPlugin,
+    CarouselSlidePlugin,
+)
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
 from djangocms_frontend.helpers import (
     first_choice,
     get_plugin_template,
     get_template_path,
     insert_fields,
-    link_to_framework_doc, is_first_child,
+    is_first_child,
+    link_to_framework_doc,
 )
 
 from .fixtures import TestFixture
