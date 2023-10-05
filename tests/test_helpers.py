@@ -2,13 +2,17 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.template.loader import select_template
 
-from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin
+from djangocms_frontend.contrib.carousel.cms_plugins import (
+    CarouselPlugin,
+    CarouselSlidePlugin,
+)
 from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
 from djangocms_frontend.helpers import (
     first_choice,
     get_plugin_template,
     get_template_path,
     insert_fields,
+    is_first_child,
     link_to_framework_doc,
 )
 
@@ -194,3 +198,25 @@ class HelpersTestCase(TestFixture, CMSTestCase):
         self.assertIsNone(
             link_to_framework_doc("NonExistingUIITEM", "this topic does not exist")
         )
+
+    def test_first_child(self):
+        parent = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselPlugin.__name__,
+            language="en",
+        )
+        child_1 = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselSlidePlugin.__name__,
+            language="en",
+            target=parent,
+        )
+        child_2 = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselSlidePlugin.__name__,
+            language="en",
+            target=parent,
+        )
+
+        self.assertTrue(is_first_child(child_1, parent))
+        self.assertFalse(is_first_child(child_2, parent))

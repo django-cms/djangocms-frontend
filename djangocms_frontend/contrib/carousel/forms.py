@@ -55,7 +55,7 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
         untangled_fields = ("tag_type",)
 
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=CAROUSEL_TEMPLATE_CHOICES,
         initial=first_choice(CAROUSEL_TEMPLATE_CHOICES),
         help_text=_("This is the template that will be used for the component."),
