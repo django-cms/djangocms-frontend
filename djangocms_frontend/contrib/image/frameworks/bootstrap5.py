@@ -1,3 +1,6 @@
+from djangocms_frontend.helpers import is_first_child
+
+
 class ImageRenderMixin:
     def render(self, context, instance, placeholder):
         # assign link to a context variable to be performant
@@ -17,7 +20,7 @@ class ImageRenderMixin:
             instance.add_classes("img-thumbnail")
         if instance.parent and instance.parent.plugin_type == "CardPlugin":
             instance.add_classes(
-                "card-img-top" if instance.position == 0 else "card-img-bottom"
+                "card-img-top" if is_first_child(instance, instance.parent) else "card-img-bottom"
             )
         elif instance.parent and instance.parent.plugin_type == "FigurePlugin":
             instance.add_classes("figure-img")

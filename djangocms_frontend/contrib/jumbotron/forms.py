@@ -41,7 +41,7 @@ class JumbotronForm(
         untangled_fields = ("tag_type",)
 
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=settings.JUMBOTRON_TEMPLATE_CHOICES,
         initial=first_choice(settings.JUMBOTRON_TEMPLATE_CHOICES),
     )
