@@ -454,7 +454,7 @@ msgstr "Überblenden"
 #: contrib/jumbotron/forms.py:44 contrib/link/forms.py:324
 #: contrib/navigation/forms.py:42 contrib/tabs/forms.py:45
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
 #: contrib/carousel/forms.py:61 contrib/tabs/forms.py:48
 msgid "This is the template that will be used for the component."
@@ -1103,8 +1103,8 @@ msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 "Erweitert Jas Jumbotron auf die volle Breite des Containers oder Fensters."
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
-#: contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr "Link"
 
