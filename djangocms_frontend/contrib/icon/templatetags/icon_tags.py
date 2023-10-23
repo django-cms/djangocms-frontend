@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.inclusion_tag("djangocms_frontend/icon/add_css.html", takes_context=True)
 def add_css_for_icon(context, icon):
-    if icon.get("library", "") in ICON_LIBRARIES:
+    if icon and icon.get("library", "") in ICON_LIBRARIES:
         css_link = ICON_LIBRARIES[icon.get("library")][1]
         if css_link:
             if "/" not in css_link:  # static link?
