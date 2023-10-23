@@ -100,7 +100,7 @@ class ImageForm(
     link_is_optional = True
 
     template = forms.ChoiceField(
-        label=_("Template"),
+        label=_("Layout"),
         choices=get_templates(),
         initial=first_choice(get_templates()),
     )
