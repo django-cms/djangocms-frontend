@@ -22,8 +22,8 @@ def get_alignment():
         settings,
         "DJANGOCMS_PICTURE_ALIGN",
         (
-            ("start", _("Align left")),
-            ("end", _("Align right")),
+            ("start", _("Float left")),
+            ("end", _("Float right")),
             ("center", _("Align center")),
         ),
     )
@@ -42,7 +42,7 @@ def get_templates():
     return choices
 
 
-# required for backwards compability
+# required for backwards compatibility
 PICTURE_ALIGNMENT = get_alignment()
 
 

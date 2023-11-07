@@ -11,7 +11,11 @@ class ImageRenderMixin:
         )
         context["img_srcset_data"] = instance.img_srcset_data
         if instance.alignment:
-            instance.add_classes(f"align-{instance.alignment}")
+            # See https://getbootstrap.com/docs/5.2/content/images/#aligning-images
+            if instance.alignment != "center":
+                instance.add_classes(f"float-{instance.alignment}")
+            else:
+                instance.add_classes("mx-auto d-block")
         if instance.picture_fluid:
             instance.add_classes("img-fluid")
         if instance.picture_rounded:

@@ -2,10 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
+# Fabian Braun <fsbraun@gmx.de>, 2023
 # Stefan van den Eertwegh <stefan@corebyte.nl>, 2023
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -15,10 +16,10 @@ msgstr ""
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Stefan van den Eertwegh <stefan@corebyte.nl>, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/divio/teams/58664/nl/)\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: common/attributes.py:9
@@ -37,7 +38,7 @@ msgstr "Achtergrond"
 
 #: common/bootstrap5/background.py:48
 msgid "Background context"
-msgstr ""
+msgstr "Achtergrond context"
 
 #: common/bootstrap5/background.py:52 contrib/card/forms.py:32
 #: contrib/card/models.py:7
@@ -46,13 +47,14 @@ msgstr "Transparant"
 
 #: common/bootstrap5/background.py:57
 msgid "Background opacity"
-msgstr ""
+msgstr "Achtergrond opacity"
 
 #: common/bootstrap5/background.py:62
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr ""
 
-#: common/bootstrap5/background.py:66 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:66
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Schaduw"
 
@@ -70,7 +72,8 @@ msgstr "Toon element op apparaat"
 
 #: common/bootstrap5/responsive.py:60
 msgid "Select only devices on which this element should be shown."
-msgstr "Selecteer alleen apparaten waarop dit element moet worden weergegeven."
+msgstr ""
+"Selecteer alleen apparaten waarop dit element moet worden weergegeven."
 
 #: common/bootstrap5/sizing.py:8 common/spacing.py:11
 #: contrib/utilities/forms.py:51 frameworks/bootstrap5.py:90
@@ -87,6 +90,8 @@ msgid ""
 "Sets the horizontal size relative to the surrounding container or the "
 "viewport."
 msgstr ""
+"Sets the horizontal size relative to the surrounding container or the "
+"viewport."
 
 #: common/bootstrap5/sizing.py:54
 msgid "Vertical size"
@@ -94,8 +99,11 @@ msgstr "Verticale grootte"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr ""
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 
 #: common/spacing.py:84
 msgid "Please choose a side to which the spacing should be applied."
@@ -116,15 +124,15 @@ msgstr ""
 
 #: common/spacing.py:189
 msgid "Horizontal margin"
-msgstr ""
+msgstr "Horizontale margin"
 
 #: common/spacing.py:195
 msgid "Vertical margin"
-msgstr ""
+msgstr "Verticale margin"
 
 #: common/spacing.py:201
 msgid "Apply margin on device"
-msgstr ""
+msgstr "Pas margin op apparaat tie"
 
 #: common/spacing.py:204
 msgid ""
@@ -134,25 +142,25 @@ msgstr ""
 
 #: common/spacing.py:221
 msgid "Horizontal padding"
-msgstr ""
+msgstr "Horizontale paddign"
 
 #: common/spacing.py:227
 msgid "Vertical padding"
-msgstr ""
+msgstr "Verticale padding"
 
 #: common/spacing.py:233
 msgid "Apply padding on device"
-msgstr ""
+msgstr "Pas padding op apparaat toe"
 
 #: common/spacing.py:236
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 
 #: common/title.py:40
 msgid "Please add a title if you want to publish it."
-msgstr ""
+msgstr "Voeg een titel toe als je het wilt publiceren."
 
 #: common/title.py:64
 msgid "Title"
@@ -160,8 +168,8 @@ msgstr "Titel"
 
 #: common/title.py:67
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:21 contrib/accordion/models.py:14
@@ -216,8 +224,8 @@ msgstr ""
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
@@ -373,7 +381,8 @@ msgstr "Volledige hoogte"
 
 #: contrib/card/forms.py:152
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 
 #: contrib/card/forms.py:186
@@ -391,7 +400,7 @@ msgstr "Content uitlijning"
 #: contrib/card/templates/djangocms_frontend/admin/card_layout.html:14
 #: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:13
 msgid "Colums per row"
-msgstr "Kolommen per row"
+msgstr "Kolommen per rij"
 
 #: contrib/carousel/cms_plugins.py:25 contrib/carousel/models.py:20
 msgid "Carousel"
@@ -431,7 +440,7 @@ msgstr "Vervagen"
 #: contrib/jumbotron/forms.py:44 contrib/link/forms.py:324
 #: contrib/navigation/forms.py:42 contrib/tabs/forms.py:45
 msgid "Layout"
-msgstr ""
+msgstr "Lay-out"
 
 #: contrib/carousel/forms.py:61 contrib/tabs/forms.py:48
 msgid "This is the template that will be used for the component."
@@ -443,8 +452,8 @@ msgstr "Interval"
 
 #: contrib/carousel/forms.py:67
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 
 #: contrib/carousel/forms.py:72 contrib/carousel/models.py:25
@@ -634,7 +643,7 @@ msgstr "Container"
 
 #: contrib/grid/cms_plugins.py:72 contrib/grid/models.py:55
 msgid "Row"
-msgstr "Row"
+msgstr "Rij"
 
 #: contrib/grid/cms_plugins.py:149 contrib/grid/models.py:79
 #: contrib/tabs/constants.py:15
@@ -733,21 +742,22 @@ msgstr ""
 
 #: contrib/grid/forms.py:167
 msgid "Column alignment"
-msgstr "Klom uitlijning"
+msgstr "Kolom uitlijning"
 
 #: contrib/grid/forms.py:195
 #, python-format
 msgid ""
 "Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
 msgstr ""
+"Kolom grootte dient leeg, \"auto\" of een nummer tussen 1 en %(cols)dte zijn"
 
 #: contrib/grid/models.py:29
 msgid "GridContainer"
-msgstr ""
+msgstr "Grid container"
 
 #: contrib/grid/models.py:56
 msgid "GridRow"
-msgstr ""
+msgstr "Grid rij"
 
 #: contrib/grid/models.py:64
 #, python-format
@@ -758,11 +768,11 @@ msgstr[1] "(%(count)i kolommen)"
 
 #: contrib/grid/models.py:80
 msgid "GridColumn"
-msgstr ""
+msgstr "Grid kolom"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:15
 msgid "Column size"
-msgstr "Klom grootte"
+msgstr "Kolom grootte"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:16
 msgid "Order"
@@ -770,7 +780,7 @@ msgstr "Sortering"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:17
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 #: contrib/grid/templates/djangocms_frontend/admin/grid_column.html:18
 msgid "Margin left"
@@ -918,8 +928,7 @@ msgid "Width"
 msgstr "Breedte"
 
 #: contrib/image/forms.py:135
-msgid ""
-"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 
 #: contrib/image/forms.py:139
@@ -927,8 +936,7 @@ msgid "Height"
 msgstr "Hoogte"
 
 #: contrib/image/forms.py:143
-msgid ""
-"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 "De afbeelding-hoogte als nummer in pixels. Voorbeeld: \"720\" en niet "
 "\"720px\"."
@@ -967,10 +975,11 @@ msgstr "Afbeelding bijsnijden"
 
 #: contrib/image/forms.py:179
 msgid ""
-"Crops the image according to the thumbnail settings provided in the template."
-msgstr ""
-"Snij de afbeelding bij volgens de thumbnail instellingen mits gebruikt in de "
+"Crops the image according to the thumbnail settings provided in the "
 "template."
+msgstr ""
+"Snij de afbeelding bij volgens de thumbnail instellingen mits gebruikt in de"
+" template."
 
 #: contrib/image/forms.py:183
 msgid "Upscale image"
@@ -988,8 +997,8 @@ msgstr "Gebruik afbeelding responsive"
 
 #: contrib/image/forms.py:194
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
@@ -1034,7 +1043,8 @@ msgid ""
 msgstr ""
 
 #: contrib/image/forms.py:255
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
 #: contrib/image/forms.py:281
@@ -1056,8 +1066,8 @@ msgstr ""
 msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
-#: contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr "Link"
 
@@ -1072,7 +1082,7 @@ msgstr "Knop"
 #: contrib/link/constants.py:10 frameworks/bootstrap5.py:7
 #: frameworks/bootstrap5.py:133
 msgid "Small"
-msgstr "Smal"
+msgstr "Klein"
 
 #: contrib/link/constants.py:11 frameworks/bootstrap5.py:8
 #: frameworks/bootstrap5.py:134
@@ -1451,8 +1461,8 @@ msgstr "ID"
 
 #: contrib/utilities/forms.py:128
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:132
@@ -1461,7 +1471,7 @@ msgstr "Heading context"
 
 #: contrib/utilities/forms.py:160
 msgid "List attributes"
-msgstr ""
+msgstr "Lijst attributen"
 
 #: contrib/utilities/forms.py:162
 msgid ""
@@ -1511,7 +1521,7 @@ msgstr "Selecteer een HTML tag om te gebruiken"
 
 #: frameworks/bootstrap5.py:6 frameworks/bootstrap5.py:132
 msgid "Extra small"
-msgstr "Extra smal"
+msgstr "Extra klein"
 
 #: frameworks/bootstrap5.py:10 frameworks/bootstrap5.py:136
 msgid "Extra large"
@@ -1584,8 +1594,7 @@ msgstr "XX groot"
 
 #: helpers.py:112
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr "Lees meer in de <a href=\"{link}\" target=\"_blank\">documentatie</a>."
 
 #: models.py:24
@@ -1599,6 +1608,3 @@ msgstr ""
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
-
-#~ msgid "Template"
-#~ msgstr "Template"
