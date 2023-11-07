@@ -2,6 +2,16 @@
 Changelog
 =========
 
+1.1.10 (2023-10-23)
+===================
+
+* Fix bug: icon template tags do not throw an exception if called with
+  empty icon
+* Rename "Template" fields to "Layout"
+* Fix bug: Card image at top of card recognized also for django CMS v4
+* Fix bug: Picture ratio retained for image plugin
+* Fix bug: Show selected page in menu of default template.
+
 1.1.7 (2023-08-03)
 ==================
 
