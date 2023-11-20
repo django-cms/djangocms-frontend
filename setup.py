@@ -22,8 +22,10 @@ EXTRA_REQUIREMENTS = {
         "djangocms-static-ace",
     ],
     "cms-4": [
-        "django-cms>=4.1.0rc2",
+        "django-cms>=4.1.0rc4",
         "django-parler",
+        "djangocms-versioning>=2.0.0rc1",
+        "djangocms-alias>=2.0.0rc1",
     ],
     "cms-3": [
         "django-cms<4",
