@@ -286,6 +286,25 @@ Picture / image component
 The image or picture component make responsive picture uploads available as
 well as responsive embedding of external pictures.
 
+.. versionadded:: 1.2
+
+   djangocms-text-ckeditor supports dragging and dropping images into a rich
+   text field. If you add the following line to your `settings.py` file,
+   djangocms-text-ckeditor will automatically convert an image dropped into it
+   to a djangocms-frontend image component.
+
+   .. code-block::
+
+      TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_image_plugin'
+
+   Please note, that images dropped into djangocms-text-ckeditor are base64-
+   encoded and take a quite a bit of band width. You may have to increase your
+   `DATA_UPLOAD_MAX_MEMORY_SIZE` setting in `settings.py`.
+
+   We recommend not using this feature but instead adding a image component
+   through the "CMS Plugin" menu of Ckeditor.
+
+
 
 .. index::
     single: Spacing
@@ -462,7 +481,7 @@ To disable this behavior of CKEDITOR, you need to add a ``stylesSet`` entry in `
 
     CKEDITOR_SETTINGS = {
         ...,
-        "stylesSet": "default:icon/ckeditor.icons.js",
+        "customConfig": "icon/ckeditor.icons.js",
         ...,
     }
 
