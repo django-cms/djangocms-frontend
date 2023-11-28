@@ -223,15 +223,14 @@ in your project's ``settings.py``.
 
 .. py:attribute:: settings.TEXT_SAVE_IMAGE_FUNCTION
 
-    Requirement: ``TEXT_SAVE_IMAGE_FUNCTION = None``
+    If you want to use
+    djangocms-text-ckeditor's `Drag & Drop Images
+    <https://github.com/django-cms/djangocms-text-ckeditor/#drag--drop-images>`_
+    so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION``::
 
-    .. warning::
+      TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_image_plugin'
 
-        Please be aware that this package does not support
-        djangocms-text-ckeditor's `Drag & Drop Images
-        <https://github.com/divio/djangocms-text-ckeditor/#drag--drop-images>`_
-        so be sure to set ``TEXT_SAVE_IMAGE_FUNCTION = None``.
-
+    Otherwise set ``TEXT_SAVE_IMAGE_FUNCTION = None``
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_ICON_LIBRARIES
 
