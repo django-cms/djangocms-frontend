@@ -8,8 +8,7 @@ from tests.fixtures import TestFixture
 class DjangoCMSPictureIntegrationTestCase(TestFixture, CMSTestCase):
     def setUp(self):
         super().setUp()
-        self.page = self.create_page('test page', template='page.html', language='en')
-        self.placeholder = self.get_placeholders(self.page).get(slot='content')
+        self.placeholder = self.get_placeholders(self.home).get(slot='content')
 
     def test_extract_images(self):
         text_plugin = add_plugin(
