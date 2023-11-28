@@ -462,7 +462,7 @@ To disable this behavior of CKEDITOR, you need to add a ``stylesSet`` entry in `
 
     CKEDITOR_SETTINGS = {
         ...,
-        "stylesSet": f"default:{STATIC_URL}djangocms_frontend/icon/ckeditor/ckeditor.icons.js",
+        "stylesSet": "default:icon/ckeditor.icons.js",
         ...,
     }
 
