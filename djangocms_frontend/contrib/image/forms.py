@@ -145,7 +145,8 @@ class ImageForm(
     )
     alignment = forms.ChoiceField(
         label=_("Alignment"),
-        choices=get_alignment(),
+        choices=settings.EMPTY_CHOICE + get_alignment(),
+        initial=settings.EMPTY_CHOICE[0][0],
         required=False,
         help_text=_("Aligns the image according to the selected option."),
     )

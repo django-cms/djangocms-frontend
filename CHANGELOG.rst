@@ -2,6 +2,16 @@
 Changelog
 =========
 
+1.2.0 (2023-11-28)
+==================
+
+* feat: Add float option for images by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/162
+* feat: Add drag'n'drop support for djangocms-text-ckeditor by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/165
+* fix: Ckeditor does not show icons for editing by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/163
+* fix: Replace ``stylesSet`` setting in docs with ``customConfig` for icons in ckeditor by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/164
+* ci: pre-commit autoupdate by @pre-commit-ci in https://github.com/django-cms/djangocms-frontend/pull/161
+
+
 1.1.10 (2023-10-23)
 ===================
 
