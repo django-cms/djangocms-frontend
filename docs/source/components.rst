@@ -462,7 +462,7 @@ To disable this behavior of CKEDITOR, you need to add a ``stylesSet`` entry in `
 
     CKEDITOR_SETTINGS = {
         ...,
-        "stylesSet": "default:icon/ckeditor.icons.js",
+        "customConfig": "icon/ckeditor.icons.js",
         ...,
     }
 
