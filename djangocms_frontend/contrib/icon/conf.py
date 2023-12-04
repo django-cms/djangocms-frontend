@@ -28,7 +28,6 @@ ICON_LIBRARIES_SHOWN = getattr(settings, "DJANGOCMS_FRONTEND_ICONS_LIBRARIES_SHO
     "feather-icons",
     "open-iconic",
     "tabler-icons",
-    "zondicons",
     "weather-icons",
 ))
 
