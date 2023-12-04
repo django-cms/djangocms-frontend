@@ -151,6 +151,11 @@ Documentation
 See readthedocs for the `documentation
 <https://djangocms-frontend.readthedocs.io>`_.
 
+License
+=======
+
+See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICENSE>`_. 
+
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
 
