@@ -33,7 +33,7 @@ may be used optionally in an installation of the software:
   (MIT Licence https://github.com/feathericons/feather/blob/main/LICENSE)
 * Fomantic UI icons https://fomantic-ui.com/elements/icon.html
   (MIT Licence for own icons https://github.com/fomantic/Fomantic-UI/blob/develop/LICENSE.md,
-   SIL OFL 1.1 Licence of included Fontawesome 5 https://scripts.sil.org/OFL)
+   SIL Open Font Licence 1.1 of included Fontawesome 5 https://scripts.sil.org/OFL)
 * Foundation icons https://get.foundation/icon-fonts.html
   (MIT Licence https://github.com/thecreation/standard-icons/blob/master/modules/foundation-icons/LICENSE)
 * Open Iconic https://github.com/iconic/open-iconic
@@ -41,5 +41,5 @@ may be used optionally in an installation of the software:
 * Tabler Icons https://github.com/tabler/tabler-icons
   (MIT Licence https://github.com/tabler/tabler-icons/blob/master/LICENSE)
 * Weather Icons https://erikflowers.github.io/weather-icons/
-  (SIL Open Font Licence https://openfontlicense.org)
+  (SIL Open Font Licence 1.1 https://openfontlicense.org)
 
