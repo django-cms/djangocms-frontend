@@ -26,8 +26,6 @@ ICON_LIBRARIES_SHOWN = getattr(settings, "DJANGOCMS_FRONTEND_ICONS_LIBRARIES_SHO
     "foundation-icons",
     "elegant-icons",
     "feather-icons",
-    "happy-icons",
-    "icomoon",
     "open-iconic",
     "tabler-icons",
     "zondicons",

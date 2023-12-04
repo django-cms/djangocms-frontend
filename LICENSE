@@ -22,3 +22,17 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+This software package contains fonts under the following licenses which
+may be used optionally in an installation of the software:
+
+* ElegantIcons (MIT Licence https://opensource.org/license/mit/)
+* feather-icons (MIT Licence https://github.com/feathericons/feather/blob/main/LICENSE)
+* Fomantic UI icons (MIT Licence https://github.com/fomantic/Fomantic-UI/blob/develop/LICENSE.md)
+* Foundation icons (MIT Licence https://github.com/thecreation/standard-icons/blob/master/modules/foundation-icons/LICENSE)
+* Open Iconic (MIT Licence https://github.com/iconic/open-iconic/blob/master/ICON-LICENSE)
+* Tabler Icons (MIT Licence https://github.com/tabler/tabler-icons/blob/master/LICENSE)
+* Weather Icons (SIL Open Font Licence https://openfontlicense.org)
+* ZondIcons (MIT Licence https://github.com/dukestreetstudio/zondicons/blob/master/LICENSE)
+
