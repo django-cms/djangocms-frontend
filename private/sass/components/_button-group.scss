@@ -1,6 +1,10 @@
 // #############################################################################
 // BUTTON GROUPS
 
+.aligned .frontend-button-group label {
+    min-width: unset;
+}
+
 .frontend-button-group {
     .btn {
         box-sizing: border-box;
