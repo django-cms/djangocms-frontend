@@ -94,7 +94,7 @@ Contents
    getting_started
    grid
    components
-   howto_guides
+   how-to/index
    reference
 
 .. toctree::
