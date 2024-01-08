@@ -98,8 +98,13 @@ your Django app:
 
        <!-- your_plugin_template.html -->
        <div class="your-plugin-class">
-           {{ instance.field_name }}
+           {{ instance.field_name }} or {{ instance.config.field_name }}
        </div>
+
+   The "entangled" fields in the JSON config can either be accessed  using
+   ``instance.config.field_name`` or by using the ``instance.field_name`` syntax. The
+    latter is only possible if the field model does not have a property with the same
+    name.
 
 Remember, developing custom plugins requires a good understanding of Django's and Django
 CMS's architecture. Additionally, consider the security implications of your plugin,
