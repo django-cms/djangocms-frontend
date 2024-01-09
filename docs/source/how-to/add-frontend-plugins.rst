@@ -126,6 +126,58 @@ functionality of your plugin. These mixins are:
 * **Title**: Adds an optional title to the plugin which can be used to display
   a title above the plugin or just to simplify the navigation of the plugin tree.
 
+Each mixin comes in two flavours, one for the plugin and one for the plugin form.
+The plugin mixin is used to add the functionality to the plugin, while the form
+mixin is used to add their fields to the plugin form. The mixins are
+designed to be used together.
+
+For example, if you want to use the attributes mixin, you need to add the
+``AttributesMixin`` to your plugin and the ``AttributesMixinForm`` to your
+plugin form::
+
+    from djangocms_frontend.cms_plugins import AttributesMixin, AttributesMixinForm
+
+    class YourPlugin(AttributesMixin, CMSUIPlugin):
+        ...
+
+    class YourPluginForm(AttributesMixinForm, EntangledModelForm):
+        ...
+
+Re-using links and images
+-------------------------
+
+django CMS Frontend comes with a set of classes that can be used to re-use links
+and images in your plugin. These mixins are:
+
+* **LinkPluginMixin**: Adds a link to the plugin. The link can be used to link
+  the plugin to a page, a file or an external URL. Include **GetLinkMixin** with
+  your plugin model and base the admin form on **AbstractLinkForm** (can also
+  be used as a mixin)::
+
+        from djangocms_frontend.contrib.link.cms_plugins import LinkPluginMixin
+        from djangocms_frontend.contrib.link.models import GetLinkMixin
+        from djangocms_frontend.contrib.link.forms import AbstractLinkForm
+
+        class YourPlugin(LinkPluginMixin, CMSUIPlugin):
+            ...
+
+        class YourPluginForm(AbstractLinkForm):
+            link_is_optional = False  # True, if the link is optional
+            ...
+
+        class YourPluginModel(GetLinkMixin, FrontendUIItem):
+            ...
 
 
+* **ImageMixin**: Adds an image to the plugin *model*. Base your plugin form on
+  **ImageForm** (can also be used as a mixin)::
 
+        from djangocms_frontend.contrib.image.models import ImageMixin
+        from djangocms_frontend.contrib.image.forms import ImageForm
+
+        class YourPluginForm(ImageForm):
+            ...
+
+        class YourPluginModel(ImageMixin, FrontendUIItem):
+            image_field = "image"  # The name of the image field in the config JSON
+            ...
