@@ -87,5 +87,5 @@ class GridColumn(FrontendUIItem):
         if self.xs_col:
             text += f" (col-{self.xs_col}) "
         else:
-            text += "(auto) "
+            text += " (auto) "
         return text.strip()
