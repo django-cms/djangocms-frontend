@@ -145,28 +145,28 @@ FRAMEWORK_PLUGIN_INFO = {
         "grid_sizes": grid_sizes,
         "grid_icons": grid_icons,
         "row_links": [
-            "https://getbootstrap.com/docs/5.1/layout/grid/#grid-options",
-            "https://getbootstrap.com/docs/5.1/layout/columns/#reordering",
-            "https://getbootstrap.com/docs/5.1/layout/columns/#offsetting-columns",
-            "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
-            "https://getbootstrap.com/docs/5.1/utilities/flex/#auto-margins",
+            "https://getbootstrap.com/docs/5.3/layout/grid/#grid-options",
+            "https://getbootstrap.com/docs/5.3/layout/columns/#reordering",
+            "https://getbootstrap.com/docs/5.3/layout/columns/#offsetting-columns",
+            "https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins",
+            "https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins",
         ],
     },
     "GridRow": {
         "grid_sizes": grid_sizes,
         "grid_icons": grid_icons,
         "row_links": [
-            "https://getbootstrap.com/docs/5.1/layout/grid/#row-columns",
+            "https://getbootstrap.com/docs/5.3/layout/grid/#row-columns",
         ],
-        "vertical_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#vertical-alignment",
-        "horizontal_alignment_link": "https://getbootstrap.com/docs/5.1/layout/columns/#horizontal-alignment",
+        "vertical_alignment_link": "https://getbootstrap.com/docs/5.3/layout/columns/#vertical-alignment",
+        "horizontal_alignment_link": "https://getbootstrap.com/docs/5.3/layout/columns/#horizontal-alignment",
     },
     "CardLayout": {
-        "card_type_link": "https://getbootstrap.com/docs/5.1/components/card/#card-layout",
+        "card_type_link": "https://getbootstrap.com/docs/5.3/components/card/#card-layout",
         "grid_sizes": grid_sizes,
         "grid_icons": grid_icons,
         "row_links": [
-            "https://getbootstrap.com/docs/5.1/layout/grid/#row-columns",
+            "https://getbootstrap.com/docs/5.3/layout/grid/#row-columns",
         ],
     },
 }
