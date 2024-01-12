@@ -415,13 +415,10 @@ support for the following icon sets:
 * `Fomatic UI icons <https://fomantic-ui.com/elements/icon.html>`_ (bundled)
 * `Font awesome (regular, solid and brands) <https://fontawesome.com>`_
 * `Foundation icons <https://zurb.com/playground/foundation-icon-fonts-3>`_ (bundled)
-* Happy icons (bundled)
-* `Icomoon <https://icomoon.io>`_ (bundled)
 * `Material icons (filled, outlined, sharp, two-tone) <https://fonts.google.com/icons>`_
 * `Open iconic <https://github.com/iconic/open-iconic>`_
 * `Tabler icons <https://tabler-icons.io>`_
 * Eric Flower's `Weather icons <https://erikflowers.github.io/weather-icons/>`_ (bundled)
-* Steve Schoger's `Zondicons <https://www.zondicons.com/icons.html>`_ (bundled)
 
 
 .. note::
