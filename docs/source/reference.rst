@@ -262,23 +262,20 @@ in your project's ``settings.py``.
     Default::
 
         DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN = (
-            'font-awesome',
-            'bootstrap-icons',
-            'material-icons-filled',
-            'material-icons-outlined',
-            'material-icons-round',
-            'material-icons-sharp',
-            'material-icons-two-tone',
-            'fomantic-ui',
-            'foundation-icons',
-            'elegant-icons',
-            'feather-icons',
-            'happy-icons',
-            'icomoon',
-            'open-iconic',
-            'tabler-icons',
-            'zondicons',
-            'weather-icons'
+            "font-awesome",
+            "bootstrap-icons",
+            "material-icons-filled",
+            "material-icons-outlined",
+            "material-icons-round",
+            "material-icons-sharp",
+            "material-icons-two-tone",
+            "fomantic-ui",
+            "foundation-icons",
+            "elegant-icons",
+            "feather-icons",
+            "open-iconic",
+            "tabler-icons",
+            "weather-icons",
         )
 
     This settings allows to restrict the number of icon sets shown to the user. Typically one or two icon sets should be sufficient to keep a consistent icon expierence.
