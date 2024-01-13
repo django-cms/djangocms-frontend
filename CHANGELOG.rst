@@ -2,6 +2,28 @@
 Changelog
 =========
 
+1.2.2 (2024-01-13)
+==================
+
+* fix: Reference to removed icon fonts caused some static file storage backends to fail
+* fix: Replace deprecated ``length_is`` by ``length`` filter by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/173
+* fix: Missing space in auto column short description by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/177
+* docs: Update how tos by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/174
+* docs: Typo corrections by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/175
+* docs: Clarify how to re-use image and links in custom plugins by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/176
+* ci: pre-commit autoupdate by @pre-commit-ci in https://github.com/django-cms/djangocms-frontend/pull/172
+* ci: bump github/codeql-action from 2 to 3 by @dependabot in https://github.com/django-cms/djangocms-frontend/pull/171
+
+1.2.1 (2023-12-20)
+==================
+
+* feat: Add licences of vendor icon libraries by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/167
+* feat: django 5.1 preparation by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/169
+* fix: Button group sizes for django 4.x+ by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/170
+* ci:(deps): bump actions/setup-python from 4 to 5 by @dependabot in https://github.com/django-cms/djangocms-frontend/pull/168
+
+
+
 1.2.0 (2023-11-28)
 ==================
 
