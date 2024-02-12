@@ -42,4 +42,4 @@ jobs:
         pip install -r tests/requirements/${{ matrix.requirements-file }}
         coverage run setup.py test
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
