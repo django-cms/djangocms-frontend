@@ -1,16 +1,15 @@
-{% load thumbnail frontend %}{% spaceless %}
-    {% if picture_link %}
-        <a href="{{ picture_link }}"
-            {% if instance.target %} target="{{ instance.target }}"{% endif %}
-            {% get_attributes instance.link_attributes %}>
+{% load thumbnail frontend %}
+{% if picture_link %}
+    <a href="{{ picture_link }}"
+        {% if instance.target %} target="{{ instance.target }}"{% endif %}
+        {% get_attributes instance.link_attributes %}>
+{% endif %}
+<img src="{{ instance.img_src }}" {% if not instance.attributes.alt and instance.rel_image.default_alt_text %}alt="{{ instance.rel_image.default_alt_text }}"{% endif %} {% if instance.width %} width="{{ instance.width|safe }}"{% endif %} {% if instance.height %} height="{{ instance.height|safe }}"{% endif %}
+    {% if img_srcset_data %}
+        srcset="{% for size, thumb in img_srcset_data %}{{ thumb.url }} {{ size|safe }}w,{% endfor %}{{ instance.img_src }} {{ picture_size.size.0|safe }}w"
+        sizes="{% for size, thumb in img_srcset_data %}(max-width: {{ size|safe }}px) {{ size|safe }}px, {% endfor %} {{ picture_size.size.0|safe }}px"
     {% endif %}
-    <img src="{{ instance.img_src }}" {% if not instance.attributes.alt and instance.rel_image.default_alt_text %}alt="{{ instance.rel_image.default_alt_text }}"{% endif %} {% if instance.width %} width="{{ instance.width|safe }}"{% endif %} {% if instance.height %} height="{{ instance.height|safe }}"{% endif %}
-        {% if img_srcset_data %}
-            srcset="{% for size, thumb in img_srcset_data %}{{ thumb.url }} {{ size|safe }}w,{% endfor %}{{ instance.img_src }} {{ picture_size.size.0|safe }}w"
-            sizes="{% for size, thumb in img_srcset_data %}(max-width: {{ size|safe }}px) {{ size|safe }}px, {% endfor %} {{ picture_size.size.0|safe }}px"
-        {% endif %}
-        {{ instance.get_attributes }} />
-    {% if picture_link %}
-        </a>
-    {% endif %}
-{% endspaceless %}
+    {{ instance.get_attributes }} />
+{% if picture_link %}
+    </a>
+{% endif %}

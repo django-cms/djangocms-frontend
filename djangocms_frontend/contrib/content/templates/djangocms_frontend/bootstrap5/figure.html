@@ -1,9 +1,7 @@
 {% load i18n cms_tags frontend %}
-{% spaceless %}
-    <figure {{ instance.get_attributes }}>
-        {% for plugin in instance.child_plugin_instances %}
-            {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
-        {% endfor %}
-        <figcaption class="figure-caption{% if figure_alignment %} text-{{ figure_alignment }}{% endif %}">{{ instance.figure_caption|safe_caption }}</figcaption>
-    </figure>
-{% endspaceless %}
+<figure {{ instance.get_attributes }}>
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+    <figcaption class="figure-caption{% if figure_alignment %} text-{{ figure_alignment }}{% endif %}">{{ instance.figure_caption|safe_caption }}</figcaption>
+</figure>

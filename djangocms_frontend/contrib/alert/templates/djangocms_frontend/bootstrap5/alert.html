@@ -3,10 +3,10 @@
     {% if instance.alert_dismissible %}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans "Close" %}"></button>
     {% endif %}
-    <div>
+    <div>{% endspaceless %}
         {% for plugin in instance.child_plugin_instances %}
             {% with parent=instance %}{% render_plugin plugin %}{% endwith %}
-        {% endfor %}
+        {% endfor %}{% spaceless %}
     </div>
     </{{ instance.tag_type }}>
 {% endspaceless %}

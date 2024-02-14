@@ -1,10 +1,9 @@
-{% load cms_tags %}{% spaceless %}
-    <{{ instance.tag_type }}{{ instance.get_attributes }}
-     id="tab-{{ instance.pk|safe }}"
-     aria-labelledby="tab-label-{{ instance.pk|safe }}"
-     role="tabpanel">
-        {% for plugin in instance.child_plugin_instances %}
-            {% render_plugin plugin %}
-        {% endfor %}
-    </{{ instance.tag_type }}>
-{% endspaceless %}
+{% load cms_tags %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}
+ id="tab-{{ instance.pk|safe }}"
+ aria-labelledby="tab-label-{{ instance.pk|safe }}"
+ role="tabpanel">
+    {% for plugin in instance.child_plugin_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
+</{{ instance.tag_type }}>
