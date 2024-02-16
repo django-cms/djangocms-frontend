@@ -1,13 +1,13 @@
-{% load cms_tags easy_thumbnails_tags %}{% spaceless %}
-    {% if instance.rel_image %}
-        {% thumbnail instance.rel_image options.size crop=options.crop upscale=options.upscale subject_location=instance.rel_image.subject_location as thumbnail %}
+{% load cms_tags easy_thumbnails_tags %}
+{% if instance.rel_image %}
+    {% thumbnail instance.rel_image options.size crop=options.crop upscale=options.upscale subject_location=instance.rel_image.subject_location as thumbnail %}
 
-        <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.rel_image.default_alt_text|default:'' }}" />
-    {% else %}
-        <div class="d-block w-100"
-            style="aspect-ratio: {{ aspect_ratio }}">
-            {% for plugin in instance.child_plugin_instances %}
-                {% render_plugin plugin %}
-            {% endfor %}
-        </div>
-    {% endif %}{% endspaceless %}
+    <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.rel_image.default_alt_text|default:'' }}" />
+{% else %}
+    <div class="d-block w-100"
+        style="aspect-ratio: {{ aspect_ratio }}">
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </div>
+{% endif %}

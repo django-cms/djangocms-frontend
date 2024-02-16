@@ -1,25 +1,22 @@
-{% load cms_tags frontend %}{% spaceless %}
-    <{{ instance.tag_type }}{{ instance.get_attributes }}>
-    {% if link %}
-        <a href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>
+{% load cms_tags frontend %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}>
+{% if link %}
+    <a href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>
+{% endif %}
+{% with image=carousel_image.image %}
+    {% include "djangocms_frontend/bootstrap5/carousel/default/image.html" %}
+{% endwith %}
+{% if link %}
+    </a>
+{% endif %}
+<div class="carousel-caption d-none d-md-block">
+    {% if instance.carousel_content %}
+        {{ instance.carousel_content|html_safe }}
     {% endif %}
-
-    {% with image=carousel_image.image %}
-        {% include "djangocms_frontend/bootstrap5/carousel/default/image.html" %}
-    {% endwith %}
-
-    {% if link %}
-        </a>
+    {% if instance.rel_image %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
     {% endif %}
-
-    <div class="carousel-caption d-none d-md-block">
-        {% if instance.carousel_content %}
-            {{ instance.carousel_content|html_safe }}
-        {% endif %}
-        {% if instance.rel_image %}
-            {% for plugin in instance.child_plugin_instances %}
-                {% render_plugin plugin %}
-            {% endfor %}
-        {% endif %}
-    </div>
-    </{{ instance.tag_type }}>{% endspaceless %}
+</div>
+</{{ instance.tag_type }}>

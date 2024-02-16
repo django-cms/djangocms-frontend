@@ -21,8 +21,7 @@
     {% block page_head %}{% endblock %}
     </head>
     <body {% block body_attrs %}{% endblock %}>
-{% endspaceless %}{% cms_toolbar %}{% spaceless %}
-    {% block navbar %}{% endblock %}
+{% endspaceless %}{% cms_toolbar %}{% block navbar %}{% endblock %}
     {% block content %}
         <section>
             {% placeholder "Page Content" %}
@@ -30,7 +29,7 @@
         <footer>
             {% static_placeholder "Footer" %}
         </footer>
-    {% endblock content %}
+    {% endblock content %}{% spaceless %}
     {% block base_js %}{% endblock %}
 {% endspaceless %}{% render_block 'js' %}{% spaceless %}
     {% block end_js %}{% endblock %}
