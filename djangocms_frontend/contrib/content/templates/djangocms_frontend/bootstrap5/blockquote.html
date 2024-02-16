@@ -1,23 +1,21 @@
 {% load cms_tags frontend %}
-{% spaceless %}
-    {# djlint:off #}
-    {% if instance.quote_origin %}
-        <figure{{ instance.get_attributes }}>
-        <blockquote class="blockquote">
-    {% else %}
-        <blockquote{{ instance.get_attributes }}>
-    {% endif %}
-    {# djlint:on #}
-        {% for plugin in instance.child_plugin_instances %}
-            {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
-        {% empty %}{{ instance.quote_content|html_safe }}{% endfor %}
-    {# djlint:off #}
-    </blockquote>
-    {# djlint:on #}
-    {% if instance.quote_origin %}
-        <figcaption class="blockquote-footer">
-            {{ instance.quote_origin|safe_caption }}
-        </figcaption>
-        </figure>
-    {% endif %}
-{% endspaceless %}
+{# djlint:off #}
+{% if instance.quote_origin %}
+    <figure{{ instance.get_attributes }}>
+    <blockquote class="blockquote">
+{% else %}
+    <blockquote{{ instance.get_attributes }}>
+{% endif %}
+{# djlint:on #}
+    {% for plugin in instance.child_plugin_instances %}
+        {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+    {% empty %}{{ instance.quote_content|html_safe }}{% endfor %}
+{# djlint:off #}
+</blockquote>
+{# djlint:on #}
+{% if instance.quote_origin %}
+    <figcaption class="blockquote-footer">
+        {{ instance.quote_origin|safe_caption }}
+    </figcaption>
+    </figure>
+{% endif %}

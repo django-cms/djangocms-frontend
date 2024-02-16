@@ -1,39 +1,39 @@
-{% load i18n cms_tags %}{% spaceless %}
-    <{{ instance.tag_type }}{{ instance.get_attributes }}
-    id="carousel-{{ instance.pk|safe }}"
-    data-bs-interval="{{ instance.carousel_interval|lower }}"
-    data-bs-keyboard="{{ instance.carousel_keyboard|lower }}"
-    data-bs-pause="{{ instance.carousel_pause|lower }}"
-    data-bs-ride="{% if instance.carousel_ride %}carousel{% else %}false{% endif %}"
-    data-bs-wrap="{{ instance.carousel_wrap|lower }}"
-    >
-    {% if instance.carousel_indicators %}
-        <div class="carousel-indicators">
-            {% for plugin in instance.child_plugin_instances %}
-                <button type="button" data-bs-target="#carousel-{{ instance.pk|safe }}"
-                    data-bs-slide-to="{{ forloop.counter0 }}"
-                    {% if forloop.first %} class="active"{% endif %}>
-                </button>
-            {% endfor %}
-        </div>
-    {% endif %}
+{% load i18n cms_tags %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}
+id="carousel-{{ instance.pk|safe }}"
+data-bs-interval="{{ instance.carousel_interval|lower }}"
+data-bs-keyboard="{{ instance.carousel_keyboard|lower }}"
+data-bs-pause="{{ instance.carousel_pause|lower }}"
+data-bs-ride="{% if instance.carousel_ride %}carousel{% else %}false{% endif %}"
+data-bs-wrap="{{ instance.carousel_wrap|lower }}"
+>
+{% if instance.carousel_indicators %}
+    <div class="carousel-indicators">
+        {% for plugin in instance.child_plugin_instances %}
+            <button type="button" data-bs-target="#carousel-{{ instance.pk|safe }}"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %} class="active"{% endif %}>
+            </button>
+        {% endfor %}
+    </div>
+{% endif %}
 
-    {% with width=1024 height=768 %}
-        <div class="carousel-inner">
-            {% for plugin in instance.child_plugin_instances %}
-                {% render_plugin plugin %}
-            {% endfor %}
-        </div>
-    {% endwith %}
+{% with width=1024 height=768 %}
+    <div class="carousel-inner">
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </div>
+{% endwith %}
 
-    {% if instance.carousel_controls %}
-        <button class="carousel-control-prev" data-bs-target="#carousel-{{ instance.pk|safe }}" type="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden-focusable">{% trans "Previous" %}</span>
-        </button>
-        <button class="carousel-control-next" data-bs-target="#carousel-{{ instance.pk|safe }}" type="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden-focusable">{% trans "Next" %}</span>
-        </button>
-    {% endif %}
-    </{{ instance.tag_type }}>{% endspaceless %}
+{% if instance.carousel_controls %}
+    <button class="carousel-control-prev" data-bs-target="#carousel-{{ instance.pk|safe }}" type="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden-focusable">{% trans "Previous" %}</span>
+    </button>
+    <button class="carousel-control-next" data-bs-target="#carousel-{{ instance.pk|safe }}" type="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden-focusable">{% trans "Next" %}</span>
+    </button>
+{% endif %}
+</{{ instance.tag_type }}>
