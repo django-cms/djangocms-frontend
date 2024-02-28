@@ -36,7 +36,6 @@ class NavigationPlugin(
         "NavLinkPlugin",
         "PageTreePlugin",
         "NavBrandPlugin",
-        "NavContainerPlugin",
     ]
 
     fieldsets = [
@@ -77,7 +76,7 @@ class PageTreePlugin(
     form = forms.PageTreeForm
     change_form_template = "djangocms_frontend/admin/page_tree.html"
     allow_children = False
-    parent_classes = ["NavigationPlugin", "NavContainerPlugin"]
+    parent_classes = ["NavigationPlugin",]
     fieldsets = [
         (
             None,
@@ -108,7 +107,7 @@ class NavBrandPlugin(
     form = forms.NavBrandForm
     change_form_template = "djangocms_frontend/admin/brand.html"
     allow_children = True
-    parent_classes = ["NavigationPlugin", "NavContainerPlugin"]
+    parent_classes = ["NavigationPlugin",]
     link_fieldset_position = -1
 
     fieldsets = [
@@ -134,9 +133,9 @@ class NavContainerPlugin(
     module = _("Frontend")
     model = models.NavContainer
     form = forms.NavContainerForm
-    change_form_template = "djangocms_frontend/admin/nav_container.html"
+    change_form_template = "djangocms_frontend/admin/deprecated.html"
     allow_children = True
-    parent_classes = ["NavigationPlugin"]
+    parent_classes = [""]  # No parent classes
     child_classes = [
         "NavLinkPlugin",
         "PageTreePlugin",
@@ -150,11 +149,6 @@ class NavContainerPlugin(
         ),
     ]
 
-    def get_render_template(self, context, instance, placeholder):
-        return get_template_path(
-            "navigation", context.get("nav_template", default_template), "nav_container"
-        )
-
 
 @plugin_pool.register_plugin
 class NavLinkPlugin(
@@ -167,7 +161,7 @@ class NavLinkPlugin(
     form = forms.NavLinkForm
     change_form_template = "djangocms_frontend/admin/navlink.html"
     allow_children = True
-    parent_classes = ["NavigationPlugin", "NavContainerPlugin", "NavLinkPlugin"]
+    parent_classes = ["NavigationPlugin", "NavLinkPlugin"]
     child_classes = [
         "NavLinkPlugin",
         "GridContainerPlugin",

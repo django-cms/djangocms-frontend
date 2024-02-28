@@ -8,14 +8,14 @@
     .form-row.field-create .icon {
         position: absolute;
         font-size: 30px;
-        margin-top: 28px;
-        margin-left: 4px;
+        margin-block-start: 28px;
+        margin-inline-start: 4px;
     }
 
     .form-row.field-create input[name="create"] {
         width: 130px !important;
-        padding-right: 5px !important;
-        text-align: right;
+        padding-inline-end: 5px !important;
+        text-align: start;
     }
 }
 
@@ -45,8 +45,8 @@
         float: left !important;
 
         input:not([type="checkbox"]) {
-            text-align: right;
-            padding-right: 5px !important;
+            text-align: end;
+            padding-inline-end: 5px !important;
             box-sizing: border-box;
             width: 100%;
         }
@@ -56,8 +56,8 @@
             font-weight: normal !important;
             color: #ccc !important;
             position: absolute;
-            left: 15px;
-            bottom: 17px;
+            inset-inline-start: 15px;
+            inset-block-end: 17px;
             text-transform: lowercase;
         }
 
@@ -67,7 +67,7 @@
         }
 
         &:last-child {
-            border-right: none;
+            border-inline-end: none;
         }
     }
 
@@ -120,11 +120,11 @@
     .field-lg_me,
     .field-xl_me,
     .field-xxl_me {
-        text-align: left;
+        text-align: start;
 
         label {
-            left: 30px;
-            bottom: 14px;
+            inset-inline-start: 30px;
+            inset-block-start: 14px;
         }
 
         input {
@@ -137,8 +137,8 @@
 
 .grid-reset {
     position: absolute;
-    right: 5px;
-    top: 0;
+    inset-inline-end: 5px;
+    inset-block-start: 0;
 }
 
 .icon-thead {

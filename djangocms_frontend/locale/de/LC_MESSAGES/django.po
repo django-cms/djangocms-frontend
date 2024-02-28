@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 07:43+0200\n"
+"POT-Creation-Date: 2024-02-28 23:03+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Fabian Braun <fsbraun@gmx.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/divio/teams/58664/de/)\n"
@@ -822,31 +822,31 @@ msgstr "Zurücksetzen"
 msgid "Icon"
 msgstr "Icon"
 
-#: contrib/icon/conf.py:54
+#: contrib/icon/conf.py:51
 msgid "Regular"
 msgstr "Schriftgröße"
 
-#: contrib/icon/conf.py:55
+#: contrib/icon/conf.py:52
 msgid "x 2"
 msgstr "x 2"
 
-#: contrib/icon/conf.py:56
+#: contrib/icon/conf.py:53
 msgid "x 3"
 msgstr "x 3"
 
-#: contrib/icon/conf.py:57
+#: contrib/icon/conf.py:54
 msgid "x 4"
 msgstr "x 4"
 
-#: contrib/icon/conf.py:58
+#: contrib/icon/conf.py:55
 msgid "x 5"
 msgstr "x 5"
 
-#: contrib/icon/conf.py:59
+#: contrib/icon/conf.py:56
 msgid "x 8"
 msgstr "x 8"
 
-#: contrib/icon/conf.py:60
+#: contrib/icon/conf.py:57
 msgid "x 12"
 msgstr "x 12"
 
@@ -883,12 +883,16 @@ msgid "Cropping"
 msgstr "Beschneiden"
 
 #: contrib/image/forms.py:25
-msgid "Align left"
-msgstr "Links ausrichten"
+#, fuzzy
+#| msgid "Icon left"
+msgid "Float left"
+msgstr "Icon links"
 
 #: contrib/image/forms.py:26
-msgid "Align right"
-msgstr "Rechts ausrichten"
+#, fuzzy
+#| msgid "Icon right"
+msgid "Float right"
+msgstr "Icon rechts"
 
 #: contrib/image/forms.py:27
 msgid "Align center"
@@ -973,57 +977,57 @@ msgid ""
 msgstr ""
 "Bild-Höhe in Pixeln (ohne Enheit). Beispiel: \"720\" and not \"720px\"."
 
-#: contrib/image/forms.py:150
+#: contrib/image/forms.py:151
 msgid "Aligns the image according to the selected option."
 msgstr "Richtet das Bild entsprechend der ausgewählten Option aus."
 
-#: contrib/image/forms.py:153 contrib/utilities/forms.py:167
+#: contrib/image/forms.py:154 contrib/utilities/forms.py:167
 msgid "Link attributes"
 msgstr "Link-Attribute"
 
-#: contrib/image/forms.py:154
+#: contrib/image/forms.py:155
 msgid "Attributes apply to the <b>link</b>."
 msgstr "Attribute werden auf den <b>Link</b> angewendet."
 
-#: contrib/image/forms.py:160
+#: contrib/image/forms.py:161
 msgid "Automatic scaling"
 msgstr "Automatische Skalierung"
 
-#: contrib/image/forms.py:163
+#: contrib/image/forms.py:164
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr "Skaliert das Bild autmatisch auf die Größe des Platzhalters."
 
-#: contrib/image/forms.py:169
+#: contrib/image/forms.py:170
 msgid "Use original image"
 msgstr "Original-Bild nutzen"
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:172
 msgid "Outputs the raw image without cropping."
 msgstr "Erzeugt das Originalbild ohne Zuschneiden"
 
-#: contrib/image/forms.py:176
+#: contrib/image/forms.py:177
 msgid "Crop image"
 msgstr "Bild beschneiden"
 
-#: contrib/image/forms.py:179
+#: contrib/image/forms.py:180
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr "Schneidet das Bild gemäß der Vorschau-Einstellungen in der Vorlage zu."
 
-#: contrib/image/forms.py:183
+#: contrib/image/forms.py:184
 msgid "Upscale image"
 msgstr "Bildgröße anpassen"
 
-#: contrib/image/forms.py:186
+#: contrib/image/forms.py:187
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr "Passt die Bildgröße auf die Vorschau-Einstellungen in der Vorlage"
 
-#: contrib/image/forms.py:190
+#: contrib/image/forms.py:191
 msgid "Use responsive image"
 msgstr "Bild responsive darstellen"
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:195
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
@@ -1033,11 +1037,11 @@ msgstr ""
 "Bildschirmgröße des Nutzers auszuwählen. Dies erfolgt nur bei hochgeladenen "
 "Bildern."
 
-#: contrib/image/forms.py:203
+#: contrib/image/forms.py:204
 msgid "Thumbnail options"
 msgstr "Optionen für Vorschaubilder"
 
-#: contrib/image/forms.py:206
+#: contrib/image/forms.py:207
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
@@ -1045,31 +1049,31 @@ msgstr ""
 "Überschreibt Breite, Höhe und Zuschneide-Einstellungen. Passt die Bildgröße "
 "auf die Voreingestellung an."
 
-#: contrib/image/forms.py:210
+#: contrib/image/forms.py:211
 msgid "Responsive"
 msgstr "Responsive"
 
-#: contrib/image/forms.py:213
+#: contrib/image/forms.py:214
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Fügt die Klasse .img-fluid hinzu um das Bild responsiv zu machen."
 
-#: contrib/image/forms.py:216
+#: contrib/image/forms.py:217
 msgid "Rounded"
 msgstr "Abgerundet"
 
-#: contrib/image/forms.py:219
+#: contrib/image/forms.py:220
 msgid "Adds the .rounded class for round corners."
 msgstr "Fügt die Klasse .rounded für abgerundete Ecken hinzu."
 
-#: contrib/image/forms.py:222
+#: contrib/image/forms.py:223
 msgid "Thumbnail"
 msgstr "Vorschaubild"
 
-#: contrib/image/forms.py:225
+#: contrib/image/forms.py:226
 msgid "Adds the .img-thumbnail class."
 msgstr "Fügt die Klasse .img-thumbnail hinzu."
 
-#: contrib/image/forms.py:246
+#: contrib/image/forms.py:247
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
@@ -1077,11 +1081,11 @@ msgstr ""
 "Nur ein Ziel kann angegbenen werden: Extern, intern oder eine Datei. Es ist "
 "mehr als ein Ziel ausgewählt."
 
-#: contrib/image/forms.py:255
+#: contrib/image/forms.py:256
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr "Entweder ein Bild oder eine URL für ein externed Bild angeben."
 
-#: contrib/image/forms.py:281
+#: contrib/image/forms.py:282
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -1103,8 +1107,8 @@ msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 "Erweitert Jas Jumbotron auf die volle Breite des Containers oder Fensters."
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5
-#: contrib/link/models.py:11 contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
+#: contrib/link/models.py:114
 msgid "Link"
 msgstr "Link"
 
@@ -1342,9 +1346,11 @@ msgstr "Seitenbaum"
 msgid "Brand"
 msgstr "Marke"
 
-#: contrib/navigation/cms_plugins.py:133 contrib/navigation/models.py:24
-msgid "Navigation container"
-msgstr "Navigationscontainer"
+#: contrib/navigation/cms_plugins.py:133
+#, fuzzy
+#| msgid "Collapse container"
+msgid "Collapsible container"
+msgstr "Collapse-Container"
 
 #: contrib/navigation/cms_plugins.py:164
 msgid "Navigation link"
@@ -1373,6 +1379,10 @@ msgstr "Start-Ebene dieser Seite (0: Wurzel, 1: erste Ebene, ...)"
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
 msgstr "Marke eingeben oder Plugins für Markenlogo einfügen"
+
+#: contrib/navigation/models.py:24
+msgid "Navigation container"
+msgstr "Navigationscontainer"
 
 #: contrib/navigation/models.py:30
 msgid "Navigation Link"
@@ -1674,6 +1684,12 @@ msgstr ""
 #: settings.py:73
 msgid "Offcanvas"
 msgstr "Off-Canvas"
+
+#~ msgid "Align left"
+#~ msgstr "Links ausrichten"
+
+#~ msgid "Align right"
+#~ msgstr "Rechts ausrichten"
 
 #~ msgid "Template"
 #~ msgstr "Vorlage"

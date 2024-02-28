@@ -23,6 +23,9 @@ class NavContainer(FrontendUIItem):
         proxy = True
         verbose_name = _("Navigation container")
 
+    def get_short_description(self):
+        return _("(deprecated)")
+
 
 class NavLink(Link):
     class Meta:

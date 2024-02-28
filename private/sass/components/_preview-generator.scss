@@ -3,15 +3,15 @@
 
 .djangocms-frontend-preview {
     position: fixed;
-    top: 0;
-    right: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     z-index: 10;
     text-align: center;
     border-radius: 0 0 0 3px;
     padding: 10px 20px 27px;
     border: 1px solid var(--dca-gray, var(--hairline-color, #ccc));
-    border-top: none;
-    border-right: none;
+    border-block-start: none;
+    border-inline-end: none;
     background: var(--body-bg, white);
     @media (prefers-color-scheme: dark) {
         background: var(--body-bg, black);
@@ -29,8 +29,8 @@
 
     .b4-close {
         position: absolute;
-        right: 10px;
-        top: 8px;
+        inset-inline-end: 10px;
+        inset-block-start: 8px;
         z-index: 100;
         display: block;
         color: darken($cms-gray, 50%);

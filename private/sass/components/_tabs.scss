@@ -5,7 +5,7 @@
 
 ul.nav {
     .nav-item {
-        margin-right: 1rem;
+        margin-inline-end: 1rem;
     }
     // margin-bottom: 0;
     .nav-link {
@@ -28,8 +28,8 @@ ul.nav {
             padding: 0.5rem;
             border: 1px solid var(--dca-white, var(--body-bg, $white));
             transform: translate(-50%, -50%);
-            top: 0;
-            left: 100%;
+            inset-block-start: 0;
+            inset-inline-start: 100%;
             position: absolute;
         }
 
@@ -62,7 +62,7 @@ div.tab-pk {
     align-self: center;
     color: var(--dca-gray-darker, var(--body-fg, $django-fg));
     font-size: 80%;
-    margin-left: auto;
+    margin-inline-start: auto;
 }
 
 .djangocms-admin-style .colM ul.nav:not(.object-tools):not(.messagelist) {
