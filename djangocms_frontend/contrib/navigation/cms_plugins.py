@@ -132,7 +132,6 @@ class NavContainerPlugin(
     name = _("Navigation container")
     module = _("Frontend")
     model = models.NavContainer
-    form = forms.NavContainerForm
     change_form_template = "djangocms_frontend/admin/deprecated.html"
     allow_children = True
     parent_classes = [""]  # No parent classes

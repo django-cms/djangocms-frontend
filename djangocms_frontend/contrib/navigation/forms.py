@@ -108,18 +108,5 @@ class NavBrandForm(mixin_factory("NavBrand"), AbstractLinkForm, EntangledModelFo
     attributes = AttributesFormField()
 
 
-class NavContainerForm(mixin_factory("NavContainer"), EntangledModelForm):
-    class Meta:
-        model = FrontendUIItem
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
-        untangled_fields = ()
-
-    attributes = AttributesFormField()
-
-
 class NavLinkForm(mixin_factory("NavLink"), LinkForm):
     link_is_optional = True
