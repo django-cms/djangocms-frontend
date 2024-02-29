@@ -6,7 +6,7 @@
                     {% show_menu from_level to_level extra_inactive extra_active "bootstrap5/dropdown.html" "" "" child %}
                 </div>
             {% else %}
-                <a class="nav-link{% if child.selected %} active{% endif %}" data-request="{{ request.path }}"  href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>
+                <a class="nav-link{% if child.selected %} active{% endif %}" href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>
             {% endif %}
         </li>
     {% endfor %}

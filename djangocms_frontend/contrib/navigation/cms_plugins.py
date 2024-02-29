@@ -23,7 +23,7 @@ class NavigationPlugin(
     CMSUIPlugin,
 ):
     """
-    Creates a Navbar
+    The NavigationPlugin class is a plugin used in Django CMS to create navigation menus or off-canvas menus.
     """
 
     name = _("Navigation")
@@ -70,6 +70,11 @@ class PageTreePlugin(
     AttributesMixin,
     CMSUIPlugin,
 ):
+    """
+
+    The PageTreePlugin class is a plugin for Django CMS that allows users to display a hierarchical
+    tree-like structure of pages on the frontend.
+    """
     name = _("Page tree")
     module = _("Frontend")
     model = models.PageTree
@@ -101,6 +106,11 @@ class NavBrandPlugin(
     LinkPluginMixin,
     CMSUIPlugin,
 ):
+    """
+    The `NavBrandPlugin` class is a plugin used in Django CMS to create a navigation brand element.
+    This plugin allows the user to define a brand logo or text that will be displayed in the
+    navigation header. Content is added through child plugins.
+    """
     name = _("Brand")
     module = _("Frontend")
     model = models.NavBrand
@@ -129,6 +139,9 @@ class NavContainerPlugin(
     AttributesMixin,
     CMSUIPlugin,
 ):
+    """
+    The `NavContainerPlugin` class is a deprecated plugin without functionality. It will be removed.
+    """
     name = _("Navigation container")
     module = _("Frontend")
     model = models.NavContainer
@@ -154,6 +167,20 @@ class NavLinkPlugin(
     mixin_factory("NavLink"),
     LinkPlugin,
 ):
+    """
+    A plugin that allows creating navigation links for the frontend.
+
+    Attributes:
+    -----------
+    - `name` (str): The name of the plugin, displayed in the plugin list when editing a page.
+    - `module` (str): The module where the plugin belongs, displayed in the plugin list when editing a page.
+    - `model` (Model): The Django model used to store the plugin's data.
+    - `form` (Form): The form used to render the plugin's settings in the admin interface.
+    - `change_form_template` (str): The path to the template used to render the plugin's change form in the admin interface.
+    - `allow_children` (bool): Whether the plugin allows having child plugins.
+    - `parent_classes` (list): List of parent plugin classes that this plugin can be nested within.
+    - `child_classes` (list): List of child plugin classes that can be nested within this plugin.
+    """
     name = _("Navigation link")
     module = _("Frontend")
     model = models.NavLink
