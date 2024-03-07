@@ -20,7 +20,7 @@ your Django app:
 
        class YourPluginModel(FrontendUIItem):
            class Meta:
-               proxy = True  # Only a proxy model, if NO new fields are added
+               proxy = True  # MUST be a proxy model
                verbose_name = _("Your Plugin")
 
            def short_description(self):
@@ -28,8 +28,12 @@ your Django app:
 
    .. note::
 
-        When adding new fields to the model, you need to remove the ``proxy = True``
-        statement in the model's ``Meta`` class.
+      Proxy models do not allow to add your own model fields. Add your fields
+      to the plugin form as described below.
+
+      If you **must** add new fields to
+      the model, use :class:`djangocms_frontend.models.AbstractFrontendUIItem`
+      as a base class and remove ``proxy = True`` from the ``Meta`` class.
 
 2. **Define a Plugin Form**: This form will declare which data to store in the
    ``FrontendUIItem``'s JSON field. The ``EntangledModelForm`` will automatically
@@ -181,3 +185,4 @@ and images in your plugin. These mixins are:
         class YourPluginModel(ImageMixin, FrontendUIItem):
             image_field = "image"  # The name of the image field in the config JSON
             ...
+
