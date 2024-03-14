@@ -4,13 +4,13 @@ How to add your own frontend plugin
 Creating the plugin
 -------------------
 
-To add custom plugins to Django CMS Frontend, you can follow these steps with in
-your Django app:
+In order to integrate your custom plugins with Django CMS Frontend within your Django app, you should follow these steps.
 
-1. **Define a Plugin Model**: In ``models.py`` of your new app, define a model for your
-   plugin. Data will be stored in a JSON field of the ``FrontendUIItem`` class. The
-   model will in many cases not do much, except defining a short description of
-   an instance.
+1. **Define a Plugin Model**:As the first step, you need to define a model for your plugin. This is done in the `models.py` of your Django app. The Plugin model needs to be a **proxy model** of the Django CMS Frontend's `FrontendUIItem` class.
+
+The plugin model defines what kind information will be associated with instances of your plugin.
+
+   Here is an example of a hypothetical plugin model:
 
    .. code-block:: python
 
@@ -26,14 +26,11 @@ your Django app:
            def short_description(self):
                return f"'{self.field_name}'"
 
+   In this example, the `YourPluginModel` is a proxy of the `FrontendUIItem`, which is the base class for all Django CMS Frontend plugins. It includes a short description method that provides a description for each instance of the plugin.
+
    .. note::
 
-      Proxy models do not allow to add your own model fields. Add your fields
-      to the plugin form as described below.
-
-      If you **must** add new fields to
-      the model, use :class:`djangocms_frontend.models.AbstractFrontendUIItem`
-      as a base class and remove ``proxy = True`` from the ``Meta`` class.
+      Keep in mind proxy models don't allow adding fields to the model. If your plugin needs to include additional fields, consider using  ``AbstractFrontendUIItem`` as the base class and remove ``proxy = True`` from the Meta class.
 
 2. **Define a Plugin Form**: This form will declare which data to store in the
    ``FrontendUIItem``'s JSON field. The ``EntangledModelForm`` will automatically
@@ -43,6 +40,10 @@ your Django app:
    ``untangled_fields`` attribute is optional.
 
    It will be used in the frontend to create and edit plugin instances.
+
+2. **Define a Plugin Form**: You should also define a form that will instruct Django on how to handle the input for creating and editing instances of your plugin. The form should specify which data will be stored in the `FrontendUIItem`'s JSON field.
+
+   Here is an example of a form for the `YourPluginModel`:
 
    .. code-block:: python
 
@@ -63,7 +64,7 @@ your Django app:
             field_name = forms.CharField(max_length=50)
 
 3. **Create a Plugin Class**: In the same app, create a file named ``cms_plugins.py``.
-   Inside this file, define a class for your plugin by extending `CMSPluginBase`.
+   Inside this file, define a class for your plugin by extending ``CMSPluginBase``.
 
    .. code-block:: python
 
@@ -113,6 +114,8 @@ your Django app:
 Remember, developing custom plugins requires a good understanding of Django's and Django
 CMS's architecture. Additionally, consider the security implications of your plugin,
 especially if it handles user input.
+
+
 
 Extending the plugin
 --------------------
