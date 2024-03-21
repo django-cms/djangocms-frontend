@@ -11,6 +11,7 @@ Changelog
 * fix: removed Nav Container plugin and fixed Navigation Link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/192
 * fix: Remove `{% spaceless %}` around `{% block "content" %}` by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/188
 * fix: Improved fieldset layout for Django 4.2+ by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/185
+* fix: Dropped django-select2 dependency
 
 
 1.2.2 (2024-01-13)
