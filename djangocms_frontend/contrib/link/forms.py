@@ -224,7 +224,7 @@ else:
         def get_choices(self):
             if MINIMUM_INPUT_LENGTH == 0:
                 return get_choices(self.request)
-            if not self.is_bound:  # find inital value
+            if not self.is_bound:  # find initial value
                 int_link_field = self.fields["internal_link"]
                 initial = self.get_initial_for_field(int_link_field, "internal_link")
                 if initial:  # Initial set?
