@@ -22,7 +22,7 @@ class AutocompleteJsonView(LoginRequiredMixin, View):
 
         # TODO Check permissions
         # ======================
-        self.term = kwargs.get("term", request.GET.get("term", ""))
+        self.term = kwargs.get("term", request.GET.get("term", "")).strip()
         results = get_link_choices(request, self.term)
         return JsonResponse(
             {

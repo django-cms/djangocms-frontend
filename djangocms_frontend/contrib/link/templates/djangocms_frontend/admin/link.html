@@ -3,6 +3,14 @@
 
 {% block extrahead %}
     {{ block.super }}
+    <style> {# Bugfix for Django admin styling #}
+        @media screen {
+        .change-form .select2-dropdown {
+            background: var(--body-bg);
+            border: 1px solid var(--border-color);
+        }
+    }
+    </style>
     <script src="{% static 'djangocms_frontend/js/bundle.link.js' %}"></script>
 {% endblock %}
 

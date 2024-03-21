@@ -2,6 +2,18 @@
 Changelog
 =========
 
+1.3.0 (2024-03-21)
+==================
+
+* feat: Add abstract base model `AbstractFrontendUIItem` by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/195
+* feat: Add icons for selected text-enabled plugins by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/195
+* fix: Correct site used when using Link plugin within a static placholder in django CMS 3.x by @fsbraun
+* fix: removed Nav Container plugin and fixed Navigation Link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/192
+* fix: Remove `{% spaceless %}` around `{% block "content" %}` by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/188
+* fix: Improved fieldset layout for Django 4.2+ by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/185
+* fix: Dropped django-select2 dependency
+
+
 1.2.2 (2024-01-13)
 ==================
 

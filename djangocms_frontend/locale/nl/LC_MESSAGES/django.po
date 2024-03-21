@@ -2,11 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Fabian Braun <fsbraun@gmx.de>, 2023
 # Stefan van den Eertwegh <stefan@corebyte.nl>, 2023
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -16,10 +16,10 @@ msgstr ""
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Stefan van den Eertwegh <stefan@corebyte.nl>, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/divio/teams/58664/nl/)\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: common/attributes.py:9
@@ -53,7 +53,8 @@ msgstr "Achtergrond opacity"
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr ""
 
-#: common/bootstrap5/background.py:66 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:66
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Schaduw"
 
@@ -71,7 +72,8 @@ msgstr "Toon element op apparaat"
 
 #: common/bootstrap5/responsive.py:60
 msgid "Select only devices on which this element should be shown."
-msgstr "Selecteer alleen apparaten waarop dit element moet worden weergegeven."
+msgstr ""
+"Selecteer alleen apparaten waarop dit element moet worden weergegeven."
 
 #: common/bootstrap5/sizing.py:8 common/spacing.py:11
 #: contrib/utilities/forms.py:51 frameworks/bootstrap5.py:90
@@ -97,9 +99,11 @@ msgstr "Verticale grootte"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 
 #: common/spacing.py:84
 msgid "Please choose a side to which the spacing should be applied."
@@ -150,8 +154,8 @@ msgstr "Pas padding op apparaat toe"
 
 #: common/spacing.py:236
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 
 #: common/title.py:40
@@ -164,8 +168,8 @@ msgstr "Titel"
 
 #: common/title.py:67
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:21 contrib/accordion/models.py:14
@@ -220,8 +224,8 @@ msgstr ""
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
@@ -377,7 +381,8 @@ msgstr "Volledige hoogte"
 
 #: contrib/card/forms.py:152
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 
 #: contrib/card/forms.py:186
@@ -447,8 +452,8 @@ msgstr "Interval"
 
 #: contrib/carousel/forms.py:67
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 
 #: contrib/carousel/forms.py:72 contrib/carousel/models.py:25
@@ -855,16 +860,12 @@ msgid "Cropping"
 msgstr "Bijsnijden"
 
 #: contrib/image/forms.py:25
-#, fuzzy
-#| msgid "Icon left"
 msgid "Float left"
-msgstr "Icoon links"
+msgstr ""
 
 #: contrib/image/forms.py:26
-#, fuzzy
-#| msgid "Icon right"
 msgid "Float right"
-msgstr "Icoon rechts"
+msgstr ""
 
 #: contrib/image/forms.py:27
 msgid "Align center"
@@ -927,8 +928,7 @@ msgid "Width"
 msgstr "Breedte"
 
 #: contrib/image/forms.py:135
-msgid ""
-"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 
 #: contrib/image/forms.py:139
@@ -936,8 +936,7 @@ msgid "Height"
 msgstr "Hoogte"
 
 #: contrib/image/forms.py:143
-msgid ""
-"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 "De afbeelding-hoogte als nummer in pixels. Voorbeeld: \"720\" en niet "
 "\"720px\"."
@@ -976,10 +975,11 @@ msgstr "Afbeelding bijsnijden"
 
 #: contrib/image/forms.py:180
 msgid ""
-"Crops the image according to the thumbnail settings provided in the template."
-msgstr ""
-"Snij de afbeelding bij volgens de thumbnail instellingen mits gebruikt in de "
+"Crops the image according to the thumbnail settings provided in the "
 "template."
+msgstr ""
+"Snij de afbeelding bij volgens de thumbnail instellingen mits gebruikt in de"
+" template."
 
 #: contrib/image/forms.py:184
 msgid "Upscale image"
@@ -997,8 +997,8 @@ msgstr "Gebruik afbeelding responsive"
 
 #: contrib/image/forms.py:195
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
@@ -1043,7 +1043,8 @@ msgid ""
 msgstr ""
 
 #: contrib/image/forms.py:256
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
 #: contrib/image/forms.py:282
@@ -1065,8 +1066,8 @@ msgstr ""
 msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
-#: contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr "Link"
 
@@ -1294,10 +1295,8 @@ msgid "Brand"
 msgstr "Brand"
 
 #: contrib/navigation/cms_plugins.py:133
-#, fuzzy
-#| msgid "Collapse container"
 msgid "Collapsible container"
-msgstr "Collaps container"
+msgstr ""
 
 #: contrib/navigation/cms_plugins.py:164
 msgid "Navigation link"
@@ -1466,8 +1465,8 @@ msgstr "ID"
 
 #: contrib/utilities/forms.py:128
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:132
@@ -1599,8 +1598,7 @@ msgstr "XX groot"
 
 #: helpers.py:112
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr "Lees meer in de <a href=\"{link}\" target=\"_blank\">documentatie</a>."
 
 #: models.py:24
@@ -1614,9 +1612,3 @@ msgstr ""
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
-
-#~ msgid "Align left"
-#~ msgstr "Links uitlijnen"
-
-#~ msgid "Align right"
-#~ msgstr "Rechts uitlijnen"
