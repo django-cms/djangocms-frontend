@@ -1,15 +1,17 @@
+import json
+from types import SimpleNamespace
+
 from django import apps, forms
 from django.conf import settings as django_settings
-from django.contrib.admin.widgets import SELECT2_TRANSLATIONS
+from django.contrib.admin.widgets import AutocompleteMixin
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.fields.related import ManyToOneRel
+from django.urls import reverse
 from django.utils.encoding import force_str
-from django.utils.translation import get_language
 from django.utils.translation import gettext as _
-from django_select2.forms import HeavySelect2Widget, Select2Widget
 
 # from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm
@@ -56,40 +58,58 @@ MINIMUM_INPUT_LENGTH = getattr(
 )
 
 
-class Select2jqWidget(HeavySelect2Widget if MINIMUM_INPUT_LENGTH else Select2Widget):
-    """Make jQuery available to Select2 widget"""
-
+class Select2jqWidget(AutocompleteMixin, forms.Select):
     empty_label = _("Select a destination")
 
-    @property
-    def media(self):
-        extra = ".min"
-        i18n_name = SELECT2_TRANSLATIONS.get(get_language())
-        i18n_file = (
-            ("admin/js/vendor/select2/i18n/%s.js" % i18n_name,) if i18n_name else ()
-        )
-        return forms.Media(
-            js=("admin/js/vendor/select2/select2.full%s.js" % extra,)
-            + i18n_file
-            + ("djangocms_frontend/js/django_select2.js",),
-            css={
-                "screen": (
-                    "admin/css/vendor/select2/select2%s.css" % extra,
-                    "djangocms_frontend/css/select2.css",
-                ),
-            },
-        )
-
     def __init__(self, *args, **kwargs):
-        if MINIMUM_INPUT_LENGTH:
+        if MINIMUM_INPUT_LENGTH and False:
             if "attrs" in kwargs:
                 kwargs["attrs"].setdefault(
                     "data-minimum-input-length", MINIMUM_INPUT_LENGTH
                 )
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
-            kwargs.setdefault("data_view", "dcf_autocomplete:ac_view")
+        kwargs.setdefault("admin_site", None)
+        kwargs.setdefault("field", SimpleNamespace(name="name", model=SimpleNamespace(
+            _meta=SimpleNamespace(app="app", label="label")
+        )))
         super().__init__(*args, **kwargs)
+
+    def get_url(self):
+        return reverse("dcf_autocomplete:ac_view")
+
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set select2's AJAX attributes.
+
+        Attributes can be set using the html5 data attribute.
+        Nested attributes require a double dash as per
+        https://select2.org/configuration/data-attributes#nested-subkey-options
+        """
+        attrs = super(forms.Select, self).build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault("class", "")
+        attrs.update(
+            {
+                "data-ajax--cache": "true",
+                "data-ajax--delay": 250,
+                "data-ajax--type": "GET",
+                "data-ajax--url": self.get_url(),
+                "data-theme": "admin-autocomplete",
+                "data-app-label": "app",
+                "data-model-name": "model",
+                "data-field-name": "field",
+                "data-allow-clear": json.dumps(not self.is_required),
+                "data-placeholder": "",  # Allows clearing of the input.
+                "lang": self.i18n_name,
+                "class": attrs["class"]
+                + (" " if attrs["class"] else "")
+                + "admin-autocomplete",
+            }
+        )
+        return attrs
+
+    def optgroups(self, name, value, attr=None):
+        return super(forms.Select, self).optgroups(name, value)
 
 
 class SmartLinkField(forms.ChoiceField):
