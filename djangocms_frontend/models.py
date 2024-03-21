@@ -14,13 +14,35 @@ else:
     JSONField = models.JSONField
 
 
-class FrontendUIItem(CMSPlugin):
+class AbstractFrontendUIItem(CMSPlugin):
     """
-    Generic plugin model to store all frontend items. Plugin-specific information is stored in a JSON field
-    called "config".
+    The `AbstractFrontendUIItem` class is an abstract base class that provides common functionality
+    for frontend UI items in a CMS plugin. It is a subclass of `CMSPlugin` class.
+
+    Use this class as a base class for custom plugins that add their own database fields.
+
+    Attributes:
+        - ui_item: A CharField that represents the UI item name (max length 30).
+        - tag_type: A TagTypeField (custom field) that represents the type of HTML tag for the UI item.
+        - config: A JSONField that stores additional configuration for the UI item.
+
+    Methods:
+        - __init__(*args, **kwargs): Constructor method that initializes the object and sets additional classes.
+        - __getattr__(item): Allows properties of the plugin config to be accessed as plugin properties.
+        - __str__(): Returns a string representation of the UI item.
+        - add_classes(*args): Adds additional classes to the UI item.
+        - add_attribute(attr, value=None): Adds an attribute to the configuration attributes.
+        - get_attributes(): Returns the attributes as a string for rendering the UI item.
+        - save(*args, **kwargs): Saves the UI item to the database.
+        - initialize_from_form(form=None): Populates the config JSON field based on initial values from a form.
+        - get_short_description(): Returns a plugin-specific short description.
+        - framework_info: Returns the framework information for the UI item.
+
+    Note: This is an abstract base class and should not be used directly.
     """
 
     class Meta:
+        abstract = True
         verbose_name = gettext("UI item")
 
     ui_item = models.CharField(max_length=30)
@@ -95,3 +117,28 @@ class FrontendUIItem(CMSPlugin):
     @property
     def framework_info(self):
         return FRAMEWORK_PLUGIN_INFO.get(self.__class__.__name__, None)
+
+
+class FrontendUIItem(AbstractFrontendUIItem):
+    """
+
+    Class: FrontendUIItem
+
+    Inherits From: AbstractFrontendUIItem
+
+    Description:
+    This class represents a UI item in the frontend. It is used to define the behavior and attributes
+    of a UI item in the user interface.
+
+    Use this class as a base class for custom plugins that do not add their own database fields but
+    use the entangled form fields instead.
+
+    Attributes:
+    - verbose_name (str): The verbose name of the UI item.
+
+    Methods:
+    None
+
+    """
+    class Meta:
+        verbose_name = gettext("UI item")
