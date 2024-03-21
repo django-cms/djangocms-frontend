@@ -538,3 +538,20 @@ from their cdn
         ...,
     }
 
+**********
+Navigation
+**********
+
+.. warning::
+
+    The navigation plugin is still experimental. We believe for most use
+    cases it is better to create custom navigation using the standard,
+    template-based django CMS template tags like ``show_menu``.
+
+    If your navigation deviates from you tree structure and needs to be managed
+    by hand, you may want to consider using the navigation plugin.
+
+The navigation plugin is a plugin that allows you to create a navigation. All navigation elements are
+child plugins of the navigation plugin: The navigation plugin itself is just a
+container for the navigation elements.
+

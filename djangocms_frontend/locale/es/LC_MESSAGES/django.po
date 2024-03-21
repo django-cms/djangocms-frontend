@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 07:43+0200\n"
+"POT-Creation-Date: 2024-02-28 23:03+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Biel Frontera, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/divio/teams/58664/es/)\n"
@@ -826,31 +826,31 @@ msgstr ""
 msgid "Icon"
 msgstr "Icono"
 
-#: contrib/icon/conf.py:54
+#: contrib/icon/conf.py:51
 msgid "Regular"
 msgstr "Normal"
 
-#: contrib/icon/conf.py:55
+#: contrib/icon/conf.py:52
 msgid "x 2"
 msgstr "x 2"
 
-#: contrib/icon/conf.py:56
+#: contrib/icon/conf.py:53
 msgid "x 3"
 msgstr "x 3"
 
-#: contrib/icon/conf.py:57
+#: contrib/icon/conf.py:54
 msgid "x 4"
 msgstr "x 4"
 
-#: contrib/icon/conf.py:58
+#: contrib/icon/conf.py:55
 msgid "x 5"
 msgstr "x 5"
 
-#: contrib/icon/conf.py:59
+#: contrib/icon/conf.py:56
 msgid "x 8"
 msgstr "x 8"
 
-#: contrib/icon/conf.py:60
+#: contrib/icon/conf.py:57
 msgid "x 12"
 msgstr "x 12"
 
@@ -887,12 +887,16 @@ msgid "Cropping"
 msgstr "Recorte"
 
 #: contrib/image/forms.py:25
-msgid "Align left"
-msgstr "Alinear a la izquierda"
+#, fuzzy
+#| msgid "Icon left"
+msgid "Float left"
+msgstr "Icono izquierda"
 
 #: contrib/image/forms.py:26
-msgid "Align right"
-msgstr "Alinear a la derecha"
+#, fuzzy
+#| msgid "Icon right"
+msgid "Float right"
+msgstr "Icono derecha"
 
 #: contrib/image/forms.py:27
 msgid "Align center"
@@ -975,62 +979,62 @@ msgstr ""
 "La altura de la imagen como número en píxeles. Ejemplo: \"720\" y no "
 "\"720px\""
 
-#: contrib/image/forms.py:150
+#: contrib/image/forms.py:151
 msgid "Aligns the image according to the selected option."
 msgstr "Alinea la imagen según la opción seleccionada."
 
-#: contrib/image/forms.py:153 contrib/utilities/forms.py:167
+#: contrib/image/forms.py:154 contrib/utilities/forms.py:167
 msgid "Link attributes"
 msgstr "Atributos del enlace"
 
-#: contrib/image/forms.py:154
+#: contrib/image/forms.py:155
 msgid "Attributes apply to the <b>link</b>."
 msgstr "Atributos que se aplicarán al <b>enlace</b>."
 
-#: contrib/image/forms.py:160
+#: contrib/image/forms.py:161
 msgid "Automatic scaling"
 msgstr "Escalado automático"
 
-#: contrib/image/forms.py:163
+#: contrib/image/forms.py:164
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr ""
 "Usa las dimensiones del contenedor para calcular automáticamente el tamaño."
 
-#: contrib/image/forms.py:169
+#: contrib/image/forms.py:170
 msgid "Use original image"
 msgstr "Utiliza la imagen original"
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:172
 msgid "Outputs the raw image without cropping."
 msgstr "Muestra la imagen sin ningún recorte."
 
-#: contrib/image/forms.py:176
+#: contrib/image/forms.py:177
 msgid "Crop image"
 msgstr "Recorte de la imagen"
 
-#: contrib/image/forms.py:179
+#: contrib/image/forms.py:180
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr ""
 "Recorta la imagen según las opciones de miniatura proporcionadas en la "
 "plantilla."
 
-#: contrib/image/forms.py:183
+#: contrib/image/forms.py:184
 msgid "Upscale image"
 msgstr "Aumento de tamaño de la imagen"
 
-#: contrib/image/forms.py:186
+#: contrib/image/forms.py:187
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr ""
 "Escala la imagen hasta el tamaño de las opciones de las miniaturas en la "
 "plantilla."
 
-#: contrib/image/forms.py:190
+#: contrib/image/forms.py:191
 msgid "Use responsive image"
 msgstr "Utiliza imagen responsive"
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:195
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
@@ -1040,11 +1044,11 @@ msgstr ""
 "la imagen en función del tamaño de la pantalla. Esta configuración solo se "
 "aplica a imágenes subidas (las imágenes externas no se verán afectadas). "
 
-#: contrib/image/forms.py:203
+#: contrib/image/forms.py:204
 msgid "Thumbnail options"
 msgstr "Opciones de miniatura"
 
-#: contrib/image/forms.py:206
+#: contrib/image/forms.py:207
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
@@ -1052,31 +1056,31 @@ msgstr ""
 "Sobrescribe las opciones de ancho, alto y recorte; escala hasta las "
 "dimensiones predefinidas."
 
-#: contrib/image/forms.py:210
+#: contrib/image/forms.py:211
 msgid "Responsive"
 msgstr "Responsive"
 
-#: contrib/image/forms.py:213
+#: contrib/image/forms.py:214
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Añade la clase .img-fluid para hacer la imagen responsive."
 
-#: contrib/image/forms.py:216
+#: contrib/image/forms.py:217
 msgid "Rounded"
 msgstr "Redondeado"
 
-#: contrib/image/forms.py:219
+#: contrib/image/forms.py:220
 msgid "Adds the .rounded class for round corners."
 msgstr "Añade la clase .rounder para redondear las esquinas."
 
-#: contrib/image/forms.py:222
+#: contrib/image/forms.py:223
 msgid "Thumbnail"
 msgstr "Miniatura"
 
-#: contrib/image/forms.py:225
+#: contrib/image/forms.py:226
 msgid "Adds the .img-thumbnail class."
 msgstr "Añade la clase .img-thumbnail."
 
-#: contrib/image/forms.py:246
+#: contrib/image/forms.py:247
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
@@ -1084,11 +1088,11 @@ msgstr ""
 "Solo se permite rellenar una opción entre externo, interno o enlace a "
 "fichero."
 
-#: contrib/image/forms.py:255
+#: contrib/image/forms.py:256
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr "Debes introducir o una imagen o un enlace a una imagen externa."
 
-#: contrib/image/forms.py:281
+#: contrib/image/forms.py:282
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -1348,9 +1352,11 @@ msgstr "Árbol de páginas"
 msgid "Brand"
 msgstr "Marca"
 
-#: contrib/navigation/cms_plugins.py:133 contrib/navigation/models.py:24
-msgid "Navigation container"
-msgstr "Contenedor de navegación"
+#: contrib/navigation/cms_plugins.py:133
+#, fuzzy
+#| msgid "Collapse container"
+msgid "Collapsible container"
+msgstr "Contenedor para colapsar"
 
 #: contrib/navigation/cms_plugins.py:164
 msgid "Navigation link"
@@ -1382,6 +1388,10 @@ msgid "Enter brand name or add child plugins for brand icon or image"
 msgstr ""
 "Introduce el nombre de la marca o añade extensiones hijas para mostrar el "
 "icono o imagen de la marca"
+
+#: contrib/navigation/models.py:24
+msgid "Navigation container"
+msgstr "Contenedor de navegación"
 
 #: contrib/navigation/models.py:30
 msgid "Navigation Link"
@@ -1680,6 +1690,12 @@ msgstr "No hay más opciones para esta extensión. Haz clic en guardar."
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
+
+#~ msgid "Align left"
+#~ msgstr "Alinear a la izquierda"
+
+#~ msgid "Align right"
+#~ msgstr "Alinear a la derecha"
 
 #~ msgid "Template"
 #~ msgstr "Plantilla"

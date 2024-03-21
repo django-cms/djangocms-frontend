@@ -6,8 +6,10 @@
     {% else %}
         <div class="{{ item|default:"nav" }}-item  {{ drop|default:"dropdown" }}">
     {% endif %}
+        {% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
         <a {{ instance.get_attributes }} href="{{ instance.get_link }}"
            {% if parent.plugin_type != "NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
+        {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
         <ul class="dropdown-menu">
             {% for plugin in instance.child_plugin_instances %}
                 {% with forloop=parentloop parent=instance drop="dropend" item="dropdown" %}{% render_plugin plugin %}{% endwith %}
@@ -20,7 +22,9 @@
     {% endif %}
 {% else %}
     {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
+        {% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
         <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
+        {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
     {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
 {% endif %}{# djlint:on #}
 {% endspaceless %}

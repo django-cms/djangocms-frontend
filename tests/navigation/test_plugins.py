@@ -2,13 +2,11 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_frontend.contrib.navigation.cms_plugins import (
-    NavContainerPlugin,
     NavigationPlugin,
     NavLinkPlugin,
     PageTreePlugin,
 )
 from djangocms_frontend.contrib.navigation.forms import (
-    NavContainerForm,
     NavigationForm,
     NavLinkForm,
     PageTreeForm,
@@ -48,32 +46,16 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             or '<nav class="navbar-light navbar-expand-xl navbar">'
             in response.content.decode("utf-8")
         )
-        self.assertContains(response, '<div class="container"><ul class="navbar-nav"></ul></div>')
-
-        # add more options
-        container = add_plugin(
-            placeholder=self.placeholder,
-            plugin_type=NavContainerPlugin.__name__,
-            target=nav,
-            language=self.language,
-            config=dict(),
-        )
-        container.initialize_from_form(NavContainerForm).save()
-        self.publish(self.page, self.language)
-
-        with self.login_user_context(self.superuser):
-            response = self.client.get(self.request_url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<ul class="navbar-nav"></ul>')
-        self.assertContains(response, '<button class="navbar-toggler"')
-        self.assertContains(response, 'id="nav')
+        self.assertContains(response, '<div class="container">')
+        self.assertContains(response, '<span class="navbar-toggler-icon"></span>')
+        self.assertContains(response, '<div class="collapse navbar-collapse"')
+        self.assertContains(response, '<ul class="navbar-nav">')
 
         plugin = add_plugin(
             placeholder=self.placeholder,
             plugin_type=NavLinkPlugin.__name__,
             language=self.language,
-            target=container,
+            target=nav,
             config=dict(
                 internal_link=dict(model="cms.page", pk=self.page.id),
                 link_context="primary",
@@ -95,7 +77,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=PageTreePlugin.__name__,
             language=self.language,
-            target=container,
+            target=nav,
             config=dict(),
         )
         plugin.initialize_from_form(PageTreeForm).save()

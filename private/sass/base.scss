@@ -31,11 +31,11 @@ ul.nav {
 input[type="number"].auto-field + span {
     display: none;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    text-align: right;
-    margin-right: 31px;
-    margin-bottom: 23px;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    text-align: end;
+    margin-inline-end: 31px;
+    margin-block-end: 23px;
     cursor: pointer;
 }
 

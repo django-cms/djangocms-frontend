@@ -5,6 +5,8 @@ class NavigationRenderMixin:
             f"navbar-{instance.config.get('navbar_design', '')}",
             f"navbar-expand-{instance.config.get('navbar_breakpoint', '')}",
         )
+        if instance.config.get("navbar_design", "") == "dark":
+            instance.add_classes("bg-dark")
         return super().render(context, instance, placeholder)
 
 

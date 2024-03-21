@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 07:43+0200\n"
+"POT-Creation-Date: 2024-02-28 23:03+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2023\n"
 "Language-Team: Albanian (https://app.transifex.com/divio/teams/58664/sq/)\n"
@@ -826,31 +826,31 @@ msgstr "Riktheje te parazgjedhje"
 msgid "Icon"
 msgstr ""
 
-#: contrib/icon/conf.py:54
+#: contrib/icon/conf.py:51
 msgid "Regular"
 msgstr ""
 
-#: contrib/icon/conf.py:55
+#: contrib/icon/conf.py:52
 msgid "x 2"
 msgstr ""
 
-#: contrib/icon/conf.py:56
+#: contrib/icon/conf.py:53
 msgid "x 3"
 msgstr ""
 
-#: contrib/icon/conf.py:57
+#: contrib/icon/conf.py:54
 msgid "x 4"
 msgstr ""
 
-#: contrib/icon/conf.py:58
+#: contrib/icon/conf.py:55
 msgid "x 5"
 msgstr ""
 
-#: contrib/icon/conf.py:59
+#: contrib/icon/conf.py:56
 msgid "x 8"
 msgstr ""
 
-#: contrib/icon/conf.py:60
+#: contrib/icon/conf.py:57
 msgid "x 12"
 msgstr ""
 
@@ -887,12 +887,16 @@ msgid "Cropping"
 msgstr "Qethje"
 
 #: contrib/image/forms.py:25
-msgid "Align left"
-msgstr "Vëre majtas"
+#, fuzzy
+#| msgid "Icon left"
+msgid "Float left"
+msgstr "Ikonë majtas"
 
 #: contrib/image/forms.py:26
-msgid "Align right"
-msgstr "Vëre djathtas"
+#, fuzzy
+#| msgid "Icon right"
+msgid "Float right"
+msgstr "Ikonë djathas"
 
 #: contrib/image/forms.py:27
 msgid "Align center"
@@ -972,58 +976,58 @@ msgid ""
 "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr "Lartësia e figurës si numër pikselash. Shembull: “720” dhe jo “720px”."
 
-#: contrib/image/forms.py:150
+#: contrib/image/forms.py:151
 msgid "Aligns the image according to the selected option."
 msgstr "E drejton figurën sipas mundësisë së përzgjedhur."
 
-#: contrib/image/forms.py:153 contrib/utilities/forms.py:167
+#: contrib/image/forms.py:154 contrib/utilities/forms.py:167
 msgid "Link attributes"
 msgstr "Atribute lidhjeje"
 
-#: contrib/image/forms.py:154
+#: contrib/image/forms.py:155
 msgid "Attributes apply to the <b>link</b>."
 msgstr "Atribute që aplikohen mbi <b>lidhjen</b>."
 
-#: contrib/image/forms.py:160
+#: contrib/image/forms.py:161
 msgid "Automatic scaling"
 msgstr "Përshkallëzim automatik"
 
-#: contrib/image/forms.py:163
+#: contrib/image/forms.py:164
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr ""
 "Përdor përmasat e vendmbajtëses për të llogaritur automatikisht madhësinë."
 
-#: contrib/image/forms.py:169
+#: contrib/image/forms.py:170
 msgid "Use original image"
 msgstr "Përdor figurën origjinale"
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:172
 msgid "Outputs the raw image without cropping."
 msgstr "Jep figurën e papërpunuar pa qethje."
 
-#: contrib/image/forms.py:176
+#: contrib/image/forms.py:177
 msgid "Crop image"
 msgstr "Qetheni figurën"
 
-#: contrib/image/forms.py:179
+#: contrib/image/forms.py:180
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr "E qeth figurën sipas rregullimeve miniaturash të dhëna te gjedhja."
 
-#: contrib/image/forms.py:183
+#: contrib/image/forms.py:184
 msgid "Upscale image"
 msgstr ""
 
-#: contrib/image/forms.py:186
+#: contrib/image/forms.py:187
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr ""
 
-#: contrib/image/forms.py:190
+#: contrib/image/forms.py:191
 msgid "Use responsive image"
 msgstr "Përdor figurë reaguese"
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:195
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
@@ -1033,11 +1037,11 @@ msgstr ""
 "shfaqje, bazuar në ekranin e parjes. Ky formësim zbatohet vetëm mbi figurat "
 "e ngarkuara (fotot e jashtme nuk do të preken prej kësaj). "
 
-#: contrib/image/forms.py:203
+#: contrib/image/forms.py:204
 msgid "Thumbnail options"
 msgstr "Mundësi miniaturash"
 
-#: contrib/image/forms.py:206
+#: contrib/image/forms.py:207
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
@@ -1045,31 +1049,31 @@ msgstr ""
 "Anashkalon gjerësi, lartësi dhe qethje, e bën sa përmasat e paracaktuara të "
 "dhëna."
 
-#: contrib/image/forms.py:210
+#: contrib/image/forms.py:211
 msgid "Responsive"
 msgstr "Reaguese"
 
-#: contrib/image/forms.py:213
+#: contrib/image/forms.py:214
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Shton klasën .img-fluid për ta bërë figurën reaguese."
 
-#: contrib/image/forms.py:216
+#: contrib/image/forms.py:217
 msgid "Rounded"
 msgstr "Rrumbullake"
 
-#: contrib/image/forms.py:219
+#: contrib/image/forms.py:220
 msgid "Adds the .rounded class for round corners."
 msgstr "Shton klasën .rounded për cepa të rrumbullakët."
 
-#: contrib/image/forms.py:222
+#: contrib/image/forms.py:223
 msgid "Thumbnail"
 msgstr "Miniaturë"
 
-#: contrib/image/forms.py:225
+#: contrib/image/forms.py:226
 msgid "Adds the .img-thumbnail class."
 msgstr "Shton .img-thumbnail class."
 
-#: contrib/image/forms.py:246
+#: contrib/image/forms.py:247
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
@@ -1077,13 +1081,13 @@ msgstr ""
 "Keni dhënë më shumë se një objektiv të jashtëm, të brendshëm, ose lidhje për "
 "te kartelë. Lejohet vetëm një mundësi."
 
-#: contrib/image/forms.py:255
+#: contrib/image/forms.py:256
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 "Lypset të shtoni ose një figurë, ose një URL që shpie te një figurë e "
 "jashtme."
 
-#: contrib/image/forms.py:281
+#: contrib/image/forms.py:282
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -1337,9 +1341,11 @@ msgstr "Pemë faqeje"
 msgid "Brand"
 msgstr "Markë"
 
-#: contrib/navigation/cms_plugins.py:133 contrib/navigation/models.py:24
-msgid "Navigation container"
-msgstr "Kontejner Menuje Lëvizjesh"
+#: contrib/navigation/cms_plugins.py:133
+#, fuzzy
+#| msgid "Collapse container"
+msgid "Collapsible container"
+msgstr "Tkurre kontejnerin"
 
 #: contrib/navigation/cms_plugins.py:164
 msgid "Navigation link"
@@ -1369,6 +1375,10 @@ msgstr ""
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
 msgstr "Jepni emër marke, ose shtoni shtojca pjellë për ikonë ose figurë marke"
+
+#: contrib/navigation/models.py:24
+msgid "Navigation container"
+msgstr "Kontejner Menuje Lëvizjesh"
 
 #: contrib/navigation/models.py:30
 msgid "Navigation Link"
@@ -1662,6 +1672,12 @@ msgstr "S’ka rregullime të tjera për këtë shtojcë. Ju lutemi, shtypni “
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
+
+#~ msgid "Align left"
+#~ msgstr "Vëre majtas"
+
+#~ msgid "Align right"
+#~ msgstr "Vëre djathtas"
 
 #~ msgid "Template"
 #~ msgstr "Gjedhe"

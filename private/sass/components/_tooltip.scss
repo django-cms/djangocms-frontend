@@ -15,8 +15,8 @@ a[data-pk] {
         position: absolute;
         z-index: 1;
         top: 110%;
-        left: 50%;
-        margin-left: -50%;
+        inset-inline-start: 50%;
+        margin-inline-start: -50%;
     }
 
     &:hover:after {

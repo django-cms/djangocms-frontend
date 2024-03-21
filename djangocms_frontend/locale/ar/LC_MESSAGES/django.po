@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 07:43+0200\n"
+"POT-Creation-Date: 2024-02-28 23:03+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Israa Kamal Salameh, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/divio/teams/58664/ar/)\n"
@@ -802,31 +802,31 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: contrib/icon/conf.py:54
+#: contrib/icon/conf.py:51
 msgid "Regular"
 msgstr ""
 
-#: contrib/icon/conf.py:55
+#: contrib/icon/conf.py:52
 msgid "x 2"
 msgstr ""
 
-#: contrib/icon/conf.py:56
+#: contrib/icon/conf.py:53
 msgid "x 3"
 msgstr ""
 
-#: contrib/icon/conf.py:57
+#: contrib/icon/conf.py:54
 msgid "x 4"
 msgstr ""
 
-#: contrib/icon/conf.py:58
+#: contrib/icon/conf.py:55
 msgid "x 5"
 msgstr ""
 
-#: contrib/icon/conf.py:59
+#: contrib/icon/conf.py:56
 msgid "x 8"
 msgstr ""
 
-#: contrib/icon/conf.py:60
+#: contrib/icon/conf.py:57
 msgid "x 12"
 msgstr ""
 
@@ -863,11 +863,11 @@ msgid "Cropping"
 msgstr ""
 
 #: contrib/image/forms.py:25
-msgid "Align left"
+msgid "Float left"
 msgstr ""
 
 #: contrib/image/forms.py:26
-msgid "Align right"
+msgid "Float right"
 msgstr ""
 
 #: contrib/image/forms.py:27
@@ -944,108 +944,108 @@ msgid ""
 "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 
-#: contrib/image/forms.py:150
+#: contrib/image/forms.py:151
 msgid "Aligns the image according to the selected option."
 msgstr ""
 
-#: contrib/image/forms.py:153 contrib/utilities/forms.py:167
+#: contrib/image/forms.py:154 contrib/utilities/forms.py:167
 msgid "Link attributes"
 msgstr ""
 
-#: contrib/image/forms.py:154
+#: contrib/image/forms.py:155
 msgid "Attributes apply to the <b>link</b>."
 msgstr ""
 
-#: contrib/image/forms.py:160
+#: contrib/image/forms.py:161
 msgid "Automatic scaling"
 msgstr ""
 
-#: contrib/image/forms.py:163
+#: contrib/image/forms.py:164
 msgid "Uses the placeholder dimensions to automatically calculate the size."
 msgstr ""
 
-#: contrib/image/forms.py:169
+#: contrib/image/forms.py:170
 msgid "Use original image"
 msgstr ""
 
-#: contrib/image/forms.py:171
+#: contrib/image/forms.py:172
 msgid "Outputs the raw image without cropping."
 msgstr ""
 
-#: contrib/image/forms.py:176
+#: contrib/image/forms.py:177
 msgid "Crop image"
 msgstr ""
 
-#: contrib/image/forms.py:179
+#: contrib/image/forms.py:180
 msgid ""
 "Crops the image according to the thumbnail settings provided in the template."
 msgstr ""
 
-#: contrib/image/forms.py:183
+#: contrib/image/forms.py:184
 msgid "Upscale image"
 msgstr ""
 
-#: contrib/image/forms.py:186
+#: contrib/image/forms.py:187
 msgid ""
 "Upscales the image to the size of the thumbnail settings in the template."
 msgstr ""
 
-#: contrib/image/forms.py:190
+#: contrib/image/forms.py:191
 msgid "Use responsive image"
 msgstr ""
 
-#: contrib/image/forms.py:194
+#: contrib/image/forms.py:195
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
-#: contrib/image/forms.py:203
+#: contrib/image/forms.py:204
 msgid "Thumbnail options"
 msgstr ""
 
-#: contrib/image/forms.py:206
+#: contrib/image/forms.py:207
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
 msgstr ""
 
-#: contrib/image/forms.py:210
+#: contrib/image/forms.py:211
 msgid "Responsive"
 msgstr ""
 
-#: contrib/image/forms.py:213
+#: contrib/image/forms.py:214
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr ""
 
-#: contrib/image/forms.py:216
+#: contrib/image/forms.py:217
 msgid "Rounded"
 msgstr ""
 
-#: contrib/image/forms.py:219
+#: contrib/image/forms.py:220
 msgid "Adds the .rounded class for round corners."
 msgstr ""
 
-#: contrib/image/forms.py:222
+#: contrib/image/forms.py:223
 msgid "Thumbnail"
 msgstr ""
 
-#: contrib/image/forms.py:225
+#: contrib/image/forms.py:226
 msgid "Adds the .img-thumbnail class."
 msgstr ""
 
-#: contrib/image/forms.py:246
+#: contrib/image/forms.py:247
 msgid ""
 "You have given more than one external, internal, or file link target. Only "
 "one option is allowed."
 msgstr ""
 
-#: contrib/image/forms.py:255
+#: contrib/image/forms.py:256
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
-#: contrib/image/forms.py:281
+#: contrib/image/forms.py:282
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with "
@@ -1292,8 +1292,8 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: contrib/navigation/cms_plugins.py:133 contrib/navigation/models.py:24
-msgid "Navigation container"
+#: contrib/navigation/cms_plugins.py:133
+msgid "Collapsible container"
 msgstr ""
 
 #: contrib/navigation/cms_plugins.py:164
@@ -1322,6 +1322,10 @@ msgstr ""
 
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
+msgstr ""
+
+#: contrib/navigation/models.py:24
+msgid "Navigation container"
 msgstr ""
 
 #: contrib/navigation/models.py:30
