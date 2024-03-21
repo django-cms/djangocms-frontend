@@ -344,6 +344,7 @@ class LinkForm(
     name = forms.CharField(
         label=_("Display name"),
         required=False,
+        widget=forms.TextInput(attrs={"class": "js-prepopulate-selected-text"}),
     )
     template = forms.ChoiceField(
         label=_("Layout"),

@@ -32,6 +32,7 @@ class BadgeForm(EntangledModelForm):
     badge_text = forms.CharField(
         label=_("Badge text"),
         max_length=255,
+        widget=forms.TextInput(attrs={"class": "js-prepopulate-selected-text"}),
     )
     badge_context = forms.ChoiceField(
         label=_("Context"),
