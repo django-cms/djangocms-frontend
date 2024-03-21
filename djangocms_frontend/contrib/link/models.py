@@ -53,7 +53,7 @@ class GetLinkMixin:
             cms_page = self.placeholder.page if self.placeholder_id else None
 
             # first, we check if the placeholder the plugin is attached to
-            # has a page. Thus the check "is not None":
+            # has a page. Thus, the check "is not None":
             if cms_page is not None:
                 if getattr(cms_page, "node", None):
                     cms_page_site_id = getattr(cms_page.node, "site_id", None)
@@ -67,9 +67,9 @@ class GetLinkMixin:
 
             # now we do the same for the reference page the plugin links to
             # in order to compare them later
-            if getattr(ref_page, "node", None) and cms_page is not None:
+            if getattr(ref_page, "node", None):
                 ref_page_site_id = ref_page.node.site_id
-            elif getattr(ref_page, "site_id", None) and cms_page is not None:
+            elif getattr(ref_page, "site_id", None):
                 ref_page_site_id = ref_page.site_id
             # if no external reference is found the plugin links to the
             # current page
