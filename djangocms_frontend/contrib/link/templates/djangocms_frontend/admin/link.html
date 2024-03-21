@@ -5,11 +5,14 @@
     {{ block.super }}
     <style> {# Bugfix for Django admin styling #}
         @media screen {
-        .change-form .select2-dropdown {
-            background: var(--body-bg);
-            border: 1px solid var(--border-color);
+            .change-form .select2-dropdown {
+                background: var(--body-bg);
+                border: 1px solid var(--border-color);
+            }
         }
-    }
+        select {
+            min-width: 160px;
+        }
     </style>
     <script src="{% static 'djangocms_frontend/js/bundle.link.js' %}"></script>
 {% endblock %}

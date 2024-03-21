@@ -3,9 +3,7 @@
     display: inline-block;
     .icon-container {
         position: relative;
-        margin-bottom: 0.5em;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0.5em auto;
         width: 7em;
         height: 7em;
         border: 1px var(--dca-gray-light, var(--border-color, lightgray)) solid;
