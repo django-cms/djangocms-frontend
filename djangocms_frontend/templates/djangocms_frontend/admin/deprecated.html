@@ -1,0 +1,12 @@
+{% extends "djangocms_frontend/admin/base.html" %}
+{% load i18n %}
+{% block custom_class %}djangocms-frontend-deprecated{% endblock %}
+{% block content %}
+    {% blocktranslate %}
+        <h1>Deprecated</h1>
+        <p>This plugin has been deprecated. It will be removed in a future version of djangocms-frontend.
+        It is a no-op.</p>
+        <p>To avoid an error message in the future, move all child plugins - if any - one level up and
+            delete this plugin.</p>
+    {% endblocktranslate %}
+{% endblock %}

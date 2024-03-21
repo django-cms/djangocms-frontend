@@ -49,11 +49,11 @@
             border-radius: 50%;
             color: var(--dca-black, var(--body-fg, $black));
             background-color: var(--dca-white, var(--body-bg, $white));
-            padding: 0.5rem;
+            padding: 0.3rem;
             border: 1px solid var(--dca-black, var(--body-fg, $black));
             transform: translate(-50%, -50%);
             top: 0;
-            left: 100%;
+            inset-inline-start: 100%;
             width: 0.6em;
             height: 0.6em;
             line-height: 0.5em;
@@ -79,8 +79,8 @@
     position: fixed;
     height: 100%;
     width: 100%;
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 9999;
     user-select: none;
@@ -168,7 +168,7 @@
                         padding: 15px;
                         font-size: 14px;
                         color: var(--dca-gray, var(--body-quiet-color, #666));
-                        text-align: left;
+                        text-align: start;
                         cursor: pointer;
                         position: relative;
                         display: flex;
@@ -176,11 +176,11 @@
                         text-transform: capitalize;
                         i {
                             font-size: 20px;
-                            padding-right: 15px;
+                            padding-inline-end: 15px;
                             color: var(--dca-gray-lighter, var(--border-color, #ccc));
                         }
                         img {
-                            padding-right: 15px;
+                            padding-inline-end: 15px;
                         }
                         &.universal-active {
                             background-color: var(--dca-white, var(--bg-color, #fff));
@@ -191,8 +191,8 @@
                                 position: absolute;
                                 height: 100%;
                                 width: 5px;
-                                top: 0;
-                                left: 0;
+                                inset-block-start: 0;
+                                inset-inline-start: 0;
                                 background-color: $cms-primary;
                             }
                             i {
@@ -301,7 +301,7 @@
                         -webkit-transform: translateY(-50%);
                         -ms-transform: translateY(-50%);
                         transform: translateY(-50%);
-                        right: 10px;
+                        inset-inline-end: 10px;
                     }
                 }
             }
@@ -332,7 +332,7 @@
         }
         .universal-button {
             height: 40px;
-            margin-left: 5px;
+            margin-inline-start: 5px;
         }
         .universal-button-success {
             padding: 12px 36px;

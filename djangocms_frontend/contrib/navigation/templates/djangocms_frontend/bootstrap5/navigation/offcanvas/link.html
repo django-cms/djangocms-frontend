@@ -5,9 +5,8 @@
     {% else %}
         <div class="{{ item|default:"nav" }}-item  {{ drop|default:"dropdown" }}">
     {% endif %}
-        <a {{ instance.get_attributes }} href="{{ instance.get_link }}"
-           {% if parent.plugin_type != "NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
-        <ul class="dropdown-menu">
+        <a class="nav-link" href="{{ instance.get_link }}">{{ instance.name }}</a>
+        <ul>
             {% for plugin in instance.child_plugin_instances %}
                 {% with forloop=parentloop parent=instance drop="dropend" item="dropdown" %}{% render_plugin plugin %}{% endwith %}
             {% endfor %}
@@ -19,18 +18,7 @@
     {% endif %}
 {% else %}
     {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
-        <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
+        <a class="nav-link" href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
     {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
 {% endif %}{# djlint:on #}
 {% endspaceless %}
-{% addtoblock "css" %}
-    <style>
-        .dropdown-menu > li:hover > .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu .dropdown-menu {
-          left: calc(100% - 0.3rem);
-          top: calc(0.3rem - 8px);
-        }
-    </style>
-{% endaddtoblock %}

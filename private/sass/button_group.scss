@@ -69,8 +69,8 @@ form .form-row div.frontend-button-group {
 
     input[property="opacity"] + label.btn-grp {
         width: 3.5em !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding-inline-start: 0 !important;
+        padding-inline-end: 0 !important;
         color: var(--dca-black, $django-dark-color) !important;
         overflow: hidden;
         white-space: nowrap;
@@ -115,7 +115,7 @@ form .form-row div.frontend-button-group {
     }
 
     input[property="shadow"] + label.btn-grp {
-        margin-right: 1em;
+        margin-inline-end: 1em;
         width: 3.5em !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -146,7 +146,7 @@ form .form-row div.frontend-button-group {
 
     input[property="nav-design"][value="dark"] + label.btn-grp {
         background: var(--bs-dark);
-        color: var(--bs-white);
+        color: var(--bs-white) !important;
     }
 
     .btn-white {
@@ -168,5 +168,5 @@ form .form-row div.frontend-button-group {
 }
 
 body:not(.djangocms-admin-style) .frontend-button-group .optgroup {
-    clear: left;  // Bug in django 3.2?
+    clear: both;  // Bug in django 3.2?
 }
