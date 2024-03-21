@@ -12,7 +12,7 @@
         {% if instance.navbar_container %}</div>{% endif %}
     </nav>
     <div class="offcanvas offcanvas-end" id="nav{{ instance.id|safe }}">
-        <div class="offcanvas-header mt-5">
+        <div class="offcanvas-header">
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -26,3 +26,8 @@
         </div>
     </div>
 {% endspaceless %}
+<style>
+    html.cms-toolbar-expanded .offcanvas-header {
+        margin-top: 3rem;
+    }
+</style>
