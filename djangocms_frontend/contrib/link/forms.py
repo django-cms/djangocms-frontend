@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 from django import apps, forms
 from django.conf import settings as django_settings
-from django.contrib.admin.widgets import AutocompleteMixin
+from django.contrib.admin.widgets import SELECT2_TRANSLATIONS, AutocompleteMixin
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
@@ -11,6 +11,7 @@ from django.db import models
 from django.db.models.fields.related import ManyToOneRel
 from django.urls import reverse
 from django.utils.encoding import force_str
+from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 
 # from djangocms_link.validators import IntranetURLValidator
@@ -91,6 +92,7 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
         """
         attrs = super(forms.Select, self).build_attrs(base_attrs, extra_attrs=extra_attrs)
         attrs.setdefault("class", "")
+        i18n_name = getattr(self, "i18n_name", SELECT2_TRANSLATIONS.get(get_language()))  # Django 3.2 compat
         attrs.update(
             {
                 "data-ajax--cache": "true",
@@ -103,7 +105,7 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
                 "data-field-name": "field",
                 "data-allow-clear": json.dumps(not self.is_required),
                 "data-placeholder": "",  # Allows clearing of the input.
-                "lang": self.i18n_name,
+                "lang": i18n_name,
                 "class": attrs["class"]
                 + (" " if attrs["class"] else "")
                 + "admin-autocomplete",
