@@ -61,9 +61,11 @@ def get_object_for_value(value):
     return None
 
 
-def get_link_choices(request, term="", lang=None, nbsp=""):
+def get_link_choices(request, term="", lang=None, nbsp=None):
     global _querysets
 
+    if nbsp is None:
+        nbsp = "" if term else "\u2000"
     available_objects = []
     # Now create our list of cms pages
     type_id = ContentType.objects.get_for_model(Page).id

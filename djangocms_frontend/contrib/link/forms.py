@@ -62,7 +62,7 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
     empty_label = _("Select a destination")
 
     def __init__(self, *args, **kwargs):
-        if MINIMUM_INPUT_LENGTH and False:
+        if MINIMUM_INPUT_LENGTH:
             if "attrs" in kwargs:
                 kwargs["attrs"].setdefault(
                     "data-minimum-input-length", MINIMUM_INPUT_LENGTH
@@ -70,9 +70,12 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
         kwargs.setdefault("admin_site", None)
-        kwargs.setdefault("field", SimpleNamespace(name="name", model=SimpleNamespace(
-            _meta=SimpleNamespace(app="app", label="label")
-        )))
+        kwargs.setdefault(
+            "field",
+            SimpleNamespace(name="", model=SimpleNamespace(
+                _meta=SimpleNamespace(app="djangocms_frontend", label="link")
+            ))
+        )  # Fake field properties for autocomplete field (unused by link)
         super().__init__(*args, **kwargs)
 
     def get_url(self):
