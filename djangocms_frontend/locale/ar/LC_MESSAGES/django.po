@@ -2,10 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
-# Israa Kamal Salameh, 2023
-#
+# Israa Kamal Salameh <i.salameh@najah.edu>, 2023
+# Seraj Adden Baltu, 2024
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -13,22 +14,21 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-28 23:03+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
-"Last-Translator: Israa Kamal Salameh, 2023\n"
+"Last-Translator: Seraj Adden Baltu, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/divio/teams/58664/ar/)\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: common/attributes.py:9
 msgid ""
 "Advanced settings lets you add html attributes to render this element. Use "
 "them wisely and rarely."
 msgstr ""
-"تتيح لك الإعدادات المتقدمة، أضافة صفات html لعَرض هذا العنصر، استخدمها بحكمة "
-"ونادراً"
+"تتيح لك الإعدادات المتقدمة، أضافة صفات html لعَرض هذا العنصر، استخدمها بحكمة"
+" ونادراً"
 
 #: common/attributes.py:26 contrib/accordion/cms_plugins.py:91
 msgid "Advanced settings"
@@ -53,9 +53,10 @@ msgstr "تعتيم الخلفية"
 
 #: common/bootstrap5/background.py:62
 msgid "Opacity of card background color (only if no outline selected)"
-msgstr ""
+msgstr "الشفافية للون الخلفي للبطاقة (فقط إذا لم يتم اختيار حدود)"
 
-#: common/bootstrap5/background.py:66 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:66
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "ظل"
 
@@ -89,7 +90,7 @@ msgstr "الحجم الأفقي"
 msgid ""
 "Sets the horizontal size relative to the surrounding container or the "
 "viewport."
-msgstr ""
+msgstr "تعين حجم الأفقي بالنسبة للحاوية المحيطة أو العرض الظاهر"
 
 #: common/bootstrap5/sizing.py:54
 msgid "Vertical size"
@@ -97,20 +98,21 @@ msgstr "الحجم العمودي"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
-msgstr ""
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
+msgstr "تعين حجم راسي بالنسبة للحاوية المحيطة أو نافذة العرض"
 
 #: common/spacing.py:84
 msgid "Please choose a side to which the spacing should be applied."
-msgstr ""
+msgstr "الرجاء اختيار الجهة التي يجب تطبيق المسافة عليها"
 
 #: common/spacing.py:113
 msgid "Margin"
-msgstr "محاذاة خارجية"
+msgstr "هامش خارجي"
 
 #: common/spacing.py:139 common/spacing.py:147
 msgid "Padding"
-msgstr "محاذاة داخلية"
+msgstr "هامش داخلي"
 
 #: common/spacing.py:175 contrib/utilities/cms_plugins.py:22
 #: contrib/utilities/models.py:14
@@ -152,8 +154,8 @@ msgstr "طبّق الهامش الداخلي على الأجهزة"
 
 #: common/spacing.py:236
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 "حدد فقط الأجهزة التي يجب تطبيق المحاذاة الداخلية عليها. أما في الأجهزة "
 "الأخرى التي يزيد حجمها عن الجهاز الأول الذي تم تحديده، ستكون قيمة المحاذاة "
@@ -169,13 +171,13 @@ msgstr "عنوان"
 
 #: common/title.py:67
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:21 contrib/accordion/models.py:14
 msgid "Accordion"
-msgstr ""
+msgstr "الأكورديون"
 
 #: contrib/accordion/cms_plugins.py:22 contrib/accordion/cms_plugins.py:72
 #: contrib/alert/cms_plugins.py:25 contrib/badge/cms_plugins.py:21
@@ -197,90 +199,92 @@ msgstr ""
 #: contrib/utilities/cms_plugins.py:50 contrib/utilities/cms_plugins.py:62
 #: contrib/utilities/cms_plugins.py:123
 msgid "Frontend"
-msgstr ""
+msgstr "واجهة امامية"
 
 #: contrib/accordion/cms_plugins.py:57
 msgid "Item {}"
-msgstr ""
+msgstr "عنصر{}"
 
 #: contrib/accordion/cms_plugins.py:71 contrib/accordion/models.py:33
 msgid "Accordion item"
-msgstr ""
+msgstr "عنصر الأكورديون"
 
 #: contrib/accordion/forms.py:34
 msgid "Create accordion items"
-msgstr ""
+msgstr "انشاء عنصر الأكورديون"
 
 #: contrib/accordion/forms.py:35
 msgid "Number of accordion items to create when saving."
-msgstr ""
+msgstr "عدد عناصر الأكورديون التي يجب إنشاؤها عند الحفظ"
 
 #: contrib/accordion/forms.py:42
 msgid "Header type"
-msgstr ""
+msgstr "نوع الرأس"
 
 #: contrib/accordion/forms.py:48
 msgid "Integrate into parent"
-msgstr ""
+msgstr "دمج داخل عنصر الاب"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
+"يقوم بإزالة لون الخلفي الافتراضي وبعض الحدود وبعض الزوايا المستديرة لعرض "
+"الأكورديون بحيث يكون حافة بجوار حاوية الاب"
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
 msgid "Header"
-msgstr ""
+msgstr "رأس"
 
 #: contrib/accordion/forms.py:82
 msgid "Item open"
-msgstr ""
+msgstr "عنصر مفتوح"
 
 #: contrib/accordion/forms.py:85
 msgid "Initially shows this accordion item on page load."
-msgstr ""
+msgstr "يظهر هذا العنصر في الأكورديون في البداية عند تحميل الصفحة"
 
 #: contrib/accordion/models.py:20
 msgid "({} entries)"
-msgstr ""
+msgstr "({} إدخالات)"
 
 #: contrib/accordion/models.py:29
 msgid "AccordionItem"
-msgstr ""
+msgstr "عنصر الأكورديون"
 
 #: contrib/alert/cms_plugins.py:24 contrib/alert/models.py:14
 msgid "Alert"
-msgstr ""
+msgstr "تحذير"
 
 #: contrib/alert/forms.py:41 contrib/badge/forms.py:37
 #: contrib/link/forms.py:344 contrib/listgroup/forms.py:71
 msgid "Context"
-msgstr ""
+msgstr "محتوى"
 
 #: contrib/alert/forms.py:47
 msgid "Dismissible"
-msgstr ""
+msgstr "يمكن إغلاقه"
 
 #: contrib/alert/forms.py:50
 msgid "Allows the alert to be closed."
-msgstr ""
+msgstr "يمكن إغلاق التنبيه"
 
 #: contrib/alert/frameworks/bootstrap5.py:47
 msgid "Use shadows to optically lift alerts from the background."
-msgstr ""
+msgstr "استخدام الظلال لرفع التنبيهات بصرياً عن الخلفية"
 
 #: contrib/alert/templates/djangocms_frontend/bootstrap5/alert.html:4
 msgid "Close"
-msgstr ""
+msgstr "اغلاق"
 
 #: contrib/badge/cms_plugins.py:20 contrib/badge/models.py:14
 msgid "Badge"
-msgstr ""
+msgstr "شارة"
 
 #: contrib/badge/forms.py:33
 msgid "Badge text"
-msgstr ""
+msgstr "نص الشارة"
 
 #: contrib/badge/forms.py:43
 msgid "Pills style"
@@ -292,50 +296,50 @@ msgstr ""
 
 #: contrib/card/cms_plugins.py:24 contrib/card/models.py:20
 msgid "Card layout"
-msgstr ""
+msgstr "تخطيط البطاقة"
 
 #: contrib/card/cms_plugins.py:47 contrib/grid/cms_plugins.py:93
 #: contrib/grid/cms_plugins.py:173
 msgid "Responsive settings"
-msgstr ""
+msgstr "إعدادات التوفق"
 
 #: contrib/card/cms_plugins.py:85 contrib/card/models.py:35
 msgid "Card"
-msgstr ""
+msgstr "بطاقة"
 
 #: contrib/card/cms_plugins.py:145 contrib/card/models.py:57
 msgid "Card inner"
-msgstr ""
+msgstr "البطاقة الداخلية"
 
 #: contrib/card/constants.py:4
 msgid "Card group"
-msgstr ""
+msgstr "مجموعة البطاقة"
 
 #: contrib/card/constants.py:5
 msgid "Grid cards"
-msgstr ""
+msgstr "شبكة البطاقات"
 
 #: contrib/card/constants.py:9 contrib/utilities/forms.py:108
 #: frameworks/bootstrap5.py:59 settings.py:47
 msgid "Left"
-msgstr ""
+msgstr "يسار"
 
 #: contrib/card/constants.py:10 contrib/utilities/forms.py:109 settings.py:48
 msgid "Center"
-msgstr ""
+msgstr "وسط"
 
 #: contrib/card/constants.py:11 contrib/utilities/forms.py:110
 #: frameworks/bootstrap5.py:60 settings.py:49
 msgid "Right"
-msgstr ""
+msgstr "يمين"
 
 #: contrib/card/constants.py:15
 msgid "Body"
-msgstr ""
+msgstr "جسم"
 
 #: contrib/card/constants.py:17
 msgid "Footer"
-msgstr ""
+msgstr "ذيل"
 
 #: contrib/card/constants.py:18
 msgid "Image overlay"
@@ -382,7 +386,8 @@ msgstr ""
 
 #: contrib/card/forms.py:152
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 
 #: contrib/card/forms.py:186
@@ -452,8 +457,8 @@ msgstr ""
 
 #: contrib/carousel/forms.py:67
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 
 #: contrib/carousel/forms.py:72 contrib/carousel/models.py:25
@@ -931,8 +936,7 @@ msgid "Width"
 msgstr ""
 
 #: contrib/image/forms.py:135
-msgid ""
-"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 
 #: contrib/image/forms.py:139
@@ -940,8 +944,7 @@ msgid "Height"
 msgstr ""
 
 #: contrib/image/forms.py:143
-msgid ""
-"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 
 #: contrib/image/forms.py:151
@@ -978,7 +981,8 @@ msgstr ""
 
 #: contrib/image/forms.py:180
 msgid ""
-"Crops the image according to the thumbnail settings provided in the template."
+"Crops the image according to the thumbnail settings provided in the "
+"template."
 msgstr ""
 
 #: contrib/image/forms.py:184
@@ -996,8 +1000,8 @@ msgstr ""
 
 #: contrib/image/forms.py:195
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
@@ -1042,7 +1046,8 @@ msgid ""
 msgstr ""
 
 #: contrib/image/forms.py:256
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
 #: contrib/image/forms.py:282
@@ -1064,8 +1069,8 @@ msgstr ""
 msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr ""
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
-#: contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr ""
 
@@ -1463,8 +1468,8 @@ msgstr ""
 
 #: contrib/utilities/forms.py:128
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:132
@@ -1473,7 +1478,7 @@ msgstr ""
 
 #: contrib/utilities/forms.py:160
 msgid "List attributes"
-msgstr ""
+msgstr "قائمة السمات"
 
 #: contrib/utilities/forms.py:162
 msgid ""
@@ -1487,7 +1492,7 @@ msgstr ""
 
 #: contrib/utilities/forms.py:173
 msgid "Item attributes"
-msgstr ""
+msgstr "سمات العنصر"
 
 #: contrib/utilities/forms.py:175
 msgid ""
@@ -1498,14 +1503,19 @@ msgstr ""
 #: fields.py:94
 msgid "Please select at least one device size"
 msgstr ""
+"الرجاء اختيار حجم جهاز واحد على الأقل\n"
+" \n"
+" \n"
+" \n"
+" "
 
 #: fields.py:102 fields.py:110
 msgid "Attributes"
-msgstr ""
+msgstr "السمات"
 
 #: fields.py:131
 msgid "Choices"
-msgstr ""
+msgstr "اختيارات"
 
 #: fields.py:142
 msgid ""
@@ -1515,11 +1525,16 @@ msgstr ""
 
 #: fields.py:160 fields.py:170
 msgid "Tag type"
-msgstr ""
+msgstr "نوع Tag"
 
 #: fields.py:164
 msgid "Select the HTML tag to be used."
 msgstr ""
+"اختر Tag HTML التي ستستخدم.\n"
+" \n"
+" \n"
+" \n"
+" "
 
 #: frameworks/bootstrap5.py:6 frameworks/bootstrap5.py:132
 msgid "Extra small"
@@ -1535,35 +1550,35 @@ msgstr ""
 
 #: frameworks/bootstrap5.py:19
 msgid "Primary"
-msgstr ""
+msgstr "أساسي"
 
 #: frameworks/bootstrap5.py:20
 msgid "Secondary"
-msgstr ""
+msgstr "ثانوي"
 
 #: frameworks/bootstrap5.py:21
 msgid "Success"
-msgstr ""
+msgstr "نجاح"
 
 #: frameworks/bootstrap5.py:22
 msgid "Danger"
-msgstr ""
+msgstr "خطر"
 
 #: frameworks/bootstrap5.py:23
 msgid "Warning"
-msgstr ""
+msgstr "تحذير"
 
 #: frameworks/bootstrap5.py:24
 msgid "Info"
-msgstr ""
+msgstr "معلومات"
 
 #: frameworks/bootstrap5.py:25 frameworks/bootstrap5.py:178
 msgid "Light"
-msgstr ""
+msgstr "ضوء"
 
 #: frameworks/bootstrap5.py:26 frameworks/bootstrap5.py:179
 msgid "Dark"
-msgstr ""
+msgstr "مظلم"
 
 #: frameworks/bootstrap5.py:58 frameworks/bootstrap5.py:64
 msgid "Both"
@@ -1571,11 +1586,11 @@ msgstr ""
 
 #: frameworks/bootstrap5.py:65
 msgid "Top"
-msgstr ""
+msgstr "فوق"
 
 #: frameworks/bootstrap5.py:66
 msgid "Bottom"
-msgstr ""
+msgstr "تحت"
 
 #: frameworks/bootstrap5.py:91
 msgid "Screen"
@@ -1596,13 +1611,12 @@ msgstr ""
 
 #: helpers.py:112
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr ""
 
 #: models.py:24
 msgid "UI item"
-msgstr ""
+msgstr "عنصر UI"
 
 #: settings.py:14
 msgid "There are no further settings for this plugin. Please press save."

@@ -2,10 +2,10 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Biel Frontera, 2023
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -15,12 +15,11 @@ msgstr ""
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Biel Frontera, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/divio/teams/58664/es/)\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
-"1 : 2;\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: common/attributes.py:9
 msgid ""
@@ -57,7 +56,8 @@ msgstr ""
 "Opacidad del color de fondo de la tarjeta (solo si no se ha seleccionado "
 "contorno)"
 
-#: common/bootstrap5/background.py:66 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:66
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Sombra"
 
@@ -101,7 +101,8 @@ msgstr "Alto"
 
 #: common/bootstrap5/sizing.py:60
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr "Configura el alto relativo a su contenedor o el viewport."
 
 #: common/spacing.py:84
@@ -155,8 +156,8 @@ msgstr "Aplica el padding en dispositivo"
 
 #: common/spacing.py:236
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 "Selecciona aquellos dispositivos en los que el padding se aplicará. En los "
 "dispositivos superiores a los seleccionados, el padding será cero."
@@ -171,8 +172,8 @@ msgstr "Título"
 
 #: common/title.py:67
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 "Título opcional de la extensión para su mejor identificación. El atributo "
 "<code>title</code> solo se asignará si se selecciona la casilla."
@@ -229,8 +230,8 @@ msgstr "Integra en su contenedor"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 "Elimina el color de fondo por defecto, algunos bordes y algunas esquinas "
 "redondeadas para renderizar los acordeones de borde a borde de su contenedor"
@@ -390,7 +391,8 @@ msgstr "Altura completa"
 
 #: contrib/card/forms.py:152
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 "Las tarjetas que se muestren en la misma fila se extenderán hasta la altura "
 "de la fila."
@@ -462,8 +464,8 @@ msgstr "Intervalo"
 
 #: contrib/carousel/forms.py:67
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 "Tiempo de espera entre las transiciones automáticas de elementos. Si no se "
 "selecciona, el carrusel no realizará transiciones automáticas."
@@ -534,8 +536,8 @@ msgstr "Relación de aspecto"
 msgid ""
 "Determines width and height of the image according to the selected ratio."
 msgstr ""
-"Calcula el ancho y el alto de la imagen en función de la relación de aspecto "
-"seleccionada."
+"Calcula el ancho y el alto de la imagen en función de la relación de aspecto"
+" seleccionada."
 
 #: contrib/carousel/forms.py:129
 msgid "Transition"
@@ -887,16 +889,12 @@ msgid "Cropping"
 msgstr "Recorte"
 
 #: contrib/image/forms.py:25
-#, fuzzy
-#| msgid "Icon left"
 msgid "Float left"
-msgstr "Icono izquierda"
+msgstr ""
 
 #: contrib/image/forms.py:26
-#, fuzzy
-#| msgid "Icon right"
 msgid "Float right"
-msgstr "Icono derecha"
+msgstr ""
 
 #: contrib/image/forms.py:27
 msgid "Align center"
@@ -963,18 +961,15 @@ msgid "Width"
 msgstr "Ancho"
 
 #: contrib/image/forms.py:135
-msgid ""
-"The image width as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr ""
-"El ancho de la imagen como número en píxeles. Ejemplo: \"720\" y no \"720px\""
+msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr "El ancho de la imagen como número en píxeles. Ejemplo: \"720\" y no \"720px\""
 
 #: contrib/image/forms.py:139
 msgid "Height"
 msgstr "Altura"
 
 #: contrib/image/forms.py:143
-msgid ""
-"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
 msgstr ""
 "La altura de la imagen como número en píxeles. Ejemplo: \"720\" y no "
 "\"720px\""
@@ -1014,7 +1009,8 @@ msgstr "Recorte de la imagen"
 
 #: contrib/image/forms.py:180
 msgid ""
-"Crops the image according to the thumbnail settings provided in the template."
+"Crops the image according to the thumbnail settings provided in the "
+"template."
 msgstr ""
 "Recorta la imagen según las opciones de miniatura proporcionadas en la "
 "plantilla."
@@ -1036,8 +1032,8 @@ msgstr "Utiliza imagen responsive"
 
 #: contrib/image/forms.py:195
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 "Utiliza la técnica de imagen adaptable para seleccionar las dimensiones de "
@@ -1089,7 +1085,8 @@ msgstr ""
 "fichero."
 
 #: contrib/image/forms.py:256
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr "Debes introducir o una imagen o un enlace a una imagen externa."
 
 #: contrib/image/forms.py:282
@@ -1115,8 +1112,8 @@ msgstr ""
 "Configura el jumbotron para que ocupe todo el ancho del contenedor o de la "
 "ventana."
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/models.py:11
-#: contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5
+#: contrib/link/models.py:11 contrib/link/models.py:114
 msgid "Link"
 msgstr "Enlace"
 
@@ -1225,7 +1222,8 @@ msgstr "Introduce un enlace."
 msgid ""
 "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
 msgstr ""
-"%(anchor_field_verbose_name)s no se permite conjuntamente con %(field_name)s."
+"%(anchor_field_verbose_name)s no se permite conjuntamente con "
+"%(field_name)s."
 
 #: contrib/link/forms.py:320
 msgid "Display name"
@@ -1353,10 +1351,8 @@ msgid "Brand"
 msgstr "Marca"
 
 #: contrib/navigation/cms_plugins.py:133
-#, fuzzy
-#| msgid "Collapse container"
 msgid "Collapsible container"
-msgstr "Contenedor para colapsar"
+msgstr ""
 
 #: contrib/navigation/cms_plugins.py:164
 msgid "Navigation link"
@@ -1381,7 +1377,8 @@ msgstr "Nivel inicial"
 #: contrib/navigation/forms.py:84
 msgid "Start level of this page tree (0: root, 1: level below root, etc.)"
 msgstr ""
-"Nivel inicial de este árbol de páginas (0: raíz, 1: nivel bajo la raíz, etc.)"
+"Nivel inicial de este árbol de páginas (0: raíz, 1: nivel bajo la raíz, "
+"etc.)"
 
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
@@ -1532,8 +1529,8 @@ msgstr "Identificador"
 
 #: contrib/utilities/forms.py:128
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 "Asigna un identificador único para la tabla de contenidos. En caso de no "
 "rellenar, este encabezado no aparecerá en la tabla de contenidos."
@@ -1675,8 +1672,7 @@ msgstr "XX grande"
 
 #: helpers.py:112
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr "Leer más en la <a href=\"{link}\" target=\"_blank\">documentación</a>."
 
 #: models.py:24
@@ -1690,12 +1686,3 @@ msgstr "No hay más opciones para esta extensión. Haz clic en guardar."
 #: settings.py:73
 msgid "Offcanvas"
 msgstr ""
-
-#~ msgid "Align left"
-#~ msgstr "Alinear a la izquierda"
-
-#~ msgid "Align right"
-#~ msgstr "Alinear a la derecha"
-
-#~ msgid "Template"
-#~ msgstr "Plantilla"
