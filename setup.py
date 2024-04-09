@@ -9,7 +9,6 @@ REQUIREMENTS = [
     "django-filer>=1.7",
     "easy-thumbnails",
     "djangocms-attributes-field>=1",
-    "djangocms-text-ckeditor>=3.1.0",
     "django-entangled>=0.5.4",
 ]
 
@@ -25,9 +24,11 @@ EXTRA_REQUIREMENTS = {
         "django-parler",
         "djangocms-versioning>=2.0.0",
         "djangocms-alias>=2.0.0",
+        "djangocms-text",
     ],
     "cms-3": [
         "django-cms<4",
+        "djangocms-text-ckeditor>=3.1.0",
         "django-parler",
     ],
 }
