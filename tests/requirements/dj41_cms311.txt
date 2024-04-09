@@ -3,3 +3,4 @@
 django-filer>=2.2
 Django>=4.1,<4.2
 django-cms>=3.11,<3.12
+djangocms-text-ckeditor
