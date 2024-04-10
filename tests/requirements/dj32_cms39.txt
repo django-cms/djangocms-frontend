@@ -2,3 +2,4 @@
 
 Django>=3.2,<3.3
 django-cms>=3.9,<4.0
+djangocms-text-ckeditor
