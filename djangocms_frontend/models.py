@@ -4,6 +4,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
@@ -43,7 +44,7 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     class Meta:
         abstract = True
-        verbose_name = gettext("UI item")
+        verbose_name = _("UI item")
 
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)
@@ -141,4 +142,4 @@ class FrontendUIItem(AbstractFrontendUIItem):
 
     """
     class Meta:
-        verbose_name = gettext("UI item")
+        verbose_name = _("UI item")
