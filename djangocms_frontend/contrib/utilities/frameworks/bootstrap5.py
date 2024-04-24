@@ -6,7 +6,7 @@ class SpacingRenderMixin:
             )
         else:
             instance.add_classes(
-                f"{instance.space_property}{instance.space_sides}-{ instance.space_device }-{instance.space_size}"
+                f"{instance.space_property}{instance.space_sides}-{instance.space_device}-{instance.space_size}"
             )
         return super().render(context, instance, placeholder)
 

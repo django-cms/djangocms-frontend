@@ -114,7 +114,10 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
         return attrs
 
     def optgroups(self, name, value, attr=None):
-        return super(forms.Select, self).optgroups(name, value)
+        groups = super(forms.Select, self).optgroups(name, value)
+        if not self.is_required:
+            groups[0][1].insert(0, self.create_option(name, "", "", False, 0))
+        return groups
 
 
 class SmartLinkField(forms.ChoiceField):
