@@ -119,8 +119,8 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
     def test_smart_link_field(self):
         slf = SmartLinkField()
         choices = get_choices(None)
-        self.assertEqual("example.com", choices[0][0])  # Site name
-        self.assertIn(("2-1", "home"), choices[0][1])
+        self.assertEqual("example.com", choices[1][0])  # Site name
+        self.assertIn(("2-1", "home"), choices[1][1])
 
         cleaned = slf.clean("2-1")
         self.assertEqual(dict(model="cms.page", pk=1), cleaned)
