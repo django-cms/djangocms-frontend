@@ -63,9 +63,7 @@ class ListGroupItemForm(PaddingFormMixin, ResponsiveFormMixin, EntangledModelFor
     simple_content = forms.CharField(
         label=_("One line content"),
         required=False,
-        help_text=_(
-            "List item text. Is only show if this list item has no child plugins."
-        ),
+        help_text=_("List item text. Is only show if this list item has no child plugins."),
     )
     list_context = forms.ChoiceField(
         label=_("Context"),

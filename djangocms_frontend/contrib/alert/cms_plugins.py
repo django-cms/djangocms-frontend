@@ -13,9 +13,7 @@ mixin_factory = settings.get_renderer(alert)
 
 
 @plugin_pool.register_plugin
-class AlertPlugin(
-    mixin_factory("Alert"), AttributesMixin, ResponsiveMixin, SpacingMixin, CMSUIPlugin
-):
+class AlertPlugin(mixin_factory("Alert"), AttributesMixin, ResponsiveMixin, SpacingMixin, CMSUIPlugin):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/

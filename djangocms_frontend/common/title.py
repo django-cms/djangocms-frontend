@@ -36,9 +36,7 @@ class TitleField(forms.MultiValueField):  # lgtm [py/missing-call-to-init]
 
     def clean(self, value):
         if value[0] and not value[1]:
-            raise ValidationError(
-                _("Please add a title if you want to publish it."), code="incomplete"
-            )
+            raise ValidationError(_("Please add a title if you want to publish it."), code="incomplete")
         return super().clean(value)
 
     def compress(self, data_list):

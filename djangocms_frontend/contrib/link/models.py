@@ -95,9 +95,7 @@ class GetLinkMixin:
         else:
             link = ""
 
-        if (
-            not getattr(self, "phone", None) and not getattr(self, "mailto", None)
-        ) and getattr(self, "anchor", None):
+        if (not getattr(self, "phone", None) and not getattr(self, "mailto", None)) and getattr(self, "anchor", None):
             link += f"#{self.anchor}"
 
         return link

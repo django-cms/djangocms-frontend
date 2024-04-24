@@ -17,9 +17,7 @@ class CarouselSlideRenderMixin:
         height = float(context.get("height") or CAROUSEL_DEFAULT_SIZE[1])
 
         if parent.carousel_aspect_ratio:
-            aspect_width, aspect_height = tuple(
-                int(i) for i in parent.carousel_aspect_ratio.split("x")
-            )
+            aspect_width, aspect_height = tuple(int(i) for i in parent.carousel_aspect_ratio.split("x"))
             height = width * aspect_height / aspect_width
 
         instance.add_classes("carousel-item")

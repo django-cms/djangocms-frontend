@@ -42,9 +42,7 @@ def get_grid_values(self):
                     else:
                         classes.append(f"{foundation_sizes.get(device, device)}-{size}")
                 else:
-                    classes.append(
-                        f"{foundation_sizes.get(device, device)}-{element}-{size}"
-                    )
+                    classes.append(f"{foundation_sizes.get(device, device)}-{element}-{size}")
 
     return classes
 

@@ -28,9 +28,7 @@ CAROUSEL_ASPECT_RATIOS = (
     (18, 9),
 ) + tuple(getattr(settings, "DJANGOCMS_FRONTEND_CAROUSEL_ASPECT_RATIOS", tuple()))
 
-CAROUSEL_ASPECT_RATIO_CHOICES = tuple(
-    (f"{x}x{y}", f"{x}x{y}") for x, y in CAROUSEL_ASPECT_RATIOS
-)
+CAROUSEL_ASPECT_RATIO_CHOICES = tuple((f"{x}x{y}", f"{x}x{y}") for x, y in CAROUSEL_ASPECT_RATIOS)
 
 CAROUSEL_TRANSITION_CHOICES = (
     ("", _("Slide")),

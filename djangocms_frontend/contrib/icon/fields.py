@@ -29,8 +29,8 @@ class IconPickerWidget(TextInput):  # pragma: no cover
             (
                 key,
                 key.title(),
-                static(f'{VENDOR_PATH}/icons-libraries/{value[0]}'),
-                value[1] if "/" in value[1] else static(f'{VENDOR_PATH}/stylesheets/{value[1]}')
+                static(f"{VENDOR_PATH}/icons-libraries/{value[0]}"),
+                value[1] if "/" in value[1] else static(f"{VENDOR_PATH}/stylesheets/{value[1]}"),
             )
             for key, value in ICON_LIBRARIES.items()
         ]

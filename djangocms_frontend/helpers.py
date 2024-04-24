@@ -25,9 +25,7 @@ def get_related_object(scope, field_name):
     return relobj
 
 
-def insert_fields(
-    fieldsets, new_fields, block=None, position=-1, blockname=None, blockattrs=None
-):
+def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None, blockattrs=None):
     """
     creates a copy of fieldsets inserting the new fields either in the indexed block at the position,
     or - if no block is given - at the end
@@ -53,9 +51,7 @@ def insert_fields(
     modify = copy.deepcopy(fieldsets[block])
     fields = modify[1]["fields"]
     if position >= 0:
-        modify[1]["fields"] = (
-            list(fields[:position]) + list(new_fields) + list(fields[position:])
-        )
+        modify[1]["fields"] = list(fields[:position]) + list(new_fields) + list(fields[position:])
     else:
         modify[1]["fields"] = (
             list(fields[: position + 1] if position != -1 else fields)
@@ -108,9 +104,7 @@ def link_to_framework_doc(ui_item, topic):
     link = FRAMEWORK_PLUGIN_INFO.get(ui_item, {}).get(topic, None)
     if link:
         return mark_safe_lazy(
-            _(
-                'Read more in the <a href="{link}" target="_blank">documentation</a>.'
-            ).format(link=link)
+            _('Read more in the <a href="{link}" target="_blank">documentation</a>.').format(link=link)
         )
     return None
 
@@ -121,9 +115,7 @@ def add_plugin(placeholder, plugin):
         placeholder.add_plugin(plugin)
     else:  # CMS < v4
         if plugin.parent:
-            plugin.position -= (
-                plugin.parent.position + 1
-            )  # Restart position counting at 0
+            plugin.position -= plugin.parent.position + 1  # Restart position counting at 0
         else:
             plugin.position -= 1  # 0-based counting in v3
         plugin.save()

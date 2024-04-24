@@ -55,9 +55,7 @@ class NavigationPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "navigation", "navigation", settings.NAVIGATION_TEMPLATE_CHOICES
-        )
+        return get_plugin_template(instance, "navigation", "navigation", settings.NAVIGATION_TEMPLATE_CHOICES)
 
     def render(self, context, instance, placeholder):
         context["nav_template"] = instance.config.get("template", default_template)
@@ -75,13 +73,16 @@ class PageTreePlugin(
     The PageTreePlugin class is a plugin for Django CMS that allows users to display a hierarchical
     tree-like structure of pages on the frontend.
     """
+
     name = _("Page tree")
     module = _("Frontend")
     model = models.PageTree
     form = forms.PageTreeForm
     change_form_template = "djangocms_frontend/admin/page_tree.html"
     allow_children = False
-    parent_classes = ["NavigationPlugin",]
+    parent_classes = [
+        "NavigationPlugin",
+    ]
     fieldsets = [
         (
             None,
@@ -90,9 +91,7 @@ class PageTreePlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_template_path(
-            "navigation", context.get("nav_template", default_template), "page_tree"
-        )
+        return get_template_path("navigation", context.get("nav_template", default_template), "page_tree")
 
     def render(self, context, instance, placeholder):
         context["start_level"] = instance.config.get("start_level", 0)
@@ -111,13 +110,16 @@ class NavBrandPlugin(
     This plugin allows the user to define a brand logo or text that will be displayed in the
     navigation header. Content is added through child plugins.
     """
+
     name = _("Brand")
     module = _("Frontend")
     model = models.NavBrand
     form = forms.NavBrandForm
     change_form_template = "djangocms_frontend/admin/brand.html"
     allow_children = True
-    parent_classes = ["NavigationPlugin",]
+    parent_classes = [
+        "NavigationPlugin",
+    ]
     link_fieldset_position = -1
 
     fieldsets = [
@@ -128,9 +130,7 @@ class NavBrandPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_template_path(
-            "navigation", context.get("nav_template", default_template), "brand"
-        )
+        return get_template_path("navigation", context.get("nav_template", default_template), "brand")
 
 
 @plugin_pool.register_plugin
@@ -142,6 +142,7 @@ class NavContainerPlugin(
     """
     The `NavContainerPlugin` class is a deprecated plugin without functionality. It will be removed.
     """
+
     name = _("Navigation container")
     module = _("Frontend")
     model = models.NavContainer
@@ -181,6 +182,7 @@ class NavLinkPlugin(
     - `parent_classes` (list): List of parent plugin classes that this plugin can be nested within.
     - `child_classes` (list): List of child plugin classes that can be nested within this plugin.
     """
+
     name = _("Navigation link")
     module = _("Frontend")
     model = models.NavLink
@@ -196,6 +198,4 @@ class NavLinkPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_template_path(
-            "navigation", context.get("nav_template", default_template), "link"
-        )
+        return get_template_path("navigation", context.get("nav_template", default_template), "link")

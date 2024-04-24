@@ -10,9 +10,7 @@ EMPTY_FIELDSET = [
         None,
         {
             "fields": (),
-            "description": _(
-                "There are no further settings for this plugin. Please press save."
-            ),
+            "description": _("There are no further settings for this plugin. Please press save."),
         },
     )
 ]
@@ -80,9 +78,7 @@ FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
 framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
-framework_settings = importlib.import_module(
-    f"djangocms_frontend.frameworks.{framework}"
-)
+framework_settings = importlib.import_module(f"djangocms_frontend.frameworks.{framework}")
 
 DEVICE_SIZES = framework_settings.DEVICE_SIZES
 DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
@@ -126,22 +122,16 @@ def get_mixins(naming, theme_path, mixin_path):
     except ModuleNotFoundError:
         render_module = None
 
-    return lambda name: render_factory(
-        naming.format(name=name), theme_module, render_module
-    )
+    return lambda name: render_factory(naming.format(name=name), theme_module, render_module)
 
 
 def get_renderer(my_module):
     if not isinstance(my_module, str):
         my_module = my_module.__name__
-    return get_mixins(
-        "{name}RenderMixin", theme_render_path, f"{my_module}.frameworks.{framework}"
-    )
+    return get_mixins("{name}RenderMixin", theme_render_path, f"{my_module}.frameworks.{framework}")
 
 
 def get_forms(my_module):
     if not isinstance(my_module, str):
         my_module = my_module.__name__
-    return get_mixins(
-        "{name}FormMixin", theme_forms_path, f"{my_module}.frameworks.{framework}"
-    )
+    return get_mixins("{name}FormMixin", theme_forms_path, f"{my_module}.frameworks.{framework}")

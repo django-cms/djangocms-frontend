@@ -14,33 +14,33 @@ ICON_CDN = {
     "fomantic-ui": "fomantic-ui-icons.css",
 }
 
-ICON_LIBRARIES_SHOWN = getattr(settings, "DJANGOCMS_FRONTEND_ICONS_LIBRARIES_SHOWN", (
-    "font-awesome",
-    "bootstrap-icons",
-    "material-icons-filled",
-    "material-icons-outlined",
-    "material-icons-round",
-    "material-icons-sharp",
-    "material-icons-two-tone",
-    "fomantic-ui",
-    "foundation-icons",
-    "elegant-icons",
-    "feather-icons",
-    "open-iconic",
-    "tabler-icons",
-    "weather-icons",
-))
+ICON_LIBRARIES_SHOWN = getattr(
+    settings,
+    "DJANGOCMS_FRONTEND_ICONS_LIBRARIES_SHOWN",
+    (
+        "font-awesome",
+        "bootstrap-icons",
+        "material-icons-filled",
+        "material-icons-outlined",
+        "material-icons-round",
+        "material-icons-sharp",
+        "material-icons-two-tone",
+        "fomantic-ui",
+        "foundation-icons",
+        "elegant-icons",
+        "feather-icons",
+        "open-iconic",
+        "tabler-icons",
+        "weather-icons",
+    ),
+)
 
 ICON_LIBRARIES = getattr(
     settings,
     "DJANGOCMS_FRONTEND_ICON_LIBRARIES",
     {
         library: (f"{library}.min.json", ICON_CDN.get(library, f"{library}.css"))
-        for library in getattr(
-            settings,
-            "DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN",
-            ICON_LIBRARIES_SHOWN
-        )
+        for library in getattr(settings, "DJANGOCMS_FRONTEND_ICON_LIBRARIES_SHOWN", ICON_LIBRARIES_SHOWN)
     },
 )
 

@@ -1,6 +1,7 @@
 import json
 from types import SimpleNamespace
 
+from cms.utils.urlutils import admin_reverse
 from django import apps, forms
 from django.conf import settings as django_settings
 from django.contrib.admin.widgets import SELECT2_TRANSLATIONS, AutocompleteMixin
@@ -9,7 +10,6 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.fields.related import ManyToOneRel
-from django.urls import reverse
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
@@ -32,7 +32,7 @@ from ...helpers import first_choice, get_related_object
 from ...models import FrontendUIItem
 from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-from .helpers import ensure_select2_url_is_available, get_choices, get_object_for_value
+from .helpers import get_choices, get_object_for_value
 
 mixin_factory = settings.get_forms(link)
 
@@ -54,9 +54,7 @@ else:  # pragma: no cover
 
 HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
-MINIMUM_INPUT_LENGTH = getattr(
-    django_settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH", 0
-)
+MINIMUM_INPUT_LENGTH = getattr(django_settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH", 0)
 
 
 class Select2jqWidget(AutocompleteMixin, forms.Select):
@@ -65,22 +63,20 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
     def __init__(self, *args, **kwargs):
         if MINIMUM_INPUT_LENGTH:
             if "attrs" in kwargs:
-                kwargs["attrs"].setdefault(
-                    "data-minimum-input-length", MINIMUM_INPUT_LENGTH
-                )
+                kwargs["attrs"].setdefault("data-minimum-input-length", MINIMUM_INPUT_LENGTH)
             else:
                 kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
         kwargs.setdefault("admin_site", None)
         kwargs.setdefault(
             "field",
-            SimpleNamespace(name="", model=SimpleNamespace(
-                _meta=SimpleNamespace(app="djangocms_frontend", label="link")
-            ))
+            SimpleNamespace(
+                name="", model=SimpleNamespace(_meta=SimpleNamespace(app="djangocms_frontend", label="link"))
+            ),
         )  # Fake field properties for autocomplete field (unused by link)
         super().__init__(*args, **kwargs)
 
     def get_url(self):
-        return reverse("dcf_autocomplete:ac_view")
+        return admin_reverse("link_link_autocomplete")
 
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
@@ -106,9 +102,7 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
                 "data-allow-clear": json.dumps(not self.is_required),
                 "data-placeholder": "",  # Allows clearing of the input.
                 "lang": i18n_name,
-                "class": attrs["class"]
-                + (" " if attrs["class"] else "")
-                + "admin-autocomplete",
+                "class": attrs["class"] + (" " if attrs["class"] else "") + "admin-autocomplete",
             }
         )
         return attrs
@@ -128,9 +122,7 @@ class SmartLinkField(forms.ChoiceField):
             if isinstance(value, dict):  # Entangled dictionary?
                 try:
                     app_label, model = value["model"].rsplit(".", 1)
-                    content_type = ContentType.objects.get(
-                        app_label=app_label, model=model
-                    )
+                    content_type = ContentType.objects.get(app_label=app_label, model=model)
                     return f"{content_type.id}-{value['pk']}"
                 except (TypeError, ValueError, KeyError, ObjectDoesNotExist):
                     pass
@@ -165,17 +157,13 @@ if apps.apps.is_installed("djangocms_url_manager"):
         site = forms.ModelChoiceField(
             label=_("Site"),
             queryset=Site.objects.all(),
-            widget=HtmlLinkSiteSelectWidget(
-                attrs={"data-placeholder": _("Select site")}
-            ),
+            widget=HtmlLinkSiteSelectWidget(attrs={"data-placeholder": _("Select site")}),
             required=False,
         )
         url_grouper = forms.ModelChoiceField(
             label=_("Url"),
             queryset=UrlGrouper.objects.all(),
-            widget=HtmlLinkUrlSelectWidget(
-                attrs={"data-placeholder": _("Select URL object from list")}
-            ),
+            widget=HtmlLinkUrlSelectWidget(attrs={"data-placeholder": _("Select URL object from list")}),
             required=False,
         )
 
@@ -246,7 +234,6 @@ else:
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            ensure_select2_url_is_available()
             self.fields["internal_link"].choices = self.get_choices
 
         def get_choices(self):
@@ -278,15 +265,9 @@ else:
             )
             anchor_field_verbose_name = force_str(self.fields[anchor_field_name].label)
             anchor_field_value = self.cleaned_data.get(anchor_field_name, None)
-            link_fields = {
-                key: self.cleaned_data.get(key, None) for key in link_field_names
-            }
-            link_field_verbose_names = {
-                key: force_str(self.fields[key].label) for key in link_fields.keys()
-            }
-            provided_link_fields = {
-                key: value for key, value in link_fields.items() if value
-            }
+            link_fields = {key: self.cleaned_data.get(key, None) for key in link_field_names}
+            link_field_verbose_names = {key: force_str(self.fields[key].label) for key in link_fields.keys()}
+            provided_link_fields = {key: value for key, value in link_fields.items() if value}
 
             if len(provided_link_fields) > 1:
                 # Too many fields have a value.
@@ -308,9 +289,7 @@ else:
             if anchor_field_value:
                 for field_name in provided_link_fields.keys():
                     if field_name not in field_names_allowed_with_anchor:
-                        error_msg = _(
-                            "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
-                        ) % {
+                        error_msg = _("%(anchor_field_verbose_name)s is not allowed together with %(field_name)s") % {
                             "anchor_field_verbose_name": anchor_field_verbose_name,
                             "field_name": link_field_verbose_names.get(field_name),
                         }
@@ -322,9 +301,7 @@ else:
                         )
 
 
-class LinkForm(
-    mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm
-):
+class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):
     class Meta:
         model = FrontendUIItem
         entangled_fields = {
@@ -358,9 +335,7 @@ class LinkForm(
         label=_("Stretch link"),
         required=False,
         initial=False,
-        help_text=_(
-            "Stretches the active link area to the containing block (with position: relative)."
-        ),
+        help_text=_("Stretches the active link area to the containing block (with position: relative)."),
     )
     link_type = forms.ChoiceField(
         label=_("Type"),
@@ -381,9 +356,7 @@ class LinkForm(
         choices=LINK_SIZE_CHOICES,
         initial=LINK_SIZE_CHOICES[1][0],  # Medium
         required=False,
-        widget=ButtonGroup(
-            attrs=dict(property="link-size", label_class="btn-secondary")
-        ),
+        widget=ButtonGroup(attrs=dict(property="link-size", label_class="btn-secondary")),
     )
     link_outline = forms.BooleanField(
         label=_("Outline"),

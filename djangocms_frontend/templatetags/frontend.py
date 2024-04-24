@@ -21,9 +21,7 @@ def get_attributes(attribute_field, *add_classes):
     additional_classes = set()
     for classes in add_classes:
         if classes:
-            additional_classes.update(
-                classes.split() if isinstance(classes, str) else classes
-            )
+            additional_classes.update(classes.split() if isinstance(classes, str) else classes)
     attrs = []
     if attribute_field:
         for key, val in attribute_field.items():
@@ -89,9 +87,7 @@ def framework_info(context, item, as_json=True):
     if not framework_info:
         content_type_id = context.get("content_type_id", None)
         if content_type_id:  # Get from content_type
-            model_name = (
-                ContentType.objects.get(id=content_type_id).model_class().__name__
-            )
+            model_name = ContentType.objects.get(id=content_type_id).model_class().__name__
             framework_info = settings.FRAMEWORK_PLUGIN_INFO.get(model_name, {})
             context["framework_info"] = framework_info  # and store
     return (

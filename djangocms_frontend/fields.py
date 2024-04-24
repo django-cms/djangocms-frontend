@@ -18,9 +18,7 @@ class TemplateChoiceMixin:
             template_field = self.fields["template"]
             choices = template_field.choices
             instance = kwargs.get("instance", None)
-            if len(choices) == 1 and (
-                instance is None or instance.config.get("template", "") == choices[0][0]
-            ):
+            if len(choices) == 1 and (instance is None or instance.config.get("template", "") == choices[0][0]):
                 template_field.widget = forms.HiddenInput()
 
 
@@ -33,9 +31,7 @@ class ButtonGroup(forms.RadioSelect):
 
 
 class ColoredButtonGroup(ButtonGroup):  # lgtm [py/missing-call-to-init]
-    option_template_name = (
-        "djangocms_frontend/admin/widgets/button_group_color_option.html"
-    )
+    option_template_name = "djangocms_frontend/admin/widgets/button_group_color_option.html"
 
     class Media:
         css = settings.ADMIN_CSS
@@ -65,9 +61,7 @@ class IconMultiselect(forms.CheckboxSelectMultiple):  # lgtm [py/missing-call-to
         super().__init__(*args, **kwargs)
 
 
-class OptionalDeviceChoiceField(
-    forms.MultipleChoiceField
-):  # lgtm [py/missing-call-to-init]
+class OptionalDeviceChoiceField(forms.MultipleChoiceField):  # lgtm [py/missing-call-to-init]
     def __init__(self, **kwargs):
         kwargs.setdefault("choices", settings.DEVICE_CHOICES)
         kwargs.setdefault("initial", None)
@@ -90,9 +84,7 @@ class DeviceChoiceField(OptionalDeviceChoiceField):
     def clean(self, value):
         value = super().clean(value)
         if isinstance(value, list) and len(value) == 0:
-            raise ValidationError(
-                _("Please select at least one device size"), code="invalid"
-            )
+            raise ValidationError(_("Please select at least one device size"), code="invalid")
         return value
 
 
@@ -115,9 +107,7 @@ class AttributesFormField(fields.AttributesFormField):
 
 
 try:
-    fields.AttributesWidget(
-        sorted=True
-    )  # does djangocms-attributes-field support sorted param?
+    fields.AttributesWidget(sorted=True)  # does djangocms-attributes-field support sorted param?
     CHOICESWIDGETPARAMS = dict(sorted=False)  # use unsorted variant
 except TypeError:
     CHOICESWIDGETPARAMS = dict()  # Fallback for djangocms-attributes-field < 2.1
@@ -137,11 +127,7 @@ class ChoicesFormField(fields.AttributesFormField):
     def clean(self, value):
         if not value:
             raise ValidationError(
-                mark_safe(
-                    _(
-                        "Please enter at least one choice. Use the <code>+</code> symbol to add a choice."
-                    )
-                ),
+                mark_safe(_("Please enter at least one choice. Use the <code>+</code> symbol to add a choice.")),
                 code="empty",
             )
         return [(key, value) for key, value in value.items()]

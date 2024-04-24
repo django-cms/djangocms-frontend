@@ -28,12 +28,7 @@ class SizeSideWidget(forms.MultiWidget):  # lgtm [py/missing-call-to-init]
         self.side_choices = kwargs.pop("side_choices")
         super().__init__(
             [
-                IconGroup(
-                    choices=[
-                        (self.property + side, verbose)
-                        for side, verbose in self.side_choices
-                    ]
-                ),
+                IconGroup(choices=[(self.property + side, verbose) for side, verbose in self.side_choices]),
                 DivSelectWidget(choices=kwargs.pop("size_choices")),
             ],
             **kwargs,
