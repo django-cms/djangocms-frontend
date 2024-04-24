@@ -46,9 +46,7 @@ class SizingFormMixin(EntangledModelFormMixin):
         initial=settings.EMPTY_CHOICE[0][0],
         choices=settings.EMPTY_CHOICE + settings.SIZE_X_CHOICES,
         #        widget=ButtonGroup(attrs=dict(property="text")),
-        help_text=_(
-            "Sets the horizontal size relative to the surrounding container or the viewport."
-        ),
+        help_text=_("Sets the horizontal size relative to the surrounding container or the viewport."),
     )
     size_y = forms.ChoiceField(
         label=_("Vertical size"),
@@ -56,7 +54,5 @@ class SizingFormMixin(EntangledModelFormMixin):
         initial=settings.EMPTY_CHOICE[0][0],
         choices=settings.EMPTY_CHOICE + settings.SIZE_Y_CHOICES,
         #       widget=ButtonGroup(attrs=dict(property="text")),
-        help_text=_(
-            "Sets the vertical size relative to the surrounding container or the viewport."
-        ),
+        help_text=_("Sets the vertical size relative to the surrounding container or the viewport."),
     )

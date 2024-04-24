@@ -29,9 +29,7 @@ class GridContainer(TitelModelMixin, FrontendUIItem):
         _("GridContainer")
 
     def get_short_description(self):
-        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
-            "attributes", {}
-        ).get("id", "")
+        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get("attributes", {}).get("id", "")
         for item in GRID_CONTAINER_CHOICES[1:]:
             if item[0] == self.container_type:
                 text += f" ({item[1]})"
@@ -56,13 +54,9 @@ class GridRow(TitelModelMixin, FrontendUIItem):
         _("GridRow")
 
     def get_short_description(self):
-        descr = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
-            "attributes", {}
-        ).get("id", "")
+        descr = self.config.get("plugin_title", {}).get("title", "") or self.config.get("attributes", {}).get("id", "")
         column_count = len(self.child_plugin_instances or [])
-        column_count_str = ngettext(
-            "(1 column)", "(%(count)i columns)", column_count
-        ) % {"count": column_count}
+        column_count_str = ngettext("(1 column)", "(%(count)i columns)", column_count) % {"count": column_count}
         if descr:
             column_count_str = f"{descr} {column_count_str}"
         return column_count_str
@@ -80,9 +74,7 @@ class GridColumn(FrontendUIItem):
         _("GridColumn")
 
     def get_short_description(self):
-        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get(
-            "attributes", {}
-        ).get("id", "")
+        text = self.config.get("plugin_title", {}).get("title", "") or self.config.get("attributes", {}).get("id", "")
 
         if self.xs_col:
             text += f" (col-{self.xs_col}) "

@@ -51,10 +51,7 @@ class CarouselSlide(GetLinkMixin, ImageMixin, FrontendUIItem):
                 image_text = _("<file is missing>")
             elif self.rel_image.name:
                 image_text = self.rel_image.name
-            elif (
-                self.rel_image.original_filename
-                and os.path.split(self.rel_image.original_filename)[1]
-            ):
+            elif self.rel_image.original_filename and os.path.split(self.rel_image.original_filename)[1]:
                 image_text = os.path.split(self.rel_image.original_filename)[1]
             else:
                 image_text = "Image"

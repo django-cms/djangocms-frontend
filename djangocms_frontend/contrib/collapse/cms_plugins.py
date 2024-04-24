@@ -38,9 +38,7 @@ class CollapsePlugin(mixin_factory("Collapse"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class CollapseTriggerPlugin(
-    mixin_factory("CollapseTrigger"), AttributesMixin, CMSUIPlugin
-):
+class CollapseTriggerPlugin(mixin_factory("CollapseTrigger"), AttributesMixin, CMSUIPlugin):
     """
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/
@@ -64,9 +62,7 @@ class CollapseTriggerPlugin(
 
 
 @plugin_pool.register_plugin
-class CollapseContainerPlugin(
-    mixin_factory("CollapseContainer"), AttributesMixin, CMSUIPlugin
-):
+class CollapseContainerPlugin(mixin_factory("CollapseContainer"), AttributesMixin, CMSUIPlugin):
     """
     Component > "Collapse Container" Plugin
     https://getbootstrap.com/docs/5.0/components/collapse/

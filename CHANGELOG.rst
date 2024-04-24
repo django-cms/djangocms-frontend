@@ -2,6 +2,13 @@
 Changelog
 =========
 
+1.3.2 (2024-04-25)
+==================
+
+* fix: make grid layout (rows/columns) compatible with flex box-based Django admin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/208
+* fix: Improved handling of optional smart link field by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/210
+
+
 1.3.1 (2024-04-12)
 ==================
 

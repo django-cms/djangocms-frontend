@@ -15,9 +15,5 @@ class AccordionItemRenderMixin:
         instance.add_classes("accordion-collapse collapse")
         if instance.accordion_item_open:
             instance.add_classes("show")
-        instance.font_size = (
-            context["parent"]
-            .config.get("accordion_header_type", "")
-            .replace("h", "fs-")
-        )
+        instance.font_size = context["parent"].config.get("accordion_header_type", "").replace("h", "fs-")
         return super().render(context, instance, placeholder)

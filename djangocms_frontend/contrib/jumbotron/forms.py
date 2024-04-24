@@ -49,9 +49,7 @@ class JumbotronForm(
         label=_("Fluid"),
         initial=False,
         required=False,
-        help_text=_(
-            "Makes the jumbotron fill the full width of the container or window."
-        ),
+        help_text=_("Makes the jumbotron fill the full width of the container or window."),
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()

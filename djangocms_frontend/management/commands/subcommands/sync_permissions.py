@@ -31,11 +31,7 @@ Changes cannot be undone. Are you sure you want to proceed?
             self.stdout.write(self.style.ERROR("Aborted."))
             return
 
-        dcf_models = [
-            m
-            for m in apps.get_models()
-            if m.__module__.startswith("djangocms_frontend.")
-        ]
+        dcf_models = [m for m in apps.get_models() if m.__module__.startswith("djangocms_frontend.")]
         reference_model = [m for m in dcf_models if m.__name__ == "FrontendUIItem"][0]
         dcf_models.remove(reference_model)
         ctype = ContentType.objects.get(
@@ -49,9 +45,7 @@ Changes cannot be undone. Are you sure you want to proceed?
                 reduced = permission_set.filter(user=user)
                 reduced = [perm.codename.split("_")[0] for perm in reduced]
                 if reduced:
-                    self.stdout.write(
-                        self.style.NOTICE(f"... has {', '.join(reduced)}")
-                    )
+                    self.stdout.write(self.style.NOTICE(f"... has {', '.join(reduced)}"))
                 for model in dcf_models:
                     perms = _get_all_permissions(model._meta)
                     for perm, name in perms:
@@ -66,24 +60,14 @@ Changes cannot be undone. Are you sure you want to proceed?
                             defaults=dict(name=name),
                         )
                         if created:
-                            self.stdout.write(
-                                self.style.WARNING(f"Created permission {new_perm}")
-                            )
+                            self.stdout.write(self.style.WARNING(f"Created permission {new_perm}"))
                         if ok:
-                            if not user.user_permissions.filter(
-                                codename=new_perm.codename, content_type=ctype
-                            ):
-                                self.stdout.write(
-                                    self.style.NOTICE(f"Added {new_perm} for {user}")
-                                )
+                            if not user.user_permissions.filter(codename=new_perm.codename, content_type=ctype):
+                                self.stdout.write(self.style.NOTICE(f"Added {new_perm} for {user}"))
                                 user.user_permissions.add(new_perm)
                         else:
-                            if user.user_permissions.filter(
-                                codename=new_perm.codename, content_type=ctype
-                            ):
-                                self.stdout.write(
-                                    self.style.WARNING(f"Removed {new_perm} for {user}")
-                                )
+                            if user.user_permissions.filter(codename=new_perm.codename, content_type=ctype):
+                                self.stdout.write(self.style.WARNING(f"Removed {new_perm} for {user}"))
                                 user.user_permissions.remove(new_perm)
                 user.save()
         if "groups" in options["scope"]:
@@ -92,9 +76,7 @@ Changes cannot be undone. Are you sure you want to proceed?
                 reduced = permission_set.filter(group=group)
                 reduced = [perm.codename.split("_")[0] for perm in reduced]
                 if reduced:
-                    self.stdout.write(
-                        self.style.NOTICE(f"... has {', '.join(reduced)}")
-                    )
+                    self.stdout.write(self.style.NOTICE(f"... has {', '.join(reduced)}"))
                 for model in dcf_models:
                     perms = _get_all_permissions(model._meta)
                     for perm, name in perms:
@@ -109,22 +91,12 @@ Changes cannot be undone. Are you sure you want to proceed?
                             defaults=dict(name=name),
                         )
                         if ok:
-                            if not group.permissions.filter(
-                                codename=new_perm.codename, content_type=ctype
-                            ):
-                                self.stdout.write(
-                                    self.style.NOTICE(f"Added {new_perm} for {group}")
-                                )
+                            if not group.permissions.filter(codename=new_perm.codename, content_type=ctype):
+                                self.stdout.write(self.style.NOTICE(f"Added {new_perm} for {group}"))
                                 group.permissions.add(new_perm)
                         else:
-                            if group.permissions.filter(
-                                codename=new_perm.codename, content_type=ctype
-                            ):
-                                self.stdout.write(
-                                    self.style.WARNING(
-                                        f"Removed {new_perm} for {group}"
-                                    )
-                                )
+                            if group.permissions.filter(codename=new_perm.codename, content_type=ctype):
+                                self.stdout.write(self.style.WARNING(f"Removed {new_perm} for {group}"))
                                 group.permissions.remove(new_perm)
                 group.save()
 
