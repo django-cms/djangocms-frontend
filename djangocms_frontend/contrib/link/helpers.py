@@ -10,8 +10,6 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.encoding import force_str
 from django.utils.html import mark_safe
 
-from djangocms_frontend.settings import EMPTY_CHOICE
-
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
 
 
@@ -68,7 +66,7 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
 
     if nbsp is None:
         nbsp = "" if term else "\u2000"
-    available_objects = [dict(id=EMPTY_CHOICE[0][0], text=EMPTY_CHOICE[0][1])]
+    available_objects = []
     # Now create our list of cms pages
     type_id = ContentType.objects.get_for_model(Page).id
     for value, descr in get_page_choices(lang):
