@@ -2,6 +2,18 @@
 Changelog
 =========
 
+1.3.1 (2024-04-12)
+==================
+
+* fix: Allow page titles to contain ampersand (&) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/202
+* fix: Use gettext_lazy for model verbose names by @tidenhub in https://github.com/django-cms/djangocms-frontend/pull/203
+* fix: Add `dir` attribute to `html` tag in `djangocms_frontend.html` by @sakhawy in https://github.com/django-cms/djangocms-frontend/pull/204
+
+**New Contributors**
+
+* @tidenhub made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/203
+* @sakhawy made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/204
+
 1.3.0 (2024-03-21)
 ==================
 
