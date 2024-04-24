@@ -122,26 +122,20 @@ class ImageForm(
     lazy_loading = forms.BooleanField(
         label=_("Load lazily"),
         required=False,
-        help_text=_(
-            "Use for images below the fold. This will load images only if user scrolls them into view. "
-        ),
+        help_text=_("Use for images below the fold. This will load images only if user scrolls them into view. "),
     )
 
     width = forms.IntegerField(
         label=_("Width"),
         required=False,
         min_value=1,
-        help_text=_(
-            "The image width as number in pixels. " 'Example: "720" and not "720px".'
-        ),
+        help_text=_("The image width as number in pixels. " 'Example: "720" and not "720px".'),
     )
     height = forms.IntegerField(
         label=_("Height"),
         required=False,
         min_value=1,
-        help_text=_(
-            "The image height as number in pixels. " 'Example: "720" and not "720px".'
-        ),
+        help_text=_("The image height as number in pixels. " 'Example: "720" and not "720px".'),
     )
     alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -160,9 +154,7 @@ class ImageForm(
     use_automatic_scaling = forms.BooleanField(
         label=_("Automatic scaling"),
         required=False,
-        help_text=_(
-            "Uses the placeholder dimensions to automatically calculate the size."
-        ),
+        help_text=_("Uses the placeholder dimensions to automatically calculate the size."),
     )
     # ignores all other cropping options
     # throws validation error if other cropping options are selected
@@ -176,16 +168,12 @@ class ImageForm(
     use_crop = forms.BooleanField(
         label=_("Crop image"),
         required=False,
-        help_text=_(
-            "Crops the image according to the thumbnail settings provided in the template."
-        ),
+        help_text=_("Crops the image according to the thumbnail settings provided in the template."),
     )
     use_upscale = forms.BooleanField(
         label=_("Upscale image"),
         required=False,
-        help_text=_(
-            "Upscales the image to the size of the thumbnail settings in the template."
-        ),
+        help_text=_("Upscales the image to the size of the thumbnail settings in the template."),
     )
     use_responsive_image = forms.ChoiceField(
         label=_("Use responsive image"),
@@ -203,9 +191,7 @@ class ImageForm(
         to_field_name="id",
         label=_("Thumbnail options"),
         required=False,
-        help_text=_(
-            "Overrides width, height, and crop; scales up to the provided preset dimensions."
-        ),
+        help_text=_("Overrides width, height, and crop; scales up to the provided preset dimensions."),
     )
     picture_fluid = forms.BooleanField(
         label=_("Responsive"),
@@ -252,10 +238,7 @@ class ImageForm(
         # you shall only set one image kind
         if not data.get("picture", False) and not data.get("external_picture", False):
             raise forms.ValidationError(
-                _(
-                    "You need to add either an image, "
-                    "or a URL linking to an external image."
-                )
+                _("You need to add either an image, " "or a URL linking to an external image.")
             )
 
         # certain cropping options do not work together, the following
@@ -278,10 +261,7 @@ class ImageForm(
                 break
 
         if invalid_option_pair:
-            message = _(
-                "Invalid cropping settings. "
-                'You cannot combine "{field_a}" with "{field_b}".'
-            )
+            message = _("Invalid cropping settings. " 'You cannot combine "{field_a}" with "{field_b}".')
             message = message.format(
                 field_a=self.fields[invalid_option_pair[0]].label,
                 field_b=self.fields[invalid_option_pair[0]].label,

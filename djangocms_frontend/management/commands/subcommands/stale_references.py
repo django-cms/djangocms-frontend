@@ -21,15 +21,9 @@ class StaleReferences(SubcommandsCommand):
                             if pages:
                                 for page in pages:
                                     self.stdout.write(
-                                        self.style.WARNING(
-                                            f"... on page #{page.id}, at {page.get_absolute_url()}"
-                                        )
+                                        self.style.WARNING(f"... on page #{page.id}, at {page.get_absolute_url()}")
                                     )
                             else:
-                                self.stdout.write(
-                                    self.style.WARNING(
-                                        f"... in placeholder #{ui_item.placeholder.id}"
-                                    )
-                                )
+                                self.stdout.write(self.style.WARNING(f"... in placeholder #{ui_item.placeholder.id}"))
 
         self.stdout.write(self.style.SUCCESS("Finished checking references"))

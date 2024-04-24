@@ -10,10 +10,6 @@ class FrequencyAnalysis(SubcommandsCommand):
     command_name = "frequency_analysis"
 
     def handle(self, *args, **options):
-        analysis = (
-            FrontendUIItem.objects.values("ui_item")
-            .annotate(count=Count("ui_item"))
-            .order_by("-count")
-        )
+        analysis = FrontendUIItem.objects.values("ui_item").annotate(count=Count("ui_item")).order_by("-count")
         for element in analysis:
             self.stdout.write(f"{element['ui_item']:20}\t{element['count']:6}")

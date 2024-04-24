@@ -48,6 +48,4 @@ class JumbotronPlugin(
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "jumbotron", "jumbotron", settings.JUMBOTRON_TEMPLATE_CHOICES
-        )
+        return get_plugin_template(instance, "jumbotron", "jumbotron", settings.JUMBOTRON_TEMPLATE_CHOICES)

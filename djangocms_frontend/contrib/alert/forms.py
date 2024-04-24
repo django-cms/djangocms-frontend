@@ -18,9 +18,7 @@ from djangocms_frontend.settings import COLOR_STYLE_CHOICES
 mixin_factory = settings.get_forms(alert)
 
 
-class AlertForm(
-    mixin_factory("Alert"), ResponsiveFormMixin, SpacingFormMixin, EntangledModelForm
-):
+class AlertForm(mixin_factory("Alert"), ResponsiveFormMixin, SpacingFormMixin, EntangledModelForm):
     """
     Components > "Alerts" Plugin
     https://getbootstrap.com/docs/5.0/components/alerts/

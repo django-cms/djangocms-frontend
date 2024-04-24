@@ -36,9 +36,7 @@ if "djangocms_icon" in apps.all_models:
     data_migration.update(icon_migration.data_migration)
     plugin_prefixes.append(icon_migration.plugin_prefix)
 
-additional_migrations = getattr(
-    settings, "DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS", None
-)
+additional_migrations = getattr(settings, "DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS", None)
 if additional_migrations:
     if isinstance(additional_migrations, str):
         additional_migrations = [additional_migrations]
@@ -78,11 +76,7 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                     new_obj.depth = obj.depth
                     new_obj.numchild = obj.numchild
                     new_obj.path = obj.path
-                new_obj.plugin_type = (
-                    plugin_names[new_model]
-                    if new_model in plugin_names
-                    else new_model + "Plugin"
-                )
+                new_obj.plugin_type = plugin_names[new_model] if new_model in plugin_names else new_model + "Plugin"
                 # Add something like `new_obj.field_name = obj.field_name` for any field in the the new plugin
                 for field in fields:
                     if field in data_migration:
@@ -92,11 +86,7 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                             old_field, new_field = field.split(" -> ")
                         else:
                             old_field, new_field = field, field
-                        value = (
-                            old_field[1:-1]
-                            if old_field[0] == "("
-                            else getattr(obj, old_field)
-                        )
+                        value = old_field[1:-1] if old_field[0] == "(" else getattr(obj, old_field)
                         if value == "":
                             value = None
                         if new_field in new_obj_fields:
@@ -110,9 +100,7 @@ def migrate_to_djangocms_frontend(apps, schema_editor):
                                     ),
                                     "pk": value.pk,
                                 }
-                            elif isinstance(
-                                value, models.QuerySet
-                            ):  # related many field
+                            elif isinstance(value, models.QuerySet):  # related many field
                                 value = {
                                     "model": "{}.{}".format(
                                         value.model._meta.app_label,
@@ -179,8 +167,7 @@ class Migrate(SubcommandsCommand):
         if "djangocms_frontend_frontenduiitem" not in tables:
             self.stdout.write(
                 self.style.ERROR(
-                    "I cannot find djangocms-frontend's tables in the database. Did you run\n"
-                    "./manage.py migrate ?"
+                    "I cannot find djangocms-frontend's tables in the database. Did you run\n" "./manage.py migrate ?"
                 )
             )
             return
@@ -200,9 +187,7 @@ class Migrate(SubcommandsCommand):
             if any([prefix in plugin.plugin_type for prefix in plugin_prefixes]):
                 if plugin.plugin_type not in not_migrated:
                     not_migrated.append(plugin.plugin_type)
-                    self.stdout.write(
-                        self.style.WARNING(f"{plugin.plugin_type} not migrated.")
-                    )
+                    self.stdout.write(self.style.WARNING(f"{plugin.plugin_type} not migrated."))
         if not not_migrated:
             if changes:
                 self.stdout.write(self.style.SUCCESS("Successfully migrated plugins."))
@@ -211,16 +196,8 @@ class Migrate(SubcommandsCommand):
 
     def check_for_link_targets(self):
         self.stdout.write()
-        self.stdout.write(
-            self.style.SUCCESS(
-                "Checking installed apps for potential link destinations"
-            )
-        )
-        self.stdout.write(
-            self.style.SUCCESS(
-                "======================================================="
-            )
-        )
+        self.stdout.write(self.style.SUCCESS("Checking installed apps for potential link destinations"))
+        self.stdout.write(self.style.SUCCESS("======================================================="))
         blog = False
         count = 0
         for app, app_models in apps.all_models.items():
@@ -229,16 +206,12 @@ class Migrate(SubcommandsCommand):
                     if hasattr(model, "get_absolute_url"):
                         count += 1
                         self.stdout.write(
-                            self.style.NOTICE(
-                                f"App {app}'s {model.__name__} model is a suitable link destination."
-                            )
+                            self.style.NOTICE(f"App {app}'s {model.__name__} model is a suitable link destination.")
                         )
             if app == "djangocms_blog":
                 blog = True
         if count:
-            self.stdout.write(
-                self.style.SUCCESS(f"{count} potential link destinations found.")
-            )
+            self.stdout.write(self.style.SUCCESS(f"{count} potential link destinations found."))
             if blog:
                 self.stdout.write(self.style.WARNING(blog_example))
             else:

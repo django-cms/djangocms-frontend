@@ -12,9 +12,7 @@ mixin_factory = settings.get_renderer(media)
 
 
 @plugin_pool.register_plugin
-class MediaPlugin(
-    mixin_factory("Media"), AttributesMixin, ResponsiveMixin, CMSUIPlugin
-):
+class MediaPlugin(mixin_factory("Media"), AttributesMixin, ResponsiveMixin, CMSUIPlugin):
     """
     Layout > "Media" Plugin
     http://getbootstrap.com/docs/4.0/layout/media-object/

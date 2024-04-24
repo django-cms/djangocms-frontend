@@ -364,24 +364,18 @@ def a001_alignment(obj, new_obj, field):
 def m001_spacing_mixin(obj, new_obj, type):
     classes = new_obj.config["attributes"].get("class", "").split()
     if classes:
-        for size, _ in list(settings.SPACER_SIZE_CHOICES) + (
-            [("auto", "auto")] if type == "margin" else []
-        ):
+        for size, _ in list(settings.SPACER_SIZE_CHOICES) + ([("auto", "auto")] if type == "margin" else []):
             if f"{type[0]}-{size}" in classes:
                 classes.remove(f"{type[0]}-{size}")
                 classes.append(f"{type[0]}x-{size}")
                 classes.append(f"{type[0]}y-{size}")
             for side, _ in settings.SPACER_X_SIDES_CHOICES:
-                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(
-                    f"{type}_x", None
-                ):
+                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(f"{type}_x", None):
                     new_obj.config[f"{type}_x"] = f"{type[0]}{side}-{size}"
                     new_obj.config[f"{type}_devices"] = None
                     classes.remove(f"{type[0]}{side}-{size}")
             for side, _ in settings.SPACER_Y_SIDES_CHOICES:
-                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(
-                    f"{type}_y", None
-                ):
+                if f"{type[0]}{side}-{size}" in classes and not new_obj.config.get(f"{type}_y", None):
                     new_obj.config[f"{type}_y"] = f"{type[0]}{side}-{size}"
                     new_obj.config[f"{type}_devices"] = None
                     classes.remove(f"{type[0]}{side}-{size}")
@@ -489,9 +483,7 @@ def t001_template(obj, new_obj, bs4_setting, dcf_setting):
     if not in_choices(obj.template, BS4):
         print(f"=> Template '{obj.template}' in {obj.plugin_type} (id: {obj.id})")
         print(f"   but not declared in {bs4_setting}")
-        print(
-            "   You will be able to edit the plugin but up saving the template will be changed."
-        )
+        print("   You will be able to edit the plugin but up saving the template will be changed.")
         if not DCF and bs4_setting != dcf_setting:
             print(f"   Remember to put {dcf_setting} in your settings.py")
 
@@ -509,9 +501,7 @@ data_migration = {
     "M001-p": lambda x, y: m001_spacing_mixin(x, y, "padding"),
     "M002": m002_responsive_mixin,
     "M003": m003_background_mixin,
-    "T001_PICTURE": lambda x, y: t001_template(
-        x, y, "DJANGOCMS_PICTURE_TEMPLATES", "DJANGOCMS_PICTURE_TEMPLATES"
-    ),
+    "T001_PICTURE": lambda x, y: t001_template(x, y, "DJANGOCMS_PICTURE_TEMPLATES", "DJANGOCMS_PICTURE_TEMPLATES"),
     "T001_LINK": lambda x, y: t001_template(
         x, y, "DJANGOCMS_LINK_TEMPLATES", "DJANGOCMS_FRONTEND_LINK_TEMPLATE_CHOICES"
     ),

@@ -182,19 +182,11 @@ class GridColumnBaseForm(
         super().clean()
         for size in settings.DEVICE_SIZES:
             if f"{size}_col" in self.cleaned_data:
-                if (
-                    isinstance(self.cleaned_data[f"{size}_col"], str)
-                    and self.cleaned_data[f"{size}_col"].isnumeric()
-                ):
-                    self.cleaned_data[f"{size}_col"] = int(
-                        self.cleaned_data[f"{size}_col"]
-                    )
+                if isinstance(self.cleaned_data[f"{size}_col"], str) and self.cleaned_data[f"{size}_col"].isnumeric():
+                    self.cleaned_data[f"{size}_col"] = int(self.cleaned_data[f"{size}_col"])
             else:
                 raise ValidationError(
-                    _(
-                        'Column size needs to be empty, "auto", or a '
-                        "number between 1 and %(cols)d"
-                    ),
+                    _('Column size needs to be empty, "auto", or a ' "number between 1 and %(cols)d"),
                     params=dict(cols=GRID_SIZE),
                     code="invalid_column",
                 )
@@ -233,16 +225,12 @@ for size in settings.DEVICE_SIZES:
     extra_fields_column[f"{size}_ms"] = forms.BooleanField(
         label="ms-auto" if size == "xs" else f"ms-{size}-auto",
         required=False,
-        widget=forms.HiddenInput()
-        if "{size}_ms" in getattr(settings, "EXCL_COL_PROP", ())
-        else forms.CheckboxInput(),
+        widget=forms.HiddenInput() if "{size}_ms" in getattr(settings, "EXCL_COL_PROP", ()) else forms.CheckboxInput(),
     )
     extra_fields_column[f"{size}_me"] = forms.BooleanField(
         label="me-auto" if size == "xs" else f"me-{size}-auto",
         required=False,
-        widget=forms.HiddenInput()
-        if "{size}_me" in getattr(settings, "EXCL_COL_PROP", ())
-        else forms.CheckboxInput(),
+        widget=forms.HiddenInput() if "{size}_me" in getattr(settings, "EXCL_COL_PROP", ()) else forms.CheckboxInput(),
     )
 
 GridColumnForm = type(

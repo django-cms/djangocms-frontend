@@ -64,15 +64,11 @@ class SpacingForm(mixin_factory("Spacing"), EntangledModelForm):
 
     def clean(self):
         super().clean()
-        if (
-            self.cleaned_data["space_property"] == "p"
-            and self.cleaned_data["space_size"] == "auto"
-        ):
+        if self.cleaned_data["space_property"] == "p" and self.cleaned_data["space_size"] == "auto":
             raise ValidationError(
                 {
                     "space_property": _(
-                        "Padding does not have an auto spacing. Either "
-                        "switch to margin or a defined size."
+                        "Padding does not have an auto spacing. Either " "switch to margin or a defined size."
                     ),
                     "space_size": _(
                         "Padding does not have an auto spacing. Either "
@@ -124,9 +120,7 @@ class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm
     heading_id = forms.CharField(
         label=_("ID"),
         required=False,
-        help_text=_(
-            "Fill in unique ID for table of contents. If empty heading will not appear in table of contents."
-        ),
+        help_text=_("Fill in unique ID for table of contents. If empty heading will not appear in table of contents."),
     )
     heading_context = forms.ChoiceField(
         label=_("Heading context"),
@@ -158,20 +152,14 @@ class TableOfContentsForm(mixin_factory("TableOfContents"), EntangledModelForm):
 
     list_attributes = AttributesFormField(
         label=_("List attributes"),
-        help_text=_(
-            "Attributes apply to the <b>list</b> for each level in the table of contents."
-        ),
+        help_text=_("Attributes apply to the <b>list</b> for each level in the table of contents."),
     )
 
     link_attributes = AttributesFormField(
         label=_("Link attributes"),
-        help_text=_(
-            "Attributes apply to the <b>link</b> for each entry in the table of contents."
-        ),
+        help_text=_("Attributes apply to the <b>link</b> for each entry in the table of contents."),
     )
     attributes = AttributesFormField(
         label=_("Item attributes"),
-        help_text=_(
-            "Attributes apply to the <b>list items</b> for each entry in the table of contents."
-        ),
+        help_text=_("Attributes apply to the <b>list items</b> for each entry in the table of contents."),
     )
