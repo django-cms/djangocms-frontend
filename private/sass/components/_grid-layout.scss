@@ -30,6 +30,10 @@
     padding: 0;
     min-width: 800px;
 
+    > div > div:not([class]) {  // fix a quirk of djangocms-admin-style
+        width: unset  !important;
+        max-width: unset  !important;
+    }
     .field-box:first-child {
         width: 115px !important;
     }
@@ -39,6 +43,7 @@
         box-sizing: content-box;
         width: 86px !important;
         flex: none;
+        display: block;
         padding: 15px 10px;
         margin: 0 !important;
         border-bottom: 1px solid #eee;
