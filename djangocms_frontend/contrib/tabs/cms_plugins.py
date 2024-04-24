@@ -47,9 +47,7 @@ class TabPlugin(mixin_factory("Tab"), AttributesMixin, CMSUIPlugin):
 
 
 @plugin_pool.register_plugin
-class TabItemPlugin(
-    mixin_factory("TabItem"), AttributesMixin, PaddingMixin, CMSUIPlugin
-):
+class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, PaddingMixin, CMSUIPlugin):
     """
     Components > "Navs - Tab Item" Plugin
     https://getbootstrap.com/docs/5.0/components/navs/

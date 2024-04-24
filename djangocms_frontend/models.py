@@ -56,9 +56,7 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     def __getattr__(self, item):
         """Makes properties of plugin config available as plugin properties."""
-        if (
-            item[0] != "_" and item in self.config
-        ):  # Avoid infinite recursion trying to get .config from db
+        if item[0] != "_" and item in self.config:  # Avoid infinite recursion trying to get .config from db
             return self.config[item]
         return super().__getattribute__(item)
 
@@ -85,10 +83,7 @@ class AbstractFrontendUIItem(CMSPlugin):
         classes.update(self._additional_classes)
         if classes:
             attributes["class"] = " ".join(classes)
-        parts = (
-            f'{item}="{conditional_escape(value)}"' if value else f"{item}"
-            for item, value in attributes.items()
-        )
+        parts = (f'{item}="{conditional_escape(value)}"' if value else f"{item}" for item, value in attributes.items())
         attributes_string = " ".join(parts)
         return mark_safe(" " + attributes_string) if attributes_string else ""
 
@@ -102,13 +97,9 @@ class AbstractFrontendUIItem(CMSPlugin):
             form = self.get_plugin_class().form
         if isinstance(form, type):  # if is class
             form = form()  # instantiate
-        entangled_fields = getattr(
-            getattr(form, "Meta", None), "entangled_fields", {}
-        ).get("config", ())
+        entangled_fields = getattr(getattr(form, "Meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:
-            self.config.setdefault(
-                field, {} if field == "attributes" else form[field].initial or ""
-            )
+            self.config.setdefault(field, {} if field == "attributes" else form[field].initial or "")
         return self
 
     def get_short_description(self):
@@ -141,5 +132,6 @@ class FrontendUIItem(AbstractFrontendUIItem):
     None
 
     """
+
     class Meta:
         verbose_name = _("UI item")

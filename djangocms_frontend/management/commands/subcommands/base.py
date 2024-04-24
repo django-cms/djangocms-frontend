@@ -38,9 +38,7 @@ def add_builtin_arguments(parser):
         "--pythonpath",
         help='A directory to add to the Python path, e.g. "/home/djangoprojects/myproject".',
     )
-    parser.add_argument(
-        "--traceback", action="store_true", help="Raise on CommandError exceptions"
-    )
+    parser.add_argument("--traceback", action="store_true", help="Raise on CommandError exceptions")
     parser.add_argument(
         "--no-color",
         action="store_true",

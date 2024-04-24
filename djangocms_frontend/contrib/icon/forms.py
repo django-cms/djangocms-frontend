@@ -36,9 +36,7 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
                 "attributes",
             ]
         }
-        untangled_fields = (
-            "tag_type",
-        )
+        untangled_fields = ("tag_type",)
 
     icon = IconPickerField()
     icon_size = forms.ChoiceField(

@@ -80,9 +80,7 @@ class PageTreeForm(mixin_factory("PageTree"), EntangledModelForm):
     start_level = forms.IntegerField(
         label=_("Start level"),
         initial=0,
-        help_text=_(
-            "Start level of this page tree (0: root, 1: level below root, etc.)"
-        ),
+        help_text=_("Start level of this page tree (0: root, 1: level below root, etc.)"),
     )
     attributes = AttributesFormField()
 

@@ -49,9 +49,7 @@ class CarouselPlugin(mixin_factory("Carousel"), AttributesMixin, CMSUIPlugin):
     ]
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, "carousel", "carousel", CAROUSEL_TEMPLATE_CHOICES
-        )
+        return get_plugin_template(instance, "carousel", "carousel", CAROUSEL_TEMPLATE_CHOICES)
 
 
 @plugin_pool.register_plugin

@@ -28,9 +28,7 @@ from .constants import (
 )
 
 # card allow for a transparent color
-CARD_COLOR_STYLE_CHOICES = settings.COLOR_STYLE_CHOICES + (
-    ("transparent", _("Transparent")),
-)
+CARD_COLOR_STYLE_CHOICES = settings.COLOR_STYLE_CHOICES + (("transparent", _("Transparent")),)
 
 CARD_TEXT_STYLES = COLOR_STYLE_CHOICES + (("white", _("White")),)
 
@@ -132,9 +130,7 @@ class CardForm(
         label=_("Alignment"),
         choices=settings.EMPTY_CHOICE + CARD_ALIGNMENT_CHOICES,
         required=False,
-        widget=forms.HiddenInput()
-        if "card_alignment" in getattr(settings, "EXCL_CARD_PROP", ())
-        else IconGroup(),
+        widget=forms.HiddenInput() if "card_alignment" in getattr(settings, "EXCL_CARD_PROP", ()) else IconGroup(),
     )
     card_text_color = forms.ChoiceField(
         label=_("Text context"),
@@ -148,9 +144,7 @@ class CardForm(
         label=_("Full height"),
         initial=False,
         required=False,
-        help_text=_(
-            "If checked cards in one row will automatically extend to the full row height."
-        ),
+        help_text=_("If checked cards in one row will automatically extend to the full row height."),
         widget=forms.HiddenInput()
         if "card_full_height" in getattr(settings, "EXCL_CARD_PROP", ())
         else forms.CheckboxInput,
@@ -193,9 +187,7 @@ class CardInnerForm(
         label=_("Content alignment"),
         choices=settings.EMPTY_CHOICE + settings.ALIGN_CHOICES,
         required=False,
-        widget=forms.HiddenInput()
-        if "text_alignment" in getattr(settings, "EXCL_CARD_PROP", ())
-        else IconGroup(),
+        widget=forms.HiddenInput() if "text_alignment" in getattr(settings, "EXCL_CARD_PROP", ()) else IconGroup(),
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()

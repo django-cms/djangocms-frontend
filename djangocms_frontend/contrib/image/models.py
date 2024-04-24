@@ -133,9 +133,7 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
             "size": picture_options["size"],
             "crop": picture_options["crop"],
             "upscale": picture_options["upscale"],
-            "subject_location": self.rel_image.subject_location
-            if self.rel_image
-            else (),
+            "subject_location": self.rel_image.subject_location if self.rel_image else (),
         }
 
         try:

@@ -16,9 +16,7 @@ class AttributesMixin:
 
     def get_fieldsets(self, request, obj=None):
         meta = self.form._meta
-        fields = (
-            ["tag_type"] if "tag_type" in getattr(meta, "untangled_fields", ()) else []
-        )
+        fields = ["tag_type"] if "tag_type" in getattr(meta, "untangled_fields", ()) else []
         fields.append("attributes")
         return insert_fields(
             super().get_fieldsets(request, obj),

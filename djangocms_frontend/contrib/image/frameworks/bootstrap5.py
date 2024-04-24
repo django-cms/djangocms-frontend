@@ -23,9 +23,7 @@ class ImageRenderMixin:
         if instance.picture_thumbnail:
             instance.add_classes("img-thumbnail")
         if instance.parent and instance.parent.plugin_type == "CardPlugin":
-            instance.add_classes(
-                "card-img-top" if is_first_child(instance, instance.parent) else "card-img-bottom"
-            )
+            instance.add_classes("card-img-top" if is_first_child(instance, instance.parent) else "card-img-bottom")
         elif instance.parent and instance.parent.plugin_type == "FigurePlugin":
             instance.add_classes("figure-img")
         return super().render(context, instance, placeholder)

@@ -41,9 +41,7 @@ def get_grid_values(self):
     for device in settings.DEVICE_SIZES:
         for element in ("col", "order", "offset", "ms", "me"):
             size = getattr(self, f"{device}_{element}", None)
-            if isinstance(size, int) and (
-                element == "col" or element == "order" or element == "offset"
-            ):
+            if isinstance(size, int) and (element == "col" or element == "order" or element == "offset"):
                 if size == 0 and element == "col":  # 0 represents auto
                     size = "auto"
                 if device == "xs":
@@ -62,9 +60,7 @@ def get_grid_values(self):
 class GridColumnRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes(
-            f"col text-{instance.text_alignment}"
-            if instance.config.get("text_alignment", None)
-            else "col"
+            f"col text-{instance.text_alignment}" if instance.config.get("text_alignment", None) else "col"
         )
         instance.add_classes(instance.column_alignment)
         instance.add_classes(get_grid_values(instance))

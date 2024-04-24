@@ -12,8 +12,6 @@ def add_css_for_icon(context, icon):
         css_link = ICON_LIBRARIES[icon.get("library")][1]
         if css_link:
             if "/" not in css_link:  # static link?
-                css_link = static(
-                    f"djangocms_frontend/icon/vendor/assets/stylesheets/{css_link}"
-                )
+                css_link = static(f"djangocms_frontend/icon/vendor/assets/stylesheets/{css_link}")
             context["icon_css"] = css_link
     return context

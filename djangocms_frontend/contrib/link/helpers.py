@@ -6,7 +6,6 @@ from django.conf import settings as django_settings
 from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError, ObjectDoesNotExist
-from django.urls import NoReverseMatch, reverse
 from django.utils.encoding import force_str
 from django.utils.html import mark_safe
 
@@ -99,11 +98,7 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
             except FieldError:
                 pass
         if objects is None:
-            objects = [
-                item
-                for item in qs.all()
-                if (not isinstance(term, str)) or term.upper() in str(item).upper()
-            ]
+            objects = [item for item in qs.all() if (not isinstance(term, str)) or term.upper() in str(item).upper()]
         if objects:
             type_class = ContentType.objects.get_for_model(objects[0].__class__)
             available_objects.append(
@@ -112,9 +107,7 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
                     "children": [
                         dict(id=f"{type_class.id}-{obj.id}", text=str(obj))
                         for obj in objects
-                        if request is None
-                        or model_admin
-                        and model_admin.has_view_permission(request, obj=obj)
+                        if request is None or model_admin and model_admin.has_view_permission(request, obj=obj)
                     ],
                 }
             )
@@ -124,30 +117,8 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
 def get_choices(request, term="", lang=None) -> list:
     def to_choices(json):
         return list(
-            (elem["text"], to_choices(elem["children"]))
-            if "children" in elem
-            else (elem["id"], elem["text"])
+            (elem["text"], to_choices(elem["children"])) if "children" in elem else (elem["id"], elem["text"])
             for elem in json
         )
 
     return to_choices(get_link_choices(request, term, lang, "&nbsp;"))
-
-
-def ensure_select2_url_is_available() -> None:
-    """Install the URLs"""
-    try:
-        reverse("dcf_autocomplete:ac_view")
-    except NoReverseMatch:  # Not installed yet
-        urlconf_module = import_module(django_settings.ROOT_URLCONF)
-        from django.urls import clear_url_caches, include, path
-
-        urlconf_module.urlpatterns = [
-            path(
-                "@dcf-links/",
-                include(
-                    "djangocms_frontend.contrib.link.urls",
-                    namespace="dcf_autocomplete",
-                ),
-            )
-        ] + urlconf_module.urlpatterns
-        clear_url_caches()

@@ -37,14 +37,10 @@ def s001_migrate_styled_link(obj, new_obj):
             pk=obj.int_destination_id,
         )
         styles = obj.styles.all()
-        new_obj.config["attributes"] = {
-            "class": " ".join(style.link_class for style in styles)
-        }
+        new_obj.config["attributes"] = {"class": " ".join(style.link_class for style in styles)}
         for style in styles:
             obj.styles.remove(style)
-        new_obj.config["link_type"] = (
-            "btn" if "btn" in new_obj.attributes["class"] else "link"
-        )
+        new_obj.config["link_type"] = "btn" if "btn" in new_obj.attributes["class"] else "link"
 
 
 def s002_migrate_image_container(obj, new_obj):
