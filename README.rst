@@ -165,7 +165,7 @@ See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICEN
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
    :target: https://pypi.org/project/djangocms-frontend/
 
-.. |django| image:: https://img.shields.io/badge/django-3.2--4.2-blue.svg
+.. |django| image:: https://img.shields.io/badge/django-3.2---blue.svg
    :target: https://www.djangoproject.com/
 
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
