@@ -132,10 +132,6 @@ For a manual install:
 
 -  run ``python manage.py migrate``
 
-If you use **Django < 3.2** please also add ``django-jsonfield-backport`` to
-your ``requirements.txt`` and ``django_jsonfield_backport`` to your
-``INSTALLED_APPS`` list.
-
 **djangocms-frontend** has a weak dependencies on **djangocms-icon** you can
 install separately or by adding an option:
 
@@ -169,7 +165,7 @@ See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICEN
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
    :target: https://pypi.org/project/djangocms-frontend/
 
-.. |django| image:: https://img.shields.io/badge/django-3.2--4.2-blue.svg
+.. |django| image:: https://img.shields.io/badge/django-3.2---blue.svg
    :target: https://www.djangoproject.com/
 
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
