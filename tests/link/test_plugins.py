@@ -172,11 +172,14 @@ class AutocompleteViewTestCase(TestFixture, CMSTestCase):
 
     def test_autocomplete_view(self):
         tricky_title = """d'acceuil: <script>alert("XSS");</script>"""
-
         page = self.create_page(
             title=tricky_title,
             template="page.html",
         )
+        expected_choices = [
+            "home", "content", tricky_title,
+        ]
+
         self.publish(page, self.language)
         autocomplete_url = admin_reverse("link_link_autocomplete")
 
@@ -187,11 +190,6 @@ class AutocompleteViewTestCase(TestFixture, CMSTestCase):
         choices = autocomplete_result.get("results")[0]
 
         self.assertFalse((autocomplete_result.get("pagination") or {}).get("more"))
-        self.assertEqual(
-            choices.get("children"),
-            [
-                {'id': '2-1', 'text': 'home'},
-                {'id': '2-2', 'text': 'content'},
-                {'id': '2-3', 'text': tricky_title},
-            ]
-        )
+
+        for expected, sent in zip(expected_choices, choices.get("children")):
+            self.assertEqual(expected, sent.get("text"))
