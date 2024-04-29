@@ -7,7 +7,6 @@ from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError, ObjectDoesNotExist
 from django.utils.encoding import force_str
-from django.utils.html import mark_safe
 
 from djangocms_frontend.settings import EMPTY_CHOICE
 
@@ -62,6 +61,15 @@ def get_object_for_value(value):
     return None
 
 
+def unescape(text, nbsp):
+    return (text.replace("&nbsp;", nbsp)
+            .replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&quot;", '"')
+            .replace("&#x27;", "'"))
+
+
 def get_link_choices(request, term="", lang=None, nbsp=None):
     global _querysets
 
@@ -78,7 +86,9 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
                     "children": [
                         dict(
                             id=f"{type_id}-{page}",
-                            text=mark_safe(name.replace("&nbsp;", nbsp)),
+                            # django admin's autocomplete view requires unescaped strings
+                            # get_page_choices escepes strings, so we undo the escape
+                            text=unescape(name, nbsp),
                         )
                         for page, name in descr
                         if not isinstance(term, str) or term.upper() in name.upper()
