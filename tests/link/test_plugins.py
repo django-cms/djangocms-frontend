@@ -1,5 +1,6 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
+from cms.utils.urlutils import admin_reverse
 from django.http import HttpRequest
 
 from djangocms_frontend import settings
@@ -116,19 +117,6 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             f'Cound not find class="btn btn-outline-primary" in {response.content.decode("utf-8")}',
         )
 
-    def test_smart_link_field(self):
-        slf = SmartLinkField()
-        choices = get_choices(None)
-        self.assertEqual("example.com", choices[1][0])  # Site name
-        self.assertIn(("2-1", "home"), choices[1][1])
-
-        cleaned = slf.clean("2-1")
-        self.assertEqual(dict(model="cms.page", pk=1), cleaned)
-
-        self.assertEqual(slf.prepare_value("blabla"), "")
-        self.assertEqual(slf.prepare_value(dict(model="cms.page", pk=1)), "2-1")
-        self.assertEqual(slf.prepare_value(self.home), "2-1")
-
     def test_link_form(self):
         request = HttpRequest()
         request.POST = {
@@ -165,3 +153,43 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             request.POST["external_link"] = None
             form = LinkForm(request.POST)
             self.assertFalse(form.is_valid())  # no anchor for mail
+
+
+class AutocompleteViewTestCase(TestFixture, CMSTestCase):
+
+    def test_smart_link_field(self):
+        slf = SmartLinkField()
+        choices = get_choices(None)
+        self.assertEqual("example.com", choices[0][0])  # Site name
+        self.assertIn(("2-1", "home"), choices[0][1])
+
+        cleaned = slf.clean("2-1")
+        self.assertEqual(dict(model="cms.page", pk=1), cleaned)
+
+        self.assertEqual(slf.prepare_value("blabla"), "")
+        self.assertEqual(slf.prepare_value(dict(model="cms.page", pk=1)), "2-1")
+        self.assertEqual(slf.prepare_value(self.home), "2-1")
+
+    def test_autocomplete_view(self):
+        tricky_title = """d'acceuil: <script>alert("XSS");</script>"""
+        page = self.create_page(
+            title=tricky_title,
+            template="page.html",
+        )
+        expected_choices = [
+            "home", "content", tricky_title,
+        ]
+
+        self.publish(page, self.language)
+        autocomplete_url = admin_reverse("link_link_autocomplete")
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(autocomplete_url)
+
+        autocomplete_result = response.json()
+        choices = autocomplete_result.get("results")[0]
+
+        self.assertFalse((autocomplete_result.get("pagination") or {}).get("more"))
+
+        for expected, sent in zip(expected_choices, choices.get("children")):
+            self.assertEqual(expected, sent.get("text"))
