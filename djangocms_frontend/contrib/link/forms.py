@@ -61,7 +61,7 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
     empty_label = _("Select a destination")
 
     def __init__(self, *args, **kwargs):
-        if MINIMUM_INPUT_LENGTH:
+        if MINIMUM_INPUT_LENGTH:  # no-cover
             if "attrs" in kwargs:
                 kwargs["attrs"].setdefault("data-minimum-input-length", MINIMUM_INPUT_LENGTH)
             else:
