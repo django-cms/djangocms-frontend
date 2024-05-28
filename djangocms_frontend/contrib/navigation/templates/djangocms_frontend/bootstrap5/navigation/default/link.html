@@ -22,9 +22,10 @@
     {% endif %}
 {% else %}
     {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
-        {% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
-        <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
-        {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
+        <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
+            {{ instance.name }}
+            {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
+        </a>
     {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
 {% endif %}{# djlint:on #}
 {% endspaceless %}
