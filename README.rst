@@ -15,7 +15,7 @@ Key features
 ============
 
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-  and the new upcoming major django CMS 4.
+  and the new major django CMS 4.
 
 - **Separation of plugins from css framework**, i.e. no need to
   rebuild you site's plugin tree if css framework is changed in the

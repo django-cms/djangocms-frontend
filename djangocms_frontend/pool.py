@@ -90,7 +90,7 @@ def setup():
                     "template": patch_template(template),
                     "class": plugin,
                 }
-            else:
+            else:  # pragma: no cover
                 warnings.warn(
                     f"Duplicate candidates for {{% plugin \"{tag_name}\" %}} found. "
                     f"Only registered {plugin_tag_pool[tag_name]['class'].__name__}.", stacklevel=1)
