@@ -79,12 +79,15 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     def get_attributes(self):
         attributes = self.config.get("attributes", {})
-        classes = set(attributes.get("class", "").split())
-        classes.update(self._additional_classes)
-        if classes:
-            attributes["class"] = " ".join(classes)
-        parts = (f'{item}="{conditional_escape(value)}"' if value else f"{item}" for item, value in attributes.items())
-        attributes_string = " ".join(parts)
+        classes = set(attributes.get("class", "").split())  # classes added in attriutes
+        classes.update(self._additional_classes)  # add additional classes
+        classes = (f'class="{conditional_escape(" ".join(classes))}"') if classes else ""  # to string
+        parts = (
+            f'{item}="{conditional_escape(value)}"' if value else f"{item}"
+            for item, value in attributes.items()
+            if item != "class"
+        )
+        attributes_string = (classes + " ".join(parts)).strip()
         return mark_safe(" " + attributes_string) if attributes_string else ""
 
     def save(self, *args, **kwargs):

@@ -24,7 +24,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         {% load frontend cms_tags %}
         {% plugin "alert" alert_context="secondary" alert_dismissible=True %}Alert{% endplugin %}
         """)
-        expected_result = """<div class="alert alert-secondary alert-dismissible alert-primary" role="alert">
+        expected_result = """<div class="alert alert-secondary alert-dismissible" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><div>Alert
         </div></div>"""
 
@@ -62,7 +62,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         expected_result = """
         <div class="card text-primary text-center border-info h-100">
             <div class="text-start card-header"><h4>Card title</h4></div>
-            <div class="card-body text-start text-center card-header">
+            <div class="card-body text-center">
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
             </div>
