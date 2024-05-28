@@ -1,6 +1,10 @@
 import json
 
+from classytags.arguments import Argument, MultiKeywordArgument
+from classytags.core import Options
+from classytags.helpers import AsTag
 from django import template
+from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.defaultfilters import safe
@@ -9,8 +13,10 @@ from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
 
 from djangocms_frontend import settings
+from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
+from djangocms_frontend.pool import plugin_tag_pool
 
 register = template.Library()
 
@@ -95,3 +101,49 @@ def framework_info(context, item, as_json=True):
         if as_json
         else framework_info.get(item, "")
     )
+
+
+class DummyPlugin:
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+        super().__init__()
+
+
+class Plugin(AsTag):
+    name = "plugin"
+    options = Options(
+        Argument("name", required=True),
+        MultiKeywordArgument("kwargs", required=False),
+        "as",
+        Argument("varname", resolve=False, required=False),
+        blocks=[("endplugin", "nodelist")],
+    )
+
+    def message(self, message):
+        return f"<!-- {message} -->" if django_settings.DEBUG else ""
+
+    def get_value(self, context, name, kwargs, nodelist):
+        if name not in plugin_tag_pool:
+            return self.message(f"Plugin {name} not found in pool for plugins usable with {{% plugin %}}.")
+        context.push()
+        instance = (plugin_tag_pool[name]["defaults"])
+        plugin_class = plugin_tag_pool[name]["class"]
+        if issubclass(plugin_class, CMSUIPlugin):
+            #
+            instance["config"].update(kwargs)
+        else:
+            instance.update(kwargs)
+        # Create context
+        context["instance"] = plugin_class.model(**instance)
+        # Call render method of plugin
+        context = plugin_class().render(context, context["instance"], None)
+        # Replace inner plugins with the nodelist, i.e. the content within the plugin tag
+        context["instance"].child_plugin_instances = [DummyPlugin(nodelist)]
+        # ... and redner
+
+        result = plugin_tag_pool[name]["template"].render(context.flatten())
+        context.pop()
+        return result
+
+
+register.tag(Plugin.name, Plugin)

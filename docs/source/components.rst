@@ -35,8 +35,28 @@ each collapsable section.
 Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.3/components/accordion/>`_
 documentation.
 
+Re-usable component example
+===========================
+
+The accordion component is a good example of a re-usable component. It can be
+used in all your project's templates. Here is an example of how to create an
+accordion (if key word arguments are skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "accordion" accordion_header_type="h2" accordion_flush=False %}
+        {% plugin "accordionitem" accordion_item_header="Accordion item 1" accordion_item_open=True %}
+            Content of accordion item 1
+        {% endplugin %}
+        {% plugin "accordionitem" accordion_item_header="Accordion item 2" %}
+            Content of accordion item 1
+        {% endplugin %}
+    {% endplugin %}
+
 .. index::
     single: Alert
+
 
 ***************
 Alert component
@@ -61,6 +81,21 @@ the right hand side.
 Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.3/components/alerts/>`_
 documentation.
 
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "alert" alert_context="primary" alert_dismissible=True %}
+        Alert text goes here!
+    {% endplugin %}
+
+
 .. index::
     single: Badge
 
@@ -78,6 +113,22 @@ plugin, badges are useful, e.g., to mark featured or new headers.
 
 Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.3/components/badge/>`_
 documentation.
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "badge" badge_text="My badge" badge_context="info" badge_pills=False %}
+        This content is ignored.
+    {% endplugin %}
+
+
 
 .. index::
     single: Card
@@ -148,6 +199,31 @@ Here is an example of the new card **Image overlay** feature:
 
 Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.3/components/card/>`_
 documentation.
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "card" card_alignment="center" card_outline="info"
+                     card_text_color="primary" card_full_height=True %}
+        {% plugin "cardinner" inner_type="card-header" text_alignment="start" %}
+            <h4>Card title</h4>
+        {% endplugin %}
+        {% plugin "cardinner" inner_type="card-body" text_alignment="center" %}
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+        {% endplugin %}
+        {% plugin "listgroupitem" %}An item{% endplugin %}
+        {% plugin "listgroupitem" %}A second item{% endplugin %}
+        {% plugin "listgroupitem" %}A third item{% endplugin %}
+    {% endplugin %}
+
 
 .. index::
     single: Carousel
@@ -238,6 +314,23 @@ For more information, see
     Only those destinations (outside the CMS) are shown for which a model admin
     is registered and the logged in user has view permissions: A user will only
     see a destination if they can view it in the admin site.
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% url 'some_view' as some_view %}
+    {% plugin "textlink" external_link=some_view link_type="btn" link_context="primary" link_outline=False %}
+        Click me!
+    {% endplugin %}
+
+
 
 ********************
 List group component

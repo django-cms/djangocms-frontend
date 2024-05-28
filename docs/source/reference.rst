@@ -9,6 +9,24 @@
 **djangocms-frontend** can be configured by putting the appropriate settings
 in your project's ``settings.py``.
 
+.. py:attribute:: settings.CMS_COMPONENT_PLUGINS
+
+    Defaults to ``[]``
+
+    A list of dotted pathes to plugin classes that are supposed to also be
+    components (see :ref:`components`). Components are plugins to also be
+    used in templates using the ``{% plugin %}`` template tag.
+
+    For performance reason, the plugin templates are compiled at startup.
+
+    To make **djangocms-frontend** plugins available as components, add the
+    following line to your project's settings::
+
+        CMS_COMPONENT_PLUGINS = [
+            "djangocms_frontend.cms_plugins.CMSUIPlugin",  # All subclasses are added
+            # add other plugins here if needed
+        ]
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
     Defaults to ``['div', 'section', 'article', 'header', 'footer', 'aside']``.

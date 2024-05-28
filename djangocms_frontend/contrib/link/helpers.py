@@ -60,12 +60,14 @@ def get_object_for_value(value):
 
 
 def unescape(text, nbsp):
-    return (text.replace("&nbsp;", nbsp)
-            .replace("&amp;", "&")
-            .replace("&lt;", "<")
-            .replace("&gt;", ">")
-            .replace("&quot;", '"')
-            .replace("&#x27;", "'"))
+    return (
+        text.replace("&nbsp;", nbsp)
+        .replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", '"')
+        .replace("&#x27;", "'")
+    )
 
 
 def get_link_choices(request, term="", lang=None, nbsp=None):
