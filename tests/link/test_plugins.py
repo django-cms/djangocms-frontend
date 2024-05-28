@@ -4,7 +4,7 @@ from cms.utils.urlutils import admin_reverse
 from django.http import HttpRequest
 
 from djangocms_frontend import settings
-from djangocms_frontend.contrib.link.cms_plugins import LinkPlugin
+from djangocms_frontend.contrib.link.cms_plugins import TextLinkPlugin
 from djangocms_frontend.contrib.link.forms import LinkForm, SmartLinkField
 from djangocms_frontend.contrib.link.helpers import get_choices
 
@@ -15,7 +15,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
     def test_plugin(self):
         add_plugin(
             placeholder=self.placeholder,
-            plugin_type=LinkPlugin.__name__,
+            plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
                 external_link="https://www.divio.com",
@@ -31,7 +31,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         # add more options
         plugin = add_plugin(
             placeholder=self.placeholder,
-            plugin_type=LinkPlugin.__name__,
+            plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
                 external_link="https://www.divio.com",
@@ -54,7 +54,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         # alternate version for link_type
         plugin = add_plugin(
             placeholder=self.placeholder,
-            plugin_type=LinkPlugin.__name__,
+            plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
                 internal_link=dict(model="cms.page", pk=self.page.id),
@@ -75,7 +75,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         # alternate version broken link
         plugin = add_plugin(
             placeholder=self.placeholder,
-            plugin_type=LinkPlugin.__name__,
+            plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
                 internal_link=dict(model="cms.page", pk=-3141),
@@ -96,7 +96,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         # alternate version using link_outline
         plugin = add_plugin(
             placeholder=self.placeholder,
-            plugin_type=LinkPlugin.__name__,
+            plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
                 external_link="https://www.divio.com",
