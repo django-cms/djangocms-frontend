@@ -14,30 +14,30 @@ currently used frontend framework such as Bootstrap, or its specific version.
 Key features
 ============
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-   and the new upcoming major django CMS 4.
+- Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
+  and the new upcoming major django CMS 4.
 
--  **Separation of plugins from css framework**, i.e. no need to
-   rebuild you site's plugin tree if css framework is changed in the
-   future, e.g. from Bootstrap 5 to a future version.
+- **Separation of plugins from css framework**, i.e. no need to
+  rebuild you site's plugin tree if css framework is changed in the
+  future, e.g. from Bootstrap 5 to a future version.
 
--  **New link plugin** allowing to link to internal pages provided by
-   other applications, such as `djangocms-blog
-   <https://github.com/nephila/djangocms-blog>`_.
+- **New link plugin** allowing to link to internal pages provided by
+  other applications, such as `djangocms-blog
+  <https://github.com/nephila/djangocms-blog>`_.
 
--  **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
-   <https://github.com/django-cms/djangocms-bootstrap4>`_
+- **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
+  <https://github.com/django-cms/djangocms-bootstrap4>`_
 
 -  A management command to **migrate from djangocms-bootstrap4**. This
    command automatically migrates all ``djangocms-bootstrap4`` plugins to
    ``djangocms-frontend``.
 
--  **Extensible** within the project and with separate project (e.g. a
-   theme app)
+- **Extensible** within the project and with separate project (e.g. a
+  theme app)
 
--  **Plugins are re-usable as UI compnents** anywhere in your project
-    (e.g. in a custom app) giving your whole project a more consistent
-    user experience.
+- **Plugins are re-usable as UI components** anywhere in your project
+  (e.g. in a custom app) giving your whole project a more consistent
+  user experience.
 
 Description
 ===========
