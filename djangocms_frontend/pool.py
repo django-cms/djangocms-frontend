@@ -84,7 +84,7 @@ def setup():
                 form_class = plugin_admin.get_form(_DummyRequest())
                 instance.initialize_from_form(form_class)
             if tag_name not in plugin_tag_pool:
-                template = get_template(plugin_admin._get_render_template({}, instance, None))
+                template = get_template(plugin_admin._get_render_template({"request": None}, instance, None))
                 plugin_tag_pool[tag_name] = {
                     "defaults": {
                         **_get_plugindefaults(instance),

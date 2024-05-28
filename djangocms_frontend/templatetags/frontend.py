@@ -124,7 +124,7 @@ class Plugin(AsTag):
 
     def get_value(self, context, name, kwargs, nodelist):
         if name not in plugin_tag_pool:
-            return self.message(f"Plugin {name} not found in pool for plugins usable with {{% plugin %}}.")
+            return self.message(f"Plugin \"{name}\" not found in pool for plugins usable with {{% plugin %}}")
         context.push()
         instance = (plugin_tag_pool[name]["defaults"])
         plugin_class = plugin_tag_pool[name]["class"]

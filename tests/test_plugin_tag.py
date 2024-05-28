@@ -1,11 +1,13 @@
 from cms.test_utils.testcases import CMSTestCase
 from django.template import engines
+from django.test import override_settings
 
 from tests.fixtures import TestFixture
 
 django_engine = engines["django"]
 
 
+@override_settings(DEBUG=True)
 class PluginTagTestCase(TestFixture, CMSTestCase):
     def test_tag_default_rendering(self):
         template = django_engine.from_string("""
@@ -80,6 +82,31 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         """)
 
         expected_result = """<a href="/" class="btn btn-primary">Click me!</a>"""
+
+        result = template.render({"request": None})
+
+        self.assertInHTML(expected_result, result)
+
+    @override_settings(DEBUG=True)
+    def test_non_existing_component(self):
+        template = django_engine.from_string("""{% load frontend %}
+            {% plugin "nonexisting" %}
+                This should not be rendered.
+            {% endplugin %}
+        """)
+        expected_result = "<!-- Plugin \"nonexisting\" not found in pool for plugins usable with {% plugin %} -->"
+
+        result = template.render({"request": None})
+
+        self.assertEqual(expected_result.strip(), result.strip())
+
+    def test_non_frontend_component(self):
+        template = django_engine.from_string("""{% load frontend %}
+            {% plugin "text" body="<p>my text</p>" %}
+                This should not be rendered.
+            {% endplugin %}
+        """)
+        expected_result = "<p>my text</p>"
 
         result = template.render({"request": None})
 
