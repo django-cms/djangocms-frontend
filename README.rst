@@ -35,6 +35,9 @@ Key features
 -  **Extensible** within the project and with separate project (e.g. a
    theme app)
 
+-  **Plugins are re-usable as UI compnents** anywhere in your project
+    (e.g. in a custom app) giving your whole project a more consistent
+    user experience.
 
 Description
 ===========
@@ -54,6 +57,10 @@ rebuild your full plugin tree.
 The link plugin has been rewritten to not only allow internal links to other
 CMS pages, but also to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
+
+The plugins are designed to be re-usable as UI components in your
+project, e.g. in a custom app, giving your whole project a more
+consistent user experience.
 
 Contributing
 ============
@@ -150,7 +157,7 @@ See readthedocs for the `documentation
 License
 =======
 
-See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICENSE>`_. 
+See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICENSE>`_.
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
