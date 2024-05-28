@@ -45,9 +45,6 @@ class _DummyUser:
     is_superuser = True
     is_staff = True
 
-    def has_perm(self, perm):
-        return True
-
 
 class _DummyRequest:
     user = _DummyUser()
