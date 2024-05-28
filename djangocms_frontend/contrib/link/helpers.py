@@ -7,9 +7,6 @@ from django.contrib.admin import site
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import FieldError, ObjectDoesNotExist
 from django.utils.encoding import force_str
-from django.utils.html import mark_safe
-
-from djangocms_frontend.settings import EMPTY_CHOICE
 
 LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
 
@@ -62,12 +59,21 @@ def get_object_for_value(value):
     return None
 
 
+def unescape(text, nbsp):
+    return (text.replace("&nbsp;", nbsp)
+            .replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&quot;", '"')
+            .replace("&#x27;", "'"))
+
+
 def get_link_choices(request, term="", lang=None, nbsp=None):
     global _querysets
 
     if nbsp is None:
         nbsp = "" if term else "\u2000"
-    available_objects = [dict(id=EMPTY_CHOICE[0][0], text=EMPTY_CHOICE[0][1])]
+    available_objects = []
     # Now create our list of cms pages
     type_id = ContentType.objects.get_for_model(Page).id
     for value, descr in get_page_choices(lang):
@@ -78,7 +84,9 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
                     "children": [
                         dict(
                             id=f"{type_id}-{page}",
-                            text=mark_safe(name.replace("&nbsp;", nbsp)),
+                            # django admin's autocomplete view requires unescaped strings
+                            # get_page_choices escapes strings, so we undo the escape
+                            text=unescape(name, nbsp),
                         )
                         for page, name in descr
                         if not isinstance(term, str) or term.upper() in name.upper()
