@@ -1,0 +1,9 @@
+{% load i18n menu_tags cache %}{% spaceless %}
+    {% for child in children %}
+        {% if child.selected %}
+            <a href="{{ child.get_absolute_url }}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ child.get_menu_title }}</a>
+        {% else %}
+            <a href="{{ child.get_absolute_url }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ child.get_menu_title }}</a>
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}
