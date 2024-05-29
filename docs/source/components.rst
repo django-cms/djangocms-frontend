@@ -249,6 +249,51 @@ specified using the ``DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES`` setting.
     specified the child plugins add to the caption. If no image is specified
     the child plugins make up the slide.
 
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "carousel" template="my_template" carousel_controls=True %}
+        {% plugin "carouselslide" %}
+            <h4>Carousel slide title</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+        {% plugin "carouselslide" %}
+            <h4>Carousel slide title</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "carousel" %}`` are:
+
+* ``template``: The template to use for the carousel. If not specified the
+  default template is used.
+* ``carousel_controls``: If set to ``True`` the carousel will have controls.
+* ``carousel_indicators``: If set to ``True`` the carousel will have indicators.
+* ``carousel_interval``: The interval in milliseconds between slides. If not
+  specified the default interval (5000) is used.
+* ``carousel_pause``: If set to ``hover`` the carousel will pause on hover.
+* ``carousel_wrap``: If set to ``True`` the carousel will wrap around.
+* ``carousel_keyboard``: If set to ``True`` the carousel will react to keyboard
+  events.
+* ``carousel_ride``: If set to ``True`` the carousel will start sliding
+  automatically.
+* ``carousel_aspect_ratio``: The aspect ratio of the carousel. If not specified
+  the default aspect ratio (16:9) is used.
+
+Parameters for ``{% plugin "carouselslide" %}`` are:
+
+* ``carousel_image``: The image to display in the slide. If not specified the
+  slide will be empty.
+* ``carousel_content``: The HTML caption to display in the slide.
+
+
 ******************
 Collapse component
 ******************
@@ -259,6 +304,7 @@ button) to reveal itself.
 
 Compared to the accordion component the collapse component often is more
 flexible but also requires more detailed styling.
+
 
 .. index::
     single: Jumbotron
@@ -482,6 +528,46 @@ Tabs component
     be provided by you or a third party. If you use a CSS animation library,
     you can make these animations available by adjusting the
     ``DJANGOCMS_FRONTEND_TAB_EFFECTS`` setting.
+
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "tab" template="my_template" tab_type="nav-pills" tab_align="justify-content-center" %}
+        {% plugin "tabitem" tab_title="Tab 1" tab_bordered=True %}
+            <h4>Content of tab 1</h4>
+            <p> Some content...</p>
+        {% endplugin %}
+        {% plugin "tabitem" tab_title="Tab 2" tab_bordered=True %}
+            <h4>Content of tab 2</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+    {% endplugin %}
+
+
+Parameters for ``{% plugin "tab" %}`` are:
+
+* ``template``: The template to use for the tabs. If not specified the default
+  template is used.
+* ``tab_type``: The type of the tabs. If not specified the default type is used.
+* ``tab_align``: The alignment of the tabs. If not specified the default alignment
+  is used.
+* ``tab_index``: The index of the initially active tab. If not specified the
+  first tab is active.
+* ``tab_effect``: The effect of the tabs. ``"fade"`` is available. If not
+  specified no effect is used.
+
+Parameters for ``{% plugin "tabitem" %}`` are:
+
+* ``tab_title``: The title of the tab.
+* ``tab_bordered``: If set to ``True`` the tab will have a border.
 
 
 .. index::

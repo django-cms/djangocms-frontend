@@ -112,3 +112,57 @@ content.
     Removed:
         The column type entry has been removed since it was a legacy from
         Bootstrap version 3.
+
+***************************
+Re-usable component example
+***************************
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "gridcontainer" container_type="container-fluid" %}
+        {% plugin "row" vertical_alignment="align-items-center" %}
+            {% plugin "gridcolumn" xs_col=12 md_col=6 text_alignment="center" %}
+                This content is inside a column.
+            {% endplugin %}
+            {% plugin "gridcolumn" xs_col=12 md_col=6 text_alignment="center" %}
+                This content is inside another column.
+            {% endplugin %}
+        {% endplugin %}
+        This content still is inside a container.
+    {% endplugin %}
+
+Parameters for ``{% plugin "gridcontainer" %}`` are:
+
+* ``container_type``: The type of container. Default is ``container``. Other
+    options are ``container-fluid`` and ``container-full``.
+
+Parameters for ``{% plugin "gridrow" %}`` are:
+
+* ``vertical_alignment``: The vertical alignment of the row. Default is
+    ``align-items-start``. Other options are ``align-items-center`` and
+    ``align-items-end``.
+* ``horizontal_alignment``: The horizontal alignment of the row. Default is
+    ``justify-content-start``. Other options are ``justify-content-center``,
+    ``justify-content-end`` and ``justify-content-around``.
+* ``gutters``: Size of gutter between columns. Default is ``3``. Other
+    options are ``0``, ``1``, ``2``, ``4``, ``5``.
+* ``row_cols_xs``: Number of columns on mobile devices.
+* ``row_cols{sm|md|lg|xl|xx}``: Number of columns on larger devices.
+
+
+Parameters for ``{% plugin "gridcolumn" %}`` are:
+* ``column_alignment``: The vertical alignment of the column. Default is
+    ``align-self-start``. Other options are ``align-self-center`` and
+    ``align-self-end``.
+* ``text_alignment``: The text alignment of the column. Options are
+    ``left``, ``center`` and ``right``.
+* ``xs_col``: Number of columns on mobile devices.
+* ``{sm|md|lg|xl|xx}_col``: Number of columns on larger devices.
+
+
+

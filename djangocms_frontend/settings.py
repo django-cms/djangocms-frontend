@@ -72,6 +72,8 @@ NAVIGATION_TEMPLATE_CHOICES = getattr(
     ],
 )
 
+SHOW_EMPTY_CHILDREN = getattr(django_settings, "DJANGOCMS_FRONTEND_SHOW_EMPTY_CHILDREN", False)
+
 FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
 
 

@@ -103,6 +103,15 @@ def framework_info(context, item, as_json=True):
     )
 
 
+@register.inclusion_tag("djangocms_frontend/user_message.html", takes_context=True)
+def user_message(context, message):
+    """Renders a user message"""
+    toolbar = getattr(context.get("request", None), "toolbar", None)
+    if settings.SHOW_EMPTY_CHILDREN and toolbar.edit_mode_active:
+        return {"message": message}
+    return {}
+
+
 class DummyPlugin:
     def __init__(self, nodelist):
         self.nodelist = nodelist
