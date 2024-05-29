@@ -149,7 +149,6 @@ class Plugin(AsTag):
         # Replace inner plugins with the nodelist, i.e. the content within the plugin tag
         context["instance"].child_plugin_instances = [DummyPlugin(nodelist)]
         # ... and redner
-
         result = plugin_tag_pool[name]["template"].render(context.flatten())
         context.pop()
         return result
