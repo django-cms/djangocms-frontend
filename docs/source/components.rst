@@ -2,18 +2,23 @@
 .. index::
     single: Plugins
 
-###################
- Component plugins
-###################
+############################
+ Standard Component plugins
+############################
 
 ``djangocms-frontend`` adds a set of plugins to Django-CMS to allow for
 quick usage of components defined by the underlying css framework, e.g.
-bootstrap 5.
+Bootstrap 5.
 
 While ``djangocoms-frontend`` is set up to become framework agnostic its
 heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
 Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
+
+.. note::
+
+    Custom components can easily be added using the components contrib
+    package. For more information see :ref:`custom_components`.
 
 .. index::
     single: Accordion

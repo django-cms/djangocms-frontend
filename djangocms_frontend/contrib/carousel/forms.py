@@ -13,7 +13,7 @@ from djangocms_frontend.fields import (
 )
 
 from ... import settings
-from ...common.background import BackgroundFormMixin
+from ...common import BackgroundFormMixin
 from ...fields import HTMLFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem

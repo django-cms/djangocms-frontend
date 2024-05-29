@@ -5,8 +5,7 @@ from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundMixin
+from ...common import AttributesMixin, BackgroundMixin
 from .. import carousel
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models

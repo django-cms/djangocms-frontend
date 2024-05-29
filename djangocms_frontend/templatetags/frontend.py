@@ -3,6 +3,7 @@ import json
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options
 from classytags.helpers import AsTag
+from cms.templatetags.cms_tags import render_plugin
 from django import template
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
@@ -155,3 +156,21 @@ class Plugin(AsTag):
 
 
 register.tag(Plugin.name, Plugin)
+
+
+@register.simple_tag(takes_context=True)
+def render_child_plugins(context, instance, plugin_type=None):
+    """Renders the child plugins of a plugin instance"""
+    if not instance.child_plugin_instances:
+        return ""
+    context.push()
+    context["parent"] = instance
+    result = ""
+    for child in instance.child_plugin_instances:
+        if isinstance(child, DummyPlugin):
+            result += child.nodelist.render(context)
+        else:
+            if plugin_type and child.plugin_type == plugin_type:
+                result += render_plugin(context, child)
+    context.pop()
+    return result if result else getattr(instance, "simple_content", "")

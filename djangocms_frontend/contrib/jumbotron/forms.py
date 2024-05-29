@@ -3,9 +3,11 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
-from djangocms_frontend.common.background import BackgroundFormMixin
-from djangocms_frontend.common.responsive import ResponsiveFormMixin
-from djangocms_frontend.common.spacing import SpacingFormMixin
+from djangocms_frontend.common import (
+    BackgroundFormMixin,
+    ResponsiveFormMixin,
+    SpacingFormMixin,
+)
 from djangocms_frontend.contrib import jumbotron
 from djangocms_frontend.fields import (
     AttributesFormField,

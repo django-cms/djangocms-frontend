@@ -7,9 +7,12 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...common.background import BackgroundFormMixin
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import MarginFormMixin, PaddingFormMixin
+from ...common import (
+    BackgroundFormMixin,
+    MarginFormMixin,
+    PaddingFormMixin,
+    ResponsiveFormMixin,
+)
 from ...fields import (
     AttributesFormField,
     ButtonGroup,

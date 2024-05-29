@@ -4,8 +4,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import MarginFormMixin, PaddingFormMixin
+from ...common import MarginFormMixin, PaddingFormMixin, ResponsiveFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,

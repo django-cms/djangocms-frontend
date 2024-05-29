@@ -4,8 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from djangocms_frontend import settings
 
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.spacing import SpacingMixin
+from ...common import AttributesMixin, SpacingMixin
 from .. import utilities
 from . import forms, models
 
