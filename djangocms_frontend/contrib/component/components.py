@@ -1,5 +1,7 @@
 import importlib
 
+from cms.api import add_plugin
+from cms.plugin_base import CMSPluginBase
 from django import forms
 from django.utils.module_loading import autodiscover_modules
 from django.utils.translation import gettext_lazy as _
@@ -22,6 +24,9 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
 
 class CMSFrontendComponent(forms.Form):
     """Base class for frontend components:"""
+
+    slot_template = "djangocms_frontend/slot.html"
+
     @classmethod
     def admin_form_factory(cls, **kwargs) -> type:
         mixins = getattr(cls._component_meta, "mixins", [])
@@ -49,6 +54,13 @@ class CMSFrontendComponent(forms.Form):
         )
 
     @classmethod
+    def get_slot_plugins(cls) -> dict[str:str]:
+        slots : list[tuple[str, str]] = getattr(cls._component_meta, "slots", [])
+        return {
+            f"{cls.__name__}{slot[0].capitalize()}Plugin": slot[1] for slot in slots
+        }
+
+    @classmethod
     def plugin_model_factory(cls) -> type:
         model_class = type(
             cls.__name__,
@@ -72,6 +84,7 @@ class CMSFrontendComponent(forms.Form):
     @classmethod
     def plugin_factory(cls) -> type:
         mixins = getattr(cls._component_meta, "mixins", [])
+        slots = cls.get_slot_plugins()
         mixins = _get_mixin_classes(mixins)
 
         return type(
@@ -85,13 +98,34 @@ class CMSFrontendComponent(forms.Form):
                 "module": getattr(cls._component_meta, "module", _("Component")),
                 "model": cls.plugin_model_factory(),
                 "form": cls.admin_form_factory(),
-                "allow_children": getattr(cls._component_meta, "allow_children", False),
-                "child_classes": getattr(cls._component_meta, "child_classes", []),
+                "allow_children": getattr(cls._component_meta, "allow_children", False) or slots,
+                "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
                 "render_template": getattr(cls._component_meta, "render_template", CMSUIPlugin.render_template),
                 "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
                 "change_form_template": "djangocms_frontend/admin/base.html",
+                "slots": slots,
+                "render": cls.render_slot_context,
+                "save_model": cls.save_model,
             },
         )
+
+    @classmethod
+    def slot_plugin_factory(cls) -> list[type]:
+        slots = cls.get_slot_plugins()
+        return [
+            type(
+                slot,
+                (CMSPluginBase,),
+                {
+                    "name": slot_name,
+                    "module": getattr(cls._component_meta, "module", _("Component")),
+                    "allow_children": True,
+                    "parent_classes": cls.__name__ + "Plugin",
+                    "render_template": cls.slot_template,
+                },
+            )
+            for slot, slot_name in slots.items()
+        ]
 
     @classmethod
     @property
@@ -107,13 +141,27 @@ class CMSFrontendComponent(forms.Form):
     def get_short_description(self) -> str:
         return ""
 
+    def save_model(self, request, obj, form, change):
+        super(CMSUIPlugin, self).save_model(request, obj, form, change)
+        if not change:
+            for slot in self.slots.keys():
+                add_plugin(obj.placeholder, slot, obj.language, target=obj)
+
+    def render_slot_context(self, context, instance, placeholder):
+        context["instance"] = instance
+        return context
+
 
 class Components:
     _registry: dict = {}
     _discovered: bool = False
 
     def register(self, component):
-        self._registry[component.__name__] = (component.plugin_model_factory(), component.plugin_factory())
+        self._registry[component.__name__] = (
+            component.plugin_model_factory(),
+            component.plugin_factory(),
+            component.slot_plugin_factory(),
+        )
         return component
 
 

@@ -74,7 +74,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         self.assertInHTML(expected_result, result)
 
-    def test_link_component(self):
+    def test_link_plugin(self):
         template = django_engine.from_string("""{% load frontend %}
             {% plugin "link" name="Click" external_link="/" link_type="btn" link_context="primary" link_outline=False %}
                 Click me!
@@ -88,7 +88,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         self.assertInHTML(expected_result, result)
 
     @override_settings(DEBUG=True)
-    def test_non_existing_component(self):
+    def test_non_existing_plugin(self):
         template = django_engine.from_string("""{% load frontend %}
             {% plugin "nonexisting" %}
                 This should not be rendered.
@@ -100,7 +100,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         self.assertEqual(expected_result.strip(), result.strip())
 
-    def test_non_frontend_component(self):
+    def test_non_frontend_plugin(self):
         template = django_engine.from_string("""{% load frontend %}
             {% plugin "text" body="<p>my text</p>" %}
                 This should not be rendered.

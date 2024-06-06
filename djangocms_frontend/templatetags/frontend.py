@@ -1,7 +1,7 @@
 import json
 
 from classytags.arguments import Argument, MultiKeywordArgument
-from classytags.core import Options
+from classytags.core import Options, Tag
 from classytags.helpers import AsTag
 from cms.templatetags.cms_tags import render_plugin
 from django import template
@@ -113,10 +113,34 @@ def user_message(context, message):
     return {}
 
 
+@register.tag
+class SlotTag(Tag):
+    name = "slot"
+    options = Options(
+        Argument("slot_name", required=True),
+        blocks=[("endslot", "nodelist")],
+    )
+
+    def render_tag(self, context, slot_name, nodelist):
+        return ""
+
+
 class DummyPlugin:
-    def __init__(self, nodelist):
+    def __init__(self, nodelist, plugin_type, slot_name: str | None = None) -> "DummyPlugin":
         self.nodelist = nodelist
+        self.plugin_type = (f"{plugin_type}{slot_name.capitalize()}Plugin") if slot_name else "DummyPlugin"
+        if slot_name is None:
+            self.parse_slots(nodelist, plugin_type)
         super().__init__()
+
+    def parse_slots(self, nodelist, plugin_type):
+        self.slots = [self]
+        for node in nodelist:
+            if isinstance(node, SlotTag):
+                self.slots.append(DummyPlugin(node.nodelist, plugin_type, node.kwargs.get("slot_name")))
+
+    def get_instances(self):
+        return self.slots
 
 
 class Plugin(AsTag):
@@ -134,9 +158,9 @@ class Plugin(AsTag):
 
     def get_value(self, context, name, kwargs, nodelist):
         if name not in plugin_tag_pool:
-            return self.message(f"Plugin \"{name}\" not found in pool for plugins usable with {{% plugin %}}")
+            return self.message(f'Plugin "{name}" not found in pool for plugins usable with {{% plugin %}}')
         context.push()
-        instance = (plugin_tag_pool[name]["defaults"])
+        instance = plugin_tag_pool[name]["defaults"]
         plugin_class = plugin_tag_pool[name]["class"]
         if issubclass(plugin_class, CMSUIPlugin):
             #
@@ -148,29 +172,70 @@ class Plugin(AsTag):
         # Call render method of plugin
         context = plugin_class().render(context, context["instance"], None)
         # Replace inner plugins with the nodelist, i.e. the content within the plugin tag
-        context["instance"].child_plugin_instances = [DummyPlugin(nodelist)]
+        context["instance"].child_plugin_instances = DummyPlugin(
+            nodelist, context["instance"].plugin_type
+        ).get_instances()
         # ... and redner
         result = plugin_tag_pool[name]["template"].render(context.flatten())
         context.pop()
         return result
 
 
+class RenderChildPluginsTag(Tag):
+    """
+    This template node is used to render child plugins of a plugin
+    instance. It allows for selection of certain plugin types.
+
+    e.g.: {% childplugins instance %}
+
+    {% childplugins instance "LinkPlugin" %}
+
+    {% placeholder "footer" inherit or %}
+        <a href="/about/">About us</a>
+    {% endplaceholder %}
+
+    Keyword arguments:
+    name -- the name of the placeholder
+    inherit -- optional argument which if given will result in inheriting
+        the content of the placeholder with the same name on parent pages
+    or -- optional argument which if given will make the template tag a block
+        tag whose content is shown if the placeholder is empty
+    """
+
+    name = "childplugins"
+    options = Options(
+        # PlaceholderOptions parses until the "endchildplugins" tag is found if
+        # the "or" option is given
+        Argument("instance", required=True),
+        Argument("plugin_type", required=False),
+        blocks=[("endchildplugins", "nodelist")],
+    )
+
+    def render_tag(self, context, instance, plugin_type, nodelist):
+        context.push()
+        context["parent"] = instance
+        content = ""
+        if plugin_type and not plugin_type.endswith("Plugin"):
+            plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
+        for node in nodelist:
+            print(type(node), getattr(node, "args", None), getattr(node, "kwargs", None), plugin_type)
+        for child in instance.child_plugin_instances:
+            if not plugin_type or child.plugin_type == plugin_type:
+                if isinstance(child, DummyPlugin):
+                    content += child.nodelist.render(context)
+                else:
+                    for grand_child in child.child_plugin_instances:
+                        content += render_plugin(context, grand_child)
+        content = content or getattr(instance, "simple_content", "")
+        print(f"{content.strip()=}")
+
+        if not content.strip() and nodelist:
+            # "or" parameter given
+            return nodelist.render(context)
+
+        context.pop()
+        return content
+
+
 register.tag(Plugin.name, Plugin)
-
-
-@register.simple_tag(takes_context=True)
-def render_child_plugins(context, instance, plugin_type=None):
-    """Renders the child plugins of a plugin instance"""
-    if not instance.child_plugin_instances:
-        return ""
-    context.push()
-    context["parent"] = instance
-    result = ""
-    for child in instance.child_plugin_instances:
-        if isinstance(child, DummyPlugin):
-            result += child.nodelist.render(context)
-        else:
-            if plugin_type and child.plugin_type == plugin_type:
-                result += render_plugin(context, child)
-    context.pop()
-    return result if result else getattr(instance, "simple_content", "")
+register.tag(RenderChildPluginsTag.name, RenderChildPluginsTag)
