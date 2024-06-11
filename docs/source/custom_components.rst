@@ -18,13 +18,13 @@ drag and drop **and** frontend developers for use in templates from a single
 source.
 
 To use custom components in your project, add
-``"djangocms_frontend.contrib.components"`` to your ``INSTALLED_APPS`` setting.
+``"djangocms_frontend.contrib.component"`` to your ``INSTALLED_APPS`` setting.
 
 .. code-block:: python
 
     INSTALLED_APPS = [
         ...
-        "djangocms_frontend.contrib.components",
+        "djangocms_frontend.contrib.component",
         ...
     ]
 
