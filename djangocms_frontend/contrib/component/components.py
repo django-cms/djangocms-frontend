@@ -112,6 +112,7 @@ class CMSFrontendComponent(forms.Form):
                 "slots": slots,
                 "render": cls.render_slot_context,
                 "save_model": cls.save_model,
+                "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", None),
             },
         )
 
