@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.tabs",
     "djangocms_frontend.contrib.utilities",
     "sekizai",
+    "tests.test_app",
 ]
 
 if DJANGO_3_1:

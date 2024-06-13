@@ -75,11 +75,10 @@ def setup():
         if tag_name.endswith("plugin"):
             tag_name = tag_name[:-6]
         try:
-            instance = plugin.model()
+            instance = plugin.model()  # Create instance with defaults
             plugin_admin = plugin(admin_site=admin_site)
             if hasattr(instance, "initialize_from_form"):
-                form_class = plugin_admin.get_form(_DummyRequest())
-                instance.initialize_from_form(form_class)
+                instance.initialize_from_form(plugin.form)
             if tag_name not in plugin_tag_pool:
                 template = get_template(plugin_admin._get_render_template({"request": None}, instance, None))
                 plugin_tag_pool[tag_name] = {
@@ -95,4 +94,4 @@ def setup():
                     f"Duplicate candidates for {{% plugin \"{tag_name}\" %}} found. "
                     f"Only registered {plugin_tag_pool[tag_name]['class'].__name__}.", stacklevel=1)
         except Exception as exc:
-            warnings.warn(str(exc), stacklevel=1)
+            warnings.warn(f"{plugin.__name__}: \n{str(exc)}", stacklevel=1)

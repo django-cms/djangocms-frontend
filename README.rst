@@ -15,7 +15,7 @@ Key features
 ============
 
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-  and the new major django CMS 4.
+  and django CMS 4.
 
 - **Separation of plugins from css framework**, i.e. no need to
   rebuild you site's plugin tree if css framework is changed in the
@@ -28,16 +28,17 @@ Key features
 - **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
   <https://github.com/django-cms/djangocms-bootstrap4>`_
 
--  A management command to **migrate from djangocms-bootstrap4**. This
-   command automatically migrates all ``djangocms-bootstrap4`` plugins to
-   ``djangocms-frontend``.
-
 - **Extensible** within the project and with separate project (e.g. a
-  theme app)
+  theme app). Create your own components with a few lines of code only.
 
 - **Plugins are re-usable as UI components** anywhere in your project
   (e.g. in a custom app) giving your whole project a more consistent
   user experience.
+
+-  A management command to **migrate from djangocms-bootstrap4**. This
+   command automatically migrates all ``djangocms-bootstrap4`` plugins to
+   ``djangocms-frontend``.
+
 
 Description
 ===========

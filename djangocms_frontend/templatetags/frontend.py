@@ -12,9 +12,9 @@ from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
+from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.cms_plugins import CMSUIPlugin
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
 from djangocms_frontend.pool import plugin_tag_pool
@@ -162,8 +162,8 @@ class Plugin(AsTag):
         context.push()
         instance = plugin_tag_pool[name]["defaults"]
         plugin_class = plugin_tag_pool[name]["class"]
-        if issubclass(plugin_class, CMSUIPlugin):
-            #
+        # update_instance(instance, plugin_class, kwargs)
+        if issubclass(plugin_class.form, EntangledModelFormMixin):
             instance["config"].update(kwargs)
         else:
             instance.update(kwargs)
@@ -217,8 +217,6 @@ class RenderChildPluginsTag(Tag):
         content = ""
         if plugin_type and not plugin_type.endswith("Plugin"):
             plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
-        for node in nodelist:
-            print(type(node), getattr(node, "args", None), getattr(node, "kwargs", None), plugin_type)
         for child in instance.child_plugin_instances:
             if not plugin_type or child.plugin_type == plugin_type:
                 if isinstance(child, DummyPlugin):
@@ -227,7 +225,6 @@ class RenderChildPluginsTag(Tag):
                     for grand_child in child.child_plugin_instances:
                         content += render_plugin(context, grand_child)
         content = content or getattr(instance, "simple_content", "")
-        print(f"{content.strip()=}")
 
         if not content.strip() and nodelist:
             # "or" parameter given

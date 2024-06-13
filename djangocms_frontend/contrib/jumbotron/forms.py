@@ -9,6 +9,7 @@ from djangocms_frontend.common import (
     SpacingFormMixin,
 )
 from djangocms_frontend.contrib import jumbotron
+from djangocms_frontend.contrib.jumbotron import models
 from djangocms_frontend.fields import (
     AttributesFormField,
     TagTypeFormField,
@@ -33,6 +34,7 @@ class JumbotronForm(
     """
 
     class Meta:
+        model = models.Jumbotron
         entangled_fields = {
             "config": [
                 "jumbotron_fluid",

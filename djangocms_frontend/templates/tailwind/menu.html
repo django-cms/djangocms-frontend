@@ -1,9 +1,33 @@
 {% load i18n menu_tags cache %}{% spaceless %}
     {% for child in children %}
-        {% if child.selected %}
-            <a href="{{ child.get_absolute_url }}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ child.get_menu_title }}</a>
+        {% if child.children %}
+            <div class="relative ml-3">
+              <div>
+                <button type="button" class="relative flex rounded-full bg-gray-800 text-gray-400 hover:text-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="absolute -inset-1.5"></span>
+                    {{ child.get_menu_title }}
+                </button>
+              </div>
+
+          <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+                {% show_menu from_level to_level extra_inactive extra_active "tailwind/dropdown.html" "" "" child %}
+
+            </div>
         {% else %}
-            <a href="{{ child.get_absolute_url }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ child.get_menu_title }}</a>
+            {% if child.selected %}
+                <a href="{{ child.get_absolute_url }}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ child.get_menu_title }}</a>
+            {% else %}
+                <a href="{{ child.get_absolute_url }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ child.get_menu_title }}</a>
+            {% endif %}
         {% endif %}
     {% endfor %}
 {% endspaceless %}

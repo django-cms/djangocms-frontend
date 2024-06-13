@@ -1,4 +1,6 @@
 import importlib
+import typing
+import warnings
 
 from cms.api import add_plugin
 from cms.plugin_base import CMSPluginBase
@@ -14,7 +16,7 @@ from djangocms_frontend.models import FrontendUIItem
 def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
     """Find and import mixin classes from a list of mixin strings"""
     mixins = [
-        (mixin.rsplit(".")[0], f"{mixin.rsplit['.'][-1]}{suffix}Mixin")
+        (mixin.rsplit(".")[0], f"{mixin.rsplit('.')[-1]}{suffix}Mixin")
         if "." in mixin
         else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
         for mixin in mixins
@@ -26,6 +28,9 @@ class CMSFrontendComponent(forms.Form):
     """Base class for frontend components:"""
 
     slot_template = "djangocms_frontend/slot.html"
+    _base_form = EntangledModelForm
+    _plugin_mixins = []
+    _model_mixins = []
 
     @classmethod
     def admin_form_factory(cls, **kwargs) -> type:
@@ -35,8 +40,8 @@ class CMSFrontendComponent(forms.Form):
             f"{cls.__name__}Form",
             (
                 *mixins,
-                EntangledModelForm,
                 cls,
+                cls._base_form,
             ),
             {
                 **kwargs,
@@ -64,7 +69,7 @@ class CMSFrontendComponent(forms.Form):
     def plugin_model_factory(cls) -> type:
         model_class = type(
             cls.__name__,
-            (FrontendUIItem,),
+            (*cls._model_mixins, FrontendUIItem,),
             {
                 "Meta": type(
                     "Meta",
@@ -91,6 +96,7 @@ class CMSFrontendComponent(forms.Form):
             cls.__name__ + "Plugin",
             (
                 *mixins,
+                *cls._plugin_mixins,
                 CMSUIPlugin,
             ),
             {
@@ -128,20 +134,29 @@ class CMSFrontendComponent(forms.Form):
         ]
 
     @classmethod
+    def get_registration(cls) -> tuple[type, type, list[type]]:
+        return (
+            cls.plugin_model_factory(),
+            cls.plugin_factory(),
+            cls.slot_plugin_factory(),
+        )
+
+    @classmethod
     @property
-    def _component_meta(cls) -> type | None:
+    def _component_meta(cls) -> typing.Optional[type]:
         if hasattr(cls, "Meta"):
             return cls.Meta
         return None
 
     @classmethod
-    def _generate_fieldset(cls):
+    def _generate_fieldset(cls) -> list[tuple[typing.Optional[str], dict]]:
         return [(None, {"fields": cls.declared_fields.keys()})]
 
     def get_short_description(self) -> str:
         return ""
 
-    def save_model(self, request, obj, form, change):
+    def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
+        """Auto-createas slot plugins upon creation of component plugin instance"""
         super(CMSUIPlugin, self).save_model(request, obj, form, change)
         if not change:
             for slot in self.slots.keys():
@@ -152,16 +167,25 @@ class CMSFrontendComponent(forms.Form):
         return context
 
 
+class ComponentLinkMixin:
+    from djangocms_frontend.contrib.link.cms_plugins import LinkPluginMixin
+    from djangocms_frontend.contrib.link.forms import AbstractLinkForm
+    from djangocms_frontend.contrib.link.models import GetLinkMixin
+
+    _base_form = AbstractLinkForm
+    _model_mixins = [GetLinkMixin]
+    _plugin_mixins = [LinkPluginMixin]
+
+
 class Components:
     _registry: dict = {}
     _discovered: bool = False
 
     def register(self, component):
-        self._registry[component.__name__] = (
-            component.plugin_model_factory(),
-            component.plugin_factory(),
-            component.slot_plugin_factory(),
-        )
+        if component.__name__ in self._registry:
+            warnings.warn(f"Component {component.__name__} already registered", stacklevel=2)
+            return component
+        self._registry[component.__name__] = component.get_registration()
         return component
 
 
