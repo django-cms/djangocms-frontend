@@ -9,3 +9,4 @@ wheel
 black
 pre-commit
 djangocms-text
+html5lib
