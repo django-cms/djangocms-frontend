@@ -43,7 +43,7 @@ Add a ``cms_components.py`` file to the ``theme`` app:
 .. code-block:: python
 
     # theme/cms_components.py
-    from djangocms_frontend.contrib.component.components import CMSFrontendComponent
+    from djangocms_frontend.contrib.component.components import ComponentLinkMixin, CMSFrontendComponent
     from djangocms_frontend.contrib.component.components import components
     from djangocms_frontend.contrib.image.fields import ImageFormField
 
@@ -61,22 +61,20 @@ Add a ``cms_components.py`` file to the ``theme`` app:
         # declare fields
         title = forms.CharField(required=True)
         slogan = forms.CharField(required=True, widget=forms.Textarea)
-        image = ImageFormField(required=True)
+        hero_image = ImageFormField(required=True)
 
         # add description for the structure board
         def get_short_description(self):
             return self.title
 
     @components.register
-    class MyButton(CMSFrontendComponent):
+    class MyButton(ComponentLinkMixin, CMSFrontendComponent):
         class Meta:
             name = "Button"
             render_template = "components/button.html"
             allow_children = False
-            mixin = ["djangocms_frontend.contrib.link"]
 
         text = forms.CharField(required=True)
-        link = forms.URLField(required=True)
 
         def get_short_description(self):
             return self.text
@@ -107,7 +105,7 @@ The template could be, for example:
                      {% endchildplugins %}
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ instance.image_related.url }}" alt="{{ instance.image_related.alt }}">
+                <img src="{{ instance.hero_image.url }}" alt="{{ instance.image_related.alt }}">
             </div>
         </div>
     </section>

@@ -5,11 +5,14 @@ import warnings
 from cms.api import add_plugin
 from cms.plugin_base import CMSPluginBase
 from django import forms
+from django.utils.functional import cached_property
 from django.utils.module_loading import autodiscover_modules
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.cms_plugins import CMSUIPlugin
+from djangocms_frontend.contrib.image.fields import ImageFormField
+from djangocms_frontend.helpers import get_related_object
 from djangocms_frontend.models import FrontendUIItem
 
 
@@ -22,6 +25,16 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
         for mixin in mixins
     ]
     return [importlib.import_module(module).__dict__[name] for module, name in mixins]
+
+
+def _field_getter(field_name: str) -> callable:
+    """Generate a function for get the related image field"""
+    def _image_field_getter(self):
+        if self.config.get(field_name, None):
+            return get_related_object(self.config, field_name)
+        return None
+    _image_field_getter.__name__ = field_name
+    return _image_field_getter
 
 
 class CMSFrontendComponent(forms.Form):
@@ -67,6 +80,11 @@ class CMSFrontendComponent(forms.Form):
 
     @classmethod
     def plugin_model_factory(cls) -> type:
+        image_fields = {}
+        for name, field_cls in cls.declared_fields.items():
+            if isinstance(field_cls, ImageFormField):
+                image_fields[name] = cached_property(_field_getter(name))
+
         model_class = type(
             cls.__name__,
             (*cls._model_mixins, FrontendUIItem,),
@@ -80,6 +98,7 @@ class CMSFrontendComponent(forms.Form):
                         "verbose_name": getattr(cls._component_meta, "name", cls.__name__),
                     },
                 ),
+                **image_fields,
                 "get_short_description": cls.get_short_description,
                 "__module__": "djangocms_frontend.contrib.component.models",
             },
@@ -112,7 +131,7 @@ class CMSFrontendComponent(forms.Form):
                 "slots": slots,
                 "render": cls.render_slot_context,
                 "save_model": cls.save_model,
-                "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", None),
+                "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", 1),
             },
         )
 
