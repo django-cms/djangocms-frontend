@@ -1,4 +1,5 @@
 import json
+import typing
 
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options, Tag
@@ -126,7 +127,7 @@ class SlotTag(Tag):
 
 
 class DummyPlugin:
-    def __init__(self, nodelist, plugin_type, slot_name: str | None = None) -> "DummyPlugin":
+    def __init__(self, nodelist, plugin_type, slot_name: typing.Optional[str] = None) -> "DummyPlugin":
         self.nodelist = nodelist
         self.plugin_type = (f"{plugin_type}{slot_name.capitalize()}Plugin") if slot_name else "DummyPlugin"
         if slot_name is None:
