@@ -2,7 +2,6 @@
 
 Django>=4.2,<4.3
 django-cms>=4.1
-djangocms-alias>=2.0.0
+djangocms-alias>=2.0.1
 djangocms-versioning>=2.0.0
 git+https://github.com/fsbraun/djangocms-url-manager.git@master#egg=djangocms-url-manager
-djangocms-text-ckeditor
