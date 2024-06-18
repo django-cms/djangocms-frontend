@@ -14,6 +14,6 @@ class CMSUIPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         for key, value in instance.config.items():
             if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
-                if not hasattr(instance, key + "_related"):
-                    setattr(instance, key + "_related", get_related_object(instance.config, key))
+                if key not in instance.__dir__():  # hasattr would return the value in the config dict
+                    setattr(instance, key, get_related_object(instance.config, key))
         return super().render(context, instance, placeholder)
