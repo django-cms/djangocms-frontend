@@ -12,17 +12,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8, 3.9, "3.10", "3.11"]  # latest release minus two
+        python-version: ["3.10", "3.11", "3.12"]  # latest release minus two
         requirements-file: [
-            dj32_cms38.txt,
-            dj32_cms39.txt,
-            dj32_cms41.txt,
-            dj40_cms311.txt,
-            dj41_cms311.txt,
             dj42_cms311.txt,
             dj40_cms41.txt,
             dj41_cms41.txt,
             dj42_cms41.txt,
+            dj50_cms41.txt,
+            dj51_cms41.txt,
         ]
         os: [
             ubuntu-20.04,
