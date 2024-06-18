@@ -1,4 +1,5 @@
 from cms.test_utils.testcases import CMSTestCase
+from django.contrib.sites.shortcuts import get_current_site
 from django.template import engines
 from django.test import override_settings
 
@@ -75,15 +76,25 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         self.assertInHTML(expected_result, result)
 
     def test_link_plugin(self):
-        template = django_engine.from_string("""{% load frontend %}
-            {% plugin "link" name="Click" external_link="/" link_type="btn" link_context="primary" link_outline=False %}
-                Click me!
-            {% endplugin %}
-        """)
+        from cms import __version__ as cms_version
+        if cms_version < "4":
+            grouper = None
+            template = django_engine.from_string("""{% load frontend %}
+                {% plugin "link" name="Click" external_link="/test/" site=test_site link_type="btn" link_context="primary" link_outline=False %}
+                    Click me!
+                {% endplugin %}
+            """)  # noqa: B950
+        else:
+            grouper = self.create_url(manual_url="/test/").url_grouper
+            template = django_engine.from_string("""{% load frontend %}
+                {% plugin "link" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
+                    Click me!
+                {% endplugin %}
+            """)  # noqa: B950
 
-        expected_result = """<a href="/" class="btn btn-primary">Click me!</a>"""
+        expected_result = """<a href="/test/" class="btn btn-primary">Click me!</a>"""
 
-        result = template.render({"request": None})
+        result = template.render({"request": None, "test_site": get_current_site(None), "grouper": grouper})
 
         self.assertInHTML(expected_result, result)
 

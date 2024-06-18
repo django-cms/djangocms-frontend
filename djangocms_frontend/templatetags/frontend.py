@@ -9,6 +9,7 @@ from django import template
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db import models
 from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
@@ -163,9 +164,22 @@ class Plugin(AsTag):
         context.push()
         instance = plugin_tag_pool[name]["defaults"]
         plugin_class = plugin_tag_pool[name]["class"]
-        # update_instance(instance, plugin_class, kwargs)
+
         if issubclass(plugin_class.form, EntangledModelFormMixin):
-            instance["config"].update(kwargs)
+            # Handle entangled forms such as djangocms-frontend's correctly
+            for field, value in kwargs.items():
+                for container, fields in plugin_class.form._meta.entangled_fields.items():
+                    if field in fields:
+                        if isinstance(value, models.Model):
+                            # Correctly encode references
+                            value = {
+                                'model': f'{value._meta.app_label}.{value._meta.model_name}',
+                                'pk': value.pk,
+                            }
+                        instance[container][field] = value
+                        break
+                else:
+                    instance[field] = value
         else:
             instance.update(kwargs)
         # Create context
