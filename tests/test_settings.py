@@ -14,7 +14,7 @@ INSTALLED_APPS = [
     "cms",
     "menus",
     "treebeard",
-    "djangocms_text_ckeditor",
+    "djangocms_text",
     "djangocms_frontend",
     "djangocms_frontend.contrib.accordion",
     "djangocms_frontend.contrib.alert",
@@ -46,7 +46,6 @@ try:  # V4 test?
 
     INSTALLED_APPS += [
         "djangocms_versioning",
-        "djangocms_alias",
         "djangocms_url_manager",
     ]
 except ImportError:  # Nope
@@ -126,5 +125,5 @@ TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_i
 
 CMS_COMPONENT_PLUGINS = [
     "djangocms_frontend.cms_plugins.CMSUIPlugin",
-    "djangocms_text_ckeditor.cms_plugins.TextPlugin",
+    "djangocms_text.cms_plugins.TextPlugin",
 ]
