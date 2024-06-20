@@ -1,6 +1,5 @@
 {% load i18n menu_tags cache %}
-<div class="absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-    {% for child in children %}
-        <a href="{{ child.get_absolute_url }}" class="block px-4 py-2 text-sm text-gray-700{% if child.selected %} bg-gray-100{% endif %}" role="menuitem" tabindex="-1">{{ child.get_menu_title }}</a>
-    {% endfor %}
+  {% for child in children %}
+    <a href="{{ child.get_absolute_url }}" class="block px-4 py-2 text-sm text-gray-700{% if child.selected %} bg-gray-100{% endif %}" role="menuitem" tabindex="-1">{{ child.get_menu_title }}</a>
+  {% endfor %}
 </div>
