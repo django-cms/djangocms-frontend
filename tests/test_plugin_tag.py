@@ -1,3 +1,6 @@
+from unittest import skipIf
+
+from cms import __version__ as cms_version
 from cms.test_utils.testcases import CMSTestCase
 from django.contrib.sites.shortcuts import get_current_site
 from django.template import engines
@@ -75,12 +78,12 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         self.assertInHTML(expected_result, result)
 
+    @skipIf(cms_version < "4", "djangocms-url-manager currently does not work with django CMS 4.1+")
     def test_link_plugin(self):
-        from cms import __version__ as cms_version
         if cms_version < "4":
             grouper = None
             template = django_engine.from_string("""{% load frontend %}
-                {% plugin "link" name="Click" external_link="/test/" site=test_site link_type="btn" link_context="primary" link_outline=False %}
+                {% plugin "link" name="Click" external_link="/test/" link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
             """)  # noqa: B950
