@@ -1,5 +1,3 @@
-from unittest import skipIf
-
 from cms import __version__ as cms_version
 from cms.test_utils.testcases import CMSTestCase
 from django.contrib.sites.shortcuts import get_current_site
@@ -78,7 +76,6 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         self.assertInHTML(expected_result, result)
 
-    @skipIf(cms_version < "4", "djangocms-url-manager currently does not work with django CMS 4.1+")
     def test_link_plugin(self):
         if cms_version < "4":
             grouper = None

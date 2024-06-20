@@ -17,12 +17,17 @@ class GetLinkMixin:
             url_grouper = get_related_object(self.config, "url_grouper")
             if not url_grouper:
                 return ""
-            url = url_grouper.get_content(show_draft_content=True)
+            # The next line is a workaround, since djangocms-url-manager does not provide a way of
+            # getting the current URL object.
+            from djangocms_url_manager.models import Url
+            url = Url._base_manager.filter(url_grouper=url_grouper).order_by("pk").last()
+            if not url:
+                return ""
             # simulate the call to the unauthorized CMSPlugin.page property
             cms_page = self.placeholder.page if self.placeholder_id else None
 
             # first, we check if the placeholder the plugin is attached to
-            # has a page. Thus the check "is not None":
+            # has a page. Thus, the check "is not None":
             if cms_page is not None:
                 if getattr(cms_page, "node", None):
                     cms_page_site_id = getattr(cms_page.node, "site_id", None)
