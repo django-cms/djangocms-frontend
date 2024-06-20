@@ -21,7 +21,7 @@ class GetLinkMixin:
             # getting the current URL object.
             from djangocms_url_manager.models import Url
             url = Url._base_manager.filter(url_grouper=url_grouper).order_by("pk").last()
-            if not url:
+            if not url:  # pragma: no cover
                 return ""
             # simulate the call to the unauthorized CMSPlugin.page property
             cms_page = self.placeholder.page if self.placeholder_id else None
