@@ -20,7 +20,7 @@ from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
 from ... import settings
-from ...common.spacing import SpacingFormMixin
+from ...common import SpacingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,

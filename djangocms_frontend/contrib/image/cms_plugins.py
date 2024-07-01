@@ -3,9 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.responsive import ResponsiveMixin
-from ...common.spacing import MarginMixin
+from ...common import AttributesMixin, MarginMixin, ResponsiveMixin
 from .. import image
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models

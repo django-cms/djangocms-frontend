@@ -2,7 +2,7 @@ from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
 
-from ...common.responsive import ResponsiveFormMixin
+from ...common import ResponsiveFormMixin
 from ...models import FrontendUIItem
 
 

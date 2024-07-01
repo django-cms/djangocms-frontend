@@ -1,4 +1,4 @@
-{% load cms_tags %}
+{% load cms_tags frontend %}
 {% spaceless %}
     <div class="accordion-item">
         <{{ parent.accordion_header_type|default:"h2" }} class="accordion-header"
@@ -15,6 +15,7 @@
         {% with parent=instance %}
             {% for plugin in instance.child_plugin_instances %}
                 {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+            {% empty %}{% user_message _("Add content here") %}
             {% endfor %}
         {% endwith %}{% spaceless %}
     </div>

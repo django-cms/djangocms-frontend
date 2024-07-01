@@ -2,14 +2,16 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
-from djangocms_frontend.common.attributes import AttributesMixin
-from djangocms_frontend.common.background import BackgroundMixin
-from djangocms_frontend.common.responsive import ResponsiveMixin
-from djangocms_frontend.common.sizing import SizingMixin
-from djangocms_frontend.common.spacing import SpacingMixin
+from djangocms_frontend.common import (
+    AttributesMixin,
+    BackgroundMixin,
+    ResponsiveMixin,
+    SizingMixin,
+    SpacingMixin,
+)
 
 from ...cms_plugins import CMSUIPlugin
-from ...common.title import TitleMixin
+from ...common import TitleMixin
 from ...helpers import add_plugin
 from .. import grid
 from . import forms, models

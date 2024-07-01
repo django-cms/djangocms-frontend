@@ -1,5 +1,18 @@
+import uuid
+
 from cms.plugin_base import CMSPluginBase
 from django.utils.encoding import force_str
+
+from djangocms_frontend.helpers import get_related_object
+
+
+def _get_related(instance, key):
+    def get_related():
+        obj = get_related_object(instance.config, key)
+        setattr(instance, key, obj)
+        return obj
+    get_related.__name__ = key
+    return get_related
 
 
 class CMSUIPlugin(CMSPluginBase):
@@ -8,3 +21,11 @@ class CMSUIPlugin(CMSPluginBase):
 
     def __str__(self):
         return force_str(super().__str__())
+
+    def render(self, context, instance, placeholder):
+        for key, value in instance.config.items():
+            if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
+                if key not in instance.__dir__():  # hasattr would return the value in the config dict
+                    setattr(instance, key, _get_related(instance, key))
+        instance.uuid = str(uuid.uuid4())
+        return super().render(context, instance, placeholder)

@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...common.spacing import PaddingFormMixin
+from ...common import PaddingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,

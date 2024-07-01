@@ -8,8 +8,7 @@ from djangocms_frontend.helpers import get_plugin_template, insert_fields
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.spacing import SpacingMixin
+from ...common import AttributesMixin, SpacingMixin
 from .. import link
 from . import forms, models, views
 from .constants import USE_LINK_ICONS
