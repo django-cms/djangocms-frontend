@@ -17,9 +17,9 @@ from django.utils.html import conditional_escape, mark_safe
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
+from djangocms_frontend.component_pool import plugin_tag_pool
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
-from djangocms_frontend.pool import plugin_tag_pool
 
 register = template.Library()
 

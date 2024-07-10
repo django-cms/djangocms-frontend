@@ -11,11 +11,11 @@ from djangocms_frontend.models import FrontendUIItem
 from .constants import GRID_CONTAINER_CHOICES
 
 
-class TitelModelMixin:
+class TitleModelMixin:
     pass
 
 
-class GridContainer(TitelModelMixin, FrontendUIItem):
+class GridContainer(TitleModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -34,7 +34,7 @@ class GridContainer(TitelModelMixin, FrontendUIItem):
         return text
 
 
-class GridRow(TitelModelMixin, FrontendUIItem):
+class GridRow(TitleModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

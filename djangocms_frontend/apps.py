@@ -6,6 +6,6 @@ class DjangocmsFrontendConfig(apps.AppConfig):
     verbose_name = "DjangoCMS Frontend"
 
     def ready(self):
-        from .pool import setup
+        from .component_pool import setup
 
         setup()

@@ -5,6 +5,7 @@ import warnings
 from cms.api import add_plugin
 from cms.plugin_base import CMSPluginBase
 from django import forms
+from django.apps import apps
 from django.utils.module_loading import autodiscover_modules
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
@@ -67,6 +68,9 @@ class CMSFrontendComponent(forms.Form):
 
     @classmethod
     def plugin_model_factory(cls) -> type:
+        app_config = apps.get_containing_app_config(cls.__module__)
+        if app_config is None:
+            raise ValueError(f"Cannot find app_config for {cls.__module__}")
         model_class = type(
             cls.__name__,
             (*cls._model_mixins, FrontendUIItem,),
@@ -75,6 +79,7 @@ class CMSFrontendComponent(forms.Form):
                     "Meta",
                     (),
                     {
+                        "app_label": app_config.label,
                         "proxy": True,
                         "managed": False,
                         "verbose_name": getattr(cls._component_meta, "name", cls.__name__),

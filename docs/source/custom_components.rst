@@ -113,3 +113,9 @@ The template could be, for example:
 
 As always, django CMS manages styling and JavaScript dependencies with django-sekizai.
 In this example, we add the Tailwind CSS CDN to the ``js`` block.
+
+.. note::
+
+    Components will create migrations since they use proxy models which are necessary, for
+    example, to manage permissions. Those migrations will be added to the app containing
+    the ``cms_component.py`` file.
