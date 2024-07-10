@@ -155,7 +155,7 @@ class GridColumnPlugin(
     change_form_template = "djangocms_frontend/admin/grid_column.html"
     allow_children = True
     require_parent = True
-    # TODO it should allow for the responsive utilitiy class
+    # TODO it should allow for the responsive utility class
     # https://getbootstrap.com/docs/5.0/layout/grid/#column-resets
     parent_classes = ["GridRowPlugin"]
 

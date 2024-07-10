@@ -62,6 +62,11 @@ class LinkPluginMixin:
         )
     )
 
+    def render(self, context, instance, placeholder):
+        if "request" in context:
+            instance._cms_page = getattr(context["request"], "current_page", None)
+        return super().render(context, instance, placeholder)
+
     def get_form(self, request, obj=None, change=False, **kwargs):
         """The link form needs the request object to check permissions"""
         form = super().get_form(request, obj, change, **kwargs)

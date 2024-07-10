@@ -12,6 +12,10 @@ COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 
 
 class GetLinkMixin:
+    def __init__(self, *args, **kwargs):
+        self._cms_page = None
+        super().__init__(*args, **kwargs)
+
     def get_link(self):
         if getattr(self, "url_grouper", None):
             url_grouper = get_related_object(self.config, "url_grouper")
@@ -55,7 +59,7 @@ class GetLinkMixin:
                 return ""
 
             # simulate the call to the unauthorized CMSPlugin.page property
-            cms_page = self.placeholder.page if self.placeholder_id else None
+            cms_page = self._cms_page or self.placeholder.page if self.placeholder_id else None
 
             # first, we check if the placeholder the plugin is attached to
             # has a page. Thus, the check "is not None":
