@@ -1,5 +1,3 @@
-from ...helpers import get_related_object
-
 try:
     from functools import cached_property
 except ImportError:  # Only available since Python 3.8
@@ -13,11 +11,11 @@ from djangocms_frontend.models import FrontendUIItem
 from .constants import GRID_CONTAINER_CHOICES
 
 
-class TitelModelMixin:
+class TitleModelMixin:
     pass
 
 
-class GridContainer(TitelModelMixin, FrontendUIItem):
+class GridContainer(TitleModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Container" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/
@@ -35,14 +33,8 @@ class GridContainer(TitelModelMixin, FrontendUIItem):
                 text += f" ({item[1]})"
         return text
 
-    @cached_property
-    def image(self):
-        if getattr(self, "container_image", False):
-            return get_related_object(self.config, "container_image")
-        return None
 
-
-class GridRow(TitelModelMixin, FrontendUIItem):
+class GridRow(TitleModelMixin, FrontendUIItem):
     """
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/5.0/layout/grid/

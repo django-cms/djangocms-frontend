@@ -1,13 +1,31 @@
-###########
- Reference
-###########
+#########
+Reference
+#########
 
-**********
- Settings
-**********
+********
+Settings
+********
 
 **djangocms-frontend** can be configured by putting the appropriate settings
 in your project's ``settings.py``.
+
+.. py:attribute:: settings.CMS_COMPONENT_PLUGINS
+
+    Defaults to ``[]``
+
+    A list of dotted pathes to plugin classes that are supposed to also be
+    components (see :ref:`components`). Components are plugins to also be
+    used in templates using the ``{% plugin %}`` template tag.
+
+    For performance reason, the plugin templates are compiled at startup.
+
+    To make **djangocms-frontend** plugins available as components, add the
+    following line to your project's settings::
+
+        CMS_COMPONENT_PLUGINS = [
+            "djangocms_frontend.cms_plugins.CMSUIPlugin",  # All subclasses are added
+            # add other plugins here if needed
+        ]
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
@@ -301,6 +319,15 @@ in your project's ``settings.py``.
 
     This lost of options define the icon size choices a user can select. The values (first tuple element) are css units for the ``font-size`` css property. Besides relative units (``%``) any css unit can be used, e.g. ``112pt``.
 
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_SHOW_EMPTY_CHILDREN
+
+    Default: ``False``
+
+    If set to ``True`` the frontend editing will show a message where children
+    can be added to plugins to complete the design. This is supposed to make
+    the editing experience more intuitive for editors.
+
+
 ******
 Models
 ******
@@ -375,9 +402,9 @@ Models
     returns a plugin-specific short description shown in the structure mode
     of django CMS.
 
-**************
- Form widgets
-**************
+************
+Form widgets
+************
 
 **djangocms-frontend** contains button group widgets which can be used as
 for ``forms.ChoiceField``. They might turn out helpful when adding custom
@@ -431,13 +458,9 @@ plugins.
     This form field is identical to the ``OptionalDeviceChoiceField`` above,
     but requires the user to select at least one device.
 
-
-
-
-
-*********************
- Management commands
-*********************
+*******************
+Management commands
+*******************
 
 Management commands are run by typing ``./manage.py frontend command`` in the
 project directory. ``command`` can be one of the following:
@@ -466,9 +489,9 @@ project directory. ``command`` can be one of the following:
     then syncing the new permission with these commands.
 
 
-***************
- Running Tests
-***************
+*************
+Running Tests
+*************
 
 You can run tests by executing:
 

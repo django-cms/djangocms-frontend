@@ -1,0 +1,2 @@
+{% if "iconClass" in icon_class %}{% load icon_tags %}{% add_css_for_icon icon_class %}<i class="{{ icon_class.iconClass }} {{ attribute_class }}">{{ icon_class.iconText }}</i>
+{% else %}<i class="{{ icon_class }} {{ attribute_class }}" aria-hidden="true"></i>{% endif %}

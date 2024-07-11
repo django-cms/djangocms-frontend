@@ -439,3 +439,44 @@ the upper right corner:
 .. image::  screenshots/tab-error-indicator.png
 
 
+.. _components:
+
+Using frontend plugins as components in templates
+=================================================
+
+The plugins of **djangocms-frontend** can be used as components in your
+templates - even in apps that do not use or integrate with djanog CMS
+otherwise. This is useful if you want use exactly the same markup for, say,
+buttons, links, the grid both in pages managed with django CMS and in
+other parts of your project.
+
+This allows you to keep one set of templates for your django CMS frontend
+plugins and any changes to those templates will be reflected in all parts
+of your project.
+
+To use a frontend plugin in a template you need to load the ``frontend`` tags
+and then use the ``plugin`` template tag to render a frontend plugin.
+
+.. code::
+
+    {% load frontend %}
+    {% plugin "alert" alert_context="secondary" alert_dismissable=True %}
+        Here goes the content of the alert.
+    {% endplugin %}
+
+The plugins will be rendered based on their standard attribute settings.
+You can override these settings by passing them as keyword arguments to the
+``plugin`` template tag.
+
+See the documentation of the djanog CMS plugins for examples of how to use
+the ``{% plugin %}`` template tag with each plugin.
+
+.. note::
+
+    While this is designed for **djangocms-frontend** plugins primarily, it
+    will work with most django CMS plugins.
+
+    Since no plugins are created in the database, plugins relying on their
+    instances being available in the database will potentially not work.
+    This especially is true for plugins that have a foreign key to
+    other models.
