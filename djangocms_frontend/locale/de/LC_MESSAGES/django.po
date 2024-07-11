@@ -1374,7 +1374,7 @@ msgstr "Start-Ebene dieser Seite (0: Wurzel, 1: erste Ebene, ...)"
 
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
-msgstr "Marke eingeben oder Plugins für Markenlogo einfügen"
+msgstr "Marke eingeben oder Bausteine für Markenlogo einfügen"
 
 #: contrib/navigation/models.py:24
 msgid "Navigation container"
