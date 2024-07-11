@@ -559,7 +559,7 @@ msgstr "Inhalt"
 
 #: contrib/carousel/forms.py:184
 msgid "Content may also be added using child plugins."
-msgstr "Inhalt kann auch über weitere Plugins hinzugefügt werden."
+msgstr "Inhalt kann auch über weitere Bausteine hinzugefügt werden."
 
 #: contrib/carousel/models.py:29
 msgid "Ride"
