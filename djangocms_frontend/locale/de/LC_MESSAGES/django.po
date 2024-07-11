@@ -408,7 +408,7 @@ msgstr "Inhalts-Typ"
 
 #: contrib/card/forms.py:189
 msgid "Define the structure of the plugin."
-msgstr "Definiert die Struktur des Plugins."
+msgstr "Definiert die Struktur der Karte."
 
 #: contrib/card/forms.py:193 contrib/grid/forms.py:173
 msgid "Content alignment"
