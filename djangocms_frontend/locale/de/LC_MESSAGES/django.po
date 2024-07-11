@@ -182,7 +182,7 @@ msgid ""
 "Optional title of the plugin for easier identification. Its "
 "<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
-"Optionaler Titel des Plugin für eine einfachere Identifikation. Sei "
+"Optionaler Titel des Baustein für eine einfachere Identifikation. Sei "
 "<code>title</code>-Attribut wird nur gesetzt, wenn das Auswahlkästchen "
 "angewählt ist"
 
