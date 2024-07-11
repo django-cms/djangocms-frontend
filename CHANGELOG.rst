@@ -2,6 +2,19 @@
 Changelog
 =========
 
+1.3.3 (2024-07-11)
+==================
+
+* fix: pypi environments by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/214
+* fix: escaped characters in autocomplete view of link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/217
+* fix: Misaligned icons in mobile view of navigation by @hgkornmann in https://github.com/django-cms/djangocms-frontend/pull/221
+* chore: update pypi actions to use trusted publishers by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/213
+
+**New Contributors**
+
+* @hgkornmann made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/221
+
+
 1.3.2 (2024-04-25)
 ==================
 
