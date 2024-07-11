@@ -1313,7 +1313,7 @@ msgstr "Inhalt (eine Zeile)"
 msgid "List item text. Is only show if this list item has no child plugins."
 msgstr ""
 "Text des Listen-Eintrags. Wird nur angezeigt, wenn der Listen-Eintrag keine "
-"Töchter-Plugins hat."
+"weiteren Bausteine enthält."
 
 #: contrib/listgroup/forms.py:78
 msgid "State"
