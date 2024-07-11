@@ -6,7 +6,7 @@ from ...cms_plugins import CMSUIPlugin
 from ...common import AttributesMixin, BackgroundMixin
 from ...helpers import first_choice, get_plugin_template, get_template_path
 from .. import navigation
-from ..link.cms_plugins import LinkPlugin, LinkPluginMixin
+from ..link.cms_plugins import LinkPluginMixin, TextLinkPlugin
 from . import forms, models
 
 mixin_factory = settings.get_renderer(navigation)
@@ -165,7 +165,7 @@ class NavContainerPlugin(
 @plugin_pool.register_plugin
 class NavLinkPlugin(
     mixin_factory("NavLink"),
-    LinkPlugin,
+    TextLinkPlugin,
 ):
     """
     A plugin that allows creating navigation links for the frontend.

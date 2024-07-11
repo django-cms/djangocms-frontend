@@ -87,7 +87,7 @@ def get_link_choices(request, term="", lang=None, nbsp=None):
                         dict(
                             id=f"{type_id}-{page}",
                             # django admin's autocomplete view requires unescaped strings
-                            # get_page_choices escepes strings, so we undo the escape
+                            # get_page_choices escapes strings, so we undo the escape
                             text=unescape(name, nbsp),
                         )
                         for page, name in descr
