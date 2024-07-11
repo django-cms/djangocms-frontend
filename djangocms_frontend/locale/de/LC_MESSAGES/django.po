@@ -1673,7 +1673,7 @@ msgstr "Frontend-Element"
 #: settings.py:14
 msgid "There are no further settings for this plugin. Please press save."
 msgstr ""
-"Für dieses Plugin gibt es keine weiteren Einstellungen. Bitte klicken Sie "
+"Für diesen Baustein gibt es keine weiteren Einstellungen. Bitte klicken Sie "
 "\"Speichern\"."
 
 #: settings.py:73
