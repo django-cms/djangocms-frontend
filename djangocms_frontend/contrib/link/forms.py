@@ -109,7 +109,8 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
 
     def optgroups(self, name, value, attr=None):
         groups = super(forms.Select, self).optgroups(name, value)
-        if not self.is_required:
+        if not self.is_required and groups:
+            # Add an empty entry to allow for an empty value to be preselected
             groups[0][1].insert(0, self.create_option(name, "", "", False, 0))
         return groups
 
