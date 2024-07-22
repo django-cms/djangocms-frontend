@@ -85,7 +85,7 @@ class LinkPluginMixin:
         return fieldsets
 
 
-class LinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin):
+class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/
@@ -117,7 +117,6 @@ class LinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPlugi
         ]
 
 
-if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS and "LinkPlugin" not in plugin_pool.plugins:
+if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     #  Only register plugin if in INSTALLED_APPS
-
-    plugin_pool.register_plugin(LinkPlugin)
+    plugin_pool.register_plugin(TextLinkPlugin)
