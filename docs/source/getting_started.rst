@@ -128,18 +128,14 @@ The example template is customisable by a set of template blocks:
 
 ``{% block content %}``
     Here goes the main content of the page. The default setup is a ``<section>``
-    with a placeholder called "Page Content" and a ``<footer>`` with a static
-    placeholder (identical on all pages) called "Footer":
+    with a placeholder called "Page Content":
 
     .. code::
 
         {% block content %}
             <section>
                 {% placeholder "Page Content" %}
-            </section>&nbsp;
-            <footer>
-                {% static_placeholder "Footer" %}
-            </footer>
+            </section>
         {% endblock content %}
 
 ``{% block navbar %}``
