@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('docs/requirements.in') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - run: python -m pip install -r docs/requirements.in
+      - run: python -m pip install -r docs/requirements.txt
       - name: Build docs
         run: |
           cd docs
@@ -50,7 +50,7 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('docs/requirements.in') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - run: python -m pip install -r docs/requirements.in
+      - run: python -m pip install -r docs/requirements.txt
       - name: Check spelling
         run: |
           cd docs

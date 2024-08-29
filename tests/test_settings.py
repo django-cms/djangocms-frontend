@@ -46,6 +46,14 @@ try:  # V4 test?
 
     INSTALLED_APPS += [
         "djangocms_versioning",
+    ]
+except ImportError:  # Nope
+    pass
+
+try:  # url manager test?
+    import djangocms_url_manager  # noqa
+
+    INSTALLED_APPS += [
         "djangocms_url_manager",
     ]
 except ImportError:  # Nope
