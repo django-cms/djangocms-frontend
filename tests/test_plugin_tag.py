@@ -80,7 +80,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         if cms_version < "4":
             grouper = None
             template = django_engine.from_string("""{% load frontend %}
-                {% plugin "link" name="Click" external_link="/test/" link_type="btn" link_context="primary" link_outline=False %}
+                {% plugin "textlink" name="Click" external_link="/test/" link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
             """)  # noqa: B950
