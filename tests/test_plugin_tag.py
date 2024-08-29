@@ -87,7 +87,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         else:
             grouper = self.create_url(manual_url="/test/").url_grouper
             template = django_engine.from_string("""{% load frontend %}
-                {% plugin "link" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
+                {% plugin "textlink" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
             """)  # noqa: B950
