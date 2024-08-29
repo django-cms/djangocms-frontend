@@ -182,7 +182,7 @@ msgid ""
 "Optional title of the plugin for easier identification. Its "
 "<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
-"Optionaler Titel des Plugin für eine einfachere Identifikation. Sei "
+"Optionaler Titel des Baustein für eine einfachere Identifikation. Sei "
 "<code>title</code>-Attribut wird nur gesetzt, wenn das Auswahlkästchen "
 "angewählt ist"
 
@@ -408,7 +408,7 @@ msgstr "Inhalts-Typ"
 
 #: contrib/card/forms.py:189
 msgid "Define the structure of the plugin."
-msgstr "Definiert die Struktur des Plugins."
+msgstr "Definiert die Struktur der Karte."
 
 #: contrib/card/forms.py:193 contrib/grid/forms.py:173
 msgid "Content alignment"
@@ -559,7 +559,7 @@ msgstr "Inhalt"
 
 #: contrib/carousel/forms.py:184
 msgid "Content may also be added using child plugins."
-msgstr "Inhalt kann auch über weitere Plugins hinzugefügt werden."
+msgstr "Inhalt kann auch über weitere Bausteine hinzugefügt werden."
 
 #: contrib/carousel/models.py:29
 msgid "Ride"
@@ -1313,7 +1313,7 @@ msgstr "Inhalt (eine Zeile)"
 msgid "List item text. Is only show if this list item has no child plugins."
 msgstr ""
 "Text des Listen-Eintrags. Wird nur angezeigt, wenn der Listen-Eintrag keine "
-"Töchter-Plugins hat."
+"weiteren Bausteine enthält."
 
 #: contrib/listgroup/forms.py:78
 msgid "State"
@@ -1374,7 +1374,7 @@ msgstr "Start-Ebene dieser Seite (0: Wurzel, 1: erste Ebene, ...)"
 
 #: contrib/navigation/forms.py:106
 msgid "Enter brand name or add child plugins for brand icon or image"
-msgstr "Marke eingeben oder Plugins für Markenlogo einfügen"
+msgstr "Marke eingeben oder Bausteine für Markenlogo einfügen"
 
 #: contrib/navigation/models.py:24
 msgid "Navigation container"
@@ -1673,7 +1673,7 @@ msgstr "Frontend-Element"
 #: settings.py:14
 msgid "There are no further settings for this plugin. Please press save."
 msgstr ""
-"Für dieses Plugin gibt es keine weiteren Einstellungen. Bitte klicken Sie "
+"Für diesen Baustein gibt es keine weiteren Einstellungen. Bitte klicken Sie "
 "\"Speichern\"."
 
 #: settings.py:73
