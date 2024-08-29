@@ -9,5 +9,5 @@ wheel
 black
 pre-commit
 djangocms-text
-django-filer
 html5lib
+.
