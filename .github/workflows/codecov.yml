@@ -17,7 +17,7 @@ jobs:
             dj42_cms311.txt,
             dj42_cms41.txt,
             dj50_cms41.txt,
-            dj51_cms41.txt,
+            # dj51_cms41.txt,  enable, once filer runs on 5.1
         ]
         os: [
             ubuntu-20.04,
