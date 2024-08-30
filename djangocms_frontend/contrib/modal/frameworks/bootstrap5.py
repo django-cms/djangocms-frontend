@@ -7,7 +7,8 @@ class ModalContainerRenderMixin:
 
     def render(self, context, instance, placeholder):
         return super().render(context, instance, placeholder)
-    
+
+
 class ModalInnerRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/modal-inner.html"
 

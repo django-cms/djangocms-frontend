@@ -79,17 +79,18 @@ class ModalContainerPlugin(mixin_factory("ModalContainer"), CMSUIPlugin):
     ]
     fieldsets = [
         (
-            None, 
+            None,
             {
                 "fields": (
                     "container_identifier",
                     ("modal_centered"),
                     ("modal_static", "modal_scrollable"),
                     ("modal_size", "modal_fullscreen"),
-                    )
+                )
             }
         ),
     ]
+
 
 @plugin_pool.register_plugin
 class ModalInnerPlugin(

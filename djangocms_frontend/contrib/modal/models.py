@@ -51,6 +51,7 @@ class ModalContainer(FrontendUIItem):
     def get_short_description(self):
         return f"({self.container_identifier})"
 
+
 class ModalInner(FrontendUIItem):
     """
     Component > "Modal Inner" Plugin
@@ -63,3 +64,4 @@ class ModalInner(FrontendUIItem):
 
     def get_short_description(self):
         return f"({self.inner_type})"
+    

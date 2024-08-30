@@ -133,7 +133,6 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
         choices=settings.EMPTY_CHOICE + MODAL_FULLSCREEN_CHOICES,
         required=False,
     )
-    
 
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
