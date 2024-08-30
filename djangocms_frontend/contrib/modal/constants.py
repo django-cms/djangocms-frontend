@@ -12,12 +12,12 @@ MODAL_SIZE_CHOICES = (
 )
 
 MODAL_FULLSCREEN_CHOICES = (
-            ("modal-fullscreen", _("Allways")),
-            ("modal-fullscreen-sm-down", _("Fullscreen below sm")),
-            ("modal-fullscreen-md-down", _("Fullscreen below md")),
-            ("modal-fullscreen-lg-down", _("Fullscreen below lg")),
-            ("modal-fullscreen-xl-down", _("Fullscreen below xl")),
-            ("modal-fullscreen-xxl-down", _("Fullscreen below xxl")),
+    ("modal-fullscreen", _("Allways")),
+    ("modal-fullscreen-sm-down", _("Fullscreen below sm")),
+    ("modal-fullscreen-md-down", _("Fullscreen below md")),
+    ("modal-fullscreen-lg-down", _("Fullscreen below lg")),
+    ("modal-fullscreen-xl-down", _("Fullscreen below xl")),
+    ("modal-fullscreen-xxl-down", _("Fullscreen below xxl")),
 )
 
 MODAL_INNER_TYPE_CHOICES = (

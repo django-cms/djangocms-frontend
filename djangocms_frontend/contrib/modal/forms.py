@@ -3,18 +3,16 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from ... import settings
-from ...fields import AttributesFormField, TagTypeFormField, ButtonGroup
+from ...fields import AttributesFormField, ButtonGroup, TagTypeFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import modal
-
 from .constants import (
     MODAL_CENTERED_CHOICES,
-    MODAL_SIZE_CHOICES,
     MODAL_FULLSCREEN_CHOICES,
     MODAL_INNER_TYPE_CHOICES,
+    MODAL_SIZE_CHOICES,
 )
-
 
 # TODO leaving this comment for now
 # data-bs-toggle="modal" data-bs-target="#modalExample"
