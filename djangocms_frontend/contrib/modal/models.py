@@ -64,4 +64,3 @@ class ModalInner(FrontendUIItem):
 
     def get_short_description(self):
         return f"({self.inner_type})"
-    

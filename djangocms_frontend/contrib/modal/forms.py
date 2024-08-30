@@ -121,7 +121,7 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
         required=False,
         help_text=_("Enable scrolling in the container."),
     )
-    
+
     modal_size = forms.ChoiceField(
         label=_("Size"),
         choices=settings.EMPTY_CHOICE + MODAL_SIZE_CHOICES,
@@ -166,6 +166,6 @@ class ModalInnerForm(mixin_factory("ModalInner"), EntangledModelForm):
         help_text=_("Define the structure of the plugin."),
         widget=ButtonGroup(attrs=dict(label_class="btn-secondary")),
     )
-
+    
     attributes = AttributesFormField()
     
