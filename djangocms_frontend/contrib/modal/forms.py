@@ -128,7 +128,7 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
         required=False,
     )
 
-    modal_fullscreen = forms.ChoiceField (
+    modal_fullscreen = forms.ChoiceField(
         label=_("Fullscreen"),
         choices=settings.EMPTY_CHOICE + MODAL_FULLSCREEN_CHOICES,
         required=False,
@@ -166,6 +166,4 @@ class ModalInnerForm(mixin_factory("ModalInner"), EntangledModelForm):
         help_text=_("Define the structure of the plugin."),
         widget=ButtonGroup(attrs=dict(label_class="btn-secondary")),
     )
-    
     attributes = AttributesFormField()
-    
