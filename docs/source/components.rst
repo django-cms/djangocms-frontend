@@ -280,6 +280,21 @@ Media component
 The media component is another legacy component from djangocms-bootstrap4.
 **djangocms-frontend** recreates it using responsive utilities.
 
+.. index::
+    single: Modal
+
+*******************
+Modal component
+*******************
+
+The modal component shows content inside an modal.
+
+Content is added to the modal plugin by creating child plugin "Modal inner".
+
+.. note::
+
+    Restiction:
+        The footer is not editable and shows only a close button. 
 
 .. index::
     single: Picture
