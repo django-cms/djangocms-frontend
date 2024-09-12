@@ -5,7 +5,7 @@ from djangocms_frontend.contrib.modal.models import Modal, ModalTrigger, ModalCo
 
 
 class ModalModelTestCase(TestCase):
-   def test_Modal_instance(self):
+    def test_Modal_instance(self):
         instance = ModalForm.objects.create()
         self.assertEqual(str(instance), "Modal (1)")
         self.assertEqual(instance.get_short_description(), "(modal-1)")
