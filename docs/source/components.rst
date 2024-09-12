@@ -280,20 +280,30 @@ Media component
 The media component is another legacy component from djangocms-bootstrap4.
 **djangocms-frontend** recreates it using responsive utilities.
 
-.. index::
-    single: Modal
-
-*******************
+***************
 Modal component
-*******************
+***************
 
 The modal component shows content inside an modal.
 
-Content is added to the modal plugin by creating child plugin "Modal inner".
+Also see Bootstrap 5 `Modal <https://getbootstrap.com/docs/5.3/components/modal/>`_
+documentation.
+
+Modal consist of an Modal Plugin which uses an Modal Trigger Plugin and an Modal Container Plugin.
+Inside the Modal Container add an Modal Inner Plugin and select the inner type "header" or "body".
+
+.. image:: screenshots/modal-example.png
+    :width: 394
+
+The unique identifier of the Modal Trigger Plugin and Modal Container Plugin have to be identical. 
+
+The layout of the modal can be modified in the Modal Container plugin.
+
+.. image:: screenshots/modal-settings.png
 
 .. note::
 
-    Restiction:
+    Restriction:
         The footer is not editable and shows only a close button. 
 
 .. index::
