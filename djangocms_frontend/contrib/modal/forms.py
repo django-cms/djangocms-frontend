@@ -44,7 +44,7 @@ class ModalForm(mixin_factory("Modal"), EntangledModelForm):
         label=_("Siblings"),
         initial=".card",
         required=False,
-        help_text=_("Element to be used to create accordions."),
+        help_text=_("Element to be used to create a modal."),
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()

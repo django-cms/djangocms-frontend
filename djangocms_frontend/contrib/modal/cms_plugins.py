@@ -26,10 +26,6 @@ class ModalPlugin(mixin_factory("Modal"), AttributesMixin, CMSUIPlugin):
     child_classes = [
         "ModalTriggerPlugin",
         "ModalContainerPlugin",
-        "LinkPlugin",
-        "CardPlugin",
-        "SpacingPlugin",
-        "GridRowPlugin",
     ]
 
     fieldsets = [
@@ -50,10 +46,7 @@ class ModalTriggerPlugin(mixin_factory("ModalTrigger"), AttributesMixin, CMSUIPl
     form = forms.ModalTriggerForm
     allow_children = True
     parent_classes = [
-        "CardPlugin",
-        "CardInnerPlugin",
-        "ModalPlugin",
-        "GridColumnPlugin",
+        "CardPlugin"
     ]
 
     fieldsets = [
@@ -73,6 +66,9 @@ class ModalContainerPlugin(mixin_factory("ModalContainer"), CMSUIPlugin):
     model = models.ModalContainer
     form = forms.ModalContainerForm
     allow_children = True
+    parent_classes = [
+        "CardPlugin"
+    ]
     child_classes = [
         "ModalInnerPlugin",
 
