@@ -131,6 +131,7 @@ class CMSFrontendComponent(forms.Form):
                     "name": slot_name,
                     "module": getattr(cls._component_meta, "module", _("Component")),
                     "allow_children": True,
+                    "edit_disabled": True,
                     "parent_classes": cls.__name__ + "Plugin",
                     "render_template": cls.slot_template,
                 },

@@ -17,7 +17,6 @@ from django.utils.html import conditional_escape, mark_safe
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
-from djangocms_frontend.component_pool import plugin_tag_pool
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
 
@@ -159,6 +158,8 @@ class Plugin(AsTag):
         return f"<!-- {message} -->" if django_settings.DEBUG else ""
 
     def get_value(self, context, name, kwargs, nodelist):
+        from djangocms_frontend.component_pool import plugin_tag_pool
+
         if name not in plugin_tag_pool:
             return self.message(f'Plugin "{name}" not found in pool for plugins usable with {{% plugin %}}')
         context.push()
