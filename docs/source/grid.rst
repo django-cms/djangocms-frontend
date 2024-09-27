@@ -156,13 +156,12 @@ Parameters for ``{% plugin "gridrow" %}`` are:
 
 
 Parameters for ``{% plugin "gridcolumn" %}`` are:
+
 * ``column_alignment``: The vertical alignment of the column. Default is
-    ``align-self-start``. Other options are ``align-self-center`` and
-    ``align-self-end``.
+  ``align-self-start``. Other options are ``align-self-center`` and
+  ``align-self-end``.
 * ``text_alignment``: The text alignment of the column. Options are
-    ``left``, ``center`` and ``right``.
+  ``left``, ``center`` and ``right``.
 * ``xs_col``: Number of columns on mobile devices.
 * ``{sm|md|lg|xl|xx}_col``: Number of columns on larger devices.
-
-
 
