@@ -128,6 +128,7 @@ class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
     fieldsets = settings.EMPTY_FIELDSET
+    edit_disabled = True
 
     def render(self, context, instance, placeholder):
         if hasattr(context["request"], "TOC"):

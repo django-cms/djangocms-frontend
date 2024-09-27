@@ -137,13 +137,13 @@ for size in settings.DEVICE_SIZES:
         max_value=GRID_SIZE,
     )
 
+GridRowBaseForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
+
 GridRowForm = type(
     "GridRowBaseForm",
     (GridRowBaseForm,),
     copy(extra_fields_column),
 )
-
-GridRowForm._meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
 class GridColumnBaseForm(

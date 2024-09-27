@@ -3,8 +3,8 @@ from django import forms
 from djangocms_frontend.contrib.component.components import (
     CMSFrontendComponent,
     ComponentLinkMixin,
-    components,
 )
+from djangocms_frontend.contrib.component.registry import components
 from djangocms_frontend.contrib.image.fields import ImageFormField
 
 
