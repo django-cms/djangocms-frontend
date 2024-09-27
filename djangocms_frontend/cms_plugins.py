@@ -37,7 +37,9 @@ class CMSUIPlugin(FrontendEditableAdminMixin, CMSPluginBase):
         from django.urls import re_path
 
         info = f"{self.model._meta.app_label}_{self.model._meta.model_name}"
-        pat = lambda regex, fn: re_path(regex, fn, name=f"{info}_{fn.__name__}")
+
+        def pat(regex, fn):
+            return re_path(regex, fn, name=f"{info}_{fn.__name__}")
 
         return [
             pat(r'edit-field/(%s)/([a-z\-]+)/$' % SLUG_REGEXP, self.edit_field),

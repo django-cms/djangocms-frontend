@@ -160,7 +160,10 @@ class FrontendEditableAdminMixin:
         Register the url for the single field edit view
         """
         info = f"{self.model._meta.app_label}_{self.model._meta.model_name}"
-        pat = lambda regex, fn: re_path(regex, self.admin_site.admin_view(fn), name=f"{info}_{fn.__name__}")
+
+        def pat(regex, fn):
+            return re_path(regex, self.admin_site.admin_view(fn), name=f"{info}_{fn.__name__}")
+
         url_patterns = [
             pat(r'edit-field/(%s)/([a-z\-]+)/$' % SLUG_REGEXP, self.edit_field),
         ]
