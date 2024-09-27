@@ -91,7 +91,7 @@ class HeadingForm(mixin_factory("Heading"), SpacingFormMixin, EntangledModelForm
                 "attributes",
             ],
         }
-        untangled_fields = ("attributes",)
+        fields = "__all__"
 
     HEADINGS = (
         ("h1", _("Heading 1")),

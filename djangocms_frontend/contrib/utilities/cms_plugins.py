@@ -77,6 +77,8 @@ class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, SpacingMixin, CMS
         ),
     ]
 
+    frontend_editable_fields = ("heading",)
+
     def render(self, context, instance, placeholder):
         if not hasattr(context["request"], "TOC"):
             context["request"].TOC = []

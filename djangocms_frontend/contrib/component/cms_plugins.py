@@ -1,7 +1,7 @@
 from cms.plugin_pool import plugin_pool
 
 # Import the components from the current directory's models module
-from .models import components
+from .registry import components
 
 # Loop through the values in the components' registry
 for _, plugin, slot_plugins in components._registry.values():

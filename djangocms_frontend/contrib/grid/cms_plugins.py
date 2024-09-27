@@ -158,6 +158,7 @@ class GridColumnPlugin(
     # TODO it should allow for the responsive utility class
     # https://getbootstrap.com/docs/5.0/layout/grid/#column-resets
     parent_classes = ["GridRowPlugin"]
+    edit_disabled = True
 
     fieldsets = [
         (

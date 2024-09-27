@@ -1,5 +1,4 @@
 from cms.models import CMSPlugin
-from cms.utils.compat import DJANGO_3_0
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape, mark_safe
@@ -8,11 +7,6 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
-
-if DJANGO_3_0:
-    from django_jsonfield_backport.models import JSONField
-else:
-    JSONField = models.JSONField
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -48,7 +42,7 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)
-    config = JSONField(default=dict, encoder=DjangoJSONEncoder)
+    config = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     def __init__(self, *args, **kwargs):
         self._additional_classes = []
@@ -106,8 +100,8 @@ class AbstractFrontendUIItem(CMSPlugin):
         return self
 
     def get_short_description(self):
-        """Plugin-specific short description (to be defined by subclasses)"""
-        return ""
+        """Plugin-specific short description (to be defined by subclasses). Try title attribute first."""
+        return self.config.get("title", "")
 
     @property
     def framework_info(self):

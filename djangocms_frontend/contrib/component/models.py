@@ -1,6 +1,6 @@
 import warnings
 
-from djangocms_frontend.contrib.component.components import components
+from djangocms_frontend.contrib.component.registry import components
 
 # Register all component models for Django
 # Component models are unmanaged and do not create migrations

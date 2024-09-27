@@ -4,7 +4,7 @@ import typing
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options, Tag
 from classytags.helpers import AsTag
-from cms.templatetags.cms_tags import render_plugin
+from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
 from django import template
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
@@ -234,12 +234,11 @@ class RenderChildPluginsTag(Tag):
         if plugin_type and not plugin_type.endswith("Plugin"):
             plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
         for child in instance.child_plugin_instances:
-            if not plugin_type or child.plugin_type == plugin_type:
+            if plugin_type is None or child.plugin_type == plugin_type:
                 if isinstance(child, DummyPlugin):
                     content += child.nodelist.render(context)
                 else:
-                    for grand_child in child.child_plugin_instances:
-                        content += render_plugin(context, grand_child)
+                    content += render_plugin(context, child)
         content = content or getattr(instance, "simple_content", "")
 
         if not content.strip() and nodelist:
@@ -250,5 +249,40 @@ class RenderChildPluginsTag(Tag):
         return content
 
 
+class InlineField(CMSEditableObject):
+    name = 'inline_field'
+    options = Options(
+        Argument('instance'),
+        Argument('attribute'),
+        Argument('language', default=None, required=False),
+        Argument('filters', default=None, required=False),
+        Argument('view_url', default=None, required=False),
+        Argument('view_method', default=None, required=False),
+        'as',
+        Argument('varname', required=False, resolve=False),
+    )
+
+    def render_tag(self, context, **kwargs):
+        if context["request"].session.get("inline_editing", True):
+            # Only allow inline field to be rendered if inline editing is active
+            kwargs["edit_fields"] = kwargs["attribute"]
+            return super().render_tag(context, **kwargs)
+        else:
+            return getattr(kwargs["instance"], kwargs["attribute"], "")
+
+    def _get_editable_context(self, context, instance, language, edit_fields,
+                              view_method, view_url, querystring, editmode=True):
+        # Fix a not-so-clean solution in django CMS' core: While the template engine checks if an attribute is
+        # callable, python expects get_plugin_name to be a method. This is a workaround to make it a method.
+        context = super()._get_editable_context(
+            context, instance, language, edit_fields, view_method, view_url, querystring, editmode
+        )
+        if hasattr(instance, "get_plugin_name") and isinstance(instance.get_plugin_name, str):
+            value = str(instance.get_plugin_name)
+            instance.get_plugin_name = lambda: value
+        return context
+
+
 register.tag(Plugin.name, Plugin)
 register.tag(RenderChildPluginsTag.name, RenderChildPluginsTag)
+register.tag(InlineField.name, InlineField)

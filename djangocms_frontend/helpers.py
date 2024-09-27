@@ -1,10 +1,16 @@
 import copy
 import decimal
 
+from cms.constants import SLUG_REGEXP
+from cms.plugin_base import CMSPluginBase
+from cms.utils.conf import get_cms_setting
 from django.apps import apps
+from django.contrib.admin.helpers import AdminForm
 from django.db.models import ObjectDoesNotExist
+from django.shortcuts import render
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import select_template
+from django.urls import re_path
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -139,3 +145,96 @@ def coerce_decimal(value):
         return decimal.Decimal(value)
     except TypeError:
         return None
+
+
+class FrontendEditableAdminMixin:
+    """
+    Adding ``FrontendEditableAdminMixin`` to  models admin class allows to open that admin
+    in the frontend by double-clicking on fields rendered with the ``render_model`` template
+    tag.
+    """
+    frontend_editable_fields = []
+
+    def get_urls(self):
+        """
+        Register the url for the single field edit view
+        """
+        info = f"{self.model._meta.app_label}_{self.model._meta.model_name}"
+        pat = lambda regex, fn: re_path(regex, self.admin_site.admin_view(fn), name=f"{info}_{fn.__name__}")
+        url_patterns = [
+            pat(r'edit-field/(%s)/([a-z\-]+)/$' % SLUG_REGEXP, self.edit_field),
+        ]
+        return url_patterns + super().get_urls()
+
+    def _get_object_for_single_field(self, object_id, language):
+        # Quick and dirty way to retrieve objects for django-hvad
+        # Cleaner implementation will extend this method in a child mixin
+        try:
+            # First see if the model uses the admin manager pattern from cms.models.manager.ContentAdminManager
+            manager = self.model.admin_manager
+        except AttributeError:
+            # If not, use the default manager
+            manager = self.model.objects
+        try:
+            return manager.language(language).get(pk=object_id)
+        except AttributeError:
+            return manager.get(pk=object_id)
+
+    def edit_field(self, request, object_id, language):
+        obj = self._get_object_for_single_field(object_id, language)
+        opts = obj.__class__._meta
+        saved_successfully = False
+        cancel_clicked = request.POST.get("_cancel", False)
+        raw_fields = request.GET.get("edit_fields")
+        fields = [field for field in raw_fields.split(",") if field in self.frontend_editable_fields]
+        if not fields:
+            context = {
+                'opts': opts,
+                'message': _("Field %s not found") % raw_fields
+            }
+            return render(request, 'admin/cms/page/plugin/error_form.html', context)
+        if not request.user.has_perm(f"{self.model._meta.app_label}.change_{self.model._meta.model_name}"):
+            context = {
+                'opts': opts,
+                'message': _("You do not have permission to edit this item")
+            }
+            return render(request, 'admin/cms/page/plugin/error_form.html', context)
+            # Dynamically creates the form class with only `field_name` field
+        # enabled
+        form_class = self.get_form(request, obj, fields=fields)
+        if not cancel_clicked and request.method == 'POST':
+            form = form_class(instance=obj, data=request.POST)
+            if form.is_valid():
+                form.save()
+                saved_successfully = True
+        else:
+            form = form_class(instance=obj)
+        admin_form = AdminForm(form, fieldsets=[(None, {'fields': fields})], prepopulated_fields={},
+                               model_admin=self)
+        media = self.media + admin_form.media
+        context = {
+            'CMS_MEDIA_URL': get_cms_setting('MEDIA_URL'),
+            'title': opts.verbose_name,
+            'plugin': None,
+            'plugin_id': None,
+            'adminform': admin_form,
+            'add': False,
+            'is_popup': True,
+            'media': media,
+            'opts': opts,
+            'change': True,
+            'save_as': False,
+            'has_add_permission': False,
+            'window_close_timeout': 10,
+        }
+        if cancel_clicked:
+            # cancel button was clicked
+            context.update({
+                'cancel': True,
+            })
+            return render(request, 'admin/cms/page/plugin/confirm_form.html', context)
+        if not cancel_clicked and request.method == 'POST' and saved_successfully:
+            if isinstance(self, CMSPluginBase):
+                return self.render_close_frame(request, obj)
+            render(request, 'admin/cms/page/plugin/confirm_form.html', context)
+        return render(request, 'admin/cms/page/plugin/change_form.html', context)
