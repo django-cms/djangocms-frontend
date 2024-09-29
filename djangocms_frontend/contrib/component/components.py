@@ -23,6 +23,7 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
 
 class Slot:
     """Slat class as syntactic surgar to more easily define slot plugins"""
+
     def __init__(self, name, verbose_name, **kwargs):
         self.name = name
         self.verbose_name = verbose_name
@@ -67,22 +68,24 @@ class CMSFrontendComponent(forms.Form):
 
     @classmethod
     def get_slot_plugins(cls) -> dict[str:str]:
-        slots : list[Slot] = [
+        slots: list[Slot] = [
             slot if isinstance(slot, Slot) else Slot(*slot) for slot in getattr(cls._component_meta, "slots", [])
         ]
-        return {
-            f"{cls.__name__}{slot.name.capitalize()}Plugin": slot for slot in slots
-        }
+        return {f"{cls.__name__}{slot.name.capitalize()}Plugin": slot for slot in slots}
 
     @classmethod
     def plugin_model_factory(cls) -> type:
         from djangocms_frontend.models import FrontendUIItem
+
         app_config = apps.get_containing_app_config(cls.__module__)
         if app_config is None:
             raise ValueError(f"Cannot find app_config for {cls.__module__}")
         model_class = type(
             cls.__name__,
-            (*cls._model_mixins, FrontendUIItem,),
+            (
+                *cls._model_mixins,
+                FrontendUIItem,
+            ),
             {
                 "Meta": type(
                     "Meta",
@@ -129,6 +132,14 @@ class CMSFrontendComponent(forms.Form):
                 "frontend_editable_fields": getattr(cls._component_meta, "frontend_editable_fields", []),
                 "save_model": cls.save_model,
                 "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", 1),
+                **(
+                    {
+                        "get_render_template": cls.get_render_template,
+                        "TEMPLATES": cls.TEMPLATES,
+                    }
+                    if hasattr(cls, "get_render_template")
+                    else {}
+                ),
             },
         )
 
@@ -146,7 +157,7 @@ class CMSFrontendComponent(forms.Form):
                     "edit_disabled": True,
                     "parent_classes": cls.__name__ + "Plugin",
                     "render_template": cls.slot_template,
-                    **slot.kwargs
+                    **slot.kwargs,
                 },
             )
             for name, slot in slots.items()
