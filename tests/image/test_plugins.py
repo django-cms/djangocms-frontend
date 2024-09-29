@@ -74,7 +74,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             "margin_devices": ["xs"],
         }
         form = ImageForm(request.POST)
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         self.assertEqual(form.cleaned_data["config"]["use_responsive_image"], "yes")
 
         request.POST.update(

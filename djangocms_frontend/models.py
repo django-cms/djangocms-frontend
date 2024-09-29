@@ -93,6 +93,8 @@ class AbstractFrontendUIItem(CMSPlugin):
         if form is None:
             form = self.get_plugin_class().form
         if isinstance(form, type):  # if is class
+            if not getattr(form._meta, "model", None):
+                form._meta.model = self.__class__
             form = form()  # instantiate
         entangled_fields = getattr(getattr(form, "Meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:

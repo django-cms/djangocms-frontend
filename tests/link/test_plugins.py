@@ -143,7 +143,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             }
         )
         form = LinkForm(request.POST)
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         if DJANGO_CMS4:
             self.delete_urls()
         else:

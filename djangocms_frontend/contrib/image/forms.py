@@ -95,6 +95,7 @@ class ImageForm(
                 "attributes",
             ]
         }
+        exclude = ("ui_item",)
 
     link_is_optional = True
 

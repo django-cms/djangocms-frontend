@@ -321,6 +321,7 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
             ]
         }
         untangled_fields = ()
+        exclude = ("ui_item",)
 
     name = forms.CharField(
         label=_("Display name"),
