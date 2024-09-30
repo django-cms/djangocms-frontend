@@ -88,6 +88,13 @@ class ImagePlugin(
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"
 
     def render(self, context, instance, placeholder):
+        # assign link to a context variable to be performant
+        context["picture_link"] = instance.get_link()
+        context["picture_size"] = instance.get_size(
+            width=context.get("width", 0),
+            height=context.get("height", 0),
+        )
+        context["img_srcset_data"] = instance.img_srcset_data
         if instance.config.get("lazy_loading", False):
             instance.add_attribute("loading", "lazy")
         return super().render(context, instance, placeholder)
