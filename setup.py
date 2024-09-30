@@ -9,7 +9,7 @@ REQUIREMENTS = [
     "django-filer>=1.7",
     "easy-thumbnails",
     "djangocms-attributes-field>=1",
-    "django-entangled>=0.5.4,<0.6",
+    "django-entangled>=0.6",
 ]
 
 EXTRA_REQUIREMENTS = {
