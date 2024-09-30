@@ -155,7 +155,7 @@ class FrontendEditableAdminMixin:
     """
     frontend_editable_fields = []
 
-    def get_urls(self):
+    def get_urls(self):  # pragma: no cover
         """
         Register the url for the single field edit view
         """
@@ -169,7 +169,7 @@ class FrontendEditableAdminMixin:
         ]
         return url_patterns + super().get_urls()
 
-    def _get_object_for_single_field(self, object_id, language):
+    def _get_object_for_single_field(self, object_id, language):  # pragma: no cover
         # Quick and dirty way to retrieve objects for django-hvad
         # Cleaner implementation will extend this method in a child mixin
         try:
