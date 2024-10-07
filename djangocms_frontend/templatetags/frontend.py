@@ -4,6 +4,7 @@ import typing
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options, Tag
 from classytags.helpers import AsTag
+from cms.models import CMSPlugin
 from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
 from django import template
 from django.conf import settings as django_settings
@@ -263,8 +264,9 @@ class InlineField(CMSEditableObject):
     )
 
     def render_tag(self, context, **kwargs):
-        if context["request"].session.get("inline_editing", True):
-            # Only allow inline field to be rendered if inline editing is active
+        if context["request"].session.get("inline_editing", True) and isinstance(kwargs["instance"], CMSPlugin):
+            # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
+            # DummyPlugins of the ``plugin`` tag are cannot be edited
             kwargs["edit_fields"] = kwargs["attribute"]
             return super().render_tag(context, **kwargs)
         else:
