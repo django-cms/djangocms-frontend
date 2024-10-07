@@ -8,7 +8,7 @@ from djangocms_frontend.contrib.link.cms_plugins import TextLinkPlugin
 from djangocms_frontend.contrib.link.forms import LinkForm, SmartLinkField
 from djangocms_frontend.contrib.link.helpers import get_choices
 
-from ..fixtures import DJANGO_CMS4, TestFixture
+from ..fixtures import TestFixture
 
 
 class LinkPluginTestCase(TestFixture, CMSTestCase):
@@ -137,14 +137,14 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                             self.create_url(manual_url="https://www.django-cms.org/").id
                         )
                     )
-                    if DJANGO_CMS4
+                    if hasattr(self, "create_url")
                     else dict(external_link="https://www.django-cms.org/")
                 ),
             }
         )
         form = LinkForm(request.POST)
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
-        if DJANGO_CMS4:
+        if hasattr(self, "create_url"):
             self.delete_urls()
         else:
             request.POST.update({"mailto": "none@nowhere.com"})

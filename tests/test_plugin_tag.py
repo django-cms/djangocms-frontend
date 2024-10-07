@@ -1,4 +1,3 @@
-from cms import __version__ as cms_version
 from cms.test_utils.testcases import CMSTestCase
 from django.contrib.sites.shortcuts import get_current_site
 from django.template import engines
@@ -77,17 +76,17 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         self.assertInHTML(expected_result, result)
 
     def test_link_plugin(self):
-        if cms_version < "4":
+        if hasattr(self, "create_url"):
+            grouper = self.create_url(manual_url="/test/").url_grouper
+            template = django_engine.from_string("""{% load frontend %}
+            {% plugin "textlink" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
+                Click me!
+            {% endplugin %}
+        """)  # noqa: B950
+        else:
             grouper = None
             template = django_engine.from_string("""{% load frontend %}
                 {% plugin "textlink" name="Click" external_link="/test/" link_type="btn" link_context="primary" link_outline=False %}
-                    Click me!
-                {% endplugin %}
-            """)  # noqa: B950
-        else:
-            grouper = self.create_url(manual_url="/test/").url_grouper
-            template = django_engine.from_string("""{% load frontend %}
-                {% plugin "textlink" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
             """)  # noqa: B950
