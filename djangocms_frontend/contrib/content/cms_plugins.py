@@ -77,6 +77,8 @@ class BlockquotePlugin(
         ),
     ]
 
+    frontend_editable_fields = ("quote_content", "quote_origin")
+
 
 @plugin_pool.register_plugin
 class FigurePlugin(
@@ -110,3 +112,5 @@ class FigurePlugin(
             },
         ),
     ]
+
+    frontend_editable_fields = ("figure_caption",)
