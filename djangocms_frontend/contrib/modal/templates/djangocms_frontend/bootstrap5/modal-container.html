@@ -1,0 +1,16 @@
+{% load cms_tags frontend %}
+    <{{ instance.tag_type }} {{ instance.get_attributes }}>
+    <div class="modal fade" id="{{ instance.container_identifier }}" {% if instance.modal_static %} data-bs-backdrop="static"{% endif %} tabindex="-1" aria-labelledby="trigger-{{ instance.container_identifier }}" aria-hidden="true">
+        <div class="modal-dialog {% if instance.modal_centered %}{{ instance.modal_centered }}{% endif %} {% if instance.modal_size %}{{ instance.modal_size }}{% endif %} {% if instance.modal_fullscreen %}{{ instance.modal_fullscreen }}{% endif %} {% if instance.modal_scrollable %}{{ instance.modal_scrollable }} modal-dialog-scrollable{% endif %}" >
+            <div class="modal-content">
+                    {% for plugin in instance.child_plugin_instances %}
+                        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+                    {% endfor %}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </{{ instance.tag_type }}>
