@@ -37,6 +37,27 @@ Full container
     New feature:
         Containers can have a background color ("context"), opacity and shadow.
 
+Component example
+=================
+
+To create a container in a Django template, you need to load the `frontend` tags
+and then use the `plugin` template tag to render the container plugin.
+Below is an example of how you might do this::
+
+    {% load frontend %}
+
+    <!-- Example of using the plugin template tag for a container -->
+    {% plugin "container" container_type="container-fluid" %}
+        {% plugin "row" %}
+            {% plugin "column" xs_col=6 %}
+                <p>This is the first column inside the container.</p>
+            {% endplugin %}
+            {% plugin "column" xs_col=6 %}
+                <p>This is the second column inside the container.</p>
+            {% endplugin %}
+        {% endplugin %}
+    {% endplugin %}
+
 
 .. index::
     single: Row
