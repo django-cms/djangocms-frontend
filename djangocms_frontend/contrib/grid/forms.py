@@ -6,10 +6,12 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
-from djangocms_frontend.common.background import BackgroundFormMixin
-from djangocms_frontend.common.responsive import ResponsiveFormMixin
-from djangocms_frontend.common.sizing import SizingFormMixin
-from djangocms_frontend.common.spacing import SpacingFormMixin
+from djangocms_frontend.common import (
+    BackgroundFormMixin,
+    ResponsiveFormMixin,
+    SizingFormMixin,
+    SpacingFormMixin,
+)
 from djangocms_frontend.fields import (
     AttributesFormField,
     AutoNumberInput,
@@ -135,13 +137,15 @@ for size in settings.DEVICE_SIZES:
         max_value=GRID_SIZE,
     )
 
+
+GridRowBaseForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
+
+
 GridRowForm = type(
     "GridRowBaseForm",
     (GridRowBaseForm,),
     copy(extra_fields_column),
 )
-
-GridRowForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
 class GridColumnBaseForm(
@@ -239,4 +243,4 @@ GridColumnForm = type(
     copy(extra_fields_column),
 )
 
-GridColumnForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
+GridColumnForm._meta.entangled_fields["config"] += extra_fields_column.keys()

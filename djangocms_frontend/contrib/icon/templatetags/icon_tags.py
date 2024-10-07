@@ -1,5 +1,6 @@
 from django import template
 from django.templatetags.static import static
+from django.utils.safestring import mark_safe
 
 from djangocms_frontend.contrib.icon.conf import ICON_LIBRARIES
 
@@ -15,3 +16,12 @@ def add_css_for_icon(context, icon):
                 css_link = static(f"djangocms_frontend/icon/vendor/assets/stylesheets/{css_link}")
             context["icon_css"] = css_link
     return context
+
+
+@register.simple_tag(takes_context=True)
+def icon(context, icon):
+    if icon:
+        icon_class = icon.get("iconClass", "")
+        icon_text = icon.get("iconText", "")
+        return mark_safe(f'<i class="{icon_class}">{icon_text}</i>')
+    return ""

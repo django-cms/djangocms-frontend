@@ -20,7 +20,7 @@ from filer.fields.image import AdminFileFormField, FilerFileField
 from filer.models import File
 
 from ... import settings
-from ...common.spacing import SpacingFormMixin
+from ...common import SpacingFormMixin
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -321,6 +321,7 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
             ]
         }
         untangled_fields = ()
+        exclude = ("ui_item",)
 
     name = forms.CharField(
         label=_("Display name"),

@@ -8,8 +8,7 @@ from filer.models import Image, ThumbnailOption
 
 from djangocms_frontend import settings
 
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import MarginFormMixin
+from ...common import MarginFormMixin, ResponsiveFormMixin
 from ...fields import AttributesFormField, TagTypeFormField, TemplateChoiceMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
@@ -96,6 +95,7 @@ class ImageForm(
                 "attributes",
             ]
         }
+        exclude = ("ui_item",)
 
     link_is_optional = True
 

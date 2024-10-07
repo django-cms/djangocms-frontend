@@ -7,9 +7,12 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...common.background import BackgroundFormMixin
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import MarginFormMixin, PaddingFormMixin
+from ...common import (
+    BackgroundFormMixin,
+    MarginFormMixin,
+    PaddingFormMixin,
+    ResponsiveFormMixin,
+)
 from ...fields import (
     AttributesFormField,
     ButtonGroup,
@@ -87,7 +90,7 @@ CardLayoutForm = type(
     copy(extra_fields_row_cols),
 )
 
-CardLayoutForm.Meta.entangled_fields["config"] += extra_fields_row_cols.keys()
+CardLayoutForm._meta.entangled_fields["config"] += extra_fields_row_cols.keys()
 
 
 class CardForm(
@@ -222,4 +225,4 @@ CardDeckForm = type(
     copy(extra_fields_column),
 )
 
-CardDeckForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
+CardDeckForm._meta.entangled_fields["config"] += extra_fields_column.keys()

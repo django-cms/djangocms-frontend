@@ -1,5 +1,6 @@
+import uuid
+
 from cms.models import CMSPlugin
-from cms.utils.compat import DJANGO_3_0
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape, mark_safe
@@ -8,11 +9,6 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
-
-if DJANGO_3_0:
-    from django_jsonfield_backport.models import JSONField
-else:
-    JSONField = models.JSONField
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -48,10 +44,11 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)
-    config = JSONField(default=dict, encoder=DjangoJSONEncoder)
+    config = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     def __init__(self, *args, **kwargs):
         self._additional_classes = []
+        self.uuid = str(uuid.uuid4())
         super().__init__(*args, **kwargs)
 
     def __getattr__(self, item):
@@ -79,12 +76,15 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     def get_attributes(self):
         attributes = self.config.get("attributes", {})
-        classes = set(attributes.get("class", "").split())
-        classes.update(self._additional_classes)
-        if classes:
-            attributes["class"] = " ".join(classes)
-        parts = (f'{item}="{conditional_escape(value)}"' if value else f"{item}" for item, value in attributes.items())
-        attributes_string = " ".join(parts)
+        classes = set(attributes.get("class", "").split())  # classes added in attriutes
+        classes.update(self._additional_classes)  # add additional classes
+        classes = (f'class="{conditional_escape(" ".join(classes))}"') if classes else ""  # to string
+        parts = (
+            f'{item}="{conditional_escape(value)}"' if value else f"{item}"
+            for item, value in attributes.items()
+            if item != "class"
+        )
+        attributes_string = (classes + " ".join(parts)).strip()
         return mark_safe(" " + attributes_string) if attributes_string else ""
 
     def save(self, *args, **kwargs):
@@ -96,6 +96,8 @@ class AbstractFrontendUIItem(CMSPlugin):
         if form is None:
             form = self.get_plugin_class().form
         if isinstance(form, type):  # if is class
+            if not getattr(form._meta, "model", None):
+                form._meta.model = self.__class__
             form = form()  # instantiate
         entangled_fields = getattr(getattr(form, "Meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:
@@ -103,8 +105,8 @@ class AbstractFrontendUIItem(CMSPlugin):
         return self
 
     def get_short_description(self):
-        """Plugin-specific short description (to be defined by subclasses)"""
-        return ""
+        """Plugin-specific short description (to be defined by subclasses). Try title attribute first."""
+        return self.config.get("title", "")
 
     @property
     def framework_info(self):

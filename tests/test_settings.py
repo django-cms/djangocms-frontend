@@ -14,7 +14,7 @@ INSTALLED_APPS = [
     "cms",
     "menus",
     "treebeard",
-    "djangocms_text_ckeditor",
+    "djangocms_text",
     "djangocms_frontend",
     "djangocms_frontend.contrib.accordion",
     "djangocms_frontend.contrib.alert",
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.card",
     "djangocms_frontend.contrib.carousel",
     "djangocms_frontend.contrib.collapse",
+    "djangocms_frontend.contrib.component",
     "djangocms_frontend.contrib.content",
     "djangocms_frontend.contrib.grid",
     "djangocms_frontend.contrib.icon",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.tabs",
     "djangocms_frontend.contrib.utilities",
     "sekizai",
+    "tests.test_app",
 ]
 
 if DJANGO_3_1:
@@ -44,7 +46,14 @@ try:  # V4 test?
 
     INSTALLED_APPS += [
         "djangocms_versioning",
-        "djangocms_alias",
+    ]
+except ImportError:  # Nope
+    pass
+
+try:  # url manager test?
+    import djangocms_url_manager  # noqa
+
+    INSTALLED_APPS += [
         "djangocms_url_manager",
     ]
 except ImportError:  # Nope
@@ -121,3 +130,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CMS_CONFIRM_VERSION4 = True  # Needed for v4, neglected in v3
 
 TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_image_plugin'
+
+CMS_COMPONENT_PLUGINS = [
+    "djangocms_frontend.cms_plugins.CMSUIPlugin",
+    "djangocms_text.cms_plugins.TextPlugin",
+]

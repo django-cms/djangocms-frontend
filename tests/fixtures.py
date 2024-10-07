@@ -82,43 +82,48 @@ class TestFixture:
         def get_placeholders(self, page):
             return page.get_placeholders(self.language)
 
-        def create_url(
-            self,
-            site=None,
-            content_object=None,
-            manual_url="",
-            relative_path="",
-            phone="",
-            mailto="",
-            anchor="",
-        ):
-            from djangocms_url_manager.models import Url, UrlGrouper
-            from djangocms_url_manager.utils import is_versioning_enabled
-            from djangocms_versioning.constants import DRAFT
-            from djangocms_versioning.models import Version
+        try:
+            import djangocms_url_manager as __just_testing__
 
-            if site is None:
-                site = self.default_site
+            def create_url(
+                self,
+                site=None,
+                content_object=None,
+                manual_url="",
+                relative_path="",
+                phone="",
+                mailto="",
+                anchor="",
+            ):
+                from djangocms_url_manager.models import Url, UrlGrouper
+                from djangocms_url_manager.utils import is_versioning_enabled
+                from djangocms_versioning.constants import DRAFT
+                from djangocms_versioning.models import Version
 
-            url = Url.objects.create(
-                site=site,
-                content_object=content_object,
-                manual_url=manual_url,
-                relative_path=relative_path,
-                phone=phone,
-                mailto=mailto,
-                anchor=anchor,
-                url_grouper=UrlGrouper.objects.create(),
-            )
-            if is_versioning_enabled():
-                Version.objects.create(
-                    content=url,
-                    created_by=self.superuser,
-                    state=DRAFT,
-                    content_type_id=ContentType.objects.get_for_model(Url).id,
+                if site is None:
+                    site = self.default_site
+
+                url = Url.objects.create(
+                    site=site,
+                    content_object=content_object,
+                    manual_url=manual_url,
+                    relative_path=relative_path,
+                    phone=phone,
+                    mailto=mailto,
+                    anchor=anchor,
+                    url_grouper=UrlGrouper.objects.create(),
                 )
+                if is_versioning_enabled():
+                    Version.objects.create(
+                        content=url,
+                        created_by=self.superuser,
+                        state=DRAFT,
+                        content_type_id=ContentType.objects.get_for_model(Url).id,
+                    )
 
-            return url
+                return url
+        except ModuleNotFoundError:
+            pass
 
         def delete_urls(self):
             from djangocms_url_manager.models import Url
