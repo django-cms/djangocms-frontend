@@ -2,7 +2,7 @@ from cms.constants import SLUG_REGEXP
 from cms.plugin_base import CMSPluginBase
 from django.utils.encoding import force_str
 
-from djangocms_frontend.helpers import get_related_object
+from djangocms_frontend.helpers import get_related
 
 if hasattr(CMSPluginBase, "edit_field"):
     # FrontendEditable functionality already implemented in core?
@@ -10,15 +10,6 @@ if hasattr(CMSPluginBase, "edit_field"):
 else:
     # If not use our own version of the plugin-enabled mixin
     from .helpers import FrontendEditableAdminMixin
-
-
-def _get_related(instance, key):
-    def get_related():
-        obj = get_related_object(instance.config, key)
-        setattr(instance, key, obj)
-        return obj
-    get_related.__name__ = key
-    return get_related
 
 
 class CMSUIPlugin(FrontendEditableAdminMixin, CMSPluginBase):
@@ -32,7 +23,7 @@ class CMSUIPlugin(FrontendEditableAdminMixin, CMSPluginBase):
         for key, value in instance.config.items():
             if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
                 if key not in instance.__dir__():  # hasattr would return the value in the config dict
-                    setattr(instance, key, _get_related(instance, key))
+                    setattr(instance.__class__, key, get_related(key))
         return super().render(context, instance, placeholder)
 
     def get_plugin_urls(self):

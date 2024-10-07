@@ -71,6 +71,8 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "btn-primary")
         self.assertContains(response, 'href="/content/"')
+        # Finally, test the descriptor
+        self.assertEqual(plugin.internal_link, self.page)
 
         # alternate version broken link
         plugin = add_plugin(

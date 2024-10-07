@@ -45,7 +45,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             plugin_type=ImagePlugin.__name__,
             language=self.language,
             config={
-                "image": {"pk": self.image.id, "model": "filer.Image"},
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
                 "picture_fluid": False,
                 "picture_rounded": True,
                 "picture_thumbnail": True,

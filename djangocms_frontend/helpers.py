@@ -31,6 +31,18 @@ def get_related_object(scope, field_name):
     return relobj
 
 
+class get_related:
+    """Descriptor lazily getting related objects from the config dict."""
+    def __init__(self, key):
+        self.key = key
+
+    def __get__(self, instance, owner):
+        obj = get_related_object(instance.config, self.key)
+        if obj is not None:
+            setattr(instance, self.key, obj)
+        return obj
+
+
 def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None, blockattrs=None):
     """
     creates a copy of fieldsets inserting the new fields either in the indexed block at the position,
