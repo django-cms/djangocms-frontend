@@ -508,4 +508,3 @@ use the ``{% plugin %}`` template tag with each plugin.
 
     Since no plugins are created in the database, plugins relying on their
     instances being available in the database will potentially not work.
-
