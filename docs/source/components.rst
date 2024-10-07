@@ -2,18 +2,23 @@
 .. index::
     single: Plugins
 
-###################
- Component plugins
-###################
+############################
+ Standard Component plugins
+############################
 
 ``djangocms-frontend`` adds a set of plugins to Django-CMS to allow for
 quick usage of components defined by the underlying css framework, e.g.
-bootstrap 5.
+Bootstrap 5.
 
 While ``djangocoms-frontend`` is set up to become framework agnostic its
 heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
 Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
+
+.. note::
+
+    Custom components can easily be added using the components contrib
+    package. For more information see :ref:`custom_components`.
 
 .. index::
     single: Accordion
@@ -35,8 +40,28 @@ each collapsable section.
 Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.3/components/accordion/>`_
 documentation.
 
+Re-usable component example
+===========================
+
+The accordion component is a good example of a re-usable component. It can be
+used in all your project's templates. Here is an example of how to create an
+accordion (if key word arguments are skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "accordion" accordion_header_type="h2" accordion_flush=False %}
+        {% plugin "accordionitem" accordion_item_header="Accordion item 1" accordion_item_open=True %}
+            Content of accordion item 1
+        {% endplugin %}
+        {% plugin "accordionitem" accordion_item_header="Accordion item 2" %}
+            Content of accordion item 1
+        {% endplugin %}
+    {% endplugin %}
+
 .. index::
     single: Alert
+
 
 ***************
 Alert component
@@ -61,6 +86,21 @@ the right hand side.
 Also see Bootstrap 5 `Alerts <https://getbootstrap.com/docs/5.3/components/alerts/>`_
 documentation.
 
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "alert" alert_context="primary" alert_dismissible=True %}
+        Alert text goes here!
+    {% endplugin %}
+
+
 .. index::
     single: Badge
 
@@ -78,6 +118,22 @@ plugin, badges are useful, e.g., to mark featured or new headers.
 
 Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.3/components/badge/>`_
 documentation.
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "badge" badge_text="My badge" badge_context="info" badge_pills=False %}
+        This content is ignored.
+    {% endplugin %}
+
+
 
 .. index::
     single: Card
@@ -149,6 +205,31 @@ Here is an example of the new card **Image overlay** feature:
 Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.3/components/card/>`_
 documentation.
 
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "card" card_alignment="center" card_outline="info"
+                     card_text_color="primary" card_full_height=True %}
+        {% plugin "cardinner" inner_type="card-header" text_alignment="start" %}
+            <h4>Card title</h4>
+        {% endplugin %}
+        {% plugin "cardinner" inner_type="card-body" text_alignment="center" %}
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+        {% endplugin %}
+        {% plugin "listgroupitem" %}An item{% endplugin %}
+        {% plugin "listgroupitem" %}A second item{% endplugin %}
+        {% plugin "listgroupitem" %}A third item{% endplugin %}
+    {% endplugin %}
+
+
 .. index::
     single: Carousel
 
@@ -173,6 +254,51 @@ specified using the ``DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES`` setting.
     specified the child plugins add to the caption. If no image is specified
     the child plugins make up the slide.
 
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "carousel" template="my_template" carousel_controls=True %}
+        {% plugin "carouselslide" %}
+            <h4>Carousel slide title</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+        {% plugin "carouselslide" %}
+            <h4>Carousel slide title</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "carousel" %}`` are:
+
+* ``template``: The template to use for the carousel. If not specified the
+  default template is used.
+* ``carousel_controls``: If set to ``True`` the carousel will have controls.
+* ``carousel_indicators``: If set to ``True`` the carousel will have indicators.
+* ``carousel_interval``: The interval in milliseconds between slides. If not
+  specified the default interval (5000) is used.
+* ``carousel_pause``: If set to ``hover`` the carousel will pause on hover.
+* ``carousel_wrap``: If set to ``True`` the carousel will wrap around.
+* ``carousel_keyboard``: If set to ``True`` the carousel will react to keyboard
+  events.
+* ``carousel_ride``: If set to ``True`` the carousel will start sliding
+  automatically.
+* ``carousel_aspect_ratio``: The aspect ratio of the carousel. If not specified
+  the default aspect ratio (16:9) is used.
+
+Parameters for ``{% plugin "carouselslide" %}`` are:
+
+* ``carousel_image``: The image to display in the slide. If not specified the
+  slide will be empty.
+* ``carousel_content``: The HTML caption to display in the slide.
+
+
 ******************
 Collapse component
 ******************
@@ -183,6 +309,7 @@ button) to reveal itself.
 
 Compared to the accordion component the collapse component often is more
 flexible but also requires more detailed styling.
+
 
 .. index::
     single: Jumbotron
@@ -238,6 +365,23 @@ For more information, see
     Only those destinations (outside the CMS) are shown for which a model admin
     is registered and the logged in user has view permissions: A user will only
     see a destination if they can view it in the admin site.
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% url 'some_view' as some_view %}
+    {% plugin "textlink" external_link=some_view link_type="btn" link_context="primary" link_outline=False %}
+        Click me!
+    {% endplugin %}
+
+
 
 ********************
 List group component
@@ -414,6 +558,46 @@ Tabs component
     be provided by you or a third party. If you use a CSS animation library,
     you can make these animations available by adjusting the
     ``DJANGOCMS_FRONTEND_TAB_EFFECTS`` setting.
+
+
+Re-usable component example
+===========================
+
+**djangocms-frontend** plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "tab" template="my_template" tab_type="nav-pills" tab_align="justify-content-center" %}
+        {% plugin "tabitem" tab_title="Tab 1" tab_bordered=True %}
+            <h4>Content of tab 1</h4>
+            <p> Some content...</p>
+        {% endplugin %}
+        {% plugin "tabitem" tab_title="Tab 2" tab_bordered=True %}
+            <h4>Content of tab 2</h4>
+            <p> Some more content...</p>
+        {% endplugin %}
+    {% endplugin %}
+
+
+Parameters for ``{% plugin "tab" %}`` are:
+
+* ``template``: The template to use for the tabs. If not specified the default
+  template is used.
+* ``tab_type``: The type of the tabs. If not specified the default type is used.
+* ``tab_align``: The alignment of the tabs. If not specified the default alignment
+  is used.
+* ``tab_index``: The index of the initially active tab. If not specified the
+  first tab is active.
+* ``tab_effect``: The effect of the tabs. ``"fade"`` is available. If not
+  specified no effect is used.
+
+Parameters for ``{% plugin "tabitem" %}`` are:
+
+* ``tab_title``: The title of the tab.
+* ``tab_bordered``: If set to ``True`` the tab will have a border.
 
 
 .. index::

@@ -45,7 +45,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             plugin_type=ImagePlugin.__name__,
             language=self.language,
             config={
-                "image": {"pk": self.image.id, "model": "filer.Image"},
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
                 "picture_fluid": False,
                 "picture_rounded": True,
                 "picture_thumbnail": True,
@@ -74,7 +74,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             "margin_devices": ["xs"],
         }
         form = ImageForm(request.POST)
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         self.assertEqual(form.cleaned_data["config"]["use_responsive_image"], "yes")
 
         request.POST.update(

@@ -5,8 +5,7 @@ from djangocms_frontend.helpers import get_plugin_template
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundMixin
+from ...common import AttributesMixin, BackgroundMixin
 from .. import carousel
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
@@ -97,7 +96,7 @@ class CarouselSlidePlugin(
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
-            instance.parent.get_plugin_instance()[0],
+            instance.parent or instance,
             "carousel",
             "slide",
             CAROUSEL_TEMPLATE_CHOICES,

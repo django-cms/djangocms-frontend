@@ -3,8 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundMixin
+from ...common import AttributesMixin, BackgroundMixin
 from ...helpers import first_choice, get_plugin_template, get_template_path
 from .. import navigation
 from ..link.cms_plugins import LinkPluginMixin, TextLinkPlugin

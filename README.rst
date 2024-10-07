@@ -14,26 +14,30 @@ currently used frontend framework such as Bootstrap, or its specific version.
 Key features
 ============
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-   and the new upcoming major django CMS 4.
+- Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
+  and django CMS 4.
 
--  **Separation of plugins from css framework**, i.e. no need to
-   rebuild you site's plugin tree if css framework is changed in the
-   future, e.g. from Bootstrap 5 to a future version.
+- **Separation of plugins from css framework**, i.e. no need to
+  rebuild you site's plugin tree if css framework is changed in the
+  future, e.g. from Bootstrap 5 to a future version.
 
--  **New link plugin** allowing to link to internal pages provided by
-   other applications, such as `djangocms-blog
-   <https://github.com/nephila/djangocms-blog>`_.
+- **New link plugin** allowing to link to internal pages provided by
+  other applications, such as `djangocms-blog
+  <https://github.com/nephila/djangocms-blog>`_.
 
--  **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
-   <https://github.com/django-cms/djangocms-bootstrap4>`_
+- **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
+  <https://github.com/django-cms/djangocms-bootstrap4>`_
+
+- **Extensible** within the project and with separate project (e.g. a
+  theme app). Create your own components with a few lines of code only.
+
+- **Plugins are re-usable as UI components** anywhere in your project
+  (e.g. in a custom app) giving your whole project a more consistent
+  user experience.
 
 -  A management command to **migrate from djangocms-bootstrap4**. This
    command automatically migrates all ``djangocms-bootstrap4`` plugins to
    ``djangocms-frontend``.
-
--  **Extensible** within the project and with separate project (e.g. a
-   theme app)
 
 
 Description
@@ -54,6 +58,10 @@ rebuild your full plugin tree.
 The link plugin has been rewritten to not only allow internal links to other
 CMS pages, but also to other django models such as, e.g., posts of
 `djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
+
+The plugins are designed to be re-usable as UI components in your
+project, e.g. in a custom app, giving your whole project a more
+consistent user experience.
 
 Contributing
 ============
@@ -151,7 +159,7 @@ See readthedocs for the `documentation
 License
 =======
 
-See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICENSE>`_. 
+See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICENSE>`_.
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend

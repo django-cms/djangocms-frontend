@@ -72,6 +72,8 @@ NAVIGATION_TEMPLATE_CHOICES = getattr(
     ],
 )
 
+SHOW_EMPTY_CHILDREN = getattr(django_settings, "DJANGOCMS_FRONTEND_SHOW_EMPTY_CHILDREN", False)
+
 FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
 
 
@@ -83,7 +85,7 @@ framework_settings = importlib.import_module(f"djangocms_frontend.frameworks.{fr
 DEVICE_SIZES = framework_settings.DEVICE_SIZES
 DEVICE_CHOICES = framework_settings.DEVICE_CHOICES
 COLOR_STYLE_CHOICES = framework_settings.COLOR_STYLE_CHOICES
-COLOR_CODES = framework_settings.COLOR_CODES
+# COLOR_CODES = framework_settings.COLOR_CODES
 FORM_TEMPLATE = getattr(framework_settings, "FORM_TEMPLATE", None)
 SPACER_PROPERTY_CHOICES = framework_settings.SPACER_PROPERTY_CHOICES
 SPACER_SIDE_CHOICES = framework_settings.SPACER_SIDE_CHOICES

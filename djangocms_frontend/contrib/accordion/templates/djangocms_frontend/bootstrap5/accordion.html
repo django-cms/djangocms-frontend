@@ -1,6 +1,7 @@
-{% load cms_tags %}
-<{{ instance.tag_type }}{{ instance.get_attributes }} id="parent-{{ instance.pk|safe }}">
+{% load cms_tags frontend %}
+<{{ instance.tag_type }}{{ instance.get_attributes }} id="parent-{{ instance.uuid }}">
     {% for plugin in instance.child_plugin_instances %}
         {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
+    {% empty %}{% user_message _("Add accordion items here") %}
     {% endfor %}
 </{{ instance.tag_type }}>
