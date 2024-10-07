@@ -93,5 +93,5 @@ def setup():
                 warnings.warn(
                     f"Duplicate candidates for {{% plugin \"{tag_name}\" %}} found. "
                     f"Only registered {plugin_tag_pool[tag_name]['class'].__name__}.", stacklevel=1)
-        except Exception as exc:
+        except Exception as exc:  # pragma: no cover
             warnings.warn(f"{plugin.__name__}: \n{str(exc)}", stacklevel=1)

@@ -14,8 +14,12 @@ class Components:
         self._registry[component.__name__] = component.get_registration()
         return component
 
+    def __getitem__(self, item):
+        return self._registry[item]
+
 
 components = Components()
+
 if not components._discovered:
     autodiscover_modules("cms_components", register_to=components)
     components._discovered = True

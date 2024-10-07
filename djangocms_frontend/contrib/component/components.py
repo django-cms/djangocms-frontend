@@ -37,34 +37,39 @@ class CMSFrontendComponent(forms.Form):
     _base_form = EntangledModelForm
     _plugin_mixins = []
     _model_mixins = []
+    _admin_form = None
+    _model = None
+    _plugin = None
 
     @classmethod
     def admin_form_factory(cls, **kwargs) -> type:
-        from djangocms_frontend.models import FrontendUIItem
+        if cls._admin_form is None:
+            from djangocms_frontend.models import FrontendUIItem
 
-        mixins = getattr(cls._component_meta, "mixins", [])
-        mixins = _get_mixin_classes(mixins, "Form")
-        return type(
-            f"{cls.__name__}Form",
-            (
-                *mixins,
-                cls,
-                cls._base_form,
-            ),
-            {
-                **kwargs,
-                "Meta": type(
-                    "Meta",
-                    (),
-                    {
-                        "model": FrontendUIItem,
-                        "entangled_fields": {
-                            "config": list(cls.declared_fields.keys()),
-                        },
-                    },
+            mixins = getattr(cls._component_meta, "mixins", [])
+            mixins = _get_mixin_classes(mixins, "Form")
+            cls._admin_form = type(
+                f"{cls.__name__}Form",
+                (
+                    *mixins,
+                    cls,
+                    cls._base_form,
                 ),
-            },
-        )
+                {
+                    **kwargs,
+                    "Meta": type(
+                        "Meta",
+                        (),
+                        {
+                            "model": FrontendUIItem,
+                            "entangled_fields": {
+                                "config": list(cls.declared_fields.keys()),
+                            },
+                        },
+                    ),
+                },
+            )
+        return cls._admin_form
 
     @classmethod
     def get_slot_plugins(cls) -> dict[str:str]:
@@ -75,73 +80,76 @@ class CMSFrontendComponent(forms.Form):
 
     @classmethod
     def plugin_model_factory(cls) -> type:
-        from djangocms_frontend.models import FrontendUIItem
+        if cls._model is None:
+            from djangocms_frontend.models import FrontendUIItem
 
-        app_config = apps.get_containing_app_config(cls.__module__)
-        if app_config is None:
-            raise ValueError(f"Cannot find app_config for {cls.__module__}")
-        model_class = type(
-            cls.__name__,
-            (
-                *cls._model_mixins,
-                FrontendUIItem,
-            ),
-            {
-                "Meta": type(
-                    "Meta",
-                    (),
-                    {
-                        "app_label": app_config.label,
-                        "proxy": True,
-                        "managed": False,
-                        "verbose_name": getattr(cls._component_meta, "name", cls.__name__),
-                    },
+            app_config = apps.get_containing_app_config(cls.__module__)
+            if app_config is None:
+                raise ValueError(f"Cannot find app_config for {cls.__module__}")
+            cls._model = type(
+                cls.__name__,
+                (
+                    *cls._model_mixins,
+                    FrontendUIItem,
                 ),
-                "get_short_description": cls.get_short_description,
-                "__module__": "djangocms_frontend.contrib.component.models",
-            },
-        )
-        return model_class
+                {
+                    "Meta": type(
+                        "Meta",
+                        (),
+                        {
+                            "app_label": app_config.label,
+                            "proxy": True,
+                            "managed": False,
+                            "verbose_name": getattr(cls._component_meta, "name", cls.__name__),
+                        },
+                    ),
+                    "get_short_description": cls.get_short_description,
+                    "__module__": "djangocms_frontend.contrib.component.models",
+                },
+            )
+        return cls._model
 
     @classmethod
     def plugin_factory(cls) -> type:
-        from djangocms_frontend.cms_plugins import CMSUIPlugin
+        if cls._plugin is None:
+            from djangocms_frontend.cms_plugins import CMSUIPlugin
 
-        mixins = getattr(cls._component_meta, "mixins", [])
-        slots = cls.get_slot_plugins()
-        mixins = _get_mixin_classes(mixins)
+            mixins = getattr(cls._component_meta, "mixins", [])
+            slots = cls.get_slot_plugins()
+            mixins = _get_mixin_classes(mixins)
 
-        return type(
-            cls.__name__ + "Plugin",
-            (
-                *mixins,
-                *cls._plugin_mixins,
-                CMSUIPlugin,
-            ),
-            {
-                "name": getattr(cls._component_meta, "name", cls.__name__),
-                "module": getattr(cls._component_meta, "module", _("Component")),
-                "model": cls.plugin_model_factory(),
-                "form": cls.admin_form_factory(),
-                "allow_children": getattr(cls._component_meta, "allow_children", False) or slots,
-                "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
-                "render_template": getattr(cls._component_meta, "render_template", CMSUIPlugin.render_template),
-                "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
-                "change_form_template": "djangocms_frontend/admin/base.html",
-                "slots": slots,
-                "frontend_editable_fields": getattr(cls._component_meta, "frontend_editable_fields", []),
-                "save_model": cls.save_model,
-                "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", 1),
-                **(
-                    {
-                        "get_render_template": cls.get_render_template,
-                        "TEMPLATES": cls.TEMPLATES,
-                    }
-                    if hasattr(cls, "get_render_template")
-                    else {}
+            cls._plugin = type(
+                cls.__name__ + "Plugin",
+                (
+                    *mixins,
+                    *cls._plugin_mixins,
+                    CMSUIPlugin,
                 ),
-            },
-        )
+                {
+                    "name": getattr(cls._component_meta, "name", cls.__name__),
+                    "module": getattr(cls._component_meta, "module", _("Component")),
+                    "model": cls.plugin_model_factory(),
+                    "form": cls.admin_form_factory(),
+                    "allow_children": getattr(cls._component_meta, "allow_children", False) or slots,
+                    "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
+                    "render_template": getattr(cls._component_meta, "render_template", CMSUIPlugin.render_template),
+                    "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
+                    "change_form_template": "djangocms_frontend/admin/base.html",
+                    "slots": slots,
+                    "frontend_editable_fields": getattr(cls._component_meta, "frontend_editable_fields", []),
+                    "save_model": cls.save_model,
+                    "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", 1),
+                    **(
+                        {
+                            "get_render_template": cls.get_render_template,
+                            "TEMPLATES": cls.TEMPLATES,
+                        }
+                        if hasattr(cls, "get_render_template")
+                        else {}
+                    ),
+                },
+            )
+        return cls._plugin
 
     @classmethod
     def slot_plugin_factory(cls) -> list[type]:
