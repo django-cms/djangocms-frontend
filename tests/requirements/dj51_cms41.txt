@@ -3,4 +3,3 @@
 Django>=5.1,<5.2
 django-cms>=4.1.1,<4.2
 djangocms-versioning>=2.0.1
-git+https://github.com/fsbraun/djangocms-url-manager.git@master#egg=djangocms-url-manager

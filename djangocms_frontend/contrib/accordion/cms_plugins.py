@@ -98,3 +98,5 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSUIPlugin):
             },
         ),
     ]
+
+    frontend_editable_fields = ("accordion_item_header",)

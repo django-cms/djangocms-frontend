@@ -208,7 +208,8 @@ class FrontendEditableAdminMixin:
         if not cancel_clicked and request.method == 'POST':
             form = form_class(instance=obj, data=request.POST)
             if form.is_valid():
-                form.save()
+                new_object = form.save(commit=False)
+                self.save_model(request, new_object, form, change=True)
                 saved_successfully = True
         else:
             form = form_class(instance=obj)
@@ -238,6 +239,10 @@ class FrontendEditableAdminMixin:
             return render(request, 'admin/cms/page/plugin/confirm_form.html', context)
         if not cancel_clicked and request.method == 'POST' and saved_successfully:
             if isinstance(self, CMSPluginBase):
+                if hasattr(obj.placeholder, 'mark_as_dirty'):
+                    # Only relevant for v3: mark the placeholder as dirty so user can publish changes
+                    obj.placeholder.mark_as_dirty(obj.language, clear_cache=False)
+                # Update the structure board by populating the data bridge
                 return self.render_close_frame(request, obj)
             render(request, 'admin/cms/page/plugin/confirm_form.html', context)
         return render(request, 'admin/cms/page/plugin/change_form.html', context)

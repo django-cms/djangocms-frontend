@@ -4,7 +4,6 @@ from setuptools import find_packages, setup
 from djangocms_frontend import __version__
 
 REQUIREMENTS = [
-    "Django>=2.2",
     "django-cms>=3.7",
     "django-filer>=1.7",
     "easy-thumbnails",
@@ -28,7 +27,7 @@ EXTRA_REQUIREMENTS = {
     ],
     "cms-3": [
         "django-cms<4",
-        "djangocms-text-ckeditor>=3.1.0",
+        "djangocms-text",
         "django-parler",
     ],
 }

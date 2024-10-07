@@ -2,15 +2,15 @@
 {% spaceless %}
     <div class="accordion-item">
         <{{ parent.accordion_header_type|default:"h2" }} class="accordion-header"
-        id="heading-{{ instance.pk|safe }}"><button
+        id="heading-{{ instance.uuid }}"><button
             class="accordion-button{% if not instance.accordion_item_open %} collapsed{% endif %} {{ instance.font_size }}"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#item-{{ instance.pk|safe }}"
+            data-bs-target="#item-{{ instance.uuid }}"
             aria-expanded="{{ instance.accordion_item_open|lower }}"
-            aria-controls="item-{{ instance.pk|safe }}">{{ instance.accordion_item_header }}</button>
+            aria-controls="item-{{ instance.uuid }}">{% inline_field instance "accordion_item_header" %}</button>
     </{{ parent.accordion_header_type|default:"h2" }}>
-    <{{ instance.tag_type }}{{ instance.get_attributes }} id="item-{{ instance.pk|safe }}" aria-labelledby="heading-{{ instance.pk|safe }}" data-bs-parent="#parent-{{ parent.pk|safe }}">
+    <{{ instance.tag_type }}{{ instance.get_attributes }} id="item-{{ instance.uuid }}" aria-labelledby="heading-{{ instance.uuid }}" data-bs-parent="#parent-{{ parent.uuid }}">
     <div class="accordion-body">{% endspaceless %}
         {% with parent=instance %}
             {% for plugin in instance.child_plugin_instances %}

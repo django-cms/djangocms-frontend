@@ -1,12 +1,15 @@
-import uuid
-
 from cms.constants import SLUG_REGEXP
 from cms.plugin_base import CMSPluginBase
 from django.utils.encoding import force_str
 
 from djangocms_frontend.helpers import get_related_object
 
-from .helpers import FrontendEditableAdminMixin
+if hasattr(CMSPluginBase, "edit_field"):
+    # FrontendEditable functionality already implemented in core?
+    FrontendEditableAdminMixin = object
+else:
+    # If not use our own version of the plugin-enabled mixin
+    from .helpers import FrontendEditableAdminMixin
 
 
 def _get_related(instance, key):
@@ -30,7 +33,6 @@ class CMSUIPlugin(FrontendEditableAdminMixin, CMSPluginBase):
             if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
                 if key not in instance.__dir__():  # hasattr would return the value in the config dict
                     setattr(instance, key, _get_related(instance, key))
-        instance.uuid = str(uuid.uuid4())
         return super().render(context, instance, placeholder)
 
     def get_plugin_urls(self):
