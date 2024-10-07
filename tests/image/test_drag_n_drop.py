@@ -25,7 +25,7 @@ class DjangoCMSPictureIntegrationTestCase(TestFixture, CMSTestCase):
         id = picture_plugins[0].id
         self.assertHTMLEqual(
             text_plugin.body,
-            f'<cms-plugin alt="Picture / Image - Image ({id}) " '
+            f'<cms-plugin alt="Picture / Image - Image ({id})" '
             f'title="Picture / Image - Image ({id})" '
             f'id="{id}"></cms-plugin>',
         )

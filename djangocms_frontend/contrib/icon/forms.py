@@ -9,9 +9,7 @@ from djangocms_frontend.fields import (
 )
 
 from ... import settings
-from ...common.background import BackgroundFormMixin
-from ...common.responsive import ResponsiveFormMixin
-from ...common.spacing import SpacingFormMixin
+from ...common import BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ...settings import COLOR_STYLE_CHOICES

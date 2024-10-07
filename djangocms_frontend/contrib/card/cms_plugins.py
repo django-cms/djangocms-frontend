@@ -3,10 +3,13 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.background import BackgroundMixin
-from ...common.responsive import ResponsiveMixin
-from ...common.spacing import MarginMixin, PaddingMixin
+from ...common import (
+    AttributesMixin,
+    BackgroundMixin,
+    MarginMixin,
+    PaddingMixin,
+    ResponsiveMixin,
+)
 from ...helpers import add_plugin
 from .. import card
 from . import forms, models

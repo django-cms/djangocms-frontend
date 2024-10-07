@@ -25,8 +25,8 @@ class GridRowRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes(
             "row",
-            instance.vertical_alignment,
-            instance.horizontal_alignment,
+            instance.config.get("vertical_alignment"),
+            instance.config.get("horizontal_alignment"),
         )
         if instance.parent and instance.parent.plugin_type == "CardPlugin":
             instance.add_classes("g-0")  # no gutters if inside card
@@ -62,6 +62,6 @@ class GridColumnRenderMixin:
         instance.add_classes(
             f"col text-{instance.text_alignment}" if instance.config.get("text_alignment", None) else "col"
         )
-        instance.add_classes(instance.column_alignment)
+        instance.add_classes(instance.config.get("column_alignment"))
         instance.add_classes(get_grid_values(instance))
         return super().render(context, instance, placeholder)

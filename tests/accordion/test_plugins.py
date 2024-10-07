@@ -23,7 +23,7 @@ class AccordionPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'id="parent-1"')
+        self.assertContains(response, 'id="parent-')
 
         plugin = add_plugin(
             target=parent,

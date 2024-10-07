@@ -3,9 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
-from ...common.responsive import ResponsiveMixin
-from ...common.spacing import MarginMixin
+from ...common import AttributesMixin, MarginMixin, ResponsiveMixin
 from .. import image
 from ..link.cms_plugins import LinkPluginMixin
 from . import forms, models
@@ -90,6 +88,13 @@ class ImagePlugin(
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"
 
     def render(self, context, instance, placeholder):
+        # assign link to a context variable to be performant
+        context["picture_link"] = instance.get_link()
+        context["picture_size"] = instance.get_size(
+            width=context.get("width", 0),
+            height=context.get("height", 0),
+        )
+        context["img_srcset_data"] = instance.img_srcset_data
         if instance.config.get("lazy_loading", False):
             instance.add_attribute("loading", "lazy")
         return super().render(context, instance, placeholder)

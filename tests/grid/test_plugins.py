@@ -133,7 +133,7 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
         form = GridRowForm(
             {"config": {"a": 1}, **data}
         )  # GridRowForm & GridColumnForm need config explicitly not empty
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
 
         if (
             not DJANGO_CMS4

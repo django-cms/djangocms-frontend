@@ -94,6 +94,7 @@ Contents
    getting_started
    grid
    components
+   custom_components
    how-to/index
    reference
 

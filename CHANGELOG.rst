@@ -2,6 +2,27 @@
 Changelog
 =========
 
+1.3.4 (2024-09-30)
+==================
+
+* feat: Rename link plugin to text link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/219
+* Updates for file djangocms_frontend/locale/en/LC_MESSAGES/django.po in de by @transifex-integration in https://github.com/django-cms/djangocms-frontend/pull/228
+* fix: setting `DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH` caused a regression when updating opt groups by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/230
+* fix: Pin django-entangled dependency to <0.6.
+
+1.3.3 (2024-07-11)
+==================
+
+* fix: pypi environments by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/214
+* fix: escaped characters in autocomplete view of link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/217
+* fix: Misaligned icons in mobile view of navigation by @hgkornmann in https://github.com/django-cms/djangocms-frontend/pull/221
+* chore: update pypi actions to use trusted publishers by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/213
+
+**New Contributors**
+
+* @hgkornmann made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/221
+
+
 1.3.2 (2024-04-25)
 ==================
 

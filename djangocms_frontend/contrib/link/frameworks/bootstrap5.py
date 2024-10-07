@@ -18,7 +18,7 @@ class LinkRenderMixin:
                 link_classes.append(f"link-{instance.link_context}")
             else:
                 link_classes.append("btn")
-                if not instance.link_outline:
+                if not instance.config.get("link_outline"):
                     link_classes.append(f"{background_prefix}-{instance.link_context}")
                 else:
                     link_classes.append(f"btn-outline-{instance.link_context}")

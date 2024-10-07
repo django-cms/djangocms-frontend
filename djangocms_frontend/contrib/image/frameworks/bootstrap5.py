@@ -3,13 +3,6 @@ from djangocms_frontend.helpers import is_first_child
 
 class ImageRenderMixin:
     def render(self, context, instance, placeholder):
-        # assign link to a context variable to be performant
-        context["picture_link"] = instance.get_link()
-        context["picture_size"] = instance.get_size(
-            width=context.get("width", 0),
-            height=context.get("height", 0),
-        )
-        context["img_srcset_data"] = instance.img_srcset_data
         if instance.alignment:
             # See https://getbootstrap.com/docs/5.2/content/images/#aligning-images
             if instance.alignment != "center":
