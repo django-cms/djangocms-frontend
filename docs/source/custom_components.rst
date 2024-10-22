@@ -4,6 +4,8 @@
 Custom Components
 #################
 
+.. versionadded:: 2.0
+
 Some frontend developers prefer custom components specifically tailored to
 give the project a unique and distinct look.
 

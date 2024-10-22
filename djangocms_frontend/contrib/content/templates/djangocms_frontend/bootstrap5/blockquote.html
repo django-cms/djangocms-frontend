@@ -9,13 +9,13 @@
 {# djlint:on #}
     {% for plugin in instance.child_plugin_instances %}
         {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
-    {% empty %}{{ instance.quote_content|html_safe }}{% endfor %}
+    {% empty %}{% inline_field instance "quote_content" "" "html_safe" %}{% endfor %}
 {# djlint:off #}
 </blockquote>
 {# djlint:on #}
 {% if instance.quote_origin %}
     <figcaption class="blockquote-footer">
-        {{ instance.quote_origin|safe_caption }}
+        {% inline_field instance "quote_origin" "" "safe_caption" %}
     </figcaption>
     </figure>
 {% endif %}

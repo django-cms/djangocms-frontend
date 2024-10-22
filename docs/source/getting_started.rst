@@ -51,6 +51,7 @@ Add the following entries to your ``INSTALLED_APPS``:
       "djangocms_frontend.contrib.card",
       "djangocms_frontend.contrib.carousel",
       "djangocms_frontend.contrib.collapse",
+      "djangocms_frontend.contrib.component",
       "djangocms_frontend.contrib.content",
       "djangocms_frontend.contrib.grid",
       "djangocms_frontend.contrib.icon",
@@ -62,12 +63,6 @@ Add the following entries to your ``INSTALLED_APPS``:
       'djangocms_frontend.contrib.modal',
       "djangocms_frontend.contrib.tabs",
       "djangocms_frontend.contrib.utilities",
-
-.. note :: Using Django 2.2 to 3.1
-
-    You will need to add ``django-jsonfield-backport`` to your
-    ``requirements.txt`` and add ``"django_jsonfield_backport"`` to your
-    ``INSTALLED_APPS``.
 
 
 Create necessary database table
@@ -441,15 +436,19 @@ the upper right corner:
 Using frontend plugins as components in templates
 =================================================
 
+.. versionadded:: 2.0
+
 The plugins of **djangocms-frontend** can be used as components in your
 templates - even in apps that do not use or integrate with djanog CMS
 otherwise. This is useful if you want use exactly the same markup for, say,
 buttons, links, the grid both in pages managed with django CMS and in
-other parts of your project.
+other parts of your project without duplicating HTML code.
 
-This allows you to keep one set of templates for your django CMS frontend
-plugins and any changes to those templates will be reflected in all parts
-of your project.
+This feature introduces a simple and flexible way to re-use djangocms-frontend
+plugins directly in templates without needing to create database entries for
+them. This allows developers to maintain clean, reusable, and dynamic
+components, such as buttons, cards, links, and more, while minimizing code
+repetition.
 
 To use a frontend plugin in a template you need to load the ``frontend`` tags
 and then use the ``plugin`` template tag to render a frontend plugin.
@@ -465,15 +464,48 @@ The plugins will be rendered based on their standard attribute settings.
 You can override these settings by passing them as keyword arguments to the
 ``plugin`` template tag.
 
-See the documentation of the djanog CMS plugins for examples of how to use
-the ``{% plugin %}`` template tag with each plugin.
+You can also create more complex reusable components, like a card with inner
+elements such as headers, bodies, and lists, by nesting plugins. Here’s an
+example of a card component::
+
+    {% load frontend %}
+    {% plugin "card" card_alignment="center" card_outline="info" card_text_color="primary" card_full_height=True %}
+        {% plugin "cardinner" inner_type="card-header" text_alignment="start" %}
+            <h4>Card title</h4>
+        {% endplugin %}
+        {% plugin "cardinner" inner_type="card-body" text_alignment="center" %}
+            Some quick example text to build on the card title and make up the bulk of the card's content.
+        {% endplugin %}
+        {% plugin "listgroupitem" %}An item{% endplugin %}
+        {% plugin "listgroupitem" %}A second item{% endplugin %}
+        {% plugin "listgroupitem" %}A third item{% endplugin %}
+    {% endplugin %}
+
+Breakdown of the Code:
+
+* ``plugin "card"``: Creates the outer card component.
+    * ``card_alignment="center"``: Aligns the card content to the center.
+    * ``card_outline="info"``: Gives the card an "info" outline style.
+    * ``card_text_color="primary"``: Changes the text color to "primary."
+    * ``card_full_height=True``: Ensures the card takes up the full height of its container.
+* Nested ``plugin "cardinner"``: Creates inner components within the card.
+    * ``inner_type="card-header"``: Specifies a header section for the card.
+    * ``text_alignment="start"``: Aligns the header text to the start (left).
+* Additional nested ``plugin "cardinner"`` and ``listgroupitem``:
+* These create the body of the card and a list group inside the card.
+
+The above template generates a dynamic card component with a header, a body,
+and a list group that can be reused across multiple pages without requiring
+database entries.
+
+For more examples, see the documentation of the djanog CMS plugins on of how to
+use the ``{% plugin %}`` template tag with each plugin.
+
 
 .. note::
 
     While this is designed for **djangocms-frontend** plugins primarily, it
-    will work with most django CMS plugins.
+    will work with many other django CMS plugins.
 
     Since no plugins are created in the database, plugins relying on their
     instances being available in the database will potentially not work.
-    This especially is true for plugins that have a foreign key to
-    other models.
