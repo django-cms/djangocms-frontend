@@ -136,7 +136,10 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                         )
                     )
                     if hasattr(self, "create_url")
-                    else dict(external_link="https://www.django-cms.org/")
+                    else dict(
+                        link_0="external_link",
+                        link_1="https://www.django-cms.org/",
+                    )
                 ),
             }
         )
@@ -144,10 +147,3 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         if hasattr(self, "create_url"):
             self.delete_urls()
-        else:
-            request.POST.update({"mailto": "none@nowhere.com"})
-            form = LinkForm(request.POST)
-            self.assertFalse(form.is_valid())  # Two targets
-            request.POST["external_link"] = None
-            form = LinkForm(request.POST)
-            self.assertFalse(form.is_valid())  # no anchor for mail

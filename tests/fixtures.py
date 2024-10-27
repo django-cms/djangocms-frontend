@@ -2,7 +2,6 @@ from cms.api import create_page
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
-from djangocms_versioning.constants import PUBLISHED
 
 DJANGO_CMS4 = apps.is_installed("djangocms_versioning")
 
@@ -114,6 +113,8 @@ class TestFixture:
                     url_grouper=UrlGrouper.objects.create(),
                 )
                 if is_versioning_enabled():
+                    from djangocms_versioning.constants import PUBLISHED
+
                     Version.objects.create(
                         content=url,
                         created_by=self.superuser,
