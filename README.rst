@@ -115,7 +115,7 @@ For a manual install:
 
 -  run ``pip install djangocms-frontend``
 
--  add the following entries to your ``INSTALLED_APPS``:
+-  add the following entries to your ``INSTALLED_APPS`` (or only those you need):
 
    .. code::
 
@@ -127,6 +127,7 @@ For a manual install:
       'djangocms_frontend.contrib.card',
       'djangocms_frontend.contrib.carousel',
       'djangocms_frontend.contrib.collapse',
+      'djangocms_frontend.contrib.component',
       'djangocms_frontend.contrib.content',
       'djangocms_frontend.contrib.grid',
       'djangocms_frontend.contrib.icon',
