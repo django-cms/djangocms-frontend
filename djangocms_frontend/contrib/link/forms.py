@@ -5,10 +5,7 @@ from cms.utils.urlutils import admin_reverse
 from django import apps, forms
 from django.conf import settings as django_settings
 from django.contrib.admin.widgets import SELECT2_TRANSLATIONS, AutocompleteMixin
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import models
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from djangocms_link.fields import LinkFormField
@@ -29,7 +26,6 @@ from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-from .helpers import get_object_for_value
 
 mixin_factory = settings.get_forms(link)
 
@@ -110,30 +106,6 @@ class Select2jqWidget(AutocompleteMixin, forms.Select):
             # Add an empty entry to allow for an empty value to be preselected
             groups[0][1].insert(0, self.create_option(name, "", "", False, 0))
         return groups
-
-
-class SmartLinkField(forms.ChoiceField):
-    widget = Select2jqWidget
-
-    def prepare_value(self, value):
-        if value:
-            if isinstance(value, dict):  # Entangled dictionary?
-                try:
-                    app_label, model = value["model"].rsplit(".", 1)
-                    content_type = ContentType.objects.get(app_label=app_label, model=model)
-                    return f"{content_type.id}-{value['pk']}"
-                except (TypeError, ValueError, KeyError, ObjectDoesNotExist):
-                    pass
-            elif isinstance(value, models.Model):
-                content_type = ContentType.objects.get_for_model(value)
-                return f"{content_type.id}-{value.id}"
-        return ""
-
-    def clean(self, value):
-        obj = get_object_for_value(value)
-        if obj is not None:
-            return obj
-        return super().clean(value)
 
 
 if apps.apps.is_installed("djangocms_url_manager"):

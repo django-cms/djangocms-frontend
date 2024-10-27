@@ -21,8 +21,8 @@ Key features
   rebuild you site's plugin tree if css framework is changed in the
   future, e.g. from Bootstrap 5 to a future version.
 
-- **New link plugin** allowing to link to internal pages provided by
-  other applications, such as `djangocms-blog
+- Leverage of new **djangocms-link features** allowing to link to internal pages
+  provided by other applications, such as `djangocms-blog
   <https://github.com/nephila/djangocms-blog>`_.
 
 - **Nice and well-arranged admin frontend** of `djangocms-bootstrap4

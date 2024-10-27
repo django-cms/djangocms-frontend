@@ -1,7 +1,6 @@
 from cms.plugin_pool import plugin_pool
 from django.apps import apps
 from django.conf import settings as django_settings
-from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template, insert_fields
@@ -10,7 +9,7 @@ from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common import AttributesMixin, SpacingMixin
 from .. import link
-from . import forms, models, views
+from . import forms, models
 from .constants import USE_LINK_ICONS
 from .helpers import GetLinkMixin
 
@@ -98,11 +97,6 @@ class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkP
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(instance, "link", "link", settings.LINK_TEMPLATE_CHOICES)
-
-    def get_plugin_urls(self):
-        return [
-            path("autocomplete/", views.AutocompleteJsonView.as_view(), name="link_link_autocomplete"),
-        ]
 
 
 if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
