@@ -10,4 +10,5 @@ black
 pre-commit
 djangocms-text
 html5lib
-djangocms-link>=5.0.0
+git+https://github.com/django-cms/djangocms-link@feat/url-mngr
+
