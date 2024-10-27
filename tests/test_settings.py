@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "menus",
     "treebeard",
     "djangocms_text",
+    "djangocms_link",
     "djangocms_frontend",
     "djangocms_frontend.contrib.accordion",
     "djangocms_frontend.contrib.alert",

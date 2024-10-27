@@ -149,7 +149,7 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
         )
         instance.initialize_from_form(MyButtonPlugin.form)
-        instance.config["internal_link"] = {"model": "cms.page", "pk": self.page.pk}
+        instance.config["link"] = {"internal_link": f"cms.page:{self.page.pk}"}
         instance.save()
 
         link = instance.get_link()

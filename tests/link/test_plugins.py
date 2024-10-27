@@ -18,7 +18,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
-                external_link="https://www.divio.com",
+                link=dict(external_link="https://www.divio.com"),
             ),
         ).initialize_from_form(LinkForm).save()
         self.publish(self.page, self.language)
@@ -34,7 +34,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
-                external_link="https://www.divio.com",
+                dict(link=dict(external_link="https://www.divio.com")),
                 link_context="primary",
                 link_size="btn-sm",
                 link_block=True,
@@ -57,7 +57,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
-                internal_link=dict(model="cms.page", pk=self.page.id),
+                link=dict(internal_link=f"cms.page:{self.page.id}"),
                 link_context="primary",
                 link_type="btn",
                 name="django CMS rocks!",
@@ -71,8 +71,6 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "btn-primary")
         self.assertContains(response, 'href="/content/"')
-        # Finally, test the descriptor
-        self.assertEqual(plugin.internal_link, self.page)
 
         # alternate version broken link
         plugin = add_plugin(
@@ -101,7 +99,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=TextLinkPlugin.__name__,
             language=self.language,
             config=dict(
-                external_link="https://www.divio.com",
+                link=dict(external_link="https://www.divio.com"),
                 link_context="primary",
                 link_type="btn",
                 link_outline=True,

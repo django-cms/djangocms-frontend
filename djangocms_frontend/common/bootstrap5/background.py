@@ -4,7 +4,7 @@ from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.fields import ButtonGroup, ColoredButtonGroup
-from djangocms_frontend.helpers import first_choice, insert_fields
+from djangocms_frontend.helpers import insert_fields
 
 
 class BackgroundMixin:
@@ -23,9 +23,8 @@ class BackgroundMixin:
     def render(self, context, instance, placeholder):
         if getattr(instance, "background_context", ""):
             instance.add_classes(f"bg-{instance.background_context}")
-        if getattr(instance, "background_opacity", "100") != "100":
-            if instance.background_opacity:
-                instance.add_classes(f"bg-opacity-{instance.background_opacity}")
+        if getattr(instance, "background_opacity", ""):
+            instance.add_classes(f"bg-opacity-{instance.background_opacity}")
         if getattr(instance, "background_shadow", ""):
             if instance.background_shadow == "reg":
                 instance.add_classes("shadow")
@@ -54,8 +53,8 @@ class BackgroundFormMixin(EntangledModelFormMixin):
     background_opacity = forms.ChoiceField(
         label=_("Background opacity"),
         required=False,
-        choices=settings.framework_settings.OPACITY_CHOICES,
-        initial=first_choice(settings.framework_settings.OPACITY_CHOICES),
+        choices=settings.EMPTY_CHOICE + settings.framework_settings.OPACITY_CHOICES,
+        initial=settings.EMPTY_CHOICE[0][0],
         widget=ButtonGroup(attrs=dict(property="opacity")),
         help_text=_("Opacity of card background color (only if no outline selected)"),
     )

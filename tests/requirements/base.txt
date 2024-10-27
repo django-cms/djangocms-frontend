@@ -10,4 +10,4 @@ black
 pre-commit
 djangocms-text
 html5lib
-.
+djangocms-link>=5.0.0
