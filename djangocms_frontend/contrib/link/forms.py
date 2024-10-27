@@ -1,12 +1,6 @@
-import json
-from types import SimpleNamespace
-
-from cms.utils.urlutils import admin_reverse
 from django import apps, forms
 from django.conf import settings as django_settings
-from django.contrib.admin.widgets import SELECT2_TRANSLATIONS, AutocompleteMixin
 from django.contrib.sites.models import Site
-from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from djangocms_link.fields import LinkFormField
 
@@ -43,69 +37,6 @@ else:  # pragma: no cover
         def __init__(self, *args, **kwargs):
             kwargs["widget"] = forms.HiddenInput
             super().__init__(*args, **kwargs)
-
-
-HOSTNAME = getattr(settings, "DJANGOCMS_LINK_INTRANET_HOSTNAME_PATTERN", None)
-LINK_MODELS = getattr(django_settings, "DJANGOCMS_FRONTEND_LINK_MODELS", [])
-MINIMUM_INPUT_LENGTH = getattr(django_settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH", 0)
-
-
-class Select2jqWidget(AutocompleteMixin, forms.Select):
-    empty_label = _("Select a destination")
-
-    def __init__(self, *args, **kwargs):
-        if MINIMUM_INPUT_LENGTH:  # no-cover
-            if "attrs" in kwargs:
-                kwargs["attrs"].setdefault("data-minimum-input-length", MINIMUM_INPUT_LENGTH)
-            else:
-                kwargs["attrs"] = {"data-minimum-input-length": MINIMUM_INPUT_LENGTH}
-        kwargs.setdefault("admin_site", None)
-        kwargs.setdefault(
-            "field",
-            SimpleNamespace(
-                name="", model=SimpleNamespace(_meta=SimpleNamespace(app="djangocms_frontend", label="link"))
-            ),
-        )  # Fake field properties for autocomplete field (unused by link)
-        super().__init__(*args, **kwargs)
-
-    def get_url(self):
-        return admin_reverse("link_link_autocomplete")
-
-    def build_attrs(self, base_attrs, extra_attrs=None):
-        """
-        Set select2's AJAX attributes.
-
-        Attributes can be set using the html5 data attribute.
-        Nested attributes require a double dash as per
-        https://select2.org/configuration/data-attributes#nested-subkey-options
-        """
-        attrs = super(forms.Select, self).build_attrs(base_attrs, extra_attrs=extra_attrs)
-        attrs.setdefault("class", "")
-        i18n_name = getattr(self, "i18n_name", SELECT2_TRANSLATIONS.get(get_language()))  # Django 3.2 compat
-        attrs.update(
-            {
-                "data-ajax--cache": "true",
-                "data-ajax--delay": 250,
-                "data-ajax--type": "GET",
-                "data-ajax--url": self.get_url(),
-                "data-theme": "admin-autocomplete",
-                "data-app-label": "app",
-                "data-model-name": "model",
-                "data-field-name": "field",
-                "data-allow-clear": json.dumps(not self.is_required),
-                "data-placeholder": "",  # Allows clearing of the input.
-                "lang": i18n_name,
-                "class": attrs["class"] + (" " if attrs["class"] else "") + "admin-autocomplete",
-            }
-        )
-        return attrs
-
-    def optgroups(self, name, value, attr=None):
-        groups = super(forms.Select, self).optgroups(name, value)
-        if not self.is_required and groups:
-            # Add an empty entry to allow for an empty value to be preselected
-            groups[0][1].insert(0, self.create_option(name, "", "", False, 0))
-        return groups
 
 
 if apps.apps.is_installed("djangocms_url_manager"):
