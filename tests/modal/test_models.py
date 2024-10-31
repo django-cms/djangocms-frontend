@@ -1,12 +1,11 @@
 from django.test import TestCase
 
-from djangocms_frontend.contrib.modal.forms import ModalForm, ModalTriggerForm, ModalContainerForm, ModalInnerForm
 from djangocms_frontend.contrib.modal.models import Modal, ModalTrigger, ModalContainer, ModalInner
 
 
 class ModalModelTestCase(TestCase):
     def test_Modal_instance(self):
-        instance = ModalForm.objects.create()
+        instance = Modal.objects.create()
         self.assertEqual(str(instance), "Modal (1)")
         self.assertEqual(instance.get_short_description(), "(modal-1)")
 

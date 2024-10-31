@@ -94,7 +94,7 @@ class ModalInnerPlugin(
     CMSUIPlugin,
 ):
     """
-    Component > "Modal Container" Plugin
+    Component > "Modal Container Content" Plugin
     https://getbootstrap.com/docs/5.0/components/modal/
     """
     name = _("Modal inner")

@@ -138,7 +138,7 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
 
 class ModalInnerForm(mixin_factory("ModalInner"), EntangledModelForm):
     """
-    Component > "Modal Container" Plugin
+    Component > "Modal Container Content" Plugin
     https://getbootstrap.com/docs/5.0/components/modal/
     """
 

@@ -5,13 +5,11 @@ from djangocms_frontend.contrib.modal.cms_plugins import (
     ModalContainerPlugin,
     ModalPlugin,
     ModalTriggerPlugin,
-    ModalModalInnerPlugin
 )
 from djangocms_frontend.contrib.modal.forms import (
     ModalContainerForm,
     ModalForm,
     ModalTriggerForm,
-    ModalModalInnerForm
 )
 
 from ..fixtures import TestFixture
