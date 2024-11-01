@@ -152,7 +152,8 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         instance.config["link"] = {"internal_link": f"cms.page:{self.page.pk}"}
         instance.save()
 
-        link = instance.get_link()
+        from djangocms_link.templatetags.djangocms_link_tags import to_url
+        link = to_url(instance.link)
 
         self.publish(self.page, self.language)
 

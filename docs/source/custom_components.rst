@@ -45,6 +45,8 @@ Add a ``cms_components.py`` file to the ``theme`` app:
 .. code-block:: python
 
     # theme/cms_components.py
+    from djangocms_link.fields import LinkFormField
+
     from djangocms_frontend.contrib.component.components import ComponentLinkMixin, CMSFrontendComponent
     from djangocms_frontend.contrib.component.components import components
     from djangocms_frontend.contrib.image.fields import ImageFormField
@@ -77,6 +79,7 @@ Add a ``cms_components.py`` file to the ``theme`` app:
             allow_children = False
 
         text = forms.CharField(required=True)
+        link = LinkFormField()
 
         def get_short_description(self):
             return self.text
