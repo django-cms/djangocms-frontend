@@ -18,7 +18,7 @@ from ...fields import HTMLFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import carousel
-from ..link.forms import AbstractLinkForm
+from ..link.forms import LinkFormMixin
 from .constants import (
     CAROUSEL_ASPECT_RATIO_CHOICES,
     CAROUSEL_PAUSE_CHOICES,
@@ -143,8 +143,8 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
 
 class CarouselSlideForm(
     mixin_factory("CarouselSlide"),
-    AbstractLinkForm,
     BackgroundFormMixin,
+    LinkFormMixin,
     EntangledModelForm,
 ):
     """

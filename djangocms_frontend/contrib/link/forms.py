@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 from djangocms_link.fields import LinkFormField
 
 # from djangocms_link.validators import IntranetURLValidator
-from entangled.forms import EntangledModelForm
+from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
 from ... import settings
 from ...common import SpacingFormMixin
@@ -46,7 +46,7 @@ if apps.apps.is_installed("djangocms_url_manager"):
     )
     from djangocms_url_manager.models import UrlGrouper
 
-    class AbstractLinkForm(EntangledModelForm):
+    class LinkFormMixin(EntangledModelFormMixin):
         class Meta:
             entangled_fields = {
                 "config": [
@@ -70,7 +70,7 @@ if apps.apps.is_installed("djangocms_url_manager"):
 
 else:
 
-    class AbstractLinkForm(EntangledModelForm):
+    class LinkFormMixin(EntangledModelFormMixin):
         class Meta:
             entangled_fields = {
                 "config": [
@@ -95,6 +95,10 @@ else:
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.fields["link"].required = not self.link_is_optional
+
+
+class AbstractLinkForm(LinkFormMixin, EntangledModelForm):
+    pass
 
 
 class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, AbstractLinkForm):

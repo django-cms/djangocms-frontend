@@ -81,18 +81,8 @@ class CarouselSlidePlugin(
                 )
             },
         ),
-        (
-            _("Link settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    ("external_link", "internal_link"),
-                    ("mailto", "phone"),
-                    ("anchor", "target"),
-                ),
-            },
-        ),
     ]
+    link_fieldset_position = 1
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
