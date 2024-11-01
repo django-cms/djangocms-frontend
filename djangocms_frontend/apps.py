@@ -18,7 +18,7 @@ def check_settings(*args, **kwargs):
 
     warnings = []
 
-    if hasattr(settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH"):
+    if hasattr(settings, "DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH"):  # pragma: no cover
         warnings.append(Warning(
             "The DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH setting was removed in djangocms-frontend 2.\n"
             "Use DJANGOCMS_LINK_MINIMUM_INPUT_LENGTH instead.",
@@ -27,7 +27,7 @@ def check_settings(*args, **kwargs):
             id="djangocms_frontend.W001",
             obj="settings.DJANGOCMS_FRONTEND_MINIMUM_INPUT_LENGTH",
         ))
-    if hasattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS"):
+    if hasattr(settings, "DJANGOCMS_FRONTEND_LINK_MODELS"):  # pragma: no cover
         warnings.append(Warning(
             "The DJANGOCMS_FRONTEND_LINK_MODELS setting was removed in djangocms-frontend 2.\n"
             "djangocms-frontend 2 uses linkable models from djangocms-link. See "
