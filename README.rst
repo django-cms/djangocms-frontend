@@ -136,6 +136,7 @@ For a manual install:
       'djangocms_frontend.contrib.link',
       'djangocms_frontend.contrib.listgroup',
       'djangocms_frontend.contrib.media',
+      'djangocms_frontend.contrib.modal',
       'djangocms_frontend.contrib.tabs',
       'djangocms_frontend.contrib.utilities',
 

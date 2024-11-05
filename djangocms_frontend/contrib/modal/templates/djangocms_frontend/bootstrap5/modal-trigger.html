@@ -1,0 +1,12 @@
+{% load cms_tags frontend %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}
+    id="trigger-{{ instance.trigger_identifier }}"
+    role="tab"
+    data-bs-toggle="modal"
+    data-bs-target="#{{ instance.trigger_identifier }}"
+    aria-controls="{{ instance.trigger_identifier }}"
+    aria-expanded="false">
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+</{{ instance.tag_type }}>

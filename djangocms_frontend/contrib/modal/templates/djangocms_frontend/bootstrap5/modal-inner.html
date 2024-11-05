@@ -1,0 +1,11 @@
+{% load cms_tags frontend %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}>
+{% with parent=instance %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+{% endwith %}
+{% if instance.inner_type == "modal-header" %}
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    {% endif %}
+</{{ instance.tag_type }}>
