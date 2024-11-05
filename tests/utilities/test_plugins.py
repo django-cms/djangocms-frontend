@@ -1,3 +1,4 @@
+from cms.admin.placeholderadmin import PlaceholderAdmin
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from cms.utils.urlutils import admin_reverse
@@ -100,8 +101,12 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
                 "heading_id": "id1",
             },
         )
-        url_endpoint = admin_reverse("utilities_heading_edit_field", args=[heading.pk, self.language])
-        url_endpoint += "?edit_fields=heading"
+
+        if hasattr(PlaceholderAdmin, "edit_field"):
+            url_endpoint = "cms_placeholder_edit_field"
+        else:
+            url_endpoint = "utilities_heading_edit_field"
+        url_endpoint = admin_reverse(url_endpoint, args=[heading.pk, self.language]) + "?edit_fields=heading"
         data = {
             "heading": "My new heading",
         }

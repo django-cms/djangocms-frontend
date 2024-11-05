@@ -7,10 +7,10 @@ class DjangocmsFrontendConfig(apps.AppConfig):
     verbose_name = "django CMS Frontend"
 
     def ready(self):
-        from .component_pool import setup
+        from . import plugin_tag
 
         register(check_settings)
-        setup()
+        plugin_tag.setup()
 
 
 def check_settings(*args, **kwargs):

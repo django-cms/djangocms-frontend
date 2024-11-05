@@ -19,17 +19,8 @@ With django CMS you make your components available to the content editors for
 drag and drop **and** frontend developers for use in templates from a single
 source.
 
-To use custom components in your project, add
-``"djangocms_frontend.contrib.component"`` to your ``INSTALLED_APPS`` setting.
-
-.. code-block:: python
-
-    INSTALLED_APPS = [
-        ...
-        "djangocms_frontend.contrib.component",
-        ...
-    ]
-
+Custom components are part of the djangocms-frontend root package and do not
+require additional listing in the ``INSTALLED_APPS`` setting.
 
 **djangocms-frontend** will look for custom components in the
 ``cms_components`` module in any of your apps. This way you can
@@ -47,8 +38,8 @@ Add a ``cms_components.py`` file to the ``theme`` app:
     # theme/cms_components.py
     from djangocms_link.fields import LinkFormField
 
-    from djangocms_frontend.contrib.component.components import ComponentLinkMixin, CMSFrontendComponent
-    from djangocms_frontend.contrib.component.components import components
+    from djangocms_frontend.component_base import CMSFrontendComponent
+    from djangocms_frontend.component_pool import components
     from djangocms_frontend.contrib.image.fields import ImageFormField
 
 

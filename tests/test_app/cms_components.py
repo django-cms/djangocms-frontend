@@ -1,8 +1,8 @@
 from django import forms
 from djangocms_link.fields import LinkFormField
 
-from djangocms_frontend.contrib.component.components import CMSFrontendComponent
-from djangocms_frontend.contrib.component.registry import components
+from djangocms_frontend.component_base import CMSFrontendComponent
+from djangocms_frontend.component_pool import components
 from djangocms_frontend.contrib.image.fields import ImageFormField
 
 
