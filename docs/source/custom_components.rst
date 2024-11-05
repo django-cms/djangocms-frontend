@@ -6,8 +6,9 @@ Custom Components
 
 .. versionadded:: 2.0
 
-Some frontend developers prefer custom components specifically tailored to
-give the project a unique and distinct look.
+Custom components are a powerful tool for content editors, allowing them to build pages without needing
+in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
+components, creating visually cohesive pages with ease.
 
 When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you
 either create your custom components or customize components from providers,
@@ -15,8 +16,8 @@ e.g. `Tailwind UI <https://tailwindui.com>`_,
 `Flowbite <https://flowbite.com>`_, or the commiunity
 `Tailwind Components <https://tailwindcomponents.com>`_.
 
-With django CMS you make your components available to the content editors for
-drag and drop **and** frontend developers for use in templates from a single
+With django CMS you make your components available to the content editors to
+simply add them to a page by a click **and** frontend developers for use in templates from a single
 source.
 
 Custom components are part of the djangocms-frontend root package and do not
