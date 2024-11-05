@@ -4,16 +4,19 @@
 
 |pypi| |docs| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**django CMS Frontend** is a plugin bundle which builds on and improves
+**django CMS Frontend** is a plugin bundle which originally built on and improved
 the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
-Its objective is to provide a set of popular frontend components independent of the
-currently used frontend framework such as Bootstrap, or its specific version.
+Its objective is to provide a toolset to quickly create re-usable frontend
+components and comes preloaded with a set of popular frontend components
+independent of the currently used frontend framework such as Bootstrap, or
+its specific version.
 
 .. image:: preview.png
 
 Key features
 ============
 
+- Easy to implement re-usable frontend custom components.
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
   and django CMS 4.
 

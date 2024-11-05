@@ -1,4 +1,3 @@
-from cms.admin.placeholderadmin import PlaceholderAdmin
 from cms.plugin_base import CMSPluginBase
 
 # Import the components from the current directory's models module
@@ -6,12 +5,18 @@ from django.utils.encoding import force_str
 
 from djangocms_frontend.helpers import get_related
 
-if hasattr(PlaceholderAdmin, "edit_field"):
-    # FrontendEditable functionality already implemented in core?
-    class FrontendEditableAdminMixin:
-        pass
-else:
-    # If not use our own version of the plugin-enabled mixin
+try:
+    from cms.admin.placeholderadmin import PlaceholderAdmin
+
+    if hasattr(PlaceholderAdmin, "edit_field"):
+        # FrontendEditable functionality already implemented in core?
+        class FrontendEditableAdminMixin:
+            pass
+    else:
+        # If not use our own version of the plugin-enabled mixin
+        raise ImportError
+except ImportError:
+    # django CMS 3 did not implement this: use our own version of the plugin-enabled mixin
     from .helpers import FrontendEditableAdminMixin
 
 
