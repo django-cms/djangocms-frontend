@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_frontend.contrib.component.registry import components
+from djangocms_frontend.component_pool import components
 
 
 class ComponentPluginTestCase(TestCase):

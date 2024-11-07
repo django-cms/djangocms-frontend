@@ -1,9 +1,3 @@
-..
-   djangocms-blog documentation master file, created by
-   sphinx-quickstart on Sun Jun  5 23:27:04 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 ################################################
  Welcome to djangocms-frontend's documentation!
 ################################################
@@ -12,11 +6,12 @@
  djangocms-frontend
 ********************
 
-**djangocms-frontend** is a plugin bundle based on `djangocms_bootstrap5
-<https://github.com/gl-agnx/djangocms-bootstrap5>`_. Its objective is to
-provide a set of popular frontend components independent of the
-currently used frontend framework such as Bootstrap, or its specific
-version.
+**django CMS Frontend** is a plugin bundle which originally built on and improved
+the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
+Its objective is to provide a toolset to quickly create re-usable frontend
+components and comes preloaded with a set of popular frontend components
+independent of the currently used frontend framework such as Bootstrap, or
+its specific version.
 
 .. image:: ../../preview.png
 
@@ -24,27 +19,29 @@ version.
  Key features
 **************
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_.
+- **Easy to implement re-usable frontend custom components**, which in the
+  simples case consist of a template and declarative sort of form class.
 
--  **Separation of plugins from css framework**, i.e., no need to
-   rebuild you site's plugin tree if css framework is changed in the
-   future, e.g., from Bootstrap 5 to a future version.
+- Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
+  and django CMS 4 out of the box.
 
--  **New link plugin** allowing to link to internal pages provided by
-   other applications, such as `djangocms-blog
-   <https://github.com/nephila/djangocms-blog>`_.
+- **Separation of plugins from css framework**, i.e. no need to
+  rebuild you site's plugin tree if css framework is changed in the
+  future, e.g. from Bootstrap 5 to a future version.
 
--  **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
-   <https://github.com/django-cms/djangocms-bootstrap4>`_
+- Leverage of new **djangocms-link features** allowing to link to internal pages
+  provided by other applications, such as `djangocms-blog
+  <https://github.com/nephila/djangocms-blog>`_.
 
--  Management command to **migrate from djangocms-bootstrap4**. This
-   command automatically migrates all djangocms-bootstrap4 plugins to
-   djangocms-frontend.
+- **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
+  <https://github.com/django-cms/djangocms-bootstrap4>`_
 
--  **Extensible** within the project and with separate project (e.g., a
-   theme app)
+- **Extensible** within the project and with separate project (e.g. a
+  theme app). Create your own components with a few lines of code only.
 
--  **Accordion** plugin.
+- **Plugins are re-usable as UI components** anywhere in your project
+  (e.g. in a custom app) giving your whole project a more consistent
+  user experience.
 
 *************
  Description
@@ -62,10 +59,6 @@ Instead all design parameters are stored in a common JSON field and
 future releases of improved frontend features will not require to
 rebuild your full plugin tree.
 
-The link plugin has been rewritten to not allow internal links to other
-CMS pages, but also to other django models such as, e.g., posts of
-`djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
-
 **djangocms-frontend** provides a set of plugins to structure your
 layout. This includes three basic elements
 
@@ -80,10 +73,6 @@ Components
    to grasp and easy to use look. Alerts or cards are examples of
    components.
 
-Forms
-   To nicely integrate formss into your page we recommend
-   **djangocms-form-builder** which works stand-alone but also nicely
-   integrates with **djangocms-frontend**.
 
 Contents
 ========
@@ -92,9 +81,9 @@ Contents
    :maxdepth: 3
 
    getting_started
+   custom_components
    grid
    components
-   custom_components
    how-to/index
    reference
 

@@ -61,6 +61,7 @@ class TitleFormMixin(EntangledModelFormMixin):
     plugin_title = TitleField(
         label=_("Title"),
         required=False,
+        initial={"show": False, "title": ""},
         help_text=_(
             "Optional title of the plugin for easier identification. "
             "Its <code>title</code> attribute "

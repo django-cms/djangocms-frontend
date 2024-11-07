@@ -2,7 +2,6 @@ from django import forms
 from django.conf import settings as django_settings
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image, ThumbnailOption
 
@@ -45,13 +44,6 @@ def get_templates():
 PICTURE_ALIGNMENT = get_alignment()
 
 
-LINK_TARGET = (
-    ("_blank", _("Open in new window")),
-    ("_self", _("Open in same window")),
-    ("_parent", _("Delegate to parent")),
-    ("_top", _("Delegate to top")),
-)
-
 RESPONSIVE_IMAGE_CHOICES = (
     ("inherit", _("Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide")),
     ("yes", _("Yes")),
@@ -61,10 +53,9 @@ RESPONSIVE_IMAGE_CHOICES = (
 
 class ImageForm(
     TemplateChoiceMixin,
-    AbstractLinkForm,
     ResponsiveFormMixin,
     MarginFormMixin,
-    EntangledModelForm,
+    AbstractLinkForm,
 ):
     """
     Content > "Image" Plugin
@@ -217,24 +208,6 @@ class ImageForm(
     def clean(self):
         super().clean()
         data = self.cleaned_data
-        # there can be only one link type
-        if (
-            sum(
-                (
-                    bool(data.get("external_link", False)),
-                    bool(data.get("internal_link", False)),
-                    bool(data.get("file_link", False)),
-                )
-            )
-            > 1
-        ):
-            raise forms.ValidationError(
-                _(
-                    "You have given more than one external, internal, or file link target. "
-                    "Only one option is allowed."
-                )
-            )
-
         # you shall only set one image kind
         if not data.get("picture", False) and not data.get("external_picture", False):
             raise forms.ValidationError(

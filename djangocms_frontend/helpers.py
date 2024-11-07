@@ -256,5 +256,5 @@ class FrontendEditableAdminMixin:
                     obj.placeholder.mark_as_dirty(obj.language, clear_cache=False)
                 # Update the structure board by populating the data bridge
                 return self.render_close_frame(request, obj)
-            render(request, 'admin/cms/page/plugin/confirm_form.html', context)
+            return render(request, 'admin/cms/page/plugin/confirm_form.html', context)
         return render(request, 'admin/cms/page/plugin/change_form.html', context)

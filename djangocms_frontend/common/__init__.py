@@ -2,10 +2,10 @@ from importlib import import_module
 
 from djangocms_frontend import settings
 
+from .attributes import AttributesMixin
 from .title import TitleFormMixin, TitleMixin
 
 __common = {
-    "attributes": ("AttributesMixin",),
     "background": ("BackgroundFormMixin", "BackgroundMixin"),
     "responsive": ("ResponsiveFormMixin", "ResponsiveMixin"),
     "sizing": ("SizingFormMixin", "SizingMixin"),

@@ -57,7 +57,7 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             language=self.language,
             target=nav,
             config=dict(
-                internal_link=dict(model="cms.page", pk=self.page.id),
+                link=dict(internal_link=f"cms.page:{self.page.id}"),
                 link_context="primary",
                 link_type="btn",
                 name="django CMS rocks!",

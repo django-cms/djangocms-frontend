@@ -99,7 +99,7 @@ class AbstractFrontendUIItem(CMSPlugin):
             if not getattr(form._meta, "model", None):
                 form._meta.model = self.__class__
             form = form()  # instantiate
-        entangled_fields = getattr(getattr(form, "Meta", None), "entangled_fields", {}).get("config", ())
+        entangled_fields = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:
             self.config.setdefault(field, {} if field == "attributes" else form[field].initial or "")
         return self

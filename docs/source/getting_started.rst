@@ -29,6 +29,7 @@ by adding an option:
     djangocms-frontend[djangocms-icon]  # Installs djangocms-icon for icons support in links
     djangocms-frontend[static-ace]  # Installs djangocms-static-ace to include the ace code editor in static files
     djangocms-frontend[static-ace, djangocms-icon]  # comma-separate multiple dependencies
+    djangocms-frontend[djangocms-link]  # Installs djangocms-link for link support
 
 ``djangocms-frontend[static-ace]`` is useful if your project cannot or should not
 access a CDN to load the `ace code editor <https://ace.c9.io>`_ for the code plugin.
@@ -44,6 +45,7 @@ Add the following entries to your ``INSTALLED_APPS``:
 
       "djangocms_icon",  # optional
       "easy_thumbnails",
+      "djangocms_link",  # Needed for link support
       "djangocms_frontend",
       "djangocms_frontend.contrib.accordion",
       "djangocms_frontend.contrib.alert",

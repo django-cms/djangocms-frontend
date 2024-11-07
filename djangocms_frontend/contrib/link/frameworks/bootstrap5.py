@@ -28,6 +28,5 @@ class LinkRenderMixin:
             link_classes.append("d-block")
         if instance.config.get("link_stretched", False):
             link_classes.append("stretched-link")
-        context["link"] = instance.get_link()
         instance.add_classes(link_classes)
         return super().render(context, instance, placeholder)
