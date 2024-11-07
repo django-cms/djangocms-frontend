@@ -35,6 +35,6 @@ jobs:
     - name: Generate Report
       run: |
         pip install -r tests/requirements/${{ matrix.requirements-file }}
-        coverage run run_tests.py
+        coverage run -m pytest
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v4
