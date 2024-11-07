@@ -19,6 +19,9 @@ except ImportError:
     # django CMS 3 did not implement this: use our own version of the plugin-enabled mixin
     from .helpers import FrontendEditableAdminMixin
 
+    class PlaceholderAdmin:
+        pass
+
 
 class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
     render_template = "djangocms_frontend/html_container.html"
