@@ -1,4 +1,3 @@
-from cms.admin.placeholderadmin import PlaceholderAdmin
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from cms.utils.urlutils import admin_reverse
@@ -9,6 +8,7 @@ from djangocms_frontend.contrib.utilities.cms_plugins import (
     TOCPlugin,
 )
 from djangocms_frontend.contrib.utilities.forms import TableOfContentsForm
+from djangocms_frontend.ui_plugin_base import PlaceholderAdmin
 
 from ..fixtures import TestFixture
 
