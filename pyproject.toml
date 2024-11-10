@@ -112,3 +112,12 @@ ignore_errors = true
 [tool.djlint]
 ignore = "H023,T003,H006,H031,D018,H021,H025"
 profile = "django"
+
+[tool.djlint.rule]
+name = "D034"
+message = ".pk or .id should only be used with \"|unlocalize\""
+flags = "re.DOTALL|re.I"
+patterns = [
+  '{{\s*[a-zA-Z0-9_.]+\.pk\s*}}',
+  '{{\s*[a-zA-Z0-9_.]+\.id\s*}}',
+]
