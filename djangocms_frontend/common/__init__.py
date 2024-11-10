@@ -5,11 +5,19 @@ from djangocms_frontend import settings
 from .attributes import AttributesMixin
 from .title import TitleFormMixin, TitleMixin
 
+
 __common = {
     "background": ("BackgroundFormMixin", "BackgroundMixin"),
     "responsive": ("ResponsiveFormMixin", "ResponsiveMixin"),
     "sizing": ("SizingFormMixin", "SizingMixin"),
-    "spacing": ("SpacingFormMixin", "SpacingMixin", "MarginFormMixin", "MarginMixin", "PaddingFormMixin", "PaddingMixin"),
+    "spacing": (
+        "SpacingFormMixin",
+        "SpacingMixin",
+        "MarginFormMixin",
+        "MarginMixin",
+        "PaddingFormMixin",
+        "PaddingMixin",
+    ),
 }
 
 for module, classes in __common.items():

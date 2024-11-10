@@ -1,9 +1,6 @@
 import copy
 import decimal
 
-from cms.constants import SLUG_REGEXP
-from cms.plugin_base import CMSPluginBase
-from cms.utils.conf import get_cms_setting
 from django.apps import apps
 from django.contrib.admin.helpers import AdminForm
 from django.db.models import ObjectDoesNotExist
@@ -14,6 +11,10 @@ from django.urls import re_path
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+
+from cms.constants import SLUG_REGEXP
+from cms.plugin_base import CMSPluginBase
+from cms.utils.conf import get_cms_setting
 
 from djangocms_frontend import settings
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
@@ -33,6 +34,7 @@ def get_related_object(scope, field_name):
 
 class get_related:
     """Descriptor lazily getting related objects from the config dict."""
+
     def __init__(self, key):
         self.key = key
 
@@ -74,12 +76,12 @@ def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None
         modify[1]["fields"] = (
             list(fields[: position + 1] if position != -1 else fields)
             + list(new_fields)
-            + list(fields[position + 1 :] if position != -1 else [])
+            + list(fields[position + 1:] if position != -1 else [])
         )
     fs = (
         list(fieldsets[:block] if block != -1 else fieldsets)
         + [modify]
-        + list(fieldsets[block + 1 :] if block != -1 else [])
+        + list(fieldsets[block + 1:] if block != -1 else [])
     )
     return fs
 
@@ -165,6 +167,7 @@ class FrontendEditableAdminMixin:
     in the frontend by double-clicking on fields rendered with the ``render_model`` template
     tag.
     """
+
     frontend_editable_fields = []
 
     def get_urls(self):  # pragma: no cover
@@ -177,7 +180,7 @@ class FrontendEditableAdminMixin:
             return re_path(regex, self.admin_site.admin_view(fn), name=f"{info}_{fn.__name__}")
 
         url_patterns = [
-            pat(r'edit-field/(%s)/([a-z\-]+)/$' % SLUG_REGEXP, self.edit_field),
+            pat(r"edit-field/(%s)/([a-z\-]+)/$" % SLUG_REGEXP, self.edit_field),
         ]
         return url_patterns + super().get_urls()
 
@@ -203,21 +206,15 @@ class FrontendEditableAdminMixin:
         raw_fields = request.GET.get("edit_fields")
         fields = [field for field in raw_fields.split(",") if field in self.frontend_editable_fields]
         if not fields:
-            context = {
-                'opts': opts,
-                'message': _("Field %s not found") % raw_fields
-            }
-            return render(request, 'admin/cms/page/plugin/error_form.html', context)
+            context = {"opts": opts, "message": _("Field %s not found") % raw_fields}
+            return render(request, "admin/cms/page/plugin/error_form.html", context)
         if not request.user.has_perm(f"{self.model._meta.app_label}.change_{self.model._meta.model_name}"):
-            context = {
-                'opts': opts,
-                'message': _("You do not have permission to edit this item")
-            }
-            return render(request, 'admin/cms/page/plugin/error_form.html', context)
+            context = {"opts": opts, "message": _("You do not have permission to edit this item")}
+            return render(request, "admin/cms/page/plugin/error_form.html", context)
             # Dynamically creates the form class with only `field_name` field
         # enabled
         form_class = self.get_form(request, obj, fields=fields)
-        if not cancel_clicked and request.method == 'POST':
+        if not cancel_clicked and request.method == "POST":
             form = form_class(instance=obj, data=request.POST)
             if form.is_valid():
                 new_object = form.save(commit=False)
@@ -225,36 +222,37 @@ class FrontendEditableAdminMixin:
                 saved_successfully = True
         else:
             form = form_class(instance=obj)
-        admin_form = AdminForm(form, fieldsets=[(None, {'fields': fields})], prepopulated_fields={},
-                               model_admin=self)
+        admin_form = AdminForm(form, fieldsets=[(None, {"fields": fields})], prepopulated_fields={}, model_admin=self)
         media = self.media + admin_form.media
         context = {
-            'CMS_MEDIA_URL': get_cms_setting('MEDIA_URL'),
-            'title': opts.verbose_name,
-            'plugin': None,
-            'plugin_id': None,
-            'adminform': admin_form,
-            'add': False,
-            'is_popup': True,
-            'media': media,
-            'opts': opts,
-            'change': True,
-            'save_as': False,
-            'has_add_permission': False,
-            'window_close_timeout': 10,
+            "CMS_MEDIA_URL": get_cms_setting("MEDIA_URL"),
+            "title": opts.verbose_name,
+            "plugin": None,
+            "plugin_id": None,
+            "adminform": admin_form,
+            "add": False,
+            "is_popup": True,
+            "media": media,
+            "opts": opts,
+            "change": True,
+            "save_as": False,
+            "has_add_permission": False,
+            "window_close_timeout": 10,
         }
         if cancel_clicked:
             # cancel button was clicked
-            context.update({
-                'cancel': True,
-            })
-            return render(request, 'admin/cms/page/plugin/confirm_form.html', context)
-        if not cancel_clicked and request.method == 'POST' and saved_successfully:
+            context.update(
+                {
+                    "cancel": True,
+                }
+            )
+            return render(request, "admin/cms/page/plugin/confirm_form.html", context)
+        if not cancel_clicked and request.method == "POST" and saved_successfully:
             if isinstance(self, CMSPluginBase):
-                if hasattr(obj.placeholder, 'mark_as_dirty'):
+                if hasattr(obj.placeholder, "mark_as_dirty"):
                     # Only relevant for v3: mark the placeholder as dirty so user can publish changes
                     obj.placeholder.mark_as_dirty(obj.language, clear_cache=False)
                 # Update the structure board by populating the data bridge
                 return self.render_close_frame(request, obj)
-            return render(request, 'admin/cms/page/plugin/confirm_form.html', context)
-        return render(request, 'admin/cms/page/plugin/change_form.html', context)
+            return render(request, "admin/cms/page/plugin/confirm_form.html", context)
+        return render(request, "admin/cms/page/plugin/change_form.html", context)
