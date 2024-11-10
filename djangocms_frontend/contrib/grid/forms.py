@@ -3,7 +3,6 @@ from copy import copy
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
@@ -15,10 +14,12 @@ from djangocms_frontend.models import FrontendUIItem
 from ...common.title import TitleFormMixin
 from .. import grid
 from .constants import (
-    GRID_COLUMN_ALIGNMENT_CHOICES, GRID_CONTAINER_CHOICES, GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
-    GRID_ROW_VERTICAL_ALIGNMENT_CHOICES, GRID_SIZE,
+    GRID_COLUMN_ALIGNMENT_CHOICES,
+    GRID_CONTAINER_CHOICES,
+    GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES,
+    GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,
+    GRID_SIZE,
 )
-
 
 mixin_factory = settings.get_forms(grid)
 

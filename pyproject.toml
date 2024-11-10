@@ -69,6 +69,9 @@ select = [
   "B",
   "B950",
 ]
+ignore = [
+  "W503", # line break before binary operator
+]
 exclude = [
   "*.egg-info",
   ".eggs",

@@ -1,6 +1,9 @@
 import copy
 import decimal
 
+from cms.constants import SLUG_REGEXP
+from cms.plugin_base import CMSPluginBase
+from cms.utils.conf import get_cms_setting
 from django.apps import apps
 from django.contrib.admin.helpers import AdminForm
 from django.db.models import ObjectDoesNotExist
@@ -11,10 +14,6 @@ from django.urls import re_path
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-
-from cms.constants import SLUG_REGEXP
-from cms.plugin_base import CMSPluginBase
-from cms.utils.conf import get_cms_setting
 
 from djangocms_frontend import settings
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO

@@ -1,6 +1,5 @@
-from django.utils.translation import gettext_lazy as _
-
 from cms.plugin_pool import plugin_pool
+from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings
 from djangocms_frontend.common import AttributesMixin, BackgroundMixin, ResponsiveMixin, SizingMixin, SpacingMixin
@@ -10,7 +9,6 @@ from ...common import TitleMixin
 from ...helpers import add_plugin
 from .. import grid
 from . import forms, models
-
 
 mixin_factory = settings.get_renderer(grid)
 

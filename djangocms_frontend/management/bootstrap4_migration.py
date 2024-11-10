@@ -1,5 +1,4 @@
 from django.conf import settings as django_setting
-
 from djangocms_bootstrap4.constants import DEVICE_SIZES
 
 from djangocms_frontend import settings

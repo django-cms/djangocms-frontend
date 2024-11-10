@@ -2,11 +2,10 @@ from django import apps, forms
 from django.conf import settings as django_settings
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _
+from djangocms_link.fields import LinkFormField
 
 # from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
-
-from djangocms_link.fields import LinkFormField
 
 from ... import settings
 from ...common import SpacingFormMixin
@@ -15,7 +14,6 @@ from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import link
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, TARGET_CHOICES
-
 
 mixin_factory = settings.get_forms(link)
 

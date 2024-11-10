@@ -5,7 +5,6 @@ from djangocms_frontend import settings
 from .attributes import AttributesMixin
 from .title import TitleFormMixin, TitleMixin
 
-
 __common = {
     "background": ("BackgroundFormMixin", "BackgroundMixin"),
     "responsive": ("ResponsiveFormMixin", "ResponsiveMixin"),
