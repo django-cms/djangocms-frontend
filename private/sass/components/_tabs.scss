@@ -4,6 +4,10 @@
 }
 
 ul.nav {
+    &:has(> li ~ div) {
+        // Hide single tab
+        display: none;
+    }
     .nav-item {
         margin-inline-end: 1rem;
     }

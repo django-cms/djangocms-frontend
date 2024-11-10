@@ -80,14 +80,14 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
             {% plugin "textlink" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
                 Click me!
             {% endplugin %}
-        """)  # noqa: B950
+        """)  # noqa: B950,E501
         else:
             grouper = None
             template = django_engine.from_string("""{% load frontend djangocms_link_tags %}{{ "test"|to_link }}
                 {% plugin "textlink" name="Click" link="/test/"|to_link link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
-            """)  # noqa: B950
+            """)  # noqa: B950,E501
 
         expected_result = """<a href="/test/" class="btn btn-primary">Click me!</a>"""
 

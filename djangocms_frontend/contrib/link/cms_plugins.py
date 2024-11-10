@@ -40,12 +40,7 @@ class LinkPluginMixin:
     link_fields = (
         (("site", "url_grouper"),)
         if apps.is_installed("djangocms_url_manager")
-        else (
-            ("external_link", "internal_link"),
-            ("mailto", "phone"),
-            ("anchor", "target"),
-            "file_link",
-        )
+        else ("link", "target")
     )
 
     def render(self, context, instance, placeholder):

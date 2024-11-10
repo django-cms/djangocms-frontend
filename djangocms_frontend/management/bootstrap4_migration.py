@@ -305,7 +305,7 @@ def p001_left_right_migration(obj, new_obj):
 
         def replace_left(item, old, new):
             if item[: len(old)] == old:
-                return new + item[len(old) :]
+                return new + item[len(old):]
             return item
 
         classes = new_obj.attributes["class"].split()
@@ -361,7 +361,7 @@ def a001_alignment(obj, new_obj, field):
         new_obj.config[field].replace("text-right", "end")
 
 
-def m001_spacing_mixin(obj, new_obj, type):
+def m001_spacing_mixin(obj, new_obj, type):  # noqa: A002
     classes = new_obj.config["attributes"].get("class", "").split()
     if classes:
         for size, _ in list(settings.SPACER_SIZE_CHOICES) + ([("auto", "auto")] if type == "margin" else []):
@@ -404,7 +404,7 @@ def m002_responsive_mixin(obj, new_obj):
                 visible = False
                 hit = True
                 classes.remove(f"{stump}{hidden}")
-            for type in display:
+            for type in display:  # noqa: A001
                 if f"{stump}{type}" in classes and not visible:
                     visible = True
                     hit = True

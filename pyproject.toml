@@ -1,35 +1,126 @@
 [tool.black]
 exclude = [
-    ".git",
-    ".hg",
-    ".tox",
-    "venv",
-    ".venv",
-    "_build",
-    "build",
-    "dist"
+  ".git",
+  ".hg",
+  ".tox",
+  "venv",
+  ".venv",
+  "_build",
+  "build",
+  "dist",
 ]
-
-[tool.djlint]
-ignore="H023,T003,H006,H031,D018,H021,H025"
-profile="django"
 
 [tool.ruff]
-exclude = [
-    ".env",
-    ".venv",
-    "**/migrations/**",
-]
-lint.ignore = [
-    "E501",  # line too long
-    "F403",  # 'from module import *' used; unable to detect undefined names
-    "E701",  # multiple statements on one line (colon)
-    "F401",  # module imported but unused
-]
 line-length = 119
+exclude = [
+  "**/migrations/**",
+  ".env",
+  ".venv",
+]
 lint.select = [
-    "I",
-    "E",
-    "F",
-    "W",
+  "E",
+  "F",
+  "I",
+  "W",
+]
+
+lint.ignore = [
+  "E501", # line too long
+  "E701", # multiple statements on one line (colon)
+  "F401", # module imported but unused
+  "F403", # 'from module import *' used; unable to detect undefined names
+]
+
+[tool.isort]
+line_length = 119
+skip = [
+  "manage.py",
+  "*migrations*",
+  ".tox",
+  ".eggs",
+  ".env",
+  ".venv",
+  "data",
+]
+include_trailing_comma = true
+multi_line_output = 5
+lines_after_imports = 2
+default_section = "THIRDPARTY"
+sections = [
+  "FUTURE",
+  "STDLIB",
+  "DJANGO",
+  "CMS",
+  "THIRDPARTY",
+  "FIRSTPARTY",
+  "LOCALFOLDER",
+]
+known_first_party = "djangocms_link"
+known_cms = [ "cms", "menus" ]
+known_django = "django"
+
+[tool.flake8]
+max-line-length = 120
+select = [
+  "C",
+  "E",
+  "F",
+  "W",
+  "B",
+  "B950",
+]
+ignore = [
+  "W503", # line break before binary operator
+]
+exclude = [
+  "*.egg-info",
+  ".eggs",
+  ".env",
+  ".git",
+  ".settings",
+  ".tox",
+  ".venv",
+  "build",
+  "data",
+  "dist",
+  "docs",
+  "*migrations*",
+  "requirements",
+  "tmp",
+]
+
+[tool.coverage.run]
+branch = true
+source = [ "djangocms_frontend" ]
+omit = [
+  "djangocms_frontend/migrations/*",
+  "djangocms_frontend/management/*",
+  "*/foundation6.py",
+  "tests/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "if self.debug:",
+  "if settings.DEBUG",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+]
+ignore_errors = true
+
+[tool.djlint]
+ignore = "H023,T003,H006,H031,D018,H021,H025"
+profile = "django"
+
+[tool.djlint.rule]
+name = "D034"
+message = ".pk or .id should only be used with \"|unlocalize\""
+flags = "re.DOTALL|re.I"
+patterns = [
+  '{{\s*[a-zA-Z0-9_.]+\.pk\s*}}',
+  '{{\s*[a-zA-Z0-9_.]+\.id\s*}}',
 ]

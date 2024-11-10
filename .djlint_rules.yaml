@@ -1,7 +1,0 @@
-- rule:
-    name: D034
-    message: .pk or .id should only be used with "|unlocalize"
-    flags: re.DOTALL|re.I
-    patterns:
-      - '{{\s*[a-zA-Z0-9_.]+\.pk\s*}}'
-      - '{{\s*[a-zA-Z0-9_.]+\.id\s*}}'

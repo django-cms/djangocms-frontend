@@ -1,12 +1,12 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
-from djangocms_frontend.contrib.component.cms_plugins import (
+from djangocms_frontend.cms_plugins import (
     MyButtonPlugin,
     MyHeroPlugin,
     MyStrangeComponentPlugin,
 )
+from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
 
 from ..fixtures import TestFixture
 
@@ -54,7 +54,7 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         )
 
     def test_component_with_slots_plugin(self):
-        from djangocms_frontend.contrib.component.cms_plugins import MyHeroSlotPlugin
+        from djangocms_frontend.cms_plugins import MyHeroSlotPlugin
 
         instance = add_plugin(
             placeholder=self.placeholder,
@@ -119,10 +119,7 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         )
 
     def test_autocreate_slots(self):
-        from djangocms_frontend.contrib.component.cms_plugins import (
-            MyHeroSlotPlugin,
-            MyHeroTitlePlugin,
-        )
+        from djangocms_frontend.cms_plugins import MyHeroSlotPlugin, MyHeroTitlePlugin
 
         instance = add_plugin(
             placeholder=self.placeholder,
@@ -152,7 +149,8 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         instance.config["link"] = {"internal_link": f"cms.page:{self.page.pk}"}
         instance.save()
 
-        link = instance.get_link()
+        from djangocms_link.templatetags.djangocms_link_tags import to_url
+        link = to_url(instance.link)
 
         self.publish(self.page, self.language)
 

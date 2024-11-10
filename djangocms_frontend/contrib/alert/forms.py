@@ -5,11 +5,7 @@ from entangled.forms import EntangledModelForm
 from djangocms_frontend import settings
 from djangocms_frontend.common import ResponsiveFormMixin, SpacingFormMixin
 from djangocms_frontend.contrib import alert
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    ColoredButtonGroup,
-    TagTypeFormField,
-)
+from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup, TagTypeFormField
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES

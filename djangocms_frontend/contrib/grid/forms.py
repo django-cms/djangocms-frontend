@@ -6,19 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
-from djangocms_frontend.common import (
-    BackgroundFormMixin,
-    ResponsiveFormMixin,
-    SizingFormMixin,
-    SpacingFormMixin,
-)
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    AutoNumberInput,
-    ButtonGroup,
-    IconGroup,
-    TagTypeFormField,
-)
+from djangocms_frontend.common import BackgroundFormMixin, ResponsiveFormMixin, SizingFormMixin, SpacingFormMixin
+from djangocms_frontend.fields import AttributesFormField, AutoNumberInput, ButtonGroup, IconGroup, TagTypeFormField
 from djangocms_frontend.helpers import first_choice, link_to_framework_doc
 from djangocms_frontend.models import FrontendUIItem
 
