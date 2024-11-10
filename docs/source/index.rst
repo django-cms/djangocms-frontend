@@ -33,8 +33,7 @@ its specific version.
   provided by other applications, such as `djangocms-blog
   <https://github.com/nephila/djangocms-blog>`_.
 
-- **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
-  <https://github.com/django-cms/djangocms-bootstrap4>`_
+- **Nice and well-arranged admin frontend** of djangocms-bootstrap4
 
 - **Extensible** within the project and with separate project (e.g. a
   theme app). Create your own components with a few lines of code only.

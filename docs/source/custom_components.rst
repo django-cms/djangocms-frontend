@@ -1,8 +1,9 @@
-.. _custom_components:
-
 #################
 Custom Components
 #################
+
+.. index::
+    single: Custom Components
 
 .. versionadded:: 2.0
 

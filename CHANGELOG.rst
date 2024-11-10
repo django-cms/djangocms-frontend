@@ -82,7 +82,7 @@ Changelog
 * feat: Add float option for images by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/162
 * feat: Add drag'n'drop support for djangocms-text-ckeditor by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/165
 * fix: Ckeditor does not show icons for editing by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/163
-* fix: Replace ``stylesSet`` setting in docs with ``customConfig` for icons in ckeditor by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/164
+* fix: Replace ``stylesSet`` setting in docs with ``customConfig`` for icons in ckeditor by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/164
 * ci: pre-commit autoupdate by @pre-commit-ci in https://github.com/django-cms/djangocms-frontend/pull/161
 
 
@@ -106,15 +106,15 @@ Changelog
 ==================
 
 * Fix incomplete migration of code plugins from djangocms-bootstrap4
-* Add compiled French locale (*.mo)
+* Add compiled French locale (\*.mo)
 * Add partial Dutch locale
 
 1.1.5 (2023-07-14)
 ==================
 
 * Fix bug where url for link select2 field was lost after app hook reload (#135)
-* Use `bg-body` class on Bootstrap 5's tab navigation to support color modes (#138)
-* Fix styling of icon buttons for better usager with plain django admin style (#141)
+* Use ``bg-body`` class on Bootstrap 5's tab navigation to support color modes (#138)
+* Fix styling of icon buttons for better usage with plain django admin style (#141)
 
 1.1.4 (2023-05-28)
 ==================
