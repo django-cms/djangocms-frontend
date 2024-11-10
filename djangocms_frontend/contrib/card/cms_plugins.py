@@ -1,18 +1,14 @@
-from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
+
+from cms.plugin_pool import plugin_pool
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common import (
-    AttributesMixin,
-    BackgroundMixin,
-    MarginMixin,
-    PaddingMixin,
-    ResponsiveMixin,
-)
+from ...common import AttributesMixin, BackgroundMixin, MarginMixin, PaddingMixin, ResponsiveMixin
 from ...helpers import add_plugin
 from .. import card
 from . import forms, models
+
 
 mixin_factory = settings.get_renderer(card)
 

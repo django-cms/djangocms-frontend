@@ -1,20 +1,17 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.common import BackgroundFormMixin
 from djangocms_frontend.contrib import navigation
 from djangocms_frontend.contrib.link.forms import AbstractLinkForm, LinkForm
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    ButtonGroup,
-    IconGroup,
-    TemplateChoiceMixin,
-)
+from djangocms_frontend.fields import AttributesFormField, ButtonGroup, IconGroup, TemplateChoiceMixin
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import NAVBAR_DESIGNS
+
 
 mixin_factory = settings.get_forms(navigation)
 

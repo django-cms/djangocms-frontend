@@ -1,20 +1,16 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+
 from entangled.forms import EntangledModelForm
 
 from ... import settings
 from ...common import SpacingFormMixin
-from ...fields import (
-    AttributesFormField,
-    ButtonGroup,
-    ColoredButtonGroup,
-    IconGroup,
-    TagTypeFormField,
-)
+from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup, IconGroup, TagTypeFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import utilities
+
 
 mixin_factory = settings.get_forms(utilities)
 

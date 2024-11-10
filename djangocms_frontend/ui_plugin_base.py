@@ -1,9 +1,10 @@
-from cms.plugin_base import CMSPluginBase
-
 # Import the components from the current directory's models module
 from django.utils.encoding import force_str
 
+from cms.plugin_base import CMSPluginBase
+
 from djangocms_frontend.helpers import get_related
+
 
 try:
     from cms.admin.placeholderadmin import PlaceholderAdmin

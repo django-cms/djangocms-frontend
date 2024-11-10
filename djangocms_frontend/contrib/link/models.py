@@ -1,10 +1,10 @@
 from django.utils.translation import gettext as _
 
 from djangocms_frontend.contrib.link.helpers import GetLinkMixin
-
 # 'link' type is added manually as it is only required for this plugin
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
+
 
 COLOR_STYLE_CHOICES = (("link", _("Link")),) + COLOR_STYLE_CHOICES
 

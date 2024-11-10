@@ -1,6 +1,4 @@
-from djangocms_frontend.contrib.grid.frameworks.bootstrap5 import (
-    get_row_cols_grid_values,
-)
+from djangocms_frontend.contrib.grid.frameworks.bootstrap5 import get_row_cols_grid_values
 
 
 class CardRenderMixin:

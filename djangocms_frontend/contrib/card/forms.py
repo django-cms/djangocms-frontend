@@ -2,33 +2,20 @@ from copy import copy
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
 
 from ... import settings
-from ...common import (
-    BackgroundFormMixin,
-    MarginFormMixin,
-    PaddingFormMixin,
-    ResponsiveFormMixin,
-)
-from ...fields import (
-    AttributesFormField,
-    ButtonGroup,
-    ColoredButtonGroup,
-    IconGroup,
-    TagTypeFormField,
-)
+from ...common import BackgroundFormMixin, MarginFormMixin, PaddingFormMixin, ResponsiveFormMixin
+from ...fields import AttributesFormField, ButtonGroup, ColoredButtonGroup, IconGroup, TagTypeFormField
 from ...helpers import first_choice, link_to_framework_doc
 from ...models import FrontendUIItem
 from .. import card
 from ..grid.constants import GRID_SIZE
-from .constants import (
-    CARD_ALIGNMENT_CHOICES,
-    CARD_INNER_TYPE_CHOICES,
-    CARD_LAYOUT_TYPE_CHOICES,
-)
+from .constants import CARD_ALIGNMENT_CHOICES, CARD_INNER_TYPE_CHOICES, CARD_LAYOUT_TYPE_CHOICES
+
 
 # card allow for a transparent color
 CARD_COLOR_STYLE_CHOICES = settings.COLOR_STYLE_CHOICES + (("transparent", _("Transparent")),)

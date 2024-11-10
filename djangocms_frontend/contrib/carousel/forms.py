@@ -1,16 +1,12 @@
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
 
-from djangocms_frontend.fields import (
-    AttributesFormField,
-    ButtonGroup,
-    TagTypeFormField,
-    TemplateChoiceMixin,
-)
+from djangocms_frontend.fields import AttributesFormField, ButtonGroup, TagTypeFormField, TemplateChoiceMixin
 
 from ... import settings
 from ...common import BackgroundFormMixin
@@ -20,11 +16,9 @@ from ...models import FrontendUIItem
 from .. import carousel
 from ..link.forms import LinkFormMixin
 from .constants import (
-    CAROUSEL_ASPECT_RATIO_CHOICES,
-    CAROUSEL_PAUSE_CHOICES,
-    CAROUSEL_TEMPLATE_CHOICES,
-    CAROUSEL_TRANSITION_CHOICES,
+    CAROUSEL_ASPECT_RATIO_CHOICES, CAROUSEL_PAUSE_CHOICES, CAROUSEL_TEMPLATE_CHOICES, CAROUSEL_TRANSITION_CHOICES,
 )
+
 
 mixin_factory = settings.get_forms(carousel)
 
