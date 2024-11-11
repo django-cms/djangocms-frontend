@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.3.5 (2024-11-11)
+==================
+
+* fix: XSS vulnerability by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/244
+
+
 1.3.4 (2024-09-30)
 ==================
 
