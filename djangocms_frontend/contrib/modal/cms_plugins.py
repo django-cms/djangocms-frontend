@@ -46,7 +46,7 @@ class ModalTriggerPlugin(mixin_factory("ModalTrigger"), AttributesMixin, CMSUIPl
     form = forms.ModalTriggerForm
     allow_children = True
     parent_classes = [
-        "CardPlugin"
+        "ModalPlugin"
     ]
 
     fieldsets = [
@@ -67,7 +67,7 @@ class ModalContainerPlugin(mixin_factory("ModalContainer"), CMSUIPlugin):
     form = forms.ModalContainerForm
     allow_children = True
     parent_classes = [
-        "CardPlugin"
+        "ModalPlugin"
     ]
     child_classes = [
         "ModalInnerPlugin",
