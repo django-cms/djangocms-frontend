@@ -111,7 +111,7 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
     modal_static = forms.BooleanField(
         label=_("Static backdrop"),
         required=False,
-        help_text=_("Disable scrolling in the container."),
+        help_text=_("If selected, the modal will not close when clicking outside of it."),
     )
 
     modal_scrollable = forms.BooleanField(
