@@ -89,6 +89,7 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
                 "attributes",
                 "modal_centered",
                 "modal_static",
+                "modal_footer",
                 "modal_scrollable",
                 "modal_size",
                 "modal_fullscreen",
@@ -112,6 +113,12 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
         label=_("Static backdrop"),
         required=False,
         help_text=_("If selected, the modal will not close when clicking outside of it."),
+    )
+
+    modal_footer  = forms.BooleanField(
+        label=_("Footer"),
+        required=False,
+        help_text=_("If selected, the modal will display a footer with a close button."),
     )
 
     modal_scrollable = forms.BooleanField(

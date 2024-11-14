@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ... import settings
 from ...cms_plugins import CMSUIPlugin
-from ...common.attributes import AttributesMixin
+from ...common import AttributesMixin
 from .. import modal
 from . import forms, models
 
