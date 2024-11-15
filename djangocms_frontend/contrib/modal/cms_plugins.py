@@ -82,6 +82,7 @@ class ModalContainerPlugin(mixin_factory("ModalContainer"), CMSUIPlugin):
                     ("modal_centered"),
                     ("modal_static", "modal_scrollable"),
                     ("modal_size", "modal_fullscreen"),
+                    ("modal_footer"),
                 )
             }
         ),

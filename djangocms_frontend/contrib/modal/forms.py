@@ -115,10 +115,10 @@ class ModalContainerForm(mixin_factory("ModalContainer"), EntangledModelForm):
         help_text=_("If selected, the modal will not close when clicking outside of it."),
     )
 
-    modal_footer  = forms.BooleanField(
-        label=_("Footer"),
+    modal_footer = forms.BooleanField(
+        label=_("Footer and close button"),
         required=False,
-        help_text=_("If selected, the modal will display a footer with a close button."),
+        help_text=_("If selected, the modal will show a modal footer with a close button."),
     )
 
     modal_scrollable = forms.BooleanField(
