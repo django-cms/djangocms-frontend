@@ -20,7 +20,7 @@ jobs:
             dj51_cms41.txt,
         ]
         os: [
-            ubuntu-20.04,
+            ubuntu-latest,
         ]
 
     steps:
