@@ -5,8 +5,8 @@ def convert_item(config, direction):
     """Convert FrontendUIItem config to new djangocms_link format."""
     if direction == "forward":
         if config.get("external_link"):
-            if config.get("anchor"):
-                anchor = "#" + config.get("anchor")
+            if (config.get("anchor") or "").strip():
+                anchor = "#" + config.get("anchor").strip()
                 del config["anchor"]
             else:
                 anchor = ""
