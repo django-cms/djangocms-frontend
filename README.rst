@@ -17,7 +17,7 @@ Key features
 ============
 
 - **Easy to implement re-usable frontend custom components**, which in the
-  simples case consist of a template and declarative sort of form class.
+  simplest case consist of a template and declarative sort of form class.
 
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
   and django CMS 4 out of the box.

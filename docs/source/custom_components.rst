@@ -14,7 +14,7 @@ components, creating visually cohesive pages with ease.
 When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you
 either create your custom components or customize components from providers,
 e.g. `Tailwind UI <https://tailwindui.com>`_,
-`Flowbite <https://flowbite.com>`_, or the commiunity
+`Flowbite <https://flowbite.com>`_, or the community
 `Tailwind Components <https://tailwindcomponents.com>`_.
 
 With django CMS you make your components available to the content editors to
