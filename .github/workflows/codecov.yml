@@ -20,7 +20,7 @@ jobs:
             dj51_cms41.txt,
         ]
         os: [
-            ubuntu-20.04,
+            ubuntu-latest,
         ]
 
     steps:
@@ -39,4 +39,4 @@ jobs:
       run: |
         coverage run -m pytest
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
