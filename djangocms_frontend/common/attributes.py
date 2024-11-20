@@ -1,5 +1,7 @@
 from django.utils.translation import gettext_lazy as _
+from entangled.forms import EntangledModelFormMixin
 
+from djangocms_frontend.fields import AttributesFormField
 from djangocms_frontend.helpers import insert_fields
 
 
@@ -25,3 +27,13 @@ class AttributesMixin:
             blockattrs=self.block_attr,
             position=-1,  # Always last
         )
+
+
+class AttributesFormMixin(EntangledModelFormMixin):
+    class Meta:
+        entangled_fields = {
+            "config": [
+                "attributes",
+            ]
+        }
+    attributes = AttributesFormField()

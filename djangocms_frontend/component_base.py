@@ -12,6 +12,13 @@ from entangled.forms import EntangledModelForm
 from .ui_plugin_base import CMSUIPluginBase
 
 
+def _import_or_empty(module, name):
+    try:
+        return importlib.import_module(module).__dict__[name]
+    except (ImportError, KeyError):
+        return type(name, (), {})
+
+
 def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
     """Find and import mixin classes from a list of mixin strings"""
     mixins = [
@@ -20,7 +27,8 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
         else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
         for mixin in mixins
     ]
-    return [importlib.import_module(module).__dict__[name] for module, name in mixins]
+
+    return [_import_or_empty(module, name) for module, name in mixins]
 
 
 class Slot:
