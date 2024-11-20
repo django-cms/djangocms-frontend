@@ -1,14 +1,14 @@
 [tool.black]
-exclude = [
-  ".git",
-  ".hg",
-  ".tox",
-  "venv",
-  ".venv",
-  "_build",
-  "build",
-  "dist",
-]
+exclude = '''
+  .git
+  .hg
+  .tox
+  venv
+  .venv
+  _build
+  build
+  dist
+'''
 
 [tool.ruff]
 line-length = 119
