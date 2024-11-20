@@ -1,7 +1,6 @@
 from cms.plugin_pool import plugin_pool
 from django.apps import apps
 from django.conf import settings as django_settings
-from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template, insert_fields
@@ -10,15 +9,16 @@ from ... import settings
 from ...cms_plugins import CMSUIPlugin
 from ...common import AttributesMixin, SpacingMixin
 from .. import link
-from . import forms, models, views
+from . import forms, models
 from .constants import USE_LINK_ICONS
+from .helpers import GetLinkMixin
 
 mixin_factory = settings.get_renderer(link)
 
 
 UILINK_FIELDS = (
     ("name", "link_type"),
-    ("site", "url_grouper") if apps.is_installed("djangocms_url_manager") else ("external_link", "internal_link"),
+    ("site", "url_grouper") if apps.is_installed("djangocms_url_manager") else "link",
     ("link_context", "link_size"),
     ("link_outline", "link_block"),
     "link_stretched",
@@ -33,20 +33,6 @@ UILINK_FIELDSET = [
         },
     ),
 ]
-if not apps.is_installed("djangocms_url_manager"):
-    UILINK_FIELDSET += [
-        (
-            _("Link settings"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    ("mailto", "phone"),
-                    ("anchor", "target"),
-                    ("file_link",),
-                ),
-            },
-        ),
-    ]
 
 
 class LinkPluginMixin:
@@ -54,17 +40,13 @@ class LinkPluginMixin:
     link_fields = (
         (("site", "url_grouper"),)
         if apps.is_installed("djangocms_url_manager")
-        else (
-            ("external_link", "internal_link"),
-            ("mailto", "phone"),
-            ("anchor", "target"),
-            "file_link",
-        )
+        else ("link", "target")
     )
 
     def render(self, context, instance, placeholder):
         if "request" in context:
             instance._cms_page = getattr(context["request"], "current_page", None)
+        context["link"] = instance.get_link()
         return super().render(context, instance, placeholder)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
@@ -85,7 +67,7 @@ class LinkPluginMixin:
         return fieldsets
 
 
-class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, CMSUIPlugin):
+class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkPluginMixin, GetLinkMixin, CMSUIPlugin):
     """
     Components > "Button" Plugin
     https://getbootstrap.com/docs/5.0/components/buttons/
@@ -111,12 +93,12 @@ class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkP
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(instance, "link", "link", settings.LINK_TEMPLATE_CHOICES)
 
-    def get_plugin_urls(self):
-        return [
-            path("autocomplete/", views.AutocompleteJsonView.as_view(), name="link_link_autocomplete"),
-        ]
-
 
 if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     #  Only register plugin if in INSTALLED_APPS
     plugin_pool.register_plugin(TextLinkPlugin)
+
+    if "djangocms_link" in django_settings.INSTALLED_APPS:
+        from djangocms_link.cms_plugins import LinkPlugin
+
+        LinkPlugin.parent_classes = [None]  # Remove it from the list of valid plugins

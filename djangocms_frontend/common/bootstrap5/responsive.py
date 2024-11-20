@@ -36,7 +36,7 @@ class ResponsiveMixin:
         )
 
     def render(self, context, instance, placeholder):
-        if instance.config.get("responsive_visibility", None) is not None:
+        if instance.config.get("responsive_visibility", None):
             instance.add_classes(
                 get_display_classes(
                     instance.responsive_visibility,

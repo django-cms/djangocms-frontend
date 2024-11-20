@@ -28,7 +28,6 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         expected_result = """<div class="alert alert-secondary alert-dismissible" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><div>Alert
         </div></div>"""
-
         result = template.render({"request": None})
 
         self.assertInHTML(expected_result, result)
@@ -72,7 +71,6 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
             <div class="list-group-item">A third item</div>
         </div>"""
         result = template.render({"request": None})
-
         self.assertInHTML(expected_result, result)
 
     def test_link_plugin(self):
@@ -82,19 +80,18 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
             {% plugin "textlink" name="Click" url_grouper=grouper site=test_site link_type="btn" link_context="primary" link_outline=False %}
                 Click me!
             {% endplugin %}
-        """)  # noqa: B950
+        """)  # noqa: B950,E501
         else:
             grouper = None
-            template = django_engine.from_string("""{% load frontend %}
-                {% plugin "textlink" name="Click" external_link="/test/" link_type="btn" link_context="primary" link_outline=False %}
+            template = django_engine.from_string("""{% load frontend djangocms_link_tags %}{{ "test"|to_link }}
+                {% plugin "textlink" name="Click" link="/test/"|to_link link_type="btn" link_context="primary" link_outline=False %}
                     Click me!
                 {% endplugin %}
-            """)  # noqa: B950
+            """)  # noqa: B950,E501
 
         expected_result = """<a href="/test/" class="btn btn-primary">Click me!</a>"""
 
         result = template.render({"request": None, "test_site": get_current_site(None), "grouper": grouper})
-
         self.assertInHTML(expected_result, result)
 
     @override_settings(DEBUG=True)

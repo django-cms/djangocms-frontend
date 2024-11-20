@@ -7,7 +7,8 @@ REQUIREMENTS = [
     "django-cms>=3.7",
     "django-filer>=1.7",
     "easy-thumbnails",
-    "djangocms-attributes-field>=1",
+    "djangocms-attributes-field>=4",
+    "djangocms-link>=5",
     "django-entangled>=0.6",
 ]
 
@@ -18,8 +19,12 @@ EXTRA_REQUIREMENTS = {
     "static-ace": [
         "djangocms-static-ace",
     ],
+    "djangocms-link": [
+        "djangocms-link>=5.0.0",
+    ],
     "cms-4": [
         "django-cms>=4.1.0",
+        "djangocms-link>=5.0.0",
         "django-parler",
         "djangocms-versioning>=2.0.0",
         "djangocms-alias>=2.0.0",
@@ -28,6 +33,7 @@ EXTRA_REQUIREMENTS = {
     "cms-3": [
         "django-cms<4",
         "djangocms-text",
+        "djangocms-link>=5.0.0",
         "django-parler",
     ],
 }

@@ -4,21 +4,10 @@ from entangled.forms import EntangledModelForm
 
 from ... import settings
 from ...common import PaddingFormMixin
-from ...fields import (
-    AttributesFormField,
-    ButtonGroup,
-    IconGroup,
-    TagTypeFormField,
-    TemplateChoiceMixin,
-)
+from ...fields import AttributesFormField, ButtonGroup, IconGroup, TagTypeFormField, TemplateChoiceMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
-from .constants import (
-    TAB_ALIGNMENT_CHOICES,
-    TAB_EFFECT_CHOICES,
-    TAB_TEMPLATE_CHOICES,
-    TAB_TYPE_CHOICES,
-)
+from .constants import TAB_ALIGNMENT_CHOICES, TAB_EFFECT_CHOICES, TAB_TEMPLATE_CHOICES, TAB_TYPE_CHOICES
 
 
 class TabForm(TemplateChoiceMixin, EntangledModelForm):

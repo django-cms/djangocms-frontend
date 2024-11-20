@@ -3,7 +3,13 @@
  Grid plugins
 ##############
 
-For details on how grids work, see, e.g. the `Bootstrap 5 documentation
+The grid is the basis for responsive page design. It splits the page into
+containers, rows and columns. Depending on the device, columns are shown
+next to each other (larger screens) or one below the other (smaller
+screens).
+
+The details of the grid system are based on the Bootstrap framework. Therefore,
+for details on how grids work, see, e.g. the `Bootstrap 5 documentation
 <https://getbootstrap.com/docs/5.1/layout/grid/>`_.
 
 .. index::

@@ -2,15 +2,9 @@
 
 import django.core.serializers.json
 import django.db.models.deletion
-from cms.utils.compat import DJANGO_3_1
 from django.db import migrations, models
 
 import djangocms_frontend.fields
-
-if DJANGO_3_1:
-    from django_jsonfield_backport.models import JSONField
-else:
-    JSONField = models.JSONField
 
 
 class Migration(migrations.Migration):
@@ -49,7 +43,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "config",
-                    JSONField(
+                    models.JSONField(
                         default=dict,
                         encoder=django.core.serializers.json.DjangoJSONEncoder,
                     ),

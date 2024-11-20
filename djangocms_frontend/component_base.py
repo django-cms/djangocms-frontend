@@ -9,6 +9,15 @@ from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
+from .ui_plugin_base import CMSUIPluginBase
+
+
+def _import_or_empty(module, name):
+    try:
+        return importlib.import_module(module).__dict__[name]
+    except (ImportError, KeyError):
+        return type(name, (), {})
+
 
 def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
     """Find and import mixin classes from a list of mixin strings"""
@@ -18,7 +27,8 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
         else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
         for mixin in mixins
     ]
-    return [importlib.import_module(module).__dict__[name] for module, name in mixins]
+
+    return [_import_or_empty(module, name) for module, name in mixins]
 
 
 class Slot:
@@ -112,8 +122,6 @@ class CMSFrontendComponent(forms.Form):
     @classmethod
     def plugin_factory(cls) -> type:
         if cls._plugin is None:
-            from djangocms_frontend.cms_plugins import CMSUIPlugin
-
             mixins = getattr(cls._component_meta, "mixins", [])
             slots = cls.get_slot_plugins()
             mixins = _get_mixin_classes(mixins)
@@ -123,16 +131,18 @@ class CMSFrontendComponent(forms.Form):
                 (
                     *mixins,
                     *cls._plugin_mixins,
-                    CMSUIPlugin,
+                    CMSUIPluginBase,
                 ),
                 {
                     "name": getattr(cls._component_meta, "name", cls.__name__),
-                    "module": getattr(cls._component_meta, "module", _("Component")),
+                    "module": getattr(cls._component_meta, "module", _("Components")),
                     "model": cls.plugin_model_factory(),
                     "form": cls.admin_form_factory(),
                     "allow_children": getattr(cls._component_meta, "allow_children", False) or slots,
+                    "require_parent": getattr(cls._component_meta, "require_parent", False),
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
-                    "render_template": getattr(cls._component_meta, "render_template", CMSUIPlugin.render_template),
+                    "parent_classes": getattr(cls._component_meta, "parent_classes", []),
+                    "render_template": getattr(cls._component_meta, "render_template", CMSUIPluginBase.render_template),
                     "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
                     "change_form_template": "djangocms_frontend/admin/base.html",
                     "slots": slots,
@@ -182,9 +192,7 @@ class CMSFrontendComponent(forms.Form):
     @classmethod
     @property
     def _component_meta(cls) -> typing.Optional[type]:
-        if hasattr(cls, "Meta"):
-            return cls.Meta
-        return None
+        return getattr(cls, "Meta", None)
 
     @classmethod
     def _generate_fieldset(cls) -> list[tuple[typing.Optional[str], dict]]:
@@ -194,20 +202,9 @@ class CMSFrontendComponent(forms.Form):
         return self.config.get("title", "")
 
     def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
-        """Auto-createas slot plugins upon creation of component plugin instance"""
-        from djangocms_frontend.cms_plugins import CMSUIPlugin
+        """Auto-creates slot plugins upon creation of component plugin instance"""
 
-        super(CMSUIPlugin, self).save_model(request, obj, form, change)
+        super(CMSUIPluginBase, self).save_model(request, obj, form, change)
         if not change:
             for slot in self.slots.keys():
                 add_plugin(obj.placeholder, slot, obj.language, target=obj)
-
-
-class ComponentLinkMixin:
-    from djangocms_frontend.contrib.link.cms_plugins import LinkPluginMixin
-    from djangocms_frontend.contrib.link.forms import AbstractLinkForm
-    from djangocms_frontend.contrib.link.helpers import GetLinkMixin
-
-    _base_form = AbstractLinkForm
-    _model_mixins = [GetLinkMixin]
-    _plugin_mixins = [LinkPluginMixin]

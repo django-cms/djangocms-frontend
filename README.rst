@@ -4,29 +4,33 @@
 
 |pypi| |docs| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**django CMS Frontend** is a plugin bundle which builds on and improves
+**django CMS Frontend** is a plugin bundle which originally built on and improved
 the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
-Its objective is to provide a set of popular frontend components independent of the
-currently used frontend framework such as Bootstrap, or its specific version.
+Its objective is to provide a toolset to quickly create re-usable frontend
+components and comes preloaded with a set of popular frontend components
+independent of the currently used frontend framework such as Bootstrap, or
+its specific version.
 
 .. image:: preview.png
 
 Key features
 ============
 
+- **Easy to implement re-usable frontend custom components**, which in the
+  simplest case consist of a template and declarative sort of form class.
+
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-  and django CMS 4.
+  and django CMS 4 out of the box.
 
 - **Separation of plugins from css framework**, i.e. no need to
   rebuild you site's plugin tree if css framework is changed in the
   future, e.g. from Bootstrap 5 to a future version.
 
-- **New link plugin** allowing to link to internal pages provided by
-  other applications, such as `djangocms-blog
+- Leverage of new **djangocms-link features** allowing to link to internal pages
+  provided by other applications, such as `djangocms-blog
   <https://github.com/nephila/djangocms-blog>`_.
 
-- **Nice and well-arranged admin frontend** of `djangocms-bootstrap4
-  <https://github.com/django-cms/djangocms-bootstrap4>`_
+- **Nice and well-arranged admin frontend** of djangocms-bootstrap4
 
 - **Extensible** within the project and with separate project (e.g. a
   theme app). Create your own components with a few lines of code only.
@@ -34,10 +38,6 @@ Key features
 - **Plugins are re-usable as UI components** anywhere in your project
   (e.g. in a custom app) giving your whole project a more consistent
   user experience.
-
--  A management command to **migrate from djangocms-bootstrap4**. This
-   command automatically migrates all ``djangocms-bootstrap4`` plugins to
-   ``djangocms-frontend``.
 
 
 Description
@@ -54,10 +54,6 @@ bloating your project's database with css framework-dependent tables.
 Instead all design parameters are stored in a common JSON field and
 future releases of improved frontend features will not require to
 rebuild your full plugin tree.
-
-The link plugin has been rewritten to not only allow internal links to other
-CMS pages, but also to other django models such as, e.g., posts of
-`djangocms-blog <https://github.com/nephila/djangocms-blog>`_.
 
 The plugins are designed to be re-usable as UI components in your
 project, e.g. in a custom app, giving your whole project a more
@@ -98,8 +94,7 @@ file for additional dependencies:
 -  django-cms, version 3.7 or later
 -  django-filer, version 1.7 or later
 -  djangocms-attributes-field, version 1.0 or later
--  djangocms-text-ckeditor, version 3.1 or later
--  django-select2
+-  djangocms-text
 -  django-entangled
 
 Make sure `django Filer
@@ -121,23 +116,22 @@ For a manual install:
 
       'easy_thumbnails',
       'djangocms_frontend',
-      'djangocms_frontend.contrib.accordion',
-      'djangocms_frontend.contrib.alert',
-      'djangocms_frontend.contrib.badge',
-      'djangocms_frontend.contrib.card',
-      'djangocms_frontend.contrib.carousel',
-      'djangocms_frontend.contrib.collapse',
-      'djangocms_frontend.contrib.component',
-      'djangocms_frontend.contrib.content',
-      'djangocms_frontend.contrib.grid',
-      'djangocms_frontend.contrib.icon',
-      'djangocms_frontend.contrib.image',
-      'djangocms_frontend.contrib.jumbotron',
-      'djangocms_frontend.contrib.link',
-      'djangocms_frontend.contrib.listgroup',
-      'djangocms_frontend.contrib.media',
-      'djangocms_frontend.contrib.tabs',
-      'djangocms_frontend.contrib.utilities',
+      'djangocms_frontend.contrib.accordion',  # optional
+      'djangocms_frontend.contrib.alert',  # optional
+      'djangocms_frontend.contrib.badge',  # optional
+      'djangocms_frontend.contrib.card',  # optional
+      'djangocms_frontend.contrib.carousel',  # optional
+      'djangocms_frontend.contrib.collapse',  # optional
+      'djangocms_frontend.contrib.content',  # optional
+      'djangocms_frontend.contrib.grid',  # optional
+      'djangocms_frontend.contrib.icon',  # optional
+      'djangocms_frontend.contrib.image',  # optional
+      'djangocms_frontend.contrib.jumbotron',  # optional
+      'djangocms_frontend.contrib.link',  # optional
+      'djangocms_frontend.contrib.listgroup',  # optional
+      'djangocms_frontend.contrib.media',  # optional
+      'djangocms_frontend.contrib.tabs',  # optional
+      'djangocms_frontend.contrib.utilities',  # optional
 
 -  run ``python manage.py migrate``
 
@@ -153,8 +147,7 @@ install separately or by adding an option:
 Documentation
 =============
 
-See readthedocs for the `documentation
-<https://djangocms-frontend.readthedocs.io>`_.
+See readthedocs for the `documentation <https://djangocms-frontend.readthedocs.io>`_.
 
 License
 =======

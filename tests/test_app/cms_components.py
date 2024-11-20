@@ -1,10 +1,8 @@
 from django import forms
+from djangocms_link.fields import LinkFormField
 
-from djangocms_frontend.contrib.component.components import (
-    CMSFrontendComponent,
-    ComponentLinkMixin,
-)
-from djangocms_frontend.contrib.component.registry import components
+from djangocms_frontend.component_base import CMSFrontendComponent
+from djangocms_frontend.component_pool import components
 from djangocms_frontend.contrib.image.fields import ImageFormField
 
 
@@ -33,13 +31,14 @@ class MyHero(CMSFrontendComponent):
 
 
 @components.register
-class MyButton(ComponentLinkMixin, CMSFrontendComponent):
+class MyButton(CMSFrontendComponent):
     class Meta:
         name = "Button"
         render_template = "button.html"
         allow_children = False
 
     text = forms.CharField(required=True, initial="Click me")
+    link = LinkFormField()
 
     def get_short_description(self):
         return self.text

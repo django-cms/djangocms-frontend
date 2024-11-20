@@ -1,35 +1,28 @@
-.. _custom_components:
-
 #################
 Custom Components
 #################
 
+.. index::
+    single: Custom Components
+
 .. versionadded:: 2.0
 
-Some frontend developers prefer custom components specifically tailored to
-give the project a unique and distinct look.
+Custom components are a powerful tool for content editors, allowing them to build pages without needing
+in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
+components, creating visually cohesive pages with ease.
 
 When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you
 either create your custom components or customize components from providers,
 e.g. `Tailwind UI <https://tailwindui.com>`_,
-`Flowbite <https://flowbite.com>`_, or the commiunity
+`Flowbite <https://flowbite.com>`_, or the community
 `Tailwind Components <https://tailwindcomponents.com>`_.
 
-With django CMS you make your components available to the content editors for
-drag and drop **and** frontend developers for use in templates from a single
+With django CMS you make your components available to the content editors to
+simply add them to a page by a click **and** frontend developers for use in templates from a single
 source.
 
-To use custom components in your project, add
-``"djangocms_frontend.contrib.component"`` to your ``INSTALLED_APPS`` setting.
-
-.. code-block:: python
-
-    INSTALLED_APPS = [
-        ...
-        "djangocms_frontend.contrib.component",
-        ...
-    ]
-
+Custom components are part of the djangocms-frontend root package and do not
+require additional listing in the ``INSTALLED_APPS`` setting.
 
 **djangocms-frontend** will look for custom components in the
 ``cms_components`` module in any of your apps. This way you can
@@ -45,8 +38,10 @@ Add a ``cms_components.py`` file to the ``theme`` app:
 .. code-block:: python
 
     # theme/cms_components.py
-    from djangocms_frontend.contrib.component.components import ComponentLinkMixin, CMSFrontendComponent
-    from djangocms_frontend.contrib.component.components import components
+    from djangocms_link.fields import LinkFormField
+
+    from djangocms_frontend.component_base import CMSFrontendComponent
+    from djangocms_frontend.component_pool import components
     from djangocms_frontend.contrib.image.fields import ImageFormField
 
 
@@ -77,6 +72,7 @@ Add a ``cms_components.py`` file to the ``theme`` app:
             allow_children = False
 
         text = forms.CharField(required=True)
+        link = LinkFormField()
 
         def get_short_description(self):
             return self.text

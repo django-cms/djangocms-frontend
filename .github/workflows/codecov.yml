@@ -32,9 +32,11 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Generate Report
+    - name: Intall dependencies
       run: |
         pip install -r tests/requirements/${{ matrix.requirements-file }}
-        coverage run run_tests.py
+    - name: Run coverage
+      run: |
+        coverage run -m pytest
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v5

@@ -4,6 +4,10 @@
 }
 
 ul.nav {
+    &:not(:has(> li:nth-child(2))) {
+        // Hide single tab
+        display: none;
+    }
     .nav-item {
         margin-inline-end: 1rem;
     }
