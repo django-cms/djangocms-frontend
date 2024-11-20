@@ -97,3 +97,8 @@ class TextLinkPlugin(mixin_factory("Link"), AttributesMixin, SpacingMixin, LinkP
 if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     #  Only register plugin if in INSTALLED_APPS
     plugin_pool.register_plugin(TextLinkPlugin)
+
+    if "djangocms_link" in django_settings.INSTALLED_APPS:
+        from djangocms_link.cms_plugins import LinkPlugin
+
+        LinkPlugin.parent_classes = [None]  # Remove it from the list of valid plugins
