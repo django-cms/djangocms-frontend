@@ -11,7 +11,6 @@ pre-commit
 djangocms-text
 django-filer
 html5lib
-git+https://github.com/django-cms/djangocms-link@feat/url-mngr
 -e .
 pytest
 pytest-django
