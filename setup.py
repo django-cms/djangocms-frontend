@@ -7,7 +7,8 @@ REQUIREMENTS = [
     "django-cms>=3.7",
     "django-filer>=1.7",
     "easy-thumbnails",
-    "djangocms-attributes-field>=1",
+    "djangocms-attributes-field>=4",
+    "djangocms-link>=5",
     "django-entangled>=0.6",
 ]
 
