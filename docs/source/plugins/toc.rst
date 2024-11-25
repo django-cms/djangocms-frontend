@@ -78,7 +78,7 @@ The TOC plugin:
 3. Generates a nested list of links to those headings
 
 Basic Usage
-==========
+===========
 
 To create a table of contents:
 
