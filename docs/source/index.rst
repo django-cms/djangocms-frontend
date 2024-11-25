@@ -83,6 +83,8 @@ Contents
    custom_components
    grid
    components
+   plugins/heading
+   plugins/toc
    how-to/index
    reference
 

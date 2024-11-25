@@ -19,6 +19,10 @@ EXTRA_REQUIREMENTS = {
     "static-ace": [
         "djangocms-static-ace",
     ],
+    "docs": [
+        "sphinx>=4.0.0",
+        "sphinx-rtd-theme>=1.0.0",
+    ],
     "djangocms-link": [
         "djangocms-link>=5.0.0",
     ],
