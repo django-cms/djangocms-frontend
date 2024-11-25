@@ -89,30 +89,38 @@ To create a table of contents:
 Positioning at Top of Page
 ==========================
 
+Table of contents at the top Example
+------------------------------------
+
 Since the TOC must be placed after headings to collect them, use grid layouts to display it at the top:
+
+1. Create a container
+2. Add a row with two columns
+3. In the first (bottom) column: Add your content with Heading plugins
+4. In the second (top) column: Add the TOC plugin
+5. Set the column width and order: Both columns should cover full width (typically 12/12),
+   the second columns should be shown before (i.e., at the top) the first (then at the bottom)
 
 Two Column Layout Example
 -------------------------
 
 1. Create a container
 2. Add a row with two columns
-3. In the first (left) column:
-   - Add the TOC plugin
-4. In the second (right) column:
-   - Add your content with Heading plugins
+3. In the first (left) column: Add your content with Heading plugins
+4. In the second (right) column: Add the TOC plugin
 5. Set column widths appropriately (e.g., 3/9 split)
 
 Example Structure::
 
     Container
     └── Row
-        ├── Column (col-3)
-        │   └── TOC Plugin
-        └── Column (col-9)
-            ├── Heading Plugin
-            ├── Content...
-            ├── Heading Plugin
-            └── More content...
+        ├── Column (col-9)
+        │   ├── Heading Plugin
+        │   ├── Content...
+        │   ├── Heading Plugin
+        │   └── More content...
+        └── Column (col-3)
+            └── TOC Plugin
 
 This creates a sidebar layout with the TOC always visible while scrolling through content.
 

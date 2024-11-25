@@ -80,9 +80,9 @@ Contents
    :maxdepth: 3
 
    getting_started
-   custom_components
    grid
    components
+   custom_components
    plugins/toc
    how-to/index
    reference
