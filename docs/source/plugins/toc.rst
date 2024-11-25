@@ -62,7 +62,7 @@ To make a heading appear in a Table of Contents:
 
 *******************
  Table of Contents
-###################
+*******************
 
 The Table of Contents (TOC) plugin automatically generates a navigation list from headings in your content.
 
