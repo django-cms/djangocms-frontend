@@ -68,9 +68,8 @@ The Table of Contents (TOC) plugin automatically generates a navigation list fro
 
 **Important**: The TOC plugin must be placed **after** the headings it references in the content flow.
 
-*************
- How it Works
-*************
+How it Works
+============
 
 The TOC plugin:
 
