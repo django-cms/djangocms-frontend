@@ -3,7 +3,7 @@
     single: Plugins
 
 ############################
- Standard Component plugins
+ Standard component plugins
 ############################
 
 ``djangocms-frontend`` adds a set of plugins to Django-CMS to allow for
