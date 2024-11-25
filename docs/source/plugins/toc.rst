@@ -87,12 +87,12 @@ To create a table of contents:
 3. The TOC will automatically generate when the page renders
 
 Positioning at Top of Page
-=========================
+==========================
 
 Since the TOC must be placed after headings to collect them, use grid layouts to display it at the top:
 
 Two Column Layout Example
-------------------------
+-------------------------
 
 1. Create a container
 2. Add a row with two columns
@@ -117,7 +117,7 @@ Example Structure::
 This creates a sidebar layout with the TOC always visible while scrolling through content.
 
 Best Practices
-=============
+==============
 
 1. Always set IDs on headings that should appear in the TOC
 2. Use consistent heading levels for proper hierarchy
