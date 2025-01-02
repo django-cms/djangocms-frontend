@@ -65,7 +65,7 @@ Add a ``cms_components.py`` file to the ``theme`` app:
             return self.title
 
     @components.register
-    class MyButton(ComponentLinkMixin, CMSFrontendComponent):
+    class MyButton(CMSFrontendComponent):
         class Meta:
             name = "Button"
             render_template = "components/button.html"

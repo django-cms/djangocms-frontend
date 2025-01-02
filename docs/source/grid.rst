@@ -54,7 +54,7 @@ Below is an example of how you might do this::
 
     <!-- Example of using the plugin template tag for a container -->
     {% plugin "container" container_type="container-fluid" %}
-        {% plugin "row" %}
+        {% plugin "gridrow" %}
             {% plugin "column" xs_col=6 %}
                 <p>This is the first column inside the container.</p>
             {% endplugin %}
@@ -152,7 +152,7 @@ skipped they fall back to their defaults):
 
     {% load frontend %}
     {% plugin "gridcontainer" container_type="container-fluid" %}
-        {% plugin "row" vertical_alignment="align-items-center" %}
+        {% plugin "gridrow" vertical_alignment="align-items-center" %}
             {% plugin "gridcolumn" xs_col=12 md_col=6 text_alignment="center" %}
                 This content is inside a column.
             {% endplugin %}

@@ -4,12 +4,12 @@
 
 |pypi| |docs| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**django CMS Frontend** is a plugin bundle which originally built on and improved
-the architecture of `djangocms-bootstrap4 <https://github.com/django-cms/djangocms-bootstrap4>`_.
-Its objective is to provide a toolset to quickly create re-usable frontend
-components and comes preloaded with a set of popular frontend components
-independent of the currently used frontend framework such as Bootstrap, or
-its specific version.
+**django CMS Frontend** is a powerful plugin suite designed to streamline the
+integration of frontend frameworks into django CMS. Out of the box, it provides
+comprehensive support for Bootstrap 5, while also enabling the use of other
+CSS frameworks, such as Tailwind CSS, through custom components.
+Whether you're building responsive layouts or highly customized designs,
+django CMS Frontend is designed to simplify your development workflow.
 
 .. image:: preview.png
 
@@ -22,31 +22,35 @@ Key features
 - Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
   and django CMS 4 out of the box.
 
+- Support of other frameworks such as `Tailwind CSS <https://tailwindcss.com>`_
+  through custom components.
+
 - **Separation of plugins from css framework**, i.e. no need to
   rebuild you site's plugin tree if css framework is changed in the
   future, e.g. from Bootstrap 5 to a future version.
-
-- Leverage of new **djangocms-link features** allowing to link to internal pages
-  provided by other applications, such as `djangocms-blog
-  <https://github.com/nephila/djangocms-blog>`_.
-
-- **Nice and well-arranged admin frontend** of djangocms-bootstrap4
-
-- **Extensible** within the project and with separate project (e.g. a
-  theme app). Create your own components with a few lines of code only.
 
 - **Plugins are re-usable as UI components** anywhere in your project
   (e.g. in a custom app) giving your whole project a more consistent
   user experience.
 
+- **Extensible** within the project and with separate project (e.g. a
+  theme app). Create your own components with a few lines of code only.
+
+
 
 Description
 ===========
+django CMS Frontend is framework agnostic but comes with support of selected
+components of Bootstrap 5. Components can have different templates for different
+frameworks and the preferred framework can be set in the project settings.
 
-The plugins are framework agnostic and the framework can be changed by
-adapting your project's settings. Also, it is designed to avoid having
-to rebuild your CMS plugin tree when upgrading e.g. from one version of
-your frontend framework to the next.
+It is up to you which (if any at all) components you want to include in your
+project. Each set of components is a separate package you can include in your
+project's ``INSTALLED_APPS``.
+
+The components are designed to be re-usable as UI components in your
+project, e.g. in a custom app, giving your whole project a more
+consistent user experience.
 
 django CMS Frontend uses `django-entangled
 <https://github.com/jrief/django-entangled>`_ by Jacob Rief to avoid
@@ -55,9 +59,6 @@ Instead all design parameters are stored in a common JSON field and
 future releases of improved frontend features will not require to
 rebuild your full plugin tree.
 
-The plugins are designed to be re-usable as UI components in your
-project, e.g. in a custom app, giving your whole project a more
-consistent user experience.
 
 Contributing
 ============
@@ -91,11 +92,11 @@ See ``REQUIREMENTS`` in the `setup.py
 <https://github.com/django-cms/djangocms-frontend/blob/master/setup.py>`_
 file for additional dependencies:
 
--  django-cms, version 3.7 or later
+-  django-cms, version 3.11 or later
 -  django-filer, version 1.7 or later
 -  djangocms-attributes-field, version 1.0 or later
 -  djangocms-text
--  django-entangled
+-  django-entangled 0.6 or later
 
 Make sure `django Filer
 <http://django-filer.readthedocs.io/en/latest/installation.html>`_ and
