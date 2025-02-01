@@ -1,3 +1,5 @@
+.. _custom_components: Custom Components
+
 #################
 Custom Components
 #################

@@ -445,11 +445,20 @@ otherwise. This is useful if you want use exactly the same markup for, say,
 buttons, links, the grid both in pages managed with django CMS and in
 other parts of your project without duplicating HTML code.
 
-This feature introduces a simple and flexible way to re-use djangocms-frontend
+This feature introduces a simple and flexible way to reuse django CMS
 plugins directly in templates without needing to create database entries for
 them. This allows developers to maintain clean, reusable, and dynamic
 components, such as buttons, cards, links, and more, while minimizing code
 repetition.
+
+.. note::
+
+    To make plugins available as components, ensure that the 
+    ``CMS_COMPONENT_PLUGINS`` setting in your project's ``settings.py`` 
+    includes the necessary plugin classes and their subclasses. This setting 
+    allows you to specify which plugins can be used directly in templates 
+    without creating database entries. To include all djangocms-frontend 
+    plugins, use ``djangocms_frontend.cms_plugins.CMSUIPlugin`` in the setting.
 
 To use a frontend plugin in a template you need to load the ``frontend`` tags
 and then use the ``plugin`` template tag to render a frontend plugin.

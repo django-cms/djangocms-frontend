@@ -156,13 +156,17 @@ class Plugin(AsTag):
     )
 
     def message(self, message):
+        import warnings
+
+        warnings.warn(message, stacklevel=5)
         return f"<!-- {message} -->" if django_settings.DEBUG else ""
 
     def get_value(self, context, name, kwargs, nodelist):
         from djangocms_frontend.plugin_tag import plugin_tag_pool
 
         if name not in plugin_tag_pool:
-            return self.message(f'Plugin "{name}" not found in pool for plugins usable with {{% plugin %}}')
+            return self.message(f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
+                                f'the CMS_COMPONENT_PLUGINS setting')
         context.push()
         instance = plugin_tag_pool[name]["defaults"]
         plugin_class = plugin_tag_pool[name]["class"]

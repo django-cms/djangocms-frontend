@@ -62,6 +62,7 @@ class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, SpacingMixin, CMS
 
     render_template = "djangocms_frontend/heading.html"
     allow_children = True
+    is_local = False
 
     fieldsets = [
         (
@@ -129,6 +130,7 @@ class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
 
     fieldsets = settings.EMPTY_FIELDSET
     edit_disabled = True
+    is_local = False
 
     def render(self, context, instance, placeholder):
         if hasattr(context["request"], "TOC"):

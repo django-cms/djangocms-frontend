@@ -13,11 +13,8 @@ class Accordion(FrontendUIItem):
         proxy = True
         verbose_name = _("Accordion")
 
-    def get_children_count(self):
-        return self.cmsplugin_set.count()
-
     def get_short_description(self):
-        return _("({} entries)").format(self.get_children_count())
+        return _("({} entries)").format(len(self.child_plugin_instances or []))
 
 
 class AccordionItem(FrontendUIItem):

@@ -17,8 +17,7 @@ documentation.
 
 .. note::
 
-    Custom components can easily be added using the components contrib
-    package. For more information see :ref:`custom_components`.
+    Custom components can easily be added using :ref:`custom_components`.
 
 .. index::
     single: Accordion

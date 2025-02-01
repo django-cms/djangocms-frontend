@@ -76,6 +76,7 @@ class AccordionItemForm(mixin_factory("AccordionItem"), EntangledModelForm):
 
     accordion_item_header = forms.CharField(
         label=_("Header"),
+        initial=_("New accordion item"),
         required=True,
     )
     accordion_item_open = forms.BooleanField(

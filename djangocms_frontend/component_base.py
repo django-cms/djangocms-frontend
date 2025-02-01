@@ -50,6 +50,9 @@ class CMSFrontendComponent(forms.Form):
     _admin_form = None
     _model = None
     _plugin = None
+    META_FIELDS = ["is_local", "disable_edit", "disable_child_plugins", "show_plugin_add_form",
+                   "frontend_editable_fields", "link_fieldset_position", "require_parent",
+                   "parent_classes"]
 
     @classmethod
     def admin_form_factory(cls, **kwargs) -> type:
@@ -138,17 +141,17 @@ class CMSFrontendComponent(forms.Form):
                     "module": getattr(cls._component_meta, "module", _("Components")),
                     "model": cls.plugin_model_factory(),
                     "form": cls.admin_form_factory(),
-                    "allow_children": getattr(cls._component_meta, "allow_children", False) or slots,
-                    "require_parent": getattr(cls._component_meta, "require_parent", False),
+                    "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
-                    "parent_classes": getattr(cls._component_meta, "parent_classes", []),
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIPluginBase.render_template),
                     "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
                     "change_form_template": "djangocms_frontend/admin/base.html",
                     "slots": slots,
-                    "frontend_editable_fields": getattr(cls._component_meta, "frontend_editable_fields", []),
                     "save_model": cls.save_model,
-                    "link_fieldset_position": getattr(cls._component_meta, "link_fieldset_position", 1),
+                    **{
+                        field: getattr(cls._component_meta, field) for field in cls.META_FIELDS
+                        if hasattr(cls._component_meta, field)
+                    },
                     **(
                         {
                             "get_render_template": cls.get_render_template,

@@ -196,6 +196,7 @@ class MarginFormMixin(EntangledModelFormMixin):
     margin_devices = DeviceChoiceField(
         label=_("Apply margin on device"),
         required=False,
+        initial=[size for size, _ in settings.DEVICE_CHOICES],
         help_text=_(
             "Select only devices on which the margin should be applied. On other devices "
             "larger than the first selected device the margin will be set to zero."
@@ -228,6 +229,7 @@ class PaddingFormMixin(EntangledModelFormMixin):
     padding_devices = DeviceChoiceField(
         label=_("Apply padding on device"),
         required=False,
+        initial=[size for size, _ in settings.DEVICE_CHOICES],
         help_text=_(
             "Select only devices on which the padding should be applied. On other devices "
             "larger than the first selected device the padding will be set to zero."

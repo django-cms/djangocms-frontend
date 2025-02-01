@@ -13,7 +13,7 @@ CSS frameworks, such as Tailwind CSS, through custom components.
 Whether you're building responsive layouts or highly customized designs,
 django CMS Frontend is designed to simplify your development workflow.
 
-.. image:: preview.png
+.. image:: ../../preview.png
 
 
 **************
