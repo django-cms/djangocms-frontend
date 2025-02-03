@@ -73,6 +73,8 @@ class AccordionItemPlugin(mixin_factory("AccordionItem"), CMSUIPlugin):
     model = models.AccordionItem
     form = forms.AccordionItemForm
     allow_children = True
+    show_plugin_add_form = False
+
     parent_classes = [
         "AccordionPlugin",
     ]
