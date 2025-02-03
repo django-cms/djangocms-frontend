@@ -56,3 +56,7 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
             from .models import FrontendUIItem
 
             return FrontendUIItem.objects.get(pk=object_id)
+
+
+class CMSUIComponent(CMSUIPluginBase):
+    pass
