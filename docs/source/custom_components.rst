@@ -1,4 +1,4 @@
-.. _custom_components: Custom Components
+.. _custom_components:
 
 #################
 Custom Components

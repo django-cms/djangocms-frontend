@@ -2,7 +2,7 @@ from importlib import import_module
 
 from djangocms_frontend import settings
 
-from .attributes import AttributesMixin, AttributesFormMixin
+from .attributes import AttributesFormMixin, AttributesMixin
 from .title import TitleFormMixin, TitleMixin
 
 __common = {

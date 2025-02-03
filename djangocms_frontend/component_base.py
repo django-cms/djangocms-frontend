@@ -9,7 +9,7 @@ from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
-from .ui_plugin_base import CMSUIPluginBase
+from .ui_plugin_base import CMSUIComponent
 
 
 def _import_or_empty(module, name):
@@ -134,7 +134,7 @@ class CMSFrontendComponent(forms.Form):
                 (
                     *mixins,
                     *cls._plugin_mixins,
-                    CMSUIPluginBase,
+                    CMSUIComponent,
                 ),
                 {
                     "name": getattr(cls._component_meta, "name", cls.__name__),
@@ -143,7 +143,7 @@ class CMSFrontendComponent(forms.Form):
                     "form": cls.admin_form_factory(),
                     "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
-                    "render_template": getattr(cls._component_meta, "render_template", CMSUIPluginBase.render_template),
+                    "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
                     "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
                     "change_form_template": "djangocms_frontend/admin/base.html",
                     "slots": slots,
@@ -207,7 +207,7 @@ class CMSFrontendComponent(forms.Form):
     def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
         """Auto-creates slot plugins upon creation of component plugin instance"""
 
-        super(CMSUIPluginBase, self).save_model(request, obj, form, change)
+        super(CMSUIComponent, self).save_model(request, obj, form, change)
         if not change:
             for slot in self.slots.keys():
                 add_plugin(obj.placeholder, slot, obj.language, target=obj)
