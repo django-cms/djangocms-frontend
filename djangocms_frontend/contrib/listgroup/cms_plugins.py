@@ -29,7 +29,8 @@ class ListGroupPlugin(
     form = forms.ListGroupForm
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
-    child_classes = ["ListGroupItemPlugin", "LinkPlugin"]
+    child_classes = ["ListGroupItemPlugin", "TextLinkPlugin"]
+    show_add_form = False
     # TODO consider linking to tab-content
 
     fieldsets = [
@@ -57,6 +58,7 @@ class ListGroupItemPlugin(
     change_form_template = "djangocms_frontend/admin/list-group.html"
     allow_children = True
     parent_classes = ["ListGroupPlugin"]
+    frontend_editable_fields = ("simple_content",)
 
     fieldsets = [
         (

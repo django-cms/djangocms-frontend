@@ -6,12 +6,12 @@
  djangocms-frontend
 ********************
 
-**django CMS Frontend** is a powerful plugin suite designed to streamline the
-integration of frontend frameworks into django CMS. Out of the box, it provides
-comprehensive support for Bootstrap 5, while also enabling the use of other
-CSS frameworks, such as Tailwind CSS, through custom components.
-Whether you're building responsive layouts or highly customized designs,
-django CMS Frontend is designed to simplify your development workflow.
+django CMS Frontend is a versatile plugin suite for django CMS that facilitates
+the easy creation of reusable frontend components. It supports any CSS framework,
+allowing developers to seamlessly integrate their preferred styling libraries.
+For immediate use, it includes a comprehensive set of Bootstrap 5 components
+and templates.
+
 
 .. image:: ../../preview.png
 
@@ -20,49 +20,49 @@ django CMS Frontend is designed to simplify your development workflow.
  Key features
 **************
 
-- **Easy to implement re-usable frontend custom components**, which in the
-  simplest case consist of a template and declarative sort of form class.
+* **Effortless Development of Custom Components**: Create reusable frontend
+  components with ease, utilizing simple templates and declarative form
+  classes. These components can function both as CMS plugins and within
+  standard Django templates. ​
 
-- Support of `Bootstrap 5 <https://getbootstrap.com>`_, django CMS 3.8+
-  and django CMS 4 out of the box.
+* **Framework-Agnostic Design**: Maintain flexibility in your project's design
+  by decoupling plugins from specific versions of a CSS framework. This ensures
+  that updating frameworks in the future doesn't necessitate rebuilding your
+  site's plugin structure. ​
 
-- Support of other frameworks such as `Tailwind CSS <https://tailwindcss.com>`_
-  through custom components.
+* **Pre-Integrated Bootstrap 5 Components**: Access a ready-to-use collection
+  of Bootstrap 5 components, streamlining the process of building responsive
+  and modern interfaces. ​
 
-- **Separation of plugins from css framework**, i.e. no need to
-  rebuild you site's plugin tree if css framework is changed in the
-  future, e.g. from Bootstrap 5 to a future version.
+* **Extensibility**: Enhance your project by creating custom components with
+  minimal code. The system is designed to be extended both within individual
+  projects and through separate theme applications. ​
 
-- **Plugins are re-usable as UI components** anywhere in your project
-  (e.g. in a custom app) giving your whole project a more consistent
-  user experience.
-
-- **Extensible** within the project and with separate project (e.g. a
-  theme app). Create your own components with a few lines of code only.
-
+* **Consistent User Experience**: Utilize plugins as UI components throughout
+  your project, promoting a cohesive and uniform user interface. ​
 
 *************
  Description
 *************
 
-django CMS Frontend is framework agnostic but comes with support of selected
-components of Bootstrap 5. Components can have different templates for different
-frameworks and the preferred framework can be set in the project settings.
+Designed to be framework-agnostic, django CMS Frontend allows developers to
+select and change CSS frameworks by adjusting project settings, eliminating
+the need to reconstruct the CMS plugin tree when upgrading or switching
+frameworks. It leverages `django-entangled
+<https://github.com/jrief/django-entangled>`_ to store design parameters in
+a common JSON field, preventing database bloat and facilitating seamless
+updates to frontend features.
 
-It is up to you which (if any at all) components you want to include in your
-project. Each set of components is a separate package you can include in your
-project's ``INSTALLED_APPS``.
+By providing a suite of Bootstrap 5-based components for layout structuring,
+including grids, components, and forms, django CMS Frontend simplifies the
+process of building responsive and structured page designs. Developers can
+also create custom components with minimal code, ensuring a consistent and
+efficient development experience.
 
-The components are designed to be re-usable as UI components in your
-project, e.g. in a custom app, giving your whole project a more
-consistent user experience.
+It is up to you which (if any at all) pre-build components you want to include
+in your project. Each set of components is a separate package you can include
+in your project's ``INSTALLED_APPS``.
 
-django CMS Frontend uses `django-entangled
-<https://github.com/jrief/django-entangled>`_ by Jacob Rief to avoid
-bloating your project's database with css framework-dependent tables.
-Instead all design parameters are stored in a common JSON field and
-future releases of improved frontend features will not require to
-rebuild your full plugin tree.
 
 Contents
 ========
@@ -70,11 +70,8 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   getting_started
-   grid
-   components
-   custom_components
-   plugins/toc
+   tutorial/index
+   plugins/index
    how-to/index
    reference
 

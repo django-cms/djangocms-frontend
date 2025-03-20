@@ -27,6 +27,8 @@ class TabPlugin(mixin_factory("Tab"), AttributesMixin, CMSUIPlugin):
     change_form_template = "djangocms_frontend/admin/tabs.html"
     allow_children = True
     child_classes = ["TabItemPlugin"]
+    show_add_form = False
+
 
     fieldsets = [
         (
@@ -59,6 +61,7 @@ class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, PaddingMixin, CMS
     change_form_template = "djangocms_frontend/admin/tabs.html"
     allow_children = True
     parent_classes = ["TabPlugin"]
+    show_add_form = False
 
     fieldsets = [
         (

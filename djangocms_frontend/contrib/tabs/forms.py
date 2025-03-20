@@ -83,6 +83,8 @@ class TabItemForm(PaddingFormMixin, EntangledModelForm):
 
     tab_title = forms.CharField(
         label=_("Tab title"),
+        initial=_("New tab"),
+        required=True,
     )
     tab_bordered = forms.BooleanField(
         label=_("Bordered"),

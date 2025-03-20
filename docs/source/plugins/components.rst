@@ -2,9 +2,9 @@
 .. index::
     single: Plugins
 
-############################
- Standard component plugins
-############################
+#############################
+ Pre-build component plugins
+#############################
 
 ``djangocms-frontend`` adds a set of plugins to Django-CMS to allow for
 quick usage of components defined by the underlying css framework, e.g.
