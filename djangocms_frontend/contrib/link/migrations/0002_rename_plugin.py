@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
         ('link', '0001_initial'),
     ]
 
-
     operations = [
         migrations.RunPython(
             lambda apps, schema_editor: rename(apps, "Link", "TextLink"),

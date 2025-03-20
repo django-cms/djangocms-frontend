@@ -29,7 +29,6 @@ class TabPlugin(mixin_factory("Tab"), AttributesMixin, CMSUIPlugin):
     child_classes = ["TabItemPlugin"]
     show_add_form = False
 
-
     fieldsets = [
         (
             None,

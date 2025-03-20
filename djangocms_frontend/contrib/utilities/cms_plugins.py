@@ -52,6 +52,7 @@ class EditorNotePlugin(mixin_factory("EditorNote"), CMSUIPlugin):
     show_add_form = False
     edit_disabled = True
 
+
 @plugin_pool.register_plugin
 class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, SpacingMixin, CMSUIPlugin):
     """Room for notes for editor only visible in edit mode"""
