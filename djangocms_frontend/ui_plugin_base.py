@@ -48,7 +48,7 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
                 return re_path(regex, fn, name=f"{info}_{fn.__name__}")
 
             return [
-                pat(r'edit-field/([0-9]+)/([a-z\-]+)/$', self.edit_field),
+                pat(r"edit-field/([0-9]+)/([a-z\-]+)/$", self.edit_field),
             ] + super().get_plugin_urls()
 
         def _get_object_for_single_field(self, object_id, language):

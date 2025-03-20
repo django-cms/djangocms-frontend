@@ -305,7 +305,7 @@ def p001_left_right_migration(obj, new_obj):
 
         def replace_left(item, old, new):
             if item[: len(old)] == old:
-                return new + item[len(old):]
+                return new + item[len(old) :]
             return item
 
         classes = new_obj.attributes["class"].split()

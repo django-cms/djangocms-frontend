@@ -15,7 +15,7 @@ class CodeBlock(FrontendUIItem):
         verbose_name = _("Code block")
 
     def get_short_description(self):
-        return f'<{self.config.get("code_type", CODE_TYPE_CHOICES[0][0])}>'
+        return f"<{self.config.get('code_type', CODE_TYPE_CHOICES[0][0])}>"
 
 
 class Blockquote(FrontendUIItem):
