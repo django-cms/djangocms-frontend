@@ -75,12 +75,12 @@ def insert_fields(fieldsets, new_fields, block=None, position=-1, blockname=None
         modify[1]["fields"] = (
             list(fields[: position + 1] if position != -1 else fields)
             + list(new_fields)
-            + list(fields[position + 1 :] if position != -1 else [])
+            + list(fields[position + 1:] if position != -1 else [])
         )
     fs = (
         list(fieldsets[:block] if block != -1 else fieldsets)
         + [modify]
-        + list(fieldsets[block + 1 :] if block != -1 else [])
+        + list(fieldsets[block + 1:] if block != -1 else [])
     )
     return fs
 
