@@ -1,17 +1,17 @@
 . _custom_components:
 
 #####################################################
-Setup a Website with Pre-Build Bootstrap 5 Components
+Setup a Website with Pre-Built Bootstrap 5 Components
 #####################################################
 
 .. index::
-    single: Pre-build Components
+    single: Pre-Built Components
 
 
 Here's a step-by-step tutorial to get you started with **djangocms-frontend**, a versatile plugin bundle
 for django CMS that provides a suite of frontend components compatible with various CSS frameworks, including Bootstrap 5.
 
-For this tutorial we will be using the pre-build Boostrap 5 components that come with **djangocms-frontend**.
+For this tutorial we will be using the pre-built Boostrap 5 components that come with **djangocms-frontend**.
 
 Installation
 ============

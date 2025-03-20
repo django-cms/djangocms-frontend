@@ -55,7 +55,7 @@ process of building responsive and structured page designs. Developers can
 also create custom components with minimal code, ensuring a consistent and
 efficient development experience.
 
-It is up to you which (if any at all) pre-build components you want to include
+It is up to you which (if any at all) pre-built components you want to include
 in your project. Each set of components is a separate package you can include
 in your project's ``INSTALLED_APPS``.
 

@@ -6,7 +6,7 @@
 ##########
 
 The first tutoral shows how to quickly build a website using Bootstrap 5, django CMS frontend and
-its pre-build components.
+its pre-built components.
 
 The second tutorial guides you through creating custom components with minimal code.
 

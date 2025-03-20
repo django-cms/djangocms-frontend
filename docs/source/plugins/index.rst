@@ -1,11 +1,11 @@
 .. index::
-    single: Pre-build Components
+    single: Pre-Built Components
 
 ###################################
- Reference to Pre-build Components
+ Reference to Pre-Built Components
 ###################################
 
-Find the available pre-build components for Boostrap 5 in the following sections:
+Find the available pre-built components for Boostrap 5 in the following sections:
 
 .. toctree::
    :maxdepth: 1
