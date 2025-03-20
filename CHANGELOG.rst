@@ -2,6 +2,20 @@
 Changelog
 =========
 
+2.0.0 (2025-03-20)
+==================
+* feat: Rename link plugin to text link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/219
+* feat: Add re-usable components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/220
+* feat: Support `LinkFormField` of djangocms-link 5+ by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/241
+* feat: Use Django CMS 5.0 capabilities by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/254
+* locale: Updates for file djangocms_frontend/locale/en/LC_MESSAGES/django.po in de by @transifex-integration in https://github.com/django-cms/djangocms-frontend/pull/228
+* fix: inline editing crashed for plugin template tags by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/260
+* docs: update by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/239
+* docs: Add documentation for HeadingPlugin and TOCPlugin by @sourcery-ai in https://github.com/django-cms/djangocms-frontend/pull/246
+* docs: Revise table of contents and fix typos by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/249
+* docs: Update documentation by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/259
+
+
 1.3.4 (2024-09-30)
 ==================
 
