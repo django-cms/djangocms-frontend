@@ -104,10 +104,15 @@ Adding Styles and JavaScript
 ``djangocms-frontend`` does not automatically include CSS or JavaScript files.
 You need to manually add them to your templates.
 
+
+.. index::
+    single: base.html
+
+
 1. **Using Bootstrap 5 templates (recommended to get started quickly)**
 
    The package is designed to work with Bootstrap 5 by default. If you want to use Bootstrap 5,
-    extend the default template like this:
+   extend the default template like this:
 
    .. code-block:: django
 
@@ -116,9 +121,28 @@ You need to manually add them to your templates.
 
    This will load Bootstrap 5 CSS and JS from a CDN.
 
+   .. note::
+
+      We recommend developing your own ``base.html`` for your projects. The
+      example templates load CSS and JS files from a CDN. Good reasons to do so
+      are
+
+      * **djangocms-frontend** does not contain CSS or JS files from Bootstrap
+        or any other framework for that matter. The example templates load
+        CSS and JS from a CDN.
+      * It is considered safer to host CSS and JS files yourself. Otherwise you
+        do not have control over the CSS and/or JS that is delivered.
+      * It is a common practice to customize at least the CSS part, e.g. with
+        brand colors.
+      * You might have a totally different build process for your styling assets,
+        especially if you use other frameworks, such as Tailwind CSS.
+
+
+
 2. **Custom Templates**
 
-   If you prefer to manage assets locally, download Bootstrap 5 and include it in your template:
+   If you prefer to manage assets locally, download Bootstrap 5, customize as needed,
+   and include it in your template:
 
    .. code-block:: html
 
@@ -135,7 +159,8 @@ You need to manually add them to your templates.
 Customizing Templates
 =====================
 
-``djangocms-frontend`` allows for extensive customization through Django template blocks. Some key blocks you can override:
+``djangocms-frontend``'s built-in templates allow for extensive customization through
+Django template blocks. Some key blocks you can override:
 
 The example template is customisable by a set of template blocks:
 
