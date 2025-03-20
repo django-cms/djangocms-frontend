@@ -179,7 +179,7 @@ class GridColumnBaseForm(
                     self.cleaned_data[f"{size}_col"] = int(self.cleaned_data[f"{size}_col"])
             else:
                 raise ValidationError(
-                    _('Column size needs to be empty, "auto", or a ' "number between 1 and %(cols)d"),
+                    _('Column size needs to be empty, "auto", or a number between 1 and %(cols)d'),
                     params=dict(cols=GRID_SIZE),
                     code="invalid_column",
                 )

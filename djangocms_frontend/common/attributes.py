@@ -36,4 +36,5 @@ class AttributesFormMixin(EntangledModelFormMixin):
                 "attributes",
             ]
         }
+
     attributes = AttributesFormField()

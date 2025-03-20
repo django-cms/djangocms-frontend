@@ -27,10 +27,12 @@ class GetLinkMixin:
             if not url_grouper:
                 return ""
             from djangocms_url_manager.models import Url
+
             url = Url.objects.filter(url_grouper=url_grouper).order_by("pk").last()
             if not url:  # pragma: no cover
                 return ""
             return url.get_absolute_url() or ""
 
         from djangocms_link.helpers import get_link as djangocms_link_get_link
+
         return djangocms_link_get_link(self.config.get("link", {}), Site.objects.get_current().pk) or ""

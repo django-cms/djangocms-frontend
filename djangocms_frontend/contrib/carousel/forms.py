@@ -106,14 +106,14 @@ class CarouselForm(mixin_factory("Carousel"), TemplateChoiceMixin, EntangledMode
         label=_("Wrap"),
         initial=True,
         required=False,
-        help_text=_("Whether the carousel should cycle continuously or have " "hard stops."),
+        help_text=_("Whether the carousel should cycle continuously or have hard stops."),
     )
     carousel_aspect_ratio = forms.ChoiceField(
         label=_("Aspect ratio"),
         choices=settings.EMPTY_CHOICE + CAROUSEL_ASPECT_RATIO_CHOICES,
         required=False,
         initial=settings.EMPTY_CHOICE[0][0],
-        help_text=_("Determines width and height of the image " "according to the selected ratio."),
+        help_text=_("Determines width and height of the image according to the selected ratio."),
     )
     carousel_transition = forms.ChoiceField(
         label=_("Transition"),

@@ -167,7 +167,7 @@ class Migrate(SubcommandsCommand):
         if "djangocms_frontend_frontenduiitem" not in tables:
             self.stdout.write(
                 self.style.ERROR(
-                    "I cannot find djangocms-frontend's tables in the database. Did you run\n" "./manage.py migrate ?"
+                    "I cannot find djangocms-frontend's tables in the database. Did you run\n./manage.py migrate ?"
                 )
             )
             return
