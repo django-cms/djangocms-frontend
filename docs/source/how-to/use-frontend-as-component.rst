@@ -98,3 +98,32 @@ use the ``{% plugin %}`` template tag with each plugin.
     Currently, ``{% placeholder %}`` template tags are not supported inside
     a ``{% plugin %}`` tag. This is because the ``{% plugin %}`` tag does
     preprocess the content and placeholders are not recognized by django CMS.
+
+Multi-line tags
+===============
+
+Multi-line tags are not supported in Django templates. For components with many
+parameters this can lead to long lines of code. To make the code more readable
+you can use the following patch (to be executed, for example during your project's
+``AppConfig.ready()`` method):
+
+.. code-block:: python
+
+    import re
+    from django.template import base
+
+    base.tag_re = re.compile(base.tag_re.pattern, re.DOTALL)
+
+This will patch the Django template engine **for all templates rendered by it
+within your project.** It will however allow templates like this:
+
+.. code-block:: django
+
+    {% plugin "card"
+        card_alignment="center"
+        card_outline="info"
+        card_text_color="primary"
+        card_full_height=True %}
+        ...
+    {% endplugin %}
+

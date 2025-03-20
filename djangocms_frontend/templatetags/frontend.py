@@ -268,9 +268,9 @@ class InlineField(CMSEditableObject):
     )
 
     def render_tag(self, context, **kwargs):
-        if context["request"].session.get("inline_editing", True) and isinstance(kwargs["instance"], CMSPlugin):
+        if context["request"].session.get("inline_editing", True) and isinstance(kwargs["instance"], CMSPlugin) and kwargs["instance"].pk:
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
-            # DummyPlugins of the ``plugin`` tag are cannot be edited
+            # DummyPlugins of the ``plugin`` tag are cannot be edited (they have no pk in their model class)
             kwargs["edit_fields"] = kwargs["attribute"]
             return super().render_tag(context, **kwargs)
         else:
