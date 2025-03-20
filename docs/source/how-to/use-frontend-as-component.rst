@@ -7,7 +7,7 @@ Using frontend plugins as components in templates
 .. versionadded:: 2.0
 
 The plugins of **djangocms-frontend** can be used as components in your
-templates - even in apps that do not use or integrate with djanog CMS
+templates - even in apps that do not use or integrate with django CMS
 otherwise. This is useful if you want use exactly the same markup for, say,
 buttons, links, the grid both in pages managed with django CMS and in
 other parts of your project without duplicating HTML code.
