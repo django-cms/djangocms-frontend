@@ -1,8 +1,8 @@
 .. _custom_components:
 
-#################
-Custom Components
-#################
+##########################
+Building Custom Components
+##########################
 
 .. index::
     single: Custom Components

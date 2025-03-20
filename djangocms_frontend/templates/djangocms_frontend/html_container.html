@@ -2,6 +2,6 @@
     {% for plugin in instance.child_plugin_instances %}
         {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
     {% empty %}
-        {% if instance.simple_content %}{{ instance.simple_content }}{% else %}{% user_message _("Add content here") %}{% endif %}
+        {% if instance.simple_content %}{% inline_field instance "simple_content" %}{% else %}{% user_message _("Add content here") %}{% endif %}
     {% endfor %}
     </{{ instance.tag_type }}>

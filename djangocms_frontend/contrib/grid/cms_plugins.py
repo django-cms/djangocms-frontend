@@ -35,7 +35,7 @@ class GridContainerPlugin(
     form = forms.GridContainerForm
     change_form_template = "djangocms_frontend/admin/grid_container.html"
     allow_children = True
-    show_plugin_add_form = False
+    show_add_form = False
 
     fieldsets = [
         (
@@ -153,7 +153,7 @@ class GridColumnPlugin(
     # TODO it should allow for the responsive utility class
     # https://getbootstrap.com/docs/5.0/layout/grid/#column-resets
     parent_classes = ["GridRowPlugin"]
-    show_plugin_add_form = False
+    show_add_form = False
 
     fieldsets = [
         (
