@@ -68,7 +68,7 @@ class GridColumn(FrontendUIItem):
     def get_short_description(self):
         text = self.config.get("plugin_title", {}).get("title", "") or self.config.get("attributes", {}).get("id", "")
 
-        if self.config.get('xs_col'):
+        if self.config.get("xs_col"):
             text += f" (col-{self.xs_col}) "
         else:
             text += " (auto) "

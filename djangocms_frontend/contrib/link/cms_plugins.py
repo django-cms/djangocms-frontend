@@ -37,11 +37,7 @@ UILINK_FIELDSET = [
 
 class LinkPluginMixin:
     link_fieldset_position = None
-    link_fields = (
-        (("site", "url_grouper"),)
-        if apps.is_installed("djangocms_url_manager")
-        else ("link", "target")
-    )
+    link_fields = (("site", "url_grouper"),) if apps.is_installed("djangocms_url_manager") else ("link", "target")
 
     def render(self, context, instance, placeholder):
         if "request" in context:

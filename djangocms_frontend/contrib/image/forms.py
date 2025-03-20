@@ -120,13 +120,13 @@ class ImageForm(
         label=_("Width"),
         required=False,
         min_value=1,
-        help_text=_("The image width as number in pixels. " 'Example: "720" and not "720px".'),
+        help_text=_('The image width as number in pixels. Example: "720" and not "720px".'),
     )
     height = forms.IntegerField(
         label=_("Height"),
         required=False,
         min_value=1,
-        help_text=_("The image height as number in pixels. " 'Example: "720" and not "720px".'),
+        help_text=_('The image height as number in pixels. Example: "720" and not "720px".'),
     )
     alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -210,9 +210,7 @@ class ImageForm(
         data = self.cleaned_data
         # you shall only set one image kind
         if not data.get("picture", False) and not data.get("external_picture", False):
-            raise forms.ValidationError(
-                _("You need to add either an image, " "or a URL linking to an external image.")
-            )
+            raise forms.ValidationError(_("You need to add either an image, or a URL linking to an external image."))
 
         # certain cropping options do not work together, the following
         # list defines the disallowed options used in the ``clean`` method
@@ -234,7 +232,7 @@ class ImageForm(
                 break
 
         if invalid_option_pair:
-            message = _("Invalid cropping settings. " 'You cannot combine "{field_a}" with "{field_b}".')
+            message = _('Invalid cropping settings. You cannot combine "{field_a}" with "{field_b}".')
             message = message.format(
                 field_a=self.fields[invalid_option_pair[0]].label,
                 field_b=self.fields[invalid_option_pair[0]].label,

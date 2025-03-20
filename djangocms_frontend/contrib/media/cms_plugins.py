@@ -23,6 +23,7 @@ class MediaPlugin(mixin_factory("Media"), AttributesMixin, ResponsiveMixin, CMSU
     form = forms.MediaForm
     change_form_template = "djangocms_frontend/admin/media.html"
     allow_children = True
+    show_add_form = False
 
     fieldsets = settings.EMPTY_FIELDSET
 
@@ -41,5 +42,6 @@ class MediaBodyPlugin(mixin_factory("MediaBody"), AttributesMixin, CMSUIPlugin):
     change_form_template = "djangocms_frontend/admin/media.html"
     allow_children = True
     parent_classes = ["MediaPlugin"]
+    show_add_form = False
 
     fieldsets = settings.EMPTY_FIELDSET

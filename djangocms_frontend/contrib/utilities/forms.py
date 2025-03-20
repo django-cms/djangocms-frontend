@@ -62,7 +62,7 @@ class SpacingForm(mixin_factory("Spacing"), EntangledModelForm):
             raise ValidationError(
                 {
                     "space_property": _(
-                        "Padding does not have an auto spacing. Either " "switch to margin or a defined size."
+                        "Padding does not have an auto spacing. Either switch to margin or a defined size."
                     ),
                     "space_size": _(
                         "Padding does not have an auto spacing. Either "

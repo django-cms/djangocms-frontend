@@ -50,9 +50,16 @@ class CMSFrontendComponent(forms.Form):
     _admin_form = None
     _model = None
     _plugin = None
-    META_FIELDS = ["is_local", "disable_edit", "disable_child_plugins", "show_plugin_add_form",
-                   "frontend_editable_fields", "link_fieldset_position", "require_parent",
-                   "parent_classes"]
+    META_FIELDS = [
+        "is_local",
+        "disable_edit",
+        "disable_child_plugins",
+        "show_add_form",
+        "frontend_editable_fields",
+        "link_fieldset_position",
+        "require_parent",
+        "parent_classes",
+    ]
 
     @classmethod
     def admin_form_factory(cls, **kwargs) -> type:
@@ -149,7 +156,8 @@ class CMSFrontendComponent(forms.Form):
                     "slots": slots,
                     "save_model": cls.save_model,
                     **{
-                        field: getattr(cls._component_meta, field) for field in cls.META_FIELDS
+                        field: getattr(cls._component_meta, field)
+                        for field in cls.META_FIELDS
                         if hasattr(cls._component_meta, field)
                     },
                     **(

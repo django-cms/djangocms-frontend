@@ -15,7 +15,7 @@ class Navigation(FrontendUIItem):
         verbose_name = _("Navigation")
 
     def get_short_description(self):
-        return f'({self.config.get("navbar_design", "-")})'
+        return f"({self.config.get('navbar_design', '-')})"
 
 
 class NavContainer(FrontendUIItem):

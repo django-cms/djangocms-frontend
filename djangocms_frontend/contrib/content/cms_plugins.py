@@ -63,6 +63,7 @@ class BlockquotePlugin(
     form = forms.BlockquoteForm
     change_form_template = "djangocms_frontend/admin/blockquote.html"
     allow_children = True
+    frontend_editable_fields = ("quote_content", "quote_origin")
 
     fieldsets = [
         (
@@ -76,8 +77,6 @@ class BlockquotePlugin(
             },
         ),
     ]
-
-    frontend_editable_fields = ("quote_content", "quote_origin")
 
 
 @plugin_pool.register_plugin
@@ -100,6 +99,7 @@ class FigurePlugin(
     form = forms.FigureForm
     change_form_template = "djangocms_frontend/admin/figure.html"
     allow_children = True
+    frontend_editable_fields = ("figure_caption",)
 
     fieldsets = [
         (
@@ -112,5 +112,3 @@ class FigurePlugin(
             },
         ),
     ]
-
-    frontend_editable_fields = ("figure_caption",)

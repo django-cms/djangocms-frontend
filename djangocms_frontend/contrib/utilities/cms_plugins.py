@@ -49,6 +49,8 @@ class EditorNotePlugin(mixin_factory("EditorNote"), CMSUIPlugin):
     module = _("Frontend")
     allow_children = True
     change_form_template = "djangocms_frontend/admin/no_form.html"
+    show_add_form = False
+    edit_disabled = True
 
 
 @plugin_pool.register_plugin
@@ -129,6 +131,7 @@ class TOCPlugin(mixin_factory("TOC"), AttributesMixin, CMSUIPlugin):
     change_form_template = "djangocms_frontend/admin/no_form.html"
 
     fieldsets = settings.EMPTY_FIELDSET
+    show_add_form = False
     edit_disabled = True
     is_local = False
 

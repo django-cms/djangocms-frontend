@@ -85,7 +85,7 @@ def i001_icon(obj, new_obj):
         "libraryName": "fontAwesome",
         "iconHtml": f'<i class="{library} {" ".join(classes)}"></i>',
         "iconMarkup": "&",
-        "iconClass": f'{library} {" ".join(classes)}',
+        "iconClass": f"{library} {' '.join(classes)}",
         "iconText": "",
         "library": "font-awesome",
     }

@@ -165,8 +165,10 @@ class Plugin(AsTag):
         from djangocms_frontend.plugin_tag import plugin_tag_pool
 
         if name not in plugin_tag_pool:
-            return self.message(f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
-                                f'the CMS_COMPONENT_PLUGINS setting')
+            return self.message(
+                f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
+                f"the CMS_COMPONENT_PLUGINS setting"
+            )
         context.push()
         instance = plugin_tag_pool[name]["defaults"]
         plugin_class = plugin_tag_pool[name]["class"]
@@ -179,8 +181,8 @@ class Plugin(AsTag):
                         if isinstance(value, models.Model):
                             # Correctly encode references
                             value = {
-                                'model': f'{value._meta.app_label}.{value._meta.model_name}',
-                                'pk': value.pk,
+                                "model": f"{value._meta.app_label}.{value._meta.model_name}",
+                                "pk": value.pk,
                             }
                         instance[container][field] = value
                         break
@@ -255,29 +257,34 @@ class RenderChildPluginsTag(Tag):
 
 
 class InlineField(CMSEditableObject):
-    name = 'inline_field'
+    name = "inline_field"
     options = Options(
-        Argument('instance'),
-        Argument('attribute'),
-        Argument('language', default=None, required=False),
-        Argument('filters', default=None, required=False),
-        Argument('view_url', default=None, required=False),
-        Argument('view_method', default=None, required=False),
-        'as',
-        Argument('varname', required=False, resolve=False),
+        Argument("instance"),
+        Argument("attribute"),
+        Argument("language", default=None, required=False),
+        Argument("filters", default=None, required=False),
+        Argument("view_url", default=None, required=False),
+        Argument("view_method", default=None, required=False),
+        "as",
+        Argument("varname", required=False, resolve=False),
     )
 
     def render_tag(self, context, **kwargs):
-        if context["request"].session.get("inline_editing", True) and isinstance(kwargs["instance"], CMSPlugin):
+        if (
+            context["request"].session.get("inline_editing", True)
+            and isinstance(kwargs["instance"], CMSPlugin)
+            and kwargs["instance"].pk
+        ):
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
-            # DummyPlugins of the ``plugin`` tag are cannot be edited
+            # DummyPlugins of the ``plugin`` tag are cannot be edited (they have no pk in their model class)
             kwargs["edit_fields"] = kwargs["attribute"]
             return super().render_tag(context, **kwargs)
         else:
             return getattr(kwargs["instance"], kwargs["attribute"], "")
 
-    def _get_editable_context(self, context, instance, language, edit_fields,
-                              view_method, view_url, querystring, editmode=True):
+    def _get_editable_context(
+        self, context, instance, language, edit_fields, view_method, view_url, querystring, editmode=True
+    ):
         # Fix a not-so-clean solution in django CMS' core: While the template engine checks if an attribute is
         # callable, python expects get_plugin_name to be a method. This is a workaround to make it a method.
         context = super()._get_editable_context(

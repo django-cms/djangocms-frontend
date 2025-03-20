@@ -82,6 +82,7 @@ class PageTreePlugin(
     parent_classes = [
         "NavigationPlugin",
     ]
+    show_add_form = False
     fieldsets = [
         (
             None,
