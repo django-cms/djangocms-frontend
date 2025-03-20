@@ -12,7 +12,7 @@ step-by-step guidance.
 .. toctree::
    :maxdepth: 1
 
-   using-frontend-as-components
+   use-frontend-as-component
    add-frontend-plugins
    extend-frontend-plugins
    add-tab-style
