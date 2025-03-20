@@ -68,7 +68,7 @@ Contents
 ========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    tutorial/index
    plugins/index
