@@ -200,7 +200,7 @@ Assigning Permissions
 =====================
 
 If you have restricted rights for users our groups in your projects make
-sure that editors have the right to to add, change, delete, and - of
+sure that editors have the right to add, change, delete, and - of
 course - view instances of all ``djangocms_frontend`` UI items:
 
 * Accordion
