@@ -1,8 +1,8 @@
 
 .. _components:
 
-Using frontend plugins as components in templates
-=================================================
+How to use frontend plugins as components in templates
+======================================================
 
 .. versionadded:: 2.0
 
@@ -99,8 +99,9 @@ use the ``{% plugin %}`` template tag with each plugin.
     a ``{% plugin %}`` tag. This is because the ``{% plugin %}`` tag does
     preprocess the content and placeholders are not recognized by django CMS.
 
+
 Multi-line tags
-===============
+---------------
 
 Multi-line tags are not supported in Django templates. For components with many
 parameters this can lead to long lines of code. To make the code more readable
