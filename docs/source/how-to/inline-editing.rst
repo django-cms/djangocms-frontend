@@ -96,6 +96,7 @@ Step-by-Step: Adding Inline Editing to a Custom Component
 4. **Test Inline Editing**
 
    - Run the Django server:
+
      .. code-block:: bash
 
         python manage.py runserver
