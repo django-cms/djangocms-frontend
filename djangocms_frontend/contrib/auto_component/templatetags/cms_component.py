@@ -49,4 +49,14 @@ def field(context: template.Context, field_name: str, field_type: forms.Field, *
 
 @register.filter
 def split(value: str, delimiter: str = "|") -> list[str]:
+    """
+    Helper that splits a given string into a list of substrings based on a specified delimiter.
+
+    Args:
+        value (str): The string to be split.
+        delimiter (str, optional): The delimiter to use for splitting the string. Defaults to "|".
+
+    Returns:
+        list[str]: A list of substrings obtained by splitting the input string using the delimiter.
+    """
     return value.split(delimiter)
