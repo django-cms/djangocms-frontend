@@ -42,7 +42,7 @@ class LinkPluginMixin:
     def render(self, context, instance, placeholder):
         if "request" in context:
             instance._cms_page = getattr(context["request"], "current_page", None)
-        context["link"] = instance.get_link()
+        context["mixin_link"] = instance.get_link()
         return super().render(context, instance, placeholder)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
