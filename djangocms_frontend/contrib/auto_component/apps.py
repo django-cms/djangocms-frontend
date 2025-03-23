@@ -1,10 +1,31 @@
+import importlib
 import os
 from collections import defaultdict
 
 from django.apps import AppConfig, apps
 from django.template import loader
 
+from djangocms_frontend import settings
 from djangocms_frontend.component_base import CMSFrontendComponent
+
+
+default_field_context = {
+    "djanghocms_text": "djangocms_text.fields.TextFormField",
+    "djanghocms_text_ckeditor": "djangocms_text_ckeditor.fields.TextFormField",
+    "djangocms_link": "djangocms_link.fields.LinkFormField",
+    "djangocms_frontend.contrib.image": "djangocms_frontend.contrib.image.fields.ImageFormField",
+    "djangocms_frontend.contrib.icon": "djangocms_frontend.contrib.icon.fields.IconPickerField",
+}
+
+
+def get_field_context() -> dict:
+    field_context = {}
+    default_field_context.update(settings.COMPONENT_FIELDS)
+    for key, value in default_field_context.items():
+        if apps.is_installed(key) and "." in value:
+            module, field_name = value.rsplit(".", 1)
+            field_context[field_name] = importlib.import_module(module).__dict__[field_name]
+    return field_context
 
 
 def find_cms_component_templates() -> list[str]:
@@ -46,9 +67,9 @@ def scan_templates_for_component_declaration(templates: list[str]) -> list[CMSFr
     from django.forms import fields
 
     components = []
-
+    field_context = get_field_context()
     for template_name in templates:
-        context = {"_cms_components": defaultdict(list), "forms": fields, "instance": {}}
+        context = {"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context}
         loader.render_to_string(template_name, context)
         cms_component = context["_cms_components"].get("cms_component", [])
         fields = context["_cms_components"].get("fields", [])

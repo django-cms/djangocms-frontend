@@ -193,6 +193,7 @@ class CMSFrontendComponent(forms.Form):
                     "module": getattr(cls._component_meta, "module", _("Component")),
                     "allow_children": True,
                     "edit_disabled": True,
+                    "show_add_form": False,
                     "parent_classes": cls.__name__ + "Plugin",
                     "render_template": cls.slot_template,
                     **slot.kwargs,

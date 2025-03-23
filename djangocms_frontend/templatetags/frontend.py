@@ -243,7 +243,6 @@ class RenderChildPluginsTag(Tag):
             and len(context["_cms_components"]["cms_component"]) == 1
         ):
             args, kwargs = context["_cms_components"]["cms_component"][0]
-            print(plugin_type, verbose_name)
             if plugin_type is None:
                 # If tag is used, default to allow_children=True
                 kwargs.setdefault("allow_children", True)
@@ -253,7 +252,6 @@ class RenderChildPluginsTag(Tag):
                     kwargs["slots"].append((plugin_type, verbose_name))
                 else:
                     kwargs["slots"] = [(plugin_type, verbose_name)]
-            print(kwargs)
             context["_cms_components"]["cms_component"][0] = (args, kwargs)
 
         context.push()
