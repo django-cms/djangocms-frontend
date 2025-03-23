@@ -1,6 +1,90 @@
+from collections import defaultdict
+import importlib
+import os
 import warnings
 
+from django.apps import apps
+from django.template import loader
 from django.utils.module_loading import autodiscover_modules
+
+from djangocms_frontend import settings
+from djangocms_frontend.component_base import CMSFrontendComponent
+
+
+def find_cms_component_templates() -> list[str]:
+    templates = []
+    for app in apps.get_app_configs():
+        app_template_dir = os.path.join(app.path, "templates", app.label, "cms_components")
+        if os.path.exists(app_template_dir):
+            for root, _, files in os.walk(app_template_dir):
+                for file in files:
+                    if file.endswith(".html") or file.endswith(".htm"):
+                        relative_path = os.path.relpath(os.path.join(root, file), app_template_dir)
+                        templates.append(f"{app.label}/cms_components/{relative_path}")
+    return templates
+
+
+class CMSAutoComponentDiscovery:
+    default_field_context = {
+        "djanghocms_text": "djangocms_text.fields.TextFormField",
+        "djanghocms_text_ckeditor": "djangocms_text_ckeditor.fields.TextFormField",
+        "djangocms_link": "djangocms_link.fields.LinkFormField",
+        "djangocms_frontend.contrib.image": "djangocms_frontend.contrib.image.fields.ImageFormField",
+        "djangocms_frontend.contrib.icon": "djangocms_frontend.contrib.icon.fields.IconPickerField",
+    }
+
+    def __init__(self, register_to):
+        templates = find_cms_component_templates()
+        auto_components = self.scan_templates_for_component_declaration(templates)
+        for component in auto_components:
+            register_to.register(component)
+
+    def get_field_context(self) -> dict:
+        field_context = {}
+        self.default_field_context.update(settings.COMPONENT_FIELDS)
+        for key, value in self.default_field_context.items():
+            if apps.is_installed(key) and "." in value:
+                module, field_name = value.rsplit(".", 1)
+                field_context[field_name] = importlib.import_module(module).__dict__[field_name]
+        return field_context
+
+    @staticmethod
+    def component_factory(component: tuple, fields: list[tuple], template: str) -> CMSFrontendComponent:
+        args, kwargs = component
+        (name,) = args
+
+        kwargs["render_template"] = template
+        meta = type("Meta", (), kwargs)
+        cls = type(
+            name,
+            (CMSFrontendComponent,),
+            {
+                "Meta": meta,
+                "__module__": "djangocms_frontend.contrib.auto_component.cms_components",
+                **{
+                    # Django template engine instantiates objects -- re-instantiate them here
+                    args[0]: args[1].__class__(**kwargs)
+                    for args, kwargs in fields
+                },
+            },
+        )
+        return cls
+
+    def scan_templates_for_component_declaration(self, templates: list[str]) -> list[CMSFrontendComponent]:
+        from django.forms import fields
+
+        components = []
+        field_context = self.get_field_context()
+        for template_name in templates:
+            context = {"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context}
+            loader.render_to_string(template_name, context)
+            cms_component = context["_cms_components"].get("cms_component", [])
+            fields = context["_cms_components"].get("fields", [])
+            if len(cms_component) == 1:
+                components.append(self.component_factory(cms_component[0], fields, template_name))
+            elif len(cms_component) > 1:
+                raise ValueError(f"Multiple cms_component tags found in {template_name}")
+        return components
 
 
 class Components:
@@ -20,6 +104,16 @@ class Components:
 
 components = Components()
 
-if not components._discovered:
-    autodiscover_modules("cms_components", register_to=components)
-    components._discovered = True
+
+def setup():
+    global components
+
+    if not components._discovered:
+        from .cms_plugins import update_plugin_pool
+
+        # First discover components in cms_components module
+        autodiscover_modules("cms_components", register_to=components)
+        # The discover auto components by their templates
+        CMSAutoComponentDiscovery(register_to=components)
+        update_plugin_pool()
+        components._discovered = True

@@ -1,6 +1,5 @@
 from cms.plugin_pool import plugin_pool
 
-from .component_pool import components
 from .ui_plugin_base import CMSUIPluginBase
 
 
@@ -9,6 +8,8 @@ class CMSUIPlugin(CMSUIPluginBase):
 
 
 def update_plugin_pool():
+    from .component_pool import components
+
     # Loop through the values in the components' registry
     for _, plugin, slot_plugins in components._registry.values():
         if plugin.__name__ not in plugin_pool.plugins:
@@ -23,6 +24,3 @@ def update_plugin_pool():
                 globals()[slot_plugin.__name__] = slot_plugin
                 # Register the slot plugin with the plugin pool
                 plugin_pool.register_plugin(slot_plugin)
-
-
-update_plugin_pool()
