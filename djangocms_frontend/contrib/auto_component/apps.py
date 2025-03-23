@@ -10,11 +10,11 @@ from djangocms_frontend.component_base import CMSFrontendComponent
 def find_cms_component_templates() -> list[str]:
     templates = []
     for app in apps.get_app_configs():
-        app_template_dir = os.path.join(app.path, 'templates', app.label, 'cms_components')
+        app_template_dir = os.path.join(app.path, "templates", app.label, "cms_components")
         if os.path.exists(app_template_dir):
             for root, _, files in os.walk(app_template_dir):
                 for file in files:
-                    if file.endswith('.html') or file.endswith('.htm'):
+                    if file.endswith(".html") or file.endswith(".htm"):
                         relative_path = os.path.relpath(os.path.join(root, file), app_template_dir)
                         templates.append(f"{app.label}/cms_components/{relative_path}")
     return templates
@@ -22,23 +22,29 @@ def find_cms_component_templates() -> list[str]:
 
 def component_factory(component: tuple, fields: list[tuple], template: str) -> CMSFrontendComponent:
     args, kwargs = component
-    name, = args
+    (name,) = args
 
     kwargs["render_template"] = template
     meta = type("Meta", (), kwargs)
-    cls = type(name, (CMSFrontendComponent,), {
-        "Meta": meta,
-        "__module__": "djangocms_frontend.contrib.auto_component.cms_components",
-        **{
-            # Django template engine instantiates objects -- re-instantiate them here
-            args[0]: args[1].__class__(**kwargs) for args, kwargs in fields
-        }
-    })
+    cls = type(
+        name,
+        (CMSFrontendComponent,),
+        {
+            "Meta": meta,
+            "__module__": "djangocms_frontend.contrib.auto_component.cms_components",
+            **{
+                # Django template engine instantiates objects -- re-instantiate them here
+                args[0]: args[1].__class__(**kwargs)
+                for args, kwargs in fields
+            },
+        },
+    )
     return cls
 
 
 def scan_templates_for_component_declaration(templates: list[str]) -> list[CMSFrontendComponent]:
     from django.forms import fields
+
     components = []
 
     for template_name in templates:

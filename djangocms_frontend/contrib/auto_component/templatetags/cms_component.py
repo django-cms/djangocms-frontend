@@ -4,7 +4,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def cms_component(context: template.Context, name, **kwargs: dict) -> str:
+def cms_component(context: template.Context, *args, **kwargs: dict) -> str:
     """
     Declare a CMS frontend component in a Django template.
 
@@ -22,7 +22,9 @@ def cms_component(context: template.Context, name, **kwargs: dict) -> str:
         str: An empty string, as this function is intended for side effects only.
     """
     if "_cms_components" in context:
-        context["_cms_components"]["cms_component"].append(([name], kwargs))
+        if len(args) != 1:
+            raise ValueError("The cms_component tag requires exactly one positional argument: the component name.")
+        context["_cms_components"]["cms_component"].append((args, kwargs))
     return ""
 
 
@@ -43,7 +45,7 @@ def field(context: template.Context, field_name: str, field_type: forms.Field, *
         str: An empty string, as this function is intended for side effects only.
     """
     if "_cms_components" in context:
-        context["_cms_components"]["fields"].append(([], kwargs))
+        context["_cms_components"]["fields"].append(([field_name, field_type], kwargs))
     return ""
 
 

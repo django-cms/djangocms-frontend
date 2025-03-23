@@ -120,6 +120,7 @@ class SlotTag(Tag):
     name = "slot"
     options = Options(
         Argument("slot_name", required=True),
+        Argument("verbose_name", required=False),
         blocks=[("endslot", "nodelist")],
     )
 
@@ -198,7 +199,7 @@ class Plugin(AsTag):
         context["instance"].child_plugin_instances = DummyPlugin(
             nodelist, context["instance"].plugin_type
         ).get_instances()
-        # ... and redner
+        # ... and render
         result = plugin_tag_pool[name]["template"].render(context.flatten())
         context.pop()
         return result
@@ -211,16 +212,17 @@ class RenderChildPluginsTag(Tag):
 
     e.g.: {% childplugins instance %}
 
-    {% childplugins instance "LinkPlugin" %}
+    {% childplugins instance "LinkPlugin" %} will only render child plugins of
+    type LinkPlugin.
 
-    {% placeholder "footer" inherit or %}
+    {% childplugins instance or %}
         <a href="/about/">About us</a>
-    {% endplaceholder %}
+    {% endchildplugins %}
 
     Keyword arguments:
     name -- the name of the placeholder
-    inherit -- optional argument which if given will result in inheriting
-        the content of the placeholder with the same name on parent pages
+    plugin_type -- optional argument which if given will result in filtering
+        the direct child plugin types that are rendered.
     or -- optional argument which if given will make the template tag a block
         tag whose content is shown if the placeholder is empty
     """
@@ -235,6 +237,16 @@ class RenderChildPluginsTag(Tag):
     )
 
     def render_tag(self, context, instance, plugin_type, nodelist):
+        if (
+            "_cms_components" in context
+            and "cms_component" in context["_cms_components"]
+            and len(context["_cms_components"]["cms_component"]) == 1
+        ):
+            # If tag is used, default to allow_children=True
+            args, kwargs = context["_cms_components"]["cms_component"][0]
+            kwargs.setdefault("allow_children", True)
+            context["_cms_components"]["cms_component"][0] = (args, kwargs)
+
         context.push()
         context["parent"] = instance
         content = ""
