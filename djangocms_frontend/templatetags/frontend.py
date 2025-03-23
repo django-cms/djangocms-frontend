@@ -120,7 +120,6 @@ class SlotTag(Tag):
     name = "slot"
     options = Options(
         Argument("slot_name", required=True),
-        Argument("verbose_name", required=False),
         blocks=[("endslot", "nodelist")],
     )
 
@@ -233,33 +232,42 @@ class RenderChildPluginsTag(Tag):
         # the "or" option is given
         Argument("instance", required=True),
         Argument("plugin_type", required=False),
+        Argument("verbose_name", required=False),
         blocks=[("endchildplugins", "nodelist")],
     )
 
-    def render_tag(self, context, instance, plugin_type, nodelist):
+    def render_tag(self, context, instance, plugin_type, verbose_name, nodelist):
         if (
             "_cms_components" in context
             and "cms_component" in context["_cms_components"]
             and len(context["_cms_components"]["cms_component"]) == 1
         ):
-            # If tag is used, default to allow_children=True
             args, kwargs = context["_cms_components"]["cms_component"][0]
-            kwargs.setdefault("allow_children", True)
+            print(plugin_type, verbose_name)
+            if plugin_type is None:
+                # If tag is used, default to allow_children=True
+                kwargs.setdefault("allow_children", True)
+            if plugin_type and verbose_name:
+                # Populate slots with plugin_type and verbose_name
+                if "slots" in kwargs:
+                    kwargs["slots"].append((plugin_type, verbose_name))
+                else:
+                    kwargs["slots"] = [(plugin_type, verbose_name)]
+            print(kwargs)
             context["_cms_components"]["cms_component"][0] = (args, kwargs)
 
         context.push()
         context["parent"] = instance
-        content = ""
+        content = []
         if plugin_type and not plugin_type.endswith("Plugin"):
             plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
         for child in getattr(instance, "child_plugin_instances", []):
             if plugin_type is None or child.plugin_type == plugin_type:
                 if isinstance(child, DummyPlugin):
-                    content += child.nodelist.render(context)
+                    content.append(child.nodelist.render(context))
                 else:
-                    content += render_plugin(context, child)
-        content = content or getattr(instance, "simple_content", "")
-
+                    content.append(render_plugin(context, child))
+        content = "".join(content) or getattr(instance, "simple_content", "")
         if not content.strip() and nodelist:
             # "or" parameter given
             return nodelist.render(context)
