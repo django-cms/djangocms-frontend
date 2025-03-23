@@ -1,6 +1,5 @@
 import os
 
-from cms.utils.compat import DJANGO_3_1
 
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
@@ -37,9 +36,6 @@ INSTALLED_APPS = [
     "sekizai",
     "tests.test_app",
 ]
-
-if DJANGO_3_1:
-    INSTALLED_APPS += ["django_jsonfield_backport"]
 
 try:  # V4 test?
     import djangocms_versioning  # noqa

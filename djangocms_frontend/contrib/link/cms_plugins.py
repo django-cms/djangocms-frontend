@@ -97,4 +97,4 @@ if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     if "djangocms_link" in django_settings.INSTALLED_APPS:
         from djangocms_link.cms_plugins import LinkPlugin
 
-        LinkPlugin.parent_classes = [None]  # Remove it from the list of valid plugins
+        LinkPlugin.parent_classes = [""]  # Remove it from the list of valid plugins
