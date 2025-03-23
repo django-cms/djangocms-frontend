@@ -240,7 +240,7 @@ class RenderChildPluginsTag(Tag):
         content = ""
         if plugin_type and not plugin_type.endswith("Plugin"):
             plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
-        for child in instance.child_plugin_instances:
+        for child in getattr(instance, "child_plugin_instances", []):
             if plugin_type is None or child.plugin_type == plugin_type:
                 if isinstance(child, DummyPlugin):
                     content += child.nodelist.render(context)
