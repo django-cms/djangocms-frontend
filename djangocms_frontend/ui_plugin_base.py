@@ -34,7 +34,7 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
             if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
                 if key not in instance.__dir__():  # hasattr would return the value in the config dict
                     setattr(instance.__class__, key, get_related(key))
-        if "instance" not in instance.config:
+        if "instance" not in instance.config and isinstance(instance.config, dict):
             context.update(instance.config)
         return super().render(context, instance, placeholder)
 

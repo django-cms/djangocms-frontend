@@ -141,7 +141,7 @@ The fields declared earlier (``title``, ``slogan``, and ``hero_image``) are now 
 The ``{% childplugins %}`` block allows additional CMS plugins (like buttons) to be added inside the component
 in the structure editor.
 
-Make the component avialabvle in django CMS
+Make the component available in django CMS
 -------------------------------------------
 
 Template components are discovered automatically - no more coding is required. If you change the declarative
