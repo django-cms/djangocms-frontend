@@ -34,7 +34,7 @@ they are used in different custom apps.
 Directory Structure
 -------------------
 
-Custom components live in the ``cms_componenty`` module of any of your apps.
+Custom components live in the ``cms_components`` module of any of your apps.
 Ensure your app has the following structure::
 
     theme/
