@@ -94,7 +94,6 @@ class CMSAutoComponentDiscovery:
                 logger.error(
                     f"Error rendering template {template_name} to scan for cms frontend components", exc_info=True
                 )
-                pass
 
 
 class Components:
