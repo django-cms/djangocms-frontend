@@ -12,7 +12,7 @@ from djangocms_frontend import settings
 from djangocms_frontend.component_base import CMSFrontendComponent
 
 
-def find_cms_component_templates() -> list[str]:
+def find_cms_component_templates() -> list[tuple[str, str]]:
     templates = []
     for app in apps.get_app_configs():
         app_template_dir = os.path.join(app.path, "templates", app.label, "cms_components")
@@ -21,7 +21,7 @@ def find_cms_component_templates() -> list[str]:
                 for file in files:
                     if file.endswith(".html") or file.endswith(".htm"):
                         relative_path = os.path.relpath(os.path.join(root, file), app_template_dir)
-                        templates.append(f"{app.label}/cms_components/{relative_path}")
+                        templates.append((app.module.__name__, f"{app.label}/cms_components/{relative_path}"))
     return templates
 
 
@@ -50,20 +50,18 @@ class CMSAutoComponentDiscovery:
         return field_context
 
     @staticmethod
-    def component_factory(component: tuple, fields: list[tuple], template: str) -> CMSFrontendComponent:
+    def component_factory(module, component: tuple, fields: list[tuple], template: str) -> CMSFrontendComponent:
         args, kwargs = component
         (name,) = args
 
         kwargs["render_template"] = template
-        print(kwargs)
-        print(fields)
         meta = type("Meta", (), kwargs)
         cls = type(
             name,
             (CMSFrontendComponent,),
             {
                 "Meta": meta,
-                "__module__": "djangocms_frontend.contrib.auto_component.cms_components",
+                "__module__": module,
                 **{
                     # Django template engine instantiates objects -- re-instantiate them here
                     args[0]: args[1].__class__(**kwargs)
@@ -73,18 +71,18 @@ class CMSAutoComponentDiscovery:
         )
         return cls
 
-    def scan_templates_for_component_declaration(self, templates: list[str]) -> list[CMSFrontendComponent]:
+    def scan_templates_for_component_declaration(self, templates: list[tuple[str, str]]) -> list[CMSFrontendComponent]:
         from django.forms import fields
 
         components = []
         field_context = self.get_field_context()
-        for template_name in templates:
+        for module, template_name in templates:
             context = {"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context}
             loader.render_to_string(template_name, context)
             cms_component = context["_cms_components"].get("cms_component", [])
             fields = context["_cms_components"].get("fields", [])
             if len(cms_component) == 1:
-                components.append(self.component_factory(cms_component[0], fields, template_name))
+                components.append(self.component_factory(module, cms_component[0], fields, template_name))
             elif len(cms_component) > 1:
                 raise ValueError(f"Multiple cms_component tags found in {template_name}")
         return components

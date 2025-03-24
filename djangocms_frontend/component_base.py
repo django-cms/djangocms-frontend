@@ -128,7 +128,7 @@ class CMSFrontendComponent(forms.Form):
                         },
                     ),
                     "get_short_description": cls.get_short_description,
-                    "__module__": "djangocms_frontend.models",
+                    "__module__": cls.__module__,
                 },
             )
         return cls._model
@@ -174,7 +174,7 @@ class CMSFrontendComponent(forms.Form):
                         if hasattr(cls, "get_render_template")
                         else {}
                     ),
-                    "__module__": "djangocms_frontend.cms_plugins",
+                    "__module__": cls.__module__,
                 },
             )
         return cls._plugin
