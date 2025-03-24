@@ -1,6 +1,7 @@
 from collections import defaultdict
 import importlib
 import os
+from collections.abc import Iterator
 import warnings
 
 from django import forms
@@ -71,7 +72,9 @@ class CMSAutoComponentDiscovery:
             },
         )
 
-    def scan_templates_for_component_declaration(self, templates: list[tuple[str, str]]) -> list[CMSFrontendComponent]:
+    def scan_templates_for_component_declaration(
+        self, templates: list[tuple[str, str]]
+    ) -> Iterator[CMSFrontendComponent]:
         from django.forms import fields
 
         field_context = self.get_field_context()

@@ -1,5 +1,6 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
+from django.template import Template, TemplateSyntaxError
 
 from tests.fixtures import TestFixture
 
@@ -69,3 +70,23 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
         self.assertEqual(split("hero.html"), ["hero.html"])
         self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])
+
+    def test_invalid_cms_component_usage_missing_required_argument(self):
+        # The {% cms_component %} tag requires a component name.
+        invalid_template = "{% load cms_tags %}{% cms_component %}"
+        with self.assertRaises(TemplateSyntaxError):
+            Template(invalid_template)
+
+    def test_invalid_field_usage_invalid_argument(self):
+        # The {% field %} tag requires valid arguments: a field name and a component instance.
+        # Here we simulate invalid usage by providing an invalid component.
+        invalid_template = "{% load cms_tags %}{% field 'nonexistent_field' component %}"
+        with self.assertRaises(TemplateSyntaxError):
+            Template(invalid_template)
+
+    def test_multiple_cms_component_tags_error(self):
+        # Assuming only one {% cms_component %} tag is allowed per template.
+        # This should raise an error if multiple tags are used.
+        invalid_template = "{% load cms_tags %}{% cms_component 'Hero' %}{% cms_component 'Footer' %}"
+        with self.assertRaises(TemplateSyntaxError):
+            Template(invalid_template)
