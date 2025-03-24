@@ -59,7 +59,8 @@ Configuration
 
 1. **Add Installed Apps**
 
-   Open your Django project's ``settings.py`` and add the following applications to ``INSTALLED_APPS``:
+   Open your Django project's ``settings.py`` and add the following applications to ``INSTALLED_APPS`` -
+   you only need (and should) add the components you want content editors to use:
 
    .. code-block:: python
 

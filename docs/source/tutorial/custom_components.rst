@@ -31,6 +31,23 @@ require additional listing in the ``INSTALLED_APPS`` setting.
 either keep components together in one theme app, or keep them with where
 they are used in different custom apps.
 
+Directory Structure
+-------------------
+
+Custom components live in the ``cms_componenty`` module of any of your apps.
+Ensure your app has the following structure::
+
+    theme/
+        cms_components.py
+        migrations/
+        models.py
+        templates/
+            components/
+                hero.html
+        views.py
+        admin.py
+
+
 Let's go through this by creating a theme app::
 
         python manage.py startapp theme
@@ -83,7 +100,7 @@ The template could be, for example:
 
 .. code-block:: html
 
-    <!-- theme/components/hero.html -->
+    <!-- theme/templates/components/hero.html -->
     {% load cms_tags frontend sekizai_tags %}
     <section class="bg-white dark:bg-gray-900">
         <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">

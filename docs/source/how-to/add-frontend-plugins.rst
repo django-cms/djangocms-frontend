@@ -1,3 +1,5 @@
+.. _how-to-add-frontend-plugins:
+
 How to add your own frontend plugin
 ===================================
 
