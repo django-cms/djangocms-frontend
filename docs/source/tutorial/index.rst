@@ -23,7 +23,7 @@ that gets the job done for your project.
    needed. This is the fastest approach to create djangocms-frontend components.
    Template-based (or auto) components are auto-detected.
 
-3. **Custom Component Development** – A more advanced method that lets you create
+3. **Custom component development** – A more advanced method that lets you create
    custom components with **minimal code**. This approach is more flexible than the
    template-based method, but requires some Python coding providing more control over
    the components add and change forms, for example.
