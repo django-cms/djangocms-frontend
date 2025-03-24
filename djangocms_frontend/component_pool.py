@@ -3,6 +3,7 @@ import importlib
 import os
 import warnings
 
+from django import forms
 from django.apps import apps
 from django.template import loader
 from django.utils.module_loading import autodiscover_modules
@@ -54,6 +55,8 @@ class CMSAutoComponentDiscovery:
         (name,) = args
 
         kwargs["render_template"] = template
+        print(kwargs)
+        print(fields)
         meta = type("Meta", (), kwargs)
         cls = type(
             name,
@@ -64,7 +67,7 @@ class CMSAutoComponentDiscovery:
                 **{
                     # Django template engine instantiates objects -- re-instantiate them here
                     args[0]: args[1].__class__(**kwargs)
-                    for args, kwargs in fields
+                    for args, kwargs in fields if isinstance(args[1], forms.Field)
                 },
             },
         )
