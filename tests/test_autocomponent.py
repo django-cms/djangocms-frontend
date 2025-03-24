@@ -41,14 +41,6 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, "My Hero")
         self.assertContains(response, "My Hero Slogan")
 
-    def test_split_template_tag(self):
-        from djangocms_frontend.templatetags.cms_component import split
-
-        self.assertEqual(split("hero.html"), ["hero.html"])
-        self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
-        self.assertEqual(split("hero.html"), ["hero.html"])
-        self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])
-
     def test_autocomponents_slots_are_created(self):
         from cms.plugin_pool import plugin_pool
 
@@ -56,8 +48,12 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
 
         plugin = plugin_pool.get_plugin("AutoHeroWithSlotsPlugin")
         model = plugin.model
-
+        form = plugin.form
         self.assertEqual(model.__name__, "AutoHeroWithSlots")
+        self.assertIn("title", form.declared_fields)
+        self.assertIn("slogan", form.declared_fields)
+        self.assertIn("hero_image", form.declared_fields)
+        self.assertIn("config", form.declared_fields)  # Inherited from djangocms_frontend.models.FrontendUIItem
         self.assertTrue(plugin.allow_children)
         self.assertEqual(plugin.child_classes, ["AutoHeroWithSlotsButtonsPlugin"])
 
@@ -65,3 +61,11 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         slot_plugin = plugin_pool.get_plugin("AutoHeroWithSlotsButtonsPlugin")
 
         self.assertEqual(slot_plugin.parent_classes, ["AutoHeroWithSlotsPlugin"])
+
+    def test_split_template_tag(self):
+        from djangocms_frontend.templatetags.cms_component import split
+
+        self.assertEqual(split("hero.html"), ["hero.html"])
+        self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
+        self.assertEqual(split("hero.html"), ["hero.html"])
+        self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])

@@ -35,6 +35,7 @@ class CMSAutoComponentDiscovery:
     }
 
     def __init__(self, register_to):
+        self.default_field_context.update(settings.COMPONENT_FIELDS)
         templates = find_cms_component_templates()
         auto_components = self.scan_templates_for_component_declaration(templates)
         for component in auto_components:
@@ -42,7 +43,6 @@ class CMSAutoComponentDiscovery:
 
     def get_field_context(self) -> dict:
         field_context = {}
-        self.default_field_context.update(settings.COMPONENT_FIELDS)
         for key, value in self.default_field_context.items():
             if apps.is_installed(key) and "." in value:
                 module, field_name = value.rsplit(".", 1)
@@ -56,7 +56,7 @@ class CMSAutoComponentDiscovery:
 
         kwargs["render_template"] = template
         meta = type("Meta", (), kwargs)
-        cls = type(
+        return type(
             name,
             (CMSFrontendComponent,),
             {
@@ -70,12 +70,10 @@ class CMSAutoComponentDiscovery:
                 },
             },
         )
-        return cls
 
     def scan_templates_for_component_declaration(self, templates: list[tuple[str, str]]) -> list[CMSFrontendComponent]:
         from django.forms import fields
 
-        components = []
         field_context = self.get_field_context()
         for module, template_name in templates:
             # Create a new context for each template
@@ -83,9 +81,9 @@ class CMSAutoComponentDiscovery:
             try:
                 loader.render_to_string(template_name, context)
                 cms_component = context["_cms_components"].get("cms_component", [])
-                fields = context["_cms_components"].get("fields", [])
+                discovered_fields = context["_cms_components"].get("fields", [])
                 if len(cms_component) == 1:
-                    components.append(self.component_factory(module, cms_component[0], fields, template_name))
+                    yield self.component_factory(module, cms_component[0], discovered_fields, template_name)
                 elif len(cms_component) > 1:  # pragma: no cover
                     raise ValueError(f"Multiple cms_component tags found in {template_name}")
             except Exception:  # pragma: no cover
@@ -97,7 +95,6 @@ class CMSAutoComponentDiscovery:
                     f"Error rendering template {template_name} to scan for cms frontend components", exc_info=True
                 )
                 pass
-        return components
 
 
 class Components:
