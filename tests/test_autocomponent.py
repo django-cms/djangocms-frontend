@@ -16,10 +16,10 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
 
         self.assertEqual(plugin.name, "My Hero Auto Component")
         self.assertEqual(model.__name__, "AutoHero")
-        self.assertIn("title", form.base_fields)
-        self.assertIn("slogan", form.base_fields)
-        self.assertIn("hero_image", form.base_fields)
-        self.assertIn("config", form.base_fields)  # Inherited from djangocms_frontend.models.FrontendUIItem
+        self.assertIn("title", form.declared_fields)
+        self.assertIn("slogan", form.declared_fields)
+        self.assertIn("hero_image", form.declared_fields)
+        self.assertIn("config", form.declared_fields)  # Inherited from djangocms_frontend.models.FrontendUIItem
 
         self.assertTrue(plugin.allow_children)
 
