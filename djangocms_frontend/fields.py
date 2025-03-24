@@ -182,5 +182,3 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("attrs", {"class": "auto-field"})
         super().__init__(*args, **kwargs)
-
-
