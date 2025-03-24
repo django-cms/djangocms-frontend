@@ -1,3 +1,4 @@
+from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from tests.fixtures import TestFixture
@@ -21,3 +22,21 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertIn("config", form.base_fields)  # Inherited from djangocms_frontend.models.FrontendUIItem
 
         self.assertTrue(plugin.allow_children)
+
+    def test_render_autocomponent(self):
+        add_plugin(
+            placeholder=self.placeholder,
+            plugin_type="AutoHeroPlugin",
+            language=self.language,
+            config={"title": "My Hero", "slogan": "My Hero Slogan", "hero_image": None},
+        )
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+
+        # Declarative tags render empty
+        self.assertContains(response, 9 * "\n" + '<section class="bg-white dark:bg-gray-900">')
+        self.assertContains(response, "My Hero")
+        self.assertContains(response, "My Hero Slogan")
