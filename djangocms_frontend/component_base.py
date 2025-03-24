@@ -108,7 +108,7 @@ class CMSFrontendComponent(forms.Form):
             from djangocms_frontend.models import FrontendUIItem
 
             app_config = apps.get_containing_app_config(cls.__module__)
-            if app_config is None:
+            if app_config is None:  # pragma: no cover
                 raise ValueError(f"Cannot find app_config for {cls.__module__}")
             cls._model = type(
                 cls.__name__,

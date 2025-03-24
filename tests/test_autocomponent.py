@@ -40,3 +40,11 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, 9 * "\n" + '<section class="bg-white dark:bg-gray-900">')
         self.assertContains(response, "My Hero")
         self.assertContains(response, "My Hero Slogan")
+
+    def test_split_template_tag(self):
+        from djangocms_frontend.templatetags.cms_component import split
+
+        self.assertEqual(split("hero.html"), ["hero.html"])
+        self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
+        self.assertEqual(split("hero.html"), ["hero.html"])
+        self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])

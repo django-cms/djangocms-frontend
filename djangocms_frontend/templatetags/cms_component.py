@@ -22,7 +22,7 @@ def cms_component(context: template.Context, *args, **kwargs: dict) -> str:
         str: An empty string, as this function is intended for side effects only.
     """
     if "_cms_components" in context:
-        if len(args) != 1:
+        if len(args) != 1:  # pragma: no cover
             raise ValueError("The cms_component tag requires exactly one positional argument: the component name.")
         context["_cms_components"]["cms_component"].append((args, kwargs))
     return ""
