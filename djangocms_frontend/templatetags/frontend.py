@@ -219,7 +219,7 @@ class RenderChildPluginsTag(Tag):
     {% endchildplugins %}
 
     Keyword arguments:
-    name -- the name of the placeholder
+    instance -- instance of the plugin whose children are to be rendered
     plugin_type -- optional argument which if given will result in filtering
         the direct child plugin types that are rendered.
     or -- optional argument which if given will make the template tag a block
@@ -230,7 +230,7 @@ class RenderChildPluginsTag(Tag):
     options = Options(
         # PlaceholderOptions parses until the "endchildplugins" tag is found if
         # the "or" option is given
-        Argument("instance", required=True),
+        Argument("instance", required=False),
         Argument("plugin_type", required=False),
         Argument("verbose_name", required=False),
         blocks=[("endchildplugins", "nodelist")],
@@ -253,6 +253,9 @@ class RenderChildPluginsTag(Tag):
                 else:
                     kwargs["slots"] = [(plugin_type, verbose_name)]
             context["_cms_components"]["cms_component"][0] = (args, kwargs)
+
+        if not instance:
+            instance = context.get("instance", None)
 
         context.push()
         context["parent"] = instance

@@ -48,3 +48,20 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
         self.assertEqual(split("hero.html"), ["hero.html"])
         self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])
+
+    def test_autocomponents_slots_are_created(self):
+        from cms.plugin_pool import plugin_pool
+
+        self.assertIn("AutoHeroWithSlotsPlugin", plugin_pool.plugins)
+
+        plugin = plugin_pool.get_plugin("AutoHeroWithSlotsPlugin")
+        model = plugin.model
+
+        self.assertEqual(model.__name__, "AutoHeroWithSlots")
+        self.assertTrue(plugin.allow_children)
+        self.assertEqual(plugin.child_classes, ["AutoHeroWithSlotsButtonsPlugin"])
+
+        self.assertIn("AutoHeroWithSlotsButtonsPlugin", plugin_pool.plugins)
+        slot_plugin = plugin_pool.get_plugin("AutoHeroWithSlotsButtonsPlugin")
+
+        self.assertEqual(slot_plugin.parent_classes, ["AutoHeroWithSlotsPlugin"])

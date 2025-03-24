@@ -1,7 +1,7 @@
 {% load cms_tags frontend cms_component %}
 
 {# Declare component - template tags are evaluated at project startup and will render empty #}
-{% cms_component "AutoHero" name=_("My Hero Auto Component") %}
+{% cms_component "AutoHeroWithSlots" name=_("My Slotted Hero Auto Component") %}
 {% field "title" forms.CharField required=True %}
 {% field "slogan" forms.CharField required=True widget=forms.Textarea %}
 {% field "hero_image" ImageFormField required=True help_text=_("At least 1024px wide image") %}
@@ -16,7 +16,7 @@
             <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                 {{ slogan }}
             </p>
-                {% childplugins %}
+                {% childplugins instance "buttons" _("Buttons") %}
                     Add buttons here
                 {% endchildplugins %}
         </div>

@@ -83,7 +83,7 @@ class CMSAutoComponentDiscovery:
             fields = context["_cms_components"].get("fields", [])
             if len(cms_component) == 1:
                 components.append(self.component_factory(module, cms_component[0], fields, template_name))
-            elif len(cms_component) > 1:
+            elif len(cms_component) > 1:  # pragma: no cover
                 raise ValueError(f"Multiple cms_component tags found in {template_name}")
         return components
 
@@ -93,7 +93,7 @@ class Components:
     _discovered: bool = False
 
     def register(self, component):
-        if component.__name__ in self._registry:
+        if component.__name__ in self._registry:  # pragma: no cover
             warnings.warn(f"Component {component.__name__} already registered", stacklevel=2)
             return component
         self._registry[component.__name__] = component.get_registration()
