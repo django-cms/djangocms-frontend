@@ -65,7 +65,8 @@ class CMSAutoComponentDiscovery:
                 **{
                     # Django template engine instantiates objects -- re-instantiate them here
                     args[0]: args[1].__class__(**kwargs)
-                    for args, kwargs in fields if isinstance(args[1], forms.Field)
+                    for args, kwargs in fields
+                    if isinstance(args[1], forms.Field)
                 },
             },
         )
@@ -92,7 +93,9 @@ class CMSAutoComponentDiscovery:
                 import logging
 
                 logger = logging.getLogger(__name__)
-                logger.error(f"Error rendering template {template_name} to scan for cms frontend components", exc_info=True)
+                logger.error(
+                    f"Error rendering template {template_name} to scan for cms frontend components", exc_info=True
+                )
                 pass
         return components
 
