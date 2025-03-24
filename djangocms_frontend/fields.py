@@ -14,11 +14,11 @@ if apps.is_installed("djangocms_text"):
     from djangocms_text.fields import HTMLFormField  # noqa F401
 
     HTMLsanitized = True
-elif apps.is_installed("djangocms_text_ckeditor"):
+elif apps.is_installed("djangocms_text_ckeditor"):  # pragma: no cover
     from djangocms_text_ckeditor.fields import HTMLFormField  # noqa F401
 
     HTMLsanitized = True
-else:
+else:  # pragma: no cover
     HTMLFormField = forms.CharField
     HTMLsanitized = False
 
