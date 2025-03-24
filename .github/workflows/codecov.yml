@@ -22,6 +22,9 @@ jobs:
         os: [
             ubuntu-latest,
         ]
+        exclude:
+          - python-version: "3.12"
+            requirements-file: dj42_cms311.txt
 
     steps:
     - uses: actions/checkout@v4
