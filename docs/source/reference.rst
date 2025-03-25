@@ -27,6 +27,32 @@ in your project's ``settings.py``.
             # add other plugins here if needed
         ]
 
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_COMPONENT_FIELDS
+
+    Defaults to ``{}``
+
+    A dictionary of installed Django apps and a list of Django form fields to be provided
+    to :ref:`template components <template_components>`' context during their registration.
+    The form fields can be used with the ``{% field %}`` template tag.
+
+    For example, to add a custom field to the context of all components, add the following line to your project's settings::
+
+        DJANGOCMS_FRONTEND_COMPONENT_FIELDS = {
+            "myapp": [
+                "myapp.fields.MySuperFieldField",
+                "myapp.fields.ChatBotField",
+            ],
+            # add other apps here if needed
+        }
+
+    These fields can be used in the template like this::
+
+        {% field "superField" MySuperFieldField required=True %}
+        {% field "chat_bot" ChatBotField required=False %}
+
+    Fields are only imported into the context if the app is installed in the project's ``INSTALLED_APPS``.
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
     Defaults to ``['div', 'section', 'article', 'header', 'footer', 'aside']``.

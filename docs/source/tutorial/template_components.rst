@@ -128,7 +128,7 @@ Understanding the Code
 Component Declaration
 ^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: django
 
     {% cms_component "Hero" name=_("My Hero Component") %}
 
@@ -139,10 +139,36 @@ class. All named arguments are added to the component's Meta class.
 
 Only one ``{% cms_component %}`` tag is allowed per template file.
 
+The first part is the declarative part of the template:
+
+.. code-block: django
+    {% cms_component "Hero" name=_("My Hero Component") %}
+    {% field "title" forms.CharField required=True name=_("Title") %}
+    {% field "slogan" forms.CharField required=True name=_("Slogan") widget=forms.Textarea %}
+    {% field "hero_image" ImageFormField required=True name=_("Image") help_text=_("At least 1024px wide image") %}
+
+It will render empty. During project startup, however, these tags are evaluated and used to create the ``CMSFrontendComponent`` class
+and the corresponding plugins class.
+
+The named parameters are added to the ``CMSFrontendComponent``'s Meta class and end up as properties of the plugin itself. The
+following attributes are allowed:
+
+* ``name``: The name of the component as it will be displayed in the CMS admin interface.
+* ``module``: The module the component belongs to. This is used to group components in the CMS admin interface.
+* ``disable_edit``: If set to ``True``, the component will not be editable in the frontend.
+* ``show_add_form``: If set to ``False``, the component will not show an add form in the frontend. This is useful if
+  all component fields have valid initial values.
+* ``require_parent``: If set to ``True``, the component will only be available if it is a child of another component.
+* ``parent_classes``: A list of plugin classes that can be parents of this component.
+* ``child_classes``: A list of plugin classes that can be children of this component.
+
+``allow_children`` and ``frontend_editable_fields`` are set automatically.
+
+
 Defining Fields
 ^^^^^^^^^^^^^^^
 
-::
+.. code-block:: django
 
     {% field "title" forms.CharField required=True name=_("Title") %}
     {% field "slogan" forms.CharField required=True name=_("Slogan") widget=forms.Textarea %}
@@ -154,7 +180,7 @@ form field class to use. The remaining parameters are passed to the form field c
 
 By default, Django's ``django.forms`` module is available as ``forms`` in the template context. If the relevant apps are
 installed, additional fields available are ``HTMLFormField`` for rich text, ``LinkFormField`` for links, and ``ImageFormField``
-for images. Custom fields can be added to the context using the :ref:`CMS_FRONTEND_CUSTOM_FIELDS` setting.
+for images. Custom fields can be added to the context using the :attr:`~settings.DJANGOCMS_FRONTEND_COMPONENT_FIELDS` setting.
 
 You can add additional fields to the component by adding more ``{% field %}`` tags.
 
@@ -198,7 +224,7 @@ Adding inline-editing to the component
 --------------------------------------
 
 When using `djangocms-text <https://github.com/django-cms/djangocms-text>`_, fields of the component can be
-marked as inline fields to activate inline editing. Simply replace ``{{ title }}``and/or ``{{ slogan }}`` with
+marked as inline fields to activate inline editing. Simply replace ``{{ title }}`` and/or ``{{ slogan }}`` with
 ``{% inline_field "title" %}`` and/or ``{% inline_field "slogan" %}``::
 
     <h1>{% inline_field "title" %}</h1>
