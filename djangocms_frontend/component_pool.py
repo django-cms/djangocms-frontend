@@ -6,8 +6,10 @@ import warnings
 
 from django import forms
 from django.apps import apps
-from django.template import loader
+from django.template.loader import get_template
 from django.utils.module_loading import autodiscover_modules
+
+from sekizai.context import SekizaiContext
 
 from djangocms_frontend import settings
 from djangocms_frontend.component_base import CMSFrontendComponent
@@ -86,9 +88,10 @@ class CMSAutoComponentDiscovery:
         field_context = self.get_field_context()
         for module, template_name in templates:
             # Create a new context for each template
-            context = {"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context}
+            context = SekizaiContext({"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context})
             try:
-                loader.render_to_string(template_name, context)
+                template = get_template(template_name)
+                template.template.render(context)
                 cms_component = context["_cms_components"].get("cms_component", [])
                 discovered_fields = context["_cms_components"].get("fields", [])
                 if len(cms_component) == 1:
