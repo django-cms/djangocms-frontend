@@ -20,7 +20,7 @@ and templates.
  Key features
 **************
 
-* **Effortless Development of Custom Components**: Create reusable frontend
+* **Effortless Development of Custom Frontend Components**: Create reusable frontend
   components with ease, utilizing simple templates and declarative form
   classes. These components can function both as CMS plugins and within
   standard Django templates. ​
@@ -34,7 +34,7 @@ and templates.
   of Bootstrap 5 components, streamlining the process of building responsive
   and modern interfaces. ​
 
-* **Extensibility**: Enhance your project by creating custom components with
+* **Extensibility**: Enhance your project by creating custom frontend components with
   minimal code. The system is designed to be extended both within individual
   projects and through separate theme applications. ​
 
@@ -56,7 +56,7 @@ updates to frontend features.
 By providing a suite of Bootstrap 5-based components for layout structuring,
 including grids, components, and forms, django CMS Frontend simplifies the
 process of building responsive and structured page designs. Developers can
-also create custom components with minimal code, ensuring a consistent and
+also create custom frontend components with minimal code, ensuring a consistent and
 efficient development experience.
 
 It is up to you which (if any at all) pre-built components you want to include
@@ -68,7 +68,7 @@ Contents
 ========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    tutorial/index
    plugins/index

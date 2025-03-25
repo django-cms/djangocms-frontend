@@ -1,4 +1,5 @@
 from django import forms
+from django.apps import apps
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.safestring import mark_safe
@@ -7,6 +8,19 @@ from djangocms_attributes_field import fields
 
 from . import settings
 from .helpers import first_choice
+
+
+if apps.is_installed("djangocms_text"):
+    from djangocms_text.fields import HTMLFormField  # noqa F401
+
+    HTMLsanitized = True
+elif apps.is_installed("djangocms_text_ckeditor"):  # pragma: no cover
+    from djangocms_text_ckeditor.fields import HTMLFormField  # noqa F401
+
+    HTMLsanitized = True
+else:  # pragma: no cover
+    HTMLFormField = forms.CharField
+    HTMLsanitized = False
 
 
 class TemplateChoiceMixin:
@@ -168,12 +182,3 @@ class AutoNumberInput(forms.NumberInput):  # lgtm [py/missing-call-to-init]
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("attrs", {"class": "auto-field"})
         super().__init__(*args, **kwargs)
-
-
-try:
-    from djangocms_text_ckeditor.fields import HTMLFormField  # noqa
-
-    HTMLsanitized = True
-except ModuleNotFoundError:
-    HTMLFormField = forms.CharField
-    HTMLsanitized = False

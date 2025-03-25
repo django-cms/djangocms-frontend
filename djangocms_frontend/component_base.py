@@ -1,15 +1,11 @@
 import importlib
 import typing
 
-from cms.api import add_plugin
-from cms.plugin_base import CMSPluginBase
 from django import forms
 from django.apps import apps
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
-
-from .ui_plugin_base import CMSUIComponent
 
 
 def _import_or_empty(module, name):
@@ -29,6 +25,14 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
     ]
 
     return [_import_or_empty(module, name) for module, name in mixins]
+
+
+class classproperty:
+    def __init__(self, fget):
+        self.fget = fget
+
+    def __get__(self, obj, owner):
+        return self.fget(owner)
 
 
 class Slot:
@@ -104,7 +108,7 @@ class CMSFrontendComponent(forms.Form):
             from djangocms_frontend.models import FrontendUIItem
 
             app_config = apps.get_containing_app_config(cls.__module__)
-            if app_config is None:
+            if app_config is None:  # pragma: no cover
                 raise ValueError(f"Cannot find app_config for {cls.__module__}")
             cls._model = type(
                 cls.__name__,
@@ -124,13 +128,15 @@ class CMSFrontendComponent(forms.Form):
                         },
                     ),
                     "get_short_description": cls.get_short_description,
-                    "__module__": "djangocms_frontend.contrib.component.models",
+                    "__module__": cls.__module__,
                 },
             )
         return cls._model
 
     @classmethod
     def plugin_factory(cls) -> type:
+        from .ui_plugin_base import CMSUIComponent
+
         if cls._plugin is None:
             mixins = getattr(cls._component_meta, "mixins", [])
             slots = cls.get_slot_plugins()
@@ -168,12 +174,15 @@ class CMSFrontendComponent(forms.Form):
                         if hasattr(cls, "get_render_template")
                         else {}
                     ),
+                    "__module__": cls.__module__,
                 },
             )
         return cls._plugin
 
     @classmethod
     def slot_plugin_factory(cls) -> list[type]:
+        from cms.plugin_base import CMSPluginBase
+
         slots = cls.get_slot_plugins()
         return [
             type(
@@ -184,7 +193,9 @@ class CMSFrontendComponent(forms.Form):
                     "module": getattr(cls._component_meta, "module", _("Component")),
                     "allow_children": True,
                     "edit_disabled": True,
-                    "parent_classes": cls.__name__ + "Plugin",
+                    "is_local": False,
+                    "show_add_form": False,
+                    "parent_classes": [cls.__name__ + "Plugin"],
                     "render_template": cls.slot_template,
                     **slot.kwargs,
                 },
@@ -200,8 +211,7 @@ class CMSFrontendComponent(forms.Form):
             cls.slot_plugin_factory(),
         )
 
-    @classmethod
-    @property
+    @classproperty
     def _component_meta(cls) -> typing.Optional[type]:
         return getattr(cls, "Meta", None)
 
@@ -214,6 +224,8 @@ class CMSFrontendComponent(forms.Form):
 
     def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
         """Auto-creates slot plugins upon creation of component plugin instance"""
+        from cms.api import add_plugin
+        from .ui_plugin_base import CMSUIComponent
 
         super(CMSUIComponent, self).save_model(request, obj, form, change)
         if not change:

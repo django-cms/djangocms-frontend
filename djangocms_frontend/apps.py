@@ -8,7 +8,9 @@ class DjangocmsFrontendConfig(apps.AppConfig):
 
     def ready(self):
         from . import plugin_tag
+        from . import component_pool
 
+        component_pool.setup()
         plugin_tag.setup()
         checks.register(check_settings)
         checks.register(check_installed_apps)

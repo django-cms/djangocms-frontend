@@ -144,7 +144,7 @@ content.
 Re-usable component example
 ***************************
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 

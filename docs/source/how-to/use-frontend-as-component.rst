@@ -1,12 +1,12 @@
 
 .. _components:
 
-Using frontend plugins as components in templates
-=================================================
+How to use frontend plugins as components in templates
+======================================================
 
 .. versionadded:: 2.0
 
-The plugins of **djangocms-frontend** can be used as components in your
+The plugins of ``djangocms-frontend`` can be used as components in your
 templates - even in apps that do not use or integrate with django CMS
 otherwise. This is useful if you want use exactly the same markup for, say,
 buttons, links, the grid both in pages managed with django CMS and in
@@ -26,10 +26,10 @@ repetition.
     allows you to specify which plugins can be used directly in templates
     without creating database entries.
 
-    * To include all djangocms-frontend plugins, use
+    * To include all ``djangocms-frontend`` plugins, use
       ``djangocms_frontend.cms_plugins.CMSUIPlugin`` in the setting.
 
-    * To include all :ref:`custom_components`, use
+    * To include all :ref:`custom components <custom_components>`, use
       ``djangocms_frontend.cms_plugins.CMSUIComponent`` in the setting.
 
 To use a frontend plugin in a template you need to load the ``frontend`` tags
@@ -86,7 +86,7 @@ use the ``{% plugin %}`` template tag with each plugin.
 
 .. note::
 
-    While this is designed for **djangocms-frontend** plugins primarily, it
+    While this is designed for ``djangocms-frontend`` plugins primarily, it
     will work with many other django CMS plugins.
 
     Since no plugins are created in the database, plugins relying on their
@@ -99,8 +99,9 @@ use the ``{% plugin %}`` template tag with each plugin.
     a ``{% plugin %}`` tag. This is because the ``{% plugin %}`` tag does
     preprocess the content and placeholders are not recognized by django CMS.
 
+
 Multi-line tags
-===============
+---------------
 
 Multi-line tags are not supported in Django templates. For components with many
 parameters this can lead to long lines of code. To make the code more readable

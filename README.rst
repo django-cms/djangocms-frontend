@@ -96,6 +96,7 @@ file for additional dependencies:
 -  django-filer, version 1.7 or later
 -  djangocms-attributes-field, version 1.0 or later
 -  djangocms-text
+-  djangocms-link
 -  django-entangled 0.6 or later
 
 Make sure `django Filer
@@ -103,6 +104,8 @@ Make sure `django Filer
 `django CMS Text CKEditor
 <https://github.com/divio/djangocms-text-ckeditor>`_ are installed and
 configured appropriately.
+
+**As of djangocms-frontend 2.0, djangocms-link is needed to use the Link/Button plugin.**
 
 Installation
 ============

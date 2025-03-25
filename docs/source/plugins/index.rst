@@ -1,9 +1,9 @@
 .. index::
     single: Pre-Built Components
 
-######################
- Pre-Built Components
-######################
+#####################
+ Built-in Components
+#####################
 
 Find the available pre-built components for Boostrap 5 in the following sections:
 

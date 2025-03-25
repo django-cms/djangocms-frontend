@@ -1,8 +1,10 @@
-********************************
- How to extend existing plugins
-********************************
+.. _how-to-extend-frontend-plugins:
 
-Existing plugins can be extended through two type of class mixins.
+**********************************
+ How to extend built-in components
+**********************************
+
+Existing components can be extended through two type of class mixins.
 ``djangocms-frontend`` looks for these mixins in two places:
 
 #. In the theme module. Its name is specified by the setting
@@ -158,7 +160,7 @@ Next, you add some fields to the ``GridContainerForm`` (in
     If you need to add many form mixins, consider turning ``forms.py`` into a
     package, i.e. create a directory ``forms`` and distribute the mixins over
     several files, e.g., ``forms/marketing_forms.py`` etc., and importing the
-    all mixins relevant to **djangocms-frontend** into the directory's
+    all mixins relevant to ``djangocms-frontend`` into the directory's
     ``__init__.py``.
 
 Rendering should be done with the Bootstrap 5 framework. Hence all rendering
@@ -294,14 +296,14 @@ With these three additions, all grid container plugins will now have
 additional fields to define background images to cover the container
 area.
 
-If the theme is taken out of the path djangocms-frontend will fall back
+If the theme is taken out of the path ``djangocms-frontend`` will fall back
 to its basic functionality, i.e. the background images will not be
 shown. As long as plugins are not edited the background image
 information will be preserved.
 
 .. note::
 
-    A few suggestions on extending **djangocms-frontend**:
+    A few suggestions on extending ``djangocms-frontend``:
 
     *   You may think of customizing bootstrap by including a folder ``sass`` in
         your theme app. For more see `Bootstrap 5 documentation on customizing

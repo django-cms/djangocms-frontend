@@ -6,7 +6,7 @@ Reference
 Settings
 ********
 
-**djangocms-frontend** can be configured by putting the appropriate settings
+``djangocms-frontend`` can be configured by putting the appropriate settings
 in your project's ``settings.py``.
 
 .. py:attribute:: settings.CMS_COMPONENT_PLUGINS
@@ -19,7 +19,7 @@ in your project's ``settings.py``.
 
     For performance reason, the plugin templates are compiled at startup.
 
-    To make **djangocms-frontend** plugins available as components, add the
+    To make ``djangocms-frontend`` plugins available as components, add the
     following line to your project's settings::
 
         CMS_COMPONENT_PLUGINS = [
@@ -27,11 +27,37 @@ in your project's ``settings.py``.
             # add other plugins here if needed
         ]
 
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_COMPONENT_FIELDS
+
+    Defaults to ``{}``
+
+    A dictionary of installed Django apps and a list of Django form fields to be provided
+    to :ref:`template components <template_components>`' context during their registration.
+    The form fields can be used with the ``{% field %}`` template tag.
+
+    For example, to add a custom field to the context of all components, add the following line to your project's settings::
+
+        DJANGOCMS_FRONTEND_COMPONENT_FIELDS = {
+            "myapp": [
+                "myapp.fields.MySuperFieldField",
+                "myapp.fields.ChatBotField",
+            ],
+            # add other apps here if needed
+        }
+
+    These fields can be used in the template like this::
+
+        {% field "superField" MySuperFieldField required=True %}
+        {% field "chat_bot" ChatBotField required=False %}
+
+    Fields are only imported into the context if the app is installed in the project's ``INSTALLED_APPS``.
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_TAG_CHOICES
 
     Defaults to ``['div', 'section', 'article', 'header', 'footer', 'aside']``.
 
-    Lists the choices for the tag field of all djangocms-frontend plugins.
+    Lists the choices for the tag field of all ``djangocms-frontend`` plugins.
     ``div`` is the default tag.
 
     These tags appear in Advanced Settings of some elements for editors to
@@ -159,7 +185,7 @@ in your project's ``settings.py``.
     Default: ``None``
 
     Adds css format files to the frontend editing forms of
-    **djangocms-frontend**. The syntax is with a ``ModelForm``'s
+    ``djangocms-frontend``. The syntax is with a ``ModelForm``'s
     ``css`` attribute of its ``Media`` class, e.g.,
     ``DJANGOCMS_FRONTEND_ADMIN_CSS = {"all": ("css/admin.min.css",)}``.
 
@@ -332,7 +358,7 @@ in your project's ``settings.py``.
 Models
 ******
 
-**djangocms-frontend** subclasses the ``CMSPlugin`` model.
+``djangocms-frontend`` subclasses the ``CMSPlugin`` model.
 
 .. py:class:: FrontendUIItem(CMSPlugin)
 
@@ -406,7 +432,7 @@ Models
 Form widgets
 ************
 
-**djangocms-frontend** contains button group widgets which can be used as
+``djangocms-frontend`` contains button group widgets which can be used as
 for ``forms.ChoiceField``. They might turn out helpful when adding custom
 plugins.
 
@@ -466,7 +492,7 @@ Management commands are run by typing ``./manage.py frontend command`` in the
 project directory. ``command`` can be one of the following:
 
 ``migrate``
-    Migrates plugins from other frontend packages to **djangocms-frontend**.
+    Migrates plugins from other frontend packages to ``djangocms-frontend``.
     Currently supports **djangocms_bootstrap4** and **djangocms_styled_link**.
     Other packages can be migrated adding custom migration modules to
     the ``DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS`` setting.
@@ -484,7 +510,7 @@ project directory. ``command`` can be one of the following:
     level. This might become somewhat tedious which is why this command
     will sync permissions. For each user or group it will copy the permissions
     of ``djangocms_frontend.models.FrontendUIItem`` to all installed
-    djangocms-frontend plugins. If you need to change permissions for all
+    ``djangocms-frontend`` plugins. If you need to change permissions for all
     plugins this requires you only to change them for ``FrontendUIItem`` and
     then syncing the new permission with these commands.
 

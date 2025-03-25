@@ -35,7 +35,7 @@ plugins.
    Please do **back up** your database before you do run the management
    command!
 
-For this to work, the both the djangocms-frontend **and** the
+For this to work, the both the ``djangocms-frontend`` **and** the
 djangocms-bootstrap4 apps need to be included in ``INSTALLED_APPS``.
 
 .. warning::
