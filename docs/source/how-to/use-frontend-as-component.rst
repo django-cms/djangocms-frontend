@@ -29,7 +29,7 @@ repetition.
     * To include all ``djangocms-frontend`` plugins, use
       ``djangocms_frontend.cms_plugins.CMSUIPlugin`` in the setting.
 
-    * To include all :ref:`custom_components`, use
+    * To include all :ref:`custom components <custom_components>`, use
       ``djangocms_frontend.cms_plugins.CMSUIComponent`` in the setting.
 
 To use a frontend plugin in a template you need to load the ``frontend`` tags

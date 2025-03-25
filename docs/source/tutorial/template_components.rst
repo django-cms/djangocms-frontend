@@ -232,6 +232,12 @@ marked as inline fields to activate inline editing. Simply replace ``{{ title }}
 
 ``djangocms-frontend`` will automatically register these fields with the list ``frontend_editable_fields``.
 
+.. note::
+
+    Django's ``runserver`` command only watches for Python source file changes. If you make changes to the
+    template files, you need to restart the server manually to see the changes.
+
+
 Limitations of template components
 ----------------------------------
 
