@@ -32,6 +32,12 @@ def is_registering_component(context: template.Context) -> bool:
     )
 
 
+def is_inline_editing_active(context: template.Context) -> bool:
+    if "request" in context:
+        return context["request"].session.get("inline_editing", True)
+    return False
+
+
 def update_component_properties(context: template.Context, key: str, value: typing.Any, append: bool = False) -> None:
     """"Adds or appends the value to the property "key" of a component during delcaration"""
     args, kwargs = context["_cms_components"]["cms_component"][0]
@@ -312,9 +318,8 @@ class InlineField(CMSEditableObject):
 
         if is_registering_component(context) and attribute:
             update_component_properties(context, "frontend_editable_fields", attribute, append=True)
-            print("After update", context["_cms_components"]["cms_component"][0])
         elif (
-            context["request"].session.get("inline_editing", True)
+            is_inline_editing_active(context)
             and isinstance(instance, CMSPlugin)
             and instance.pk
         ):
