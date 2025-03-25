@@ -2,7 +2,7 @@ How to migrate other plugin packages
 ====================================
 
 The management command ``migrate`` converts any plugin from **djangocms_bootstrap4** and
-**djangocms_styled_link** to **djangocms-frontend**. This behaviour can be extended
+**djangocms_styled_link** to ``djangocms-frontend``. This behaviour can be extended
 adding custom migratation modules to the ``DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS``
 setting.
 

@@ -24,10 +24,36 @@ With django CMS you make your components available to the content editors to
 simply add them to a page by a click **and** frontend developers for use in templates from a single
 source.
 
-Custom components are part of the djangocms-frontend root package and do not
-require additional listing in the ``INSTALLED_APPS`` setting.
+Installation
+============
 
-djangocms-frontend allows developers to extend its functionality by creating
+Install ``djangocms-frontend`` and add it to your project as described here: :ref:`built_in_components`.
+
+If you do not use the built-in components, you do not need to add them to your ``INSTALLED_APPS``.
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # Optional dependencies
+        'djangocms_icon',
+        'easy_thumbnails',
+        'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
+        # Main frontend app - pre-built components not needed
+        'djangocms_frontend',
+    ]
+
+
+Adding Styles and JavaScript
+============================
+
+When building template components, you will need to provide your custom CSS files
+either by adding them to the base templates to load on every page, or by adding a
+django-sekizai block to each component.
+
+Hero component
+==============
+
+``djangocms-frontend`` allows developers to extend its functionality by creating
 template components**. In this tutorial, we will create an **Hero component**
 with the following fields:
 
@@ -36,7 +62,7 @@ with the following fields:
 - ``hero_image``: A required image field.
 
 This component will be stored in a template directory named ``<app_name>/cms_components``,
-as required for djangocms-frontend template components.
+as required for ``djangocms-frontend`` template components.
 
 Directory Structure
 -------------------
@@ -58,7 +84,7 @@ Creating the Template Component
 --------------------------------
 
 The **template component** must be stored in the ``cms_components`` directory
-inside your app. djangocms-frontend expects you to follow Django's template
+inside your app. ``djangocms-frontend`` expects you to follow Django's template
 namespace convention. Create a new file at::
 
     theme_app/templates/theme_app/cms_components/hero.html
@@ -111,6 +137,8 @@ by django CMS to identify the plguin later. The ``name`` parameter is used to di
 component in the CMS admin interface. Internally the command declares a ``CMSFrontendComponent``
 class. All named arguments are added to the component's Meta class.
 
+Only one ``{% cms_component %}`` tag is allowed per template file.
+
 Defining Fields
 ^^^^^^^^^^^^^^^
 
@@ -126,7 +154,9 @@ form field class to use. The remaining parameters are passed to the form field c
 
 By default, Django's ``django.forms`` module is available as ``forms`` in the template context. If the relevant apps are
 installed, additional fields available are ``HTMLFormField`` for rich text, ``LinkFormField`` for links, and ``ImageFormField``
-for images.
+for images. Custom fields can be added to the context using the :ref:`CMS_FRONTEND_CUSTOM_FIELDS` setting.
+
+You can add additional fields to the component by adding more ``{% field %}`` tags.
 
 Rendering the Component
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -154,10 +184,40 @@ the Django server to apply the changes.
 4. Fill in the **title**, **slogan**, and **hero image** fields.
 5. Save and publish the page.
 
+Using the component in your templates
+-------------------------------------
+
+To use the component in your templates, you can use the ``{% plugin %}`` tag with the component's name.
+For example, to render the **Hero component** in a template, use the following code::
+
+    {% load frontend %}
+    {% plugin "hero" title=_("Welcome to my new website") slogan=_("Building successful websites since 1896") %}
+
+
+Limitations of template components
+----------------------------------
+
+Template components are a powerful tool for developers, but they have some limitations:
+
+* **No Python code**: Template components are defined in the template itself. This means that you cannot add
+  custom Python code to the component. If you need to add custom logic to a component, you should create a
+  custom plugin instead. For some simple cases custom template tags also might help.
+* **No custom forms**: Template components use Django forms to define the fields that content editors can use
+  to configure the component. Advanced form configurations such as ``fieldsets`` are not available. If you need
+  to create a custom form for a component, you should create a custom component instead.
+* **Limits of the template language**: The Django template language is powerful, but it has some limitations.
+  Classes are intantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
+  for more complex cases.
+
 Conclusion
-----------
+==========
 
 You have successfully created a **djangocms-frontend template component** using ``cms_component``!
 This structure allows editors to easily customize hero sections while maintaining a reusable
 and structured design.
 
+.. note::
+
+    Components will create migrations since they use proxy models which are necessary, for
+    example, to manage permissions. Those migrations will be added to the app containing
+    the template file.

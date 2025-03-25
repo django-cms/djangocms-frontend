@@ -1,40 +1,69 @@
 .. _custom_components:
 
 ##########################
-Building Custom Components
+Building custom frontend components
 ##########################
 
 .. index::
-    single: Custom Components
+    single: custom frontend components
 
 .. versionadded:: 2.0
 
-Custom components are a powerful tool for content editors, allowing them to build pages without needing
+custom frontend components are a powerful tool for content editors, allowing them to build pages without needing
 in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
 components, creating visually cohesive pages with ease.
 
 When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you
-either create your custom components or customize components from providers,
+either create your custom frontend components or customize components from providers,
 e.g. `Tailwind UI <https://tailwindui.com>`_,
 `Flowbite <https://flowbite.com>`_, or the community
 `Tailwind Components <https://tailwindcomponents.com>`_.
 
-With django CMS you make your components available to the content editors to
-simply add them to a page by a click **and** frontend developers for use in templates from a single
-source.
+With django CMS you make your components available to the content editors to simply add them to a page by a
+click **and** frontend developers for use in templates from a single source.
 
-Custom components are part of the djangocms-frontend root package and do not
-require additional listing in the ``INSTALLED_APPS`` setting.
+Installation
+============
 
-**djangocms-frontend** will look for custom components in the
-``cms_components`` module in any of your apps. This way you can
+Install ``djangocms-frontend`` and add it to your project as described here: :ref:`built_in_components`.
+
+If you do not use the built-in components, you do not need to add them to your ``INSTALLED_APPS``.
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # Optional dependencies
+        'djangocms_icon',
+        'easy_thumbnails',
+        'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
+        # Main frontend app - pre-built components not needed
+        'djangocms_frontend',
+    ]
+
+
+Adding Styles and JavaScript
+============================
+
+When building template components, you will need to provide your custom CSS files
+either by adding them to the base templates to load on every page, or by adding a
+django-sekizai block to each component.
+
+Hero component example
+======================
+
+``djangocms-frontend`` will look for custom frontend components in the
+**``cms_components`` module in any of your apps**. This way you can
 either keep components together in one theme app, or keep them with where
 they are used in different custom apps.
 
 Directory Structure
 -------------------
 
-Custom components live in the ``cms_components`` module of any of your apps.
+Let's go through this by creating a theme app::
+
+        python manage.py startapp theme
+
+Custom frontend components live in the ``cms_components`` module of any of your apps.
 Ensure your app has the following structure::
 
     theme/
@@ -47,12 +76,10 @@ Ensure your app has the following structure::
         views.py
         admin.py
 
+Creating two Custom Frontend Components
+---------------------------------------
 
-Let's go through this by creating a theme app::
-
-        python manage.py startapp theme
-
-Add a ``cms_components.py`` file to the ``theme`` app:
+Add a ``cms_components.py`` file to the ``theme`` app (see structure above):
 
 .. code-block:: python
 
@@ -96,9 +123,9 @@ Add a ``cms_components.py`` file to the ``theme`` app:
         def get_short_description(self):
             return self.text
 
-The template could be, for example:
+The templates could be, for example:
 
-.. code-block:: html
+.. code-block:: django
 
     <!-- theme/templates/components/hero.html -->
     {% load cms_tags frontend sekizai_tags %}
@@ -128,8 +155,45 @@ The template could be, for example:
     </section>
     {% addtoblock "js" %}<script src="https://cdn.tailwindcss.com"></script>{% endaddtoblock %}
 
+
+.. code-block:: django
+
+    <!-- theme/templates/components/button.html -->
+    {% load djangocms_link_tags %}
+
+    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+       href="{{ instance.link|to_url }}">{{ instance.text }}</a>
+
 As always, django CMS manages styling and JavaScript dependencies with django-sekizai.
 In this example, we add the Tailwind CSS CDN to the ``js`` block.
+
+Understanding the Code
+----------------------
+
+
+
+Limitations of custom frontend components
+=========================================
+
+Custom frontend components are a powerful tool for developers, but they have a limitations:
+
+**Limited Python code**: Custom components are (indirect) subclasses of Django's ``AdminForm`` class
+and can contain Python code to modify the behavior of a form. You cannot directly add Python code to
+the resulting plugin class with the exception of ``get_render_template()`` and ``save_model()``.
+Similarly, you cannot add Python code the model class, in this case with the exception of ``get_short_description()``.
+
+Conclusion
+==========
+
+In this tutorial, we explored how to create custom frontend components. These components empower developers to
+provide visually appealing components to content editors with minimal coding.
+
+By following the steps outlined above, you can:
+
+- Create a theme app to house your custom components.
+- Define components using the `CMSFrontendComponent` class.
+- Leverage templates to control the visual presentation of your components.
+- Register and manage your components seamlessly within django CMS.
 
 .. note::
 

@@ -88,7 +88,7 @@ documentation.
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
@@ -121,7 +121,7 @@ documentation.
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
@@ -207,7 +207,7 @@ documentation.
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
@@ -256,7 +256,7 @@ specified using the ``DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES`` setting.
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
@@ -347,7 +347,7 @@ If targets are deleted the link will fallback to regular text.
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
@@ -400,7 +400,7 @@ Media component
 ***************
 
 The media component is another legacy component from djangocms-bootstrap4.
-**djangocms-frontend** recreates it using responsive utilities.
+``djangocms-frontend`` recreates it using responsive utilities.
 
 
 .. index::
@@ -421,7 +421,7 @@ well as responsive embedding of external pictures.
    djangocms-text-ckeditor supports dragging and dropping images into a rich
    text field. If you add the following line to your `settings.py` file,
    djangocms-text-ckeditor will automatically convert an image dropped into it
-   to a djangocms-frontend image component.
+   to a ``djangocms-frontend`` image component.
 
    .. code-block::
 
@@ -475,7 +475,7 @@ Code component
 **************
 
 Have code snippets on your site using this plugin, either inline or as a code block.
-djangocms-frontend offers the `ace code editor <https://ace.c9.io>`_
+``djangocms-frontend`` offers the `ace code editor <https://ace.c9.io>`_
 to enter code bits.
 
 .. warning::
@@ -516,7 +516,7 @@ Tabs component
 Re-usable component example
 ===========================
 
-**djangocms-frontend** plugins can be used as components. They can be
+``djangocms-frontend`` plugins can be used as components. They can be
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 

@@ -5,7 +5,7 @@
  Common plugin settings
 ########################
 
-**djangocms-frontend** offers a set of plugins to allow for an easy and clean
+``djangocms-frontend`` offers a set of plugins to allow for an easy and clean
 structure of your CMS contents.
 
 All plugins are listed in the section "Frontend" when adding a plugin to
@@ -75,7 +75,7 @@ to render the element. You may also add attributes like additional classes as a
     Using the advanced tab requires some technical knowledge on the sites
     installation, e.g., what css classes are available. This is why the advanced
     settings tab should only be used rarely. If you find yourself using it
-    regularly, extending **djangocms-frontend** using a theme might be the more
+    regularly, extending ``djangocms-frontend`` using a theme might be the more
     editor-friendly and more maintainable solution.
 
 The advanced tab label carries a blue-ish dot to indicate that attributes are

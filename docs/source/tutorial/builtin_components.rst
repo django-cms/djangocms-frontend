@@ -1,17 +1,17 @@
-. _custom_components:
+.. _built_in_components:
 
-#####################################################
-Setup a Website with Pre-Built Bootstrap 5 Components
-#####################################################
+######################################
+Using Pre-Built Bootstrap 5 Components
+######################################
 
 .. index::
     single: Pre-Built Components
 
 
-Here's a step-by-step tutorial to get you started with **djangocms-frontend**, a versatile plugin bundle
+Here's a step-by-step tutorial to get you started with ``djangocms-frontend``, a versatile plugin bundle
 for django CMS that provides a suite of frontend components compatible with various CSS frameworks, including Bootstrap 5.
 
-For this tutorial we will be using the pre-built Boostrap 5 components that come with **djangocms-frontend**.
+For this tutorial we will be using the pre-built Boostrap 5 components that come with ``djangocms-frontend``.
 
 Installation
 ============
@@ -128,7 +128,7 @@ You need to manually add them to your templates.
       example templates load CSS and JS files from a CDN. Good reasons to do so
       are
 
-      * **djangocms-frontend** does not contain CSS or JS files from Bootstrap
+      * ``djangocms-frontend`` does not contain CSS or JS files from Bootstrap
         or any other framework for that matter. The example templates load
         CSS and JS from a CDN.
       * It is considered safer to host CSS and JS files yourself. Otherwise you
@@ -268,12 +268,34 @@ plugins for each user or group, respectively.
 The first command is only necessary of you define by-user permissions. Depending
 on the number of users it may take some time.
 
+Limitations of built-in components
+==================================
+
+Built-oin components are a powerful tool for content editors, especially if they are used to
+using the Bootstrap CSS framework. Those components are both portable to other frameworks
+and extensible (see :ref:`how-to-extend-frontend-plugins`) But they have some limitations:
+
+* **Deep nesting**: The Bootstrap 5-based components will require some nesting, e.g., a text inside a
+  card inner inside a card inside a column inside a row inside a container will be a regular example.
+  For some editors this might be confusing, or at least something to get used to. Also, large plugin
+  trees in the structure board are more difficult to navigate.
+
+  So even if you are working with the Bootstrap 5 framework you might consider using a template component
+  to cover typical use cases.
+
+* **"Bootstrappyness"**: Bootstrap is a powerful framework, but contains certain potentially oppinionated
+  design decisions which reflect in the type of built-in components are included with ``djangocms-frontend``.
+
+* **Need for customization**: Most websites will require some customization of the design. To use the built-in
+  components as a starting point is a good idea, but you will need to customize Bootstrap to fit your design.
+  See the `Bootstrap documentation <https://getbootstrap.com/docs/5.3/customize/overview/>`_ for more information.
+
 Next Steps
 ==========
 
 Now that you have installed and configured ``djangocms-frontend``, explore additional features such as:
 
-- Creating custom frontend components.
+- Creating template components or custom frontend components.
 - Using advanced layout features.
 - Integrating with third-party frameworks.
 
