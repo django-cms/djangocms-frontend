@@ -568,7 +568,7 @@ icon component is centered around Gilles Migliori's
 
 .. image:: screenshots/icon-picker.png
 
-A version of it is bundled with djangocms-frontend. It currently contains
+A version of it is bundled with ``djangocms-frontend``. It currently contains
 support for the following icon sets:
 
 * `Bootstrap icons <https://icons.getbootstrap.com>`_

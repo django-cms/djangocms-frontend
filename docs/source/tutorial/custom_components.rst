@@ -1,8 +1,8 @@
 .. _custom_components:
 
-##########################
-Building custom frontend components
-##########################
+####################################
+Building Custom Frontend Components
+####################################
 
 .. index::
     single: custom frontend components
