@@ -88,7 +88,9 @@ class CMSAutoComponentDiscovery:
         field_context = self.get_field_context()
         for module, template_name in templates:
             # Create a new context for each template
-            context = SekizaiContext({"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context})
+            context = SekizaiContext(
+                {"_cms_components": defaultdict(list), "forms": fields, "instance": {}, **field_context}
+            )
             try:
                 template = get_template(template_name)
                 template.template.render(context)
