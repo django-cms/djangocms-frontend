@@ -31,8 +31,10 @@ class CMSAutoComponentDiscovery:
         "djanghocms_text": "djangocms_text.fields.TextFormField",
         "djanghocms_text_ckeditor": "djangocms_text_ckeditor.fields.TextFormField",
         "djangocms_link": "djangocms_link.fields.LinkFormField",
-        "djangocms_frontend.contrib.image": "djangocms_frontend.contrib.image.fields.ImageFormField",
-        "djangocms_frontend.contrib.icon": "djangocms_frontend.contrib.icon.fields.IconPickerField",
+        "djangocms_frontend": [
+            "djangocms_frontend.contrib.image.fields.ImageFormField",
+            "djangocms_frontend.contrib.icon.fields.IconPickerField",
+        ],
     }
 
     def __init__(self, register_to):
@@ -45,9 +47,13 @@ class CMSAutoComponentDiscovery:
     def get_field_context(self) -> dict:
         field_context = {}
         for key, value in self.default_field_context.items():
-            if apps.is_installed(key) and "." in value:
-                module, field_name = value.rsplit(".", 1)
-                field_context[field_name] = importlib.import_module(module).__dict__[field_name]
+            if apps.is_installed(key):
+                if not isinstance(value, list):
+                    value = [value]
+                for field in value:
+                    if "." in field:
+                        module, field_name = field.rsplit(".", 1)
+                        field_context[field_name] = importlib.import_module(module).__dict__[field_name]
         return field_context
 
     @staticmethod
