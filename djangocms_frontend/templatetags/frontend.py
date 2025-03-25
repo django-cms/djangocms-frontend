@@ -46,7 +46,6 @@ def update_component_properties(context: template.Context, key: str, value: typi
     context["_cms_components"]["cms_component"][0] = (args, kwargs)
 
 
-
 @register.simple_tag
 def get_attributes(attribute_field, *add_classes):
     """Joins a list of classes with an attributes field and returns all html attributes"""
@@ -296,7 +295,7 @@ class InlineField(CMSEditableObject):
     name = "inline_field"
     options = Options(
         Argument("instance"),
-        Argument("attribute"),
+        Argument("attribute", default=None, required=False),
         Argument("language", default=None, required=False),
         Argument("filters", default=None, required=False),
         Argument("view_url", default=None, required=False),
@@ -306,8 +305,14 @@ class InlineField(CMSEditableObject):
     )
 
     def render_tag(self, context, instance, attribute, **kwargs):
+        if isinstance(instance, str) and attribute is None:
+            # Shortcut {% inline_field "string" %}
+            attribute = instance  # First parameter is the attribute
+            instance = context.get("instance", None)  # Use instance from context
+
         if is_registering_component(context) and attribute:
             update_component_properties(context, "frontend_editable_fields", attribute, append=True)
+            print("After update", context["_cms_components"]["cms_component"][0])
         elif (
             context["request"].session.get("inline_editing", True)
             and isinstance(instance, CMSPlugin)
@@ -318,7 +323,7 @@ class InlineField(CMSEditableObject):
             kwargs["edit_fields"] = attribute
             return super().render_tag(context, instance=instance, attribute=attribute, **kwargs)
         else:
-            return getattr(kwargs["instance"], kwargs["attribute"], "")
+            return getattr(instance, attribute, "")
 
     def _get_editable_context(
         self, context, instance, language, edit_fields, view_method, view_url, querystring, editmode=True

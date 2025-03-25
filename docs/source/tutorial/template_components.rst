@@ -194,6 +194,18 @@ For example, to render the **Hero component** in a template, use the following c
     {% plugin "hero" title=_("Welcome to my new website") slogan=_("Building successful websites since 1896") %}
 
 
+Adding inline-editing to the component
+--------------------------------------
+
+When using `djangocms-text <https://github.com/django-cms/djangocms-text>`_, fields of the component can be
+marked as inline fields to activate inline editing. Simply replace ``{{ title }}``and/or ``{{ slogan }}`` with
+``{% inline_field "title" %}`` and/or ``{% inline_field "slogan" %}``::
+
+    <h1>{% inline_field "title" %}</h1>
+    <p>{% inline_field "slogan" %}</p>
+
+``djangocms-frontend`` will automatically register these fields with the list ``frontend_editable_fields``.
+
 Limitations of template components
 ----------------------------------
 
