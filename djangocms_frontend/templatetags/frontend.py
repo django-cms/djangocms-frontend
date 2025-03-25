@@ -24,6 +24,29 @@ from djangocms_frontend.helpers import get_related_object as related_object
 register = template.Library()
 
 
+def is_registering_component(context: template.Context) -> bool:
+    return (
+        "_cms_components" in context
+        and "cms_component" in context["_cms_components"]
+        and len(context["_cms_components"]["cms_component"]) == 1
+    )
+
+
+def update_component_properties(context: template.Context, key: str, value: typing.Any, append: bool = False) -> None:
+    """"Adds or appends the value to the property "key" of a component during delcaration"""
+    args, kwargs = context["_cms_components"]["cms_component"][0]
+    if append:
+        # Populate slots with plugin_type and verbose_name
+        if key in kwargs:
+            kwargs[key].append(value)
+        else:
+            kwargs[key] = [value]
+    else:
+        kwargs[key] = value
+    context["_cms_components"]["cms_component"][0] = (args, kwargs)
+
+
+
 @register.simple_tag
 def get_attributes(attribute_field, *add_classes):
     """Joins a list of classes with an attributes field and returns all html attributes"""
@@ -237,21 +260,13 @@ class RenderChildPluginsTag(Tag):
     )
 
     def render_tag(self, context, instance, plugin_type, verbose_name, nodelist):
-        if (
-            "_cms_components" in context
-            and "cms_component" in context["_cms_components"]
-            and len(context["_cms_components"]["cms_component"]) == 1
-        ):
+        if is_registering_component(context):
             args, kwargs = context["_cms_components"]["cms_component"][0]
             if plugin_type is None:
                 # If tag is used, default to allow_children=True
                 kwargs.setdefault("allow_children", True)
             if plugin_type and verbose_name:
-                # Populate slots with plugin_type and verbose_name
-                if "slots" in kwargs:
-                    kwargs["slots"].append((plugin_type, verbose_name))
-                else:
-                    kwargs["slots"] = [(plugin_type, verbose_name)]
+                update_component_properties(context, "slots", (plugin_type, verbose_name), append=True)
             context["_cms_components"]["cms_component"][0] = (args, kwargs)
 
         if not instance:
@@ -290,16 +305,18 @@ class InlineField(CMSEditableObject):
         Argument("varname", required=False, resolve=False),
     )
 
-    def render_tag(self, context, **kwargs):
-        if (
+    def render_tag(self, context, instance, attribute, **kwargs):
+        if is_registering_component(context) and attribute:
+            update_component_properties(context, "frontend_editable_fields", attribute, append=True)
+        elif (
             context["request"].session.get("inline_editing", True)
-            and isinstance(kwargs["instance"], CMSPlugin)
-            and kwargs["instance"].pk
+            and isinstance(instance, CMSPlugin)
+            and instance.pk
         ):
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
             # DummyPlugins of the ``plugin`` tag are cannot be edited (they have no pk in their model class)
-            kwargs["edit_fields"] = kwargs["attribute"]
-            return super().render_tag(context, **kwargs)
+            kwargs["edit_fields"] = attribute
+            return super().render_tag(context, instance=instance, attribute=attribute, **kwargs)
         else:
             return getattr(kwargs["instance"], kwargs["attribute"], "")
 
