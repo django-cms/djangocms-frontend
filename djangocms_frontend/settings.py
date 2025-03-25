@@ -76,6 +76,7 @@ SHOW_EMPTY_CHILDREN = getattr(django_settings, "DJANGOCMS_FRONTEND_SHOW_EMPTY_CH
 
 FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FRONTEND_FORM_OPTIONS", {})
 
+COMPONENT_FIELDS = getattr(django_settings, "DJANGOCMS_FRONTEND_COMPONENT_FIELDS", {})
 
 framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")

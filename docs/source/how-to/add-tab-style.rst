@@ -1,7 +1,7 @@
 How to add the tab editing style to your custom plugins
 =======================================================
 
-If you prefer the tabbed frontend editing style of **djangocms-frontend** you can easily
+If you prefer the tabbed frontend editing style of ``djangocms-frontend`` you can easily
 add it to your own plugins.
 
 If you use the standard editing form, just add a line specifying the

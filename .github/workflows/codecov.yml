@@ -22,6 +22,9 @@ jobs:
         os: [
             ubuntu-latest,
         ]
+        exclude:
+          - python-version: "3.12"
+            requirements-file: dj42_cms311.txt
 
     steps:
     - uses: actions/checkout@v4
@@ -32,9 +35,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Intall dependencies
+    - name: Install dependencies
       run: |
-        pip install -r tests/requirements/${{ matrix.requirements-file }}
+        pip install -U -r tests/requirements/${{ matrix.requirements-file }}
     - name: Run coverage
       run: |
         coverage run -m pytest

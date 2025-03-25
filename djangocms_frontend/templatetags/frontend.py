@@ -24,6 +24,28 @@ from djangocms_frontend.helpers import get_related_object as related_object
 register = template.Library()
 
 
+def is_registering_component(context: template.Context) -> bool:
+    return (
+        "_cms_components" in context
+        and "cms_component" in context["_cms_components"]
+        and len(context["_cms_components"]["cms_component"]) == 1
+    )
+
+
+def update_component_properties(context: template.Context, key: str, value: typing.Any, append: bool = False) -> None:
+    """"Adds or appends the value to the property "key" of a component during delcaration"""
+    args, kwargs = context["_cms_components"]["cms_component"][0]
+    if append:
+        # Populate slots with plugin_type and verbose_name
+        if key in kwargs:
+            kwargs[key].append(value)
+        else:
+            kwargs[key] = [value]
+    else:
+        kwargs[key] = value
+    context["_cms_components"]["cms_component"][0] = (args, kwargs)
+
+
 @register.simple_tag
 def get_attributes(attribute_field, *add_classes):
     """Joins a list of classes with an attributes field and returns all html attributes"""
@@ -198,7 +220,7 @@ class Plugin(AsTag):
         context["instance"].child_plugin_instances = DummyPlugin(
             nodelist, context["instance"].plugin_type
         ).get_instances()
-        # ... and redner
+        # ... and render
         result = plugin_tag_pool[name]["template"].render(context.flatten())
         context.pop()
         return result
@@ -211,16 +233,17 @@ class RenderChildPluginsTag(Tag):
 
     e.g.: {% childplugins instance %}
 
-    {% childplugins instance "LinkPlugin" %}
+    {% childplugins instance "LinkPlugin" %} will only render child plugins of
+    type LinkPlugin.
 
-    {% placeholder "footer" inherit or %}
+    {% childplugins instance or %}
         <a href="/about/">About us</a>
-    {% endplaceholder %}
+    {% endchildplugins %}
 
     Keyword arguments:
-    name -- the name of the placeholder
-    inherit -- optional argument which if given will result in inheriting
-        the content of the placeholder with the same name on parent pages
+    instance -- instance of the plugin whose children are to be rendered
+    plugin_type -- optional argument which if given will result in filtering
+        the direct child plugin types that are rendered.
     or -- optional argument which if given will make the template tag a block
         tag whose content is shown if the placeholder is empty
     """
@@ -229,25 +252,37 @@ class RenderChildPluginsTag(Tag):
     options = Options(
         # PlaceholderOptions parses until the "endchildplugins" tag is found if
         # the "or" option is given
-        Argument("instance", required=True),
+        Argument("instance", required=False),
         Argument("plugin_type", required=False),
+        Argument("verbose_name", required=False),
         blocks=[("endchildplugins", "nodelist")],
     )
 
-    def render_tag(self, context, instance, plugin_type, nodelist):
+    def render_tag(self, context, instance, plugin_type, verbose_name, nodelist):
+        if is_registering_component(context):
+            args, kwargs = context["_cms_components"]["cms_component"][0]
+            if plugin_type is None:
+                # If tag is used, default to allow_children=True
+                kwargs.setdefault("allow_children", True)
+            if plugin_type and verbose_name:
+                update_component_properties(context, "slots", (plugin_type, verbose_name), append=True)
+            context["_cms_components"]["cms_component"][0] = (args, kwargs)
+
+        if not instance:
+            instance = context.get("instance", None)
+
         context.push()
         context["parent"] = instance
-        content = ""
+        content = []
         if plugin_type and not plugin_type.endswith("Plugin"):
             plugin_type = f"{instance.__class__.__name__}{plugin_type.capitalize()}Plugin"
-        for child in instance.child_plugin_instances:
+        for child in getattr(instance, "child_plugin_instances", []):
             if plugin_type is None or child.plugin_type == plugin_type:
                 if isinstance(child, DummyPlugin):
-                    content += child.nodelist.render(context)
+                    content.append(child.nodelist.render(context))
                 else:
-                    content += render_plugin(context, child)
-        content = content or getattr(instance, "simple_content", "")
-
+                    content.append(render_plugin(context, child))
+        content = "".join(content) or getattr(instance, "simple_content", "")
         if not content.strip() and nodelist:
             # "or" parameter given
             return nodelist.render(context)
@@ -260,7 +295,7 @@ class InlineField(CMSEditableObject):
     name = "inline_field"
     options = Options(
         Argument("instance"),
-        Argument("attribute"),
+        Argument("attribute", default=None, required=False),
         Argument("language", default=None, required=False),
         Argument("filters", default=None, required=False),
         Argument("view_url", default=None, required=False),
@@ -269,18 +304,26 @@ class InlineField(CMSEditableObject):
         Argument("varname", required=False, resolve=False),
     )
 
-    def render_tag(self, context, **kwargs):
-        if (
+    def render_tag(self, context, instance, attribute, **kwargs):
+        if isinstance(instance, str) and attribute is None:
+            # Shortcut {% inline_field "string" %}
+            attribute = instance  # First parameter is the attribute
+            instance = context.get("instance", None)  # Use instance from context
+
+        if is_registering_component(context) and attribute:
+            update_component_properties(context, "frontend_editable_fields", attribute, append=True)
+            print("After update", context["_cms_components"]["cms_component"][0])
+        elif (
             context["request"].session.get("inline_editing", True)
-            and isinstance(kwargs["instance"], CMSPlugin)
-            and kwargs["instance"].pk
+            and isinstance(instance, CMSPlugin)
+            and instance.pk
         ):
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
             # DummyPlugins of the ``plugin`` tag are cannot be edited (they have no pk in their model class)
-            kwargs["edit_fields"] = kwargs["attribute"]
-            return super().render_tag(context, **kwargs)
+            kwargs["edit_fields"] = attribute
+            return super().render_tag(context, instance=instance, attribute=attribute, **kwargs)
         else:
-            return getattr(kwargs["instance"], kwargs["attribute"], "")
+            return getattr(instance, attribute, "")
 
     def _get_editable_context(
         self, context, instance, language, edit_fields, view_method, view_url, querystring, editmode=True

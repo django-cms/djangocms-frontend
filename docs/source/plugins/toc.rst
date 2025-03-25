@@ -52,7 +52,7 @@ You can apply Bootstrap contextual classes through the "Heading Context" setting
 For example, selecting "primary" will add the ``text-primary`` class.
 
 TOC Integration
---------------
+---------------
 
 To make a heading appear in a Table of Contents:
 

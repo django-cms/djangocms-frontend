@@ -1,3 +1,5 @@
+.. _how-to-add-frontend-plugins:
+
 How to add your own frontend plugin
 ===================================
 
@@ -174,6 +176,8 @@ and images in your plugin. These mixins are:
 
         class YourPluginModel(GetLinkMixin, FrontendUIItem):
             ...
+
+  The resolved link (final URL) will be passed as ``mixin_link`` to the plugin context.
 
 
 * **ImageMixin**: Adds an image to the plugin *model*. Base your plugin form on

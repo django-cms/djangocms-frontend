@@ -42,7 +42,7 @@ class LinkPluginMixin:
     def render(self, context, instance, placeholder):
         if "request" in context:
             instance._cms_page = getattr(context["request"], "current_page", None)
-        context["link"] = instance.get_link()
+        context["mixin_link"] = instance.get_link()
         return super().render(context, instance, placeholder)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
@@ -97,4 +97,4 @@ if "djangocms_frontend.contrib.link" in django_settings.INSTALLED_APPS:
     if "djangocms_link" in django_settings.INSTALLED_APPS:
         from djangocms_link.cms_plugins import LinkPlugin
 
-        LinkPlugin.parent_classes = [None]  # Remove it from the list of valid plugins
+        LinkPlugin.parent_classes = [""]  # Remove it from the list of valid plugins
