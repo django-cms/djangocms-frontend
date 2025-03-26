@@ -271,7 +271,7 @@ on the number of users it may take some time.
 Limitations of built-in components
 ==================================
 
-Built-oin components are a powerful tool for content editors, especially if they are used to
+Built-in components are a powerful tool for content editors, especially if they are used to
 using the Bootstrap CSS framework. Those components are both portable to other frameworks
 and extensible (see :ref:`how-to-extend-frontend-plugins`) But they have some limitations:
 

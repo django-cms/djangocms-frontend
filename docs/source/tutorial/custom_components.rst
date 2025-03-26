@@ -197,6 +197,6 @@ By following the steps outlined above, you can:
 
 .. note::
 
-    Components will create migrations since they use proxy models which are necessary, for
-    example, to manage permissions. Those migrations will be added to the app containing
-    the ``cms_component.py`` file.
+    Components will create migrations since they use proxy models of ``djangocms-frontend``'s
+    ``FrontendUIItem`` model which are necessary, for example, to manage permissions.
+    Those migrations will be added to the app containing the ``cms_component.py`` file.
