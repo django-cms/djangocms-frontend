@@ -30,8 +30,8 @@ def find_cms_component_templates() -> list[tuple[str, str]]:
 
 class CMSAutoComponentDiscovery:
     default_field_context = {
-        "djanghocms_text": "djangocms_text.fields.TextFormField",
-        "djanghocms_text_ckeditor": "djangocms_text_ckeditor.fields.TextFormField",
+        "djangocms_text": "djangocms_text.fields.HTMLFormField",
+        "djangocms_text_ckeditor": "djangocms_text_ckeditor.fields.HTMLFormField",
         "djangocms_link": "djangocms_link.fields.LinkFormField",
         "djangocms_frontend": [
             "djangocms_frontend.contrib.image.fields.ImageFormField",
@@ -56,6 +56,7 @@ class CMSAutoComponentDiscovery:
                     if "." in field:
                         module, field_name = field.rsplit(".", 1)
                         field_context[field_name] = importlib.import_module(module).__dict__[field_name]
+        print(field_context)
         return field_context
 
     @staticmethod
@@ -141,9 +142,10 @@ def setup():
         update_plugin_pool()
         components._discovered = True
 
-        if text_config := apps.get_app_config("djangocms_text"):
+        if apps.is_installed("djangocms_text"):
             # Hack - update inline editable fields in case djangocms_text is installed
             # BEFORE djangocms_frontend in INSTALLED_APPS
+            text_config = apps.get_app_config("djangocms_text")
             if text_config.inline_models:
                 # Already initialized? Need to initialize again
                 # to reflect inline fields in of just discovered components
