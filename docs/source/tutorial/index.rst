@@ -6,13 +6,13 @@
 #################
 
 When working with components in ``djangocms-frontend``, you can choose from different
-approaches depending on your needs. These range from using pre-built Bootstrap 5
+approaches depending on your needs. These range from using built-in Bootstrap 5
 components, over quick and simple methods to create your own custom frontend components to
 more flexible but complex solutions. We recommend staying with the simplest approach
 that gets the job done for your project.
 
-1. **Pre-Built Bootstrap 5 Components** – The easiest way to **get started** with
-   ``djangocms-frontend``. Pre-built components are ready to use and require no additional
+1. **Built-in Bootstrap 5 Components** – The easiest way to **get started** with
+   ``djangocms-frontend``. Built-in components are ready to use and require no additional
    configuration. They are perfect for quickly setting up a website with a variety of components
    that are compatible with Bootstrap 5. Pre-built components need to be explicitly
    added to your project's ``INSTALLED_APPS``.
