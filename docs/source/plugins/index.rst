@@ -5,7 +5,7 @@
  Built-in Components
 #####################
 
-Find the available pre-built components for Boostrap 5 in the following sections:
+Find the available built-in components for Boostrap 5 in the following sections:
 
 .. toctree::
    :maxdepth: 1

@@ -26,7 +26,7 @@ Key features
   that updating frameworks in the future doesn't necessitate rebuilding your
   site's plugin structure. ​
 
-* **Pre-Integrated Bootstrap 5 Components**: Access a ready-to-use collection
+* **Built-in Bootstrap 5 Components**: Access a ready-to-use collection
   of Bootstrap 5 components, streamlining the process of building responsive
   and modern interfaces. ​
 

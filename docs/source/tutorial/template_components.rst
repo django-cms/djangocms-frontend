@@ -38,7 +38,7 @@ If you do not use the built-in components, you do not need to add them to your `
         'djangocms_icon',
         'easy_thumbnails',
         'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
-        # Main frontend app - pre-built components not needed
+        # Main frontend app - built-in components from contrib not needed
         'djangocms_frontend',
     ]
 

@@ -23,23 +23,23 @@ and templates.
 * **Effortless Development of Custom Frontend Components**: Create reusable frontend
   components with ease, utilizing simple templates and declarative form
   classes. These components can function both as CMS plugins and within
-  standard Django templates. ​
+  standard Django templates.
 
 * **Framework-Agnostic Design**: Maintain flexibility in your project's design
   by decoupling plugins from specific versions of a CSS framework. This ensures
   that updating frameworks in the future doesn't necessitate rebuilding your
-  site's plugin structure. ​
+  site's plugin structure.
 
-* **Pre-Integrated Bootstrap 5 Components**: Access a ready-to-use collection
+* **Built-in Bootstrap 5 Components**: Access a ready-to-use collection
   of Bootstrap 5 components, streamlining the process of building responsive
-  and modern interfaces. ​
+  and modern interfaces.
 
 * **Extensibility**: Enhance your project by creating custom frontend components with
   minimal code. The system is designed to be extended both within individual
-  projects and through separate theme applications. ​
+  projects and through separate theme applications.
 
 * **Consistent User Experience**: Utilize plugins as UI components throughout
-  your project, promoting a cohesive and uniform user interface. ​
+  your project, promoting a cohesive and uniform user interface.
 
 *************
  Description
