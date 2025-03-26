@@ -2,6 +2,13 @@
 Changelog
 =========
 
+2.1.0 (2025-03-26)
+==================
+
+* feat: Add template components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/263
+* docs: Add inline-editing how-to by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/261
+
+
 2.0.0 (2025-03-20)
 ==================
 * feat: Rename link plugin to text link plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/219
