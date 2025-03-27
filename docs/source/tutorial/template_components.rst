@@ -34,8 +34,6 @@ If you do not use the built-in components, you do not need to add them to your `
 .. code-block:: python
 
     INSTALLED_APPS = [
-        # Optional dependencies
-        'djangocms_icon',
         'easy_thumbnails',
         'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
         # Main frontend app - built-in components from contrib not needed
@@ -67,7 +65,7 @@ as required for ``djangocms-frontend`` template components.
 Directory Structure
 -------------------
 
-The templte component lives in the template directory of any of your apps.
+The template component lives in the template directory of any of your apps.
 Ensure your DjangoCMS app has the following structure::
 
     theme_app/
@@ -117,7 +115,10 @@ Then, add the following code::
                     {% childplugins %}{% endchildplugins %}
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ hero_image.url }}">
+                {# Get the related object of the image field which itself is just a dict #}
+                {% with image=instance.hero_image|get_related_object %}
+                    <img src="{{ image.url }}" alt="{{ image.alt }}">
+                {% endwith %}
             </div>
         </div>
     </section>
@@ -133,7 +134,7 @@ Component Declaration
     {% cms_component "Hero" name=_("My Hero Component") %}
 
 This tag **declares** the component and assigns it a name (``Hero``). This is used internally
-by django CMS to identify the plguin later. The ``name`` parameter is used to display the
+by django CMS to identify the plugin later. The ``name`` parameter is used to display the
 component in the CMS admin interface. Internally the command declares a ``CMSFrontendComponent``
 class. All named arguments are added to the component's Meta class.
 
@@ -205,7 +206,7 @@ content, i.e. add/remove ``{% field %}`` tags, or change the ``{% cms_component 
 the Django server to apply the changes.
 
 1. Restart your Django server.
-2. Create a new page end edit it.
+2. Create a new page And edit it.
 3. Add a new **Hero component** to a page from the plugin picker.
 4. Fill in the **title**, **slogan**, and **hero image** fields.
 5. Save and publish the page.
@@ -213,19 +214,28 @@ the Django server to apply the changes.
 Using the component in your templates
 -------------------------------------
 
-To use the component in your templates, you can use the ``{% plugin %}`` tag with the component's name.
-For example, to render the **Hero component** in a template, use the following code::
+To use the component in your templates outside django CMS, you can use the ``{% plugin %}`` tag with the
+component's name. For example, to render the **Hero component** in a template, use the following code::
 
     {% load frontend %}
     {% plugin "hero" title=_("Welcome to my new website") slogan=_("Building successful websites since 1896") %}
+
+.. note::
+    Do not forget to register the component with :attr:`CMS_COMPONENT_PLUGINS`. If you needed to list the single
+    component in the setting, the hero component's dotted path to its plugin would be
+    ``djangocms_frontend.cms_plugins.HeroPlugin``.
 
 
 Adding inline-editing to the component
 --------------------------------------
 
-When using `djangocms-text <https://github.com/django-cms/djangocms-text>`_, fields of the component can be
-marked as inline fields to activate inline editing. Simply replace ``{{ title }}`` and/or ``{{ slogan }}`` with
-``{% inline_field "title" %}`` and/or ``{% inline_field "slogan" %}``::
+When using `djangocms-text <https://github.com/django-cms/djangocms-text>`_, `CharField` and `HTMLFormField` fields
+of the component can be marked as inline fields to activate inline editing. Inline-editing fields can be changed in
+the edit endpoint by simply clicking inside and typing over the text - without the need to open an edit dialogue for
+the component.
+
+Simply replace ``{{ title }}`` and/or ``{{ slogan }}`` with ``{% inline_field "title" %}`` and/or
+``{% inline_field "slogan" %}``::
 
     <h1>{% inline_field "title" %}</h1>
     <p>{% inline_field "slogan" %}</p>
@@ -253,12 +263,44 @@ Template components are a powerful tool for developers, but they have some limit
   Classes are intantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
   for more complex cases.
 
+
+Trouble Shooting
+================
+
+If the component does not appear in the plugin picker, check the following:
+
+1. **INSTALLED_APPS**: Verify that the app containing the component is listed in your ``INSTALLED_APPS`` setting.
+
+2. **Template Location**: Ensure the template file is located in the correct directory structure:
+   ``templates/<app_name>/cms_components/`` inside your app.
+
+3. **Server Restart**: Restart the Django server after creating or modifying the component template. Changes in
+   the declarative part are only reflected after server restart.
+
+4. **Rendering exceptions**: The template component will only be added if it renders without exception. Make
+   sure it does not fail if the context is empty. Check the server logs for errors during startup. Missing
+   dependencies or syntax errors in the template can prevent the component from being registered.
+
+5. **Migration module**: Make sure the app has a migration module. If not, create one with
+   ``python -m manage makemigrations <app_name>``.
+
+6. **Permissions**: Add the necessary permissions for the user/group if you are not the superuser.
+   Also see :ref:`sync_permissions`.
+
+If the issue persists, double-check the template syntax and ensure all required fields are properly defined.
+
 Conclusion
 ==========
 
-You have successfully created a **djangocms-frontend template component** using ``cms_component``!
-This structure allows editors to easily customize hero sections while maintaining a reusable
-and structured design.
+In this tutorial, you learned how to create a reusable **Hero component** using ``djangocms-frontend``.
+This approach allows you to:
+
+- Simplify component creation for editors by offering inline editing.
+- Maintain consistent design across your website by reusing the component.
+- Extend functionality without writing Python code.
+
+By following these steps, you can create additional components tailored to your project's needs.
+
 
 .. note::
 

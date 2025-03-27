@@ -9,18 +9,19 @@ Building Custom Frontend Components
 
 .. versionadded:: 2.0
 
-custom frontend components are a powerful tool for content editors, allowing them to build pages without needing
-in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
+Custom frontend components are a powerful tool for content editors, allowing them to build pages without
+needing in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
 components, creating visually cohesive pages with ease.
 
-When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you
-either create your custom frontend components or customize components from providers,
-e.g. `Tailwind UI <https://tailwindui.com>`_,
-`Flowbite <https://flowbite.com>`_, or the community
-`Tailwind Components <https://tailwindcomponents.com>`_.
+When working with `Tailwind CSS <https://tailwindcss.com>`_, for example, you either create your custom
+frontend components or customize components from providers, e.g. `Tailwind UI <https://tailwindui.com>`_,
+`Flowbite <https://flowbite.com>`_, or the community `Tailwind Components <https://tailwindcomponents.com>`_.
 
 With django CMS you make your components available to the content editors to simply add them to a page by a
 click **and** frontend developers for use in templates from a single source.
+
+Custom frontend components are more versatile than template components, but require some minimal Python coding.
+Technically, you create a custom frontend component by declaring its change form and rendering template.
 
 Installation
 ============
@@ -32,8 +33,6 @@ If you do not use the built-in components, you do not need to add them to your `
 .. code-block:: python
 
     INSTALLED_APPS = [
-        # Optional dependencies
-        'djangocms_icon',
         'easy_thumbnails',
         'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
         # Main frontend app - pre-built components not needed
@@ -71,7 +70,7 @@ Ensure your app has the following structure::
         migrations/
         models.py
         templates/
-            components/
+            theme/
                 hero.html
         views.py
         admin.py
@@ -95,20 +94,19 @@ Add a ``cms_components.py`` file to the ``theme`` app (see structure above):
     class MyHeroComponent(CMSFrontendComponent):
         class Meta:
             # declare plugin properties
-            name = "My Hero Component"
-            render_template = "components/hero.html"
-            allow_children = True
-            mixins = ["Background"]
+            name = "My Hero Component"  # Name displayed in the CMS admin interface
+            render_template = "theme/hero.html"  # Template used to render the component
+            allow_children = True  # Allow child plugins inside this component
+            mixins = ["Background"]  # Add background styling options
             # for more complex components, you can add fieldsets
 
-        # declare fields
+        # Declare fields for the component
         title = forms.CharField(required=True)
         slogan = forms.CharField(required=True, widget=forms.Textarea)
         hero_image = ImageFormField(required=True)
 
-        # add description for the structure board
         def get_short_description(self):
-            return self.title
+            return self.title  # Display the title in the structure board
 
     @components.register
     class MyButton(CMSFrontendComponent):
@@ -149,7 +147,10 @@ The templates could be, for example:
                      {% endchildplugins %}
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ instance.hero_image.url }}" alt="{{ instance.image_related.alt }}">
+                {# Get the related object of the image field which itself is just a dict #}
+                {% with image=instance.hero_image|get_related_object %}
+                    <img src="{{ image.url }}" alt="{{ image.alt }}">
+                {% endwith %}
             </div>
         </div>
     </section>
@@ -167,8 +168,18 @@ The templates could be, for example:
 As always, django CMS manages styling and JavaScript dependencies with django-sekizai.
 In this example, we add the Tailwind CSS CDN to the ``js`` block.
 
-Understanding the Code
-----------------------
+
+.. note::
+
+    The component instance is available in the template as ``instance``. This is a proxy model of the
+    ``FrontendUIItem`` model, which is a subclass of Django's ``Model`` class. The instance has all the
+    fields declared in the component class.
+
+    Additionally, if the component does not have a field called ``instance``, the fields themselves are
+    available directly in the template. Both ways are equivalent::
+
+        {{ instance.title }}  {{ title }}
+        {{ instance.slogan }} {{ slogan }}
 
 
 
@@ -179,8 +190,9 @@ Custom frontend components are a powerful tool for developers, but they have a l
 
 **Limited Python code**: Custom components are (indirect) subclasses of Django's ``AdminForm`` class
 and can contain Python code to modify the behavior of a form. You cannot directly add Python code to
-the resulting plugin class with the exception of ``get_render_template()`` and ``save_model()``.
-Similarly, you cannot add Python code the model class, in this case with the exception of ``get_short_description()``.
+the resulting plugin class with the exception of ``get_render_template()``. Similarly, you cannot add
+Python code the model class, in this case with the exception of ``get_short_description()``.
+
 
 Conclusion
 ==========

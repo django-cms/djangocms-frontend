@@ -488,7 +488,7 @@ plugins.
 Management commands
 *******************
 
-Management commands are run by typing ``./manage.py frontend command`` in the
+Management commands are run by typing ``python -m manage frontend command`` in the
 project directory. ``command`` can be one of the following:
 
 ``migrate``
@@ -505,14 +505,18 @@ project directory. ``command`` can be one of the following:
     The drawback is, that references might become stale. This command prints all
     stale references, their plugins and pages/placeholder they belong to.
 
-``sync_permissions users`` or ``sync_permissions groups``
-    Django allows to set permissions for each user and group on a per plugin
-    level. This might become somewhat tedious which is why this command
-    will sync permissions. For each user or group it will copy the permissions
-    of ``djangocms_frontend.models.FrontendUIItem`` to all installed
-    ``djangocms-frontend`` plugins. If you need to change permissions for all
-    plugins this requires you only to change them for ``FrontendUIItem`` and
-    then syncing the new permission with these commands.
+.. _sync_permissions:
+
+``sync_permissions``
+    This command syncs permissions for users or groups. It is run with one of
+    the following arguments:
+
+    - ``users``: Syncs permissions for all users.
+    - ``groups``: Syncs permissions for all groups.
+
+    Permissions are copied from the ``FrontendUIItem`` model to all installed
+    plugins. This way you can set permissions for all plugins by setting them
+    for ``FrontendUIItem`` and then syncing them.
 
 
 *************

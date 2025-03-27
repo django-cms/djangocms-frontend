@@ -34,11 +34,9 @@ that gets the job done for your project.
    but also the most complex, since template, plugin, and forms need to be created.
    For custom plugin development, see the :ref:`how-to-add-frontend-plugins` guide.
 
+---------
 
-Tutorials
-#########
-
-
+**Start with one of the following tutorials:**
 
 .. toctree::
    :maxdepth: 1
