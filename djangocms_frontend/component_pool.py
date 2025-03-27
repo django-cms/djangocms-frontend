@@ -56,7 +56,6 @@ class CMSAutoComponentDiscovery:
                     if "." in field:
                         module, field_name = field.rsplit(".", 1)
                         field_context[field_name] = importlib.import_module(module).__dict__[field_name]
-        print(field_context)
         return field_context
 
     @staticmethod
