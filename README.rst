@@ -120,7 +120,11 @@ For a manual install:
 
       'easy_thumbnails',
       'djangocms_link',  # Needed for link support
+
+      # Base package template components and custom components
       'djangocms_frontend',
+
+      # Add built-in Bootstrap 5 components as needed
       'djangocms_frontend.contrib.accordion',  # optional
       'djangocms_frontend.contrib.alert',  # optional
       'djangocms_frontend.contrib.badge',  # optional
