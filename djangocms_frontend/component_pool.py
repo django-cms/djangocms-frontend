@@ -36,6 +36,8 @@ class CMSAutoComponentDiscovery:
         "djangocms_frontend": [
             "djangocms_frontend.contrib.image.fields.ImageFormField",
             "djangocms_frontend.contrib.icon.fields.IconPickerField",
+            "djangocms_frontend.fields.AttributesFormField",
+            "djangocms_frontend.fields.ChoicesFormField",
         ],
     }
 
@@ -56,6 +58,8 @@ class CMSAutoComponentDiscovery:
                     if "." in field:
                         module, field_name = field.rsplit(".", 1)
                         field_context[field_name] = importlib.import_module(module).__dict__[field_name]
+            elif key not in ("djangocms_text", "djangocms_text_ckeditor"):
+                warnings.warn(f"App {key} not installed, skipping field registration", stacklevel=2)
         return field_context
 
     @staticmethod
