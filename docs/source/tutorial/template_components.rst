@@ -196,7 +196,9 @@ The fields declared earlier (``title``, ``slogan``, and ``hero_image``) are now 
     <img src="{{ hero_image.url }}">
 
 The ``{% childplugins %}`` block allows additional CMS plugins (like buttons) to be added inside the component
-in the structure editor.
+in the structure editor. Anything in between ``{% childplugins %}`` and ``{% endchildplugins %}`` will only be
+rendered if the component has no children.
+
 
 Make the component available in django CMS
 -------------------------------------------
