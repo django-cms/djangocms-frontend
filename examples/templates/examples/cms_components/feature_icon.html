@@ -1,0 +1,36 @@
+{% load frontend cms_component djangocms_link_tags sekizai_tags icon_tags %}
+
+{% cms_component "FeatureIcon" name=_("Feature with icon") module=_("Examples") mixins="Background|Spacing|Attributes"|split %}
+{% field "icon" IconPickerField required=True label=_("Icon") initial="chevron-right" %}
+{% field "title" forms.CharField required=True label=_("Title") initial=_("Featured title") %}
+{% field "description" HTMLFormField required=True label=_("Description") initial=_("<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>") %}
+{% field "call_to_action" forms.CharField required=True label=_("Call to action") initial=_("Call to action") %}
+{% field "link" LinkFormField required=True label=_("Link") initial="#"|to_link %}
+
+{% add_css_for_icon icon %}
+<div class="feature {{ instance.get_classes }}">
+    <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+      {% icon icon %}
+    </div>
+    <h3 class="fs-2 text-body-emphasis">{% inline_field "title" %}</h3>
+   {% inline_field instance "description" "" "safe" %}
+    <a href="{{ link|to_url }}" class="icon-link">
+      {{ call_to_action }}
+      <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+    </a>
+</div>
+
+{% addtoblock "css" %}
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="chevron-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+    </symbol>
+</svg>
+<style>
+.feature-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: .75rem;
+}
+</style>
+{% endaddtoblock %}

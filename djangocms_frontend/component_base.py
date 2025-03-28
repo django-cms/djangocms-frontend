@@ -21,7 +21,7 @@ def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
         (mixin.rsplit(".")[0], f"{mixin.rsplit('.')[-1]}{suffix}Mixin")
         if "." in mixin
         else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
-        for mixin in mixins
+        for mixin in reversed(mixins)
     ]
 
     return [_import_or_empty(module, name) for module, name in mixins]
