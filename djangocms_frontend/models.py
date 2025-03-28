@@ -77,6 +77,7 @@ class AbstractFrontendUIItem(CMSPlugin):
     def get_attributes(self):
         attributes = self.config.get("attributes", {})
         classes = self.get_classes()  # get classes
+        classes = (f'class="{classes}"') if classes else ""  # to string
         parts = (
             f'{item}="{conditional_escape(value)}"' if value else f"{item}"
             for item, value in attributes.items()

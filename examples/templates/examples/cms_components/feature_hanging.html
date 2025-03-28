@@ -1,0 +1,32 @@
+{% load frontend cms_component djangocms_link_tags sekizai_tags icon_tags %}
+
+{% cms_component "FeatureHanging" name=_("Feature hanging") module=_("Examples") mixins="Background|Spacing|Attributes"|split %}
+{% field "icon" IconPickerField required=True label=_("Icon") initial="chevron-right" %}
+{% field "title" forms.CharField required=True label=_("Title") initial=_("Featured title") %}
+{% field "description" HTMLFormField required=True label=_("Description") initial=_("<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>") %}
+{% field "call_to_action" forms.CharField required=True label=_("Call to action") initial=_("Call to action") %}
+{% field "link" LinkFormField required=True label=_("Link") initial="#"|to_link %}
+
+{% add_css_for_icon icon %}
+<div class="d-flex align-items-start {{ instance.get_classes }}">
+  <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+    {% icon icon %}
+  </div>
+  <div>
+    <h3 class="fs-2 text-body-emphasis">{% inline_field "title" %}</h3>
+    {% inline_field instance "description" "" "safe" %}
+    <a href="{{ link|to_url }}" class="btn btn-primary">
+      {{ call_to_action }}
+    </a>
+  </div>
+</div>
+
+{% addtoblock "css" %}
+<style>
+.icon-square {
+  width: 3rem;
+  height: 3rem;
+  border-radius: .75rem;
+}
+</style>
+{% endaddtoblock %}

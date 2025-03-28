@@ -1,0 +1,15 @@
+{% load frontend cms_component djangocms_link_tags sekizai_tags icon_tags %}
+
+{% cms_component "IconGrid" name=_("Icon grid") module=_("Examples") mixins="Background|Spacing|Attributes"|split %}
+{% field "icon" IconPickerField required=True label=_("Icon") %}
+{% field "title" forms.CharField required=True label=_("Title") initial=_("Featured title") %}
+{% field "description" HTMLFormField required=True label=_("Description") initial=_("<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>") %}
+
+{% add_css_for_icon icon %}
+<div class="col d-flex align-items-start {{ instance.get_classes }}">
+  <span class="fs-4 me-3">{% icon icon %}</span>
+  <div>
+    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">{% inline_field "title" %}</h3>
+    {% inline_field instance "description" "" "safe" %}
+  </div>
+</div>
