@@ -276,7 +276,7 @@ and modified to include the template component tags.
 Examples are not installed through the package. You can copy them to your project and adapt them
 to your needs.
 
-Trouble Shooting
+Troubleshooting
 ================
 
 If the component does not appear in the plugin picker, check the following:
