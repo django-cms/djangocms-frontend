@@ -262,7 +262,7 @@ Template components are a powerful tool for developers, but they have some limit
   to configure the component. Advanced form configurations such as ``fieldsets`` are not available. If you need
   to create a custom form for a component, you should create a custom component instead.
 * **Limits of the template language**: The Django template language is powerful, but it has some limitations.
-  Classes are intantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
+  Classes are instantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
   for more complex cases.
 
 Examples
