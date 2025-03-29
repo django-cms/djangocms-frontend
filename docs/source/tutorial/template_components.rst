@@ -262,11 +262,21 @@ Template components are a powerful tool for developers, but they have some limit
   to configure the component. Advanced form configurations such as ``fieldsets`` are not available. If you need
   to create a custom form for a component, you should create a custom component instead.
 * **Limits of the template language**: The Django template language is powerful, but it has some limitations.
-  Classes are intantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
+  Classes are instantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
   for more complex cases.
 
+Examples
+========
 
-Trouble Shooting
+The djangocms-frontend repository contains a small number of example components in the
+`examples directory <https://github.com/django-cms/djangocms-frontend/tree/master/examples>`_.
+They are taken from the `Bootstrap 5 examle page <https://getbootstrap.com/docs/5.3/examples/>`_
+and modified to include the template component tags.
+
+Examples are not installed through the package. You can copy them to your project and adapt them
+to your needs.
+
+Troubleshooting
 ================
 
 If the component does not appear in the plugin picker, check the following:
