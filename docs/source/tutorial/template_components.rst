@@ -273,7 +273,7 @@ The djangocms-frontend repository contains a small number of example components 
 They are taken from the `Bootstrap 5 examle page <https://getbootstrap.com/docs/5.3/examples/>`_
 and modified to include the template component tags.
 
-Examples are not installed throug the package. You can copy them to your project and adapt them
+Examples are not installed through the package. You can copy them to your project and adapt them
 to your needs.
 
 Trouble Shooting
