@@ -265,6 +265,16 @@ Template components are a powerful tool for developers, but they have some limit
   Classes are intantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
   for more complex cases.
 
+Examples
+========
+
+The djangocms-frontend repository contains a small number of example components in the
+`examples directory <https://github.com/django-cms/djangocms-frontend/tree/master/examples>`_.
+They are taken from the `Bootstrap 5 examle page <https://getbootstrap.com/docs/5.3/examples/>`_
+and modified to include the template component tags.
+
+Examples are not installed throug the package. You can copy them to your project and adapt them
+to your needs.
 
 Trouble Shooting
 ================

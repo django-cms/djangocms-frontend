@@ -74,7 +74,6 @@ else:
 
         link = LinkFormField(
             label=_("Link"),
-            initial={},
             required=False,
         )
         target = forms.ChoiceField(
