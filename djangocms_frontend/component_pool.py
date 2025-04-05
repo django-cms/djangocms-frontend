@@ -147,11 +147,9 @@ def setup():
 
         if apps.is_installed("djangocms_text"):
             # Hack - update inline editable fields in case djangocms_text is installed
-            # BEFORE djangocms_frontend in INSTALLED_APPS
-            text_config = apps.get_app_config("djangocms_text")
-            if text_config.inline_models:
-                # Already initialized? Need to initialize again
-                # to reflect inline fields in of just discovered components
-                from djangocms_text.apps import discover_inline_editable_models
+            # BEFORE djangocms_frontend in INSTALLED_APPS:
+            # Need to initialize inline fields again to reflect inline fields of the just discovered components
+            from djangocms_text.apps import discover_inline_editable_models
 
-                text_config.inline_models = discover_inline_editable_models()
+            text_config = apps.get_app_config("djangocms_text")
+            text_config.inline_models = discover_inline_editable_models()
