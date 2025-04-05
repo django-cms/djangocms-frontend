@@ -454,9 +454,11 @@ def g001_col_text_alignment(obj, new_obj):
     if "text-center" in classes:
         classes.remove("text-center")
         new_obj.config["text_alignment"] = "center"
-    if "text-right" in classes or "text-end" in classes:
-        classes.remove("text-right")
+    if "text-end" in classes:
         classes.remove("text-end")
+        new_obj.config["text_alignment"] = "end"
+    if "text-right" in classes:
+        classes.remove("text-right")
         new_obj.config["text_alignment"] = "end"
     if classes:
         new_obj.config["attributes"]["class"] = " ".join(classes)
