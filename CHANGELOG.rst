@@ -2,13 +2,23 @@
 Changelog
 =========
 
+2.1.2 (2025-05-05)
+==================
+
+* fix: Force rediscovery of inline fields by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/272
+* fix: Bootstrap4 migration failed in some cases by @milonline-eu in https://github.com/django-cms/djangocms-frontend/pull/270
+
+**New Contributors**
+
+* @milonline-eu made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/270
+
+
 2.1.1 (2025-03-29)
 ==================
 
 * feat: add `instance.get_classes` for template components by @fsbraun
   in https://github.com/django-cms/djangocms-frontend/pull/268
 * docs: Reference example template components
-
 
 2.1.0 (2025-03-26)
 ==================
