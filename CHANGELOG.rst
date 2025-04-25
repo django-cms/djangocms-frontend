@@ -6,7 +6,7 @@ Changelog
 ==================
 
 * fix: Force rediscovery of inline fields by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/272
-* fix: Bootstrap4 migration failed in some cases by @milonline-eu in https://github.com/django-cms/djangocms-frontend/pull/270
+* fix: Bootstrap 4 migration failed in some cases by @milonline-eu in https://github.com/django-cms/djangocms-frontend/pull/270
 
 **New Contributors**
 
