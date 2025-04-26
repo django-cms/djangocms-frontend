@@ -17,12 +17,16 @@
     @include visually-hidden;
 }
 
-ul.nav {
+#content-main ul.nav {
     margin-bottom: 1em;
 
     & > li.nav-item {
         list-style-type: none;
         padding: inherit;
+
+        a.nav-link {
+            text-decoration: none;
+        }
     }
 }
 
