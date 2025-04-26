@@ -66,8 +66,6 @@ def patch_template(template):
 
 
 def setup():
-    global plugin_tag_pool
-
     for plugin in plugin_pool.get_all_plugins():
         if not issubclass(plugin, allowed_plugin_types):
             continue

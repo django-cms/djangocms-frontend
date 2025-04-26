@@ -133,8 +133,6 @@ components = Components()
 
 
 def setup():
-    global components
-
     if not components._discovered:
         from .cms_plugins import update_plugin_pool
 
