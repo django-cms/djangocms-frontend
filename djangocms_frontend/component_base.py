@@ -174,7 +174,7 @@ class CMSFrontendComponent(forms.Form):
                         if hasattr(cls, "get_render_template")
                         else {}
                     ),
-                    "__module__": cls.__module__,
+                    "__module__": "djangocms_frontend.cms_plugins",
                 },
             )
         return cls._plugin

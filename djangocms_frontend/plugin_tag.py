@@ -65,7 +65,8 @@ def get_plugin_class(settings_string: str | type) -> type:
     if isinstance(settings_string, str):
         if "." in settings_string:
             # import the class if a dotted oath is given
-            return importlib.import_module(*settings_string.rsplit(".", 1))
+            module_name, class_name = settings_string.rsplit(".", 1)
+            return getattr(importlib.import_module(module_name), class_name, None)
         # Get the plugin class from the plugin pool by its name
         return plugin_pool.get_plugin(settings_string)
     return settings_string
