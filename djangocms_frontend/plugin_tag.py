@@ -66,7 +66,7 @@ def get_plugin_class(settings_string: str | type) -> type:
         if "." in settings_string:
             # import the class if a dotted path is given
             module_name, class_name = settings_string.rsplit(".", 1)
-            return getattr(importlib.import_module(module_name), class_name, None)
+            return getattr(importlib.import_module(module_name), class_name)
         # Get the plugin class from the plugin pool by its name
         return plugin_pool.get_plugin(settings_string)
     return settings_string
