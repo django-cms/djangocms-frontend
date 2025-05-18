@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from cms.plugin_pool import plugin_pool
 from django.core.exceptions import ImproperlyConfigured
 
