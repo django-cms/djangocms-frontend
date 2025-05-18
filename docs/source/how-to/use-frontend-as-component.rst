@@ -23,7 +23,7 @@ repetition.
     To make plugins available as components, ensure that the
     ``CMS_COMPONENT_PLUGINS`` setting in your project's ``settings.py``
     is a list that includes the necessary plugin names or dotted path to
-    a plugin parent class . Only plugins named in the listing or their
+    a plugin parent class. Only plugins named in the listing or their
     child classes can be used directly in templates
     without creating database entries.
 
