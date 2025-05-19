@@ -64,7 +64,7 @@ def get_plugin_class(settings_string: str | type) -> type:
     """Get the plugin class from the settings string or import it if it's a dotted path."""
     if isinstance(settings_string, str):
         if "." in settings_string:
-            # import the class if a dotted path is given
+            # import the class if a dotted path is given - raise can exception if not found
             module_name, class_name = settings_string.rsplit(".", 1)
             return getattr(importlib.import_module(module_name), class_name)
         # Get the plugin class from the plugin pool by its name
@@ -76,7 +76,7 @@ def setup():
     allowed_plugin_types = tuple(get_plugin_class(cls) for cls in getattr(settings, "CMS_COMPONENT_PLUGINS", []))
     if not allowed_plugin_types:
         return
-        
+
     for plugin in plugin_pool.get_all_plugins():
         if not issubclass(plugin, allowed_plugin_types):
             continue

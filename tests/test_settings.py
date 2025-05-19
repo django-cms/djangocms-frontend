@@ -129,5 +129,5 @@ TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_i
 
 CMS_COMPONENT_PLUGINS = [
     "djangocms_frontend.cms_plugins.CMSUIPlugin",
-    "djangocms_text.cms_plugins.TextPlugin",
+    "TextPlugin",
 ]
