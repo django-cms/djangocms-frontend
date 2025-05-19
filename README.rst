@@ -101,6 +101,7 @@ file for additional dependencies:
 
 Make sure `django Filer
 <http://django-filer.readthedocs.io/en/latest/installation.html>`_ and
+`django CMS Text <https://github.com/divio/djangocms-text>`_ /
 `django CMS Text CKEditor
 <https://github.com/divio/djangocms-text-ckeditor>`_ are installed and
 configured appropriately.
