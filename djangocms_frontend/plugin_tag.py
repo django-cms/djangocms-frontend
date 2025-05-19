@@ -74,8 +74,6 @@ def get_plugin_class(settings_string: str | type) -> type:
 
 def setup():
     allowed_plugin_types = tuple(get_plugin_class(cls) for cls in getattr(settings, "CMS_COMPONENT_PLUGINS", []))
-    if not allowed_plugin_types:
-        return
 
     for plugin in plugin_pool.get_all_plugins():
         if not issubclass(plugin, allowed_plugin_types):
