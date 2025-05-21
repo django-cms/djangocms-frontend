@@ -1,7 +1,8 @@
 const argv = require('minimist')(process.argv.slice(2));
 const plugins = [];
 const webpack = require('webpack');
-const path = require('path');
+const path = require('path');1
+const CopyPlugin = require("copy-webpack-plugin");
 
 
 process.env.NODE_ENV = (argv.debug) ? 'development' : 'production';
@@ -12,6 +13,14 @@ plugins.push(
         chunks: ['base', 'grid', 'link'],
     })
 );
+plugins.push(
+    new CopyPlugin([{
+        from: path.join(
+            __dirname, '..', '..', 'node_modules', 'bootstrap', 'dist', 'js', 'bootstrap.bundle.js'),
+        to: path.join(
+            __dirname, '..', '..', 'djangocms_frontend', 'static', 'djangocms_frontend', 'js', 'bundle.bootstrap5.js'),
+    }])
+)
 
 // add plugins depending on if we are debugging or not
 if (argv.debug) {
