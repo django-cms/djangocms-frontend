@@ -22,7 +22,6 @@ class TestFixture:
             title="content",
             template="page.html",
         )
-        self.publish(self.page, self.language)
         self.placeholder = self.get_placeholders(self.page).get(slot="content")
         self.request_url = (
             self.page.get_absolute_url(self.language) + "?toolbar_off=true"
@@ -80,7 +79,9 @@ class TestFixture:
             return create_page(title=title, **kwargs)
 
         def get_placeholders(self, page):
-            return page.get_placeholders(self.language)
+            from cms.models import Placeholder, PageContent
+            page_content = PageContent.admin_manager.latest_content().get(language=self.language, page=self.page)
+            return Placeholder.objects.get_for_obj(page_content)
 
         try:
             import djangocms_url_manager as __just_testing__
