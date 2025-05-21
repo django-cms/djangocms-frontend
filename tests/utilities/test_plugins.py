@@ -164,6 +164,5 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
 
         with self.login_user_context(self.superuser):
             response = self.client.get(endpoint)
-        print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'My private note')
