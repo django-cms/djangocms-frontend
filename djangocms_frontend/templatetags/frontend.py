@@ -39,7 +39,7 @@ def is_inline_editing_active(context: template.Context) -> bool:
 
 
 def update_component_properties(context: template.Context, key: str, value: typing.Any, append: bool = False) -> None:
-    """"Adds or appends the value to the property "key" of a component during delcaration"""
+    """ "Adds or appends the value to the property "key" of a component during delcaration"""
     args, kwargs = context["_cms_components"]["cms_component"][0]
     if append:
         # Populate slots with plugin_type and verbose_name
@@ -318,11 +318,7 @@ class InlineField(CMSEditableObject):
 
         if is_registering_component(context) and attribute:
             update_component_properties(context, "frontend_editable_fields", attribute, append=True)
-        elif (
-            is_inline_editing_active(context)
-            and isinstance(instance, CMSPlugin)
-            and instance.pk
-        ):
+        elif is_inline_editing_active(context) and isinstance(instance, CMSPlugin) and instance.pk:
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
             # DummyPlugins of the ``plugin`` tag are cannot be edited (they have no pk in their model class)
             kwargs["edit_fields"] = attribute
