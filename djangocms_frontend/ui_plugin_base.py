@@ -3,6 +3,7 @@ from cms.plugin_base import CMSPluginBase
 from django.utils.encoding import force_str
 
 from djangocms_frontend.helpers import get_related
+from djangocms_frontend.models import AbstractFrontendUIItem
 
 try:
     from cms.admin.placeholderadmin import PlaceholderAdmin
@@ -30,12 +31,13 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
         return force_str(super().__str__())
 
     def render(self, context, instance, placeholder):
-        for key, value in instance.config.items():
-            if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
-                if key not in instance.__dir__():  # hasattr would return the value in the config dict
-                    setattr(instance.__class__, key, get_related(key))
-        if "instance" not in instance.config and isinstance(instance.config, dict):
-            context.update(instance.config)
+        if isinstance(instance, AbstractFrontendUIItem):
+            for key, value in instance.config.items():
+                if isinstance(value, dict) and set(value.keys()) == {"pk", "model"}:
+                    if key not in instance.__dir__():  # hasattr would return the value in the config dict
+                        setattr(instance.__class__, key, get_related(key))
+            if "instance" not in instance.config and isinstance(instance.config, dict):
+                context.update(instance.config)
         return super().render(context, instance, placeholder)
 
     if not hasattr(PlaceholderAdmin, "edit_field"):

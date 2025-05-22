@@ -119,6 +119,8 @@ CMS_TEMPLATES = (("page.html", "Page"),)
 
 SITE_ID = 1
 
+STATIC_URL = "/static/"
+
 ROOT_URLCONF = "tests.urls"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
