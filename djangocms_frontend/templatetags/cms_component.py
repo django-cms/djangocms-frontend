@@ -4,6 +4,8 @@ from django import forms, template
 
 register = template.Library()
 
+_TUPLE_RE = re.compile(r"^(.*?)\s*<([^>]+)>\s?$")
+
 
 @register.simple_tag(takes_context=True)
 def cms_component(context: template.Context, *args, **kwargs: dict) -> str:
@@ -59,17 +61,17 @@ def _to_tuple_if_needed(value: str) -> str | tuple[str, str]:
         value (str): The string to be converted.
 
     Returns:
-        tuple[str, str]: A tuple containing the two parts of the string if it contains a delimiter,
-                         otherwise returns the original string as a single-element tuple.
+        str | tuple[str, str]: A tuple containing the two parts of the string if it contains 
+                               a delimiter, otherwise returns the original string.
     """
-    match = re.match(r"^(.*?)\s*<([^>]+)>\s?$", value)
+    match = _TUPLE_RE.fullmatch(value)
     if match:
         return (match.group(2).strip(), match.group(1).strip())
     return value
 
 
 @register.filter
-def split(value: str, delimiter: str = "|") -> list[str] | list[tuple[str, str]]:
+def split(value: str, delimiter: str = "|") -> list[str | tuple[str, str]]:
     """
     Helper that splits a given string into a list of substrings based on a specified delimiter.
     If the substring is of the format "Verbose name <value>" it is turned into a 2-tuple
@@ -80,7 +82,8 @@ def split(value: str, delimiter: str = "|") -> list[str] | list[tuple[str, str]]
         delimiter (str, optional): The delimiter to use for splitting the string. Defaults to "|".
 
     Returns:
-        list[str]: A list of substrings obtained by splitting the input string using the delimiter.
+        list[str | tuple[str, str]: A list of substrings or 2-tuples obtained by splitting the 
+        input string using the delimiter.
     """
     split_list = value.split(delimiter)
     return [_to_tuple_if_needed(item) for item in split_list]
