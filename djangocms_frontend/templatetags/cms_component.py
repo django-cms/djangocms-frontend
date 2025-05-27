@@ -61,7 +61,7 @@ def _to_tuple_if_needed(value: str) -> str | tuple[str, str]:
         value (str): The string to be converted.
 
     Returns:
-        str | tuple[str, str]: A tuple containing the two parts of the string if it contains 
+        str | tuple[str, str]: A tuple containing the two parts of the string if it contains
                                a delimiter, otherwise returns the original string.
     """
     match = _TUPLE_RE.fullmatch(value)
@@ -82,7 +82,7 @@ def split(value: str, delimiter: str = "|") -> list[str | tuple[str, str]]:
         delimiter (str, optional): The delimiter to use for splitting the string. Defaults to "|".
 
     Returns:
-        list[str | tuple[str, str]: A list of substrings or 2-tuples obtained by splitting the 
+        list[str | tuple[str, str]: A list of substrings or 2-tuples obtained by splitting the
         input string using the delimiter.
     """
     split_list = value.split(delimiter)
