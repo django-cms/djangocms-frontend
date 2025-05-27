@@ -111,6 +111,7 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         from djangocms_frontend.component_pool import find_cms_component_templates
 
         all_components = find_cms_component_templates("cms_components")
+        path_components = find_cms_component_templates("cms_components/ui")
         private_components = find_cms_component_templates("my_components")
         no_components = find_cms_component_templates("no_components")
 
@@ -119,5 +120,6 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
             ("tests.test_app", "test_app/cms_components/with_slots.html"),
             ("tests.test_app", "test_app/cms_components/ui/button.html"),
         }
+        assert path_components == [("tests.test_app", "test_app/cms_components/ui/button.html")]
         assert private_components == [("tests.test_app", "test_app/my_components/test_component.htm")]
         assert no_components == []
