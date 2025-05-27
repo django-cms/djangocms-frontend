@@ -64,7 +64,7 @@ def _to_tuple_if_needed(value: str) -> str | tuple[str, str]:
     """
     match = re.match(r"^(.*?)\s*<([^>]+)>\s?$", value)
     if match:
-        return [match.group(1).strip(), match.group(2).strip()]
+        return [match.group(2).strip(), match.group(1).strip()]
     return value
 
 
