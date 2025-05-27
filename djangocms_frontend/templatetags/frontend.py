@@ -317,6 +317,7 @@ class InlineField(CMSEditableObject):
             instance = context.get("instance", None)  # Use instance from context
 
         if is_registering_component(context) and attribute:
+            # Autodetect inline field and add it to the component
             update_component_properties(context, "frontend_editable_fields", attribute, append=True)
         elif is_inline_editing_active(context) and isinstance(instance, CMSPlugin) and instance.pk:
             # Only allow inline field to be rendered if inline editing is active and the instance is a CMSPlugin
