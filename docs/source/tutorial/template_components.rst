@@ -254,8 +254,10 @@ A little helper: the ``split`` filter
 -------------------------------------
 
 .. index::
-    single: ``split`` filter
+    single: split filter
+    single: choices in template components
 
+If you load the ``cms_component`` template tag library, you can use the ``split`` filter to convert a string into a list.
 Some component properties require a list of values, such as the ``parent_classes`` or ``child_classes``.
 You can use the ``split`` filter to convert a string into a list. For example, if you want to allow the
 **Hero component** to be a child of the **Container or Column component**, you can set the ``parent_classes``
@@ -272,9 +274,14 @@ Additionally, ``split`` can be used to create tuples as needed for the ``choices
 ``forms.ChoiceField``. For example, if you want to create a choice field with two options, you can use the
 following code::
 
-    {% field "color" forms.ChoiceField choices="Red <red>|Green <green>|Default <blue>"|split name=_("Color") %}
+    {% field "color" forms.ChoiceField choices=_("Red <red>|Green <green>|Default <blue>")|split name=_("Color") %}
 
 The verbose choice label is appended by the actual value of the field between angle brackets (``<...>``).
+
+.. note::
+
+    For translators it is important to know, that they **should not translate** the value in angle brackets.
+    The German translation of the above example string might be ``Rot <red>|Grün <green>|Standard <blue>``.
 
 
 Limitations of template components
