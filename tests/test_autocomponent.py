@@ -69,7 +69,23 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertEqual(split("hero.html"), ["hero.html"])
         self.assertEqual(split("Mixin1|Mixin2"), ["Mixin1", "Mixin2"])
         self.assertEqual(split("hero.html"), ["hero.html"])
+        # Common alternative:
         self.assertEqual(split("hero.html, Mixin1, Mixin2", ", "), ["hero.html", "Mixin1", "Mixin2"])
+        # Not nice but correct:
+        self.assertEqual(split("hero.html, Mixin1, Mixin2", ","), ["hero.html", " Mixin1", " Mixin2"])
+
+        self.assertEqual(
+            split("Dark mode <bg-dark>|Light mode <bg-light>"),
+            [("bg-dark", "Dark mode"), ("bg-light", "Light mode")],
+        )
+        self.assertEqual(
+            split("Dark mode<bg-dark>|Light mode<bg-light>"),  # No space before < needed
+            [("bg-dark", "Dark mode"), ("bg-light", "Light mode")],
+        )
+        self.assertEqual(
+            split("Dark mode <bg-dark|bg-light>"),
+            ["Dark mode <bg-dark", "bg-light>"],
+        )
 
     def test_invalid_cms_component_usage_missing_required_argument(self):
         # The {% cms_component %} tag requires a component name.

@@ -5,7 +5,7 @@ Building Custom Frontend Components
 ####################################
 
 .. index::
-    single: custom frontend components
+    single: Custom frontend components
 
 .. versionadded:: 2.0
 

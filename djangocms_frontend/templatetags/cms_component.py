@@ -1,3 +1,5 @@
+from __future__ import annotations
+import re
 from django import forms, template
 
 register = template.Library()
@@ -49,10 +51,29 @@ def field(context: template.Context, field_name: str, field_type: forms.Field, *
     return ""
 
 
+def _to_tuple_if_needed(value: str) -> str | tuple[str, str]:
+    """
+    Helper function to convert a string into a tuple if it contains a delimiter.
+
+    Args:
+        value (str): The string to be converted.
+
+    Returns:
+        tuple[str, str]: A tuple containing the two parts of the string if it contains a delimiter,
+                         otherwise returns the original string as a single-element tuple.
+    """
+    match = re.match(r"^(.*?)\s*<([^>]+)>\s?$", value)
+    if match:
+        return (match.group(2).strip(), match.group(1).strip())
+    return value
+
+
 @register.filter
-def split(value: str, delimiter: str = "|") -> list[str]:
+def split(value: str, delimiter: str = "|") -> list[str] | list[tuple[str, str]]:
     """
     Helper that splits a given string into a list of substrings based on a specified delimiter.
+    If the substring is of the format "Verbose name <value>" it is turned into a 2-tuple
+    as used by a form field's choices argument.
 
     Args:
         value (str): The string to be split.
@@ -61,4 +82,5 @@ def split(value: str, delimiter: str = "|") -> list[str]:
     Returns:
         list[str]: A list of substrings obtained by splitting the input string using the delimiter.
     """
-    return value.split(delimiter)
+    split_list = value.split(delimiter)
+    return [_to_tuple_if_needed(item) for item in split_list]
