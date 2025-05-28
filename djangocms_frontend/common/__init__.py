@@ -24,7 +24,7 @@ for module, classes in __common.items():
         module = import_module(f"{__name__}.{settings.framework}.{module}", module)
         for cls in classes:
             globals()[cls] = getattr(module, cls)
-    except ModuleNotFoundError:
+    except ModuleNotFoundError:  # pragma: no cover
         for cls in classes:
             globals()[cls] = type(cls, (object,), {})
 

@@ -106,3 +106,20 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         invalid_template = "{% load cms_tags %}{% cms_component 'Hero' %}{% cms_component 'Footer' %}"
         with self.assertRaises(TemplateSyntaxError):
             Template(invalid_template)
+
+    def test_component_folder_selection(self):
+        from djangocms_frontend.component_pool import find_cms_component_templates
+
+        all_components = find_cms_component_templates("cms_components")
+        path_components = find_cms_component_templates("cms_components/ui")
+        private_components = find_cms_component_templates("my_components")
+        no_components = find_cms_component_templates("no_components")
+
+        assert set(all_components) == {
+            ("tests.test_app", "test_app/cms_components/hero.html"),
+            ("tests.test_app", "test_app/cms_components/with_slots.html"),
+            ("tests.test_app", "test_app/cms_components/ui/button.html"),
+        }
+        assert path_components == [("tests.test_app", "test_app/cms_components/ui/button.html")]
+        assert private_components == [("tests.test_app", "test_app/my_components/test_component.htm")]
+        assert no_components == []

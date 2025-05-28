@@ -79,3 +79,15 @@ class ContentPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<figcaption class="figure-caption')
+
+    def test_safe_caption_tag(self):
+        from djangocms_frontend.templatetags.frontend import safe_caption
+
+        # no paragraphs: unchanged
+        self.assertEqual(safe_caption("hello world"), "hello world")
+
+        # single paragraph: stripped
+        self.assertEqual(safe_caption("<p>hello world</p>"), "hello world")
+
+        # multiple paragraphs: kept as is
+        self.assertEqual(safe_caption("<p>hello</p><p>world</p>"), "<p>hello</p><p>world</p>")

@@ -28,6 +28,24 @@ in your project's ``settings.py``.
         ]
 
 
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_COMPONENT_FOLDER
+
+    Defaults to ``"cms_components"``
+
+    The subfolder where the component templates are discovered. This is used by the
+    :ref:`template components <template_components>` to find the templates
+    for the components.
+
+    The folder needs to be created in your app's ``templates/<app_name>/`` directory.
+    If you want to use a different folder, set this to the folder name of your choice.
+
+    For example, if you want to use ``"my_components"``, add the following line to your project's settings::
+
+        DJANGOCMS_FRONTEND_COMPONENT_FOLDER = "my_components"
+
+    This causes djangocms-frontend to search for templates on the following paths: ``templates/<app_name>/my_components/``,
+    where ``<app_name>`` is the name of any installed app.
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_COMPONENT_FIELDS
 
     Defaults to ``{}``

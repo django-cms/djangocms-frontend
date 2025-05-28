@@ -1,7 +1,7 @@
 from collections import defaultdict
+from collections.abc import Iterator
 import importlib
 import os
-from collections.abc import Iterator
 import warnings
 
 from django import forms
@@ -15,16 +15,16 @@ from djangocms_frontend import settings
 from djangocms_frontend.component_base import CMSFrontendComponent
 
 
-def find_cms_component_templates() -> list[tuple[str, str]]:
+def find_cms_component_templates(subfolder: str) -> list[tuple[str, str]]:
     templates = []
     for app in apps.get_app_configs():
-        app_template_dir = os.path.join(app.path, "templates", app.label, "cms_components")
+        app_template_dir = os.path.join(app.path, "templates", app.label, subfolder)
         if os.path.exists(app_template_dir):
             for root, _, files in os.walk(app_template_dir):
                 for file in files:
                     if file.endswith(".html") or file.endswith(".htm"):
                         relative_path = os.path.relpath(os.path.join(root, file), app_template_dir)
-                        templates.append((app.module.__name__, f"{app.label}/cms_components/{relative_path}"))
+                        templates.append((app.module.__name__, f"{app.label}/{subfolder}/{relative_path}"))
     return templates
 
 
@@ -43,7 +43,7 @@ class CMSAutoComponentDiscovery:
 
     def __init__(self, register_to):
         self.default_field_context.update(settings.COMPONENT_FIELDS)
-        templates = find_cms_component_templates()
+        templates = find_cms_component_templates(settings.COMPONENT_FOLDER)
         auto_components = self.scan_templates_for_component_declaration(templates)
         for component in auto_components:
             register_to.register(component)
