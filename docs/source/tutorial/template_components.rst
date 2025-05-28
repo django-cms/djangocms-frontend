@@ -52,15 +52,21 @@ Hero component
 ==============
 
 ``djangocms-frontend`` allows developers to extend its functionality by creating
-template components**. In this tutorial, we will create an **Hero component**
+**template components**. In this tutorial, we will create an **Hero component**
 with the following fields:
 
 - ``title``: A required text field.
 - ``slogan``: A required text area field.
 - ``hero_image``: A required image field.
 
-This component will be stored in a template directory named ``<app_name>/cms_components``,
-as required for ``djangocms-frontend`` template components.
+This component will be stored in a template directory named ``<app_name>/cms_components``
+(or any subdirectory thereof).
+
+.. note::
+    You can change the location of your template components inside your template directory
+    by setting the :attr:`DJANGOCMS_FRONTEND_COMPONENT_FOLDER` setting. The default is
+    ``cms_components``. If you change it, you need to adjust the directory structure accordingly.
+
 
 Directory Structure
 -------------------
