@@ -2,7 +2,7 @@
  django CMS Frontend
 #####################
 
-|pypi| |docs| |coverage| |python| |django| |djangocms| |djangocms4|
+|pypi| |docs| |coverage| |python| |django| |djangocms|
 
 django CMS Frontend is a versatile plugin suite for django CMS that facilitates
 the easy creation of reusable frontend components. It supports any CSS framework,
@@ -173,14 +173,14 @@ See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICEN
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/django-cms/djangocms-frontend
 
-.. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
-   :target: https://pypi.org/project/djangocms-frontend/
+.. |python| image:: https://img.shields.io/pypi/pyversions/djangocms-frontend
+    :alt: PyPI - Python Version
+    :target: https://pypi.org/project/djangocms-frontend/
 
-.. |django| image:: https://img.shields.io/badge/django-3.2+-blue.svg
-   :target: https://www.djangoproject.com/
+.. |django| image:: https://img.shields.io/pypi/frameworkversions/django/djangocms-frontend
+    :alt: PyPI - Django Versions from Framework Classifiers
+    :target: https://www.djangoproject.com/
 
-.. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
-   :target: https://www.django-cms.org/
-
-.. |djangocms4| image:: https://img.shields.io/badge/django%20CMS-4%2B-blue.svg
-   :target: https://www.django-cms.org/en/preview-django-cms-40/
+.. |djangocms| image:: https://img.shields.io/pypi/frameworkversions/django-cms/djangocms-frontend
+    :alt: PyPI - django CMS Versions from Framework Classifiers
+    :target: https://www.django-cms.org/
