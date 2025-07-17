@@ -1,3 +1,80 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+
+requires = [ "setuptools", "setuptools-scm" ]
+
+[project]
+name = "djangocms-frontend"
+description = "Adds abstract User Interface items as plugins to django CMS."
+readme = "README.rst"
+license = "BSD-3-Clause"
+authors = [
+  { name = "Fabian Braun", email = "fsbraun@gmx.de" },
+]
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
+  "Framework :: Django CMS",
+  "Framework :: Django CMS :: 3.11",
+  "Framework :: Django CMS :: 4.1",
+  "Framework :: Django CMS :: 5.0",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dynamic = [ "version" ]
+dependencies = [
+  "django-cms>=3.7",
+  "django-entangled>=0.6",
+  "django-filer>=1.7",
+  "djangocms-attributes-field>=4",
+  "djangocms-link>=5",
+  "easy-thumbnails",
+]
+
+optional-dependencies.cms-3 = [
+  "django-cms<4",
+  "django-parler",
+  "djangocms-link>=5",
+  "djangocms-text",
+]
+optional-dependencies.cms-4 = [
+  "django-cms>=4.1",
+  "django-parler",
+  "djangocms-alias>=2",
+  "djangocms-link>=5",
+  "djangocms-text",
+  "djangocms-versioning>=2",
+]
+optional-dependencies.djangocms-icon = [
+  "djangocms-icon>=1.4",
+]
+optional-dependencies.static-ace = [
+  "djangocms-static-ace",
+]
+urls.Documentation = "https://djangocms-frontend.readthedocs.io"
+urls.Issues = "https://github.com/django-cms/djangocms-frontend/issues"
+urls."Release notes" = "https://github.com/django-cms/djangocms-frontend/blob/master/CHANGELOG.rst"
+urls.Source = "https://github.com/django-cms/djangocms-frontend"
+
+[tool.setuptools]
+packages = [ "djangocms_frontend" ]
+
+[tool.setuptools.dynamic]
+version = { attr = "djangocms_frontend.__version__" }
+
+[tool.setuptools.package-data]
+djangocms_frontend = [ "static/**/*", "templates/**/*", "locale/**/*", "LICENSE", "README.rst" ]
+exclude = [ "**/bundles/" ]
+
 [tool.black]
 exclude = '''
   .git

@@ -5,3 +5,6 @@ recursive-include djangocms_frontend/static *
 recursive-include djangocms_frontend/templates *
 recursive-include djangocms_frontend/contrib *
 recursive-exclude * *.py[co]
+exclude docs/
+exclude tests/
+exclude tools/
