@@ -72,8 +72,8 @@ packages = [ "djangocms_frontend" ]
 version = { attr = "djangocms_frontend.__version__" }
 
 [tool.setuptools.package-data]
-djangocms_stories = [ "static/**/*", "templates/**/*", "locale/**/*", "LICENSE", "README.rst" ]
-exclude = [ "**/bundles/", "docs/**", "tests/**", "private/**" ]
+djangocms_frontend = [ "static/**/*", "templates/**/*", "locale/**/*", "LICENSE", "README.rst" ]
+exclude = [ "**/bundles/" ]
 
 [tool.black]
 exclude = '''
