@@ -1,0 +1,26 @@
+{% load frontend cms_component %}
+
+{% cms_component "CenteredScreenshotHeader" name=_("Centered screenshot")}
+{% field "title" forms.CharField required=True label=_("Title") %}
+{% field "lead" HTMLFormField required=True label=_("Lead") %}
+{% field "image" ImageFormField required=True label=_("Image") %}
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 class="display-4 fw-bold text-body-emphasis">{% inline_field "title" %}</h1>
+    <div class="col-lg-6 mx-auto">
+        <div class="lead mb-4">{% inline_field "lead" %}</div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            {% childplugins %}
+                <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Add button plugins</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            {% endchildplugins %}
+        </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+            {% thumbnail image|get_related_object 700x500 upscale as thumb %}
+                <img src="{{ thumb.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" width="700" height="500" loading="lazy">
+            {% endwith %}
+        </div>
+    </div>
+</div>
