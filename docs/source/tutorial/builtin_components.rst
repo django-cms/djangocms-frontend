@@ -121,19 +121,12 @@ You need to manually add them to your templates.
       {% extends "bootstrap5/base.html" %}
       {% block brand %}<a href="/">My Site</a>{% endblock %}
 
-   This will load Bootstrap 5 CSS and JS from a CDN.
+   This will load Bootstrap 5 CSS and JS.
 
    .. note::
 
-      We recommend developing your own ``base.html`` for your projects. The
-      example templates load CSS and JS files from a CDN. Good reasons to do so
-      are
+      We recommend developing your own ``base.html`` for your projects.
 
-      * ``djangocms-frontend`` does not contain CSS or JS files from Bootstrap
-        or any other framework for that matter. The example templates load
-        CSS and JS from a CDN.
-      * It is considered safer to host CSS and JS files yourself. Otherwise you
-        do not have control over the CSS and/or JS that is delivered.
       * It is a common practice to customize at least the CSS part, e.g. with
         brand colors.
       * You might have a totally different build process for your styling assets,
