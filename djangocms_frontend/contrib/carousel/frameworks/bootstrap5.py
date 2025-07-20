@@ -23,7 +23,7 @@ class CarouselSlideRenderMixin:
         instance.add_classes("carousel-item")
         if is_first_child(instance, parent):
             instance.add_classes("active")
-        context["link"] = instance.get_link()
+        context["mixin_link"] = instance.get_link()
         context["aspect_ratio"] = str(width / height)
         context["options"] = {"crop": 10, "size": (width, height), "upscale": True}
         return super().render(context, instance, placeholder)
