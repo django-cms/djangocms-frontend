@@ -1,6 +1,10 @@
+from django import forms
 from django.test import TestCase
 
-from djangocms_frontend.fields import AttributesField, TagTypeField, TagTypeFormField
+from djangocms_frontend.settings import DEVICE_CHOICES
+from djangocms_frontend.fields import (
+    AttributesField, TagTypeField,
+    TagTypeFormField, DeviceChoiceField, OptionalDeviceChoiceField)
 
 
 class FieldsTestCase(TestCase):
@@ -31,3 +35,32 @@ class FieldsTestCase(TestCase):
                 ("aside", "aside"),
             ],
         )
+
+    def test_optional_device_choice_field(self):
+        class Form(forms.Form):
+            odc = OptionalDeviceChoiceField()
+            odc_not_required = OptionalDeviceChoiceField(required=False)
+
+        form = Form(data={"odc": [size for size, _ in DEVICE_CHOICES]})
+        self.assertTrue(form.is_valid(), form.errors)
+        self.assertEqual(form.cleaned_data["odc"], None)
+
+        form_1 = Form(data={"odc": ['xs', 'sm']})
+        self.assertTrue(form_1.is_valid(), form_1.errors)
+        self.assertEqual(form_1.cleaned_data["odc"], ['xs', 'sm'])
+
+    def test_device_choice_field(self):
+        class Form(forms.Form):
+            dc = DeviceChoiceField()
+
+        class Form2(forms.Form):
+            dc_not_required = DeviceChoiceField(required=False)
+
+        form = Form(data={"dc": ["xs"]})
+        self.assertTrue(form.is_valid(), form.errors)
+        self.assertEqual(form.cleaned_data["dc"], ["xs"])
+
+        form_1 = Form2(data={})
+        self.assertFalse(form_1.is_valid())
+        self.assertFormError(form_1, "dc_not_required",
+                             ["Please select at least one device size"])
