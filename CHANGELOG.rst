@@ -2,6 +2,25 @@
 Changelog
 =========
 
+2.1.3 (2025-07-20)
+==================
+
+* feat: simpler component configuration  by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/279
+* feat: Add support for ``choices`` in template components. by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/282
+* feat: Make template component folder configurable by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/285
+* fix: AttributeError CMSPlugin (EditorNotePlugin) object has no attribute config by @zbohm in https://github.com/django-cms/djangocms-frontend/pull/280
+* chore: Add test for editor note plugin by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/281
+* chore: Fix some style issues by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/283
+* chore: Introduce dynamic badges from shields.io by @mrbazzan in https://github.com/django-cms/djangocms-frontend/pull/287
+* chore: Move setup info to pyproject.toml exclude docs and tests from wheel by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/290
+* chore: fix column per row not been saved and added tests by @mrbazzan in https://github.com/django-cms/djangocms-frontend/pull/291
+* chore: Increase specificity for admin urls (django 5.2) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/278
+
+**New Contributors**
+
+* @zbohm made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/280
+* @mrbazzan made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/287
+
 2.1.2 (2025-05-05)
 ==================
 
