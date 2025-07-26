@@ -173,3 +173,16 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the form with the language of the plugin edited for the link field widgets.
+        """
+        super().__init__(*args, **kwargs)
+        language = None
+        if "instance" in kwargs:
+            language = getattr(kwargs["instance"], "language", None)
+        elif "initial" in kwargs and "plugin_language" in kwargs["initial"]:
+            language = kwargs["initial"]["plugin_language"]
+        for widget in self.fields["link"].widget.widgets:
+            widget.language = language
