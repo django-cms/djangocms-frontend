@@ -127,11 +127,11 @@ for size in settings.DEVICE_SIZES:
     )
 
 
-GridRowBaseForm.Meta.entangled_fields["config"] += extra_fields_column.keys()
+GridRowBaseForm._meta.entangled_fields["config"] += extra_fields_column.keys()
 
 
 GridRowForm = type(
-    "GridRowBaseForm",
+    "GridRowForm",
     (GridRowBaseForm,),
     copy(extra_fields_column),
 )
@@ -226,10 +226,10 @@ for size in settings.DEVICE_SIZES:
         widget=forms.HiddenInput() if "{size}_me" in getattr(settings, "EXCL_COL_PROP", ()) else forms.CheckboxInput(),
     )
 
+GridColumnBaseForm._meta.entangled_fields["config"] += extra_fields_column.keys()
+
 GridColumnForm = type(
     "GridColumnForm",
     (GridColumnBaseForm,),
     copy(extra_fields_column),
 )
-
-GridColumnForm._meta.entangled_fields["config"] += extra_fields_column.keys()
