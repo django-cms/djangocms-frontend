@@ -3,7 +3,8 @@
 
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}"/>
-    {{ block.super }}
+    <meta name="plugin_language" itemprop="{{ plugin.language|default:request.GET.plugin_language }}">
+   {{ block.super }}
 {% endblock %}
 
 {% block field_sets %}
