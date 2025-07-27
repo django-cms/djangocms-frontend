@@ -8,6 +8,9 @@ Changelog
 * fix: Bad URL generation for the CarouselSlidePlugin by @nchaourar in https://github.com/django-cms/djangocms-frontend/pull/293
 * fix: Provide frontend plugin change forms with plugin language by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/295
 
+**New Contributors**
+
+* @nchaourar made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/293
 
 2.1.3 (2025-07-20)
 ==================
