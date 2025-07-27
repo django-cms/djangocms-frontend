@@ -3,6 +3,9 @@
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}"/>
     <script src="{% static 'djangocms_frontend/js/bundle.base.js' %}"></script>
+    {% with get_plugin_language=request.GET.plugin_language %}
+      <meta name="plugin_language" data-plugin-language="{{ plugin.language|default:get_plugin_language }}">
+    {% endwith %}
     {{ block.super }}
 {% endblock %}
 {% block content_subtitle %}{% endblock %}
