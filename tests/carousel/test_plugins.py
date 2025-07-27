@@ -104,3 +104,28 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             or ('<div class="carousel slide"' in response.content.decode("utf-8")),
             f'<div class="slide carousel" not found in {response.content.decode("utf-8")}',
         )
+
+        # Now testing if links are working
+        row = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselPlugin.__name__,
+            language=self.language,
+        )
+        row.initialize_from_form(CarouselForm).save()
+        plugin = add_plugin(
+            target=row,
+            placeholder=self.placeholder,
+            plugin_type=CarouselSlidePlugin.__name__,
+            language=self.language,
+            config=dict(
+                carousel_image=dict(pk=self.image.id, model="filer.Image"),
+                link=dict(external_link="https://www.divio.com"),
+            ),
+        )
+        plugin.initialize_from_form(CarouselSlideForm).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'href="https://www.divio.com"')
