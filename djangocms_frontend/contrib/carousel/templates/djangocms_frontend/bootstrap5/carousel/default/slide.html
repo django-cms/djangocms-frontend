@@ -1,12 +1,12 @@
 {% load cms_tags frontend %}
 <{{ instance.tag_type }}{{ instance.get_attributes }}>
-{% if link %}
-    <a href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>
+{% if mixin_link %}
+    <a href="{{ mixin_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>
 {% endif %}
 {% with image=carousel_image.image %}
     {% include "djangocms_frontend/bootstrap5/carousel/default/image.html" %}
 {% endwith %}
-{% if link %}
+{% if mixin_link %}
     </a>
 {% endif %}
 <div class="carousel-caption d-none d-md-block">
