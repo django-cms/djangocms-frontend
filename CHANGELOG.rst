@@ -2,6 +2,13 @@
 Changelog
 =========
 
+2.1.4 (2025-07-27)
+==================
+
+* fix: Bad URL generation for the CarouselSlidePlugin by @nchaourar in https://github.com/django-cms/djangocms-frontend/pull/293
+* fix: Provide frontend plugin change forms with plugin language by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/295
+
+
 2.1.3 (2025-07-20)
 ==================
 
