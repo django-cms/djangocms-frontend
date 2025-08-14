@@ -1,17 +1,33 @@
+@import "./button";
+
 .colM ul:not(.object-tools).nav {
     margin-top: 0;
     margin-bottom: 20px;
 }
 
-ul.nav {
+form ul.djangocms-frontend.nav {
+    margin: 0  !important;
+    padding: 0;
     &:not(:has(> li:nth-child(2))) {
         // Hide single tab
         display: none;
     }
     .nav-item {
-        margin-inline-end: 1rem;
+        display: inline-block;
+        margin-inline-start: 0;
+        margin-inline-end: $nav-pills-margin;
+        margin-block-end: 14px;
+        a.nav-link {
+            padding: $nav-pills-padding;
+            height: $nav-pills-height;
+            line-height: $nav-pills-height;
+            display: inline-block;
+            @include button-variant($black, $white, $gray, $btn-border-radius-base);
+            &.active {
+                @include button-variant($nav-pills-color, $nav-pills-background, $gray, $btn-border-radius-base);
+            }
+        }
     }
-    // margin-bottom: 0;
     .nav-link {
         position: relative;
         text-decoration: none;
@@ -21,11 +37,11 @@ ul.nav {
             border-radius: 50%;
 
             &.error {
-                background-color: var(--bs-danger);
+                background-color: var(--delete-button-bg);
             }
 
             &.attributes {
-                background-color: var(--bs-info);
+                background-color: color-mix(in srgb, $cms-primary 50%, var(--body-fg));
                 display: block;
             }
 
@@ -43,9 +59,13 @@ ul.nav {
     }
 }
 
-ul.nav.nav-pills .nav-link:not(.active) {
-    border-style: solid;
-    border-width: 1px;
+.djangocms-frontend.tab-content {
+    .tab-pane {
+        display: none;
+        &.active {
+            display: block;
+        }
+    }
 }
 
 body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs + div.tab-content .tab-pane {
@@ -67,6 +87,7 @@ div.tab-pk {
     color: var(--dca-gray-darker, var(--body-fg, $django-fg));
     font-size: 80%;
     margin-inline-start: auto;
+    display: inline-block;
 }
 
 .djangocms-admin-style .colM ul.nav:not(.object-tools):not(.messagelist) {

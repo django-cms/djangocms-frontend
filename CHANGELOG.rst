@@ -2,6 +2,14 @@
 Changelog
 =========
 
+2.2.0 (2025-08-18)
+==================
+
+* feat: Refactored CSS for faster and more reliable loading by @fsbraun
+* feat: Removed link and button preview
+* chore: Update node version
+* chore: Remove bootstrap dependency
+
 2.1.4 (2025-07-27)
 ==================
 

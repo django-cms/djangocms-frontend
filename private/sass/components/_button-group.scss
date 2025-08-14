@@ -6,7 +6,8 @@
 }
 
 .frontend-button-group {
-    display: inline-block;
+    display: inline-flex;
+    margin-inline-end: 1em;
     .btn {
         box-sizing: border-box;
         cursor: pointer;

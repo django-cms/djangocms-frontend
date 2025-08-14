@@ -71,16 +71,7 @@ function task(id, extra) {
 // #############################################################################
 // TASKS
 gulp.task('sass', task('sass'));
-gulp.task('bundle', task('webpack'));
-gulp.task('webpack:watch', task('webpack', { watch: true }));
-
-gulp.task('lint', task('lint'));
-gulp.task('icons', task('svg', { svg: 'icons' }));
-
-// gulp.task('default', ['sass', 'webpack', 'watch']);
 
 gulp.task('watch', function () {
-    gulp.start('webpack:watch');
     gulp.watch(PROJECT_PATTERNS.sass, ['sass']);
-    gulp.watch(PROJECT_PATTERNS.js, ['lint']);
 });

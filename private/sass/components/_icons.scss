@@ -1,5 +1,6 @@
 // #############################################################################
 // COMMON
+@use "sass:map";
 
 .icon {
     display: inline-block;
@@ -27,12 +28,12 @@ $svg-colors: (
     "primary": #0bf,
 );
 
-@each $key in map-keys($svg-colors) {
+@each $key in map.keys($svg-colors) {
     .icon-#{$key} {
-        color: map-get($svg-colors, $key);
+        color: map.get($svg-colors, $key);
 
         svg {
-            fill: map-get($svg-colors, $key);
+            fill: map.get($svg-colors, $key);
         }
     }
 }
