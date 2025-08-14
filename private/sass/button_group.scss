@@ -1,11 +1,5 @@
 @import "components/variables";
 
-/*
-.btn-check:checked+.btn-outline-secondary.btn-grp {
-    background: white;
-}
-
-*/
 form .form-row div.frontend-button-group.frontend-button-group-block {
     display: flex;
     flex-wrap: wrap;
@@ -57,14 +51,14 @@ form .form-row div.frontend-button-group {
 
     input[type="radio"]:checked + label.btn-grp,
     input[type="checkbox"]:checked + label.btn-grp {
-        outline: 2px solid $cms-primary;
+        outline: 2px solid $color-secondary;
         border-color: white;
         border-radius: 0;
     }
 
     input[property="text"]:checked + label.btn-grp,
     input[property="icon"]:checked + label.btn-grp {
-        background: $cms-primary;
+        background: $color-secondary;
     }
 
     input[property="opacity"] + label.btn-grp {

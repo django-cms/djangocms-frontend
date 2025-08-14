@@ -22,9 +22,9 @@ form ul.djangocms-frontend.nav {
             height: $nav-pills-height;
             line-height: $nav-pills-height;
             display: inline-block;
-            @include button-variant($black, $white, $gray, $btn-border-radius-base);
+            @include button-variant($black, $white, $color-gray, $btn-border-radius-base);
             &.active {
-                @include button-variant($nav-pills-color, $nav-pills-background, $gray, $btn-border-radius-base);
+                @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
             }
         }
     }
@@ -41,7 +41,7 @@ form ul.djangocms-frontend.nav {
             }
 
             &.attributes {
-                background-color: color-mix(in srgb, $cms-primary 50%, var(--body-fg));
+                background-color: color-mix(in srgb, $color-secondary 50%, var(--body-fg));
                 display: block;
             }
 

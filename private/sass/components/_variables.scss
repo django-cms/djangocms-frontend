@@ -1,5 +1,5 @@
-$cms-primary: var(--dca-secondary, #0bf);
-$cms-gray: var(--dca-gray, var(--breadcrumbs-fg, #999));
+$color-secondary: var(--dca-secondary, var(--header-bg));
+$color-gray: var(--dca-gray, var(--breadcrumbs-fg, #999));
 $dark-fg: var(--dca-dark-fg, #333);
 
 $django-dark-bg: #121212;
@@ -8,11 +8,10 @@ $django-dark-color: #eee;
 $django-fg: #333;
 $white: var(--body-bg);
 $black: var(--body-fg);
-$gray: $cms-gray;
 $font-size-base: 0.8125rem;
 
-$nav-pills-color: $black;
-$nav-pills-background: $cms-primary;
+$nav-pills-color: var(--dca-action-text, $white);
+$nav-pills-background: $color-secondary;
 $nav-link-padding-y: 0.3rem;
 $nav-pills-padding: 1px 12px;
 $nav-pills-margin: 0.5rem;
@@ -21,7 +20,7 @@ $nav-pills-height: 30px;
 
 $btn-border-radius-base: var(--dca-btn-radius, 5px);
 $btn-active-shadow: none;
-$component-active-bg: $cms-primary;
+$component-active-bg: $color-secondary;
 
 [data-theme="auto"] {
     --dca-light-mode: 1;

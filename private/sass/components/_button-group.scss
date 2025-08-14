@@ -19,14 +19,14 @@
 
     // adds basic active effect
     .btn.active {
-        outline: 3px solid $cms-primary;
+        outline: 3px solid $color-secondary;
         border-color: #fff !important;
     }
 
     // specific for default classes (used for button-group)
     .btn-default.active {
         border-radius: 0;
-        background-color: $cms-primary !important;
+        background-color: $color-secondary !important;
     }
 }
 

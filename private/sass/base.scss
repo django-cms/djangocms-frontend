@@ -1,15 +1,13 @@
 @charset "utf-8";
 
 @import "components/variables";
+// Navigation
 @import "components/tabs";
 
-// Bootstrap5 (parts)
-// @import "import_bootstrap";
 // our components
 @import "components/icons";
 @import "components/button-group";
 @import "components/grid-layout";
-// @import "components/preview-generator";
 @import "components/forms";
 @import "components/tooltip";
 @import "components/title";
