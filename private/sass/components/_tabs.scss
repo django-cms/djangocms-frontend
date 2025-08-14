@@ -31,6 +31,7 @@ form ul.djangocms-frontend.nav {
     .nav-link {
         position: relative;
         text-decoration: none;
+        color: $black;
 
         span.indicator {
             display: none;
