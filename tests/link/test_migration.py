@@ -5,7 +5,7 @@ from django.test.testcases import TestCase
 
 
 @skipIf(sys.version_info < (3, 10), "Python 3.10 or higher required")
-gitclass LinkMigrationTestCase(TestCase):
+class LinkMigrationTestCase(TestCase):
     def setUp(self):
         import importlib
 
