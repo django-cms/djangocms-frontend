@@ -5,9 +5,10 @@
     margin-bottom: 20px;
 }
 
-form ul.djangocms-frontend.nav {
+form ul.djangocms-frontend.nav.nav-pills {
     margin: 0  !important;
     padding: 0;
+    display: flex;
     &:not(:has(> li:nth-child(2))) {
         // Hide single tab
         display: none;
@@ -91,6 +92,7 @@ div.tab-pk {
     color: var(--dca-gray-darker, var(--body-fg, $django-fg));
     font-size: 80%;
     margin-inline-start: auto;
+    margin-bottom: 14px;
     display: inline-block;
 }
 
