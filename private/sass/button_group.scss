@@ -1,4 +1,5 @@
 @import "components/variables";
+@import "components/bs-buttons";
 
 form .form-row div.frontend-button-group.frontend-button-group-block {
     display: flex;
@@ -18,11 +19,15 @@ form .form-row div.frontend-button-group.frontend-button-group-block {
 form .form-row div.frontend-button-group {
     label.btn-grp {
         margin: 3px;
-        padding: 4px 7px;
+
+        &:not(.btn) {
+            padding: 4px 7px;
+        }
+
         text-transform: none;
         text-align: center !important;
-        //border-color: transparent !important;
         outline: 2px solid transparent;
+        outline-offset: 2px;
         width: auto !important;
         font-weight: normal !important;
         display: inline-block;
@@ -51,9 +56,14 @@ form .form-row div.frontend-button-group {
 
     input[type="radio"]:checked + label.btn-grp,
     input[type="checkbox"]:checked + label.btn-grp {
-        outline: 2px solid $color-secondary;
-        border-color: white;
+        outline-color: $color-primary;
         border-radius: 0;
+        border: none;
+    }
+
+    input[property="icon"] + label.btn-grp {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 
     input[property="text"]:checked + label.btn-grp,
@@ -65,18 +75,10 @@ form .form-row div.frontend-button-group {
         width: 3.5em !important;
         padding-inline-start: 0 !important;
         padding-inline-end: 0 !important;
-        color: var(--dca-black, $django-dark-color) !important;
+        color: $black !important;
         overflow: hidden;
         white-space: nowrap;
         background: rgba(var(--bs-secondary-rgb), calc(var(--fe-value) / 100));
-    }
-
-    input[property="opacity"][value="50"] + label.btn-grp,
-    input[property="opacity"][value="25"] + label.btn-grp,
-    input[property="opacity"][value="10"] + label.btn-grp {
-        @media (prefers-color-scheme: light) {
-            color: black !important;
-        }
     }
 
     input[property="link-size"][value="btn-lg"] + label.btn-grp {
@@ -145,7 +147,7 @@ form .form-row div.frontend-button-group {
 
     .btn-white {
         background: white;
-        color: black !important;
+        color: $black !important;
     }
 
     .btn-light {

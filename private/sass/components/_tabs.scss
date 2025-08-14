@@ -65,6 +65,9 @@ form ul.djangocms-frontend.nav {
         &.active {
             display: block;
         }
+        & > fieldset > h2 {
+            display: none;
+        }
     }
 }
 
