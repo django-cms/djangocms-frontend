@@ -322,8 +322,8 @@
         display: flex;
         button.uip-insert-icon-button {
             padding: 10px 35px  !important;
-            color: var(--dca-white, var(--bg-color, #fff)) !important;
-            background-color: $color-secondary  !important;
+            color: $nav-pills-color !important;
+            background-color: $nav-pills-background !important;
             border: none;
             cursor: pointer;
             outline: 0;
