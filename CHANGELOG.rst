@@ -2,11 +2,12 @@
 Changelog
 =========
 
-2.2.0 (2025-08-18)
+2.2.0 (2025-08-16)
 ==================
 
 * feat: Refactored CSS for faster and more reliable loading by @fsbraun
 * feat: Removed link and button preview
+* fix: Python 3.9 compatibility
 * chore: Update node version
 * chore: Remove bootstrap dependency
 
