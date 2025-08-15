@@ -27,7 +27,7 @@ Syntax:
 
 .. code-block:: django
 
-    {% load frontend_tags %}
+    {% load frontend %}
     {% inline_field instance "field_name" %}
 
 - ``instance`` - The plugin or model instance.
@@ -80,7 +80,7 @@ Step-by-Step: Adding Inline Editing to a custom frontend component
 
    .. code-block:: django
 
-       {% load frontend_tags %}
+       {% load frontend %}
 
        <div class="custom-component">
            <h2>{% inline_field instance "title" %}</h2>
