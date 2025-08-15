@@ -42,7 +42,11 @@ may be used optionally in an installation of the software:
   (MIT Licence https://github.com/tabler/tabler-icons/blob/master/LICENSE)
 * Weather Icons https://erikflowers.github.io/weather-icons/
   (SIL Open Font Licence 1.1 https://openfontlicense.org)
+* Selected FontAwesome Free icons for UI interface https://fontawesome.com
+  (CC BY 4.0 License https://creativecommons.org/licenses/by/4.0/) - attribution within the
+  individual SVG files in djangocms_frontend/contrib/icon/static/djangocms_frontend/icon/vendor/assets
 
-It also uses FontAwesome Free icons for UI interface https://fontawesome.com
-(CC BY 4.0 License https://creativecommons.org/licenses/by/4.0/) - attribution within the
-individual SVG files in djangocms_frontend/contrib/icon/static/djangocms_frontend/icon/vendor/assets
+This software includes Universal Icon Picker code licensed under the MIT License:
+
+Copyright (c) 2024 Gilles Migliori
+Full license text: https://github.com/migliori/universal-icon-picker/blob/main/LICENSE
