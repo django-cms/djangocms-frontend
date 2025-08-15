@@ -1,0 +1,48 @@
+
+:root {
+    --bs-secondary-rgb: 0, 123, 255;
+    --bs-secondary: #6c757d;
+    --bs-primary: #0d6efd;
+    --bs-gray-600: #6c757d;
+    --bs-gray-900: #212529;
+    --bs-light: #f8f9fa;
+    --bs-dark: #343a40;
+    --bs-white: #fff;
+    --bs-black: #000;
+    --bs-success: #198754;
+    --bs-danger: #dc3545;
+    --bs-warning: #ffc107;
+    --bs-info: #0dcaf0;
+
+    .btn-primary {
+        color: white;
+        background-color: var(--bs-primary)
+    }
+    .btn-secondary {
+        color: white;
+        background-color: var(--bs-secondary)
+    }
+    .btn-light {
+        background-color: var(--bs-light)
+    }
+    .btn-dark {
+        background-color: var(--bs-dark)
+    }
+    .btn-success {
+        color: white;
+        background-color: var(--bs-success)
+    }
+    .btn-danger {
+        color: $body-bg;
+        background-color: var(--bs-danger)
+    }
+    .btn-warning {
+        color: black;
+        background-color: var(--bs-warning)
+    }
+    .btn-info {
+        color: black;
+        background-color: var(--bs-info)
+    }
+}
+

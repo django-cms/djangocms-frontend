@@ -16,12 +16,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]  # latest release minus two
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]  # latest release minus two
         requirements-file: [
             dj42_cms311.txt,
             dj42_cms41.txt,
             dj50_cms41.txt,
             dj51_cms41.txt,
+            dj52_cms50.txt,
         ]
         os: [
             ubuntu-latest,
@@ -31,7 +32,13 @@ jobs:
             requirements-file: dj50_cms41.txt
           - python-version: "3.9"
             requirements-file: dj51_cms41.txt
+          - python-version: "3.9"
+            requirements-file: dj52_cms50.txt
+          - python-version: "3.10"
+            requirements-file: dj52_cms50.txt
           - python-version: "3.12"
+            requirements-file: dj42_cms311.txt
+          - python-version: "3.13"
             requirements-file: dj42_cms311.txt
 
     steps:

@@ -1,0 +1,68 @@
+// #############################################################################
+// BUTTONS
+
+@use "sass:string";
+
+// #############################################################################
+// BUTTONS
+
+@mixin button-variant($color, $background, $border, $btn-border-radius-base) {
+    background-image: none;
+    margin-bottom: 0; // For input.btn
+    border-radius: $btn-border-radius-base;
+    color: $color;
+    background-color: $background;
+    border: 1px solid $border;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    &:focus,
+    &.focus {
+        color: $color;
+        background-color: color-mix(in srgb, $background, $body-fg 5%);
+        border-color: color-mix(in srgb, $background, $body-fg 5%);
+        text-decoration: none;
+    }
+    &:hover {
+        color: $color;
+        background-color: color-mix(in srgb, $background, $body-fg 10%);
+        border-color: color-mix(in srgb, $border, $body-fg 10%);
+        text-decoration: none;
+    }
+    &:active,
+    &.cms-btn-active {
+        color: $color;
+        background-color: color-mix(in srgb, $background, $body-fg 15%);
+        border-color: color-mix(in srgb, $border, $body-fg 15%);
+        box-shadow: $btn-active-shadow;
+
+        &:hover,
+        &:focus,
+        &.focus {
+            color: $color;
+            background-color: color-mix(in srgb, $background, $body-fg 20%);
+            border-color: color-mix(in srgb, $border, $body-fg 25%);
+        }
+    }
+    &:active,
+    &.cms-btn-active {
+        background-image: none;
+    }
+    &.cms-btn-disabled,
+    &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &.focus,
+        &:active,
+        &.cms-btn-active {
+            background-color: color-mix(in srgb, $background 40%, transparent);
+            border-color: color-mix(in srgb, $border 40%, transparent);
+            color: color-mix(in srgb, $color, $body-bg 50%);
+            cursor: not-allowed;
+            box-shadow: none;
+            &:before {
+                color: color-mix(in srgb, $color 40%, transparent);
+            }
+        }
+    }
+}

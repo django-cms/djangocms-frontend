@@ -1,20 +1,20 @@
 @charset "utf-8";
 
 @import "components/variables";
-// Bootstrap5 (parts)
-@import "import_bootstrap";
+// Navigation
+@import "components/tabs";
+
 // our components
 @import "components/icons";
 @import "components/button-group";
 @import "components/grid-layout";
-@import "components/preview-generator";
 @import "components/forms";
 @import "components/tooltip";
 @import "components/title";
 @import "components/icon-picker";
 
 .sr-only {
-    @include visually-hidden;
+    display: none;
 }
 
 #content-main ul.nav {
@@ -29,8 +29,6 @@
         }
     }
 }
-
-@import "components/tabs";
 
 input[type="number"].auto-field + span {
     display: none;

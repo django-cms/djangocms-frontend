@@ -27,7 +27,6 @@ CMS.$(document).ready(function () {
         .each(function(no, item) {
             set_auto_class(CMS.$(item));
             CMS.$(item.nextSibling).click(function() {
-                console.log("CLICK");
                 this.previousSibling.focus();
             });
         }

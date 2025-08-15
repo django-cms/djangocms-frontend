@@ -9,7 +9,6 @@ from djangocms_attributes_field import fields
 from . import settings
 from .helpers import first_choice
 
-
 if apps.is_installed("djangocms_text"):
     from djangocms_text.fields import HTMLFormField  # noqa F401
 

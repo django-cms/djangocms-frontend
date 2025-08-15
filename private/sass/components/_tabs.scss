@@ -1,36 +1,54 @@
+@import "./button";
+
 .colM ul:not(.object-tools).nav {
     margin-top: 0;
     margin-bottom: 20px;
 }
 
-ul.nav {
+form ul.djangocms-frontend.nav.nav-pills {
+    margin: 0  !important;
+    padding: 0;
+    display: flex;
     &:not(:has(> li:nth-child(2))) {
         // Hide single tab
         display: none;
     }
     .nav-item {
-        margin-inline-end: 1rem;
+        display: inline-block;
+        margin-inline-start: 0;
+        margin-inline-end: $nav-pills-margin;
+        margin-block-end: 14px;
+        a.nav-link {
+            padding: $nav-pills-padding;
+            height: $nav-pills-height;
+            line-height: $nav-pills-height;
+            display: inline-block;
+            @include button-variant($body-fg, $body-bg, $color-gray, $btn-border-radius-base);
+            &.active {
+                @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
+            }
+        }
     }
-    // margin-bottom: 0;
     .nav-link {
         position: relative;
         text-decoration: none;
+        color: $body-fg;
 
         span.indicator {
             display: none;
             border-radius: 50%;
 
             &.error {
-                background-color: var(--bs-danger);
+                background-color: var(--delete-button-bg);
             }
 
             &.attributes {
-                background-color: var(--bs-info);
+                background-color: color-mix(in srgb, $color-secondary 50%, var(--body-fg));
                 display: block;
             }
 
             padding: 0.5rem;
-            border: 1px solid var(--dca-white, var(--body-bg, $white));
+            border: 1px solid var(--dca-white, var(--body-bg, $body-bg));
             transform: translate(-50%, -50%);
             inset-block-start: 0;
             inset-inline-start: 100%;
@@ -43,9 +61,16 @@ ul.nav {
     }
 }
 
-ul.nav.nav-pills .nav-link:not(.active) {
-    border-style: solid;
-    border-width: 1px;
+.djangocms-frontend.tab-content {
+    .tab-pane {
+        display: none;
+        &.active {
+            display: block;
+        }
+        & > fieldset > h2 {
+            display: none;
+        }
+    }
 }
 
 body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs + div.tab-content .tab-pane {
@@ -64,9 +89,11 @@ body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs + div.tab-conten
 
 div.tab-pk {
     align-self: center;
-    color: var(--dca-gray-darker, var(--body-fg, $django-fg));
+    color: var(--dca-gray-darker, $body-fg);
     font-size: 80%;
     margin-inline-start: auto;
+    margin-bottom: 14px;
+    display: inline-block;
 }
 
 .djangocms-admin-style .colM ul.nav:not(.object-tools):not(.messagelist) {

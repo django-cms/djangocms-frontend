@@ -19,6 +19,16 @@
     }
 }
 
+
+.djangocms-frontend-row .form-row.field-row_cols_xs,
+.djangocms-frontend-column .form-row.field-xs_col,
+.djangocms-frontend-column .form-row.field-xs_order,
+.djangocms-frontend-column .form-row.field-xs_offset {
+    label {
+        color: var(--border-color) !important;
+    }
+}
+
 .djangocms-frontend-row .form-row.field-row_cols_xs,
 .djangocms-frontend-column .form-row.field-xs_col,
 .djangocms-frontend-column .form-row.field-xs_order,
@@ -37,6 +47,15 @@
     .field-box:first-child {
         width: 115px !important;
     }
+    .form-multiline {
+        display: block;
+        white-space: nowrap;
+        margin-bottom: -3px;
+        & > div {
+            display: inline-block;
+            padding: 0;
+        }
+    }
     .field-box,
     .fieldBox {
         position: relative;
@@ -46,7 +65,7 @@
         display: block;
         padding: 15px 10px;
         margin: 0 !important;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-color);
         float: left !important;
 
         input:not([type="checkbox"]) {
@@ -59,7 +78,6 @@
         label {
             font-size: 12px !important;
             font-weight: normal !important;
-            color: #ccc !important;
             position: absolute;
             inset-inline-start: 15px;
             inset-block-end: 17px;
@@ -67,8 +85,8 @@
         }
 
         .disabled {
-            color: #ccc;
-            background: #eee;
+            color: var(--border-color);
+            background: var(--border-color);
         }
 
         &:last-child {
@@ -81,7 +99,7 @@
     }
 
     .errorlist {
-        @include visually-hidden;
+        // @include visually-hidden;
     }
 
     &.field-xs_me .field-box {
@@ -130,12 +148,6 @@
         label {
             inset-inline-start: 30px;
             inset-block-start: 14px;
-        }
-
-        input {
-            position: relative;
-            box-sizing: border-box;
-            top: -3px;
         }
     }
 }

@@ -6,26 +6,43 @@
 }
 
 .frontend-button-group {
-    display: inline-block;
+    display: inline-flex;
+    margin-inline-end: 1em;
     .btn {
         box-sizing: border-box;
         cursor: pointer;
-        -webkit-appearance: none;
         margin: 2px;
+        padding: 0.375rem 0.75rem;
+        border-radius: 4px;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
+
+        border-color: var(--bs-secondary);
+        box-shadow: none;
+        transition: all 0.15s ease-in-out;
+
+        &:hover {
+            filter: opacity(0.8);
+        }
+
+        &:focus,
+        &.focus {
+            filter: opacity(0.85);
+            text-decoration: none;
+        }
     }
 
     // adds basic active effect
     .btn.active {
-        outline: 3px solid $cms-primary;
+        outline: 3px solid $color-primary;
         border-color: #fff !important;
     }
 
     // specific for default classes (used for button-group)
     .btn-default.active {
         border-radius: 0;
-        background-color: $cms-primary !important;
+        background-color: $color-secondary !important;
     }
 }
 

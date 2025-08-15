@@ -45,10 +45,10 @@
         .icon-close-indicator {
             display: block;
             border-radius: 50%;
-            color: var(--dca-black, var(--body-fg, $black));
-            background-color: var(--dca-white, var(--body-bg, $white));
+            color: var(--dca-black, var(--body-fg, $body-fg));
+            background-color: var(--dca-white, var(--body-bg, $body-bg));
             padding: 0.3rem;
-            border: 1px solid var(--dca-black, var(--body-fg, $black));
+            border: 1px solid var(--dca-black, var(--body-fg, $body-fg));
             transform: translate(-50%, -50%);
             top: 0;
             inset-inline-start: 100%;
@@ -191,10 +191,10 @@
                                 width: 5px;
                                 inset-block-start: 0;
                                 inset-inline-start: 0;
-                                background-color: $cms-primary;
+                                background-color: $color-secondary;
                             }
                             i {
-                                color: $cms-primary;
+                                color: $color-secondary;
                             }
                         }
                         &:only-child {
@@ -245,8 +245,8 @@
                                 box-shadow: 0 1px 14px rgba(0, 0, 0, 0.16);
                             }
                             &.universal-selected {
-                                -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px $cms-primary;
-                                box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px $cms-primary;
+                                -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px $color-secondary;
+                                box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 0 0 3px $color-secondary;
                             }
                             .uip-icon-item-inner {
                                 display: -webkit-box;
@@ -322,8 +322,8 @@
         display: flex;
         button.uip-insert-icon-button {
             padding: 10px 35px  !important;
-            color: var(--dca-white, var(--bg-color, #fff)) !important;
-            background-color: $cms-primary  !important;
+            color: $nav-pills-color !important;
+            background-color: $nav-pills-background !important;
             border: none;
             cursor: pointer;
             outline: 0;
@@ -337,7 +337,7 @@
             color: var(--dca-white, var(--bg-color, #fff));
             width: initial;
             &:hover {
-                background-color: $cms-primary;
+                background-color: $color-secondary;
             }
         }
     }

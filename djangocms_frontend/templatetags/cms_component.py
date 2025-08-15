@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 import re
+
 from django import forms, template
 
 register = template.Library()

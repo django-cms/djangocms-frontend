@@ -2,6 +2,16 @@
 Changelog
 =========
 
+2.2.0 (2025-08-16)
+==================
+
+* feat: Refactored CSS for faster and more reliable loading by @fsbraun
+* feat: Removed link and button preview
+* fix: Some UI Components were not discovered by the `{% plugin %}` template tag in django CMS 5
+* fix: Restored Python 3.9 compatibility
+* chore: Update node version
+* chore: Remove bootstrap dependency
+
 2.1.4 (2025-07-27)
 ==================
 

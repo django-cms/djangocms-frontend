@@ -1,14 +1,13 @@
-from collections import defaultdict
-from collections.abc import Iterator
 import importlib
 import os
 import warnings
+from collections import defaultdict
+from collections.abc import Iterator
 
 from django import forms
 from django.apps import apps
 from django.template.loader import get_template
 from django.utils.module_loading import autodiscover_modules
-
 from sekizai.context import SekizaiContext
 
 from djangocms_frontend import settings

@@ -7,9 +7,9 @@ a[data-pk] {
         width: auto;
         font-weight: normal;
         font-size: 80%;
-        background-color: var(--dca-white, var(--body-bg, $white));
-        color: var(--dca-gray, var(--body-fg, $django-fg));
-        border: solid 1px var(--dca-gray, var(--body-fg, $django-fg));
+        background-color: var(--dca-white, $body-fg);
+        color: var(--dca-gray, $body-fg);
+        border: solid 1px var(--dca-gray, $body-fg);
         text-align: center;
         padding: 5px 10px;
         position: absolute;
