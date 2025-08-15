@@ -46,6 +46,13 @@
     }
 }
 
+form .form-row>div:not([class])>.flex-container>label+div.frontend-button-group {
+    // djangocms-adim-style hack with high specificity
+    max-width: unset;
+    width: unset;
+}
+
+
 .frontend-button-group-context-size,
 .frontend-button-group-context-colors {
     > div {
