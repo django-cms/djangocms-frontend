@@ -12,7 +12,7 @@
         box-sizing: border-box;
         cursor: pointer;
         margin: 2px;
-        padding: 0.375rem 0.75rem;
+        padding: $nav-pills-padding;
         border-radius: 4px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -35,7 +35,7 @@
 
     // adds basic active effect
     .btn.active {
-        outline: 3px solid $color-primary;
+        outline: 1px solid $color-primary;
         border-color: #fff !important;
     }
 
@@ -293,17 +293,13 @@
 
     .icon-px {
         transform: scale(1.5);
-        background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" standalone="yes"?><svg xmlns="http://www.w3.org/2000/svg" style="stroke: rgb(15,15,15);;zoom: 1;" viewBox="0 0 48 48"><rect x="9px" height="30px" stroke-width="3px" y="9px" width="30px" fill="transparent" opacity="0.5" transform=""></rect><rect y="11px" stroke-width="none" width="4px" height="26px" x="14px"></rect><rect y="11px" stroke-width="none" width="4px" height="26px" x="30px"></rect></svg>');
+        background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" standalone="yes"?><svg xmlns="http://www.w3.org/2000/svg" style="stroke: rgb(15,15,15);zoom: 1;" viewBox="0 0 48 48"><rect x="9px" height="30px" stroke-width="3px" y="9px" width="30px" fill="transparent" opacity="0.5" transform=""></rect><rect y="11px" stroke-width="none" width="4px" height="26px" x="14px"></rect><rect y="11px" stroke-width="none" width="4px" height="26px" x="30px"></rect></svg>');
         filter: brightness(calc(var(--dca-light-mode, 1) + calc(var(--dca-dark-mode, 0) * 100)));
     }
 
     .icon-py {
         transform: scale(1.5);
-        background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" standalone="yes"?><svg xmlns="http://www.w3.org/2000/svg" style="stroke: rgb(15,15,15);;zoom: 1;" viewBox="0 0 48 48"><rect x="9px" height="30px" stroke-width="3px" y="9px" width="30px" fill="transparent" opacity="0.5" transform=""></rect><rect y="31px" stroke-width="none" width="26px" height="4px" x="11px"></rect><rect y="13px" stroke-width="none" width="26px" height="4px" x="11px"></rect></svg>');
+        background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" standalone="yes"?><svg xmlns="http://www.w3.org/2000/svg" style="stroke: rgb(15,15,15);zoom: 1;" viewBox="0 0 48 48"><rect x="9px" height="30px" stroke-width="3px" y="9px" width="30px" fill="transparent" opacity="0.5" transform=""></rect><rect y="31px" stroke-width="none" width="26px" height="4px" x="11px"></rect><rect y="13px" stroke-width="none" width="26px" height="4px" x="11px"></rect></svg>');
         filter: brightness(calc(var(--dca-light-mode, 1) + calc(var(--dca-dark-mode, 0) * 100)));
     }
-}
-
-.icon-info {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 448" style="fill: DeepSkyBlue;"><path d="M256 344v-40c0-4.5-3.5-8-8-8h-24v-128c0-4.5-3.5-8-8-8h-80c-4.5 0-8 3.5-8 8v40c0 4.5 3.5 8 8 8h24v80h-24c-4.5 0-8 3.5-8 8v40c0 4.5 3.5 8 8 8h112c4.5 0 8-3.5 8-8zM224 120v-40c0-4.5-3.5-8-8-8h-48c-4.5 0-8 3.5-8 8v40c0 4.5 3.5 8 8 8h48c4.5 0 8-3.5 8-8zM384 224c0 106-86 192-192 192s-192-86-192-192 86-192 192-192 192 86 192 192z"></path></svg>');
 }

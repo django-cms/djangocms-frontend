@@ -18,14 +18,14 @@
 }
 
 .icon-info {
-    width: 0.9em;
-    font-size: 110% !important;
+    margin-inline-start: 0.5em;
+    zoom: 85%;
 }
 
 $svg-colors: (
     "white": white,
     "black": black,
-    "primary": #0bf,
+    "primary": $color-primary,
 );
 
 @each $key in map.keys($svg-colors) {

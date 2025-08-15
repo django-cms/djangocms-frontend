@@ -19,6 +19,8 @@ form .form-row div.frontend-button-group.frontend-button-group-block {
 form .form-row div.frontend-button-group {
     label.btn-grp {
         margin: 3px;
+        height: 30px;
+        line-height: calc(30px - 0.15rem);
 
         &:not(.btn) {
             padding: 4px 7px;
@@ -26,7 +28,7 @@ form .form-row div.frontend-button-group {
 
         text-transform: none;
         text-align: center !important;
-        outline: 2px solid transparent;
+        outline: 1px solid transparent;
         outline-offset: 2px;
         width: auto !important;
         font-weight: normal !important;
@@ -48,7 +50,7 @@ form .form-row div.frontend-button-group {
     input[type="radio"]:checked + label.btn-grp,
     input[type="checkbox"]:checked + label.btn-grp {
         outline-color: $color-primary;
-        border-radius: 0;
+        border-radius: $btn-border-radius-base;
         border: none;
     }
 
