@@ -28,6 +28,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         expected_result = """<div class="alert alert-secondary alert-dismissible" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><div>Alert
         </div></div>"""
+
         result = template.render({"request": None})
 
         self.assertInHTML(expected_result, result)
@@ -45,6 +46,8 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         self.assertInHTML(expected_result, result)
 
     def test_complex_tags(self):
+        from djangocms_frontend.plugin_tag import plugin_tag_pool
+
         template = django_engine.from_string("""{% load frontend %}
         {% plugin "card" card_alignment="center" card_outline="info" card_text_color="primary" card_full_height=True %}
             {% plugin "cardinner" inner_type="card-header" text_alignment="start" %}
@@ -70,7 +73,12 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
             <div class="list-group-item">A second item</div>
             <div class="list-group-item">A third item</div>
         </div>"""
+
         result = template.render({"request": None})
+        for item in plugin_tag_pool:
+            print(item)
+        self.assertIn("cardinner", plugin_tag_pool)
+
         self.assertInHTML(expected_result, result)
 
     def test_link_plugin(self):
