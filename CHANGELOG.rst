@@ -7,7 +7,8 @@ Changelog
 
 * feat: Refactored CSS for faster and more reliable loading by @fsbraun
 * feat: Removed link and button preview
-* fix: Python 3.9 compatibility
+* fix: Some UI Components were not discovered by the `{% plugin %}` template tag in django CMS 5
+* fix: Restored Python 3.9 compatibility
 * chore: Update node version
 * chore: Remove bootstrap dependency
 
