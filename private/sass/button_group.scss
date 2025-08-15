@@ -34,24 +34,15 @@ form .form-row div.frontend-button-group {
     }
 
     input[property="color"] + label.btn-grp[style="--fe-value: ;"] {
-        color: var(--dca-black, $django-fg) !important;
-        @media (prefers-color-scheme: dark) {
-            color: var(--dca-black, $django-dark-color) !important;
-        }
+        color: $body-fg !important;
     }
 
     input[property="color"][value="transparent"] + label.btn-grp {
-        color: var(--dca-black, $django-fg) !important;
-        @media (prefers-color-scheme: dark) {
-            color: var(--dca-black, $django-dark-color) !important;
-        }
+        color: $body-fg !important;
     }
 
     input[property="text"] + label.btn-grp {
-        color: var(--dca-black, $django-fg) !important;
-        @media (prefers-color-scheme: dark) {
-            color: var(--dca-black, $django-dark-color) !important;
-        }
+        color: $body-fg !important;
     }
 
     input[type="radio"]:checked + label.btn-grp,
@@ -75,7 +66,7 @@ form .form-row div.frontend-button-group {
         width: 3.5em !important;
         padding-inline-start: 0 !important;
         padding-inline-end: 0 !important;
-        color: $black !important;
+        color: $body-fg !important;
         overflow: hidden;
         white-space: nowrap;
         background: rgba(var(--bs-secondary-rgb), calc(var(--fe-value) / 100));
@@ -94,10 +85,7 @@ form .form-row div.frontend-button-group {
     }
 
     input[property="list_state"] + label.btn-grp[style="--fe-value: ;"] {
-        color: var(--dca-black, $django-fg) !important;
-        @media (prefers-color-scheme: dark) {
-            color: var(--dca-black, $django-dark-color);
-        }
+        color: $body-fg !important;
     }
 
     input[property="list_state"][value="active"] + label.btn-grp {
@@ -147,7 +135,7 @@ form .form-row div.frontend-button-group {
 
     .btn-white {
         background: white;
-        color: $black !important;
+        color: $body-fg !important;
     }
 
     .btn-light {

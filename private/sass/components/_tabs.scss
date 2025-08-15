@@ -23,7 +23,7 @@ form ul.djangocms-frontend.nav.nav-pills {
             height: $nav-pills-height;
             line-height: $nav-pills-height;
             display: inline-block;
-            @include button-variant($black, $white, $color-gray, $btn-border-radius-base);
+            @include button-variant($body-fg, $body-bg, $color-gray, $btn-border-radius-base);
             &.active {
                 @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
             }
@@ -32,7 +32,7 @@ form ul.djangocms-frontend.nav.nav-pills {
     .nav-link {
         position: relative;
         text-decoration: none;
-        color: $black;
+        color: $body-fg;
 
         span.indicator {
             display: none;
@@ -48,7 +48,7 @@ form ul.djangocms-frontend.nav.nav-pills {
             }
 
             padding: 0.5rem;
-            border: 1px solid var(--dca-white, var(--body-bg, $white));
+            border: 1px solid var(--dca-white, var(--body-bg, $body-bg));
             transform: translate(-50%, -50%);
             inset-block-start: 0;
             inset-inline-start: 100%;
@@ -89,7 +89,7 @@ body:not(.djangocms-admin-style) ul.djangocms-frontend.nav-tabs + div.tab-conten
 
 div.tab-pk {
     align-self: center;
-    color: var(--dca-gray-darker, var(--body-fg, $django-fg));
+    color: var(--dca-gray-darker, $body-fg);
     font-size: 80%;
     margin-inline-start: auto;
     margin-bottom: 14px;

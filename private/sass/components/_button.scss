@@ -18,29 +18,29 @@
     &:focus,
     &.focus {
         color: $color;
-        background-color: color-mix(in srgb, $background, $black 5%);
-        border-color: color-mix(in srgb, $background, $black 5%);
+        background-color: color-mix(in srgb, $background, $body-fg 5%);
+        border-color: color-mix(in srgb, $background, $body-fg 5%);
         text-decoration: none;
     }
     &:hover {
         color: $color;
-        background-color: color-mix(in srgb, $background, $black 10%);
-        border-color: color-mix(in srgb, $border, $black 10%);
+        background-color: color-mix(in srgb, $background, $body-fg 10%);
+        border-color: color-mix(in srgb, $border, $body-fg 10%);
         text-decoration: none;
     }
     &:active,
     &.cms-btn-active {
         color: $color;
-        background-color: color-mix(in srgb, $background, $black 15%);
-        border-color: color-mix(in srgb, $border, $black 15%);
+        background-color: color-mix(in srgb, $background, $body-fg 15%);
+        border-color: color-mix(in srgb, $border, $body-fg 15%);
         box-shadow: $btn-active-shadow;
 
         &:hover,
         &:focus,
         &.focus {
             color: $color;
-            background-color: color-mix(in srgb, $background, $black 20%);
-            border-color: color-mix(in srgb, $border, $black 25%);
+            background-color: color-mix(in srgb, $background, $body-fg 20%);
+            border-color: color-mix(in srgb, $border, $body-fg 25%);
         }
     }
     &:active,
@@ -57,7 +57,7 @@
         &.cms-btn-active {
             background-color: color-mix(in srgb, $background 40%, transparent);
             border-color: color-mix(in srgb, $border 40%, transparent);
-            color: color-mix(in srgb, $color, $white 50%);
+            color: color-mix(in srgb, $color, $body-bg 50%);
             cursor: not-allowed;
             box-shadow: none;
             &:before {

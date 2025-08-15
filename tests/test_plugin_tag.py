@@ -75,8 +75,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
         </div>"""
 
         result = template.render({"request": None})
-        for item in plugin_tag_pool:
-            print(item)
+
         self.assertIn("cardinner", plugin_tag_pool)
 
         self.assertInHTML(expected_result, result)

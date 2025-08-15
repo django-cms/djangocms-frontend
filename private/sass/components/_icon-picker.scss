@@ -45,10 +45,10 @@
         .icon-close-indicator {
             display: block;
             border-radius: 50%;
-            color: var(--dca-black, var(--body-fg, $black));
-            background-color: var(--dca-white, var(--body-bg, $white));
+            color: var(--dca-black, var(--body-fg, $body-fg));
+            background-color: var(--dca-white, var(--body-bg, $body-bg));
             padding: 0.3rem;
-            border: 1px solid var(--dca-black, var(--body-fg, $black));
+            border: 1px solid var(--dca-black, var(--body-fg, $body-fg));
             transform: translate(-50%, -50%);
             top: 0;
             inset-inline-start: 100%;
