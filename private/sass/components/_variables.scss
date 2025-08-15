@@ -1,5 +1,5 @@
 $color-primary: var(--primary);
-$color-secondary: var(--dca-action-bg, var(--header-bg));
+$color-secondary: var(--dca-action-bg, var(--dca-primary, var(--header-bg)));
 $color-gray: var(--dca-gray, var(--breadcrumbs-fg, #999));
 $dark-fg: var(--dca-dark-fg, #333);
 
