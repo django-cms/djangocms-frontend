@@ -225,6 +225,7 @@ class CMSFrontendComponent(forms.Form):
     def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
         """Auto-creates slot plugins upon creation of component plugin instance"""
         from cms.api import add_plugin
+
         from .ui_plugin_base import CMSUIComponent
 
         super(CMSUIComponent, self).save_model(request, obj, form, change)

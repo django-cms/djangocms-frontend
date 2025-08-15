@@ -7,8 +7,7 @@ class DjangocmsFrontendConfig(apps.AppConfig):
     verbose_name = "django CMS Frontend"
 
     def ready(self):
-        from . import plugin_tag
-        from . import component_pool
+        from . import component_pool, plugin_tag
 
         component_pool.setup()
         plugin_tag.setup()

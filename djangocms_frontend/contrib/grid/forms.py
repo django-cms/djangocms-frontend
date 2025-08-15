@@ -136,6 +136,8 @@ GridRowForm = type(
     copy(extra_fields_column),
 )
 
+GridRowForm._meta.model = FrontendUIItem  # Potentially a django-entangled bug?
+
 
 class GridColumnBaseForm(
     mixin_factory("GridColumn"),
@@ -233,3 +235,5 @@ GridColumnForm = type(
     (GridColumnBaseForm,),
     copy(extra_fields_column),
 )
+
+GridColumnForm._meta.model = FrontendUIItem  # Potentially a django-entangled bug?
