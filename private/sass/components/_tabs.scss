@@ -23,10 +23,7 @@ form ul.djangocms-frontend.nav.nav-pills {
             height: $nav-pills-height;
             line-height: $nav-pills-height;
             display: inline-block;
-            @include button-variant($body-fg, $body-bg, $color-gray, $btn-border-radius-base);
-            &.active {
-                @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
-            }
+            @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
         }
     }
     .nav-link {
