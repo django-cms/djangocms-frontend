@@ -47,11 +47,12 @@ jobs:
         fetch-depth: '2'
 
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        sudo apt install libcairo2-dev pkg-config python3-dev
         pip install -U -r tests/requirements/${{ matrix.requirements-file }}
     - name: Run coverage
       run: |
