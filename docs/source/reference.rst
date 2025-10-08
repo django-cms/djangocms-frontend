@@ -545,8 +545,8 @@ You can run tests by executing:
 
 .. code::
 
-   virtualenv env
+   python -m venv env
    source env/bin/activate
-   pip install -r tests/requirements.txt
-   python ./run_tests.py
+   pip install -r tests/requirements/base.txt
+   pytest
 
