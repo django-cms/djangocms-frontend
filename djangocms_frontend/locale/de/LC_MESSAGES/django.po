@@ -417,7 +417,7 @@ msgstr "Inhalts-Ausrichtung"
 #: contrib/card/templates/djangocms_frontend/admin/card_layout.html:14
 #: contrib/grid/templates/djangocms_frontend/admin/grid_row.html:13
 msgid "Colums per row"
-msgstr "Splaten pro Zeile"
+msgstr "Spalten pro Zeile"
 
 #: contrib/carousel/cms_plugins.py:25 contrib/carousel/models.py:20
 msgid "Carousel"
