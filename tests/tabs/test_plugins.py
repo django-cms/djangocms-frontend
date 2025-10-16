@@ -60,7 +60,7 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
             template="custom",
         )
         tab_container.initialize_from_form(TabForm).save()
-        
+
         # Create a tab item as child of the tab container
         tab_item = add_plugin(
             target=tab_container,
@@ -70,17 +70,17 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
             config=dict(tab_title="Test Tab"),
         )
         tab_item.initialize_from_form(TabItemForm).save()
-        
+
         # Get the plugin instance
         plugin_instance = TabItemPlugin()
-        
+
         # Test that get_render_template uses the parent's template
         template_path = plugin_instance.get_render_template(
             context={},
             instance=tab_item,
             placeholder=self.placeholder
         )
-        
+
         # The template path should use 'custom' from the parent, not 'default'
         self.assertIn("custom", template_path)
         self.assertEqual(

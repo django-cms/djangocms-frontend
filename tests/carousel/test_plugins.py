@@ -6,7 +6,6 @@ from djangocms_frontend.contrib.carousel.cms_plugins import (
     CarouselPlugin,
     CarouselSlidePlugin,
 )
-from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
 from djangocms_frontend.contrib.carousel.forms import CarouselForm, CarouselSlideForm
 
 from ..fixtures import TestFixture
@@ -148,7 +147,7 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             template="custom",
         )
         carousel.initialize_from_form(CarouselForm).save()
-        
+
         # Create a slide as child of the carousel
         slide = add_plugin(
             target=carousel,
@@ -158,17 +157,17 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
         )
         slide.initialize_from_form(CarouselSlideForm).save()
-        
+
         # Get the plugin instance
         plugin_instance = CarouselSlidePlugin()
-        
+
         # Test that get_render_template uses the parent's template
         template_path = plugin_instance.get_render_template(
             context={},
             instance=slide,
             placeholder=self.placeholder
         )
-        
+
         # The template path should use 'custom' from the parent, not 'default'
         self.assertIn("custom", template_path)
         self.assertEqual(
