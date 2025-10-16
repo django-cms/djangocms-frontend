@@ -86,7 +86,7 @@ class CarouselSlidePlugin(
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
-            instance.parent or instance,
+            instance.parent.get_plugin_instance()[0] if instance.parent else instance,
             "carousel",
             "slide",
             CAROUSEL_TEMPLATE_CHOICES,

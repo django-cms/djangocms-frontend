@@ -1,10 +1,12 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
+from django.test import override_settings
 
 from djangocms_frontend.contrib.carousel.cms_plugins import (
     CarouselPlugin,
     CarouselSlidePlugin,
 )
+from djangocms_frontend.contrib.carousel.constants import CAROUSEL_TEMPLATE_CHOICES
 from djangocms_frontend.contrib.carousel.forms import CarouselForm, CarouselSlideForm
 
 from ..fixtures import TestFixture
@@ -129,3 +131,47 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'href="https://www.divio.com"')
+
+    @override_settings(
+        DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES=(
+            ("default", "Default"),
+            ("custom", "Custom"),
+        )
+    )
+    def test_carousel_slide_inherits_parent_template(self):
+        """Test that CarouselSlidePlugin correctly retrieves parent's template."""
+        # Create a carousel with a custom template
+        carousel = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselPlugin.__name__,
+            language=self.language,
+            template="custom",
+        )
+        carousel.initialize_from_form(CarouselForm).save()
+        
+        # Create a slide as child of the carousel
+        slide = add_plugin(
+            target=carousel,
+            placeholder=self.placeholder,
+            plugin_type=CarouselSlidePlugin.__name__,
+            language=self.language,
+            config=dict(carousel_image=dict(pk=self.image.id, model="filer.Image")),
+        )
+        slide.initialize_from_form(CarouselSlideForm).save()
+        
+        # Get the plugin instance
+        plugin_instance = CarouselSlidePlugin()
+        
+        # Test that get_render_template uses the parent's template
+        template_path = plugin_instance.get_render_template(
+            context={},
+            instance=slide,
+            placeholder=self.placeholder
+        )
+        
+        # The template path should use 'custom' from the parent, not 'default'
+        self.assertIn("custom", template_path)
+        self.assertEqual(
+            template_path,
+            "djangocms_frontend/bootstrap5/carousel/custom/slide.html"
+        )

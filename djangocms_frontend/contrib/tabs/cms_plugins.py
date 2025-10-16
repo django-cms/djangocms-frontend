@@ -71,7 +71,7 @@ class TabItemPlugin(mixin_factory("TabItem"), AttributesMixin, PaddingMixin, CMS
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
-            instance.parent or instance,
+            instance.parent.get_plugin_instance()[0] if instance.parent else instance,
             "tabs",
             "item",
             TAB_TEMPLATE_CHOICES,
