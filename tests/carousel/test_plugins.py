@@ -144,7 +144,7 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=CarouselPlugin.__name__,
             language=self.language,
-            template="custom",
+            config=dict(template="custom"),
         )
         carousel.initialize_from_form(CarouselForm).save()
 
