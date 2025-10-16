@@ -57,7 +57,7 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=TabPlugin.__name__,
             language=self.language,
-            template="custom",
+            config=dict(template="custom"),
         )
         tab_container.initialize_from_form(TabForm).save()
 
