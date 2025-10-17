@@ -149,12 +149,12 @@ class ImageForm(
     use_crop = forms.BooleanField(
         label=_("Crop image"),
         required=False,
-        help_text=_("Crops the image according to the thumbnail settings provided in the template."),
+        help_text=_("Crops the image rather than resizing"),
     )
     use_upscale = forms.BooleanField(
         label=_("Upscale image"),
         required=False,
-        help_text=_("Upscales the image to the size of the thumbnail settings in the template."),
+        help_text=_("Allows the image to be upscaled beyond its original size."),
     )
     use_responsive_image = forms.ChoiceField(
         label=_("Use responsive image"),
