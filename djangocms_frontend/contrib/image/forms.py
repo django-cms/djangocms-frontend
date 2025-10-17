@@ -75,7 +75,6 @@ class ImageForm(
                 "alignment",
                 "link_attributes",
                 "use_crop",
-                "use_no_cropping",
                 "use_upscale",
                 "use_responsive_image",
                 "thumbnail_options",
@@ -139,13 +138,6 @@ class ImageForm(
         help_text=_("Attributes apply to the <b>link</b>."),
     )
 
-    # ignores all other cropping options
-    # throws validation error if other cropping options are selected
-    use_no_cropping = forms.BooleanField(
-        label=_("Use original image"),
-        required=False,
-        help_text=_("Outputs the raw image without cropping."),
-    )
     # upscale and crop work together
     # throws validation error if other cropping options are selected
     use_crop = forms.BooleanField(
@@ -207,9 +199,6 @@ class ImageForm(
         # certain cropping options do not work together, the following
         # list defines the disallowed options used in the ``clean`` method
         invalid_option_pairs = [
-            ("use_no_cropping", "use_crop"),
-            ("use_no_cropping", "use_upscale"),
-            ("use_no_cropping", "thumbnail_options"),
             ("thumbnail_options", "use_crop"),
             ("thumbnail_options", "use_upscale"),
         ]

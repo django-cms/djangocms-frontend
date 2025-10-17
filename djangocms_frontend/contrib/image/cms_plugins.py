@@ -75,7 +75,6 @@ class ImagePlugin(
             {
                 "classes": ("collapse",),
                 "fields": (
-                    ("use_no_cropping"),
                     ("use_crop", "use_upscale"),
                     "thumbnail_options",
                 ),
