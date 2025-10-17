@@ -74,7 +74,6 @@ class ImageForm(
                 "height",
                 "alignment",
                 "link_attributes",
-                "use_automatic_scaling",
                 "use_crop",
                 "use_no_cropping",
                 "use_upscale",
@@ -140,13 +139,6 @@ class ImageForm(
         help_text=_("Attributes apply to the <b>link</b>."),
     )
 
-    # cropping models
-    # active per default
-    use_automatic_scaling = forms.BooleanField(
-        label=_("Automatic scaling"),
-        required=False,
-        help_text=_("Uses the placeholder dimensions to automatically calculate the size."),
-    )
     # ignores all other cropping options
     # throws validation error if other cropping options are selected
     use_no_cropping = forms.BooleanField(
@@ -215,8 +207,6 @@ class ImageForm(
         # certain cropping options do not work together, the following
         # list defines the disallowed options used in the ``clean`` method
         invalid_option_pairs = [
-            ("use_automatic_scaling", "use_no_cropping"),
-            ("use_automatic_scaling", "thumbnail_options"),
             ("use_no_cropping", "use_crop"),
             ("use_no_cropping", "use_upscale"),
             ("use_no_cropping", "thumbnail_options"),

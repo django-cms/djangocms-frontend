@@ -24,7 +24,7 @@ class ImageMixin:
             height = thumbnail_options.height
             crop = thumbnail_options.crop
             upscale = thumbnail_options.upscale
-        elif not getattr(self, "use_automatic_scaling", None):
+        else:
             width = getattr(self, "width", None)
             height = getattr(self, "height", None)
 
