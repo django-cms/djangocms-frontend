@@ -118,13 +118,19 @@ class ImageForm(
         label=_("Width"),
         required=False,
         min_value=1,
-        help_text=_('The image width as number in pixels. Example: "720" and not "720px".'),
+        help_text=_(
+            'The image width as number in pixels (eg, "720" and not "720px"). '
+        ),
     )
     height = forms.IntegerField(
         label=_("Height"),
         required=False,
         min_value=1,
-        help_text=_('The image height as number in pixels. Example: "720" and not "720px".'),
+        help_text=_(
+            'The image height as number in pixels (eg, "720" and not "720px"). '
+            "Note: if width is set, height will be calculated automatically to preserve aspect ratio. "
+            "In case of cropping, then both width and height are applied as given."
+        ),
     )
     alignment = forms.ChoiceField(
         label=_("Alignment"),
