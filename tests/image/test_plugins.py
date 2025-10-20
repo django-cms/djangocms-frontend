@@ -77,10 +77,11 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         self.assertEqual(form.cleaned_data["config"]["use_responsive_image"], "yes")
 
+        # Test invalid option pair 
         request.POST.update(
             {
-                "use_automatic_scaling": True,
-                "use_no_cropping": True,
+                "thumbnail_options": True,
+                "use_crop": True,
             }
         )
         form = ImageForm(request.POST)
