@@ -18,12 +18,12 @@ that gets the job done for your project.
    added to your project's ``INSTALLED_APPS``.
 
 2. **Template Components** – The easiest approach creating or porting your own
-   **custom frontend components**, allowing you define components by their HTML templates. Special
+   custom components, allowing you **define them by their HTML templates, without any code**. Special
    ``djangocms-frontend`` tags are used to provide the additional declarative information
    needed. This is the fastest approach to create ``djangocms-frontend`` components.
    Template-based (or auto) components are auto-detected.
 
-3. **Custom Frontend Component** development – A more advanced method that lets you create
+3. **Custom CMS Frontend Component** development – A more advanced method that lets you create
    custom components with **minimal code**. This approach is more flexible than the
    template-based method, but requires some Python coding providing more control over
    the components add and change forms, for example.

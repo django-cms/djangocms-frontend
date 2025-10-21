@@ -1,7 +1,7 @@
 .. _built_in_components:
 
 ######################################
-Using Built-In Bootstrap 5 Components
+Installation and Usage with Built-In Components
 ######################################
 
 .. index::
@@ -90,6 +90,21 @@ Configuration
           'djangocms_frontend.contrib.tabs',
           'djangocms_frontend.contrib.utilities',
       ]
+
+    For example, if you don't want to use any built-in components because you plan on 
+    :ref:`building your own <custom_components>`, a minimal setup of ``INSTALLED_APPS`` 
+    would look like this:
+
+    .. code-block:: python
+
+        INSTALLED_APPS = [
+            'easy_thumbnails',
+            'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
+            # Main frontend app - pre-built components not needed
+            'djangocms_frontend',
+        ]
+
+
 
 2. **Apply Migrations**
 
