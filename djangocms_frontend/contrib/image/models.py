@@ -120,6 +120,9 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
         # in this case we want to return an empty string to avoid #69
         elif not self.picture:
             return ""
+        # skip image processing when there's no width or height defined
+        elif not self.width and not self.height:
+            return self.rel_image.url if self.rel_image else ""
 
         picture_options = self.get_size(
             width=self.width or 0,
