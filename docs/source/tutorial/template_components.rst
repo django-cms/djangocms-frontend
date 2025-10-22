@@ -31,7 +31,7 @@ Directory Structure
 -------------------
 
 `djangocms-frontend` will **automatically locate and register template components** by looking for them
- **in the `templates/<app_name>/cms_components/` directory** of your installed apps.
+ in the **``templates/<app_name>/cms_components/``** directory of your installed apps.
 
 Ensure your DjangoCMS app has the following structure::
 
@@ -45,7 +45,7 @@ Ensure your DjangoCMS app has the following structure::
         views.py
         admin.py
 
-In this case, `heme_app/templates/theme_app/cms_components/hero.html` will be the template
+In this example, ``theme_app/templates/theme_app/cms_components/hero.html`` will be the template
 defining our custom hero component.
 
 .. note::

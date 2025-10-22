@@ -9,37 +9,19 @@ Building Custom CMS Frontend Components
 
 .. versionadded:: 2.0
 
-**Custom CMS Frontend components** are a powerful tool for content editors, allowing them to build pages without
-needing in-depth knowledge of design, HTML, or nested structures. Editors can simply add content to pre-defined
-components, creating visually cohesive pages with ease.
+In this tutorial, we will explore how to create custom **CMS Frontend Components**. These are more
+versatile than :ref:`template_components`, but require some minimal Python coding.
 
-`djangocms-frontend` provides a simple way for developers to create **custom Frontend CMS Components**,
-by subclassing the `CMSFrontendComponent` class and providing a custom template. 
-This approach requires minimal
-Python coding, while still offering flexibility and control over the component's behavior and appearance.
-
-
-
-
-In this tutorial, we will explore how to create custom **CMS Frontend Components**.
-These components empower developers to provide visually appealing components to content editors
-with minimal coding.
-
-- Components are defined by subclassing the `CMSFrontendComponent` class.
-- Visual presentation is controlled via templates.
-- Django CMS allows to register and manage these components seamlessly.
-
-Custom frontend components are more versatile than :ref:`template_components`, but require some minimal
-Python coding. Technically, you create a custom frontend component by declaring its change form and 
-rendering template.
+You create a custom frontend component by subclassing the ``CMSFrontendComponent`` class to 
+declare the form, plus providing a rendering template, and `djangocms-frontend` will take care 
+integrating it automatically.
 
 
 Hero CMS component example
 ==========================
 
 In this tutorial we will create again a **Hero component** similar to the one in the
-:ref:`previous chapter <template_components>`, but this time with python code.
-
+:ref:`previous chapter <template_components>`, but this time via code.
 
 Directory Structure
 -------------------
@@ -190,3 +172,16 @@ the resulting plugin class with the exception of ``get_render_template()``. Simi
 Python code the model class, in this case with the exception of ``get_short_description()``.
 
 For maximun flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
+
+
+Conclusion
+==========
+
+In this tutorial, we explored how to create custom frontend components. These components empower developers to
+provide visually appealing components to content editors with minimal coding.
+
+By following the steps outlined above, you can:
+
+- Define components using the `CMSFrontendComponent` class.
+- Leverage templates to control the visual presentation of your components.
+- Register and manage your components seamlessly within django CMS.

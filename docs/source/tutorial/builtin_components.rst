@@ -63,32 +63,32 @@ Configuration
    Open your Django project's ``settings.py`` and add the following applications to ``INSTALLED_APPS`` -
    you only need (and should) add the components you want content editors to use:
 
-   .. code-block:: python
+    .. code-block:: python
 
-      INSTALLED_APPS = [
-          # Optional dependencies
-          'djangocms_icon',
-          'easy_thumbnails',
-          'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
-          # Main frontend components
-          'djangocms_frontend',
-          'djangocms_frontend.contrib.accordion',
-          'djangocms_frontend.contrib.alert',
-          'djangocms_frontend.contrib.badge',
-          'djangocms_frontend.contrib.card',
-          'djangocms_frontend.contrib.carousel',
-          'djangocms_frontend.contrib.collapse',
-          'djangocms_frontend.contrib.component',
-          'djangocms_frontend.contrib.content',
-          'djangocms_frontend.contrib.grid',
-          'djangocms_frontend.contrib.icon',
-          'djangocms_frontend.contrib.image',
-          'djangocms_frontend.contrib.jumbotron',
-          'djangocms_frontend.contrib.link',
-          'djangocms_frontend.contrib.listgroup',
-          'djangocms_frontend.contrib.media',
-          'djangocms_frontend.contrib.tabs',
-          'djangocms_frontend.contrib.utilities',
+        INSTALLED_APPS = [
+            # Optional dependencies
+            'djangocms_icon',
+            'easy_thumbnails',
+            'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
+            # Main frontend components
+            'djangocms_frontend',
+            'djangocms_frontend.contrib.accordion',
+            'djangocms_frontend.contrib.alert',
+            'djangocms_frontend.contrib.badge',
+            'djangocms_frontend.contrib.card',
+            'djangocms_frontend.contrib.carousel',
+            'djangocms_frontend.contrib.collapse',
+            'djangocms_frontend.contrib.component',
+            'djangocms_frontend.contrib.content',
+            'djangocms_frontend.contrib.grid',
+            'djangocms_frontend.contrib.icon',
+            'djangocms_frontend.contrib.image',
+            'djangocms_frontend.contrib.jumbotron',
+            'djangocms_frontend.contrib.link',
+            'djangocms_frontend.contrib.listgroup',
+            'djangocms_frontend.contrib.media',
+            'djangocms_frontend.contrib.tabs',
+            'djangocms_frontend.contrib.utilities',
       ]
 
     For example, if you don't want to use any built-in components because you plan on 
