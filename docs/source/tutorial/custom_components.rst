@@ -66,7 +66,7 @@ Add a ``cms_components.py`` file to the ``theme`` app (see structure above):
     from djangocms_frontend.component_base import CMSFrontendComponent
     from djangocms_frontend.component_pool import components
     from djangocms_frontend.contrib.image.fields import ImageFormField
-
+    from django import forms
 
     @components.register
     class MyHeroComponent(CMSFrontendComponent):
