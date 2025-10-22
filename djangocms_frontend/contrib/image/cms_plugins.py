@@ -70,7 +70,7 @@ class ImagePlugin(
             },
         ),
         (
-            _("Dimensions"),
+            _("Sizing"),
             {
                 "classes": ("collapse",),
                 "fields": (
