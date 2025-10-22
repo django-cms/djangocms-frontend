@@ -219,7 +219,7 @@ plugin_migrations = {
         "link_url -> external_link",
         "link_target",
         "link_attributes",
-        "use_automatic_scaling", # ask
+        "use_automatic_scaling",
         "use_no_cropping",
         "use_crop",
         "use_upscale",
