@@ -29,7 +29,7 @@ def create_image_plugin(filename, file, parent_plugin, **kwargs):
     img.config.update(
         {
             "picture": {"pk": image_obj.pk, "model": "filer.image"},
-            "use_no_cropping": True, # ask
+            "use_no_cropping": True,
         }
     )
     add_plugin(parent_plugin.placeholder, img)
