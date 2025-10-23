@@ -102,11 +102,9 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        from pprint import pprint as pp
+
         res = response.content.decode("utf-8")
-
         self.assertTrue('/test_file.jpg"' in res)
-
 
     def test_image_form(self):
         request = HttpRequest()
