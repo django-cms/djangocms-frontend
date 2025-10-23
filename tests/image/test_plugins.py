@@ -64,6 +64,50 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             f'class="img-thumbnail rounded" not found in {response.content.decode("utf-8")}',
         )
 
+    def test_img_processing(self):
+        # Image gets resized if user width and height are provided
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "width": 50,
+                "height": 100,
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue('/test_file.jpg__50x100_q85_subsampling-2.jpg"' in res)
+
+        # Original image is used if NEITHER width nor height are provided
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        from pprint import pprint as pp
+        res = response.content.decode("utf-8")
+
+        self.assertTrue('/test_file.jpg"' in res)
+
+
     def test_image_form(self):
         request = HttpRequest()
         request.POST = {
