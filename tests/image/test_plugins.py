@@ -83,8 +83,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-
-        self.assertTrue('/test_file.jpg__50x100_q85_subsampling-2.jpg"' in res)
+        self.assertContains(response, '/test_file.jpg__50x100_q85_subsampling-2.jpg"')
 
         # Original image is used if NEITHER width nor height are provided
         plugin = add_plugin(
@@ -102,9 +101,7 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-
-        res = response.content.decode("utf-8")
-        self.assertTrue('/test_file.jpg"' in res)
+        self.assertContains(response, '/test_file.jpg"')
 
     def test_image_form(self):
         request = HttpRequest()
