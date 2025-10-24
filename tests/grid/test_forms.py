@@ -1,9 +1,6 @@
 from django.test import TestCase
 
-from djangocms_frontend.contrib.grid.forms import (
-    GridColumnForm,
-    GridRowForm,
-    GridContainerForm)
+from djangocms_frontend.contrib.grid.forms import GridColumnForm, GridContainerForm, GridRowForm
 
 
 class GridFormTestCase(TestCase):

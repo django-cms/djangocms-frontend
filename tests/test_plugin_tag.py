@@ -129,6 +129,7 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
     def test_autohero_component_registered_for_plugin_tag(self):
         from cms.plugin_pool import plugin_pool
+
         from djangocms_frontend.plugin_tag import plugin_tag_pool
 
         # Check that the AutoHero plugin is registered
