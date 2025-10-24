@@ -65,17 +65,16 @@ class ImagePlugin(
                 "classes": ("collapse",),
                 "fields": (
                     "use_responsive_image",
-                    ("width", "height"),
                     "alignment",
                 ),
             },
         ),
         (
-            _("Cropping"),
+            _("Sizing"),
             {
                 "classes": ("collapse",),
                 "fields": (
-                    ("use_automatic_scaling", "use_no_cropping"),
+                    ("width", "height"),
                     ("use_crop", "use_upscale"),
                     "thumbnail_options",
                 ),

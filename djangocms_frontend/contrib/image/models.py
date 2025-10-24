@@ -24,7 +24,7 @@ class ImageMixin:
             height = thumbnail_options.height
             crop = thumbnail_options.crop
             upscale = thumbnail_options.upscale
-        elif not getattr(self, "use_automatic_scaling", None):
+        else:
             width = getattr(self, "width", None)
             height = getattr(self, "height", None)
 
@@ -120,8 +120,9 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
         # in this case we want to return an empty string to avoid #69
         elif not self.picture:
             return ""
-        # return the original, unmodified image
-        elif self.use_no_cropping:
+        # skip image processing when there's no width or height defined,
+        # or when legacy use_no_cropping flag is present
+        elif getattr(self, 'use_no_cropping', None) or not (self.width or self.height):
             return self.rel_image.url if self.rel_image else ""
 
         picture_options = self.get_size(
