@@ -103,6 +103,28 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '/test_file.jpg"')
 
+        # Original image also used if legacy use_no_cropping flag is present,
+        # even when there is widht and height
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "width": 50,
+                "height": 100,
+                "use_no_cropping": True,
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '/test_file.jpg"')
+
     def test_image_form(self):
         request = HttpRequest()
         request.POST = {
