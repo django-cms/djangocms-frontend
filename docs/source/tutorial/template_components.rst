@@ -1,7 +1,7 @@
 .. _template_components:
 
 ############################
-Building Template Components
+Simplified Component Creation with Templates
 ############################
 
 .. index::
@@ -265,7 +265,7 @@ Template components are a powerful tool for developers, but they have some limit
   Classes are instantiated by default, for example. This is ok for ``widget=forms.Textarea``, but potentially not
   for more complex cases.
 
-For more powerful customization options, consider building a :ref:`custom CMS Frontend Component <custom_components>`
+For more powerful customization options, consider building a :ref:`custom Frontend Component <custom_components>`
 or a :ref:`custom Plugin<how-to-add-frontend-plugins>`
 
 

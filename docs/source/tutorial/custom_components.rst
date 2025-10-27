@@ -1,7 +1,7 @@
 .. _custom_components:
 
 #######################################
-Building Custom CMS Frontend Components
+Building Custom Components With Form Classes
 #######################################
 
 .. index::
@@ -9,7 +9,7 @@ Building Custom CMS Frontend Components
 
 .. versionadded:: 2.0
 
-In this tutorial, we will explore how to create custom **CMS Frontend Components**. These are more
+In this tutorial, we will explore how to create custom **Frontend Components**. These are more
 versatile than :ref:`template_components`, but require some minimal Python coding.
 
 You create a custom frontend component by subclassing the ``CMSFrontendComponent`` class to 
@@ -21,7 +21,7 @@ Hero CMS component example
 ==========================
 
 In this tutorial we will create again a **Hero component** similar to the one in the
-:ref:`previous chapter <template_components>`, but this time via code.
+:ref:`previous chapter <template_components>`.
 
 Directory Structure
 -------------------
