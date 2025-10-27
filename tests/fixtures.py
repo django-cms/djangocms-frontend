@@ -79,7 +79,7 @@ class TestFixture:
             return create_page(title=title, **kwargs)
 
         def get_placeholders(self, page):
-            from cms.models import Placeholder, PageContent
+            from cms.models import PageContent, Placeholder
             page_content = PageContent.admin_manager.latest_content().get(language=self.language, page=self.page)
             return Placeholder.objects.get_for_obj(page_content)
 

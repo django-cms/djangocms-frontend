@@ -9,6 +9,7 @@ form ul.djangocms-frontend.nav.nav-pills {
     margin: 0  !important;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     &:not(:has(> li:nth-child(2))) {
         // Hide single tab
         display: none;

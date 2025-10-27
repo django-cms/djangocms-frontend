@@ -12,7 +12,7 @@ repos:
       rev: v3.20.0
       hooks:
           - id: pyupgrade
-            args: ["--py39-plus"]
+            args: ["--py310-plus"]
 
     - repo: https://github.com/adamchainz/django-upgrade
       rev: "1.29.0"
@@ -33,6 +33,6 @@ repos:
                 - flake8-logging-format
 
     - repo: https://github.com/tox-dev/pyproject-fmt
-      rev: v2.7.0
+      rev: v2.11.0
       hooks:
       - id: pyproject-fmt
