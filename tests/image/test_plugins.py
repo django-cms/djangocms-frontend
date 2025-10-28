@@ -64,6 +64,67 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             f'class="img-thumbnail rounded" not found in {response.content.decode("utf-8")}',
         )
 
+    def test_img_processing(self):
+        # Image gets resized if user width and height are provided
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "width": 50,
+                "height": 100,
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '/test_file.jpg__50x100_q85_subsampling-2.jpg"')
+
+        # Original image is used if NEITHER width nor height are provided
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '/test_file.jpg"')
+
+        # Original image also used if legacy use_no_cropping flag is present,
+        # even when there is widht and height
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "width": 50,
+                "height": 100,
+                "use_no_cropping": True,
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '/test_file.jpg"')
+
     def test_image_form(self):
         request = HttpRequest()
         request.POST = {
@@ -77,10 +138,11 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
         self.assertEqual(form.cleaned_data["config"]["use_responsive_image"], "yes")
 
+        # Test invalid option pair
         request.POST.update(
             {
-                "use_automatic_scaling": True,
-                "use_no_cropping": True,
+                "thumbnail_options": True,
+                "use_crop": True,
             }
         )
         form = ImageForm(request.POST)

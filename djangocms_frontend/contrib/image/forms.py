@@ -74,9 +74,7 @@ class ImageForm(
                 "height",
                 "alignment",
                 "link_attributes",
-                "use_automatic_scaling",
                 "use_crop",
-                "use_no_cropping",
                 "use_upscale",
                 "use_responsive_image",
                 "thumbnail_options",
@@ -120,13 +118,19 @@ class ImageForm(
         label=_("Width"),
         required=False,
         min_value=1,
-        help_text=_('The image width as number in pixels. Example: "720" and not "720px".'),
+        help_text=_(
+            'The image width as number in pixels (eg, "720" and not "720px"). '
+        ),
     )
     height = forms.IntegerField(
         label=_("Height"),
         required=False,
         min_value=1,
-        help_text=_('The image height as number in pixels. Example: "720" and not "720px".'),
+        help_text=_(
+            'The image height as number in pixels (eg, "720" and not "720px"). '
+            "Note: if width is set, height will be calculated automatically to preserve aspect ratio. "
+            "In case of cropping, then both width and height are applied as given."
+        ),
     )
     alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -140,31 +144,17 @@ class ImageForm(
         help_text=_("Attributes apply to the <b>link</b>."),
     )
 
-    # cropping models
-    # active per default
-    use_automatic_scaling = forms.BooleanField(
-        label=_("Automatic scaling"),
-        required=False,
-        help_text=_("Uses the placeholder dimensions to automatically calculate the size."),
-    )
-    # ignores all other cropping options
-    # throws validation error if other cropping options are selected
-    use_no_cropping = forms.BooleanField(
-        label=_("Use original image"),
-        required=False,
-        help_text=_("Outputs the raw image without cropping."),
-    )
     # upscale and crop work together
     # throws validation error if other cropping options are selected
     use_crop = forms.BooleanField(
         label=_("Crop image"),
         required=False,
-        help_text=_("Crops the image according to the thumbnail settings provided in the template."),
+        help_text=_("Crops the image rather than resizing"),
     )
     use_upscale = forms.BooleanField(
         label=_("Upscale image"),
         required=False,
-        help_text=_("Upscales the image to the size of the thumbnail settings in the template."),
+        help_text=_("Allows the image to be upscaled beyond its original size."),
     )
     use_responsive_image = forms.ChoiceField(
         label=_("Use responsive image"),
@@ -215,11 +205,6 @@ class ImageForm(
         # certain cropping options do not work together, the following
         # list defines the disallowed options used in the ``clean`` method
         invalid_option_pairs = [
-            ("use_automatic_scaling", "use_no_cropping"),
-            ("use_automatic_scaling", "thumbnail_options"),
-            ("use_no_cropping", "use_crop"),
-            ("use_no_cropping", "use_upscale"),
-            ("use_no_cropping", "thumbnail_options"),
             ("thumbnail_options", "use_crop"),
             ("thumbnail_options", "use_upscale"),
         ]
