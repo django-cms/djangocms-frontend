@@ -62,6 +62,7 @@ class CMSFrontendComponent(forms.Form):
         "link_fieldset_position",
         "require_parent",
         "parent_classes",
+        "valid_models",
     ]
 
     @classmethod
