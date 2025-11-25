@@ -1,6 +1,6 @@
 {% load cms_tags frontend %}
 <{{ instance.tag_type }}{{ instance.get_attributes }}
-id="{{ instance.uuid }}"
+id="collapse-{{ instance.uuid }}"
 data-bs-children="{{ instance.collapse_siblings }}"
 role="tablist"
 >
