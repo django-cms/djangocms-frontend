@@ -75,3 +75,27 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'aria-labelledby="trigger-10"')
         self.assertContains(response, "10")
+
+    def test_collapse_html_id(self):
+        def create_plugin():
+            plugin = add_plugin(
+                placeholder=self.placeholder,
+                plugin_type=CollapsePlugin.__name__,
+                language=self.language,
+            )
+            plugin.initialize_from_form(CollapseForm).save()
+            self.publish(self.page, self.language)
+
+        create_plugin()
+        create_plugin()
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            """<div id="collapse-frontend-plugins-1" data-bs-children=".card" role="tablist"></div>""",
+            html=True)
+        self.assertContains(
+            response,
+            """<div id="collapse-frontend-plugins-2" data-bs-children=".card" role="tablist"></div>""",
+            html=True)
