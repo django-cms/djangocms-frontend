@@ -20,6 +20,7 @@ from entangled.forms import EntangledModelFormMixin
 from djangocms_frontend import settings
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
+from djangocms_frontend.models import FrontendUIItem
 
 register = template.Library()
 
@@ -71,6 +72,17 @@ def get_attributes(attribute_field, *add_classes):
     if additional_classes and (not attribute_field or "class" not in attribute_field):
         attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))
+
+
+@register.simple_tag(takes_context=True)
+def set_html_id(context: template.Context, instance: FrontendUIItem) -> str:
+    if instance.html_id is None:
+        request = context["request"]
+        key = "frontend_plugins_counter"
+        counter = getattr(request, key, 0) + 1
+        instance.html_id = f"frontend-plugins-{counter}"
+        setattr(request, key, counter)
+    return instance.html_id
 
 
 @register.filter
