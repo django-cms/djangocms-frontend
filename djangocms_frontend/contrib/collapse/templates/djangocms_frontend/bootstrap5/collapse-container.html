@@ -2,7 +2,7 @@
 <{{ instance.tag_type }}{{ instance.get_attributes }}
     id="{{ instance.container_identifier }}"
     role="tabpanel"
-    data-bs-parent="#collapse-{{ parent.uuid }}"
+    data-bs-parent="#collapse-{{ parent.html_id }}"
     aria-labelledby="trigger-{{ instance.container_identifier }}">
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}

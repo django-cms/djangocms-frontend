@@ -1,5 +1,6 @@
 import json
 import typing
+import uuid
 
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options, Tag
@@ -11,6 +12,7 @@ from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
+from django.http import HttpRequest
 from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
@@ -20,6 +22,7 @@ from entangled.forms import EntangledModelFormMixin
 from djangocms_frontend import settings
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
+from djangocms_frontend.models import FrontendUIItem
 
 register = template.Library()
 
@@ -71,6 +74,20 @@ def get_attributes(attribute_field, *add_classes):
     if additional_classes and (not attribute_field or "class" not in attribute_field):
         attrs.append(f'class="{conditional_escape(" ".join(additional_classes))}"')
     return mark_safe(" ".join(attrs))
+
+
+@register.simple_tag(takes_context=True)
+def set_html_id(context: template.Context, instance: FrontendUIItem) -> str:
+    if instance.html_id is None:
+        request = context.get("request")
+        if isinstance(request, HttpRequest):
+            key = "frontend_plugins_counter"
+            counter = getattr(request, key, 0) + 1
+            instance.html_id = f"frontend-plugins-{counter}"
+            setattr(request, key, counter)
+        else:
+            instance.html_id = f"uuid4-{uuid.uuid4()}"
+    return instance.html_id
 
 
 @register.filter

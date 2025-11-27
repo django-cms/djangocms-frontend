@@ -1,5 +1,3 @@
-import uuid
-
 from cms.models import CMSPlugin
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
@@ -48,7 +46,7 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     def __init__(self, *args, **kwargs):
         self._additional_classes = []
-        self.uuid = str(uuid.uuid4())
+        self.html_id = None  # HTML id attribute will be set in template tag set_html_id.
         super().__init__(*args, **kwargs)
 
     def __getattr__(self, item):
