@@ -8,7 +8,7 @@ Existing components can be extended through two type of class mixins.
 ``djangocms-frontend`` looks for these mixins in two places:
 
 #. In the theme module. Its name is specified by the setting
-   ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``djangocms_frontend``.
+   ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``theme``.
    For a theme app called ``theme`` and the bootstrap5 framework this
    would be ``theme.frontends.bootstrap5.py``.
 
@@ -233,9 +233,9 @@ Then, a new template is needed (in
           backdrop-filter: blur({{ instance.container_blur }}px);
         {% endif %}"
       {% endif %}>
-      {% if instance.image %}
+      {% if instance.container_image %}
         <div class="image"
-          style="background-image: url('{{ instance.image.url }}');
+          style="background-image: url('{{ instance.container_image.url }}');
                  background-position: {{ instance.image_position|default:'center center' }};
                  background-repeat: no-repeat;background-size: cover;
                  {% if instance.container_blur %}
