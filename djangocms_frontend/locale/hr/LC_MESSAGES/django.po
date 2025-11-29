@@ -2,34 +2,35 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Aleks Acimovic, 2024
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-28 23:03+0100\n"
+"POT-Creation-Date: 2025-11-12 10:28+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Aleks Acimovic, 2024\n"
 "Language-Team: Croatian (https://app.transifex.com/divio/teams/58664/hr/)\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: common/attributes.py:9
+#: common/attributes.py:11
 msgid ""
 "Advanced settings lets you add html attributes to render this element. Use "
 "them wisely and rarely."
 msgstr ""
-"Napredne postavke dopuštaju dodavanje html atributa za prikaz ovog elementa."
-" Koristite ih mudro i rijetko."
+"Napredne postavke dopuštaju dodavanje html atributa za prikaz ovog elementa. "
+"Koristite ih mudro i rijetko."
 
-#: common/attributes.py:26 contrib/accordion/cms_plugins.py:91
+#: common/attributes.py:26 contrib/accordion/cms_plugins.py:93
 msgid "Advanced settings"
 msgstr "Napredne postavke"
 
@@ -37,30 +38,29 @@ msgstr "Napredne postavke"
 msgid "Background"
 msgstr "Pozadina"
 
-#: common/bootstrap5/background.py:48
+#: common/bootstrap5/background.py:47
 msgid "Background context"
 msgstr "Kontekst pozadine"
 
-#: common/bootstrap5/background.py:52 contrib/card/forms.py:32
+#: common/bootstrap5/background.py:49 contrib/card/forms.py:19
 #: contrib/card/models.py:7
 msgid "Transparent"
 msgstr "Prozirno"
 
-#: common/bootstrap5/background.py:57
+#: common/bootstrap5/background.py:54
 msgid "Background opacity"
 msgstr "Prozirnost pozadine"
 
-#: common/bootstrap5/background.py:62
+#: common/bootstrap5/background.py:59
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr ""
 "Prozirnost pozadinske boje kartice (samo ukoliko obris/outline nije odabran)"
 
-#: common/bootstrap5/background.py:66
-#: contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:63 contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Sjena"
 
-#: common/bootstrap5/background.py:71
+#: common/bootstrap5/background.py:68
 msgid "Use shadows to optically lift cards from the background."
 msgstr "Koristite sjenu kako bi vizualno podigli kartice od pozadine."
 
@@ -76,9 +76,10 @@ msgstr "Prikaži element na uređaju"
 msgid "Select only devices on which this element should be shown."
 msgstr "Odaberite samo uređaje na kojima se ovaj element treba prikazati."
 
-#: common/bootstrap5/sizing.py:8 common/spacing.py:11
-#: contrib/utilities/forms.py:51 frameworks/bootstrap5.py:90
-#: frameworks/bootstrap5.py:103
+#: common/bootstrap5/sizing.py:8 common/bootstrap5/spacing.py:11
+#: contrib/utilities/forms.py:45 frameworks/bootstrap5.py:90
+#: frameworks/bootstrap5.py:103 frameworks/tailwind.py:77
+#: frameworks/tailwind.py:90
 msgid "Auto"
 msgstr ""
 
@@ -86,7 +87,7 @@ msgstr ""
 msgid "Horizontal size"
 msgstr "Horizontalna veličina"
 
-#: common/bootstrap5/sizing.py:50
+#: common/bootstrap5/sizing.py:49
 msgid ""
 "Sets the horizontal size relative to the surrounding container or the "
 "viewport."
@@ -94,48 +95,47 @@ msgstr ""
 "Postavlja horizontalnu velilčinu relativnu na okružujući spremnik/container "
 "ili viewport."
 
-#: common/bootstrap5/sizing.py:54
+#: common/bootstrap5/sizing.py:52
 msgid "Vertical size"
 msgstr "Vertikalna veličina"
 
-#: common/bootstrap5/sizing.py:60
+#: common/bootstrap5/sizing.py:57
 msgid ""
-"Sets the vertical size relative to the surrounding container or the "
-"viewport."
+"Sets the vertical size relative to the surrounding container or the viewport."
 msgstr ""
 "Postavlja vertikalnu velilčinu relativnu na okružujući spremnik/container "
 "ili viewport."
 
-#: common/spacing.py:84
+#: common/bootstrap5/spacing.py:80
 msgid "Please choose a side to which the spacing should be applied."
 msgstr "Molimo odaberite stranu na koju će se primijeniti razmak."
 
-#: common/spacing.py:113
+#: common/bootstrap5/spacing.py:109
 msgid "Margin"
 msgstr "Margina"
 
-#: common/spacing.py:139 common/spacing.py:147
+#: common/bootstrap5/spacing.py:135 common/bootstrap5/spacing.py:143
 msgid "Padding"
 msgstr ""
 
-#: common/spacing.py:175 contrib/utilities/cms_plugins.py:22
+#: common/bootstrap5/spacing.py:171 contrib/utilities/cms_plugins.py:21
 #: contrib/utilities/models.py:14
 msgid "Spacing"
 msgstr "Razmak"
 
-#: common/spacing.py:189
+#: common/bootstrap5/spacing.py:185
 msgid "Horizontal margin"
 msgstr "Horizontalna margina"
 
-#: common/spacing.py:195
+#: common/bootstrap5/spacing.py:191
 msgid "Vertical margin"
 msgstr "Vertikalna margina"
 
-#: common/spacing.py:201
+#: common/bootstrap5/spacing.py:197
 msgid "Apply margin on device"
 msgstr "Primijeni marginu na uređaj"
 
-#: common/spacing.py:204
+#: common/bootstrap5/spacing.py:201
 msgid ""
 "Select only devices on which the margin should be applied. On other devices "
 "larger than the first selected device the margin will be set to zero."
@@ -144,75 +144,83 @@ msgstr ""
 "uređajima većim od prvog odabranog uređaja margina će biti postavljena na "
 "nulu."
 
-#: common/spacing.py:221
+#: common/bootstrap5/spacing.py:218
 msgid "Horizontal padding"
 msgstr "Horizontalni padding"
 
-#: common/spacing.py:227
+#: common/bootstrap5/spacing.py:224
 msgid "Vertical padding"
 msgstr "Vertikalni padding"
 
-#: common/spacing.py:233
+#: common/bootstrap5/spacing.py:230
 msgid "Apply padding on device"
 msgstr "Primijeni padding na uređaju"
 
-#: common/spacing.py:236
+#: common/bootstrap5/spacing.py:234
 msgid ""
-"Select only devices on which the padding should be applied. On other devices"
-" larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices "
+"larger than the first selected device the padding will be set to zero."
 msgstr ""
 "Odaberite samo uređaje na koje će se padding primijeniti. Na ostalim "
 "uređajima većim od prvog odabranog uređaja padding će biti postavljen na "
 "nulu."
 
-#: common/title.py:40
+#: common/title.py:39
 msgid "Please add a title if you want to publish it."
 msgstr "Molimo dodajte naziv ukoliko želite objaviti."
 
-#: common/title.py:64
+#: common/title.py:62
 msgid "Title"
 msgstr "Naziv"
 
-#: common/title.py:67
+#: common/title.py:66
 msgid ""
-"Optional title of the plugin for easier identification. Its "
-"<code>title</code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its <code>title</"
+"code> attribute will only be set if the checkbox is selected."
 msgstr ""
-"Opcionalni naziv plugina radi lakše identifikacije. Njegov  "
-"<code>title</code> atribut biti će postavljen samo ukoliko je označena "
-"opcija/checkbox."
+"Opcionalni naziv plugina radi lakše identifikacije. Njegov  <code>title</"
+"code> atribut biti će postavljen samo ukoliko je označena opcija/checkbox."
+
+#: component_base.py:153
+msgid "Components"
+msgstr ""
+
+#: component_base.py:192
+msgid "Component"
+msgstr ""
 
 #: contrib/accordion/cms_plugins.py:21 contrib/accordion/models.py:14
 msgid "Accordion"
 msgstr "Harmonika / Accordion"
 
 #: contrib/accordion/cms_plugins.py:22 contrib/accordion/cms_plugins.py:72
-#: contrib/alert/cms_plugins.py:25 contrib/badge/cms_plugins.py:21
-#: contrib/card/cms_plugins.py:25 contrib/card/cms_plugins.py:86
-#: contrib/card/cms_plugins.py:146 contrib/carousel/cms_plugins.py:26
-#: contrib/carousel/cms_plugins.py:71 contrib/collapse/cms_plugins.py:21
-#: contrib/collapse/cms_plugins.py:50 contrib/collapse/cms_plugins.py:76
-#: contrib/content/cms_plugins.py:31 contrib/content/cms_plugins.py:64
-#: contrib/content/cms_plugins.py:99 contrib/grid/cms_plugins.py:37
-#: contrib/grid/cms_plugins.py:73 contrib/grid/cms_plugins.py:150
-#: contrib/icon/cms_plugins.py:30 contrib/image/cms_plugins.py:31
-#: contrib/jumbotron/cms_plugins.py:32 contrib/link/cms_plugins.py:98
-#: contrib/listgroup/cms_plugins.py:29 contrib/listgroup/cms_plugins.py:56
-#: contrib/media/cms_plugins.py:24 contrib/media/cms_plugins.py:41
-#: contrib/navigation/cms_plugins.py:30 contrib/navigation/cms_plugins.py:75
-#: contrib/navigation/cms_plugins.py:106 contrib/navigation/cms_plugins.py:134
-#: contrib/navigation/cms_plugins.py:165 contrib/tabs/cms_plugins.py:25
-#: contrib/tabs/cms_plugins.py:59 contrib/utilities/cms_plugins.py:23
-#: contrib/utilities/cms_plugins.py:50 contrib/utilities/cms_plugins.py:62
-#: contrib/utilities/cms_plugins.py:123
+#: contrib/alert/cms_plugins.py:21 contrib/badge/cms_plugins.py:21
+#: contrib/card/cms_plugins.py:22 contrib/card/cms_plugins.py:83
+#: contrib/card/cms_plugins.py:143 contrib/carousel/cms_plugins.py:25
+#: contrib/carousel/cms_plugins.py:68 contrib/collapse/cms_plugins.py:21
+#: contrib/collapse/cms_plugins.py:48 contrib/collapse/cms_plugins.py:72
+#: contrib/content/cms_plugins.py:28 contrib/content/cms_plugins.py:61
+#: contrib/content/cms_plugins.py:97 contrib/grid/cms_plugins.py:33
+#: contrib/grid/cms_plugins.py:70 contrib/grid/cms_plugins.py:147
+#: contrib/icon/cms_plugins.py:27 contrib/image/cms_plugins.py:29
+#: contrib/jumbotron/cms_plugins.py:29 contrib/link/cms_plugins.py:73
+#: contrib/listgroup/cms_plugins.py:27 contrib/listgroup/cms_plugins.py:55
+#: contrib/media/cms_plugins.py:21 contrib/media/cms_plugins.py:39
+#: contrib/navigation/cms_plugins.py:29 contrib/navigation/cms_plugins.py:77
+#: contrib/navigation/cms_plugins.py:115 contrib/navigation/cms_plugins.py:147
+#: contrib/navigation/cms_plugins.py:188 contrib/tabs/cms_plugins.py:24
+#: contrib/tabs/cms_plugins.py:57 contrib/utilities/cms_plugins.py:22
+#: contrib/utilities/cms_plugins.py:49 contrib/utilities/cms_plugins.py:61
+#: contrib/utilities/cms_plugins.py:125
 msgid "Frontend"
 msgstr ""
 
 #: contrib/accordion/cms_plugins.py:57
+#, python-brace-format
 msgid "Item {}"
 msgstr "Stavka {}"
 
-#: contrib/accordion/cms_plugins.py:71 contrib/accordion/models.py:33
+#: contrib/accordion/cms_plugins.py:71 contrib/accordion/models.py:30
 msgid "Accordion item"
 msgstr "Stavka harmonike/accordiona"
 
@@ -234,47 +242,65 @@ msgstr "Ugradi u roditelja/parenta"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners"
-" to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners "
+"to render accordions edge-to-edge with their parent container "
 msgstr ""
 "Uklanja zadanu boju pozadine, neke obrube i neke zaobljene rubove kako bi "
-"prikazao accordione od-ruba-do-ruba sa njihovim nadređenim/parent "
-"spremnikom/containerom."
+"prikazao accordione od-ruba-do-ruba sa njihovim nadređenim/parent spremnikom/"
+"containerom."
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
 msgid "Header"
 msgstr "Zaglavlje"
 
-#: contrib/accordion/forms.py:82
+#: contrib/accordion/forms.py:79
+#, fuzzy
+#| msgid "Accordion item"
+msgid "New accordion item"
+msgstr "Stavka harmonike/accordiona"
+
+#: contrib/accordion/forms.py:83
 msgid "Item open"
 msgstr "Stavka otvorena"
 
-#: contrib/accordion/forms.py:85
+#: contrib/accordion/forms.py:86
 msgid "Initially shows this accordion item on page load."
 msgstr "Inicijalno prikazuje stavku accordiona pri učitavanju stranice."
 
-#: contrib/accordion/models.py:20
+#: contrib/accordion/models.py:17
+#, python-brace-format
 msgid "({} entries)"
 msgstr "({} stavki)"
 
-#: contrib/accordion/models.py:29
+#: contrib/accordion/models.py:26
 msgid "AccordionItem"
 msgstr ""
 
-#: contrib/alert/cms_plugins.py:24 contrib/alert/models.py:14
+#: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion.html:5
+#, fuzzy
+#| msgid "Accordion item"
+msgid "Add accordion items here"
+msgstr "Stavka harmonike/accordiona"
+
+#: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion_item.html:18
+#: templates/djangocms_frontend/html_container.html:5
+msgid "Add content here"
+msgstr ""
+
+#: contrib/alert/cms_plugins.py:20 contrib/alert/models.py:14
 msgid "Alert"
 msgstr "Upozorenje / Alert"
 
-#: contrib/alert/forms.py:41 contrib/badge/forms.py:37
-#: contrib/link/forms.py:344 contrib/listgroup/forms.py:71
+#: contrib/alert/forms.py:34 contrib/badge/forms.py:34
+#: contrib/link/forms.py:139 contrib/listgroup/forms.py:63
 msgid "Context"
 msgstr "Kontekst"
 
-#: contrib/alert/forms.py:47
+#: contrib/alert/forms.py:40
 msgid "Dismissible"
 msgstr "Moguće ugasiti"
 
-#: contrib/alert/forms.py:50
+#: contrib/alert/forms.py:43
 msgid "Allows the alert to be closed."
 msgstr "Dopušta da upozorenje/alert bude zatvoren."
 
@@ -291,32 +317,32 @@ msgstr "Zatvori"
 msgid "Badge"
 msgstr "Bedž / Badge"
 
-#: contrib/badge/forms.py:33
+#: contrib/badge/forms.py:29
 msgid "Badge text"
 msgstr "Tekst bedža"
 
-#: contrib/badge/forms.py:43
+#: contrib/badge/forms.py:40
 msgid "Pills style"
 msgstr "Stil pilule/pill"
 
-#: contrib/badge/forms.py:46
+#: contrib/badge/forms.py:43
 msgid "Activates the pills style."
 msgstr "Aktivira stil pilule/pills."
 
-#: contrib/card/cms_plugins.py:24 contrib/card/models.py:20
+#: contrib/card/cms_plugins.py:21 contrib/card/models.py:20
 msgid "Card layout"
 msgstr "Izgled kartice/card"
 
-#: contrib/card/cms_plugins.py:47 contrib/grid/cms_plugins.py:93
-#: contrib/grid/cms_plugins.py:173
+#: contrib/card/cms_plugins.py:44 contrib/grid/cms_plugins.py:90
+#: contrib/grid/cms_plugins.py:171
 msgid "Responsive settings"
 msgstr "Postavke responzivnosti"
 
-#: contrib/card/cms_plugins.py:85 contrib/card/models.py:35
+#: contrib/card/cms_plugins.py:82 contrib/card/models.py:35
 msgid "Card"
 msgstr "Kartica / Card"
 
-#: contrib/card/cms_plugins.py:145 contrib/card/models.py:57
+#: contrib/card/cms_plugins.py:142 contrib/card/models.py:57
 msgid "Card inner"
 msgstr "Unutrašnjost kartice/card"
 
@@ -328,17 +354,17 @@ msgstr "Grupa kartica/cards"
 msgid "Grid cards"
 msgstr "Mreža kartica/cards"
 
-#: contrib/card/constants.py:9 contrib/utilities/forms.py:108
-#: frameworks/bootstrap5.py:59 settings.py:47
+#: contrib/card/constants.py:9 contrib/utilities/forms.py:98
+#: frameworks/bootstrap5.py:59 frameworks/tailwind.py:46 settings.py:45
 msgid "Left"
 msgstr "Lijevo"
 
-#: contrib/card/constants.py:10 contrib/utilities/forms.py:109 settings.py:48
+#: contrib/card/constants.py:10 contrib/utilities/forms.py:99 settings.py:46
 msgid "Center"
 msgstr "Sredina"
 
-#: contrib/card/constants.py:11 contrib/utilities/forms.py:110
-#: frameworks/bootstrap5.py:60 settings.py:49
+#: contrib/card/constants.py:11 contrib/utilities/forms.py:100
+#: frameworks/bootstrap5.py:60 frameworks/tailwind.py:47 settings.py:47
 msgid "Right"
 msgstr "Desno"
 
@@ -354,62 +380,61 @@ msgstr "Podnožje"
 msgid "Image overlay"
 msgstr "Premaz slike"
 
-#: contrib/card/forms.py:35 contrib/card/models.py:9
+#: contrib/card/forms.py:21 contrib/card/models.py:9
 msgid "White"
 msgstr "Bijelo"
 
-#: contrib/card/forms.py:61
+#: contrib/card/forms.py:47
 msgid "Create cards"
 msgstr "Stvori kartice/cards"
 
-#: contrib/card/forms.py:62
+#: contrib/card/forms.py:48
 msgid "Number of cards to create when saving."
 msgstr "Broj kartica/cards za kreiranje pri spremanju."
 
-#: contrib/card/forms.py:68
+#: contrib/card/forms.py:54
 msgid "Card type"
 msgstr "Tip kartice/card"
 
-#: contrib/card/forms.py:122
+#: contrib/card/forms.py:108
 msgid "Card outline context"
 msgstr "Kontekst obrisa kartice/card"
 
-#: contrib/card/forms.py:126
+#: contrib/card/forms.py:112
 msgid "Uses the border to indicate context."
 msgstr "Koristi obrub kako bi istaknuo kontekst"
 
-#: contrib/card/forms.py:132 contrib/content/forms.py:99
-#: contrib/content/forms.py:137 contrib/grid/cms_plugins.py:99
-#: contrib/image/forms.py:147 contrib/tabs/forms.py:57
-#: contrib/utilities/forms.py:139
+#: contrib/card/forms.py:118 contrib/content/forms.py:97
+#: contrib/content/forms.py:135 contrib/grid/cms_plugins.py:96
+#: contrib/image/forms.py:136 contrib/tabs/forms.py:46
+#: contrib/utilities/forms.py:127
 msgid "Alignment"
 msgstr "Poravnanje"
 
-#: contrib/card/forms.py:140
+#: contrib/card/forms.py:124
 msgid "Text context"
 msgstr "Kontekst teksta"
 
-#: contrib/card/forms.py:148
+#: contrib/card/forms.py:132
 msgid "Full height"
 msgstr "Puna visina"
 
-#: contrib/card/forms.py:152
+#: contrib/card/forms.py:135
 msgid ""
-"If checked cards in one row will automatically extend to the full row "
-"height."
+"If checked cards in one row will automatically extend to the full row height."
 msgstr ""
 "Ako je označeno sve kartice/cards u jednom retku/rowu automatski će se "
 "razvući na punu visinu retka/rowa."
 
-#: contrib/card/forms.py:186
+#: contrib/card/forms.py:168
 msgid "Inner type"
 msgstr "Tip unutrašnjosti"
 
-#: contrib/card/forms.py:189
+#: contrib/card/forms.py:171
 msgid "Define the structure of the plugin."
 msgstr "Definirajte strukturu plugina."
 
-#: contrib/card/forms.py:193 contrib/grid/forms.py:173
+#: contrib/card/forms.py:175 contrib/grid/forms.py:168
 msgid "Content alignment"
 msgstr "Poravnanje sadržaja"
 
@@ -418,18 +443,13 @@ msgstr "Poravnanje sadržaja"
 msgid "Colums per row"
 msgstr "Kolona po retku/rowu"
 
-#: contrib/carousel/cms_plugins.py:25 contrib/carousel/models.py:20
+#: contrib/carousel/cms_plugins.py:24 contrib/carousel/models.py:20
 msgid "Carousel"
 msgstr "Karusel / Carousel"
 
-#: contrib/carousel/cms_plugins.py:70 contrib/carousel/models.py:42
+#: contrib/carousel/cms_plugins.py:67 contrib/carousel/models.py:42
 msgid "Carousel slide"
 msgstr "Slajd karusela/carousel"
-
-#: contrib/carousel/cms_plugins.py:88 contrib/link/cms_plugins.py:45
-#: contrib/link/cms_plugins.py:83
-msgid "Link settings"
-msgstr "Postavke linka"
 
 #: contrib/carousel/constants.py:5
 msgid "On hover"
@@ -439,85 +459,86 @@ msgstr "Na prijelaz mišem"
 msgid "Never"
 msgstr "Nikad"
 
-#: contrib/carousel/constants.py:12 contrib/image/forms.py:39
-#: contrib/tabs/constants.py:27 settings.py:56 settings.py:64 settings.py:72
+#: contrib/carousel/constants.py:12 contrib/image/forms.py:37
+#: contrib/tabs/constants.py:27 frameworks/tailwind.py:18 settings.py:54
+#: settings.py:62 settings.py:70
 msgid "Default"
 msgstr "Zadano"
 
-#: contrib/carousel/constants.py:36
+#: contrib/carousel/constants.py:34
 msgid "Slide"
 msgstr "Klizanje"
 
-#: contrib/carousel/constants.py:37 contrib/tabs/constants.py:21
+#: contrib/carousel/constants.py:35 contrib/tabs/constants.py:21
 msgid "Fade"
 msgstr "Iščezavanje"
 
-#: contrib/carousel/forms.py:58 contrib/image/forms.py:103
-#: contrib/jumbotron/forms.py:44 contrib/link/forms.py:324
-#: contrib/navigation/forms.py:42 contrib/tabs/forms.py:45
+#: contrib/carousel/forms.py:53 contrib/image/forms.py:92
+#: contrib/jumbotron/forms.py:40 contrib/link/forms.py:121
+#: contrib/navigation/forms.py:37 contrib/tabs/forms.py:34
 msgid "Layout"
 msgstr "Izgled"
 
-#: contrib/carousel/forms.py:61 contrib/tabs/forms.py:48
+#: contrib/carousel/forms.py:56 contrib/tabs/forms.py:37
 msgid "This is the template that will be used for the component."
 msgstr "Ovo je predložak koji će se koristiti za komponentu."
 
-#: contrib/carousel/forms.py:64 contrib/carousel/models.py:24
+#: contrib/carousel/forms.py:59 contrib/carousel/models.py:24
 msgid "Interval"
 msgstr ""
 
-#: contrib/carousel/forms.py:67
+#: contrib/carousel/forms.py:62
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false,"
-" carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false, "
+"carousel will not automatically cycle."
 msgstr ""
-"Vrijeme odmaka između automatske izmjene stavki. Ukoliko je prazno, "
-"karusel/carousel neće automatski izmjenjivati stavke."
+"Vrijeme odmaka između automatske izmjene stavki. Ukoliko je prazno, karusel/"
+"carousel neće automatski izmjenjivati stavke."
 
-#: contrib/carousel/forms.py:72 contrib/carousel/models.py:25
+#: contrib/carousel/forms.py:67 contrib/carousel/models.py:25
 msgid "Controls"
 msgstr "Kontrole"
 
-#: contrib/carousel/forms.py:75
+#: contrib/carousel/forms.py:70
 msgid "Adding in the previous and next controls."
 msgstr "Dodavanje kontrola Prethodno i Sljedeće."
 
-#: contrib/carousel/forms.py:78 contrib/carousel/models.py:26
+#: contrib/carousel/forms.py:73 contrib/carousel/models.py:26
 msgid "Indicators"
 msgstr "Indikatori"
 
-#: contrib/carousel/forms.py:81
+#: contrib/carousel/forms.py:76
 msgid "Adding in the indicators to the carousel."
 msgstr "Dodavanje indikatora na karusel/carousel."
 
-#: contrib/carousel/forms.py:84 contrib/carousel/models.py:27
+#: contrib/carousel/forms.py:79 contrib/carousel/models.py:27
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: contrib/carousel/forms.py:87
+#: contrib/carousel/forms.py:82
 msgid "Whether the carousel should react to keyboard events."
 msgstr "Hoće li karusel/carousel reagirati na evente tipkovnice."
 
-#: contrib/carousel/forms.py:90 contrib/carousel/models.py:28
+#: contrib/carousel/forms.py:85 contrib/carousel/models.py:28
 msgid "Pause"
 msgstr "Pauza"
 
-#: contrib/carousel/forms.py:94
+#: contrib/carousel/forms.py:89
 msgid ""
 "If set to \"hover\", pauses the cycling of the carousel on \"mouseenter\" "
 "and resumes the cycling of the carousel on \"mouseleave\". If set to "
 "\"false\", hovering over the carousel won't pause it."
 msgstr ""
-"Ukoliko je postavljen prijelaz mišem/\"hover\", pauzira klizanje "
-"karusela/carousel na ulazak miša/\"mouseenter\" i nastavlja klizanje "
-"karusela/carousel na odlazak miša/\"mouseleave\". Ukoliko je postavljeno "
-"prazno/\"false\", prijelaz mišem preko karusela/carousel neće ga pauzirati."
+"Ukoliko je postavljen prijelaz mišem/\"hover\", pauzira klizanje karusela/"
+"carousel na ulazak miša/\"mouseenter\" i nastavlja klizanje karusela/"
+"carousel na odlazak miša/\"mouseleave\". Ukoliko je postavljeno prazno/"
+"\"false\", prijelaz mišem preko karusela/carousel neće ga pauzirati."
 
-#: contrib/carousel/forms.py:102
+#: contrib/carousel/forms.py:97
 msgid "Auto start"
 msgstr "Automatsko pokretanje"
 
-#: contrib/carousel/forms.py:106
+#: contrib/carousel/forms.py:101
 msgid ""
 "Autoplays the carousel after the user manually cycles the first item. If "
 "\"carousel\", autoplays the carousel on load."
@@ -526,41 +547,41 @@ msgstr ""
 "stavku. Ukoliko je odabran \"karusel/carousel\", automatski se pokreće "
 "karusel/carousel pri učitavanju."
 
-#: contrib/carousel/forms.py:111 contrib/carousel/models.py:30
+#: contrib/carousel/forms.py:106 contrib/carousel/models.py:30
 msgid "Wrap"
 msgstr "Omotač"
 
-#: contrib/carousel/forms.py:115
+#: contrib/carousel/forms.py:109
 msgid "Whether the carousel should cycle continuously or have hard stops."
 msgstr ""
 "Hoće li se karusel/carousel izmjenjivati kontinuirano ili će imati stanke."
 
-#: contrib/carousel/forms.py:119
+#: contrib/carousel/forms.py:112
 msgid "Aspect ratio"
 msgstr "Omjer"
 
-#: contrib/carousel/forms.py:124
+#: contrib/carousel/forms.py:116
 msgid ""
 "Determines width and height of the image according to the selected ratio."
 msgstr "Određuje širinu i visinu slike prema odabranom omjeru."
 
-#: contrib/carousel/forms.py:129
+#: contrib/carousel/forms.py:119
 msgid "Transition"
 msgstr "Tranzicija"
 
-#: contrib/carousel/forms.py:133
+#: contrib/carousel/forms.py:123
 msgid "Determines if slides change by sliding or fading."
 msgstr "Određuje hoće li se slajdovi mijenjati klizanjem ili iščezavanjem."
 
-#: contrib/carousel/forms.py:177
+#: contrib/carousel/forms.py:167
 msgid "Slide image"
 msgstr "Slika slajda"
 
-#: contrib/carousel/forms.py:181
+#: contrib/carousel/forms.py:171
 msgid "Content"
 msgstr "Sadržaj"
 
-#: contrib/carousel/forms.py:184
+#: contrib/carousel/forms.py:174
 msgid "Content may also be added using child plugins."
 msgstr "Sadržaj se također može dodati pomoću podređenih pluginova."
 
@@ -568,7 +589,7 @@ msgstr "Sadržaj se također može dodati pomoću podređenih pluginova."
 msgid "Ride"
 msgstr "Vožnja"
 
-#: contrib/carousel/models.py:51 contrib/image/models.py:155
+#: contrib/carousel/models.py:51 contrib/image/models.py:154
 msgid "<file is missing>"
 msgstr ""
 
@@ -584,11 +605,11 @@ msgstr "Sljedeće"
 msgid "Collapse"
 msgstr "Zatvori"
 
-#: contrib/collapse/cms_plugins.py:49 contrib/collapse/models.py:35
+#: contrib/collapse/cms_plugins.py:47 contrib/collapse/models.py:35
 msgid "Collapse trigger"
 msgstr "Okidač zatvaranja"
 
-#: contrib/collapse/cms_plugins.py:75 contrib/collapse/models.py:49
+#: contrib/collapse/cms_plugins.py:71 contrib/collapse/models.py:49
 msgid "Collapse container"
 msgstr "Zatvori spremnik/container"
 
@@ -614,15 +635,15 @@ msgstr "Identifikator za povezivanje okidača sa spremnikom/containerom."
 msgid "There is no configuration required here."
 msgstr "Konfiguracija nije potrebna."
 
-#: contrib/content/cms_plugins.py:30 contrib/content/forms.py:51
+#: contrib/content/cms_plugins.py:27 contrib/content/forms.py:49
 msgid "Code"
 msgstr "Kod"
 
-#: contrib/content/cms_plugins.py:63 contrib/content/models.py:29
+#: contrib/content/cms_plugins.py:60 contrib/content/models.py:29
 msgid "Blockquote"
 msgstr "Blok citat"
 
-#: contrib/content/cms_plugins.py:98 contrib/content/models.py:43
+#: contrib/content/cms_plugins.py:96 contrib/content/models.py:43
 msgid "Figure"
 msgstr "Figura / Figure"
 
@@ -646,37 +667,37 @@ msgstr "Korisnički unos"
 msgid "Sample output"
 msgstr "Uzorak izlaza "
 
-#: contrib/content/forms.py:57
+#: contrib/content/forms.py:55
 msgid "Code type"
 msgstr "Tip koda"
 
-#: contrib/content/forms.py:90
+#: contrib/content/forms.py:88
 msgid "Quote"
 msgstr "Citat"
 
-#: contrib/content/forms.py:95
+#: contrib/content/forms.py:93
 msgid "Source"
 msgstr "Izvor"
 
-#: contrib/content/forms.py:132
+#: contrib/content/forms.py:130
 msgid "Caption"
 msgstr "Naslov"
 
-#: contrib/grid/cms_plugins.py:36 contrib/grid/constants.py:19
-#: contrib/grid/models.py:28 contrib/navigation/forms.py:48
+#: contrib/grid/cms_plugins.py:32 contrib/grid/constants.py:19
+#: contrib/grid/models.py:26 contrib/navigation/forms.py:43
 msgid "Container"
 msgstr "Spremnik / Container"
 
-#: contrib/grid/cms_plugins.py:72 contrib/grid/models.py:55
+#: contrib/grid/cms_plugins.py:69 contrib/grid/models.py:45
 msgid "Row"
 msgstr "Red / Row"
 
-#: contrib/grid/cms_plugins.py:149 contrib/grid/models.py:79
+#: contrib/grid/cms_plugins.py:146 contrib/grid/models.py:65
 #: contrib/tabs/constants.py:15
 msgid "Column"
 msgstr "Kolona / Column"
 
-#: contrib/grid/cms_plugins.py:184
+#: contrib/grid/cms_plugins.py:182
 msgid "Title settings"
 msgstr "Postavke naslova"
 
@@ -732,11 +753,11 @@ msgstr ""
 msgid "Align self end"
 msgstr ""
 
-#: contrib/grid/forms.py:61
+#: contrib/grid/forms.py:52
 msgid "Container type"
 msgstr "Tip spremnika/containera"
 
-#: contrib/grid/forms.py:65
+#: contrib/grid/forms.py:56
 msgid ""
 "Defines if the grid should use fixed width, fluid width or the container "
 "should fill the full width without margins or padding."
@@ -744,37 +765,37 @@ msgstr ""
 "Definira treba li rešetka koristiti fiksnu širinu, fluidnu širinu ili "
 "spremnik/container treba ispuniti punu širinu bez margina ili paddinga."
 
-#: contrib/grid/forms.py:97
+#: contrib/grid/forms.py:88
 msgid "Create columns"
 msgstr "Stvori kolone/columns"
 
-#: contrib/grid/forms.py:98
+#: contrib/grid/forms.py:89
 msgid "Number of columns to create when saving."
 msgstr "Broj kolona/columns za kreiranje pri spremanju."
 
-#: contrib/grid/forms.py:104
+#: contrib/grid/forms.py:95
 msgid "Vertical alignment"
 msgstr "Vertikalno poravnanje"
 
-#: contrib/grid/forms.py:111
+#: contrib/grid/forms.py:102
 msgid "Horizontal alignment"
 msgstr "Horizontalno poravnanje"
 
-#: contrib/grid/forms.py:118
+#: contrib/grid/forms.py:109
 msgid "Gutters"
 msgstr "Odmaci / napusti"
 
-#: contrib/grid/forms.py:122
+#: contrib/grid/forms.py:113
 msgid "To remove all spaces between rows set gutters to 0."
 msgstr ""
 "Kako bi uklonili sve razmake između redaka/rowova postavite odmake/napuste "
 "na 0."
 
-#: contrib/grid/forms.py:167
+#: contrib/grid/forms.py:162
 msgid "Column alignment"
 msgstr "Poravnanje kolona/columns"
 
-#: contrib/grid/forms.py:195
+#: contrib/grid/forms.py:184
 #, python-format
 msgid ""
 "Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
@@ -782,15 +803,15 @@ msgstr ""
 "Veličina kolone/column mora biti prazna, \"auto\", ili broj između 1 i "
 "%(cols)d"
 
-#: contrib/grid/models.py:29
+#: contrib/grid/models.py:27
 msgid "GridContainer"
 msgstr ""
 
-#: contrib/grid/models.py:56
+#: contrib/grid/models.py:46
 msgid "GridRow"
 msgstr ""
 
-#: contrib/grid/models.py:64
+#: contrib/grid/models.py:51
 #, python-format
 msgid "(1 column)"
 msgid_plural "(%(count)i columns)"
@@ -798,7 +819,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contrib/grid/models.py:80
+#: contrib/grid/models.py:66
 msgid "GridColumn"
 msgstr ""
 
@@ -826,7 +847,7 @@ msgstr "Desna margina"
 msgid "Reset"
 msgstr "Resetiraj"
 
-#: contrib/icon/apps.py:7 contrib/icon/cms_plugins.py:29
+#: contrib/icon/apps.py:7 contrib/icon/cms_plugins.py:26
 #: contrib/icon/models.py:14
 msgid "Icon"
 msgstr "Ikona"
@@ -859,15 +880,15 @@ msgstr ""
 msgid "x 12"
 msgstr ""
 
-#: contrib/icon/forms.py:45
+#: contrib/icon/forms.py:37
 msgid "Icon size"
 msgstr "Veličina ikone"
 
-#: contrib/icon/forms.py:51
+#: contrib/icon/forms.py:43
 msgid "Foreground context"
 msgstr "Kontekst prvog plana/foreground"
 
-#: contrib/icon/forms.py:58
+#: contrib/icon/forms.py:50
 msgid "Circular icon"
 msgstr "Kružna ikona"
 
@@ -879,67 +900,51 @@ msgstr "nedefinirano"
 msgid "Click to add icon"
 msgstr "Kliknite za dodavanje ikone"
 
-#: contrib/image/cms_plugins.py:30
+#: contrib/image/cms_plugins.py:28
 msgid "Picture / Image"
 msgstr "Slika / fotografija"
 
-#: contrib/image/cms_plugins.py:58
+#: contrib/image/cms_plugins.py:63
 msgid "Format"
 msgstr ""
 
-#: contrib/image/cms_plugins.py:69
-msgid "Cropping"
-msgstr "Obrezivanje"
+#: contrib/image/cms_plugins.py:73
+msgid "Sizing"
+msgstr ""
 
-#: contrib/image/forms.py:25
+#: contrib/image/forms.py:23
 msgid "Float left"
 msgstr "Float lijevo"
 
-#: contrib/image/forms.py:26
+#: contrib/image/forms.py:24
 msgid "Float right"
 msgstr "Float desno"
 
-#: contrib/image/forms.py:27
+#: contrib/image/forms.py:25
 msgid "Align center"
 msgstr "Centrirano"
 
-#: contrib/image/forms.py:50 contrib/link/constants.py:22
-msgid "Open in new window"
-msgstr "Otvori u novom prozoru"
-
-#: contrib/image/forms.py:51 contrib/link/constants.py:23
-msgid "Open in same window"
-msgstr "Otvori u istom prozoru"
-
-#: contrib/image/forms.py:52 contrib/link/constants.py:24
-msgid "Delegate to parent"
-msgstr "Delegiraj roditelju/parentu"
-
-#: contrib/image/forms.py:53 contrib/link/constants.py:25
-msgid "Delegate to top"
-msgstr "Delegiraj na vrh"
-
-#: contrib/image/forms.py:57
+#: contrib/image/forms.py:48
 msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
 msgstr "Prepusti settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES odluku"
 
-#: contrib/image/forms.py:58
+#: contrib/image/forms.py:49
 msgid "Yes"
 msgstr "Da"
 
-#: contrib/image/forms.py:59
+#: contrib/image/forms.py:50
 msgid "No"
 msgstr "Ne"
 
-#: contrib/image/forms.py:111 contrib/image/models.py:72
+#: contrib/image/forms.py:100 contrib/image/models.py:72
 msgid "Image"
 msgstr "Slika"
 
-#: contrib/image/forms.py:115
+#: contrib/image/forms.py:104
 msgid "External image"
 msgstr "Slika sa vanjskog izvora"
 
-#: contrib/image/forms.py:118
+#: contrib/image/forms.py:107
 msgid ""
 "If provided, overrides the embedded image. Certain options such as cropping "
 "are not applicable to external images."
@@ -947,11 +952,11 @@ msgstr ""
 "Ako postoji, nadjačava ugrađenu sliku. Neke opcije kao obrezivanje nisu "
 "primijenjive na slike sa vanjskih izvora."
 
-#: contrib/image/forms.py:123
+#: contrib/image/forms.py:112
 msgid "Load lazily"
 msgstr "Lijeno/lazy učitaj"
 
-#: contrib/image/forms.py:126
+#: contrib/image/forms.py:114
 msgid ""
 "Use for images below the fold. This will load images only if user scrolls "
 "them into view. "
@@ -959,88 +964,75 @@ msgstr ""
 "Koristi se za slike ispod prijeloma. Ovo će učitati slike samo ako ih "
 "korisnik pomakne u prikaz ekrana."
 
-#: contrib/image/forms.py:131
+#: contrib/image/forms.py:118
 msgid "Width"
 msgstr "Širina"
 
-#: contrib/image/forms.py:135
-msgid "The image width as number in pixels. Example: \"720\" and not \"720px\"."
+#: contrib/image/forms.py:122
+#, fuzzy
+#| msgid ""
+#| "The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgid "The image width as number in pixels (eg, \"720\" and not \"720px\"). "
 msgstr "Širina slike kao broj u pikselima. Primjer: \"720\", a ne \"720px\"."
 
-#: contrib/image/forms.py:139
+#: contrib/image/forms.py:126
 msgid "Height"
 msgstr "Visina"
 
-#: contrib/image/forms.py:143
-msgid "The image height as number in pixels. Example: \"720\" and not \"720px\"."
-msgstr "Visina slike kao broj u pikselima. Primjer: \"720\", a ne \"720px\"."
+#: contrib/image/forms.py:130
+msgid ""
+"The image height as number in pixels (eg, \"720\" and not \"720px\"). Note: "
+"if width is set, height will be calculated automatically to preserve aspect "
+"ratio. In case of cropping, then both width and height are applied as given."
+msgstr ""
 
-#: contrib/image/forms.py:151
+#: contrib/image/forms.py:140
 msgid "Aligns the image according to the selected option."
 msgstr "Poravnava sliku prema odabranoj opciji."
 
-#: contrib/image/forms.py:154 contrib/utilities/forms.py:167
+#: contrib/image/forms.py:143 contrib/utilities/forms.py:153
 msgid "Link attributes"
 msgstr "Atributi linka"
 
-#: contrib/image/forms.py:155
+#: contrib/image/forms.py:144
 msgid "Attributes apply to the <b>link</b>."
 msgstr "Atributi se primjenjuju na <b>link</b>."
 
-#: contrib/image/forms.py:161
-msgid "Automatic scaling"
-msgstr "Automatsko skaliranje"
-
-#: contrib/image/forms.py:164
-msgid "Uses the placeholder dimensions to automatically calculate the size."
-msgstr "Koristi dimenzije placeholdera za automatski izračun veličine."
-
-#: contrib/image/forms.py:170
-msgid "Use original image"
-msgstr "Koristi originalnu sliku"
-
-#: contrib/image/forms.py:172
-msgid "Outputs the raw image without cropping."
-msgstr "Prikazuje neobrađenu sliku bez obrezivanja."
-
-#: contrib/image/forms.py:177
+#: contrib/image/forms.py:150
 msgid "Crop image"
 msgstr "Obreži sliku"
 
-#: contrib/image/forms.py:180
-msgid ""
-"Crops the image according to the thumbnail settings provided in the "
-"template."
-msgstr "Obrezuje sliku prema postavkama minijatura navedenih u predlošku."
+#: contrib/image/forms.py:152
+msgid "Crops the image rather than resizing"
+msgstr ""
 
-#: contrib/image/forms.py:184
+#: contrib/image/forms.py:155
 msgid "Upscale image"
 msgstr "Povećaj sliku"
 
-#: contrib/image/forms.py:187
-msgid ""
-"Upscales the image to the size of the thumbnail settings in the template."
-msgstr "Povećava veličinu slike na veličinu postavki minijatura u predlošku."
+#: contrib/image/forms.py:157
+msgid "Allows the image to be upscaled beyond its original size."
+msgstr ""
 
-#: contrib/image/forms.py:191
+#: contrib/image/forms.py:160
 msgid "Use responsive image"
 msgstr "Koristi responzivnu sliku"
 
-#: contrib/image/forms.py:195
+#: contrib/image/forms.py:164
 msgid ""
-"Uses responsive image technique to choose better image to display based upon"
-" screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
-"Koristi tehniku responzivne slike za odabir bolje slike za prikaz na temelju"
-" viewporta ekrana. Ova se konfiguracija odnosi samo na učitane slike (neće "
+"Koristi tehniku responzivne slike za odabir bolje slike za prikaz na temelju "
+"viewporta ekrana. Ova se konfiguracija odnosi samo na učitane slike (neće "
 "utjecati na slike sa vanjskih izvora)."
 
-#: contrib/image/forms.py:204
+#: contrib/image/forms.py:173
 msgid "Thumbnail options"
 msgstr "Opcije sličica"
 
-#: contrib/image/forms.py:207
+#: contrib/image/forms.py:175
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
@@ -1048,71 +1040,66 @@ msgstr ""
 "Nadjačava širinu, visinu i obrezivanje; skalira do unaprijed zadanih "
 "dimenzija."
 
-#: contrib/image/forms.py:211
+#: contrib/image/forms.py:178
 msgid "Responsive"
 msgstr "Responzivno"
 
-#: contrib/image/forms.py:214
+#: contrib/image/forms.py:181
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr "Dodaje klasu .img-fluid kako bi slika bila responzivna."
 
-#: contrib/image/forms.py:217
+#: contrib/image/forms.py:184
 msgid "Rounded"
 msgstr "Zaobljeno"
 
-#: contrib/image/forms.py:220
+#: contrib/image/forms.py:187
 msgid "Adds the .rounded class for round corners."
 msgstr "Dodaje klasu .rounded za zaobljene rubove."
 
-#: contrib/image/forms.py:223
+#: contrib/image/forms.py:190
 msgid "Thumbnail"
 msgstr "Sličica"
 
-#: contrib/image/forms.py:226
+#: contrib/image/forms.py:193
 msgid "Adds the .img-thumbnail class."
 msgstr "Dodaje .img-thumbnail klasu"
 
-#: contrib/image/forms.py:247
-msgid ""
-"You have given more than one external, internal, or file link target. Only "
-"one option is allowed."
-msgstr ""
-"Dali ste više od jedne eksterne, interne ili veze na datoteke. Dopuštena je "
-"samo jedna opcija."
-
-#: contrib/image/forms.py:256
-msgid ""
-"You need to add either an image, or a URL linking to an external image."
+#: contrib/image/forms.py:203
+msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 "Morate dodati ili sliku ili URL koji povezuje sliku sa vanjskog izvora."
 
-#: contrib/image/forms.py:282
+#: contrib/image/forms.py:220
 #, python-brace-format
 msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with "
-"\"{field_b}\"."
+"Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
+"\"."
 msgstr ""
 "Nevažeće postavke obrezivanja. Ne možete kombinirati \"{field_a}\" sa "
 "\"{field_b}\"."
 
-#: contrib/jumbotron/cms_plugins.py:31 contrib/jumbotron/models.py:14
+#: contrib/jumbotron/cms_plugins.py:28 contrib/jumbotron/models.py:14
 msgid "Jumbotron"
 msgstr ""
 
-#: contrib/jumbotron/forms.py:49 contrib/jumbotron/models.py:19
+#: contrib/jumbotron/forms.py:45 contrib/jumbotron/models.py:19
 msgid "Fluid"
 msgstr "Fluidno"
 
-#: contrib/jumbotron/forms.py:53
+#: contrib/jumbotron/forms.py:48
 msgid "Makes the jumbotron fill the full width of the container or window."
 msgstr "Čini jumbotron rastegnutim na punu širinu spremnika ili prozora."
 
-#: contrib/link/apps.py:7 contrib/link/constants.py:5
-#: contrib/link/models.py:11 contrib/link/models.py:114
+#: contrib/link/apps.py:7 contrib/link/constants.py:5 contrib/link/forms.py:76
+#: contrib/link/models.py:9 contrib/link/models.py:20
 msgid "Link"
 msgstr ""
 
-#: contrib/link/cms_plugins.py:97
+#: contrib/link/cms_plugins.py:60
+msgid "Link settings"
+msgstr "Postavke linka"
+
+#: contrib/link/cms_plugins.py:72
 msgid "Link / Button"
 msgstr "Link / Gumb"
 
@@ -1121,113 +1108,65 @@ msgid "Button"
 msgstr "Gumb"
 
 #: contrib/link/constants.py:10 frameworks/bootstrap5.py:7
-#: frameworks/bootstrap5.py:133
+#: frameworks/bootstrap5.py:133 frameworks/tailwind.py:6
 msgid "Small"
 msgstr "Malo"
 
 #: contrib/link/constants.py:11 frameworks/bootstrap5.py:8
-#: frameworks/bootstrap5.py:134
+#: frameworks/bootstrap5.py:134 frameworks/tailwind.py:7
 msgid "Medium"
 msgstr "Srednje"
 
 #: contrib/link/constants.py:12 frameworks/bootstrap5.py:9
-#: frameworks/bootstrap5.py:135
+#: frameworks/bootstrap5.py:135 frameworks/tailwind.py:8
 msgid "Large"
 msgstr "Veliko"
 
-#: contrib/link/forms.py:62
-msgid "Select a destination"
-msgstr "Odaberite odredište"
+#: contrib/link/constants.py:22
+msgid "Open in new window"
+msgstr "Otvori u novom prozoru"
 
-#: contrib/link/forms.py:138
+#: contrib/link/constants.py:23
+msgid "Open in same window"
+msgstr "Otvori u istom prozoru"
+
+#: contrib/link/constants.py:24
+msgid "Delegate to parent"
+msgstr "Delegiraj roditelju/parentu"
+
+#: contrib/link/constants.py:25
+msgid "Delegate to top"
+msgstr "Delegiraj na vrh"
+
+#: contrib/link/forms.py:50
 msgid "Site"
 msgstr "Stranica"
 
-#: contrib/link/forms.py:141
+#: contrib/link/forms.py:52
 msgid "Select site"
 msgstr "Odaberite stranicu"
 
-#: contrib/link/forms.py:146
+#: contrib/link/forms.py:56
 msgid "Url"
 msgstr ""
 
-#: contrib/link/forms.py:149
+#: contrib/link/forms.py:58
 msgid "Select URL object from list"
 msgstr "Odaberite URL objekt iz liste"
 
-#: contrib/link/forms.py:177
-msgid "External link"
-msgstr "Eksterni link"
-
-#: contrib/link/forms.py:180
-msgid "Provide a link to an external source."
-msgstr "Unesite link na vanjski izvor."
-
-#: contrib/link/forms.py:183
-msgid "Internal link"
-msgstr "Interni link"
-
-#: contrib/link/forms.py:185
-msgid "If provided, overrides the external link."
-msgstr "Ako je uneseno, nadjačava eksterni link."
-
-#: contrib/link/forms.py:191
-msgid "File link"
-msgstr "Link na datoteku"
-
-#: contrib/link/forms.py:193
-msgid "If provided links a file from the filer app."
-msgstr "Ako je uneseno povezuje datoteku iz filer aplikacije."
-
-#: contrib/link/forms.py:197
-msgid "Anchor"
-msgstr "Sidro"
-
-#: contrib/link/forms.py:200
-msgid ""
-"Appends the value only after the internal or external link. Do <em>not</em> "
-"include a preceding \"&#35;\" symbol."
-msgstr ""
-"Dodaje vrijednost samo nakon internog ili eksternog linka. <em>Nemojte</em> "
-"uključivati simbol \"&#35;\" ispred."
-
-#: contrib/link/forms.py:205
-msgid "Email address"
-msgstr "E-mail adresa"
-
-#: contrib/link/forms.py:209
-msgid "Phone"
-msgstr "Telefon"
-
-#: contrib/link/forms.py:214
+#: contrib/link/forms.py:80
 msgid "Target"
 msgstr "Cilj"
 
-#: contrib/link/forms.py:266
-#, python-brace-format
-msgid "Only one of {0} or {1} may be given."
-msgstr "Samo jedan od {0} ili {1} može biti odabran."
-
-#: contrib/link/forms.py:278
-msgid "Please provide a link."
-msgstr "Molimo unesite link."
-
-#: contrib/link/forms.py:284
-#, python-format
-msgid ""
-"%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
-msgstr ""
-"%(anchor_field_verbose_name)s nije dopušteno zajedno sa %(field_name)s"
-
-#: contrib/link/forms.py:320
+#: contrib/link/forms.py:116
 msgid "Display name"
 msgstr "Ime za prikaz"
 
-#: contrib/link/forms.py:329
+#: contrib/link/forms.py:126
 msgid "Stretch link"
 msgstr "Rastegni link"
 
-#: contrib/link/forms.py:333
+#: contrib/link/forms.py:129
 msgid ""
 "Stretches the active link area to the containing block (with position: "
 "relative)."
@@ -1235,55 +1174,55 @@ msgstr ""
 "Rasteže aktivno područje linka duž bloka spremnika/containera (koristeći "
 "position: relative)."
 
-#: contrib/link/forms.py:337 contrib/tabs/forms.py:51
+#: contrib/link/forms.py:132 contrib/tabs/forms.py:40
 msgid "Type"
 msgstr "Tip"
 
-#: contrib/link/forms.py:341
+#: contrib/link/forms.py:136
 msgid "Adds either a text link or a button which links to the target."
 msgstr "Dodaje ili tekstualni link ili gumb koji linka ka cilju."
 
-#: contrib/link/forms.py:351
+#: contrib/link/forms.py:146
 msgid "Button size"
 msgstr "Veličina gumba"
 
-#: contrib/link/forms.py:360
+#: contrib/link/forms.py:153
 msgid "Outline"
 msgstr "Obris / outline"
 
-#: contrib/link/forms.py:363
+#: contrib/link/forms.py:156
 msgid "Removes the coloring from a button and keeps the outline."
 msgstr "Miče boju s gumba i zadržava obris/outline."
 
-#: contrib/link/forms.py:366
+#: contrib/link/forms.py:159
 msgid "Block"
 msgstr ""
 
-#: contrib/link/forms.py:369
+#: contrib/link/forms.py:162
 msgid "Extends the button to the width of its container."
 msgstr "Proširuje gumb na širinu njegovog spremnika/containera."
 
-#: contrib/link/forms.py:372
+#: contrib/link/forms.py:165
 msgid "Icon left"
 msgstr "Ikona lijevo"
 
-#: contrib/link/forms.py:377
+#: contrib/link/forms.py:170
 msgid "Icon right"
 msgstr "Ikona desno"
 
-#: contrib/link/models.py:119
+#: contrib/link/models.py:25
 msgid "<link is missing>"
 msgstr ""
 
-#: contrib/link/templates/djangocms_frontend/admin/link.html:12
+#: contrib/link/templates/djangocms_frontend/admin/link.html:22
 msgid "Preview"
 msgstr "Pretpregled"
 
-#: contrib/listgroup/cms_plugins.py:28 contrib/listgroup/models.py:14
+#: contrib/listgroup/cms_plugins.py:26 contrib/listgroup/models.py:14
 msgid "List group"
 msgstr "Grupa liste"
 
-#: contrib/listgroup/cms_plugins.py:55
+#: contrib/listgroup/cms_plugins.py:54
 msgid "List item"
 msgstr "Stavka liste"
 
@@ -1295,25 +1234,24 @@ msgstr "Aktivno"
 msgid "Disabled"
 msgstr "Onemogućeno"
 
-#: contrib/listgroup/forms.py:36
+#: contrib/listgroup/forms.py:30
 msgid "List group flush"
 msgstr "Očisti grupu liste"
 
-#: contrib/listgroup/forms.py:39
+#: contrib/listgroup/forms.py:33
 msgid "Create lists of content in a card with a flush list group."
 msgstr "Stvori liste sadržaja u kartici koristeći čišćenje grupe liste."
 
-#: contrib/listgroup/forms.py:64
+#: contrib/listgroup/forms.py:58
 msgid "One line content"
 msgstr "Sadržaj u jednoj liniji"
 
-#: contrib/listgroup/forms.py:67
+#: contrib/listgroup/forms.py:60
 msgid "List item text. Is only show if this list item has no child plugins."
 msgstr ""
-"Tekst stavke liste. Prikazuje se samo ukoliko lista nema podređene "
-"pluginove."
+"Tekst stavke liste. Prikazuje se samo ukoliko lista nema podređene pluginove."
 
-#: contrib/listgroup/forms.py:78
+#: contrib/listgroup/forms.py:70
 msgid "State"
 msgstr "Stanje"
 
@@ -1321,74 +1259,74 @@ msgstr "Stanje"
 msgid "List group item"
 msgstr "Stavka grupe liste"
 
-#: contrib/media/cms_plugins.py:23 contrib/media/models.py:14
+#: contrib/media/cms_plugins.py:20 contrib/media/models.py:14
 msgid "Media"
 msgstr ""
 
-#: contrib/media/cms_plugins.py:40 contrib/media/models.py:28
+#: contrib/media/cms_plugins.py:38 contrib/media/models.py:28
 msgid "Media body"
 msgstr "Tijelo medie"
 
-#: contrib/navigation/cms_plugins.py:29 contrib/navigation/models.py:15
+#: contrib/navigation/cms_plugins.py:28 contrib/navigation/models.py:15
 msgid "Navigation"
 msgstr "Navigacija"
 
-#: contrib/navigation/cms_plugins.py:74 contrib/navigation/models.py:36
+#: contrib/navigation/cms_plugins.py:76 contrib/navigation/models.py:39
 msgid "Page tree"
 msgstr "Stablo stranica"
 
-#: contrib/navigation/cms_plugins.py:105 contrib/navigation/forms.py:104
-#: contrib/navigation/models.py:42
+#: contrib/navigation/cms_plugins.py:114 contrib/navigation/forms.py:97
+#: contrib/navigation/models.py:45
 msgid "Brand"
 msgstr "Brend"
 
-#: contrib/navigation/cms_plugins.py:133
-msgid "Collapsible container"
-msgstr "Spremnik/container s mogućnošću zatvaranja"
+#: contrib/navigation/cms_plugins.py:146 contrib/navigation/models.py:24
+msgid "Navigation container"
+msgstr "Navigacijski spremnik/container"
 
-#: contrib/navigation/cms_plugins.py:164
+#: contrib/navigation/cms_plugins.py:187
 msgid "Navigation link"
 msgstr "Navigacijski link"
 
-#: contrib/navigation/forms.py:45
+#: contrib/navigation/forms.py:40
 msgid "Defines the whole template set for this navigation."
 msgstr "Definira cijeli set predložaka za ovu navigaciju."
 
-#: contrib/navigation/forms.py:53
+#: contrib/navigation/forms.py:48
 msgid "Design"
 msgstr "Dizajn"
 
-#: contrib/navigation/forms.py:60
+#: contrib/navigation/forms.py:55
 msgid "Expand on device (and larger)"
 msgstr "Proširi na uređaju (i većima)"
 
-#: contrib/navigation/forms.py:81
+#: contrib/navigation/forms.py:76
 msgid "Start level"
 msgstr "Početni nivo"
 
-#: contrib/navigation/forms.py:84
+#: contrib/navigation/forms.py:78
 msgid "Start level of this page tree (0: root, 1: level below root, etc.)"
 msgstr ""
 "Početni nivo ovog stabla stranica (0: root, 1: nivo ispod roota, i sl.)"
 
-#: contrib/navigation/forms.py:106
+#: contrib/navigation/forms.py:99
 msgid "Enter brand name or add child plugins for brand icon or image"
 msgstr ""
 "Unesite ime brenda ili dodajte podređene pluginove za ikonu brenda ili sliku"
 
-#: contrib/navigation/models.py:24
-msgid "Navigation container"
-msgstr "Navigacijski spremnik/container"
+#: contrib/navigation/models.py:27
+msgid "(deprecated)"
+msgstr ""
 
-#: contrib/navigation/models.py:30
+#: contrib/navigation/models.py:33
 msgid "Navigation Link"
 msgstr "Navigacijski link"
 
-#: contrib/tabs/cms_plugins.py:24 contrib/tabs/constants.py:5
+#: contrib/tabs/cms_plugins.py:23 contrib/tabs/constants.py:5
 msgid "Tabs"
 msgstr "Tabovi"
 
-#: contrib/tabs/cms_plugins.py:58 contrib/tabs/models.py:27
+#: contrib/tabs/cms_plugins.py:56 contrib/tabs/models.py:27
 msgid "Tab item"
 msgstr "Stavka taba"
 
@@ -1416,28 +1354,32 @@ msgstr ""
 msgid "Justify end"
 msgstr ""
 
-#: contrib/tabs/forms.py:64
+#: contrib/tabs/forms.py:53
 msgid "Index"
 msgstr "Indeks"
 
-#: contrib/tabs/forms.py:67
+#: contrib/tabs/forms.py:56
 msgid "Index of element to open on page load starting at 1."
 msgstr ""
 "Indeks elementa koji će se otvoriti pri učitavanju stranice počevši od 1."
 
-#: contrib/tabs/forms.py:70
+#: contrib/tabs/forms.py:59
 msgid "Animation effect"
 msgstr "Efekt animacije"
 
-#: contrib/tabs/forms.py:96
+#: contrib/tabs/forms.py:85
 msgid "Tab title"
 msgstr "Naslov taba"
 
-#: contrib/tabs/forms.py:99
+#: contrib/tabs/forms.py:86
+msgid "New tab"
+msgstr ""
+
+#: contrib/tabs/forms.py:90
 msgid "Bordered"
 msgstr "Obrubljeno"
 
-#: contrib/tabs/forms.py:101
+#: contrib/tabs/forms.py:92
 msgid "Add borders to the tab item"
 msgstr "Dodajte obrub na stavku taba."
 
@@ -1445,36 +1387,36 @@ msgstr "Dodajte obrub na stavku taba."
 msgid "Tab"
 msgstr ""
 
-#: contrib/utilities/cms_plugins.py:49
+#: contrib/utilities/cms_plugins.py:48
 msgid "Editor note"
 msgstr "Napomena urednika"
 
-#: contrib/utilities/cms_plugins.py:61 contrib/utilities/forms.py:120
+#: contrib/utilities/cms_plugins.py:60 contrib/utilities/forms.py:110
 #: contrib/utilities/models.py:44
 msgid "Heading"
 msgstr "Naslov"
 
-#: contrib/utilities/cms_plugins.py:122 contrib/utilities/models.py:59
+#: contrib/utilities/cms_plugins.py:124 contrib/utilities/models.py:59
 msgid "Table of contents"
 msgstr "Tablica sadržaja"
 
-#: contrib/utilities/forms.py:37
+#: contrib/utilities/forms.py:31
 msgid "Property"
 msgstr "Svojstvo"
 
-#: contrib/utilities/forms.py:43
+#: contrib/utilities/forms.py:37
 msgid "Sides"
 msgstr "Strane"
 
-#: contrib/utilities/forms.py:50
+#: contrib/utilities/forms.py:44
 msgid "Size"
 msgstr "Veličina"
 
-#: contrib/utilities/forms.py:56
+#: contrib/utilities/forms.py:50
 msgid "Device"
 msgstr "Uređaj"
 
-#: contrib/utilities/forms.py:74
+#: contrib/utilities/forms.py:65
 msgid ""
 "Padding does not have an auto spacing. Either switch to margin or a defined "
 "size."
@@ -1482,7 +1424,7 @@ msgstr ""
 "Padding nema automatski razmak. Promijenite na marginu ili na definiranu "
 "veličinu."
 
-#: contrib/utilities/forms.py:78
+#: contrib/utilities/forms.py:68
 msgid ""
 "Padding does not have an auto spacing. Either switch to a defined size or "
 "change the spacing property."
@@ -1490,67 +1432,67 @@ msgstr ""
 "Padding nema automatski razmak. Promijenite na definiranu veličinu ili "
 "promjenite svojstvo razmaka."
 
-#: contrib/utilities/forms.py:101 settings.py:38
+#: contrib/utilities/forms.py:91 settings.py:36
 msgid "Heading 1"
 msgstr "Naslov 1"
 
-#: contrib/utilities/forms.py:102 settings.py:39
+#: contrib/utilities/forms.py:92 settings.py:37
 msgid "Heading 2"
 msgstr "Naslov 2"
 
-#: contrib/utilities/forms.py:103 settings.py:40
+#: contrib/utilities/forms.py:93 settings.py:38
 msgid "Heading 3"
 msgstr "Naslov 3"
 
-#: contrib/utilities/forms.py:104 settings.py:41
+#: contrib/utilities/forms.py:94 settings.py:39
 msgid "Heading 4"
 msgstr "Naslov 4"
 
-#: contrib/utilities/forms.py:105 settings.py:42
+#: contrib/utilities/forms.py:95 settings.py:40
 msgid "Heading 5"
 msgstr "Naslov 5"
 
-#: contrib/utilities/forms.py:114
+#: contrib/utilities/forms.py:104
 msgid "Heading level"
 msgstr "Nivo naslova"
 
-#: contrib/utilities/forms.py:125
+#: contrib/utilities/forms.py:115
 msgid "ID"
 msgstr ""
 
-#: contrib/utilities/forms.py:128
+#: contrib/utilities/forms.py:117
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in"
-" table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in "
+"table of contents."
 msgstr ""
 "Unesite unikatni ID za tablicu sadržaja. Ukoliko je prazan, naslov se neće "
 "prikazati u tablici sadržaja."
 
-#: contrib/utilities/forms.py:132
+#: contrib/utilities/forms.py:120
 msgid "Heading context"
 msgstr "Kontekst naslova"
 
-#: contrib/utilities/forms.py:160
+#: contrib/utilities/forms.py:148
 msgid "List attributes"
 msgstr "Atributi liste"
 
-#: contrib/utilities/forms.py:162
+#: contrib/utilities/forms.py:149
 msgid ""
 "Attributes apply to the <b>list</b> for each level in the table of contents."
 msgstr ""
 "Atributi se primjenjuju na <b>list</b> za svaki nivo u tablici sadržaja."
 
-#: contrib/utilities/forms.py:169
+#: contrib/utilities/forms.py:154
 msgid ""
 "Attributes apply to the <b>link</b> for each entry in the table of contents."
 msgstr ""
 "Atributi se primjenjuju na <b>link</b> za svaki zapis u tablici sadržaja."
 
-#: contrib/utilities/forms.py:173
+#: contrib/utilities/forms.py:157
 msgid "Item attributes"
 msgstr "Atributi stavke"
 
-#: contrib/utilities/forms.py:175
+#: contrib/utilities/forms.py:158
 msgid ""
 "Attributes apply to the <b>list items</b> for each entry in the table of "
 "contents."
@@ -1558,19 +1500,19 @@ msgstr ""
 "Atributi se primjenjuju na <b>list items</b> za svaki zapis u tablici "
 "sadržaja."
 
-#: fields.py:94
+#: fields.py:100
 msgid "Please select at least one device size"
 msgstr "Molimo odaberite bar jednu veličinu uređaja"
 
-#: fields.py:102 fields.py:110
+#: fields.py:107 fields.py:115
 msgid "Attributes"
 msgstr "Atributi"
 
-#: fields.py:131
+#: fields.py:134
 msgid "Choices"
 msgstr "Opcije / choices"
 
-#: fields.py:142
+#: fields.py:143
 msgid ""
 "Please enter at least one choice. Use the <code>+</code> symbol to add a "
 "choice."
@@ -1578,23 +1520,25 @@ msgstr ""
 "Molimo unesite bar jednu opciju/choice. Koristite <code>+</code> simbol za "
 "dodavanje."
 
-#: fields.py:160 fields.py:170
+#: fields.py:159 fields.py:169
 msgid "Tag type"
 msgstr "Tip taga"
 
-#: fields.py:164
+#: fields.py:163
 msgid "Select the HTML tag to be used."
 msgstr "Odaberite HTML tag koji će se koristiti."
 
 #: frameworks/bootstrap5.py:6 frameworks/bootstrap5.py:132
+#: frameworks/tailwind.py:5
 msgid "Extra small"
 msgstr "Ekstra malo"
 
 #: frameworks/bootstrap5.py:10 frameworks/bootstrap5.py:136
+#: frameworks/tailwind.py:9
 msgid "Extra large"
 msgstr "Ekstra veliko"
 
-#: frameworks/bootstrap5.py:11
+#: frameworks/bootstrap5.py:11 frameworks/tailwind.py:10
 msgid "Extra-extra large"
 msgstr "Ekstra-ekstra veliko"
 
@@ -1623,30 +1567,33 @@ msgid "Info"
 msgstr "Informacija"
 
 #: frameworks/bootstrap5.py:25 frameworks/bootstrap5.py:178
+#: frameworks/tailwind.py:24
 msgid "Light"
 msgstr "Svjetlo"
 
 #: frameworks/bootstrap5.py:26 frameworks/bootstrap5.py:179
+#: frameworks/tailwind.py:25
 msgid "Dark"
 msgstr "Tamno"
 
 #: frameworks/bootstrap5.py:58 frameworks/bootstrap5.py:64
+#: frameworks/tailwind.py:45 frameworks/tailwind.py:51
 msgid "Both"
 msgstr "Oboje"
 
-#: frameworks/bootstrap5.py:65
+#: frameworks/bootstrap5.py:65 frameworks/tailwind.py:52
 msgid "Top"
 msgstr "Vrh"
 
-#: frameworks/bootstrap5.py:66
+#: frameworks/bootstrap5.py:66 frameworks/tailwind.py:53
 msgid "Bottom"
 msgstr "Dno"
 
-#: frameworks/bootstrap5.py:91
+#: frameworks/bootstrap5.py:91 frameworks/tailwind.py:78
 msgid "Screen"
 msgstr "Ekran"
 
-#: frameworks/bootstrap5.py:104
+#: frameworks/bootstrap5.py:104 frameworks/tailwind.py:91
 msgid "Screen (minimum)"
 msgstr "Ekran (minimum)"
 
@@ -1659,19 +1606,157 @@ msgstr "Nijedan"
 msgid "XX large"
 msgstr "XX veliko"
 
-#: helpers.py:112
-#, python-brace-format
-msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
-msgstr "Pročitajte više u <a href=\"{link}\" target=\"_blank\">documentation</a>."
+#: frameworks/tailwind.py:19
+msgid "Alternative"
+msgstr ""
 
-#: models.py:24
+#: frameworks/tailwind.py:20
+#, fuzzy
+#| msgid "Screen"
+msgid "Green"
+msgstr "Ekran"
+
+#: frameworks/tailwind.py:21
+#, fuzzy
+#| msgid "Rounded"
+msgid "Red"
+msgstr "Zaobljeno"
+
+#: frameworks/tailwind.py:22
+msgid "Yellow"
+msgstr ""
+
+#: frameworks/tailwind.py:23
+msgid "Purple"
+msgstr ""
+
+#: helpers.py:126
+#, python-brace-format
+msgid ""
+"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgstr ""
+"Pročitajte više u <a href=\"{link}\" target=\"_blank\">documentation</a>."
+
+#: helpers.py:208
+#, python-format
+msgid "Field %s not found"
+msgstr ""
+
+#: helpers.py:211
+msgid "You do not have permission to edit this item"
+msgstr ""
+
+#: models.py:43 models.py:144
 msgid "UI item"
 msgstr "UI stavka"
 
-#: settings.py:14
+#: settings.py:13
 msgid "There are no further settings for this plugin. Please press save."
 msgstr "Ne postoje dodatne postavke za ovaj plugin. Molimo pritisnite Spremi."
 
-#: settings.py:73
+#: settings.py:71
 msgid "Offcanvas"
 msgstr "Izvan vidljivog područja / offcanvas"
+
+#: templates/djangocms_frontend/admin/deprecated.html:5
+msgid ""
+"\n"
+"        <h1>Deprecated</h1>\n"
+"        <p>This plugin has been deprecated. It will be removed in a future "
+"version of djangocms-frontend.\n"
+"        It is a no-op.</p>\n"
+"        <p>To avoid an error message in the future, move all child plugins - "
+"if any - one level up and\n"
+"            delete this plugin.</p>\n"
+"    "
+msgstr ""
+
+#~ msgid "Cropping"
+#~ msgstr "Obrezivanje"
+
+#~ msgid ""
+#~ "The image height as number in pixels. Example: \"720\" and not \"720px\"."
+#~ msgstr ""
+#~ "Visina slike kao broj u pikselima. Primjer: \"720\", a ne \"720px\"."
+
+#~ msgid "Automatic scaling"
+#~ msgstr "Automatsko skaliranje"
+
+#~ msgid "Uses the placeholder dimensions to automatically calculate the size."
+#~ msgstr "Koristi dimenzije placeholdera za automatski izračun veličine."
+
+#~ msgid "Use original image"
+#~ msgstr "Koristi originalnu sliku"
+
+#~ msgid "Outputs the raw image without cropping."
+#~ msgstr "Prikazuje neobrađenu sliku bez obrezivanja."
+
+#~ msgid ""
+#~ "Crops the image according to the thumbnail settings provided in the "
+#~ "template."
+#~ msgstr "Obrezuje sliku prema postavkama minijatura navedenih u predlošku."
+
+#~ msgid ""
+#~ "Upscales the image to the size of the thumbnail settings in the template."
+#~ msgstr ""
+#~ "Povećava veličinu slike na veličinu postavki minijatura u predlošku."
+
+#~ msgid ""
+#~ "You have given more than one external, internal, or file link target. "
+#~ "Only one option is allowed."
+#~ msgstr ""
+#~ "Dali ste više od jedne eksterne, interne ili veze na datoteke. Dopuštena "
+#~ "je samo jedna opcija."
+
+#~ msgid "Select a destination"
+#~ msgstr "Odaberite odredište"
+
+#~ msgid "External link"
+#~ msgstr "Eksterni link"
+
+#~ msgid "Provide a link to an external source."
+#~ msgstr "Unesite link na vanjski izvor."
+
+#~ msgid "Internal link"
+#~ msgstr "Interni link"
+
+#~ msgid "If provided, overrides the external link."
+#~ msgstr "Ako je uneseno, nadjačava eksterni link."
+
+#~ msgid "File link"
+#~ msgstr "Link na datoteku"
+
+#~ msgid "If provided links a file from the filer app."
+#~ msgstr "Ako je uneseno povezuje datoteku iz filer aplikacije."
+
+#~ msgid "Anchor"
+#~ msgstr "Sidro"
+
+#~ msgid ""
+#~ "Appends the value only after the internal or external link. Do <em>not</"
+#~ "em> include a preceding \"&#35;\" symbol."
+#~ msgstr ""
+#~ "Dodaje vrijednost samo nakon internog ili eksternog linka. <em>Nemojte</"
+#~ "em> uključivati simbol \"&#35;\" ispred."
+
+#~ msgid "Email address"
+#~ msgstr "E-mail adresa"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon"
+
+#, python-brace-format
+#~ msgid "Only one of {0} or {1} may be given."
+#~ msgstr "Samo jedan od {0} ili {1} može biti odabran."
+
+#~ msgid "Please provide a link."
+#~ msgstr "Molimo unesite link."
+
+#, python-format
+#~ msgid ""
+#~ "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
+#~ msgstr ""
+#~ "%(anchor_field_verbose_name)s nije dopušteno zajedno sa %(field_name)s"
+
+#~ msgid "Collapsible container"
+#~ msgstr "Spremnik/container s mogućnošću zatvaranja"

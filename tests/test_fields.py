@@ -1,10 +1,14 @@
 from django import forms
 from django.test import TestCase
 
-from djangocms_frontend.settings import DEVICE_CHOICES
 from djangocms_frontend.fields import (
-    AttributesField, TagTypeField,
-    TagTypeFormField, DeviceChoiceField, OptionalDeviceChoiceField)
+    AttributesField,
+    DeviceChoiceField,
+    OptionalDeviceChoiceField,
+    TagTypeField,
+    TagTypeFormField,
+)
+from djangocms_frontend.settings import DEVICE_CHOICES
 
 
 class FieldsTestCase(TestCase):

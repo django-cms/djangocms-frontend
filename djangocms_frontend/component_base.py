@@ -1,5 +1,4 @@
 import importlib
-import typing
 
 from django import forms
 from django.apps import apps
@@ -63,6 +62,7 @@ class CMSFrontendComponent(forms.Form):
         "link_fieldset_position",
         "require_parent",
         "parent_classes",
+        "allowed_models",
     ]
 
     @classmethod
@@ -212,11 +212,11 @@ class CMSFrontendComponent(forms.Form):
         )
 
     @classproperty
-    def _component_meta(cls) -> typing.Optional[type]:
+    def _component_meta(cls) -> type | None:
         return getattr(cls, "Meta", None)
 
     @classmethod
-    def _generate_fieldset(cls) -> list[tuple[typing.Optional[str], dict]]:
+    def _generate_fieldset(cls) -> list[tuple[str | None, dict]]:
         return [(None, {"fields": cls.declared_fields.keys()})]
 
     def get_short_description(self) -> str:

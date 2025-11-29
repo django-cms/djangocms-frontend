@@ -1,9 +1,9 @@
 from unittest import skipIf
+
 from cms import __version__ as cms_version
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from cms.utils.urlutils import admin_reverse
-
 from djangocms_text.cms_plugins import TextPlugin
 
 from djangocms_frontend.contrib.utilities.cms_plugins import (
