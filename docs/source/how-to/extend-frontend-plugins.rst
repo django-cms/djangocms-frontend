@@ -4,11 +4,12 @@
  How to extend built-in components
 **********************************
 
-Existing components can be extended through two type of class mixins.
-``djangocms-frontend`` looks for these mixins in two places:
+Existing components can be extended through **two type of class mixins**.
+``djangocms-frontend`` tries to autodiscover them by looking for these mixins 
+in two places:
 
 #. In the theme module. Its name is specified by the setting
-   ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``djangocms_frontend``.
+   ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``theme``.
    For a theme app called ``theme`` and the bootstrap5 framework this
    would be ``theme.frontends.bootstrap5.py``.
 
@@ -32,7 +33,7 @@ The framework module is primarily thought to allow for adaptation of
 RenderMixins
 ============
 
-The render mixins are called "``*PluginName*RenderMixin``", e.g.
+The render mixins are called "``<PluginName>RenderMixin``", e.g.
 ``AlertRenderMixin`` and are applied to the plugin class. This allows
 for the redefinition of the ``CMSPlugin.render`` method, especially to
 prepare the context for rendering.
@@ -51,7 +52,7 @@ Form mixins are used to add fields to a plugin's admin form. These
 fields are available to the render mixins and, of course, to the plugin
 templates.
 
-Form mixins are called "``*PluginName*FormMixin``", e.g. ``AlertFormMixin`` and are
+Form mixins are called "``<PluginName>FormMixin``", e.g. ``AlertFormMixin`` and are
 applied to the editing form class. Form mixins are a subclass of
 ``entangled.EntangledModelFormMixin``.
 
@@ -62,8 +63,8 @@ applied to the editing form class. Form mixins are a subclass of
     single: Create a theme
     single: Themes
 
-Working example
-===============
+Working example: Extending the ``GridContainerPlugin``
+======================================================
 
 Let's say you wanted to extend the ``GridContainerPlugin`` to offer the
 option for a background image, and say a blur effect. The way to do it
@@ -233,9 +234,9 @@ Then, a new template is needed (in
           backdrop-filter: blur({{ instance.container_blur }}px);
         {% endif %}"
       {% endif %}>
-      {% if instance.image %}
+      {% if instance.container_image %}
         <div class="image"
-          style="background-image: url('{{ instance.image.url }}');
+          style="background-image: url('{{ instance.container_image.url }}');
                  background-position: {{ instance.image_position|default:'center center' }};
                  background-repeat: no-repeat;background-size: cover;
                  {% if instance.container_blur %}
@@ -313,6 +314,5 @@ information will be preserved.
         import ``CMSUIPlugin`` (import from ``djangocms_frontend.cms_plugins``)
         as base class for the plugins.
 
-    *   Create ``models.py``
-        file for the models (which need to be proxy models of ``FrontendUIItem``
-        (import from ``djangocms_frontend.models``).
+    *   Create ``models.py`` file for the models (which need to be proxy models 
+        of ``FrontendUIItem`` (import from ``djangocms_frontend.models``).
