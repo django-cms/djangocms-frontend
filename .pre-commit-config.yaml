@@ -9,7 +9,7 @@ ci:
 
 repos:
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.21.0
+      rev: v3.21.2
       hooks:
           - id: pyupgrade
             args: ["--py310-plus"]
@@ -33,6 +33,6 @@ repos:
                 - flake8-logging-format
 
     - repo: https://github.com/tox-dev/pyproject-fmt
-      rev: v2.11.0
+      rev: v2.11.1
       hooks:
       - id: pyproject-fmt
