@@ -10,9 +10,9 @@ Simplified Component Creation with Templates
 
 .. versionadded:: 2.1
 
-**Template components** are the easiest approach to creating or porting your own custom 
-frontend components, allowing you to define custom components **using django templates,
-without needing to write any Python code**. 
+**Template components** are the easiest approach to creating or porting your own custom
+frontend components, allowing you to define custom components **using Django templates,
+without needing to write any Python code**.
 
 
 Example Hero Template Component
@@ -103,6 +103,11 @@ This tag **declares** the component and assigns it a name (``Hero``). This is us
 by django CMS to identify the plugin later. The ``name`` parameter is used to display the
 component in the CMS admin interface. Internally the command declares a ``CMSFrontendComponent``
 class. All named arguments are added to the component's Meta class.
+
+.. note::
+    The component name (the first argument to ``{% cms_component %}``) must be a valid Python identifier.
+    This means it should start with a letter or underscore, followed by letters, digits, or underscores,
+    and cannot contain spaces or special characters like hyphens.
 
 Only one ``{% cms_component %}`` tag is allowed per template file.
 

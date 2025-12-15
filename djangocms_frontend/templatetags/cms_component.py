@@ -30,6 +30,10 @@ def cms_component(context: template.Context, *args, **kwargs: dict) -> str:
     if "_cms_components" in context:
         if len(args) != 1:  # pragma: no cover
             raise ValueError("The cms_component tag requires exactly one positional argument: the component name.")
+        if not isinstance(args[0], str):
+            raise ValueError("The component name must be a string.")
+        if not args[0].isidentifier():
+            raise ValueError("The component name must be a valid Python identifier.")
         context["_cms_components"]["cms_component"].append((args, kwargs))
     return ""
 
