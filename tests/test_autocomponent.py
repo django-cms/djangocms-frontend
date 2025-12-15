@@ -118,6 +118,11 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         cms_component(context, "valid_name")
         self.assertEqual(len(context["_cms_components"]["cms_component"]), 1)
 
+        # Non-string identifiers should raise ValueError
+        with self.assertRaises(ValueError) as cm:
+            cms_component(context, 123)
+        self.assertIn("component name must be a string.", str(cm.exception))
+
         # Invalid identifiers should raise ValueError
         with self.assertRaises(ValueError) as cm:
             cms_component(context, "invalid-name")
