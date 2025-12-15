@@ -107,6 +107,34 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         with self.assertRaises(TemplateSyntaxError):
             Template(invalid_template)
 
+    def test_cms_component_invalid_identifier(self):
+        # Test that cms_component tag raises ValueError for invalid identifiers
+        from django.template import Context
+        from djangocms_frontend.templatetags.cms_component import cms_component
+
+        context = Context({"_cms_components": {"cms_component": []}})
+
+        # Valid identifier should work
+        cms_component(context, "valid_name")
+        self.assertEqual(len(context["_cms_components"]["cms_component"]), 1)
+
+        # Invalid identifiers should raise ValueError
+        with self.assertRaises(ValueError) as cm:
+            cms_component(context, "invalid-name")
+        self.assertIn("valid Python identifier", str(cm.exception))
+
+        with self.assertRaises(ValueError) as cm:
+            cms_component(context, "123invalid")
+        self.assertIn("valid Python identifier", str(cm.exception))
+
+        with self.assertRaises(ValueError) as cm:
+            cms_component(context, "invalid name")
+        self.assertIn("valid Python identifier", str(cm.exception))
+
+        with self.assertRaises(ValueError) as cm:
+            cms_component(context, "")
+        self.assertIn("valid Python identifier", str(cm.exception))
+
     def test_component_folder_selection(self):
         from djangocms_frontend.component_pool import find_cms_component_templates
 
