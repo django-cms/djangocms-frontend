@@ -11,7 +11,7 @@ Simplified Component Creation with Templates
 .. versionadded:: 2.1
 
 **Template components** are the easiest approach to creating or porting your own custom
-frontend components, allowing you to define custom components **using django templates,
+frontend components, allowing you to define custom components **using Django templates,
 without needing to write any Python code**.
 
 
