@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: Cache dependencies
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v5.0.1
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('docs/requirements.in') }}
@@ -44,7 +44,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: Cache dependencies
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v5.0.1
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('docs/requirements.in') }}
