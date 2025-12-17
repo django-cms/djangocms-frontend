@@ -10,8 +10,17 @@ in two places:
 
 #. In the theme module. Its name is specified by the setting
    ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``theme``.
+   Note:Make sure, you make the necessary changes in your settings.py file: 
+   your theme app should be added to the list of INSTALLED_APPS,
+   plus pointed to by the DJANGOCMS_FRONTEND_THEME setting:
+    INSTALLED_APPS = [
+        ...,
+        'theme',
+        ...
+    ]
+   DJANGOCMS_FRONTEND_THEME ="theme"
    For a theme app called ``theme`` and the bootstrap5 framework this
-   would be ``theme.frontends.bootstrap5.py``.
+   would be ``theme.frameworks.bootstrap5.py``.
 
 #. In ``djangocms_frontend.contrib.*app*.frontends.*framework*.py``. For the
    alert app and the bootstrap5 framework this would be
