@@ -60,7 +60,6 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        sudo apt install libcairo2-dev pkg-config python3-dev
         python -m pip install --upgrade pip uv
         uv pip install --system -r tests/requirements/${{ matrix.requirements-file }}
     - name: Run coverage
