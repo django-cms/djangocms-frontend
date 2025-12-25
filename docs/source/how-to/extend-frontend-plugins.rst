@@ -5,26 +5,32 @@
 **********************************
 
 Existing components can be extended through **two type of class mixins**.
-``djangocms-frontend`` tries to autodiscover them by looking for these mixins 
+``djangocms-frontend`` tries to autodiscover them by looking for these mixins
 in two places:
 
-#. In the theme module. Its name is specified by the setting
+#. In a custom theme module. Its name is specified by the setting
    ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``theme``.
-   Note:Make sure, you make the necessary changes in your settings.py file: 
-   your theme app should be added to the list of INSTALLED_APPS,
-   plus pointed to by the DJANGOCMS_FRONTEND_THEME setting:
-    INSTALLED_APPS = [
-        ...,
-        'theme',
-        ...
-    ]
-   DJANGOCMS_FRONTEND_THEME ="theme"
-   For a theme app called ``theme`` and the bootstrap5 framework this
-   would be ``theme.frameworks.bootstrap5.py``.
+   For a theme app called ``theme`` and the bootstrap5 framework djangocms-frontend
+   would look for the class mixins in ``theme.frameworks.bootstrap5.py``.
 
-#. In ``djangocms_frontend.contrib.*app*.frontends.*framework*.py``. For the
+   .. note::
+
+      Make sure, you make the necessary changes in your settings.py file:
+      your ``theme`` app should be added to the list of ``INSTALLED_APPS``,
+      plus pointed to by the ``DJANGOCMS_FRONTEND_THEME`` setting::
+
+         INSTALLED_APPS = [
+             ...,
+             'theme',
+             ...
+         ]
+         DJANGOCMS_FRONTEND_THEME = "theme"  # Change if necessary
+
+
+#. In ``djangocms_frontend.contrib.<app>.frontends.<framework>.py``. For the
    alert app and the bootstrap5 framework this would be
-   ``djangocms_frontend.contrib.alert.frontends.bootstrap5.py``.
+   ``djangocms_frontend.contrib.alert.frontends.bootstrap5.py``. These are the
+   standard mixins for standard components.
 
 Both mixins are included if they exist and all methods have to call the
 super methods to ensure all form extensions and render functionalities
@@ -42,7 +48,7 @@ The framework module is primarily thought to allow for adaptation of
 RenderMixins
 ============
 
-The render mixins are called "``<PluginName>RenderMixin``", e.g.
+The render mixins are called ``<PluginName>RenderMixin``, e.g.
 ``AlertRenderMixin`` and are applied to the plugin class. This allows
 for the redefinition of the ``CMSPlugin.render`` method, especially to
 prepare the context for rendering.
@@ -61,7 +67,7 @@ Form mixins are used to add fields to a plugin's admin form. These
 fields are available to the render mixins and, of course, to the plugin
 templates.
 
-Form mixins are called "``<PluginName>FormMixin``", e.g. ``AlertFormMixin`` and are
+Form mixins are called ``<PluginName>FormMixin``, e.g. ``AlertFormMixin`` and are
 applied to the editing form class. Form mixins are a subclass of
 ``entangled.EntangledModelFormMixin``.
 
@@ -323,5 +329,5 @@ information will be preserved.
         import ``CMSUIPlugin`` (import from ``djangocms_frontend.cms_plugins``)
         as base class for the plugins.
 
-    *   Create ``models.py`` file for the models (which need to be proxy models 
+    *   Create ``models.py`` file for the models (which need to be proxy models
         of ``FrontendUIItem`` (import from ``djangocms_frontend.models``).
