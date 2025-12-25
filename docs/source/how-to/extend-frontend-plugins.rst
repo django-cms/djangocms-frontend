@@ -8,20 +8,19 @@ Existing components can be extended through **two type of class mixins**.
 ``djangocms-frontend`` tries to autodiscover them by looking for these mixins
 in two places:
 
-#. In a custom theme module. Its name is specified by the setting
+#. In a custom theme app. Its name is specified by the setting
    ``DJANGOCMS_FRONTEND_THEME`` and defaults to ``theme``.
    For a theme app called ``theme`` and the bootstrap5 framework djangocms-frontend
    would look for the class mixins in ``theme.frameworks.bootstrap5.py``.
 
    .. note::
 
-      Make sure, you make the necessary changes in your settings.py file:
-      your ``theme`` app should be added to the list of ``INSTALLED_APPS``,
+      Make sure to include your custom theme app in your project setting's ``INSTALLED_APPS``,
       plus pointed to by the ``DJANGOCMS_FRONTEND_THEME`` setting::
 
          INSTALLED_APPS = [
              ...,
-             'theme',
+             'theme',  # Needs to be included to make custom theme templates available
              ...
          ]
          DJANGOCMS_FRONTEND_THEME = "theme"  # Change if necessary
