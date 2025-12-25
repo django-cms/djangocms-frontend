@@ -1,5 +1,8 @@
+from unittest.mock import patch
+
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
+from django.template import Context
 
 from djangocms_frontend.contrib.collapse.cms_plugins import (
     CollapseContainerPlugin,
@@ -11,6 +14,8 @@ from djangocms_frontend.contrib.collapse.forms import (
     CollapseForm,
     CollapseTriggerForm,
 )
+from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.templatetags.frontend import set_html_id
 
 from ..fixtures import TestFixture
 
@@ -75,3 +80,36 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'aria-labelledby="trigger-10"')
         self.assertContains(response, "10")
+
+    def test_collapse_html_id(self):
+        def create_plugin():
+            plugin = add_plugin(
+                placeholder=self.placeholder,
+                plugin_type=CollapsePlugin.__name__,
+                language=self.language,
+            )
+            plugin.initialize_from_form(CollapseForm).save()
+            self.publish(self.page, self.language)
+
+        create_plugin()
+        create_plugin()
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            """<div id="collapse-frontend-plugins-1" data-bs-children=".card" role="tablist"></div>""",
+            html=True)
+        self.assertContains(
+            response,
+            """<div id="collapse-frontend-plugins-2" data-bs-children=".card" role="tablist"></div>""",
+            html=True)
+
+    def test_set_html_id(self):
+        instance = FrontendUIItem()
+        context = Context()
+        with patch("os.urandom", lambda n: b'\x1bB\x96\xabyI\xf6`\xd0\xc0,\xf8\x83\xe8,\xb8'):
+            html_id = set_html_id(context, instance)
+        identifier = "uuid4-1b4296ab-7949-4660-90c0-2cf883e82cb8"
+        self.assertEqual(html_id, identifier)
+        self.assertEqual(instance.html_id, identifier)
