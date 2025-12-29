@@ -49,6 +49,8 @@ class LinkPluginMixin:
         """The link form needs the request object to check permissions"""
         form = super().get_form(request, obj, change, **kwargs)
         form.request = request
+        parent = obj.parent if obj else self._cms_initial_attributes.get("parent")
+        form.name_required = parent and parent.plugin_type == "TextPlugin"
         return form
 
     def get_fieldsets(self, request, obj=None):
