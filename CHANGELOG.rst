@@ -2,6 +2,31 @@
 Changelog
 =========
 
+2.3.0 (2025-12-29)
+==================
+
+* feat: Image plugin refactored for simpler size control by @marbru in https://github.com/django-cms/djangocms-frontend/pull/316
+* feat: Add the set_html_id template tag to resolve the random html.id attribute. by @zbohm in https://github.com/django-cms/djangocms-frontend/pull/327
+* feat: Support valid model names in custom components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/323
+* feat: Update allowed_models (rename from valid_models) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/325
+* fix: CarouselSlidePlugin and TabItemPlugin template retrieval to respect parent template setting by @Copilot in https://github.com/django-cms/djangocms-frontend/pull/314
+* fix: typo in German translation ("Splaten" → "Spalten") by @invi84 in https://github.com/django-cms/djangocms-frontend/pull/315
+* fix: Tab layout broke for too small modal by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/319
+* fix: uuid is not a valid selector. by @zbohm in https://github.com/django-cms/djangocms-frontend/pull/326
+* fix: Validate template component names by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/333
+* docs: Deduplication and clarity in the tutorials by @marbru in https://github.com/django-cms/djangocms-frontend/pull/317
+* docs: Fix inconsistency in Documentation by @va-lang in https://github.com/django-cms/djangocms-frontend/pull/329
+
+**New Contributors**
+
+* @Copilot made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/314
+* @invi84 made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/315
+* @vinitkumar made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/320
+* @marbru made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/316
+* @va-lang made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/329
+
+**Full Changelog**: https://github.com/django-cms/djangocms-frontend/compare/2.2.0...2.3.0
+
 2.2.0 (2025-08-16)
 ==================
 
