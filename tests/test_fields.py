@@ -49,9 +49,9 @@ class FieldsTestCase(TestCase):
         self.assertTrue(form.is_valid(), form.errors)
         self.assertEqual(form.cleaned_data["odc"], None)
 
-        form_1 = Form(data={"odc": ['xs', 'sm']})
+        form_1 = Form(data={"odc": ["xs", "sm"]})
         self.assertTrue(form_1.is_valid(), form_1.errors)
-        self.assertEqual(form_1.cleaned_data["odc"], ['xs', 'sm'])
+        self.assertEqual(form_1.cleaned_data["odc"], ["xs", "sm"])
 
     def test_device_choice_field(self):
         class Form(forms.Form):
@@ -66,5 +66,4 @@ class FieldsTestCase(TestCase):
 
         form_1 = Form2(data={})
         self.assertFalse(form_1.is_valid())
-        self.assertFormError(form_1, "dc_not_required",
-                             ["Please select at least one device size"])
+        self.assertFormError(form_1, "dc_not_required", ["Please select at least one device size"])

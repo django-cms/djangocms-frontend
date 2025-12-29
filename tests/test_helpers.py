@@ -41,9 +41,7 @@ class HelpersTestCase(TestFixture, CMSTestCase):
             "carousel",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(
-            template, "djangocms_frontend/bootstrap5/carousel/default/carousel.html"
-        )
+        self.assertEqual(template, "djangocms_frontend/bootstrap5/carousel/default/carousel.html")
         # trigger default template
         template = get_plugin_template(
             instance,
@@ -51,9 +49,7 @@ class HelpersTestCase(TestFixture, CMSTestCase):
             "exist",
             CAROUSEL_TEMPLATE_CHOICES,
         )
-        self.assertEqual(
-            template, "djangocms_frontend/bootstrap5/does_not/default/exist.html"
-        )
+        self.assertEqual(template, "djangocms_frontend/bootstrap5/does_not/default/exist.html")
         # cleanup
         self.page.delete()
 
@@ -195,9 +191,7 @@ class HelpersTestCase(TestFixture, CMSTestCase):
 
     def test_link_to_framework(self):
         self.assertIsNone(link_to_framework_doc("Card", "this topic does not exist"))
-        self.assertIsNone(
-            link_to_framework_doc("NonExistingUIITEM", "this topic does not exist")
-        )
+        self.assertIsNone(link_to_framework_doc("NonExistingUIITEM", "this topic does not exist"))
 
     def test_first_child(self):
         parent = add_plugin(

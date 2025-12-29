@@ -135,9 +135,7 @@ class GridPluginTestCase(TestFixture, CMSTestCase):
         )  # GridRowForm & GridColumnForm need config explicitly not empty
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
 
-        if (
-            not DJANGO_CMS4
-        ):  # TODO: Test for django CMS 4 (failing due to rights issue?)
+        if not DJANGO_CMS4:  # TODO: Test for django CMS 4 (failing due to rights issue?)
             request_url = self.get_add_plugin_uri(
                 placeholder=self.placeholder,
                 plugin_type=GridRowPlugin.__name__,

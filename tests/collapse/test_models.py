@@ -14,15 +14,11 @@ class B5CollapseModelTestCase(TestCase):
         self.assertEqual(instance.get_short_description(), "(collapse-1)")
 
     def test_collapse_trigger_instance(self):
-        instance = CollapseTrigger.objects.create(
-            config={"trigger_identifier": "Monty Python"}
-        )
+        instance = CollapseTrigger.objects.create(config={"trigger_identifier": "Monty Python"})
         self.assertEqual(str(instance), "CollapseTrigger (1)")
         self.assertEqual(instance.get_short_description(), "(Monty Python)")
 
     def test_collapse_container_instance(self):
-        instance = CollapseContainer.objects.create(
-            config={"container_identifier": "Monty Python"}
-        )
+        instance = CollapseContainer.objects.create(config={"container_identifier": "Monty Python"})
         self.assertEqual(str(instance), "CollapseContainer (1)")
         self.assertEqual(instance.get_short_description(), "(Monty Python)")

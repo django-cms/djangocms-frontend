@@ -88,9 +88,7 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<ul class="empty-toc"></ul>')
         self.assertContains(response, '<h2 id="id1">Welcome to django CMS!</h2>')
-        self.assertContains(
-            response, '<h3 id="id2">How you can benefit from django CMS</h3>'
-        )
+        self.assertContains(response, '<h3 id="id2">How you can benefit from django CMS</h3>')
         self.assertContains(response, '<ul class="test-class"><li ><a href="#id2" >')
         self.assertContains(response, '<a href="#id1" >')
         self.assertContains(response, '<a href="#id2" >')
@@ -141,7 +139,7 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertNotContains(response, 'My private note')
+        self.assertNotContains(response, "My private note")
 
     @skipIf(cms_version < "4", "django CMS 4+ required")
     def test_editor_note_with_cms4(self):
@@ -165,4 +163,4 @@ class UtilitiesPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(endpoint)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'My private note')
+        self.assertContains(response, "My private note")

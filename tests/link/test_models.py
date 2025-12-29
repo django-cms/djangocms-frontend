@@ -9,6 +9,4 @@ class LinkModelTestCase(TestCase):
             config=dict(name="Get it!", link=dict(external_link="https://www.django-cms.com/"))
         )
         self.assertEqual(str(instance), "Link (1)")
-        self.assertEqual(
-            instance.get_short_description(), "Get it! (https://www.django-cms.com/)"
-        )
+        self.assertEqual(instance.get_short_description(), "Get it! (https://www.django-cms.com/)")

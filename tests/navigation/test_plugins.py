@@ -33,18 +33,12 @@ class NavigationPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '<nav class="navbar-expand-xl navbar navbar-light">'
-            in response.content.decode("utf-8")
-            or '<nav class="navbar-expand-xl navbar-light navbar">'
-            in response.content.decode("utf-8")
-            or '<nav class="navbar navbar-light navbar-expand-xl">'
-            in response.content.decode("utf-8")
-            or '<nav class="navbar navbar-expand-xl navbar-light">'
-            in response.content.decode("utf-8")
-            or '<nav class="navbar-light navbar navbar-expand-xl">'
-            in response.content.decode("utf-8")
-            or '<nav class="navbar-light navbar-expand-xl navbar">'
-            in response.content.decode("utf-8")
+            '<nav class="navbar-expand-xl navbar navbar-light">' in response.content.decode("utf-8")
+            or '<nav class="navbar-expand-xl navbar-light navbar">' in response.content.decode("utf-8")
+            or '<nav class="navbar navbar-light navbar-expand-xl">' in response.content.decode("utf-8")
+            or '<nav class="navbar navbar-expand-xl navbar-light">' in response.content.decode("utf-8")
+            or '<nav class="navbar-light navbar navbar-expand-xl">' in response.content.decode("utf-8")
+            or '<nav class="navbar-light navbar-expand-xl navbar">' in response.content.decode("utf-8")
         )
         self.assertContains(response, '<div class="container">')
         self.assertContains(response, '<span class="navbar-toggler-icon"></span>')

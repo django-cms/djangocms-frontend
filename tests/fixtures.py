@@ -23,9 +23,7 @@ class TestFixture:
             template="page.html",
         )
         self.placeholder = self.get_placeholders(self.page).get(slot="content")
-        self.request_url = (
-            self.page.get_absolute_url(self.language) + "?toolbar_off=true"
-        )
+        self.request_url = self.page.get_absolute_url(self.language) + "?toolbar_off=true"
         return super().setUp()
 
     def tearDown(self):
@@ -46,14 +44,9 @@ class TestFixture:
 
             from djangocms_versioning.models import Version
 
-            versions = Version.objects.filter_by_grouper(grouper).filter(
-                state=version_state
-            )
+            versions = Version.objects.filter_by_grouper(grouper).filter(state=version_state)
             for version in versions:
-                if (
-                    hasattr(version.content, "language")
-                    and version.content.language == language
-                ):
+                if hasattr(version.content, "language") and version.content.language == language:
                     return version
 
         def publish(self, grouper, language=None):
@@ -80,6 +73,7 @@ class TestFixture:
 
         def get_placeholders(self, page):
             from cms.models import PageContent, Placeholder
+
             page_content = PageContent.admin_manager.latest_content().get(language=self.language, page=self.page)
             return Placeholder.objects.get_for_obj(page_content)
 

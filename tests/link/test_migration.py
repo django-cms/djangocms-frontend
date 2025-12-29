@@ -20,7 +20,7 @@ class LinkMigrationTestCase(TestCase):
             dict(internal_link=dict(model="cms.page", pk=1), anchor="top"),
             dict(file_link=dict(model="filer.file", pk=1)),
             dict(phone="1234567890"),
-            dict(mailto="mail@example.com")
+            dict(mailto="mail@example.com"),
         )
 
         for link in test_links:

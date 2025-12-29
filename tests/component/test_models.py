@@ -5,7 +5,6 @@ from djangocms_frontend.component_pool import components
 
 class ComponentPluginTestCase(TestCase):
     def test_component_description(self):
-
         MyHero, MyHeroPlugin, _ = components["MyHero"]
 
         instance = MyHero.objects.create()

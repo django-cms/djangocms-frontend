@@ -2,10 +2,7 @@ from aldryn_client import forms
 
 
 class Form(forms.BaseForm):
-
-    grid_size = forms.NumberField(
-        "Maximum columns to support, default is 12.", required=False
-    )
+    grid_size = forms.NumberField("Maximum columns to support, default is 12.", required=False)
     enable_icons = forms.CheckboxField(
         "Enable icon support",
         required=False,

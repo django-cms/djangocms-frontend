@@ -21,13 +21,7 @@ class AlertPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            (
-                '<div class="alert alert-primary" role="alert">'
-                in response.content.decode("utf-8")
-            )
-            or (
-                '<div class="alert-primary alert" role="alert">'
-                in response.content.decode("utf-8")
-            ),
-            f'alert-primary not found in {response.content.decode("utf-8")}',
+            ('<div class="alert alert-primary" role="alert">' in response.content.decode("utf-8"))
+            or ('<div class="alert-primary alert" role="alert">' in response.content.decode("utf-8")),
+            f"alert-primary not found in {response.content.decode('utf-8')}",
         )
