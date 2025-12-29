@@ -118,9 +118,7 @@ class ImageForm(
         label=_("Width"),
         required=False,
         min_value=1,
-        help_text=_(
-            'The image width as number in pixels (eg, "720" and not "720px"). '
-        ),
+        help_text=_('The image width as number in pixels (eg, "720" and not "720px"). '),
     )
     height = forms.IntegerField(
         label=_("Height"),

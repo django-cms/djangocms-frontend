@@ -162,15 +162,8 @@ class CarouselPluginTestCase(TestFixture, CMSTestCase):
         plugin_instance = CarouselSlidePlugin()
 
         # Test that get_render_template uses the parent's template
-        template_path = plugin_instance.get_render_template(
-            context={},
-            instance=slide,
-            placeholder=self.placeholder
-        )
+        template_path = plugin_instance.get_render_template(context={}, instance=slide, placeholder=self.placeholder)
 
         # The template path should use 'custom' from the parent, not 'default'
         self.assertIn("custom", template_path)
-        self.assertEqual(
-            template_path,
-            "djangocms_frontend/bootstrap5/carousel/custom/slide.html"
-        )
+        self.assertEqual(template_path, "djangocms_frontend/bootstrap5/carousel/custom/slide.html")

@@ -76,14 +76,9 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
 
         # Test that get_render_template uses the parent's template
         template_path = plugin_instance.get_render_template(
-            context={},
-            instance=tab_item,
-            placeholder=self.placeholder
+            context={}, instance=tab_item, placeholder=self.placeholder
         )
 
         # The template path should use 'custom' from the parent, not 'default'
         self.assertIn("custom", template_path)
-        self.assertEqual(
-            template_path,
-            "djangocms_frontend/bootstrap5/tabs/custom/item.html"
-        )
+        self.assertEqual(template_path, "djangocms_frontend/bootstrap5/tabs/custom/item.html")

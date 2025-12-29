@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -11,12 +11,11 @@ msgstr ""
 "POT-Creation-Date: 2025-11-12 10:28+0100\n"
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Language-Team: Italian (https://app.transifex.com/divio/teams/58664/it/)\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
-"1 : 2;\n"
+"Language: it\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: common/attributes.py:11
 msgid ""
@@ -49,7 +48,8 @@ msgstr ""
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr ""
 
-#: common/bootstrap5/background.py:63 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:63
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr ""
 
@@ -92,7 +92,8 @@ msgstr ""
 
 #: common/bootstrap5/sizing.py:57
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr ""
 
 #: common/bootstrap5/spacing.py:80
@@ -144,8 +145,8 @@ msgstr ""
 
 #: common/bootstrap5/spacing.py:234
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 
 #: common/title.py:39
@@ -158,8 +159,8 @@ msgstr ""
 
 #: common/title.py:66
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
 #: component_base.py:153
@@ -223,8 +224,8 @@ msgstr ""
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
@@ -394,7 +395,8 @@ msgstr ""
 
 #: contrib/card/forms.py:135
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 
 #: contrib/card/forms.py:168
@@ -460,8 +462,8 @@ msgstr ""
 
 #: contrib/carousel/forms.py:62
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 
 #: contrib/carousel/forms.py:67 contrib/carousel/models.py:25
@@ -968,8 +970,8 @@ msgstr ""
 
 #: contrib/image/forms.py:164
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
@@ -1008,14 +1010,15 @@ msgid "Adds the .img-thumbnail class."
 msgstr ""
 
 #: contrib/image/forms.py:203
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
 #: contrib/image/forms.py:220
 #, python-brace-format
 msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
-"\"."
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
 msgstr ""
 
 #: contrib/jumbotron/cms_plugins.py:28 contrib/jumbotron/models.py:14
@@ -1392,8 +1395,8 @@ msgstr ""
 
 #: contrib/utilities/forms.py:117
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:120
@@ -1550,8 +1553,7 @@ msgstr ""
 
 #: helpers.py:126
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr ""
 
 #: helpers.py:208
@@ -1579,11 +1581,9 @@ msgstr ""
 msgid ""
 "\n"
 "        <h1>Deprecated</h1>\n"
-"        <p>This plugin has been deprecated. It will be removed in a future "
-"version of djangocms-frontend.\n"
+"        <p>This plugin has been deprecated. It will be removed in a future version of djangocms-frontend.\n"
 "        It is a no-op.</p>\n"
-"        <p>To avoid an error message in the future, move all child plugins - "
-"if any - one level up and\n"
+"        <p>To avoid an error message in the future, move all child plugins - if any - one level up and\n"
 "            delete this plugin.</p>\n"
 "    "
 msgstr ""

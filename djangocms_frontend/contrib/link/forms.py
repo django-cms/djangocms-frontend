@@ -173,3 +173,8 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # name_required is set by the plugin's get_form method if needed
+        self.fields["name"].required = getattr(self, "name_required", False)

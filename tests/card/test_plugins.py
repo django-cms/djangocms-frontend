@@ -63,9 +63,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
             ('<div class="card bg-transparent">' in response.content.decode("utf-8"))
-            or (
-                '<div class="bg-transparent card">' in response.content.decode("utf-8")
-            ),
+            or ('<div class="bg-transparent card">' in response.content.decode("utf-8")),
             f'<div class="card bg-transparent"> not found in {response.content.decode("utf-8")}',
         )
 
@@ -118,7 +116,6 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
                 "picture": {"pk": self.image.id, "model": "filer.Image"},
                 "use_responsive_image": "yes",
             },
-
         )
         image.initialize_from_form(ImageForm).save()
         self.publish(self.page, self.language)
@@ -126,8 +123,8 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'card-img-top')
-        self.assertNotContains(response, 'card-img-bottom')
+        self.assertContains(response, "card-img-top")
+        self.assertNotContains(response, "card-img-bottom")
 
         # add inner type above image
         inner = add_plugin(
@@ -146,7 +143,7 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertNotContains(response, 'card-img-top')
-        self.assertContains(response, 'card-img-bottom')
+        self.assertNotContains(response, "card-img-top")
+        self.assertContains(response, "card-img-bottom")
 
         self.image.delete()

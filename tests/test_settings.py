@@ -126,7 +126,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CMS_CONFIRM_VERSION4 = True  # Needed for v4, neglected in v3
 
-TEXT_SAVE_IMAGE_FUNCTION = 'djangocms_frontend.contrib.image.image_save.create_image_plugin'
+TEXT_SAVE_IMAGE_FUNCTION = "djangocms_frontend.contrib.image.image_save.create_image_plugin"
 
 CMS_COMPONENT_PLUGINS = [
     "djangocms_frontend.cms_plugins.CMSUIPlugin",

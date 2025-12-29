@@ -24,14 +24,8 @@ class BadgePluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            (
-                '<span class="badge bg-primary">some text</span>'
-                in response.content.decode("utf-8")
-            )
-            or (
-                '<span class="bg-primary badge">some text</span>'
-                in response.content.decode("utf-8")
-            ),
+            ('<span class="badge bg-primary">some text</span>' in response.content.decode("utf-8"))
+            or ('<span class="bg-primary badge">some text</span>' in response.content.decode("utf-8")),
             f'<span class="badge bg-primary">some text</span> not found in {response.content.decode("utf-8")}',
         )
 

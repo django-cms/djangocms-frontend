@@ -108,8 +108,10 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
                 This should not be rendered.
             {% endplugin %}
         """)
-        expected_result = ('<!-- To use "nonexisting" with the {% plugin %} template tag, add its plugin class to the '
-                           'CMS_COMPONENT_PLUGINS setting -->')
+        expected_result = (
+            '<!-- To use "nonexisting" with the {% plugin %} template tag, add its plugin class to the '
+            "CMS_COMPONENT_PLUGINS setting -->"
+        )
 
         result = template.render({"request": None})
 

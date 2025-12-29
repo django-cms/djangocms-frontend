@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-12 10:28+0100\n"
+"POT-Creation-Date: 2025-12-29 12:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,11 +162,11 @@ msgid ""
 "code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
-#: component_base.py:153
+#: component_base.py:154
 msgid "Components"
 msgstr ""
 
-#: component_base.py:192
+#: component_base.py:193
 msgid "Component"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgstr ""
 #: contrib/content/cms_plugins.py:97 contrib/grid/cms_plugins.py:33
 #: contrib/grid/cms_plugins.py:70 contrib/grid/cms_plugins.py:147
 #: contrib/icon/cms_plugins.py:27 contrib/image/cms_plugins.py:29
-#: contrib/jumbotron/cms_plugins.py:29 contrib/link/cms_plugins.py:73
+#: contrib/jumbotron/cms_plugins.py:29 contrib/link/cms_plugins.py:75
 #: contrib/listgroup/cms_plugins.py:27 contrib/listgroup/cms_plugins.py:55
 #: contrib/media/cms_plugins.py:21 contrib/media/cms_plugins.py:39
 #: contrib/navigation/cms_plugins.py:29 contrib/navigation/cms_plugins.py:77
@@ -379,7 +379,7 @@ msgstr ""
 
 #: contrib/card/forms.py:118 contrib/content/forms.py:97
 #: contrib/content/forms.py:135 contrib/grid/cms_plugins.py:96
-#: contrib/image/forms.py:136 contrib/tabs/forms.py:46
+#: contrib/image/forms.py:134 contrib/tabs/forms.py:46
 #: contrib/utilities/forms.py:127
 msgid "Alignment"
 msgstr ""
@@ -918,99 +918,99 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
-#: contrib/image/forms.py:122
+#: contrib/image/forms.py:121
 msgid "The image width as number in pixels (eg, \"720\" and not \"720px\"). "
 msgstr ""
 
-#: contrib/image/forms.py:126
+#: contrib/image/forms.py:124
 msgid "Height"
 msgstr ""
 
-#: contrib/image/forms.py:130
+#: contrib/image/forms.py:128
 msgid ""
 "The image height as number in pixels (eg, \"720\" and not \"720px\"). Note: "
 "if width is set, height will be calculated automatically to preserve aspect "
 "ratio. In case of cropping, then both width and height are applied as given."
 msgstr ""
 
-#: contrib/image/forms.py:140
+#: contrib/image/forms.py:138
 msgid "Aligns the image according to the selected option."
 msgstr ""
 
-#: contrib/image/forms.py:143 contrib/utilities/forms.py:153
+#: contrib/image/forms.py:141 contrib/utilities/forms.py:153
 msgid "Link attributes"
 msgstr ""
 
-#: contrib/image/forms.py:144
+#: contrib/image/forms.py:142
 msgid "Attributes apply to the <b>link</b>."
 msgstr ""
 
-#: contrib/image/forms.py:150
+#: contrib/image/forms.py:148
 msgid "Crop image"
 msgstr ""
 
-#: contrib/image/forms.py:152
+#: contrib/image/forms.py:150
 msgid "Crops the image rather than resizing"
 msgstr ""
 
-#: contrib/image/forms.py:155
+#: contrib/image/forms.py:153
 msgid "Upscale image"
 msgstr ""
 
-#: contrib/image/forms.py:157
+#: contrib/image/forms.py:155
 msgid "Allows the image to be upscaled beyond its original size."
 msgstr ""
 
-#: contrib/image/forms.py:160
+#: contrib/image/forms.py:158
 msgid "Use responsive image"
 msgstr ""
 
-#: contrib/image/forms.py:164
+#: contrib/image/forms.py:162
 msgid ""
 "Uses responsive image technique to choose better image to display based upon "
 "screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
-#: contrib/image/forms.py:173
+#: contrib/image/forms.py:171
 msgid "Thumbnail options"
 msgstr ""
 
-#: contrib/image/forms.py:175
+#: contrib/image/forms.py:173
 msgid ""
 "Overrides width, height, and crop; scales up to the provided preset "
 "dimensions."
 msgstr ""
 
-#: contrib/image/forms.py:178
+#: contrib/image/forms.py:176
 msgid "Responsive"
 msgstr ""
 
-#: contrib/image/forms.py:181
+#: contrib/image/forms.py:179
 msgid "Adds the .img-fluid class to make the image responsive."
 msgstr ""
 
-#: contrib/image/forms.py:184
+#: contrib/image/forms.py:182
 msgid "Rounded"
 msgstr ""
 
-#: contrib/image/forms.py:187
+#: contrib/image/forms.py:185
 msgid "Adds the .rounded class for round corners."
 msgstr ""
 
-#: contrib/image/forms.py:190
+#: contrib/image/forms.py:188
 msgid "Thumbnail"
 msgstr ""
 
-#: contrib/image/forms.py:193
+#: contrib/image/forms.py:191
 msgid "Adds the .img-thumbnail class."
 msgstr ""
 
-#: contrib/image/forms.py:203
+#: contrib/image/forms.py:201
 msgid "You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
-#: contrib/image/forms.py:220
+#: contrib/image/forms.py:218
 #, python-brace-format
 msgid ""
 "Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
@@ -1034,11 +1034,11 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: contrib/link/cms_plugins.py:60
+#: contrib/link/cms_plugins.py:62
 msgid "Link settings"
 msgstr ""
 
-#: contrib/link/cms_plugins.py:72
+#: contrib/link/cms_plugins.py:74
 msgid "Link / Button"
 msgstr ""
 
@@ -1562,7 +1562,7 @@ msgstr ""
 msgid "You do not have permission to edit this item"
 msgstr ""
 
-#: models.py:43 models.py:144
+#: models.py:41 models.py:142
 msgid "UI item"
 msgstr ""
 

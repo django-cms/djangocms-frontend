@@ -40,30 +40,12 @@ class AccordionPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<div class="accordion-item">')
         self.assertTrue(
-            (
-                'class="collapse accordion-collapse test-class"'
-                in response.content.decode("utf-8")
-            )
-            or (
-                'class="accordion-collapse collapse test-class"'
-                in response.content.decode("utf-8")
-            )
-            or (
-                'class="accordion-collapse test-class collapse"'
-                in response.content.decode("utf-8")
-            )
-            or (
-                'class="collapse test-class accordion-collapse"'
-                in response.content.decode("utf-8")
-            )
-            or (
-                'class="test-class collapse accordion-collapse"'
-                in response.content.decode("utf-8")
-            )
-            or (
-                'class="test-class accordion-collapse collapse"'
-                in response.content.decode("utf-8")
-            ),
+            ('class="collapse accordion-collapse test-class"' in response.content.decode("utf-8"))
+            or ('class="accordion-collapse collapse test-class"' in response.content.decode("utf-8"))
+            or ('class="accordion-collapse test-class collapse"' in response.content.decode("utf-8"))
+            or ('class="collapse test-class accordion-collapse"' in response.content.decode("utf-8"))
+            or ('class="test-class collapse accordion-collapse"' in response.content.decode("utf-8"))
+            or ('class="test-class accordion-collapse collapse"' in response.content.decode("utf-8")),
             f'<div class="collapse accordion-collapse test-class"> not found in {response.content.decode("utf-8")}',
         )
         self.assertContains(response, 'id="heading-')

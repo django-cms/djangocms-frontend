@@ -99,16 +99,18 @@ class CollapsePluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(
             response,
             """<div id="collapse-frontend-plugins-1" data-bs-children=".card" role="tablist"></div>""",
-            html=True)
+            html=True,
+        )
         self.assertContains(
             response,
             """<div id="collapse-frontend-plugins-2" data-bs-children=".card" role="tablist"></div>""",
-            html=True)
+            html=True,
+        )
 
     def test_set_html_id(self):
         instance = FrontendUIItem()
         context = Context()
-        with patch("os.urandom", lambda n: b'\x1bB\x96\xabyI\xf6`\xd0\xc0,\xf8\x83\xe8,\xb8'):
+        with patch("os.urandom", lambda n: b"\x1bB\x96\xabyI\xf6`\xd0\xc0,\xf8\x83\xe8,\xb8"):
             html_id = set_html_id(context, instance)
         identifier = "uuid4-1b4296ab-7949-4660-90c0-2cf883e82cb8"
         self.assertEqual(html_id, identifier)

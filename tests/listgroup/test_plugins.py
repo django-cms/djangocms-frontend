@@ -39,14 +39,8 @@ class ListGroupPluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            (
-                '<div class="list-group list-group-flush">'
-                in response.content.decode("utf-8")
-            )
-            or (
-                '<div class="list-group-flush list-group">'
-                in response.content.decode("utf-8")
-            ),
+            ('<div class="list-group list-group-flush">' in response.content.decode("utf-8"))
+            or ('<div class="list-group-flush list-group">' in response.content.decode("utf-8")),
             '<div class="list-group-flush list-group"> not in response',
         )
 
