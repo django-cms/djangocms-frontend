@@ -2,19 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Fabian Braun <fsbraun@gmx.de>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-12 10:29+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: \n"
-"Language-Team: Chinese (Simplified)\n"
-"Language: zh_Hans\n"
+"POT-Creation-Date: 2025-11-12 10:28+0100\n"
+"PO-Revision-Date: 2023-01-20 15:48+0000\n"
+"Last-Translator: Fabian Braun <fsbraun@gmx.de>, 2025\n"
+"Language-Team: Chinese (https://app.transifex.com/divio/teams/58664/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: common/attributes.py:11
@@ -48,7 +52,8 @@ msgstr "背景不透明度"
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr "卡片背景颜色的不透明度（仅在未选择描边时生效）"
 
-#: common/bootstrap5/background.py:63 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:63
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "阴影"
 
@@ -91,7 +96,8 @@ msgstr "垂直尺寸"
 
 #: common/bootstrap5/sizing.py:57
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr "设置相对于容器或视口的垂直尺寸。"
 
 #: common/bootstrap5/spacing.py:80
@@ -143,8 +149,8 @@ msgstr "在以下设备上应用内边距"
 
 #: common/bootstrap5/spacing.py:234
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr "仅选择要应用内边距的设备。在比第一个所选设备更大的设备上，内边距将被设为 0。"
 
 #: common/title.py:39
@@ -157,8 +163,8 @@ msgstr "标题"
 
 #: common/title.py:66
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr "用于识别的可选标题。仅当勾选复选框时才会设置其 <code>title</code> 属性。"
 
 #: component_base.py:153
@@ -222,8 +228,8 @@ msgstr "合并到父容器中"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr "移除默认背景色、部分边框和圆角，使手风琴与其父容器无缝贴合显示。"
 
 #: contrib/accordion/forms.py:78 contrib/card/constants.py:16
@@ -393,7 +399,8 @@ msgstr "全高度"
 
 #: contrib/card/forms.py:135
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr "选中后，同一行的卡片会自动拉伸到相同的行高。"
 
 #: contrib/card/forms.py:168
@@ -459,8 +466,8 @@ msgstr "间隔"
 
 #: contrib/carousel/forms.py:62
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr "自动切换条目的延迟时间。如果为 false，则不自动轮播。"
 
 #: contrib/carousel/forms.py:67 contrib/carousel/models.py:25
@@ -929,7 +936,8 @@ msgid ""
 "The image height as number in pixels (eg, \"720\" and not \"720px\"). Note: "
 "if width is set, height will be calculated automatically to preserve aspect "
 "ratio. In case of cropping, then both width and height are applied as given."
-msgstr "图像高度（像素数，例如 “720”，而不是 “720px”）。注意：如果设置了宽度，为保持纵横比，高度将自动计算。若启用裁剪，则按给定的宽度和高度应用。"
+msgstr ""
+"图像高度（像素数，例如 “720”，而不是 “720px”）。注意：如果设置了宽度，为保持纵横比，高度将自动计算。若启用裁剪，则按给定的宽度和高度应用。"
 
 #: contrib/image/forms.py:140
 msgid "Aligns the image according to the selected option."
@@ -965,8 +973,8 @@ msgstr "使用响应式图片"
 
 #: contrib/image/forms.py:164
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr "使用响应式图片技术，基于视口选择更合适的图片。该设置仅对上传的图片生效（外部图片不受影响）。"
 
@@ -1005,14 +1013,15 @@ msgid "Adds the .img-thumbnail class."
 msgstr "添加 .img-thumbnail 类。"
 
 #: contrib/image/forms.py:203
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr "需要上传图片或提供外部图片的 URL。"
 
 #: contrib/image/forms.py:220
 #, python-brace-format
 msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
-"\"."
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
 msgstr "无效的裁剪设置。不能同时使用 “{field_a}” 和 “{field_b}”。"
 
 #: contrib/jumbotron/cms_plugins.py:28 contrib/jumbotron/models.py:14
@@ -1389,8 +1398,8 @@ msgstr "ID"
 
 #: contrib/utilities/forms.py:117
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr "为目录填写唯一 ID。若为空，该标题不会出现在目录中。"
 
 #: contrib/utilities/forms.py:120
@@ -1547,8 +1556,7 @@ msgstr "紫色"
 
 #: helpers.py:126
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr "在<a href=\"{link}\" target=\"_blank\">文档</a>中了解更多。"
 
 #: helpers.py:208
@@ -1576,11 +1584,16 @@ msgstr "离屏侧栏"
 msgid ""
 "\n"
 "        <h1>Deprecated</h1>\n"
-"        <p>This plugin has been deprecated. It will be removed in a future "
-"version of djangocms-frontend.\n"
+"        <p>This plugin has been deprecated. It will be removed in a future version of djangocms-frontend.\n"
 "        It is a no-op.</p>\n"
-"        <p>To avoid an error message in the future, move all child plugins - "
-"if any - one level up and\n"
+"        <p>To avoid an error message in the future, move all child plugins - if any - one level up and\n"
 "            delete this plugin.</p>\n"
 "    "
-msgstr "\n        <h1>已弃用</h1>\n        <p>此插件已弃用，将在 djangocms-frontend 的未来版本中移除。\n        它不再执行任何操作。</p>\n        <p>为避免将来出现错误，请将所有子插件（如有）上移一级，\n            并删除此插件。</p>\n    "
+msgstr ""
+"\n"
+"        <h1>已弃用</h1>\n"
+"        <p>此插件已弃用，将在 djangocms-frontend 的未来版本中移除。\n"
+"        它不再执行任何操作。</p>\n"
+"        <p>为避免将来出现错误，请将所有子插件（如有）上移一级，\n"
+"            并删除此插件。</p>\n"
+"    "

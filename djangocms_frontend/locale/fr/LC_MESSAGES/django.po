@@ -2,10 +2,10 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Adrien Delhorme, 2023
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -15,12 +15,11 @@ msgstr ""
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Adrien Delhorme, 2023\n"
 "Language-Team: French (https://app.transifex.com/divio/teams/58664/fr/)\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
-"1000000 == 0 ? 1 : 2;\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: common/attributes.py:11
 msgid ""
@@ -54,10 +53,11 @@ msgstr "Opacité du fond"
 #: common/bootstrap5/background.py:59
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr ""
-"Opacité de la couleur de fond de l'encart (uniquement si aucun contour n'est "
-"sélectionné)"
+"Opacité de la couleur de fond de l'encart (uniquement si aucun contour n'est"
+" sélectionné)"
 
-#: common/bootstrap5/background.py:63 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:63
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "Ombre"
 
@@ -105,7 +105,8 @@ msgstr "Hauteur"
 
 #: common/bootstrap5/sizing.py:57
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr ""
 "Définit la hauteur par rapport au conteneur ou à la fenêtre d'affichage."
 
@@ -143,9 +144,9 @@ msgid ""
 "Select only devices on which the margin should be applied. On other devices "
 "larger than the first selected device the margin will be set to zero."
 msgstr ""
-"Sélectionnez uniquement les équipements sur lesquels les marges doivent être "
-"affichées. Sur les autres équipements plus grands que le premier équipement "
-"sélectionné, les marges seront mises à zéro."
+"Sélectionnez uniquement les équipements sur lesquels les marges doivent être"
+" affichées. Sur les autres équipements plus grands que le premier équipement"
+" sélectionné, les marges seront mises à zéro."
 
 #: common/bootstrap5/spacing.py:218
 msgid "Horizontal padding"
@@ -161,8 +162,8 @@ msgstr "Afficher les marges internes sur les équipements suivants"
 
 #: common/bootstrap5/spacing.py:234
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 "Sélectionnez uniquement les équipements sur lesquels les marges internes "
 "doivent être affichées. Sur les autres équipements plus grands que le "
@@ -178,8 +179,8 @@ msgstr "Titre"
 
 #: common/title.py:66
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 "Titre optionnel du plugin pour l'identifier. L'attribut <code>title</code> "
 "sera défini uniquement si la case est cochée."
@@ -245,8 +246,8 @@ msgstr "Intégrer au parent"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 "Supprimer la couleur de fond, les bordures et les coins arrondis pour "
 "afficher l'accordéon sur toute la largeur du conteneur parent"
@@ -256,10 +257,8 @@ msgid "Header"
 msgstr "Entête"
 
 #: contrib/accordion/forms.py:79
-#, fuzzy
-#| msgid "Accordion item"
 msgid "New accordion item"
-msgstr "Élément d'accordéon"
+msgstr ""
 
 #: contrib/accordion/forms.py:83
 msgid "Item open"
@@ -280,10 +279,8 @@ msgid "AccordionItem"
 msgstr "Élément d'accordéon"
 
 #: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion.html:5
-#, fuzzy
-#| msgid "Accordion item"
 msgid "Add accordion items here"
-msgstr "Élément d'accordéon"
+msgstr ""
 
 #: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion_item.html:18
 #: templates/djangocms_frontend/html_container.html:5
@@ -425,10 +422,11 @@ msgstr "Occuper toute la hauteur"
 
 #: contrib/card/forms.py:135
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
-"Lorsque cette case est cochée, les encarts sur une ligne occuperont toute la "
-"hauteur de la ligne."
+"Lorsque cette case est cochée, les encarts sur une ligne occuperont toute la"
+" hauteur de la ligne."
 
 #: contrib/card/forms.py:168
 msgid "Inner type"
@@ -493,8 +491,8 @@ msgstr "Intervalle"
 
 #: contrib/carousel/forms.py:62
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 "Le délai avant le défilement automatique d'un slide. Indiquez 0 pour ne pas "
 "que les slides défilent automatiquement."
@@ -766,8 +764,8 @@ msgid ""
 "should fill the full width without margins or padding."
 msgstr ""
 "Définit si la grille doit utiliser une largeur fixe, une largeur fluide ou "
-"si le conteneur doit remplir toute la largeur sans marges externes ni marges "
-"internes."
+"si le conteneur doit remplir toute la largeur sans marges externes ni marges"
+" internes."
 
 #: contrib/grid/forms.py:88
 msgid "Create columns"
@@ -804,8 +802,8 @@ msgstr "Alignement de la colonne"
 msgid ""
 "Column size needs to be empty, \"auto\", or a number between 1 and %(cols)d"
 msgstr ""
-"La taille de la colonne doit être vide, \"auto\", ou un nombre compris entre "
-"1 et %(cols)d"
+"La taille de la colonne doit être vide, \"auto\", ou un nombre compris entre"
+" 1 et %(cols)d"
 
 #: contrib/grid/models.py:27
 msgid "GridContainer"
@@ -966,21 +964,16 @@ msgid ""
 "them into view. "
 msgstr ""
 "À utiliser pour les images situées en dessous de la limite de « scroll ». "
-"Chargera les images seulement si le visiteur les fait apparaître en défilant "
-"dans la page."
+"Chargera les images seulement si le visiteur les fait apparaître en défilant"
+" dans la page."
 
 #: contrib/image/forms.py:118
 msgid "Width"
 msgstr "Largeur"
 
 #: contrib/image/forms.py:122
-#, fuzzy
-#| msgid ""
-#| "The image width as number in pixels. Example: \"720\" and not \"720px\"."
 msgid "The image width as number in pixels (eg, \"720\" and not \"720px\"). "
 msgstr ""
-"La largeur de l'image en pixels. Un nombre (sans unité), par exemple : "
-"\"720\"."
 
 #: contrib/image/forms.py:126
 msgid "Height"
@@ -1027,8 +1020,8 @@ msgstr "Image « responsive »"
 
 #: contrib/image/forms.py:164
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 "Utilise la technique de l'image « responsive » pour choisir la meilleure "
@@ -1073,18 +1066,19 @@ msgid "Adds the .img-thumbnail class."
 msgstr "Ajoute la classe CSS .img-thumbnail."
 
 #: contrib/image/forms.py:203
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 "Vous devez soit charger une image ou fournir une URL vers une image externe."
 
 #: contrib/image/forms.py:220
 #, python-brace-format
 msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
-"\"."
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
 msgstr ""
-"Paramètres de recadrage invalides. Vous ne pouvez pas utiliser en même temps "
-"\"{field_a}\" et \"{field_b}\"."
+"Paramètres de recadrage invalides. Vous ne pouvez pas utiliser en même temps"
+" \"{field_a}\" et \"{field_b}\"."
 
 #: contrib/jumbotron/cms_plugins.py:28 contrib/jumbotron/models.py:14
 msgid "Jumbotron"
@@ -1324,8 +1318,8 @@ msgstr ""
 #: contrib/navigation/forms.py:99
 msgid "Enter brand name or add child plugins for brand icon or image"
 msgstr ""
-"Entrez un nom de marque ou ajoutez des plugins enfants pour afficher un logo "
-"ou une image"
+"Entrez un nom de marque ou ajoutez des plugins enfants pour afficher un logo"
+" ou une image"
 
 #: contrib/navigation/models.py:27
 msgid "(deprecated)"
@@ -1374,8 +1368,8 @@ msgstr "Index"
 #: contrib/tabs/forms.py:56
 msgid "Index of element to open on page load starting at 1."
 msgstr ""
-"Index de l'élément à ouvrir au chargement de la page (en numérotant à partir "
-"de 1)."
+"Index de l'élément à ouvrir au chargement de la page (en numérotant à partir"
+" de 1)."
 
 #: contrib/tabs/forms.py:59
 msgid "Animation effect"
@@ -1443,8 +1437,8 @@ msgid ""
 "Padding does not have an auto spacing. Either switch to a defined size or "
 "change the spacing property."
 msgstr ""
-"Les marges internes n'ont pas d'espacement automatique. Il faut soit définir "
-"une taille, soit changer la propriété de l'espacement."
+"Les marges internes n'ont pas d'espacement automatique. Il faut soit définir"
+" une taille, soit changer la propriété de l'espacement."
 
 #: contrib/utilities/forms.py:91 settings.py:36
 msgid "Heading 1"
@@ -1476,8 +1470,8 @@ msgstr "ID"
 
 #: contrib/utilities/forms.py:117
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 "Remplir un identifiant unique qui sera utile pour la table des matières. Si "
 "le titre est vide, il n'apparaîtra pas dans la table des matières."
@@ -1501,8 +1495,8 @@ msgstr ""
 msgid ""
 "Attributes apply to the <b>link</b> for each entry in the table of contents."
 msgstr ""
-"Les attributs s'appliquent au <b>lien</b> pour chaque entrée de la table des "
-"matières."
+"Les attributs s'appliquent au <b>lien</b> pour chaque entrée de la table des"
+" matières."
 
 #: contrib/utilities/forms.py:157
 msgid "Item attributes"
@@ -1513,8 +1507,8 @@ msgid ""
 "Attributes apply to the <b>list items</b> for each entry in the table of "
 "contents."
 msgstr ""
-"Les attributs s'appliquent aux <b>élément de liste</b> pour chaque entrée de "
-"la table des matières."
+"Les attributs s'appliquent aux <b>élément de liste</b> pour chaque entrée de"
+" la table des matières."
 
 #: fields.py:100
 msgid "Please select at least one device size"
@@ -1627,16 +1621,12 @@ msgid "Alternative"
 msgstr ""
 
 #: frameworks/tailwind.py:20
-#, fuzzy
-#| msgid "Screen"
 msgid "Green"
-msgstr "Écran"
+msgstr ""
 
 #: frameworks/tailwind.py:21
-#, fuzzy
-#| msgid "Rounded"
 msgid "Red"
-msgstr "Coins arrondis"
+msgstr ""
 
 #: frameworks/tailwind.py:22
 msgid "Yellow"
@@ -1648,8 +1638,7 @@ msgstr ""
 
 #: helpers.py:126
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr ""
 "Lire <a href=\"{link}\" target=\"_blank\">la documentation</a> pour en "
 "savoir plus."
@@ -1681,104 +1670,9 @@ msgstr "Déroulante"
 msgid ""
 "\n"
 "        <h1>Deprecated</h1>\n"
-"        <p>This plugin has been deprecated. It will be removed in a future "
-"version of djangocms-frontend.\n"
+"        <p>This plugin has been deprecated. It will be removed in a future version of djangocms-frontend.\n"
 "        It is a no-op.</p>\n"
-"        <p>To avoid an error message in the future, move all child plugins - "
-"if any - one level up and\n"
+"        <p>To avoid an error message in the future, move all child plugins - if any - one level up and\n"
 "            delete this plugin.</p>\n"
 "    "
 msgstr ""
-
-#~ msgid "Cropping"
-#~ msgstr "Recadrage"
-
-#~ msgid ""
-#~ "The image height as number in pixels. Example: \"720\" and not \"720px\"."
-#~ msgstr ""
-#~ "La hauteur de l'image en pixels. Un nombre (sans unité), par exemple : "
-#~ "\"720\"."
-
-#~ msgid "Automatic scaling"
-#~ msgstr "Redimensionnement automatique"
-
-#~ msgid "Uses the placeholder dimensions to automatically calculate the size."
-#~ msgstr ""
-#~ "Utilise les dimensions de la zone de la page pour calculer "
-#~ "automatiquement la taille."
-
-#~ msgid "Use original image"
-#~ msgstr "Utiliser l'image d'origine"
-
-#~ msgid "Outputs the raw image without cropping."
-#~ msgstr "Affiche l'image d'origine sans la recadrer."
-
-#~ msgid ""
-#~ "Crops the image according to the thumbnail settings provided in the "
-#~ "template."
-#~ msgstr ""
-#~ "Recadre l'image d'après les paramètres de miniature fournis dans le "
-#~ "gabarit de la page."
-
-#~ msgid ""
-#~ "Upscales the image to the size of the thumbnail settings in the template."
-#~ msgstr ""
-#~ "Agrandi l'image jusqu'à atteindre la taille de la miniature définie dans "
-#~ "le gabarit de la page."
-
-#~ msgid ""
-#~ "You have given more than one external, internal, or file link target. "
-#~ "Only one option is allowed."
-#~ msgstr ""
-#~ "Seulement un champ parmi : lien externe, lien interne, lien vers un "
-#~ "fichier, doit être rempli."
-
-#~ msgid "Select a destination"
-#~ msgstr "Choisissez une destination"
-
-#~ msgid "External link"
-#~ msgstr "Lien externe"
-
-#~ msgid "Provide a link to an external source."
-#~ msgstr "Indiquez un lien vers un site externe."
-
-#~ msgid "Internal link"
-#~ msgstr "Lien interne"
-
-#~ msgid "If provided, overrides the external link."
-#~ msgstr "Si ce champ est rempli, le lien externe est ignoré."
-
-#~ msgid "File link"
-#~ msgstr "Lien vers un fichier"
-
-#~ msgid "If provided links a file from the filer app."
-#~ msgstr "Fait un lien vers un fichier du navigateur de fichiers."
-
-#~ msgid "Anchor"
-#~ msgstr "Ancre"
-
-#~ msgid ""
-#~ "Appends the value only after the internal or external link. Do <em>not</"
-#~ "em> include a preceding \"&#35;\" symbol."
-#~ msgstr ""
-#~ "Ajoute la valeur uniquement après le lien interne ou externe. <em>Ne pas</"
-#~ "em> inclure le symbole \"&#35 ;\" qui précède."
-
-#~ msgid "Email address"
-#~ msgstr "Adresse e-mail"
-
-#~ msgid "Phone"
-#~ msgstr "Numéro de téléphone"
-
-#, python-brace-format
-#~ msgid "Only one of {0} or {1} may be given."
-#~ msgstr "Seulement un choix parmi {0} ou {1}, peut être donné."
-
-#~ msgid "Please provide a link."
-#~ msgstr "Veuillez fournir un lien."
-
-#, python-format
-#~ msgid ""
-#~ "%(anchor_field_verbose_name)s is not allowed together with %(field_name)s"
-#~ msgstr ""
-#~ "%(anchor_field_verbose_name)s n'est pas autorisé avec %(field_name)s"

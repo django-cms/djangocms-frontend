@@ -2,11 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Israa Kamal Salameh <i.salameh@najah.edu>, 2023
 # Seraj Adden Baltu, 2024
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -16,20 +16,19 @@ msgstr ""
 "PO-Revision-Date: 2023-01-20 15:48+0000\n"
 "Last-Translator: Seraj Adden Baltu, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/divio/teams/58664/ar/)\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: common/attributes.py:11
 msgid ""
 "Advanced settings lets you add html attributes to render this element. Use "
 "them wisely and rarely."
 msgstr ""
-"تتيح لك الإعدادات المتقدمة، أضافة صفات html لعَرض هذا العنصر، استخدمها بحكمة "
-"ونادراً"
+"تتيح لك الإعدادات المتقدمة، أضافة صفات html لعَرض هذا العنصر، استخدمها بحكمة"
+" ونادراً"
 
 #: common/attributes.py:26 contrib/accordion/cms_plugins.py:93
 msgid "Advanced settings"
@@ -56,7 +55,8 @@ msgstr "تعتيم الخلفية"
 msgid "Opacity of card background color (only if no outline selected)"
 msgstr "الشفافية للون الخلفي للبطاقة (فقط إذا لم يتم اختيار حدود)"
 
-#: common/bootstrap5/background.py:63 contrib/alert/frameworks/bootstrap5.py:42
+#: common/bootstrap5/background.py:63
+#: contrib/alert/frameworks/bootstrap5.py:42
 msgid "Shadow"
 msgstr "ظل"
 
@@ -99,7 +99,8 @@ msgstr "الحجم العمودي"
 
 #: common/bootstrap5/sizing.py:57
 msgid ""
-"Sets the vertical size relative to the surrounding container or the viewport."
+"Sets the vertical size relative to the surrounding container or the "
+"viewport."
 msgstr "تعين حجم راسي بالنسبة للحاوية المحيطة أو نافذة العرض"
 
 #: common/bootstrap5/spacing.py:80
@@ -154,8 +155,8 @@ msgstr "طبّق الهامش الداخلي على الأجهزة"
 
 #: common/bootstrap5/spacing.py:234
 msgid ""
-"Select only devices on which the padding should be applied. On other devices "
-"larger than the first selected device the padding will be set to zero."
+"Select only devices on which the padding should be applied. On other devices"
+" larger than the first selected device the padding will be set to zero."
 msgstr ""
 "حدد فقط الأجهزة التي يجب تطبيق المحاذاة الداخلية عليها. أما في الأجهزة "
 "الأخرى التي يزيد حجمها عن الجهاز الأول الذي تم تحديده، ستكون قيمة المحاذاة "
@@ -171,8 +172,8 @@ msgstr "عنوان"
 
 #: common/title.py:66
 msgid ""
-"Optional title of the plugin for easier identification. Its <code>title</"
-"code> attribute will only be set if the checkbox is selected."
+"Optional title of the plugin for easier identification. Its "
+"<code>title</code> attribute will only be set if the checkbox is selected."
 msgstr ""
 
 #: component_base.py:153
@@ -236,8 +237,8 @@ msgstr "دمج داخل عنصر الاب"
 
 #: contrib/accordion/forms.py:52
 msgid ""
-"Removes the default background-color, some borders, and some rounded corners "
-"to render accordions edge-to-edge with their parent container "
+"Removes the default background-color, some borders, and some rounded corners"
+" to render accordions edge-to-edge with their parent container "
 msgstr ""
 "يقوم بإزالة لون الخلفي الافتراضي وبعض الحدود وبعض الزوايا المستديرة لعرض "
 "الأكورديون بحيث يكون حافة بجوار حاوية الاب"
@@ -247,10 +248,8 @@ msgid "Header"
 msgstr "رأس"
 
 #: contrib/accordion/forms.py:79
-#, fuzzy
-#| msgid "Accordion item"
 msgid "New accordion item"
-msgstr "عنصر الأكورديون"
+msgstr ""
 
 #: contrib/accordion/forms.py:83
 msgid "Item open"
@@ -270,10 +269,8 @@ msgid "AccordionItem"
 msgstr "عنصر الأكورديون"
 
 #: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion.html:5
-#, fuzzy
-#| msgid "Accordion item"
 msgid "Add accordion items here"
-msgstr "عنصر الأكورديون"
+msgstr ""
 
 #: contrib/accordion/templates/djangocms_frontend/bootstrap5/accordion_item.html:18
 #: templates/djangocms_frontend/html_container.html:5
@@ -413,7 +410,8 @@ msgstr ""
 
 #: contrib/card/forms.py:135
 msgid ""
-"If checked cards in one row will automatically extend to the full row height."
+"If checked cards in one row will automatically extend to the full row "
+"height."
 msgstr ""
 
 #: contrib/card/forms.py:168
@@ -479,8 +477,8 @@ msgstr ""
 
 #: contrib/carousel/forms.py:62
 msgid ""
-"The amount of time to delay between automatically cycling an item. If false, "
-"carousel will not automatically cycle."
+"The amount of time to delay between automatically cycling an item. If false,"
+" carousel will not automatically cycle."
 msgstr ""
 
 #: contrib/carousel/forms.py:67 contrib/carousel/models.py:25
@@ -990,8 +988,8 @@ msgstr ""
 
 #: contrib/image/forms.py:164
 msgid ""
-"Uses responsive image technique to choose better image to display based upon "
-"screen viewport. This configuration only applies to uploaded images "
+"Uses responsive image technique to choose better image to display based upon"
+" screen viewport. This configuration only applies to uploaded images "
 "(external pictures will not be affected). "
 msgstr ""
 
@@ -1030,14 +1028,15 @@ msgid "Adds the .img-thumbnail class."
 msgstr ""
 
 #: contrib/image/forms.py:203
-msgid "You need to add either an image, or a URL linking to an external image."
+msgid ""
+"You need to add either an image, or a URL linking to an external image."
 msgstr ""
 
 #: contrib/image/forms.py:220
 #, python-brace-format
 msgid ""
-"Invalid cropping settings. You cannot combine \"{field_a}\" with \"{field_b}"
-"\"."
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
 msgstr ""
 
 #: contrib/jumbotron/cms_plugins.py:28 contrib/jumbotron/models.py:14
@@ -1414,8 +1413,8 @@ msgstr ""
 
 #: contrib/utilities/forms.py:117
 msgid ""
-"Fill in unique ID for table of contents. If empty heading will not appear in "
-"table of contents."
+"Fill in unique ID for table of contents. If empty heading will not appear in"
+" table of contents."
 msgstr ""
 
 #: contrib/utilities/forms.py:120
@@ -1582,8 +1581,7 @@ msgstr ""
 
 #: helpers.py:126
 #, python-brace-format
-msgid ""
-"Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
+msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
 msgstr ""
 
 #: helpers.py:208
@@ -1611,11 +1609,9 @@ msgstr ""
 msgid ""
 "\n"
 "        <h1>Deprecated</h1>\n"
-"        <p>This plugin has been deprecated. It will be removed in a future "
-"version of djangocms-frontend.\n"
+"        <p>This plugin has been deprecated. It will be removed in a future version of djangocms-frontend.\n"
 "        It is a no-op.</p>\n"
-"        <p>To avoid an error message in the future, move all child plugins - "
-"if any - one level up and\n"
+"        <p>To avoid an error message in the future, move all child plugins - if any - one level up and\n"
 "            delete this plugin.</p>\n"
 "    "
 msgstr ""
