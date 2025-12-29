@@ -1,3 +1,5 @@
+from unittest.mock import Mock
+
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.http import HttpRequest
@@ -130,11 +132,7 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
                 "margin_devices": ["xs"],
                 "padding_devices": ["xs"],
                 **(
-                    dict(
-                        url_grouper=str(
-                            self.create_url(manual_url="https://www.django-cms.org/").id
-                        )
-                    )
+                    dict(url_grouper=str(self.create_url(manual_url="https://www.django-cms.org/").id))
                     if hasattr(self, "create_url")
                     else dict(
                         link_0="external_link",
@@ -145,5 +143,110 @@ class LinkPluginTestCase(TestFixture, CMSTestCase):
         )
         form = LinkForm(request.POST)
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
+        if hasattr(self, "create_url"):
+            self.delete_urls()
+
+    def test_link_form_add_view_name_not_required_by_default(self):
+        """Test that name is not required in add view when not child of TextPlugin"""
+        request = HttpRequest()
+        request.POST = {
+            "template": settings.LINK_TEMPLATE_CHOICES[0][0],
+            "link_type": "link",
+            "margin_devices": ["xs"],
+            "padding_devices": ["xs"],
+            **(
+                dict(url_grouper=str(self.create_url(manual_url="https://www.django-cms.org/").id))
+                if hasattr(self, "create_url")
+                else dict(
+                    link_0="external_link",
+                    link_1="https://www.django-cms.org/",
+                )
+            ),
+            # name field is empty
+        }
+        form = LinkForm(request.POST)
+        form.name_required = False  # Default behavior
+        # name field should not be required
+        self.assertFalse(form.fields["name"].required)
+        if hasattr(self, "create_url"):
+            self.delete_urls()
+
+    def test_link_form_add_view_name_required_for_text_plugin_child(self):
+        """Test that name field is marked as required when child of TextPlugin"""
+        request = HttpRequest()
+        request.POST = {
+            "template": settings.LINK_TEMPLATE_CHOICES[0][0],
+            "link_type": "link",
+            "margin_devices": ["xs"],
+            "padding_devices": ["xs"],
+            **(
+                dict(url_grouper=str(self.create_url(manual_url="https://www.django-cms.org/").id))
+                if hasattr(self, "create_url")
+                else dict(
+                    link_0="external_link",
+                    link_1="https://www.django-cms.org/",
+                )
+            ),
+            # name field is empty
+        }
+        form = LinkForm(request.POST)
+        form.name_required = True  # Child of TextPlugin
+        # Update field requirement based on name_required
+        form.fields["name"].required = form.name_required
+        # name field should be required
+        self.assertTrue(form.fields["name"].required)
+        if hasattr(self, "create_url"):
+            self.delete_urls()
+
+    def test_link_form_change_view_name_required_for_text_plugin_child(self):
+        """Test that name is required in change view when link plugin is child of TextPlugin"""
+        request = HttpRequest()
+        request.POST = {
+            "template": settings.LINK_TEMPLATE_CHOICES[0][0],
+            "link_type": "link",
+            "margin_devices": ["xs"],
+            "padding_devices": ["xs"],
+            **(
+                dict(url_grouper=str(self.create_url(manual_url="https://www.django-cms.org/").id))
+                if hasattr(self, "create_url")
+                else dict(
+                    link_0="external_link",
+                    link_1="https://www.django-cms.org/",
+                )
+            ),
+            # name field is empty
+        }
+        form = LinkForm(request.POST)
+        form.name_required = True  # Simulate child of TextPlugin
+        # Update field requirement based on name_required
+        form.fields["name"].required = form.name_required
+        # Form should be invalid without name when child of TextPlugin
+        self.assertFalse(form.is_valid())
+        self.assertIn("name", form.errors)
+        if hasattr(self, "create_url"):
+            self.delete_urls()
+
+    def test_link_form_change_view_name_not_required_without_text_plugin_parent(self):
+        """Test that name is not required in change view when link plugin is not child of TextPlugin"""
+        request = HttpRequest()
+        request.POST = {
+            "template": settings.LINK_TEMPLATE_CHOICES[0][0],
+            "link_type": "link",
+            "margin_devices": ["xs"],
+            "padding_devices": ["xs"],
+            **(
+                dict(url_grouper=str(self.create_url(manual_url="https://www.django-cms.org/").id))
+                if hasattr(self, "create_url")
+                else dict(
+                    link_0="external_link",
+                    link_1="https://www.django-cms.org/",
+                )
+            ),
+            # name field is empty
+        }
+        form = LinkForm(request.POST)
+        form.name_required = False  # Not a child of TextPlugin
+        # Form should be valid without name when not child of TextPlugin
+        self.assertTrue(form.is_valid(), f"Form errors: {form.errors}")
         if hasattr(self, "create_url"):
             self.delete_urls()

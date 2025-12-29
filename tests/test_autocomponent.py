@@ -110,6 +110,7 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
     def test_cms_component_invalid_identifier(self):
         # Test that cms_component tag raises ValueError for invalid identifiers
         from django.template import Context
+
         from djangocms_frontend.templatetags.cms_component import cms_component
 
         context = Context({"_cms_components": {"cms_component": []}})
