@@ -36,8 +36,8 @@ def is_registering_component(context: template.Context) -> bool:
 
 
 def is_inline_editing_active(context: template.Context) -> bool:
-    if "request" in context:
-        return context["request"].session.get("inline_editing", True)
+    if (request := context.get("request")) and hasattr(request, "session"):
+        return request.session.get("inline_editing", True)
     return False
 
 
