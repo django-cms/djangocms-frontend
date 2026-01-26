@@ -64,9 +64,9 @@ Add the following code to the `hero.html` template::
 
     {# Declare component - template tags are evaluated at project startup and will render empty #}
     {% cms_component "Hero" name=_("My Hero Component") %}
-    {% field "title" forms.CharField required=True name=_("Title") %}
-    {% field "slogan" forms.CharField required=True name=_("Slogan") widget=forms.Textarea %}
-    {% field "hero_image" ImageFormField required=True name=_("Image") help_text=_("At least 1024px wide image") %}
+    {% field "title" forms.CharField required=True label=_("Title") %}
+    {% field "slogan" forms.CharField required=True label=_("Slogan") widget=forms.Textarea %}
+    {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("An image at least 1024px wide") %}
 
     {# Actual template - when rendering, declared fields are available in the context #}
     <section class="bg-white dark:bg-gray-900">
@@ -82,7 +82,7 @@ Add the following code to the `hero.html` template::
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
                 {# Get the related object of the image field which itself is just a dict #}
-                {% with image=instance.hero_image|get_related_object %}
+                {% with image=hero_image|get_related_object %}
                     <img src="{{ image.url }}" alt="{{ image.alt }}">
                 {% endwith %}
             </div>
