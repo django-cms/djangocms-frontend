@@ -4,8 +4,7 @@ try:
     import filer
 except ImportError:
     raise ImproperlyConfigured(
-        "Image fields require django-filer. "
-        "Install it using: pip install djangocms-frontend[filer]"
+        "Image fields require django-filer. Install it using: pip install djangocms-frontend[filer]"
     )
 
 from django.db.models import ManyToOneRel

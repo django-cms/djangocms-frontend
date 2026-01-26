@@ -4,8 +4,7 @@ try:
     import filer
 except ImportError:
     raise ImproperlyConfigured(
-        "Carousel plugin requires django-filer. "
-        "Install it using: pip install djangocms-frontend[filer]"
+        "Carousel plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
     )
 
 from django import forms

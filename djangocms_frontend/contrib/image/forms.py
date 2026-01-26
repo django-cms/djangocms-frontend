@@ -4,8 +4,7 @@ try:
     import filer
 except ImportError:
     raise ImproperlyConfigured(
-        "Image plugin requires django-filer. "
-        "Install it using: pip install djangocms-frontend[filer]"
+        "Image plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
     )
 
 from django import forms
