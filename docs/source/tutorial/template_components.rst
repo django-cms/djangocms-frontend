@@ -66,7 +66,7 @@ Add the following code to the `hero.html` template::
     {% cms_component "Hero" name=_("My Hero Component") %}
     {% field "title" forms.CharField required=True label=_("Title") %}
     {% field "slogan" forms.CharField required=True label=_("Slogan") widget=forms.Textarea %}
-    {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("At least 1024px wide image") %}
+    {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("An image at least 1024px wide") %}
 
     {# Actual template - when rendering, declared fields are available in the context #}
     <section class="bg-white dark:bg-gray-900">
