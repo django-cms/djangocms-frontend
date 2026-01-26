@@ -1,3 +1,13 @@
+from django.core.exceptions import ImproperlyConfigured
+
+try:
+    import filer
+except ImportError:
+    raise ImproperlyConfigured(
+        "Image fields require django-filer. "
+        "Install it using: pip install djangocms-frontend[filer]"
+    )
+
 from django.db.models import ManyToOneRel
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
