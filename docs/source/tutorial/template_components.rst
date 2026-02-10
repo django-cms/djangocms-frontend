@@ -120,7 +120,7 @@ The first part is the declarative part of the template:
     {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("At least 1024px wide image") %}
 
 It will render empty. During project startup, however, these tags are evaluated and used to create the ``CMSFrontendComponent`` class
-and the corresponding plugins class.
+and the corresponding plugin class.
 
 The named parameters are added to the ``CMSFrontendComponent``'s Meta class and end up as properties of the plugin itself. The
 following attributes are allowed:
