@@ -115,9 +115,9 @@ The first part is the declarative part of the template:
 
 .. code-block: django
     {% cms_component "Hero" name=_("My Hero Component") %}
-    {% field "title" forms.CharField required=True name=_("Title") %}
-    {% field "slogan" forms.CharField required=True name=_("Slogan") widget=forms.Textarea %}
-    {% field "hero_image" ImageFormField required=True name=_("Image") help_text=_("At least 1024px wide image") %}
+    {% field "title" forms.CharField required=True label=_("Title") %}
+    {% field "slogan" forms.CharField required=True label=_("Slogan") widget=forms.Textarea %}
+    {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("At least 1024px wide image") %}
 
 It will render empty. During project startup, however, these tags are evaluated and used to create the ``CMSFrontendComponent`` class
 and the corresponding plugins class.
@@ -142,9 +142,9 @@ Defining Fields
 
 .. code-block:: django
 
-    {% field "title" forms.CharField required=True name=_("Title") %}
-    {% field "slogan" forms.CharField required=True name=_("Slogan") widget=forms.Textarea %}
-    {% field "hero_image" ImageFormField required=True name=_("Image") help_text=_("At least 1024px wide image") %}
+    {% field "title" forms.CharField required=True label=_("Title") %}
+    {% field "slogan" forms.CharField required=True label=_("Slogan") widget=forms.Textarea %}
+    {% field "hero_image" ImageFormField required=True label=_("Image") help_text=_("At least 1024px wide image") %}
 
 Each ``{% field %}`` tag defines a form field that content editors can use when configuring the component in the CMS.
 The first parameter is the field name which is then available in the rest of the template. The second parameter is the
@@ -245,7 +245,7 @@ Additionally, ``split`` can be used to create tuples as needed for the ``choices
 ``forms.ChoiceField``. For example, if you want to create a choice field with two options, you can use the
 following code::
 
-    {% field "color" forms.ChoiceField choices=_("Red <red>|Green <green>|Default <blue>")|split name=_("Color") %}
+    {% field "color" forms.ChoiceField choices=_("Red <red>|Green <green>|Default <blue>")|split label=_("Color") %}
 
 The verbose choice label is appended by the actual value of the field between angle brackets (``<...>``).
 
