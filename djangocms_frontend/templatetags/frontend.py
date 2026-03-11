@@ -314,6 +314,18 @@ class RenderChildPluginsTag(Tag):
         return content
 
 
+@register.filter
+def get_slot(instance, slot_name):
+    """Get plugins for a specific slot directly from the instance. This is useful for rendering slots in a component's template,
+    e.g. with {% for plugin in instance|get_slot:"community" %}.
+    Usage: {% for plugin in instance|get_slot:"community" %} ... {% endfor %}
+    """
+    plugin_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
+    for plugin in instance.child_plugin_instances:
+        if plugin.plugin_type == plugin_type:
+            yield from plugin.child_plugin_instances
+
+
 class InlineField(CMSEditableObject):
     name = "inline_field"
     options = Options(
