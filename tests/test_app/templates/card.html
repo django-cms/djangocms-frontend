@@ -1,0 +1,10 @@
+{% load cms_tags %}
+<div class="card" style="background-color: {{ instance.background_color }}; color: {{ instance.text_color }};">
+    <div class="card-header">
+        <h3>{{ instance.title }}</h3>
+        {% if instance.subtitle %}<h5>{{ instance.subtitle }}</h5>{% endif %}
+    </div>
+    <div class="card-body">
+        {{ instance.body_text }}
+    </div>
+</div>
