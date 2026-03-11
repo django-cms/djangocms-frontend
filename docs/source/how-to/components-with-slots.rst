@@ -112,6 +112,8 @@ In your render template, use the ``{% childplugins %}`` template tag to render s
 
 The content between ``{% childplugins %}`` and ``{% endchildplugins %}`` serves as fallback content that will be displayed when the slot has no child plugins.
 
+For complete ``{% childplugins %}`` tag documentation, see the :ref:`reference documentation <Template tags>`.
+
 
 How slots work
 ==============
@@ -182,3 +184,56 @@ Template:
             {% endchildplugins %}
         </footer>
     </section>
+
+
+Advanced: Manual slot iteration with get_slot
+==============================================
+
+For more control over slot rendering, you can use the ``get_slot`` template filter to manually iterate over slot plugins:
+
+.. code-block:: django
+
+    {% load cms_tags frontend %}
+    
+    <section>
+        <div class="buttons-container">
+            {% for plugin in instance|get_slot:"buttons" %}
+                <div class="button-wrapper">
+                    {% render_plugin plugin %}
+                </div>
+            {% empty %}
+                <p>No buttons added yet</p>
+            {% endfor %}
+        </div>
+    </section>
+
+The ``get_slot`` filter takes the slot name as an argument and returns a generator of child plugins in that slot. This is useful when you need to:
+
+- Add custom wrapper HTML around each plugin in a slot
+- Apply specific classes or attributes to individual slot items
+- Implement complex layouts that require more control than ``{% childplugins %}`` provides
+- Handle empty slots with custom logic using ``{% empty %}``
+
+**Comparison:**
+
+Using ``{% childplugins %}`` (automatic rendering with fallback):
+
+.. code-block:: django
+
+    {% childplugins instance "buttons" %}
+        <button>Default Button</button>
+    {% endchildplugins %}
+
+Using ``get_slot`` filter (manual control):
+
+.. code-block:: django
+
+    {% for plugin in instance|get_slot:"buttons" %}
+        <div class="custom-wrapper">
+            {% render_plugin plugin %}
+        </div>
+    {% empty %}
+        <button>Default Button</button>
+    {% endfor %}
+
+See also :py:func:`~djangocms_frontend.templatetags.frontend.get_slot` in the reference documentation.
