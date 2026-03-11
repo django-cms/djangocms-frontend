@@ -3,6 +3,7 @@ from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_frontend.cms_plugins import (
     MyButtonPlugin,
+    MyCardWithFieldsetsPlugin,
     MyHeroPlugin,
     MyStrangeComponentPlugin,
 )
@@ -165,3 +166,50 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(MyStrangeComponentPlugin.name, "MyStrangeComponent")
         self.assertEqual(MyStrangeComponentPlugin.render_template, "djangocms_frontend/html_container.html")
         self.assertFalse(MyStrangeComponentPlugin.allow_children)
+
+    def test_component_with_custom_fieldsets(self):
+        """Test that components respect fieldsets provided in the Meta class"""
+        # Check that the plugin uses custom fieldsets
+        self.assertEqual(MyCardWithFieldsetsPlugin.name, "Card with Fieldsets")
+        
+        # Verify fieldsets are correctly set on the plugin
+        fieldsets = MyCardWithFieldsetsPlugin.fieldsets
+        
+        # Should have 3 fieldsets
+        self.assertEqual(len(fieldsets), 3)
+        
+        # First fieldset (None) should contain title and subtitle
+        self.assertIsNone(fieldsets[0][0])
+        self.assertIn("title", fieldsets[0][1]["fields"])
+        self.assertIn("subtitle", fieldsets[0][1]["fields"])
+        
+        # Second fieldset ("Content") should contain body_text
+        self.assertEqual(fieldsets[1][0], "Content")
+        self.assertIn("body_text", fieldsets[1][1]["fields"])
+        self.assertIn("collapse", fieldsets[1][1]["classes"])
+        
+        # Third fieldset ("Styling") should contain styling fields
+        self.assertEqual(fieldsets[2][0], "Styling")
+        self.assertIn("background_color", fieldsets[2][1]["fields"])
+        self.assertIn("text_color", fieldsets[2][1]["fields"])
+        self.assertIn("collapse", fieldsets[2][1]["classes"])
+        self.assertEqual(
+            fieldsets[2][1]["description"], 
+            "Customize the appearance of the card"
+        )
+        
+        # Test rendering with custom fieldsets
+        instance = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=MyCardWithFieldsetsPlugin.__name__,
+            language=self.language,
+        )
+        instance.initialize_from_form(MyCardWithFieldsetsPlugin.form).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Card Title", response.content.decode("utf-8"))
+        self.assertIn("Card body text", response.content.decode("utf-8"))

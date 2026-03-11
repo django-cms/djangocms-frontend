@@ -201,3 +201,8 @@ patterns = [
   '{{\s*[a-zA-Z0-9_.]+\.pk\s*}}',
   '{{\s*[a-zA-Z0-9_.]+\.id\s*}}',
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.test_settings"
+python_files = ["test_*.py", "*_test.py"]
+testpaths = ["tests"]

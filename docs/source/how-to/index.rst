@@ -13,6 +13,7 @@ step-by-step guidance.
    :maxdepth: 1
 
    use-frontend-as-component
+   components-with-slots
    inline-editing
    add-frontend-plugins
    extend-frontend-plugins

@@ -35,7 +35,7 @@ class classproperty:
 
 
 class Slot:
-    """Slat class as syntactic surgar to more easily define slot plugins"""
+    """Slot class as syntactic surgar to more easily define slot plugins"""
 
     def __init__(self, name, verbose_name, **kwargs):
         self.name = name
@@ -157,7 +157,7 @@ class CMSFrontendComponent(forms.Form):
                     "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
-                    "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
+                    "fieldsets": getattr(cls._component_meta, "fieldsets", cls._generate_fieldset()),
                     "change_form_template": "djangocms_frontend/admin/base.html",
                     "slots": slots,
                     "save_model": cls.save_model,

@@ -160,6 +160,105 @@ In this example, we add the Tailwind CSS CDN to the ``js`` block.
         {{ instance.slogan }} {{ slogan }}
 
 
+Using slots for structured content
+===================================
+
+Slots allow you to define specific regions within a component where content editors can add child plugins. 
+This is useful when you want to control the structure while allowing flexibility in certain areas.
+
+To define slots, add a ``slots`` attribute to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyHero(CMSFrontendComponent):
+        class Meta:
+            name = "My Hero Component"
+            render_template = "hero.html"
+            slots = (
+                ("title", "Title"),      # (slot_name, verbose_name)
+                ("slot", "Slot"),
+            )
+        
+        title = forms.CharField(required=True, initial="my title")
+        slogan = forms.CharField(required=True, widget=forms.Textarea)
+        image = ImageFormField(required=True)
+
+In your template, use the ``{% childplugins %}`` tag to render slot content with optional fallback:
+
+.. code-block:: django
+
+    {% load cms_tags %}
+    
+    <section>
+        <h1>
+            {% childplugins instance "title" %}
+                <!-- Fallback content if slot is empty -->
+                {{ instance.title }}
+            {% endchildplugins %}
+        </h1>
+        
+        {% childplugins instance "slot" %}
+            <!-- Default content for empty slots -->
+            <button>Get Started</button>
+        {% endchildplugins %}
+    </section>
+
+When you define slots:
+
+- Child plugin classes are created automatically (e.g., ``MyHeroTitlePlugin``, ``MyHeroSlotPlugin``)
+- Slot plugins can only be added as children of the parent component
+- Empty slots display the fallback content between the template tags
+- All slots are automatically created when a component instance is saved
+
+For more details and advanced usage, see :ref:`components-with-slots`.
+
+
+Organizing fields with fieldsets
+=================================
+
+For components with many fields, you can organize them into fieldsets to improve the editing experience.
+Fieldsets group related fields together and can be collapsed to keep the admin interface clean.
+
+To define fieldsets, add a ``fieldsets`` attribute to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyCard(CMSFrontendComponent):
+        class Meta:
+            name = "Card"
+            render_template = "card.html"
+            fieldsets = [
+                (None, {
+                    "fields": ("title", "subtitle")
+                }),
+                ("Content", {
+                    "fields": ("body_text",),
+                    "classes": ("collapse",)
+                }),
+                ("Styling", {
+                    "fields": ("background_color", "text_color"),
+                    "classes": ("collapse",),
+                    "description": "Customize the appearance of the card"
+                }),
+            ]
+        
+        # Basic fields
+        title = forms.CharField(required=True)
+        subtitle = forms.CharField(required=False)
+        
+        # Content fields
+        body_text = forms.CharField(required=False, widget=forms.Textarea)
+        
+        # Styling fields
+        background_color = forms.CharField(required=False)
+        text_color = forms.CharField(required=False)
+
+
+If you don't define ``fieldsets``, all fields will be shown in a single unnamed fieldset.
+
+
 
 Limitations of custom frontend components
 =========================================
