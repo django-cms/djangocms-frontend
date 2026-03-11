@@ -259,7 +259,6 @@ To define fieldsets, add a ``fieldsets`` attribute to the component's ``Meta`` c
 If you don't define ``fieldsets``, all fields will be shown in a single unnamed fieldset.
 
 
-
 Limitations of custom frontend components
 =========================================
 
