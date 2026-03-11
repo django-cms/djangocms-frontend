@@ -112,8 +112,6 @@ In your render template, use the ``{% childplugins %}`` template tag to render s
 
 The content between ``{% childplugins %}`` and ``{% endchildplugins %}`` serves as fallback content that will be displayed when the slot has no child plugins.
 
-For complete ``{% childplugins %}`` tag documentation, see the :ref:`reference documentation <Template tags>`.
-
 
 How slots work
 ==============
