@@ -158,7 +158,9 @@ class CMSFrontendComponent(forms.Form):
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
                     "fieldsets": getattr(cls._component_meta, "fieldsets", cls._generate_fieldset()),
-                    "change_form_template": "djangocms_frontend/admin/base.html",
+                    "change_form_template": getattr(
+                        cls._component_meta, "change_form_template", "djangocms_frontend/admin/base.html"
+                    ),
                     "slots": slots,
                     "save_model": cls.save_model,
                     **{
