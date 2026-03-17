@@ -99,6 +99,7 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
                 "name",
                 "template",
                 "link_type",
+                "target",
                 "link_context",
                 "link_size",
                 "link_outline",
@@ -116,6 +117,11 @@ class LinkForm(mixin_factory("Link"), SpacingFormMixin, TemplateChoiceMixin, Abs
         label=_("Display name"),
         required=False,
         widget=forms.TextInput(attrs={"class": "js-prepopulate-selected-text"}),
+    )
+    target = forms.ChoiceField(
+        label=_("Target"),
+        choices=settings.EMPTY_CHOICE + TARGET_CHOICES,
+        required=False,
     )
     template = forms.ChoiceField(
         label=_("Layout"),
