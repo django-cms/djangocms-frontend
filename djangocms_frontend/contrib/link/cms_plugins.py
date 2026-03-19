@@ -17,11 +17,11 @@ mixin_factory = settings.get_renderer(link)
 
 
 UILINK_FIELDS = (
-    ("name", "link_type", "target"),
-    ("site", "url_grouper") if apps.is_installed("djangocms_url_manager") else "link",
-    ("link_context", "link_size"),
-    ("link_outline", "link_block"),
-    "link_stretched",
+    ("name"),
+    (("site", "url_grouper") if apps.is_installed("djangocms_url_manager") else ("link",)) + ("target",),
+    ("link_type", "link_size"),
+    ("link_context"),
+    ("link_outline", "link_block", "link_stretched"),
 )
 
 UILINK_FIELDSET = [
