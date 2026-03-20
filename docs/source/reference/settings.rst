@@ -138,6 +138,13 @@ in your project's ``settings.py``.
 
     Link requires at least one file: ``link.html``.
 
+    The default template adds ``rel="noopener noreferrer"`` to links with
+    ``target="_blank"``, which is recommended for security and performance.
+    If you do not want this behaviour, provide a custom template (e.g. via
+    an additional entry in ``DJANGOCMS_FRONTEND_LINK_TEMPLATES`` and a
+    corresponding ``link.html`` in your project) and omit or adjust the
+    ``rel`` attribute there.
+
 
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_JUMBOTRON_TEMPLATES
 
