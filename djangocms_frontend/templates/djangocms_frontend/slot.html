@@ -1,1 +1,11 @@
 {% load frontend %}{% childplugins instance %}{% endchildplugins %}
+{% if request.toolbar.edit_mode_active %}
+    <style>
+        .cms-draggable-{{ instance.pk|safe }} > .cms-dragitem > .cms-dragitem-text {
+            color: var(--dca-gray);
+        }
+        .cms-draggable-{{ instance.pk|safe }} > .cms-dragitem > .cms-submenu-edit {
+            display: none;
+        }
+    </style>
+{% endif %}
