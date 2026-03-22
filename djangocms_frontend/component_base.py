@@ -204,6 +204,7 @@ class CMSFrontendComponent(forms.Form):
                     "allow_children": True,
                     "edit_disabled": True,
                     "is_local": False,
+                    "is_slot": True,
                     "show_add_form": False,
                     "parent_classes": [cls.__name__ + "Plugin"],
                     "render_template": cls.slot_template,
