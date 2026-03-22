@@ -160,6 +160,182 @@ In this example, we add the Tailwind CSS CDN to the ``js`` block.
         {{ instance.slogan }} {{ slogan }}
 
 
+Using slots for structured content
+===================================
+
+Slots allow you to define specific regions within a component where content editors can add child plugins. 
+This is useful when you want to control the structure while allowing flexibility in certain areas.
+
+To define slots, add a ``slots`` attribute to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyHero(CMSFrontendComponent):
+        class Meta:
+            name = "My Hero Component"
+            render_template = "hero.html"
+            slots = (
+                ("title", "Title"),      # (slot_name, verbose_name)
+                ("slot", "Slot"),
+            )
+        
+        title = forms.CharField(required=True, initial="my title")
+        slogan = forms.CharField(required=True, widget=forms.Textarea)
+        image = ImageFormField(required=True)
+
+In your template, use the ``{% childplugins %}`` tag to render slot content with optional fallback:
+
+.. code-block:: django
+
+    {% load cms_tags %}
+    
+    <section>
+        <h1>
+            {% childplugins instance "title" %}
+                <!-- Fallback content if slot is empty -->
+                {{ instance.title }}
+            {% endchildplugins %}
+        </h1>
+        
+        {% childplugins instance "slot" %}
+            <!-- Default content for empty slots -->
+            <button>Get Started</button>
+        {% endchildplugins %}
+    </section>
+
+When you define slots:
+
+- Child plugin classes are created automatically (e.g., ``MyHeroTitlePlugin``, ``MyHeroSlotPlugin``)
+- Slot plugins can only be added as children of the parent component
+- Empty slots display the fallback content between the template tags
+- All slots are automatically created when a component instance is saved
+
+For more details and advanced usage, see :ref:`components-with-slots`.
+
+
+Organizing fields with fieldsets
+=================================
+
+For components with many fields, you can organize them into fieldsets to improve the editing experience.
+Fieldsets group related fields together and can be collapsed to keep the admin interface clean.
+
+To define fieldsets, add a ``fieldsets`` attribute to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyCard(CMSFrontendComponent):
+        class Meta:
+            name = "Card"
+            render_template = "card.html"
+            fieldsets = [
+                (None, {
+                    "fields": ("title", "subtitle")
+                }),
+                ("Content", {
+                    "fields": ("body_text",),
+                    "classes": ("collapse",)
+                }),
+                ("Styling", {
+                    "fields": ("background_color", "text_color"),
+                    "classes": ("collapse",),
+                    "description": "Customize the appearance of the card"
+                }),
+            ]
+        
+        # Basic fields
+        title = forms.CharField(required=True)
+        subtitle = forms.CharField(required=False)
+        
+        # Content fields
+        body_text = forms.CharField(required=False, widget=forms.Textarea)
+        
+        # Styling fields
+        background_color = forms.CharField(required=False)
+        text_color = forms.CharField(required=False)
+
+
+If you don't define ``fieldsets``, all fields will be shown in a single unnamed fieldset.
+
+
+Setting default field values
+============================
+
+When a new component instance is created, its fields are initialized with
+the ``initial`` values declared on each form field. You can override these
+defaults on a per-component basis by adding a ``default_config`` dictionary
+to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyCard(CMSFrontendComponent):
+        class Meta:
+            name = "Card"
+            render_template = "card.html"
+            default_config = {
+                "background_color": "#f8f9fa",
+                "text_color": "#212529",
+            }
+
+        title = forms.CharField(required=True)
+        background_color = forms.CharField(required=False, initial="#ffffff")
+        text_color = forms.CharField(required=False, initial="#000000")
+
+In this example, new Card instances will start with ``background_color``
+set to ``#f8f9fa`` instead of the form field's ``initial`` value of
+``#ffffff``. Editors can still change the value in the plugin form.
+
+This is especially useful for fields that come from mixins, such as
+``Background``, ``Spacing``, ``Responsive``, or ``Sizing``. Since mixin
+fields are defined elsewhere, you cannot change their ``initial`` values
+in your component class. ``default_config`` lets you set sensible defaults
+for these fields without having to redefine them:
+
+.. code-block:: python
+
+    @components.register
+    class MySection(CMSFrontendComponent):
+        class Meta:
+            name = "Section"
+            render_template = "section.html"
+            mixins = ["Background", "Spacing"]
+            default_config = {
+                "background_context": "light",
+                "padding_y": "py-5",
+                "margin_y": "my-3",
+            }
+
+        heading = forms.CharField(required=True)
+
+Here, the ``background_context``, ``padding_y``, and ``margin_y`` fields
+are all contributed by the ``Background`` and ``Spacing`` mixins. Without
+``default_config``, they would start empty.
+
+Defaults are applied in the following priority order (highest wins):
+
+1. **Form field** ``initial`` **values** — the built-in baseline.
+2. **Meta** ``default_config`` — component-level overrides set by
+   the developer.
+3. **The** :py:attr:`~settings.DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`
+   **setting** — project-level overrides set by the site administrator.
+
+This means a site administrator can always fine-tune defaults via the
+Django setting without modifying component code:
+
+.. code-block:: python
+
+    # settings.py
+    DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS = {
+        "MyCard": {
+            "background_color": "#ffffff",
+        },
+    }
+
+For more details on the setting, see
+:py:attr:`~settings.DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`.
+
 
 Limitations of custom frontend components
 =========================================

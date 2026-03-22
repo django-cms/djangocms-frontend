@@ -27,6 +27,7 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=TabPlugin.__name__,
             language=self.language,
+            config=dict(tab_type="nav-tabs"),
         ).initialize_from_form(TabForm)
         parent.save()
         add_plugin(
@@ -34,7 +35,7 @@ class TabsPluginTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=TabItemPlugin.__name__,
             language=self.language,
-            config=dict(tab_title="tab title"),
+            config=dict(tab_title="tab title", tab_bordered=True),
         ).initialize_from_form(TabItemForm).save()
         self.publish(self.page, self.language)
 
