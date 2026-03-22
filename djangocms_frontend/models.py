@@ -6,7 +6,7 @@ from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import TagTypeField
-from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO
+from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -95,7 +95,10 @@ class AbstractFrontendUIItem(CMSPlugin):
         return super().save(*args, **kwargs)
 
     def initialize_from_form(self, form=None):
-        """Populates the config JSON field based on initial values provided by the fields of form"""
+        """Populates the config JSON field based on initial values provided by the fields of form.
+        After setting form defaults, applies per-model defaults from the model's ``default_config``
+        class attribute (if any), then from the ``DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`` setting
+        (keyed by model class name). Setting-based defaults take highest priority."""
         if form is None:
             form = self.get_plugin_class().form
         if isinstance(form, type):  # if is class
@@ -105,6 +108,12 @@ class AbstractFrontendUIItem(CMSPlugin):
         entangled_fields = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:
             self.config.setdefault(field, {} if field == "attributes" else form[field].initial or "")
+        # Apply model-level defaults (override form defaults)
+        for key, value in getattr(self, "default_config", {}).items():
+            self.config[key] = value
+        # Apply settings-level defaults (highest priority)
+        for key, value in PLUGIN_DEFAULTS.get(self.__class__.__name__, {}).items():
+            self.config[key] = value
         return self
 
     def get_short_description(self):

@@ -50,6 +50,22 @@ class MyStrangeComponent(CMSFrontendComponent):
 
 
 @components.register
+class MyDefaultsComponent(CMSFrontendComponent):
+    class Meta:
+        name = "Defaults Test"
+        render_template = "hero.html"
+        allow_children = False
+        default_config = {
+            "title": "Default Title",
+            "color": "primary",
+        }
+
+    title = forms.CharField(required=False, initial="Form Title")
+    color = forms.CharField(required=False, initial="secondary")
+    extra = forms.CharField(required=False, initial="form-extra")
+
+
+@components.register
 class MyCardWithFieldsets(CMSFrontendComponent):
     class Meta:
         name = "Card with Fieldsets"
