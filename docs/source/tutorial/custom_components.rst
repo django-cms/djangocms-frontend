@@ -259,6 +259,84 @@ To define fieldsets, add a ``fieldsets`` attribute to the component's ``Meta`` c
 If you don't define ``fieldsets``, all fields will be shown in a single unnamed fieldset.
 
 
+Setting default field values
+============================
+
+When a new component instance is created, its fields are initialized with
+the ``initial`` values declared on each form field. You can override these
+defaults on a per-component basis by adding a ``default_config`` dictionary
+to the component's ``Meta`` class:
+
+.. code-block:: python
+
+    @components.register
+    class MyCard(CMSFrontendComponent):
+        class Meta:
+            name = "Card"
+            render_template = "card.html"
+            default_config = {
+                "background_color": "#f8f9fa",
+                "text_color": "#212529",
+            }
+
+        title = forms.CharField(required=True)
+        background_color = forms.CharField(required=False, initial="#ffffff")
+        text_color = forms.CharField(required=False, initial="#000000")
+
+In this example, new Card instances will start with ``background_color``
+set to ``#f8f9fa`` instead of the form field's ``initial`` value of
+``#ffffff``. Editors can still change the value in the plugin form.
+
+This is especially useful for fields that come from mixins, such as
+``Background``, ``Spacing``, ``Responsive``, or ``Sizing``. Since mixin
+fields are defined elsewhere, you cannot change their ``initial`` values
+in your component class. ``default_config`` lets you set sensible defaults
+for these fields without having to redefine them:
+
+.. code-block:: python
+
+    @components.register
+    class MySection(CMSFrontendComponent):
+        class Meta:
+            name = "Section"
+            render_template = "section.html"
+            mixins = ["Background", "Spacing"]
+            default_config = {
+                "background_context": "light",
+                "padding_y": "py-5",
+                "margin_y": "my-3",
+            }
+
+        heading = forms.CharField(required=True)
+
+Here, the ``background_context``, ``padding_y``, and ``margin_y`` fields
+are all contributed by the ``Background`` and ``Spacing`` mixins. Without
+``default_config``, they would start empty.
+
+Defaults are applied in the following priority order (highest wins):
+
+1. **Form field** ``initial`` **values** — the built-in baseline.
+2. **Meta** ``default_config`` — component-level overrides set by
+   the developer.
+3. **The** :py:attr:`~settings.DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`
+   **setting** — project-level overrides set by the site administrator.
+
+This means a site administrator can always fine-tune defaults via the
+Django setting without modifying component code:
+
+.. code-block:: python
+
+    # settings.py
+    DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS = {
+        "MyCard": {
+            "background_color": "#ffffff",
+        },
+    }
+
+For more details on the setting, see
+:py:attr:`~settings.DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`.
+
+
 Limitations of custom frontend components
 =========================================
 
