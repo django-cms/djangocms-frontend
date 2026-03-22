@@ -4,7 +4,7 @@ from cms.models import CMSPlugin
 from django import forms
 from django.apps import apps
 from django.utils.encoding import force_str
-from django.utils.html import mark_safe
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
@@ -50,7 +50,7 @@ class SlotModel(CMSPlugin):
         proxy = True
 
     def get_short_description(self):
-        return mark_safe(f"<b>{_('Slot')}</b>")
+        return format_html("<b>{}</b>", _("Slot"))
 
 
 class CMSFrontendComponent(forms.Form):
