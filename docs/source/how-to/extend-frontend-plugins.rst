@@ -316,6 +316,114 @@ to its basic functionality, i.e. the background images will not be
 shown. As long as plugins are not edited the background image
 information will be preserved.
 
+.. index::
+    single: Plugin defaults
+    single: Default configuration
+
+.. _plugin-defaults:
+
+Configuring plugin defaults
+===========================
+
+When new plugin instances are created — either by an editor or automatically
+as child plugins — their configuration fields start with default values.
+``djangocms-frontend`` provides a three-level hierarchy for controlling
+these defaults, where each level overrides the previous one:
+
+1. **Form field initials** (lowest priority) — the ``initial`` parameter on
+   each form field. These are the built-in defaults shipped with
+   ``djangocms-frontend``.
+
+2. **Model ``default_config`` attribute** — a dictionary on the plugin's model
+   class. Use this when writing a theme or custom app to set sensible
+   defaults in code.
+
+3. **The** ``DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`` **setting** (highest
+   priority) — a project-level Django setting that lets site administrators
+   override defaults without touching any code.
+
+Editors can always change the values in the plugin form regardless of the
+defaults.
+
+Using ``DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS``
+--------------------------------------------
+
+Add a dictionary to your project's ``settings.py`` keyed by plugin model
+class name. The inner dictionaries map config field names to their default
+values:
+
+.. code:: python
+
+    DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS = {
+        "GridContainer": {
+            "padding_y": "py-5",
+        },
+        "GridColumn": {
+            "padding_x": "px-3",
+        },
+        "Alert": {
+            "alert_context": "info",
+        },
+    }
+
+The keys (e.g. ``"GridContainer"``, ``"Alert"``) are the proxy model class
+names defined in ``djangocms_frontend.contrib.*.models``. The field names
+(e.g. ``"padding_y"``, ``"alert_context"``) correspond to the entangled form
+field names — these are the same names visible in the plugin's admin form.
+
+For spacing fields the value format is ``"<property><side>-<size>"``, e.g.
+``"py-5"`` for vertical padding of size 5, or ``"mx-3"`` for horizontal
+margin of size 3.
+
+Using ``default_config`` on the model
+-------------------------------------
+
+When building a theme app or custom plugin, you can declare defaults
+directly on the model class:
+
+.. code:: python
+
+    from djangocms_frontend.models import FrontendUIItem
+
+    class GridContainer(FrontendUIItem):
+        default_config = {
+            "padding_y": "py-3",
+        }
+
+        class Meta:
+            proxy = True
+
+These defaults override form field initials but are themselves overridden
+by ``DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS``. This makes ``default_config``
+useful for shipping opinionated defaults with a theme while still allowing
+site administrators to adjust them via the setting.
+
+.. tip::
+
+    Theme authors who do not define their own proxy models can set or update
+    ``default_config`` on existing models in their theme app's ``ready()``
+    method:
+
+    .. code:: python
+
+        # theme/apps.py
+        from django.apps import AppConfig
+
+
+        class ThemeConfig(AppConfig):
+            name = "theme"
+
+            def ready(self):
+                from djangocms_frontend.contrib.grid.models import GridContainer
+
+                GridContainer.default_config = {
+                    "padding_y": "py-3",
+                    "container_type": "container-fluid",
+                }
+
+    This approach works well when a theme wants to provide defaults for
+    built-in plugins without subclassing them.
+
 .. note::
 
     A few suggestions on extending ``djangocms-frontend``:

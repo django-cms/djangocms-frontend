@@ -366,6 +366,42 @@ in your project's ``settings.py``.
 
     This lost of options define the icon size choices a user can select. The values (first tuple element) are css units for the ``font-size`` css property. Besides relative units (``%``) any css unit can be used, e.g. ``112pt``.
 
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS
+
+    Default: ``{}``
+
+    A dictionary of plugin model class names to default configuration values.
+    These defaults are applied when a new plugin instance is created (e.g. when
+    a plugin auto-creates child plugins). They override the form field defaults
+    but can still be changed by editors in the plugin form.
+
+    The keys of the inner dictionary correspond to the form field names (which
+    map to keys in the plugin's ``config`` JSON field). The values use the
+    same format as the form field's compressed value.
+
+    Example: to give all Container plugins a default vertical padding of 5 and
+    all Column plugins a default horizontal padding of 3::
+
+        DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS = {
+            "GridContainer": {
+                "padding_y": "py-5",
+            },
+            "GridColumn": {
+                "padding_x": "px-3",
+            },
+        }
+
+    Plugin model class names correspond to the proxy model names defined in
+    ``djangocms_frontend.contrib.*.models`` (e.g. ``GridContainer``,
+    ``GridRow``, ``GridColumn``, ``Card``, ``CardLayout``, ``Alert``, etc.).
+
+    .. note::
+
+        Plugin models can also declare a ``default_config`` class attribute
+        (a dictionary with the same format) to provide code-level defaults.
+        The priority order is: form field initials (lowest) < model
+        ``default_config`` < ``DJANGOCMS_FRONTEND_PLUGIN_DEFAULTS`` (highest).
+
 .. py:attribute:: settings.DJANGOCMS_FRONTEND_SHOW_EMPTY_CHILDREN
 
     Default: ``False``
