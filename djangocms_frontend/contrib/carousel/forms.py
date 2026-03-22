@@ -1,3 +1,12 @@
+from django.core.exceptions import ImproperlyConfigured
+
+try:
+    import filer
+except ImportError:
+    raise ImproperlyConfigured(
+        "Carousel plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
+    )
+
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _

@@ -36,8 +36,8 @@ def is_registering_component(context: template.Context) -> bool:
 
 
 def is_inline_editing_active(context: template.Context) -> bool:
-    if "request" in context:
-        return context["request"].session.get("inline_editing", True)
+    if (request := context.get("request")) and hasattr(request, "session"):
+        return request.session.get("inline_editing", True)
     return False
 
 
@@ -312,6 +312,18 @@ class RenderChildPluginsTag(Tag):
 
         context.pop()
         return content
+
+
+@register.filter
+def get_slot(instance, slot_name):
+    """Get plugins for a specific slot directly from the instance. This is useful for rendering slots in a component's template,
+    e.g. with {% for plugin in instance|get_slot:"community" %}.
+    Usage: {% for plugin in instance|get_slot:"community" %} ... {% endfor %}
+    """
+    plugin_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
+    for plugin in instance.child_plugin_instances:
+        if plugin.plugin_type == plugin_type:
+            yield from plugin.child_plugin_instances
 
 
 class InlineField(CMSEditableObject):

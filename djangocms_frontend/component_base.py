@@ -37,7 +37,7 @@ class classproperty:
 
 
 class Slot:
-    """Slat class as syntactic surgar to more easily define slot plugins"""
+    """Slot class as syntactic surgar to more easily define slot plugins"""
 
     def __init__(self, name, verbose_name, **kwargs):
         self.name = name
@@ -120,26 +120,30 @@ class CMSFrontendComponent(forms.Form):
             app_config = apps.get_containing_app_config(cls.__module__)
             if app_config is None:  # pragma: no cover
                 raise ValueError(f"Cannot find app_config for {cls.__module__}")
+            model_attrs = {
+                "Meta": type(
+                    "Meta",
+                    (),
+                    {
+                        "app_label": app_config.label,
+                        "proxy": True,
+                        "managed": False,
+                        "verbose_name": getattr(cls._component_meta, "name", cls.__name__),
+                    },
+                ),
+                "get_short_description": cls.get_short_description,
+                "__module__": cls.__module__,
+            }
+            default_config = getattr(cls._component_meta, "default_config", None)
+            if default_config:
+                model_attrs["default_config"] = default_config
             cls._model = type(
                 cls.__name__,
                 (
                     *cls._model_mixins,
                     FrontendUIItem,
                 ),
-                {
-                    "Meta": type(
-                        "Meta",
-                        (),
-                        {
-                            "app_label": app_config.label,
-                            "proxy": True,
-                            "managed": False,
-                            "verbose_name": getattr(cls._component_meta, "name", cls.__name__),
-                        },
-                    ),
-                    "get_short_description": cls.get_short_description,
-                    "__module__": cls.__module__,
-                },
+                model_attrs,
             )
         return cls._model
 
@@ -167,8 +171,10 @@ class CMSFrontendComponent(forms.Form):
                     "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
                     "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
-                    "fieldsets": getattr(cls, "fieldsets", cls._generate_fieldset()),
-                    "change_form_template": "djangocms_frontend/admin/base.html",
+                    "fieldsets": getattr(cls._component_meta, "fieldsets", cls._generate_fieldset()),
+                    "change_form_template": getattr(
+                        cls._component_meta, "change_form_template", "djangocms_frontend/admin/base.html"
+                    ),
                     "slots": slots,
                     "save_model": cls.save_model,
                     **{

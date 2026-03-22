@@ -2,6 +2,22 @@
 Changelog
 =========
 
+2.3.1 (2026-03-12)
+==================
+
+* feat: Add get_slot template filter by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/349
+* fix: fieldsets in component meta by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/348
+* fix: Do not require session object by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/338
+* fix(frontend): fail gracefully when django-filer is missing by @kunaly111 in https://github.com/django-cms/djangocms-frontend/pull/340
+* docs: Update field attributes in template components tutorial by @creimers in https://github.com/django-cms/djangocms-frontend/pull/341
+* docs: Fix more examples in the docs by @creimers in https://github.com/django-cms/djangocms-frontend/pull/344
+* docs: Update reference by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/350
+
+**New Contributors**
+
+* @kunaly111 made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/340
+* @creimers made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/341
+
 2.3.0 (2025-12-29)
 ==================
 

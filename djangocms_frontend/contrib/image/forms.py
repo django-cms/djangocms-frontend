@@ -1,3 +1,12 @@
+from django.core.exceptions import ImproperlyConfigured
+
+try:
+    import filer
+except ImportError:
+    raise ImproperlyConfigured(
+        "Image plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
+    )
+
 from django import forms
 from django.conf import settings as django_settings
 from django.db.models.fields.related import ManyToOneRel

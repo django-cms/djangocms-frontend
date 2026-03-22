@@ -73,7 +73,7 @@ Contents
    tutorial/index
    plugins/index
    how-to/index
-   reference
+   reference/index
 
 .. toctree::
    :hidden:

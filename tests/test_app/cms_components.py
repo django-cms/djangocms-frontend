@@ -47,3 +47,53 @@ class MyButton(CMSFrontendComponent):
 @components.register
 class MyStrangeComponent(CMSFrontendComponent):
     text = forms.CharField(required=True, initial="Message")
+
+
+@components.register
+class MyDefaultsComponent(CMSFrontendComponent):
+    class Meta:
+        name = "Defaults Test"
+        render_template = "hero.html"
+        allow_children = False
+        default_config = {
+            "title": "Default Title",
+            "color": "primary",
+        }
+
+    title = forms.CharField(required=False, initial="Form Title")
+    color = forms.CharField(required=False, initial="secondary")
+    extra = forms.CharField(required=False, initial="form-extra")
+
+
+@components.register
+class MyCardWithFieldsets(CMSFrontendComponent):
+    class Meta:
+        name = "Card with Fieldsets"
+        render_template = "card.html"
+        allow_children = False
+        fieldsets = [
+            (None, {"fields": ("title", "subtitle")}),
+            ("Content", {"fields": ("body_text",), "classes": ("collapse",)}),
+            (
+                "Styling",
+                {
+                    "fields": ("background_color", "text_color"),
+                    "classes": ("collapse",),
+                    "description": "Customize the appearance of the card",
+                },
+            ),
+        ]
+
+    # Basic fields
+    title = forms.CharField(required=True, initial="Card Title")
+    subtitle = forms.CharField(required=False, initial="")
+
+    # Content fields
+    body_text = forms.CharField(required=False, widget=forms.Textarea, initial="Card body text")
+
+    # Styling fields
+    background_color = forms.CharField(required=False, initial="#ffffff")
+    text_color = forms.CharField(required=False, initial="#000000")
+
+    def get_short_description(self):
+        return self.title
