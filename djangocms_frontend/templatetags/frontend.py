@@ -23,6 +23,7 @@ from djangocms_frontend import settings
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
 from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.plugin_tag import get_template, patch_template
 
 register = template.Library()
 
@@ -244,7 +245,10 @@ class Plugin(AsTag):
             nodelist, context["instance"].plugin_type
         ).get_instances()
         # ... and render
-        result = plugin_tag_pool[name]["template"].render(context.flatten())
+        template_name = plugin_class()._get_render_template(context, context["instance"], None)
+        if template_name not in plugin_tag_pool[name]["templates"]:
+            plugin_tag_pool[name]["templates"][template_name] = patch_template(get_template(template_name))
+        result = plugin_tag_pool[name]["templates"][template_name].render(context.flatten())
         context.pop()
         return result
 

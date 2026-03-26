@@ -160,6 +160,7 @@ exclude = [
 
 [tool.pytest]
 ini_options.DJANGO_SETTINGS_MODULE = "tests.test_settings"
+ini_options.pythonpath = [ "." ]
 ini_options.python_files = [ "test_*.py", "*_test.py" ]
 ini_options.testpaths = [ "tests" ]
 
