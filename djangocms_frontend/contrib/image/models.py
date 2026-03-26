@@ -112,7 +112,6 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     @cached_property
     def img_src(self):
-        picture_options = self.get_size()
         # we want the external image to take priority by design
         # please open a ticket if you disagree for an open discussion
         if self.external_picture:
@@ -123,9 +122,12 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
             return ""
         # skip image processing when there's no width or height defined,
         # or when legacy use_no_cropping flag is present
-        elif getattr(self, "use_no_cropping", None) or not (self.width or self.height or getattr(self, "thumbnail_options"):
+        elif getattr(self, "use_no_cropping", None) or not (
+            self.width or self.height or getattr(self, "thumbnail_options")
+        ):
             return self.rel_image.url if self.rel_image else ""
 
+        picture_options = self.get_size()
         thumbnail_options = {
             "size": picture_options["size"],
             "crop": picture_options["crop"],
