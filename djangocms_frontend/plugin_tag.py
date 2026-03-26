@@ -89,13 +89,14 @@ def setup():
             if hasattr(instance, "initialize_from_form"):
                 instance.initialize_from_form(plugin.form)
             if tag_name not in plugin_tag_pool:
-                template = get_template(plugin_admin._get_render_template({"request": None}, instance, None))
+                template_name = plugin_admin._get_render_template({"request": None}, instance, None)
+                template = get_template(template_name)
                 plugin_tag_pool[tag_name] = {
                     "defaults": {
                         **_get_plugindefaults(instance),
                         **dict(plugin_type=plugin.__name__),
                     },
-                    "template": patch_template(template),
+                    "templates": {template_name: patch_template(template)},
                     "class": plugin,
                 }
             else:  # pragma: no cover
