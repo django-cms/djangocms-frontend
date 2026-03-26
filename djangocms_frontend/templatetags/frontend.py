@@ -4,8 +4,9 @@ import uuid
 
 from classytags.arguments import Argument, MultiKeywordArgument
 from classytags.core import Options, Tag
-from classytags.helpers import AsTag
-from cms.models import CMSPlugin
+from classytags.helpers import AsTag, flatten_context
+from cms.models import CMSPlugin, get_cms_setting
+from cms.plugin_rendering import PluginContext
 from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
 from django import template
 from django.conf import settings as django_settings
@@ -17,6 +18,7 @@ from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
 from django.utils.html import conditional_escape, mark_safe
+from django.utils.module_loading import import_string
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
@@ -179,6 +181,7 @@ class DummyPlugin:
         self.plugin_type = (f"{plugin_type}{slot_name.capitalize()}Plugin") if slot_name else "DummyPlugin"
         if slot_name is None:
             self.parse_slots(nodelist, plugin_type)
+        self.pk = None
         super().__init__()
 
     def parse_slots(self, nodelist, plugin_type):
@@ -215,14 +218,13 @@ class Plugin(AsTag):
                 f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
                 f"the CMS_COMPONENT_PLUGINS setting"
             )
-        context.push()
-        instance = plugin_tag_pool[name]["defaults"]
-        plugin_class = plugin_tag_pool[name]["class"]
+        field_values = plugin_tag_pool[name]["defaults"]
+        plugin = plugin_tag_pool[name]["class"]()
 
-        if issubclass(plugin_class.form, EntangledModelFormMixin):
+        if issubclass(plugin.form, EntangledModelFormMixin):
             # Handle entangled forms such as djangocms-frontend's correctly
             for field, value in kwargs.items():
-                for container, fields in plugin_class.form._meta.entangled_fields.items():
+                for container, fields in plugin.form._meta.entangled_fields.items():
                     if field in fields:
                         if isinstance(value, models.Model):
                             # Correctly encode references
@@ -230,27 +232,35 @@ class Plugin(AsTag):
                                 "model": f"{value._meta.app_label}.{value._meta.model_name}",
                                 "pk": value.pk,
                             }
-                        instance[container][field] = value
+                        field_values[container][field] = value
                         break
                 else:
-                    instance[field] = value
+                    field_values[field] = value
         else:
-            instance.update(kwargs)
+            field_values.update(kwargs)
         # Create context
-        context["instance"] = plugin_class.model(**instance)
-        # Call render method of plugin
-        context = plugin_class().render(context, context["instance"], None)
+        instance = plugin.model(**field_values)
         # Replace inner plugins with the nodelist, i.e. the content within the plugin tag
-        context["instance"].child_plugin_instances = DummyPlugin(
-            nodelist, context["instance"].plugin_type
-        ).get_instances()
-        # ... and render
-        template_name = plugin_class()._get_render_template(context, context["instance"], None)
+        instance.child_plugin_instances = DummyPlugin(nodelist, instance.plugin_type).get_instances()
+        # ... and render (see cms.plugin_rendering.ContentRenderer)
+        template_name = plugin._get_render_template(context, instance, None)
         if template_name not in plugin_tag_pool[name]["templates"]:
             plugin_tag_pool[name]["templates"][template_name] = patch_template(get_template(template_name))
-        result = plugin_tag_pool[name]["templates"][template_name].render(context.flatten())
-        context.pop()
-        return result
+
+        context = PluginContext(context, instance, None)
+        context = plugin.render(context, instance, "slot")
+        context = flatten_context(context)
+        template_name = plugin._get_render_template(context, instance, None)
+        if template_name not in plugin_tag_pool[name]["templates"]:
+            plugin_tag_pool[name]["templates"][template_name] = patch_template(get_template(template_name))
+        template = plugin_tag_pool[name]["templates"][template_name]
+        content = template.render(context)
+
+        for path in get_cms_setting("PLUGIN_PROCESSORS"):
+            processor = import_string(path)
+            content = processor(instance, None, content, context)
+
+        return content
 
 
 class RenderChildPluginsTag(Tag):
