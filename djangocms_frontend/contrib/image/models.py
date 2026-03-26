@@ -112,10 +112,7 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     @cached_property
     def img_src(self):
-        picture_options = self.get_size(
-            width=self.width or 0,
-            height=self.height or 0,
-        )
+        picture_options = self.get_size()
         # we want the external image to take priority by design
         # please open a ticket if you disagree for an open discussion
         if self.external_picture:
