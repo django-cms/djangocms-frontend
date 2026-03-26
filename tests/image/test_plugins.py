@@ -1,6 +1,7 @@
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.http import HttpRequest
+from filer.models import ThumbnailOption
 
 from djangocms_frontend.contrib.image.cms_plugins import ImagePlugin
 from djangocms_frontend.contrib.image.forms import ImageForm, get_templates
@@ -102,6 +103,32 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '/test_file.jpg"')
+
+    def test_img_processing_with_thumbnail_options(self):
+        thumbnail_options = ThumbnailOption.objects.create(
+            name="test preset",
+            width=120,
+            height=90,
+            crop=True,
+            upscale=True,
+        )
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={
+                "picture": {"pk": self.image.id, "model": "filer.Image"},
+                "thumbnail_options": {"pk": thumbnail_options.pk, "model": "filer.ThumbnailOption"},
+            },
+        )
+        plugin.initialize_from_form(ImageForm)
+        plugin.save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "/test_file.jpg__120x90")
 
         # Original image also used if legacy use_no_cropping flag is present,
         # even when there is widht and height
