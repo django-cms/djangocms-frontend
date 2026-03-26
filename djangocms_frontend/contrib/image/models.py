@@ -123,7 +123,7 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
             return ""
         # skip image processing when there's no width or height defined,
         # or when legacy use_no_cropping flag is present
-        elif getattr(self, "use_no_cropping", None) or not (picture_options["size"][0] or picture_options["size"][1]):
+        elif getattr(self, "use_no_cropping", None) or not (self.width or self.height or getattr(self, "thumbnail_options"):
             return self.rel_image.url if self.rel_image else ""
 
         thumbnail_options = {
