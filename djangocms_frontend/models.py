@@ -1,7 +1,8 @@
 from cms.models import CMSPlugin
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.utils.html import conditional_escape, mark_safe
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
@@ -46,7 +47,7 @@ class AbstractFrontendUIItem(CMSPlugin):
 
     def __init__(self, *args, **kwargs):
         self._additional_classes = []
-        self.html_id = None  # HTML id attribute will be set in template tag set_html_id.
+        self.html_id: str | None = None  # HTML id attribute will be set in template tag set_html_id.
         super().__init__(*args, **kwargs)
 
     def __getattr__(self, item):

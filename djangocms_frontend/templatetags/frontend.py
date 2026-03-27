@@ -17,15 +17,16 @@ from django.http import HttpRequest
 from django.template.defaultfilters import safe
 from django.utils.encoding import force_str
 from django.utils.functional import Promise
-from django.utils.html import conditional_escape, mark_safe
+from django.utils.html import conditional_escape
 from django.utils.module_loading import import_string
+from django.utils.safestring import mark_safe
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
 from djangocms_frontend.models import FrontendUIItem
-from djangocms_frontend.plugin_tag import get_template, patch_template
+from djangocms_frontend.plugin_tag import patched_template
 
 register = template.Library()
 
@@ -243,16 +244,12 @@ class Plugin(AsTag):
         # Replace inner plugins with the nodelist, i.e. the content within the plugin tag
         instance.child_plugin_instances = DummyPlugin(nodelist, instance.plugin_type).get_instances()
         # ... and render (see cms.plugin_rendering.ContentRenderer)
-        template_name = plugin._get_render_template(context, instance, None)
-        if template_name not in plugin_tag_pool[name]["templates"]:
-            plugin_tag_pool[name]["templates"][template_name] = patch_template(get_template(template_name))
-
         context = PluginContext(context, instance, None)
         context = plugin.render(context, instance, "slot")
         context = flatten_context(context)
         template_name = plugin._get_render_template(context, instance, None)
         if template_name not in plugin_tag_pool[name]["templates"]:
-            plugin_tag_pool[name]["templates"][template_name] = patch_template(get_template(template_name))
+            plugin_tag_pool[name]["templates"][template_name] = patched_template(template_name)
         template = plugin_tag_pool[name]["templates"][template_name]
         content = template.render(context)
 
