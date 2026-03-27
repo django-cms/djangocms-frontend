@@ -50,9 +50,21 @@ def render_dummy_plugin(context, dummy_plugin):
     return dummy_plugin.nodelist.render(context)
 
 
+def get_recompiled_template(template_name: str):
+    """Get a recompiled template to ensure that the patched render_plugin is used."""
+    template = get_template(template_name)
+    origin = template.origin
+    if not origin or not origin.loader:
+        raise ValueError("Template has no origin/loader (cannot recompile)")
+
+    source = origin.loader.get_contents(origin)
+    # Compile a fresh Template instance
+    return template.backend.from_string(source)
+
+
 def patched_template(template_name: str):
     """Patches the template to use the dummy plugin renderer instead of the real one."""
-    template = get_template(template_name)  # Gives a freshly compiled template object
+    template = get_recompiled_template(template_name)  # Gives a freshly compiled template object
     for node in template.template.nodelist.get_nodes_by_type(SimpleNode):
         if node.func == render_plugin:
             node.func = render_dummy_plugin
