@@ -214,7 +214,7 @@ class CMSFrontendComponent(forms.Form):
                     "show_add_form": False,
                     "parent_classes": [cls.__name__ + "Plugin"],
                     "render_template": cls.slot_template,
-                    "model": SlotModel,
+                    # "model": SlotModel,  <-- uncomment once django CMS core is proxy safe in all current releases
                     **slot.kwargs,
                 },
             )
