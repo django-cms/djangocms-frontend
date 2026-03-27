@@ -1,8 +1,10 @@
 import importlib
 
+from cms.models import CMSPlugin
 from django import forms
 from django.apps import apps
 from django.utils.encoding import force_str
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
 
@@ -41,6 +43,14 @@ class Slot:
         self.name = name
         self.verbose_name = verbose_name
         self.kwargs = kwargs
+
+
+class SlotModel(CMSPlugin):
+    class Meta:
+        proxy = True
+
+    def get_short_description(self):
+        return format_html("<b>{}</b>", _("Slot"))
 
 
 class CMSFrontendComponent(forms.Form):
@@ -200,9 +210,11 @@ class CMSFrontendComponent(forms.Form):
                     "allow_children": True,
                     "edit_disabled": True,
                     "is_local": False,
+                    "is_slot": True,
                     "show_add_form": False,
                     "parent_classes": [cls.__name__ + "Plugin"],
                     "render_template": cls.slot_template,
+                    # "model": SlotModel,  <-- uncomment once django CMS core is proxy safe in all current releases
                     **slot.kwargs,
                 },
             )
