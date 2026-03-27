@@ -2,6 +2,19 @@
 Changelog
 =========
 
+
+2.4.0 (2026.03-27
+==================
+
+* feat: add "target" option to link plugin by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/355
+* feat: Make slots more recognizable in the plugin tree by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/357
+* feat: Allow disabling of the Advanced Settings tab to hide technical details by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/363
+* feat: Allow custom defaults for plugins and components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/356
+* fix: Allow change_form_template for components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/352
+* fix: picture now uses filer thumbnail option if set by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/360
+* fix: plugin template tag ignored dynamic templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/361
+* fix: Avoid copying compiled templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/362
+
 2.3.1 (2026-03-12)
 ==================
 
