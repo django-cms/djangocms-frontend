@@ -1,7 +1,8 @@
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 
+from djangocms_frontend.contrib.grid.cms_plugins import GridContainerPlugin
 from djangocms_frontend.contrib.grid.forms import GridColumnForm, GridContainerForm
 from djangocms_frontend.contrib.grid.models import GridColumn, GridContainer, GridRow
 
@@ -98,6 +99,77 @@ class PluginDefaultsHierarchyTestCase(TestCase):
         self.assertEqual(instance.config["container_type"], "container")
         # padding_y overridden by settings
         self.assertEqual(instance.config["padding_y"], "py-5")
+
+
+class GetFormDefaultsTestCase(TestCase):
+    """Tests that get_form applies default_config and PLUGIN_DEFAULTS as field initials."""
+
+    def _get_form_instance(self, plugin_cls):
+        """Helper to get an instantiated form from a plugin's get_form (add mode)."""
+        request = RequestFactory().get("/")
+        plugin = plugin_cls()
+        form_cls = plugin.get_form(request, obj=None, change=False)
+        return form_cls()
+
+    def test_no_defaults_returns_original_form(self):
+        """Without any defaults, get_form returns the original form class."""
+        request = RequestFactory().get("/")
+        plugin = GridContainerPlugin()
+        form_cls = plugin.get_form(request, obj=None, change=False)
+        self.assertEqual(form_cls.__name__, GridContainerForm.__name__)
+
+    def test_model_default_config_sets_initial(self):
+        original = getattr(GridContainer, "default_config", {})
+        try:
+            GridContainer.default_config = {"container_type": "container-fluid"}
+            form = self._get_form_instance(GridContainerPlugin)
+            self.assertEqual(form.fields["container_type"].initial, "container-fluid")
+        finally:
+            if original:
+                GridContainer.default_config = original
+            else:
+                del GridContainer.default_config
+
+    @patch(
+        "djangocms_frontend.ui_plugin_base.PLUGIN_DEFAULTS",
+        {"GridContainer": {"container_type": "container-full"}},
+    )
+    def test_plugin_defaults_setting_sets_initial(self):
+        form = self._get_form_instance(GridContainerPlugin)
+        self.assertEqual(form.fields["container_type"].initial, "container-full")
+
+    @patch(
+        "djangocms_frontend.ui_plugin_base.PLUGIN_DEFAULTS",
+        {"GridContainer": {"container_type": "from-settings"}},
+    )
+    def test_settings_override_model_default_config_in_form(self):
+        original = getattr(GridContainer, "default_config", {})
+        try:
+            GridContainer.default_config = {"container_type": "from-model"}
+            form = self._get_form_instance(GridContainerPlugin)
+            self.assertEqual(form.fields["container_type"].initial, "from-settings")
+        finally:
+            if original:
+                GridContainer.default_config = original
+            else:
+                del GridContainer.default_config
+
+    def test_change_form_does_not_override_initials(self):
+        """On edit (change=True), defaults should NOT be applied."""
+        original = getattr(GridContainer, "default_config", {})
+        try:
+            GridContainer.default_config = {"container_type": "container-fluid"}
+            request = RequestFactory().get("/")
+            plugin = GridContainerPlugin()
+            form_cls = plugin.get_form(request, obj=None, change=True)
+            form = form_cls()
+            # Should have the original form field initial, not the default_config value
+            self.assertNotEqual(form.fields["container_type"].initial, "container-fluid")
+        finally:
+            if original:
+                GridContainer.default_config = original
+            else:
+                del GridContainer.default_config
 
 
 class GridModelTestCase(TestCase):

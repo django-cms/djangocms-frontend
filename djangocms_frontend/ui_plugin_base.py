@@ -4,6 +4,7 @@ from django.utils.encoding import force_str
 
 from djangocms_frontend.helpers import get_related
 from djangocms_frontend.models import AbstractFrontendUIItem
+from djangocms_frontend.settings import PLUGIN_DEFAULTS
 
 try:
     from cms.admin.placeholderadmin import PlaceholderAdmin
@@ -29,6 +30,22 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
 
     def __str__(self):
         return force_str(super().__str__())
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form_cls = super().get_form(request, obj, change, **kwargs)
+        if change:
+            return form_cls
+        # On add: apply default_config and PLUGIN_DEFAULTS as field initials
+        # It is safe to modify the form_cls as it is a fresh class created for this request in get_form of the plugin base
+        defaults = {}
+        defaults.update(getattr(self.model, "default_config", {}))
+        defaults.update(PLUGIN_DEFAULTS.get(self.model.__name__, {}))
+        if not defaults:
+            return form_cls
+        for field_name, value in defaults.items():
+            if field_name in form_cls.base_fields:
+                form_cls.base_fields[field_name].initial = value
+        return form_cls
 
     def render(self, context, instance, placeholder):
         if isinstance(instance, AbstractFrontendUIItem):

@@ -170,7 +170,7 @@ See `LICENSE <https://github.com/django-cms/djangocms-frontend/blob/master/LICEN
     :target: https://djangocms-frontend.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/django-cms/djangocms-frontend
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/djangocms-frontend
