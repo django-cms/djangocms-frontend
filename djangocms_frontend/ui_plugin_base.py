@@ -36,14 +36,14 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
         if change:
             return form_cls
         # On add: apply default_config and PLUGIN_DEFAULTS as field initials
+        # It is safe to modify the form_cls as it is a fresh class created for this request in get_form of the plugin base
         defaults = {}
         defaults.update(getattr(self.model, "default_config", {}))
         defaults.update(PLUGIN_DEFAULTS.get(self.model.__name__, {}))
         if not defaults:
             return form_cls
-        entangled_fields = getattr(getattr(form_cls, "_meta", None), "entangled_fields", {}).get("config", ())
         for field_name, value in defaults.items():
-            if field_name in form_cls.base_fields and field_name in entangled_fields:
+            if field_name in form_cls.base_fields:
                 form_cls.base_fields[field_name].initial = value
         return form_cls
 
