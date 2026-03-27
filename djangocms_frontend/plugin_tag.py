@@ -53,11 +53,7 @@ def render_dummy_plugin(context, dummy_plugin):
 def get_recompiled_template(template_name: str):
     """Get a recompiled template to ensure that the patched render_plugin is used."""
     template = get_template(template_name)
-    origin = template.origin
-    if not origin or not origin.loader:
-        raise ValueError("Template has no origin/loader (cannot recompile)")
-
-    source = origin.loader.get_contents(origin)
+    source = template.origin.loader.get_contents(template.origin)
     # Compile a fresh Template instance
     return template.backend.from_string(source)
 
