@@ -31,3 +31,22 @@ project directory. ``command`` can be one of the following:
     Permissions are copied from the ``FrontendUIItem`` model to all installed
     plugins. This way you can set permissions for all plugins by setting them
     for ``FrontendUIItem`` and then syncing them.
+
+.. _clear_advanced_settings:
+
+``clear_advanced_settings``
+    Removes all advanced settings from every djangocms-frontend plugin instance
+    in the database. Specifically it:
+
+    - Clears the ``attributes`` config (custom HTML attributes and classes) on
+      each plugin.
+    - Resets ``tag_type`` to the default value (``div``) for every plugin whose
+      tag type was changed.
+
+    This is useful after setting
+    :py:attr:`~settings.DJANGOCMS_FRONTEND_SHOW_ADVANCED_SETTINGS` to
+    ``False`` to ensure no orphaned advanced settings remain in the database.
+
+    Run with ``--noinput`` to skip the confirmation prompt::
+
+        python -m manage frontend clear_advanced_settings --noinput

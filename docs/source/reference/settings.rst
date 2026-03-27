@@ -409,3 +409,34 @@ in your project's ``settings.py``.
     If set to ``True`` the frontend editing will show a message where children
     can be added to plugins to complete the design. This is supposed to make
     the editing experience more intuitive for editors.
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_SHOW_ADVANCED_SETTINGS
+
+    Default: ``True``
+
+    Controls whether the "Advanced settings" tab is available in plugin edit
+    forms. Advanced settings allow editors to set custom HTML attributes (such
+    as ``id``, ``class``, ``data-*``, ``style``) and change the HTML tag type
+    of a plugin.
+
+    Set to ``False`` to hide the tab **and** suppress all user-configured
+    advanced settings at render time:
+
+    * The "Advanced settings" fieldset is removed from plugin admin forms.
+    * Custom HTML attributes stored in the plugin's ``attributes`` config are
+      ignored during rendering.
+    * User-specified CSS classes (set through the attributes field) are not
+      applied. Programmatically added classes (e.g. from spacing, responsive,
+      or background mixins) continue to work.
+    * The ``tag_type`` is reset to the default (``div``) at render time,
+      regardless of the value stored in the database.
+
+    .. note::
+
+        Disabling this setting does **not** remove existing advanced settings
+        from the database. To clean up previously stored values use the
+        :ref:`clear_advanced_settings` management command.
+
+    Example::
+
+        DJANGOCMS_FRONTEND_SHOW_ADVANCED_SETTINGS = False
