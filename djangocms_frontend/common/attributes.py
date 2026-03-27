@@ -3,6 +3,7 @@ from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend.fields import AttributesFormField
 from djangocms_frontend.helpers import insert_fields
+from djangocms_frontend.settings import SHOW_ADVANCED_SETTINGS
 
 
 class AttributesMixin:
@@ -17,6 +18,8 @@ class AttributesMixin:
     }
 
     def get_fieldsets(self, request, obj=None):
+        if not SHOW_ADVANCED_SETTINGS:
+            return super().get_fieldsets(request, obj)
         meta = self.form._meta
         fields = ["tag_type"] if "tag_type" in getattr(meta, "untangled_fields", ()) else []
         fields.append("attributes")
