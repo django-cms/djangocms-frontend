@@ -31,21 +31,15 @@ class ClearAdvancedSettings(SubcommandsCommand):
         total_tag_type_reset = 0
 
         for model in dcf_models:
-            for obj in model.objects.all():
-                changed = False
-
+            # Bulk-reset tag_type for all instances with non-default values
+            total_tag_type_reset += model.objects.exclude(tag_type=default_tag_type).update(tag_type=default_tag_type)
+            # Attributes are stored in config JSON, so we need per-object handling;
+            # use iterator() to avoid loading all instances into memory at once
+            for obj in model.objects.iterator():
                 if obj.config.get("attributes"):
                     obj.config["attributes"] = {}
-                    changed = True
-                    total_attributes_cleared += 1
-
-                if obj.tag_type != default_tag_type:
-                    obj.tag_type = default_tag_type
-                    changed = True
-                    total_tag_type_reset += 1
-
-                if changed:
                     obj.save()
+                    total_attributes_cleared += 1
 
         self.stdout.write(
             self.style.SUCCESS(
