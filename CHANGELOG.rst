@@ -11,7 +11,7 @@ Changelog
 * feat: Allow disabling of the Advanced Settings tab to hide technical details by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/363
 * feat: Allow custom defaults for plugins and components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/356
 * fix: Allow change_form_template for components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/352
-* fix: picture now use filer thumbnail option if set by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/360
+* fix: picture now uses filer thumbnail option if set by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/360
 * fix: plugin template tag ignored dynamic templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/361
 * fix: Avoid copying compiled templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/362
 
