@@ -4,6 +4,7 @@ from django.template import engines
 from django.test import override_settings
 
 from tests.fixtures import TestFixture
+from tests.helpers import get_filer_image
 
 django_engine = engines["django"]
 
@@ -139,3 +140,58 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         # Check for the AutoHero plugin registration in the plugin_tag_pool
         self.assertIn("autohero", plugin_tag_pool)
+
+    @override_settings(
+        DJANGOCMS_FRONTEND_CAROUSEL_TEMPLATES=(
+            ("default", "Default"),
+            ("custom", "Custom"),
+        )
+    )
+    def test_plugin_tag_uses_dynamic_carousel_slide_templates(self):
+        from cms.api import add_plugin
+
+        from djangocms_frontend.contrib.carousel.cms_plugins import CarouselPlugin
+        from djangocms_frontend.contrib.carousel.forms import CarouselForm
+
+        parent_custom = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselPlugin.__name__,
+            language=self.language,
+            config={"template": "custom"},
+        )
+        parent_custom.initialize_from_form(CarouselForm).save()
+
+        parent_default = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CarouselPlugin.__name__,
+            language=self.language,
+            config={"template": "default"},
+        )
+        parent_default.initialize_from_form(CarouselForm).save()
+
+        image = get_filer_image()
+        try:
+            template = django_engine.from_string("""
+            {% load frontend cms_tags %}
+            {% plugin "carouselslide" parent=parent_custom carousel_image=image position=0 %}
+                <p>Custom slide content</p>
+            {% endplugin %}
+            {% plugin "carouselslide" parent=parent_default carousel_image=image position=0 %}
+                <p>Default slide content</p>
+            {% endplugin %}
+            """)
+
+            result = template.render(
+                {
+                    "request": None,
+                    "image": image,
+                    "parent_custom": parent_custom,
+                    "parent_default": parent_default,
+                }
+            )
+
+            # Custom slide template in tests is intentionally empty.
+            self.assertNotIn("Custom slide content", result)
+            self.assertIn("Default slide content", result)
+        finally:
+            image.delete()
