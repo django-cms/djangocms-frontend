@@ -207,6 +207,21 @@ class ClearAdvancedSettingsCommandTestCase(TestCase):
         self.assertIn("Cleared attributes on 0 plugin(s)", output)
         self.assertIn("reset tag_type on 0 plugin(s)", output)
 
+    @patch("builtins.input", return_value="no")
+    def test_aborts_when_user_declines(self, mock_input):
+        instance = Alert.objects.create(
+            tag_type="section",
+            config=dict(attributes={"data-test": "value"}),
+        )
+
+        out = StringIO()
+        call_command("frontend", "clear_advanced_settings", stdout=out)
+
+        instance.refresh_from_db()
+        self.assertEqual(instance.tag_type, "section")
+        self.assertEqual(instance.config["attributes"], {"data-test": "value"})
+        self.assertIn("Aborted", out.getvalue())
+
     def test_counts_are_correct(self):
         Alert.objects.create(
             tag_type="section",
