@@ -7,7 +7,7 @@ from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.fields import TagTypeField
-from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS
+from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS, SHOW_ADVANCED_SETTINGS
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -49,6 +49,8 @@ class AbstractFrontendUIItem(CMSPlugin):
         self._additional_classes = []
         self.html_id: str | None = None  # HTML id attribute will be set in template tag set_html_id.
         super().__init__(*args, **kwargs)
+        if not SHOW_ADVANCED_SETTINGS:
+            self.tag_type = self._meta.get_field("tag_type").default
 
     def __getattr__(self, item):
         """Makes properties of plugin config available as plugin properties."""
@@ -74,7 +76,10 @@ class AbstractFrontendUIItem(CMSPlugin):
         self.config["attributes"] = attrs
 
     def get_attributes(self):
-        attributes = self.config.get("attributes", {})
+        if SHOW_ADVANCED_SETTINGS:
+            attributes = self.config.get("attributes", {})
+        else:
+            attributes = {}
         classes = self.get_classes()  # get classes
         classes = (f'class="{classes}"') if classes else ""  # to string
         parts = (
@@ -86,8 +91,11 @@ class AbstractFrontendUIItem(CMSPlugin):
         return mark_safe(" " + attributes_string) if attributes_string else ""
 
     def get_classes(self):
-        attributes = self.config.get("attributes", {})
-        classes = set(attributes.get("class", "").split())  # classes added in attriutes
+        if SHOW_ADVANCED_SETTINGS:
+            attributes = self.config.get("attributes", {})
+            classes = set(attributes.get("class", "").split())  # classes added in attriutes
+        else:
+            classes = set()
         classes.update(self._additional_classes)  # add additional classes
         return conditional_escape(" ".join(classes))
 

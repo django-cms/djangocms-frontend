@@ -1,6 +1,7 @@
 import djangocms_frontend
 
 from .subcommands.base import SubcommandsCommand
+from .subcommands.clear_advanced_settings import ClearAdvancedSettings
 from .subcommands.frequency_analysis import FrequencyAnalysis
 from .subcommands.migrate import Migrate
 from .subcommands.stale_references import StaleReferences
@@ -10,6 +11,7 @@ from .subcommands.sync_permissions import SyncPermissions
 class Command(SubcommandsCommand):
     command_name = "frontend"
     subcommands = {
+        "clear_advanced_settings": ClearAdvancedSettings,
         "migrate": Migrate,
         "frequency_analysis": FrequencyAnalysis,
         "stale_references": StaleReferences,
