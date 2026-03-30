@@ -130,6 +130,20 @@ class PluginTagTestCase(TestFixture, CMSTestCase):
 
         self.assertInHTML(expected_result, result)
 
+    def test_kwargs_do_not_leak_between_plugin_calls(self):
+        """Regression test: kwargs from one {% plugin %} call must not
+        bleed into subsequent calls of the same plugin type."""
+        template = django_engine.from_string("""{% load frontend %}
+        {% plugin "alert" alert_context="warning" %}First{% endplugin %}
+        {% plugin "alert" %}Second{% endplugin %}
+        """)
+
+        result = template.render({"request": None})
+
+        # The second alert should use the default context ("primary"), not "warning"
+        self.assertIn("alert-warning", result)
+        self.assertIn("alert-primary", result)
+
     def test_autohero_component_registered_for_plugin_tag(self):
         from cms.plugin_pool import plugin_pool
 

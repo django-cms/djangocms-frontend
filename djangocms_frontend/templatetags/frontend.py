@@ -1,3 +1,4 @@
+import copy
 import json
 import typing
 import uuid
@@ -219,7 +220,7 @@ class Plugin(AsTag):
                 f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
                 f"the CMS_COMPONENT_PLUGINS setting"
             )
-        field_values = plugin_tag_pool[name]["defaults"]
+        field_values = copy.deepcopy(plugin_tag_pool[name]["defaults"])
         plugin = plugin_tag_pool[name]["class"]()
 
         if issubclass(plugin.form, EntangledModelFormMixin):
