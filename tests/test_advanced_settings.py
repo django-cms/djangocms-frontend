@@ -22,8 +22,7 @@ class AdvancedSettingsModelTestCase(TestCase):
         )
         instance.initialize_from_form(AlertForm).save()
         attrs = instance.get_attributes()
-        self.assertIn("data-test", attrs)
-        self.assertIn("custom-class", attrs)
+        self.assertEqual(attrs, ' class="custom-class" data-test="value"')
 
     def test_get_classes_includes_user_classes_by_default(self):
         instance = Alert.objects.create(
