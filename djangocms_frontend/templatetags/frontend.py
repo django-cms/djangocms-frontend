@@ -362,7 +362,10 @@ class InlineField(CMSEditableObject):
         placeholder_editable = (
             isinstance(instance, CMSPlugin)
             and instance.pk
-            and instance.placeholder.check_source(context["request"].user)
+            and (
+                not hasattr(instance.placeholder, "check_source")  # django CMS 3.11 does not have check_source
+                or instance.placeholder.check_source(context["request"].user)  # Otherwise needs to apss
+            )
         )
 
         if is_registering_component(context) and attribute:

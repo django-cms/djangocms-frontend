@@ -1,4 +1,5 @@
 import json
+import unittest
 import uuid
 
 from cms.api import add_plugin
@@ -20,7 +21,7 @@ from djangocms_frontend.templatetags.frontend import (
     update_component_properties,
 )
 
-from .fixtures import TestFixture
+from .fixtures import DJANGO_CMS4, TestFixture
 
 
 class GetAttributesTagTestCase(TestCase):
@@ -218,6 +219,36 @@ class UpdateComponentPropertiesTestCase(TestCase):
         update_component_properties(context, "slots", ("SlotPlugin2", "Body"), append=True)
         _, kwargs = context["_cms_components"]["cms_component"][0]
         self.assertEqual(len(kwargs["slots"]), 2)
+
+
+class InlineFieldTestCase(TestFixture, CMSTestCase):
+    """Tests for the inline_field template tag."""
+
+    @unittest.skipUnless(DJANGO_CMS4, "django CMS 4+ required")
+    def test_check_source_called_exactly_once(self):
+        """Regression test: placeholder.check_source must be called exactly once
+        when rendering inline_field, not once per tag evaluation."""
+        from unittest.mock import MagicMock, patch
+
+        parent = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=AlertPlugin.__name__,
+            language=self.language,
+        )
+        parent.initialize_from_form(AlertForm).save()
+
+        factory = RequestFactory()
+        request = factory.get("/")
+        request.user = self.superuser
+        request.session = SessionStore()
+        request.session["inline_editing"] = True
+
+        tpl = Template('{% load frontend %}{% inline_field instance "alert_context" %}')
+
+        with patch.object(type(self.placeholder), "check_source", return_value=True) as mock_check:
+            tpl.render(Context({"request": request, "instance": parent}))
+
+        mock_check.assert_called_once_with(self.superuser)
 
 
 class ChildPluginsRenderTestCase(TestFixture, CMSTestCase):
