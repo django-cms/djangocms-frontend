@@ -98,29 +98,6 @@ Replace ``OldPlugin`` / ``NewPlugin`` with the actual ``plugin_type`` values
    rolled back with ``manage.py migrate yourapp <previous_migration>``.
 
 
-When to update ``ui_item``
---------------------------
-
-The ``ui_item`` field only exists on models that inherit from
-``AbstractFrontendUIItem`` (including ``FrontendUIItem`` proxy models and custom
-components created with ``CMSFrontendComponent``).  If your plugin uses a
-different model base -- or has no model at all -- skip the ``ui_item`` update.
-
-+----------------------------------------------+----------------------------+
-| Plugin base                                  | Update ``ui_item``?        |
-+==============================================+============================+
-| ``FrontendUIItem`` (proxy model)             | Yes                        |
-+----------------------------------------------+----------------------------+
-| ``AbstractFrontendUIItem`` (concrete model)  | Yes                        |
-+----------------------------------------------+----------------------------+
-| ``CMSFrontendComponent``                     | Yes                        |
-+----------------------------------------------+----------------------------+
-| ``CMSPluginBase`` with a custom model        | No                         |
-+----------------------------------------------+----------------------------+
-| Plugin with ``model = None``                 | No                         |
-+----------------------------------------------+----------------------------+
-
-
 Combining with schema migrations
 ---------------------------------
 
