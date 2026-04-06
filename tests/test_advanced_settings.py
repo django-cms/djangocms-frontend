@@ -5,10 +5,12 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 from django.core.management import call_command
 from django.test import TestCase
+from django.test.client import RequestFactory
 
 from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
 from djangocms_frontend.contrib.alert.forms import AlertForm
 from djangocms_frontend.contrib.alert.models import Alert
+from djangocms_frontend.settings import DEVICE_CHOICES
 
 from .fixtures import TestFixture
 
@@ -66,12 +68,35 @@ class AdvancedSettingsModelTestCase(TestCase):
     def test_tag_type_reset_to_default_when_disabled(self):
         instance = Alert.objects.create(tag_type="section")
         instance.initialize_from_form(AlertForm).save()
-        self.assertEqual(instance.tag_type, "div")
+        self.assertEqual(instance.tag_type, AlertForm.base_fields["tag_type"].initial)
 
     def test_tag_type_preserved_when_enabled(self):
         instance = Alert.objects.create(tag_type="section")
         instance.initialize_from_form(AlertForm).save()
         self.assertEqual(instance.tag_type, "section")
+
+    def test_change_form_submit_uses_default_tag_type_when_disabled(self):
+        instance = Alert.objects.create(tag_type="section")
+        instance.initialize_from_form(AlertForm).save()
+        self.assertEqual(instance.tag_type, "section")
+
+        with patch("djangocms_frontend.models.SHOW_ADVANCED_SETTINGS", False):
+            plugin = Alert.objects.get(pk=instance.pk)
+            request = RequestFactory().post("/")
+            form_class = AlertPlugin().get_form(request, obj=plugin, change=True)
+            form = form_class(
+                data={
+                    "alert_context": plugin.config.get("alert_context", "primary"),
+                    "margin_devices": [size for size, _ in DEVICE_CHOICES],
+                    "padding_devices": [size for size, _ in DEVICE_CHOICES],
+                },
+                instance=plugin,
+            )
+
+            self.assertTrue(form.is_valid(), form.errors)
+            updated = form.save()
+
+        self.assertEqual(updated.tag_type, AlertForm.base_fields["tag_type"].initial)
 
 
 class AdvancedSettingsFieldsetTestCase(TestFixture, CMSTestCase):
