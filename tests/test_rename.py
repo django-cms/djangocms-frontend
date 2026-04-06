@@ -134,8 +134,30 @@ class RenameCommandTestCase(TestCase):
         self.assertEqual(instance.plugin_type, "OldTextPlugin")
 
     @patch("builtins.input", return_value="yes")
-    def test_proceeds_when_user_confirms_non_frontend_rename(self, mock_input):
-        """Renaming to a non-AbstractFrontendUIItem plugin proceeds if user confirms."""
+    def test_proceeds_when_user_confirms_with_yes(self, mock_input):
+        """Renaming to a non-AbstractFrontendUIItem plugin proceeds if user types 'yes'."""
+        instance = CMSPlugin.objects.create(plugin_type="OldTextPlugin")
+
+        out, _ = self._call_rename("OldTextPlugin", "TextPlugin")
+
+        self.assertIn("Updated 1 plugins", out)
+        instance.refresh_from_db()
+        self.assertEqual(instance.plugin_type, "TextPlugin")
+
+    @patch("builtins.input", return_value="y")
+    def test_proceeds_when_user_confirms_with_y(self, mock_input):
+        """Renaming to a non-AbstractFrontendUIItem plugin proceeds if user types 'y'."""
+        instance = CMSPlugin.objects.create(plugin_type="OldTextPlugin")
+
+        out, _ = self._call_rename("OldTextPlugin", "TextPlugin")
+
+        self.assertIn("Updated 1 plugins", out)
+        instance.refresh_from_db()
+        self.assertEqual(instance.plugin_type, "TextPlugin")
+
+    @patch("builtins.input", return_value="YES")
+    def test_confirmation_is_case_insensitive(self, mock_input):
+        """Confirmation input is case-insensitive."""
         instance = CMSPlugin.objects.create(plugin_type="OldTextPlugin")
 
         out, _ = self._call_rename("OldTextPlugin", "TextPlugin")
