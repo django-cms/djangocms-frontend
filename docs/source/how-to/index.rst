@@ -21,4 +21,5 @@ step-by-step guidance.
    create-themes
    migrate-bootstrap4
    migrate-3rd-party-plugins
+   migrate-custom-plugins
    internal-link-targets
