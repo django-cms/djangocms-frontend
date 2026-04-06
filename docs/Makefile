@@ -56,7 +56,7 @@ help:
 
 install:
 	@echo "... setting up docs virtualenv"
-	python3 -m venv env
+	[ -d env ] || python3 -m venv env
 	. $(VENV); pip install -r requirements.txt
 	@echo "\n" \
 	      "-------------------------------------------------------------------------------------------------- \n" \
@@ -66,12 +66,12 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	. $(VENV); $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 dirhtml:
-	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
+	. $(VENV); $(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/dirhtml."
 

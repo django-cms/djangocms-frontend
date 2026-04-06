@@ -55,7 +55,7 @@ project directory. ``command`` can be one of the following:
     Renames a plugin type in the database. This is useful when a plugin has been
     replaced by a new one and existing instances need to be reassigned. This comand
     is intended for djangocms-frontend plugins which share the same plugin model
-    (:class:`AbstractFrontendUIItem`). Hence, model instances are not created, so only
+    (:class:`FrontendUIItem`). Hence, model instances are not created, so only
     apply this command to non-frontend plugins if you know what you're doing.
 
     It takes two positional arguments:
@@ -65,7 +65,7 @@ project directory. ``command`` can be one of the following:
     - ``new_plugin``: The plugin type to rename to. Must be installed.
 
     The command updates the ``plugin_type`` field on all matching ``CMSPlugin``
-    rows. If the new plugin's model is a subclass of ``AbstractFrontendUIItem``,
+    rows. If the new plugin's model is a subclass of :class:`FrontendUIItem`,
     the ``ui_item`` field is updated as well.
 
     Example::
