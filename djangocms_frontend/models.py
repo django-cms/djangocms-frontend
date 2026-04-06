@@ -58,7 +58,11 @@ class AbstractFrontendUIItem(CMSPlugin):
             plugin_class = self.get_plugin_class()
             form = getattr(plugin_class, "form", None)
             if form is not None and hasattr(form, "base_fields") and "tag_type" in form.base_fields:
-                return form.base_fields["tag_type"].initial or default
+                tag_field = form.base_fields["tag_type"]
+                initial = getattr(tag_field, "initial", None)
+                if callable(initial):
+                    initial = initial()
+                return default if initial is None else initial
         except Exception:  # pragma: no cover
             pass
         return default
