@@ -50,23 +50,7 @@ class AbstractFrontendUIItem(CMSPlugin):
         self.html_id: str | None = None  # HTML id attribute will be set in template tag set_html_id.
         super().__init__(*args, **kwargs)
         if not SHOW_ADVANCED_SETTINGS:
-            self.tag_type = self._get_tag_type_initial()
-
-    def _get_tag_type_initial(self):
-        default = self._meta.get_field("tag_type").default
-        try:
-            plugin_class = self.get_plugin_class()
-            form = getattr(plugin_class, "form", None)
-            if form is not None and hasattr(form, "base_fields") and "tag_type" in form.base_fields:
-                tag_field = form.base_fields["tag_type"]
-                initial = getattr(tag_field, "initial", None)
-                if callable(initial):
-                    initial = initial()
-                return default if initial is None else initial
-        except Exception:  # pragma: no cover
-            pass
-        return default
-
+           self.tag_type = self._meta.get_field("tag_type").default
     def __getattr__(self, item):
         """Makes properties of plugin config available as plugin properties."""
         if item[0] != "_" and item in self.config:  # Avoid infinite recursion trying to get .config from db
