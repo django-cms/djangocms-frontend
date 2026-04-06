@@ -65,6 +65,7 @@ class CMSFrontendComponent(forms.Form):
     _plugin = None
     META_FIELDS = [
         "is_local",
+        "is_slot",
         "disable_edit",
         "disable_child_plugins",
         "show_add_form",
