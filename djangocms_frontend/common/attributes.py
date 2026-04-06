@@ -32,12 +32,19 @@ class AttributesMixin:
         )
 
 
-class AttributesFormMixin(EntangledModelFormMixin):
-    class Meta:
-        entangled_fields = {
-            "config": [
-                "attributes",
-            ]
-        }
+if SHOW_ADVANCED_SETTINGS:
 
-    attributes = AttributesFormField()
+    class AttributesFormMixin(EntangledModelFormMixin):
+        class Meta:
+            entangled_fields = {
+                "config": [
+                    "attributes",
+                ]
+            }
+
+        attributes = AttributesFormField()
+
+else:
+
+    class AttributesFormMixin:
+        pass
