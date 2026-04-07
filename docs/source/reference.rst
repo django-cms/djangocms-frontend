@@ -807,6 +807,24 @@ project directory. ``command`` can be one of the following:
     plugins. This way you can set permissions for all plugins by setting them
     for ``FrontendUIItem`` and then syncing them.
 
+``rename``
+    Renames a plugin type in the database. This is useful when a plugin has been
+    replaced by a new one and existing instances need to be reassigned.
+
+    It takes two positional arguments:
+
+    - ``old_plugin``: The plugin type to rename. Must **not** be installed but
+      must still be present in the database.
+    - ``new_plugin``: The plugin type to rename to. Must be installed.
+
+    The command updates the ``plugin_type`` field on all matching ``CMSPlugin``
+    rows. If the new plugin's model is a subclass of ``AbstractFrontendUIItem``,
+    the ``ui_item`` field is updated as well.
+
+    Example::
+
+        python -m manage frontend rename OldCardPlugin CardPlugin
+
 
 *************
 Running Tests
