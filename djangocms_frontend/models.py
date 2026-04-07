@@ -75,11 +75,6 @@ class AbstractFrontendUIItem(CMSPlugin):
         attrs.update({attr: value})
         self.config["attributes"] = attrs
 
-    def get_tag_type(self):
-        if SHOW_ADVANCED_SETTINGS:
-            return self.tag_type
-        return self._meta.get_field("tag_type").default
-
     def get_attributes(self):
         if SHOW_ADVANCED_SETTINGS:
             attributes = self.config.get("attributes", {})
