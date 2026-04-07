@@ -154,6 +154,26 @@ class GetFormDefaultsTestCase(TestCase):
             else:
                 del GridContainer.default_config
 
+    def test_default_config_does_not_leak_to_other_plugins(self):
+        """Regression: setting default_config on one plugin must not affect other plugins
+        sharing the same form field instances (e.g. SpacingFormMixin fields)."""
+        from djangocms_frontend.contrib.link.cms_plugins import TextLinkPlugin
+
+        # Set a default_config on GridContainer that affects a shared field
+        original = getattr(GridContainer, "default_config", {})
+        try:
+            GridContainer.default_config = {"padding_y": "py-6"}
+            # Trigger get_form on GridContainer to apply the default
+            self._get_form_instance(GridContainerPlugin)
+            # Now get the Link form — padding_y should NOT have the GridContainer default
+            link_form = self._get_form_instance(TextLinkPlugin)
+            self.assertNotEqual(link_form.fields["padding_y"].initial, "py-6")
+        finally:
+            if original:
+                GridContainer.default_config = original
+            else:
+                del GridContainer.default_config
+
     def test_change_form_does_not_override_initials(self):
         """On edit (change=True), defaults should NOT be applied."""
         original = getattr(GridContainer, "default_config", {})
