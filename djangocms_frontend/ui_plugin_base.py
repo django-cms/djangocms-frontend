@@ -1,4 +1,6 @@
 # Import the components from the current directory's models module
+import copy
+
 from cms.plugin_base import CMSPluginBase
 from django.utils.encoding import force_str
 
@@ -44,6 +46,7 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
             return form_cls
         for field_name, value in defaults.items():
             if field_name in form_cls.base_fields:
+                form_cls.base_fields[field_name] = copy.deepcopy(form_cls.base_fields[field_name])
                 form_cls.base_fields[field_name].initial = value
         return form_cls
 
