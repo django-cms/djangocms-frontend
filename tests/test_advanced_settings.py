@@ -10,6 +10,8 @@ from django.test.client import RequestFactory
 from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
 from djangocms_frontend.contrib.alert.forms import AlertForm
 from djangocms_frontend.contrib.alert.models import Alert
+from djangocms_frontend.contrib.icon.models import Icon
+from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.settings import DEVICE_CHOICES
 
 from .fixtures import TestFixture
@@ -69,6 +71,14 @@ class AdvancedSettingsModelTestCase(TestCase):
         instance = Alert.objects.create(tag_type="section")
         instance.initialize_from_form(AlertForm).save()
         self.assertEqual(instance.tag_type, AlertForm.base_fields["tag_type"].initial)
+
+    @patch("djangocms_frontend.models.SHOW_ADVANCED_SETTINGS", False)
+    def test_icon_tag_type_uses_icon_default_when_disabled(self):
+        """Icon plugin should use its own default_tag_type ('i'), not the global default ('div')."""
+        from djangocms_frontend.contrib.icon.conf import ICON_TAG_TYPES
+
+        instance = Icon.objects.create()
+        self.assertEqual(instance.tag_type, first_choice(ICON_TAG_TYPES))
 
     def test_tag_type_preserved_when_enabled(self):
         instance = Alert.objects.create(tag_type="section")
