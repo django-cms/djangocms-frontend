@@ -338,7 +338,7 @@ def get_slot(instance, slot_name):
             if plugin.plugin_type == plugin_type:
                 yield from plugin.child_plugin_instances
 
-    return tuple(generator)
+    return tuple(generator())
 
 
 class InlineField(CMSEditableObject):
