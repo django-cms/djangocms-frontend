@@ -332,10 +332,13 @@ def get_slot(instance, slot_name):
     e.g. with {% for plugin in instance|get_slot:"community" %}.
     Usage: {% for plugin in instance|get_slot:"community" %} ... {% endfor %}
     """
-    plugin_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
-    for plugin in instance.child_plugin_instances:
-        if plugin.plugin_type == plugin_type:
-            yield from plugin.child_plugin_instances
+    def generator():
+        plugin_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
+        for plugin in instance.child_plugin_instances:
+            if plugin.plugin_type == plugin_type:
+                yield from plugin.child_plugin_instances
+
+    return tuple(generator)
 
 
 class InlineField(CMSEditableObject):
