@@ -15,6 +15,7 @@ from djangocms_frontend.contrib.alert.forms import AlertForm
 from djangocms_frontend.contrib.alert.models import Alert
 from djangocms_frontend.templatetags.frontend import (
     get_attributes,
+    get_slot,
     is_registering_component,
     json_dumps,
     set_html_id,
@@ -219,6 +220,71 @@ class UpdateComponentPropertiesTestCase(TestCase):
         update_component_properties(context, "slots", ("SlotPlugin2", "Body"), append=True)
         _, kwargs = context["_cms_components"]["cms_component"][0]
         self.assertEqual(len(kwargs["slots"]), 2)
+
+
+class GetSlotFilterTestCase(TestCase):
+    """Tests for the get_slot filter."""
+
+    class FakePlugin:
+        def __init__(self, plugin_type, child_plugin_instances=None):
+            self.plugin_type = plugin_type
+            self.child_plugin_instances = child_plugin_instances or []
+
+    class Alert:
+        """Stand-in for a parent plugin instance — class name drives the slot plugin_type."""
+
+        def __init__(self, child_plugin_instances):
+            self.child_plugin_instances = child_plugin_instances
+
+    def test_returns_tuple(self):
+        """get_slot must return a tuple, not a generator (regression for b5d4f79)."""
+        instance = self.Alert(child_plugin_instances=[])
+        result = get_slot(instance, "community")
+        self.assertIsInstance(result, tuple)
+
+    def test_yields_children_of_matching_slot(self):
+        child_a = self.FakePlugin("BadgePlugin")
+        child_b = self.FakePlugin("BadgePlugin")
+        slot = self.FakePlugin("AlertCommunityPlugin", child_plugin_instances=[child_a, child_b])
+        instance = self.Alert(child_plugin_instances=[slot])
+
+        result = get_slot(instance, "community")
+        self.assertEqual(result, (child_a, child_b))
+
+    def test_ignores_non_matching_slots(self):
+        wanted_child = self.FakePlugin("BadgePlugin")
+        other_child = self.FakePlugin("BadgePlugin")
+        wanted_slot = self.FakePlugin("AlertCommunityPlugin", child_plugin_instances=[wanted_child])
+        other_slot = self.FakePlugin("AlertHeaderPlugin", child_plugin_instances=[other_child])
+        instance = self.Alert(child_plugin_instances=[other_slot, wanted_slot])
+
+        result = get_slot(instance, "community")
+        self.assertEqual(result, (wanted_child,))
+
+    def test_capitalizes_slot_name(self):
+        """Slot lookup uses ``slot_name.capitalize()`` to build the plugin_type."""
+        child = self.FakePlugin("BadgePlugin")
+        slot = self.FakePlugin("AlertMyslotPlugin", child_plugin_instances=[child])
+        instance = self.Alert(child_plugin_instances=[slot])
+
+        self.assertEqual(get_slot(instance, "myslot"), (child,))
+
+    def test_no_matching_slot_returns_empty_tuple(self):
+        slot = self.FakePlugin("AlertHeaderPlugin", child_plugin_instances=[self.FakePlugin("BadgePlugin")])
+        instance = self.Alert(child_plugin_instances=[slot])
+
+        result = get_slot(instance, "community")
+        self.assertEqual(result, ())
+
+    def test_concatenates_multiple_matching_slots(self):
+        child_a = self.FakePlugin("BadgePlugin")
+        child_b = self.FakePlugin("BadgePlugin")
+        slot_1 = self.FakePlugin("AlertCommunityPlugin", child_plugin_instances=[child_a])
+        slot_2 = self.FakePlugin("AlertCommunityPlugin", child_plugin_instances=[child_b])
+        instance = self.Alert(child_plugin_instances=[slot_1, slot_2])
+
+        result = get_slot(instance, "community")
+        self.assertEqual(result, (child_a, child_b))
 
 
 class InlineFieldTestCase(TestFixture, CMSTestCase):
