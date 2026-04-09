@@ -7,6 +7,7 @@
 
 .frontend-button-group {
     display: inline-flex;
+    flex-wrap: wrap;
     margin-inline-end: 1em;
     .btn {
         box-sizing: border-box;
