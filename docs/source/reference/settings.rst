@@ -440,3 +440,32 @@ in your project's ``settings.py``.
     Example::
 
         DJANGOCMS_FRONTEND_SHOW_ADVANCED_SETTINGS = False
+
+.. py:attribute:: settings.DJANGOCMS_FRONTEND_AUTO_TEXT_CONTRAST
+
+    Default: ``True``
+
+    If ``True``, plugins with a background context render Bootstrap's
+    ``text-bg-{color}`` helper class (available since Bootstrap 5.2) instead of
+    ``bg-{color}``. In addition to coloring the background, ``text-bg-{color}``
+    automatically sets a contrasting text color, e.g. white text on a
+    ``dark`` background.
+
+    The plain ``bg-{color}`` class is still used when the background is set to
+    *transparent* (no ``text-bg-transparent`` class exists) or when a
+    background opacity is selected (the automatic contrast color assumes a
+    fully opaque background and could render text unreadable).
+
+    .. warning::
+
+        ``text-bg-{color}`` sets the text color with ``!important``. If your
+        site relies on custom CSS to color text inside elements with a
+        background context, that CSS may be overridden. Set this setting to
+        ``False`` to restore the previous behavior of only adding
+        ``bg-{color}``::
+
+            DJANGOCMS_FRONTEND_AUTO_TEXT_CONTRAST = False
+
+        An explicit text color chosen in a plugin's settings (e.g. a card's
+        text color) still takes precedence, since Bootstrap's ``.text-*``
+        utilities are declared after the ``.text-bg-*`` helpers.

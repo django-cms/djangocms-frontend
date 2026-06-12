@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
@@ -66,6 +68,63 @@ class CardPluginTestCase(TestFixture, CMSTestCase):
             or ('<div class="bg-transparent card">' in response.content.decode("utf-8")),
             f'<div class="card bg-transparent"> not found in {response.content.decode("utf-8")}',
         )
+
+    def test_background_context_renders_text_bg(self):
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CardPlugin.__name__,
+            language=self.language,
+            config=dict(
+                background_context="primary",
+            ),
+        )
+        plugin.initialize_from_form(CardForm).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "text-bg-primary")
+        self.assertNotContains(response, " bg-primary")
+
+    def test_background_context_with_opacity_renders_plain_bg(self):
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CardPlugin.__name__,
+            language=self.language,
+            config=dict(
+                background_context="primary",
+                background_opacity="50",
+            ),
+        )
+        plugin.initialize_from_form(CardForm).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "text-bg-primary")
+        self.assertContains(response, "bg-primary")
+        self.assertContains(response, "bg-opacity-50")
+
+    @patch("djangocms_frontend.common.bootstrap5.background.AUTO_TEXT_CONTRAST", False)
+    def test_background_context_auto_text_contrast_opt_out(self):
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=CardPlugin.__name__,
+            language=self.language,
+            config=dict(
+                background_context="primary",
+            ),
+        )
+        plugin.initialize_from_form(CardForm).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "text-bg-primary")
+        self.assertContains(response, "bg-primary")
 
     def test_card_inner_plugin(self):
         plugin = add_plugin(

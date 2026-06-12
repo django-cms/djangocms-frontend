@@ -5,6 +5,7 @@ from entangled.forms import EntangledModelFormMixin
 from djangocms_frontend import settings
 from djangocms_frontend.fields import ButtonGroup, ColoredButtonGroup
 from djangocms_frontend.helpers import insert_fields
+from djangocms_frontend.settings import AUTO_TEXT_CONTRAST
 
 
 class BackgroundMixin:
@@ -22,7 +23,16 @@ class BackgroundMixin:
 
     def render(self, context, instance, placeholder):
         if getattr(instance, "background_context", ""):
-            instance.add_classes(f"bg-{instance.background_context}")
+            # text-bg-{color} also sets a contrasting text color, but only exists
+            # for theme colors and assumes a fully opaque background
+            if (
+                AUTO_TEXT_CONTRAST
+                and instance.background_context != "transparent"
+                and not getattr(instance, "background_opacity", "")
+            ):
+                instance.add_classes(f"text-bg-{instance.background_context}")
+            else:
+                instance.add_classes(f"bg-{instance.background_context}")
         if getattr(instance, "background_opacity", ""):
             instance.add_classes(f"bg-opacity-{instance.background_opacity}")
         if getattr(instance, "background_shadow", ""):

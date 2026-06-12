@@ -40,6 +40,17 @@ The background properties can be modified by changing **opacity** and its abilit
 cast a **shadow**. Shadows allow the whole element to appear elevated from the
 background.
 
+.. warning::
+
+    By default, setting a background context renders Bootstrap's
+    ``text-bg-{color}`` class, which also adjusts the text color for
+    contrast (e.g. white text on a dark background) using ``!important``.
+    Custom CSS that colors text inside such elements may be overridden. To
+    render the plain ``bg-{color}`` class instead, set
+    :attr:`~settings.DJANGOCMS_FRONTEND_AUTO_TEXT_CONTRAST` to ``False``.
+    The plain class is always used for transparent backgrounds and when a
+    background opacity is selected.
+
 .. image:: screenshots/tabs-background.png
 
 Spacing tab
