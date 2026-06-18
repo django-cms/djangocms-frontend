@@ -36,10 +36,10 @@ repetition.
 To use a frontend plugin in a template you need to load the ``frontend`` tags
 and then use the ``plugin`` template tag to render a frontend plugin.
 
-.. code::
+.. code-block:: template
 
     {% load frontend %}
-    {% plugin "alert" alert_context="secondary" alert_dismissable=True %}
+    {% plugin "alert" alert_context="secondary" alert_dismissible=True %}
         Here goes the content of the alert.
     {% endplugin %}
 
@@ -49,7 +49,9 @@ You can override these settings by passing them as keyword arguments to the
 
 You can also create more complex reusable components, like a card with inner
 elements such as headers, bodies, and lists, by nesting plugins. Here’s an
-example of a card component::
+example of a card component:
+
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "card" card_alignment="center" card_outline="info" card_text_color="primary" card_full_height=True %}

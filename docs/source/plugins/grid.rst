@@ -48,17 +48,19 @@ Component example
 
 To create a container in a Django template, you need to load the `frontend` tags
 and then use the `plugin` template tag to render the container plugin.
-Below is an example of how you might do this::
+Below is an example of how you might do this:
+
+.. code-block:: template
 
     {% load frontend %}
 
     <!-- Example of using the plugin template tag for a container -->
-    {% plugin "container" container_type="container-fluid" %}
+    {% plugin "gridcontainer" container_type="container-fluid" %}
         {% plugin "gridrow" %}
-            {% plugin "column" xs_col=6 %}
+            {% plugin "gridcolumn" xs_col=6 %}
                 <p>This is the first column inside the container.</p>
             {% endplugin %}
-            {% plugin "column" xs_col=6 %}
+            {% plugin "gridcolumn" xs_col=6 %}
                 <p>This is the second column inside the container.</p>
             {% endplugin %}
         {% endplugin %}
@@ -150,7 +152,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "gridcontainer" container_type="container-fluid" %}
