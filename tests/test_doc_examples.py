@@ -104,10 +104,7 @@ def _make_test(doc, line_number, source):
         try:
             result = self._render(source)
         except Exception as exc:  # noqa: BLE001 - re-raised with doc context
-            raise AssertionError(
-                f"{location} failed to render:\n"
-                f"{exc.__class__.__name__}: {exc}\n\n{source}"
-            ) from exc
+            raise AssertionError(f"{location} failed to render:\n{exc.__class__.__name__}: {exc}\n\n{source}") from exc
         self.assertNotIn(
             UNREGISTERED_MARKER,
             result,
