@@ -214,6 +214,123 @@ When you define slots:
 For more details and advanced usage, see :ref:`components-with-slots`.
 
 
+.. _nested_components:
+
+Nested components
+=================
+
+.. versionadded:: 2.5
+
+Slots are the right tool for *heterogeneous, fixed* regions (a media area and a
+text area, say). When you instead need a *repeating, typed* child — many tab
+items, accordion rows, or carousel slides — declare the child component **inside**
+its parent. The nesting wires up the parent/child relationship for you, so you
+never have to cross-reference plugin names.
+
+.. code-block:: python
+
+    from django import forms
+
+    from djangocms_frontend.component_base import CMSFrontendComponent
+    from djangocms_frontend.component_pool import components
+
+
+    @components.register
+    class Tabs(CMSFrontendComponent):
+        class Meta:
+            name = "Tabs"
+            render_template = "tabs/content.html"
+
+        template = forms.ChoiceField(choices=[("default", "Default"), ("pills", "Pills")])
+
+        class Item(CMSFrontendComponent):           # nested -> a child of Tabs
+            class Meta:
+                name = "Tab item"
+                render_template = "tabs/item.html"
+
+            label = forms.CharField()
+            # no parent_classes, no template field needed
+
+From this declaration ``djangocms-frontend`` derives:
+
+- **Qualified names.** ``Tabs.Item`` becomes ``TabsItem`` / ``TabsItemPlugin``.
+  The pattern is ``<Parent><Child>Plugin``, so a short inner name like ``Item``
+  reads naturally and can never collide with another component's ``Item``.
+  Nesting can go deeper (``Section.Row.Col`` → ``SectionRowColPlugin``).
+- **The parent/child link.** The child gets ``parent_classes = ["TabsPlugin"]``
+  and ``require_parent = True``; the parent gets ``allow_children = True``. On
+  django CMS 5.1+ the parent's ``child_classes`` is ``"auto"`` — the allowed
+  children are resolved from the plugins that name it in their
+  ``parent_classes`` — while on older versions the nested children are
+  enumerated explicitly. Either way, only ``Tab item`` plugins may be added.
+- **Registration.** Registering ``Tabs`` registers the nested ``Item`` too; you
+  do not decorate it separately.
+
+Any value you set explicitly on a child's ``Meta`` (``parent_classes``,
+``require_parent``, …) wins over the derived default, so the relationship stays
+fully customisable.
+
+
+Selecting the render template
+-----------------------------
+
+If a component has a ``template`` field, the selected value is inserted as a
+folder right before the file name of ``render_template``. With the
+``Tabs`` component above and ``template = "pills"`` the parent renders
+``tabs/pills/content.html`` instead of ``tabs/content.html``.
+
+A nested child without its own ``template`` field **inherits the choice from its
+parent** at render time. So ``Item`` renders ``tabs/pills/item.html`` — change
+the parent's template and all its items follow. If the resolved template does
+not exist, the bare ``render_template`` is used as a fallback.
+
+This behaviour comes from the default ``get_render_template`` that every
+component now provides; you only need to write a custom one for non-standard
+cases.
+
+
+Rendering the children
+----------------------
+
+Use the :py:func:`~djangocms_frontend.templatetags.frontend.children` filter to
+iterate a component's typed children. Because it returns the child *instances*
+(not rendered HTML), the parent template can loop them as often as it needs — for
+tabs, once for the nav and once for the panes:
+
+.. code-block:: django
+
+    {# tabs/<template>/content.html #}
+    {% load cms_tags frontend %}
+    <ul class="nav nav-{{ instance.template }}" role="tablist">
+        {% for item in instance|children:"TabsItem" %}
+            <li class="nav-item">
+                <button data-bs-target="#{% set_html_id item %}">{{ item.label }}</button>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for item in instance|children:"TabsItem" %}
+            {% render_plugin item %}     {# renders tabs/<template>/item.html #}
+        {% endfor %}
+    </div>
+
+The child template renders its own content as usual:
+
+.. code-block:: django
+
+    {# tabs/<template>/item.html #}
+    {% load frontend %}
+    <div class="tab-pane" id="{% set_html_id instance %}">
+        {% childplugins instance %}{% endchildplugins %}
+    </div>
+
+.. tip::
+
+    A runnable, byte-for-byte reproduction of the built-in
+    ``djangocms_frontend.contrib.tabs`` plugin built entirely from nested
+    components lives in the ``examples`` app shipped with the project.
+
+
 Organizing fields with fieldsets
 =================================
 
@@ -346,6 +463,11 @@ Custom frontend components are a powerful tool for developers, but they have a l
 and can contain Python code to modify the behavior of a form. You cannot directly add Python code to
 the resulting plugin class with the exception of ``get_render_template()``. Similarly, you cannot add
 Python code the model class, in this case with the exception of ``get_short_description()``.
+
+Components already ship with a default ``get_render_template()`` that handles the
+``template`` field and nested-component template inheritance (see
+:ref:`nested_components`), so you only need to override it for non-standard
+template resolution.
 
 For maximun flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
 

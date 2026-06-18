@@ -1,0 +1,3 @@
+{% load cms_tags frontend %}<section{{ instance.get_attributes }}>
+    {% for row in instance|children:"SectionRow" %}{% render_plugin row %}{% endfor %}
+</section>

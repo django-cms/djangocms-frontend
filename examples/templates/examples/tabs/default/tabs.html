@@ -1,0 +1,29 @@
+{% load cms_tags frontend %}{% spaceless %}
+    <{{ instance.tag_type }}{{ instance.get_attributes }}>
+    <ul class="nav {{ instance.tab_type }} {% if instance.tab_alignment %} {{ instance.tab_alignment }}{% endif %}" role="tablist">
+        {% for plugin in instance|children %}
+            <li class="nav-item">
+                <button
+                    class="nav-link{% if instance.tab_index == forloop.counter %} active{% endif %}"
+                    id="tab-label-{{ plugin.pk|safe }}"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tab-{{ plugin.pk|safe }}"
+                    aria-controls="tab-{{ plugin.pk|safe }}"
+                    aria-selected="{% if instance.tab_index == forloop.counter %}true{% else %}false{% endif %}"
+                    type="button"
+                    role="tab">
+                    {{ plugin.tab_title }}
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="tab-content{% if instance.tab_alignment == "flex-column" %} flex-fill{% endif %}">{% endspaceless %}
+        {% for plugin in instance|children %}
+            {% with parent=instance parentloop=forloop %}
+                {% render_plugin plugin %}
+            {% endwith %}
+        {% endfor %}{% spaceless %}
+    </div>
+    </{{ instance.tag_type }}>
+{% endspaceless %}

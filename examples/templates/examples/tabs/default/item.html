@@ -1,0 +1,9 @@
+{% load cms_tags frontend %}
+<{{ instance.tag_type }}{{ instance.get_attributes }}
+ id="tab-{{ instance.pk|safe }}"
+ aria-labelledby="tab-label-{{ instance.pk|safe }}"
+ role="tabpanel">
+    {% for plugin in instance|children %}
+        {% render_plugin plugin %}
+    {% endfor %}
+</{{ instance.tag_type }}>

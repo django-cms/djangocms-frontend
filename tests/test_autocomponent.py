@@ -153,6 +153,9 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
             ("tests.test_app", "test_app/cms_components/hero.html"),
             ("tests.test_app", "test_app/cms_components/with_slots.html"),
             ("tests.test_app", "test_app/cms_components/ui/button.html"),
+            ("examples", "examples/cms_components/feature_icon.html"),
+            ("examples", "examples/cms_components/feature_hanging.html"),
+            ("examples", "examples/cms_components/icon_grid.html"),
         }
         assert path_components == [("tests.test_app", "test_app/cms_components/ui/button.html")]
         assert private_components == [("tests.test_app", "test_app/my_components/test_component.htm")]

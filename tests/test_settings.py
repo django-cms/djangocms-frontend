@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.utilities",
     "sekizai",
     "tests.test_app",
+    "examples",
 ]
 
 try:  # V4 test?

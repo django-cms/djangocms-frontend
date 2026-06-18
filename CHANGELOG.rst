@@ -3,7 +3,7 @@ Changelog
 =========
 
 
-2.4.0 (2026.03-27
+2.4.0 (2026.03-27)
 ==================
 
 * feat: add "target" option to link plugin by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/355

@@ -342,6 +342,31 @@ def get_slot(instance, slot_name):
     return tuple(generator())
 
 
+@register.filter
+def children(instance, plugin_type=None):
+    """Get the direct child plugin instances of ``instance``, optionally filtered
+    by component (plugin) type.
+
+    Unlike ``{% childplugins %}``, this returns the child *instances* rather than
+    their rendered HTML, so a component's template can iterate them more than once
+    (e.g. a tab nav and the tab panes) and render their fields and bodies itself.
+
+    The ``plugin_type`` may be given with or without the ``Plugin`` suffix, e.g.
+    both ``"TabComponentItem"`` and ``"TabComponentItemPlugin"`` work.
+
+    Usage: ``{% for item in instance|children:"TabComponentItem" %} ... {% endfor %}``
+    """
+    wanted = None
+    if plugin_type:
+        wanted = plugin_type if plugin_type.endswith("Plugin") else f"{plugin_type}Plugin"
+
+    return tuple(
+        child
+        for child in getattr(instance, "child_plugin_instances", None) or []
+        if wanted is None or child.plugin_type == wanted
+    )
+
+
 class InlineField(CMSEditableObject):
     name = "inline_field"
     options = Options(

@@ -14,6 +14,7 @@ from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
 from djangocms_frontend.contrib.alert.forms import AlertForm
 from djangocms_frontend.contrib.alert.models import Alert
 from djangocms_frontend.templatetags.frontend import (
+    children,
     get_attributes,
     get_slot,
     is_registering_component,
@@ -285,6 +286,53 @@ class GetSlotFilterTestCase(TestCase):
 
         result = get_slot(instance, "community")
         self.assertEqual(result, (child_a, child_b))
+
+
+class ChildrenFilterTestCase(TestCase):
+    """Tests for the children filter."""
+
+    class FakePlugin:
+        def __init__(self, plugin_type):
+            self.plugin_type = plugin_type
+
+    class Parent:
+        def __init__(self, child_plugin_instances):
+            self.child_plugin_instances = child_plugin_instances
+
+    def test_returns_tuple(self):
+        """children must return a (re-iterable) tuple, not a generator."""
+        result = children(self.Parent(child_plugin_instances=[]))
+        self.assertIsInstance(result, tuple)
+
+    def test_returns_all_children_without_filter(self):
+        a = self.FakePlugin("TabComponentItemPlugin")
+        b = self.FakePlugin("SomethingElsePlugin")
+        instance = self.Parent(child_plugin_instances=[a, b])
+        self.assertEqual(children(instance), (a, b))
+
+    def test_filters_by_plugin_type(self):
+        a = self.FakePlugin("TabComponentItemPlugin")
+        b = self.FakePlugin("SomethingElsePlugin")
+        c = self.FakePlugin("TabComponentItemPlugin")
+        instance = self.Parent(child_plugin_instances=[a, b, c])
+        self.assertEqual(children(instance, "TabComponentItemPlugin"), (a, c))
+
+    def test_plugin_suffix_is_optional(self):
+        a = self.FakePlugin("TabComponentItemPlugin")
+        b = self.FakePlugin("SomethingElsePlugin")
+        instance = self.Parent(child_plugin_instances=[a, b])
+        # Both spellings resolve to the same plugin_type.
+        self.assertEqual(children(instance, "TabComponentItem"), (a,))
+        self.assertEqual(children(instance, "TabComponentItemPlugin"), (a,))
+
+    def test_no_match_returns_empty_tuple(self):
+        instance = self.Parent(child_plugin_instances=[self.FakePlugin("SomethingElsePlugin")])
+        self.assertEqual(children(instance, "TabComponentItem"), ())
+
+    def test_missing_child_plugin_instances_returns_empty_tuple(self):
+        """Safe during component scanning where instance has no children (e.g. {})."""
+        self.assertEqual(children({}), ())
+        self.assertEqual(children({}, "TabComponentItem"), ())
 
 
 class InlineFieldTestCase(TestFixture, CMSTestCase):

@@ -66,6 +66,24 @@ class MyDefaultsComponent(CMSFrontendComponent):
 
 
 @components.register
+class TabComponent(CMSFrontendComponent):
+    class Meta:
+        name = "Tab Component"
+        render_template = "tabs/content.html"
+
+    title = forms.CharField(required=False, initial="Tabs")
+
+    class Item(CMSFrontendComponent):
+        # Nested component -> registered as TabComponentItemPlugin, a child of
+        # TabComponent whose template choice it inherits.
+        class Meta:
+            name = "Tab Item"
+            render_template = "tabs/item.html"
+
+        label = forms.CharField(required=True, initial="Tab")
+
+
+@components.register
 class MyCardWithFieldsets(CMSFrontendComponent):
     class Meta:
         name = "Card with Fieldsets"

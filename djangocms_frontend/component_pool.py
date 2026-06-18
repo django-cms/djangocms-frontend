@@ -118,11 +118,17 @@ class Components:
     _discovered: bool = False
 
     def register(self, component):
+        self._register(component)
+        return component
+
+    def _register(self, component):
         if component.__name__ in self._registry:  # pragma: no cover
             warnings.warn(f"Component {component.__name__} already registered", stacklevel=2)
-            return component
+            return
         self._registry[component.__name__] = component.get_registration()
-        return component
+        # Nested components are not decorated themselves - register them too.
+        for nested in getattr(component, "_nested_components", []):
+            self._register(nested)
 
     def __getitem__(self, item):
         return self._registry[item]

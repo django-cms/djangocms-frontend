@@ -23,6 +23,14 @@ Slots are predefined placeholders in a component that:
 - Provide fallback content when a slot is empty
 - Are automatically created when a component instance is saved
 
+.. note::
+
+    Slots model *different kinds of content* in *fixed, named* regions (a media
+    area and a text area, for example). When you need a *repeating, typed* child
+    instead — many tab items or rows — reach for a
+    :ref:`nested component <nested_components>`. The two compose: a nested child
+    can itself declare slots.
+
 
 Defining slots
 ==============

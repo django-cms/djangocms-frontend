@@ -1,0 +1,3 @@
+{% load cms_tags frontend %}<div class="row"{{ instance.get_attributes }}>
+    {% for col in instance|children:"SectionRowCol" %}{% render_plugin col %}{% endfor %}
+</div>
