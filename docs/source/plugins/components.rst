@@ -273,7 +273,7 @@ skipped they fall back to their defaults):
 
     Carousel slides read settings from their parent carousel while rendering,
     so a carousel has to be built inside django CMS. Unlike the other
-    components it cannot be rendered standalone with the ``{% plugin %}`` tag.
+    components, it cannot be rendered standalone with the ``{% plugin %}`` tag.
 
 .. code-block:: django
 
