@@ -10,7 +10,7 @@
 quick usage of components defined by the underlying css framework, e.g.
 Bootstrap 5.
 
-While ``djangocms-frontend`` is set up to become framework agnostic its
+While ``djangocms-frontend`` is set up to become framework agnostic, its
 heritage from ``djangocms-bootstrap4`` is intentional and quite visible.
 Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
