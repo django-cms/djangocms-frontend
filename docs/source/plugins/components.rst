@@ -427,7 +427,14 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block:: template
+.. note::
+
+    The link field depends on the configured link backend. The example below
+    uses the default ``link`` field (via the ``to_link`` filter). If
+    ``djangocms-url-manager`` is installed, links are set through ``url_grouper``
+    and ``site`` instead.
+
+.. code-block:: django
 
     {% load frontend djangocms_link_tags %}
     {% plugin "textlink" link="/about/"|to_link link_type="btn" link_context="primary" link_outline=False %}
@@ -953,7 +960,7 @@ skipped they fall back to their defaults):
 .. note::
 
     The navigation builds a menu from the current request, so it has to be
-    rendered within a django CMS page request. Unlike the other components it
+    rendered within a django CMS page request. Unlike the other components, it
     cannot be rendered standalone with the ``{% plugin %}`` tag.
 
 .. code-block:: django

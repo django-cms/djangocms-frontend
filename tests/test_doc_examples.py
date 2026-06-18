@@ -98,16 +98,24 @@ class DocPluginExamplesTest(TestFixture, CMSTestCase):
 
 
 def _make_test(doc, line_number, source):
+    location = f"{doc}:{line_number}"
+
     def test(self):
-        result = self._render(source)
+        try:
+            result = self._render(source)
+        except Exception as exc:  # noqa: BLE001 - re-raised with doc context
+            raise AssertionError(
+                f"{location} failed to render:\n"
+                f"{exc.__class__.__name__}: {exc}\n\n{source}"
+            ) from exc
         self.assertNotIn(
             UNREGISTERED_MARKER,
             result,
-            msg=f"{doc}:{line_number} uses a plugin slug that is not a registered component:\n{source}",
+            msg=f"{location} uses a plugin slug that is not a registered component:\n{source}",
         )
         self.assertTrue(
             result.strip(),
-            msg=f"{doc}:{line_number} rendered empty output:\n{source}",
+            msg=f"{location} rendered empty output:\n{source}",
         )
 
     return test
