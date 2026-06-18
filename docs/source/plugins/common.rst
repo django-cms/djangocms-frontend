@@ -13,7 +13,7 @@ a placeholder:
 
 .. image:: screenshots/add_plugin.png
 
-Frontend editing of plugins has been desinged with three aims:
+Frontend editing of plugins has been designed with three aims:
 
 * Keep the essential editing required minimal and well-arranged on the editing
   forms.

@@ -10,8 +10,8 @@
 quick usage of components defined by the underlying css framework, e.g.
 Bootstrap 5.
 
-While ``djangocoms-frontend`` is set up to become framework agnostic its
-heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
+While ``djangocms-frontend`` is set up to become framework agnostic its
+heritage from ``djangocms-bootstrap4`` is intentional and quite visible.
 Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
 
@@ -166,7 +166,7 @@ tools. If you need more granular responsive settings, please revert to
 .. warning::
 
     djangocms-bootstrap4 Card Decks are not supported by `Bootstrap 5
-    <https://getbootstrap.com/docs/5.1/components/card/#card-layout>`_.
+    <https://getbootstrap.com/docs/5.3/components/card/#card-layout>`_.
     Card decks will be converted to grids of cards upon
     :ref:`Migrating from djangocms-bootstrap4`.
 
@@ -484,7 +484,7 @@ to enter code bits.
     from a cdn. If you do not want this to happen, e.g., for data privacy reasons
     or because your system is not connected to the internet, please use the
     weak dependency on `djangocms-static-ace <https://github.com/django-cms/djangocms-static-ace>`_
-    by chaning your requirement from ``djangocms-frontend`` to
+    by changing your requirement from ``djangocms-frontend`` to
     ``djangocms-frontend[static-ace]`` and include
     ``"djangocms_static_ace"`` in your ``INSTALLED_APPS``.
 
@@ -574,13 +574,13 @@ support for the following icon sets:
 * `Bootstrap icons <https://icons.getbootstrap.com>`_
 * `Elegant icons <https://www.elegantthemes.com/blog/resources/elegant-icon-font>`_ (bundled)
 * `Feather icons <https://feathericons.com>`_ (bundled)
-* `Fomatic UI icons <https://fomantic-ui.com/elements/icon.html>`_ (bundled)
+* `Fomantic UI icons <https://fomantic-ui.com/elements/icon.html>`_ (bundled)
 * `Font awesome (regular, solid and brands) <https://fontawesome.com>`_
 * `Foundation icons <https://zurb.com/playground/foundation-icon-fonts-3>`_ (bundled)
 * `Material icons (filled, outlined, sharp, two-tone) <https://fonts.google.com/icons>`_
 * `Open iconic <https://github.com/iconic/open-iconic>`_
 * `Tabler icons <https://tabler-icons.io>`_
-* Eric Flower's `Weather icons <https://erikflowers.github.io/weather-icons/>`_ (bundled)
+* Erik Flowers' `Weather icons <https://erikflowers.github.io/weather-icons/>`_ (bundled)
 
 
 .. note::
@@ -635,7 +635,7 @@ out the `config file for Bootstrap Icons <https://github.com/migliori/universal-
        ]
     }
 
-Icons are rendered as ``<i>>`` tags with classes.
+Icons are rendered as ``<i>`` tags with classes.
 
 ``.prefix`` defines a string that is prepended to all icons. For Bootstrap icons
 that's the class ``bi`` and the prefix for the icon selecting class ``bi-``.
@@ -645,8 +645,8 @@ The list ``.icons`` contains all available icons in the set.
 ``.list-icon`` contains the classes for the example icon. You can probably ignore it.
 
 ``.icon-style`` currently is unused. It may in future determine how icons are
-rendered. Currently all icons a re rendered by ``<i class"bla"></i>`` except
-material design icon which are rendered by ``<i class="material-icon">bla</i>``.
+rendered. Currently all icons are rendered by ``<i class="bla"></i>`` except
+material design icons which are rendered by ``<i class="material-icon">bla</i>``.
 
 
 Using svg sprites
@@ -674,7 +674,7 @@ in ``CKEDITOR_SETTINGS``, e.g.,
     }
 
 This will load the ``ckeditor.icons.js`` file which in turn will allow empty
-``span``and ``i`` tags.
+``span`` and ``i`` tags.
 
 If you already have a ``customConfig`` file specified it will suffice to add
 the following two lines to it.

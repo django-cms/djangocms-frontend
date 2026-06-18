@@ -10,7 +10,7 @@ screens).
 
 The details of the grid system are based on the Bootstrap framework. Therefore,
 for details on how grids work, see, e.g. the `Bootstrap 5 documentation
-<https://getbootstrap.com/docs/5.1/layout/grid/>`_.
+<https://getbootstrap.com/docs/5.3/layout/grid/>`_.
 
 .. index::
     single: Container
@@ -20,7 +20,7 @@ Container
 *********
 
 A container is an invisible element that wraps other content. There are
-in two types of containers:
+three types of containers:
 
 Container
    All other containers restrict the width of their content depending on

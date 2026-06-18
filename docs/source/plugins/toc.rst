@@ -9,11 +9,13 @@ Headings and table of contents
 The Heading plugin allows you to add headings (h1-h6) to your content with optional styling and anchors for navigation.
 
 Configuration
-*************
+=============
 
 - **Heading Level**: Choose h1-h6 for the heading tag
 - **Heading Text**: The text content of the heading
-- **Heading ID**: Optional anchor ID for TOC linking
+- **Heading ID**: Optional anchor ID for TOC linking. This field is automatically
+  prepopulated from the heading text as you type, but you can override it with your
+  own value.
 - **Heading Alignment**: Text alignment (left, center, right)
 - **Heading Context**: Optional Bootstrap contextual class for styling
 
@@ -29,11 +31,12 @@ To create a heading that will appear in a table of contents:
 1. Add a Heading plugin
 2. Set the heading level (e.g., h2)
 3. Enter your heading text
-4. Set a unique ID in the "Heading ID" field
+4. A unique ID is prepopulated from the heading text in the "Heading ID" field
+   (adjust it if needed)
 5. Optional: Adjust alignment and styling
 
 Advanced Usage
-=============
+==============
 
 Styling
 -------
