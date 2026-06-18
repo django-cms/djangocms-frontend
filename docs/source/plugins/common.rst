@@ -12,8 +12,9 @@ All plugins are listed in the section "Frontend" when adding a plugin to
 a placeholder:
 
 .. image:: screenshots/add_plugin.png
+    :alt: The "Frontend" plugin group shown in the "Add plugin" menu
 
-Frontend editing of plugins has been desinged with three aims:
+Frontend editing of plugins has been designed with three aims:
 
 * Keep the essential editing required minimal and well-arranged on the editing
   forms.
@@ -29,6 +30,7 @@ to the plugin, their availability depending on the plugin type. The well-known
 case be covered by the new other tabs:
 
 .. image:: screenshots/tabs-main.png
+    :alt: A plugin editing form with its main tab selected
 
 Background tab
 ==============
@@ -41,6 +43,7 @@ cast a **shadow**. Shadows allow the whole element to appear elevated from the
 background.
 
 .. image:: screenshots/tabs-background.png
+    :alt: The Background tab of a plugin editing form
 
 Spacing tab
 ===========
@@ -52,6 +55,7 @@ For both margin and padding the settings can be made independently for
 horizontal and vertical padding.
 
 .. image:: screenshots/tabs-spacing.png
+    :alt: The Spacing tab of a plugin editing form
 
 Visibility tab
 ==============
@@ -60,6 +64,7 @@ The visibility tab controls on which devices the elements and its children
 should be visible. Use this to design different content for different devices.
 
 .. image:: screenshots/tabs-visibility.png
+    :alt: The Visibility tab of a plugin editing form
 
 Advanced settings tab
 =====================
@@ -69,6 +74,7 @@ to render the element. You may also add attributes like additional classes as a
 ``class`` attribute, an ``id`` or styles in the ``style`` attribute.
 
 .. image:: screenshots/tabs-advanced.png
+    :alt: The Advanced settings tab of a plugin editing form
 
 .. warning::
 
@@ -84,6 +90,7 @@ the element significantly which is why the dot reminds the editor that
 there are advanced settings present.
 
 .. image:: screenshots/adv-settings-active.png
+    :alt: A blue dot on the Advanced settings tab label indicating active advanced settings
 
 
 Error indicators
@@ -95,5 +102,6 @@ are visible in tabbed editing tabs containing an error have a red badge at
 the upper right corner:
 
 .. image::  screenshots/tab-error-indicator.png
+    :alt: A red badge on a tab indicating a validation error in one of its fields
 
 

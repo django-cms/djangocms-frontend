@@ -10,8 +10,8 @@
 quick usage of components defined by the underlying css framework, e.g.
 Bootstrap 5.
 
-While ``djangocoms-frontend`` is set up to become framework agnostic its
-heritage from ``djangocms-bootstrap4`` is intentionally and quite visible.
+While ``djangocms-frontend`` is set up to become framework agnostic, its
+heritage from ``djangocms-bootstrap4`` is intentional and quite visible.
 Hence  for the time being, this documentation references the Bootstrap 5
 documentation.
 
@@ -29,11 +29,13 @@ Accordion component
 Build vertically collapsing sections using accordions:
 
 .. image:: screenshots/accordion-example.png
+    :alt: An accordion with vertically collapsing sections
 
 Accordions consist of an Accordion plugin which has an Accordion Item plugin for
 each collapsable section.
 
 .. image:: screenshots/accordion-plugins.png
+    :alt: The plugin tree of an Accordion with several Accordion Item child plugins
     :width: 394
 
 Also see Bootstrap 5 `Accordion <https://getbootstrap.com/docs/5.3/components/accordion/>`_
@@ -70,11 +72,13 @@ Alerts provide contextual feedback messages for typical user actions with a
 handful of available alert messages.
 
 .. image:: screenshots/alert-example.png
+    :alt: A contextual alert message
 
 Alerts can be marked dismissible which implies that a close button is added on
 the right hand side.
 
 .. image:: screenshots/alert-plugins.png
+    :alt: The plugin tree of an Alert plugin
     :width: 391
 
 .. note::
@@ -113,6 +117,7 @@ While often useful if populated automatically as opposed to statically in a
 plugin, badges are useful, e.g., to mark featured or new headers.
 
 .. image:: screenshots/badge-example.png
+    :alt: A badge attached to a heading
     :width: 180
 
 Also see Bootstrap 5 `Badge <https://getbootstrap.com/docs/5.3/components/badge/>`_
@@ -152,10 +157,12 @@ one ore more instances of a Card Inner Plugin for header, body or footer, but
 also potentially an Image Plugin for the card image or list group components.
 
 .. image:: screenshots/card-example.png
+    :alt: A card with a header, body and footer
 
 The corresponding plugin tree is here:
 
 .. image:: screenshots/card-plugins.png
+    :alt: The plugin tree of a Card with Card Inner and other child plugins
     :width: 825
 
 Cards can be grouped by a **Card Layout component** offering the ability group
@@ -166,7 +173,7 @@ tools. If you need more granular responsive settings, please revert to
 .. warning::
 
     djangocms-bootstrap4 Card Decks are not supported by `Bootstrap 5
-    <https://getbootstrap.com/docs/5.1/components/card/#card-layout>`_.
+    <https://getbootstrap.com/docs/5.3/components/card/#card-layout>`_.
     Card decks will be converted to grids of cards upon
     :ref:`Migrating from djangocms-bootstrap4`.
 
@@ -177,6 +184,7 @@ The card resides in a Card plugin which allows for coloring, opacity and shadow
 options.
 
 .. image:: screenshots/card.png
+    :alt: The Card plugin editing form with coloring, opacity and shadow options
 
 Content is added to the card plugin by creating child plugins. These can be of
 the type `Card inner`_, `Picture / Image`_, `List group`_, or Row.
@@ -195,10 +203,12 @@ The Card Inner plugin allows to add the card header, body, footer or an overlay
 space for a card image.
 
 .. image:: screenshots/card-inner.png
+    :alt: The Card Inner plugin editing form selecting header, body, footer or overlay
 
 Here is an example of the new card **Image overlay** feature:
 
 .. image:: screenshots/card-overlay-example.png
+    :alt: A card with text overlaid on its image
     :width: 298
 
 Also see Bootstrap 5 `Card <https://getbootstrap.com/docs/5.3/components/card/>`_
@@ -309,6 +319,45 @@ button) to reveal itself.
 Compared to the accordion component the collapse component often is more
 flexible but also requires more detailed styling.
 
+A collapse consists of a Collapse plugin wrapping a Collapse Trigger plugin (the
+element that toggles the content) and a Collapse Container plugin (the content
+that is shown or hidden). The trigger and the container are connected by giving
+them the same identifier.
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "collapse" %}
+        {% plugin "collapsetrigger" trigger_identifier="example" %}
+            <button class="btn btn-primary" type="button">Toggle</button>
+        {% endplugin %}
+        {% plugin "collapsecontainer" container_identifier="example" %}
+            <p>This content is revealed and hidden by the trigger.</p>
+        {% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "collapse" %}`` are:
+
+* ``collapse_siblings``: CSS selector used to group collapses into an accordion.
+  Default is ``".card"``.
+
+Parameters for ``{% plugin "collapsetrigger" %}`` are:
+
+* ``trigger_identifier``: Connects the trigger to the container that carries the
+  same identifier. Required.
+
+Parameters for ``{% plugin "collapsecontainer" %}`` are:
+
+* ``container_identifier``: Connects the container to the trigger that carries
+  the same identifier. Required.
+
 
 .. index::
     single: Jumbotron
@@ -324,6 +373,28 @@ headers.
 .. note::
 
     The jumbotron header is not reflected by the table of contents component.
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "jumbotron" jumbotron_fluid=False %}
+        <h1>Hello, world!</h1>
+        <p>A large header to showcase the most important content.</p>
+    {% endplugin %}
+
+Parameters for ``{% plugin "jumbotron" %}`` are:
+
+* ``template``: The template to use for the jumbotron. If not specified the
+  default template is used.
+* ``jumbotron_fluid``: If set to ``True`` the jumbotron fills the full width of
+  its container. Default is ``False``.
 
 .. index::
     single: Link
@@ -395,6 +466,34 @@ disabled.
         Links can be added to list groups and automatically are interpreted as list
         group items.
 
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "listgroup" list_group_flush=False %}
+        {% plugin "listgroupitem" %}An item{% endplugin %}
+        {% plugin "listgroupitem" list_context="primary" %}A second item{% endplugin %}
+        {% plugin "listgroupitem" list_state="active" %}An active item{% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "listgroup" %}`` are:
+
+* ``list_group_flush``: If set to ``True`` the list group is rendered without
+  borders to blend into a surrounding element. Default is ``False``.
+
+Parameters for ``{% plugin "listgroupitem" %}`` are:
+
+* ``simple_content``: One-line content of the item. Ignored if the item has
+  child plugins.
+* ``list_context``: Contextual color of the item, e.g. ``primary``.
+* ``list_state``: State of the item, either ``active`` or ``disabled``.
+
 ***************
 Media component
 ***************
@@ -402,6 +501,26 @@ Media component
 The media component is another legacy component from djangocms-bootstrap4.
 ``djangocms-frontend`` recreates it using responsive utilities.
 
+A media object consists of a Media plugin which typically contains a media
+element (e.g. a Picture / Image plugin) next to a Media Body plugin holding the
+accompanying text.
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Neither the Media nor the Media Body
+plugin take component-specific parameters:
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "media" %}
+        {% plugin "mediabody" %}
+            <h5>Media heading</h5>
+            <p>Text shown next to the media element.</p>
+        {% endplugin %}
+    {% endplugin %}
 
 .. index::
     single: Picture
@@ -452,6 +571,31 @@ plugins it just provides the amount of space specified on the specified sides.
     If no spacing is selected the spacing component can be used to individually
     style the content using the attributes fields in "Advanced Settings".
 
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "spacing" space_property="m" space_sides="y" space_size="3" space_device="md" %}
+        Content with vertical margins on medium screens and larger.
+    {% endplugin %}
+
+Parameters for ``{% plugin "spacing" %}`` are:
+
+* ``space_property``: ``m`` for margin or ``p`` for padding. Default is ``m``.
+* ``space_sides``: Side(s) the spacing applies to: ``""`` (all), ``t`` (top),
+  ``r`` (right), ``b`` (bottom), ``l`` (left), ``x`` (left and right) or ``y``
+  (top and bottom). Default is ``""``.
+* ``space_size``: Amount of spacing from ``0`` to ``5`` or ``auto``. Default is
+  ``0``. ``auto`` is not available for padding.
+* ``space_device``: Device from which the spacing applies (and larger): ``""``
+  (all), ``xs``, ``sm``, ``md``, ``lg``, ``xl`` or ``xxl``. Default is ``""``.
+
 .. index::
     single: Blockquote
 
@@ -466,6 +610,26 @@ Creates a ``<blockquote>`` tag.
     New feature:
         Alternatively to the un-formatted quote text, child plugins can be used
         to fill the content of the blockquote.
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "blockquote" quote_content="A well-known quotation." quote_origin="Famous Author" quote_alignment="center" %}{% endplugin %}
+
+Parameters for ``{% plugin "blockquote" %}`` are:
+
+* ``quote_content``: The quotation text. Required (unless child plugins are
+  used).
+* ``quote_origin``: The source or author of the quotation.
+* ``quote_alignment``: Alignment of the quote: ``""``, ``start``, ``center`` or
+  ``end``.
 
 .. index::
     single: Code
@@ -484,9 +648,28 @@ to enter code bits.
     from a cdn. If you do not want this to happen, e.g., for data privacy reasons
     or because your system is not connected to the internet, please use the
     weak dependency on `djangocms-static-ace <https://github.com/django-cms/djangocms-static-ace>`_
-    by chaning your requirement from ``djangocms-frontend`` to
+    by changing your requirement from ``djangocms-frontend`` to
     ``djangocms-frontend[static-ace]`` and include
     ``"djangocms_static_ace"`` in your ``INSTALLED_APPS``.
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "code" code_type="pre" code_content="print('Hello, world!')" %}{% endplugin %}
+
+Parameters for ``{% plugin "code" %}`` are:
+
+* ``code_content``: The code snippet to display. Required.
+* ``code_type``: How the snippet is rendered: ``code`` (inline code), ``pre``
+  (code block), ``var`` (variables), ``kbd`` (user input) or ``samp`` (sample
+  output). Default is ``code``.
 
 .. index::
     single: Figure
@@ -498,12 +681,40 @@ Figure component
 The figure component supplies a wrapper and a caption for a figure. The figure
 itself is placed inside the figure component (as child plugins).
 
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "figure" figure_caption="Figure 1: An example figure" figure_alignment="center" %}
+        {% plugin "picture" %}{% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "figure" %}`` are:
+
+* ``figure_caption``: The caption shown below the figure. Required.
+* ``figure_alignment``: Alignment of the figure: ``""``, ``start``, ``center``
+  or ``end``.
+
 .. index::
     single: Tabs
 
 **************
 Tabs component
 **************
+
+Tabs organize content into separate panes, only one of which is shown at a time.
+The component consists of a Tabs plugin which wraps one Tab Item plugin for each
+pane. The tab titles are generated from the Tab Item plugins and let the user
+switch between panes.
+
+Also see Bootstrap 5 `Navs & tabs <https://getbootstrap.com/docs/5.3/components/navs-tabs/>`_
+documentation.
 
 .. note::
 
@@ -567,6 +778,7 @@ icon component is centered around Gilles Migliori's
 `universal icon picker <https://github.com/migliori/universal-icon-picker>`_.
 
 .. image:: screenshots/icon-picker.png
+    :alt: The universal icon picker showing a grid of selectable icons
 
 A version of it is bundled with ``djangocms-frontend``. It currently contains
 support for the following icon sets:
@@ -574,13 +786,13 @@ support for the following icon sets:
 * `Bootstrap icons <https://icons.getbootstrap.com>`_
 * `Elegant icons <https://www.elegantthemes.com/blog/resources/elegant-icon-font>`_ (bundled)
 * `Feather icons <https://feathericons.com>`_ (bundled)
-* `Fomatic UI icons <https://fomantic-ui.com/elements/icon.html>`_ (bundled)
+* `Fomantic UI icons <https://fomantic-ui.com/elements/icon.html>`_ (bundled)
 * `Font awesome (regular, solid and brands) <https://fontawesome.com>`_
 * `Foundation icons <https://zurb.com/playground/foundation-icon-fonts-3>`_ (bundled)
 * `Material icons (filled, outlined, sharp, two-tone) <https://fonts.google.com/icons>`_
 * `Open iconic <https://github.com/iconic/open-iconic>`_
 * `Tabler icons <https://tabler-icons.io>`_
-* Eric Flower's `Weather icons <https://erikflowers.github.io/weather-icons/>`_ (bundled)
+* Erik Flowers' `Weather icons <https://erikflowers.github.io/weather-icons/>`_ (bundled)
 
 
 .. note::
@@ -635,7 +847,7 @@ out the `config file for Bootstrap Icons <https://github.com/migliori/universal-
        ]
     }
 
-Icons are rendered as ``<i>>`` tags with classes.
+Icons are rendered as ``<i>`` tags with classes.
 
 ``.prefix`` defines a string that is prepended to all icons. For Bootstrap icons
 that's the class ``bi`` and the prefix for the icon selecting class ``bi-``.
@@ -645,8 +857,8 @@ The list ``.icons`` contains all available icons in the set.
 ``.list-icon`` contains the classes for the example icon. You can probably ignore it.
 
 ``.icon-style`` currently is unused. It may in future determine how icons are
-rendered. Currently all icons a re rendered by ``<i class"bla"></i>`` except
-material design icon which are rendered by ``<i class="material-icon">bla</i>``.
+rendered. Currently all icons are rendered by ``<i class="bla"></i>`` except
+material design icons which are rendered by ``<i class="material-icon">bla</i>``.
 
 
 Using svg sprites
@@ -674,7 +886,7 @@ in ``CKEDITOR_SETTINGS``, e.g.,
     }
 
 This will load the ``ckeditor.icons.js`` file which in turn will allow empty
-``span``and ``i`` tags.
+``span`` and ``i`` tags.
 
 If you already have a ``customConfig`` file specified it will suffice to add
 the following two lines to it.
@@ -716,4 +928,47 @@ Navigation
 The navigation plugin is a plugin that allows you to create a navigation. All navigation elements are
 child plugins of the navigation plugin: The navigation plugin itself is just a
 container for the navigation elements.
+
+Possible child plugins are a Nav Brand plugin (the site brand), Nav Link plugins
+(individual links) and a Page Tree plugin (links generated from the CMS page
+tree).
+
+Re-usable component example
+===========================
+
+``djangocms-frontend`` plugins can be used as components. They can be
+used in all your project's templates. Example (if key word arguments are
+skipped they fall back to their defaults):
+
+.. code-block::
+
+    {% load frontend %}
+    {% plugin "navigation" navbar_design="light" navbar_breakpoint="lg" navbar_container=True %}
+        {% plugin "navbrand" simple_content="My site" %}{% endplugin %}
+        {% plugin "navlink" external_link="/about/" %}About{% endplugin %}
+        {% plugin "pagetree" start_level=0 %}{% endplugin %}
+    {% endplugin %}
+
+Parameters for ``{% plugin "navigation" %}`` are:
+
+* ``template``: Layout of the navigation, ``default`` or ``offcanvas``. Default
+  is ``default``.
+* ``navbar_design``: Color scheme of the navbar, ``light`` or ``dark``. Default
+  is ``light``.
+* ``navbar_breakpoint``: Device from which the navbar expands (and larger):
+  ``""``, ``xs``, ``sm``, ``md``, ``lg``, ``xl`` or ``xxl``.
+* ``navbar_container``: If set to ``True`` the navbar is wrapped in a container.
+  Default is ``True``.
+
+Parameters for ``{% plugin "navbrand" %}`` are:
+
+* ``simple_content``: The brand text. Ignored if the brand has child plugins.
+
+Parameters for ``{% plugin "pagetree" %}`` are:
+
+* ``start_level``: The level of the page tree to start from (``0`` is the root).
+  Default is ``0``.
+
+The Nav Link plugin (``{% plugin "navlink" %}``) accepts the same parameters as
+the `Link / Button component`_.
 

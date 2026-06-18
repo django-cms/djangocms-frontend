@@ -10,7 +10,7 @@ screens).
 
 The details of the grid system are based on the Bootstrap framework. Therefore,
 for details on how grids work, see, e.g. the `Bootstrap 5 documentation
-<https://getbootstrap.com/docs/5.1/layout/grid/>`_.
+<https://getbootstrap.com/docs/5.3/layout/grid/>`_.
 
 .. index::
     single: Container
@@ -20,7 +20,7 @@ Container
 *********
 
 A container is an invisible element that wraps other content. There are
-in two types of containers:
+three types of containers:
 
 Container
    All other containers restrict the width of their content depending on
@@ -97,6 +97,7 @@ row** are distributed horizontally.
     given), the "row-cols-xl" entry the number of columns on a xl screen.
 
 .. image:: screenshots/row.png
+    :alt: The Row plugin editing form with alignment and row-cols settings
 
 
 .. index::
@@ -133,6 +134,7 @@ comes handy if, e.g., the column is supposed to contain centered
 content.
 
 .. image:: screenshots/col.png
+    :alt: The Column plugin editing form with size and alignment settings
 
 .. note::
 

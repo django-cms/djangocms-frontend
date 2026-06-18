@@ -66,6 +66,8 @@ class HeadingPlugin(mixin_factory("Heading"), AttributesMixin, SpacingMixin, CMS
     allow_children = True
     is_local = False
 
+    prepopulated_fields = {"heading_id": ("heading",)}
+
     fieldsets = [
         (
             None,
