@@ -738,7 +738,7 @@ skipped they fall back to their defaults):
 .. note::
 
     Tab items read settings from their parent tab while rendering, so tabs have
-    to be built inside django CMS. Unlike the other components they cannot be
+    to be built inside django CMS. Unlike the other components, they cannot be
     rendered standalone with the ``{% plugin %}`` tag.
 
 .. code-block:: django
