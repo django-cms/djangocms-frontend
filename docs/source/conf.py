@@ -109,6 +109,14 @@ exclude_patterns = ["_build"]
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
 
+# Register a "template" highlighting language. ``.. code-block:: template`` is
+# used to mark runnable ``{% plugin %}`` examples that are verified by
+# ``tests/test_doc_examples.py``. It highlights as a Django template.
+from pygments.lexers.templates import HtmlDjangoLexer  # noqa: E402
+from sphinx.highlighting import lexers  # noqa: E402
+
+lexers["template"] = HtmlDjangoLexer()
+
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
 

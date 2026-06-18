@@ -48,7 +48,7 @@ The accordion component is a good example of a re-usable component. It can be
 used in all your project's templates. Here is an example of how to create an
 accordion (if key word arguments are skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "accordion" accordion_header_type="h2" accordion_flush=False %}
@@ -96,7 +96,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "alert" alert_context="primary" alert_dismissible=True %}
@@ -130,7 +130,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "badge" badge_text="My badge" badge_context="info" badge_pills=False %}
@@ -221,11 +221,10 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
-    {% plugin "card" card_alignment="center" card_outline="info"
-                     card_text_color="primary" card_full_height=True %}
+    {% plugin "card" card_alignment="center" card_outline="info" card_text_color="primary" card_full_height=True %}
         {% plugin "cardinner" inner_type="card-header" text_alignment="start" %}
             <h4>Card title</h4>
         {% endplugin %}
@@ -270,7 +269,13 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. note::
+
+    Carousel slides read settings from their parent carousel while rendering,
+    so a carousel has to be built inside django CMS. Unlike the other
+    components, it cannot be rendered standalone with the ``{% plugin %}`` tag.
+
+.. code-block:: django
 
     {% load frontend %}
     {% plugin "carousel" template="my_template" carousel_controls=True %}
@@ -331,7 +336,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "collapse" %}
@@ -381,7 +386,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "jumbotron" jumbotron_fluid=False %}
@@ -422,11 +427,17 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. note::
 
-    {% load frontend %}
-    {% url 'some_view' as some_view %}
-    {% plugin "textlink" external_link=some_view link_type="btn" link_context="primary" link_outline=False %}
+    The link field depends on the configured link backend. The example below
+    uses the default ``link`` field (via the ``to_link`` filter). If
+    ``djangocms-url-manager`` is installed, links are set through ``url_grouper``
+    and ``site`` instead.
+
+.. code-block:: django
+
+    {% load frontend djangocms_link_tags %}
+    {% plugin "textlink" link="/about/"|to_link link_type="btn" link_context="primary" link_outline=False %}
         Click me!
     {% endplugin %}
 
@@ -473,7 +484,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "listgroup" list_group_flush=False %}
@@ -512,7 +523,7 @@ Re-usable component example
 used in all your project's templates. Neither the Media nor the Media Body
 plugin take component-specific parameters:
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "media" %}
@@ -578,7 +589,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "spacing" space_property="m" space_sides="y" space_size="3" space_device="md" %}
@@ -618,7 +629,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "blockquote" quote_content="A well-known quotation." quote_origin="Famous Author" quote_alignment="center" %}{% endplugin %}
@@ -659,7 +670,7 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "code" code_type="pre" code_content="print('Hello, world!')" %}{% endplugin %}
@@ -688,11 +699,11 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. code-block:: template
 
     {% load frontend %}
     {% plugin "figure" figure_caption="Figure 1: An example figure" figure_alignment="center" %}
-        {% plugin "picture" %}{% endplugin %}
+        <img src="/static/example.jpg" alt="An example image">
     {% endplugin %}
 
 Parameters for ``{% plugin "figure" %}`` are:
@@ -731,10 +742,16 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. note::
+
+    Tab items read settings from their parent tab while rendering, so tabs have
+    to be built inside django CMS. Unlike the other components, they cannot be
+    rendered standalone with the ``{% plugin %}`` tag.
+
+.. code-block:: django
 
     {% load frontend %}
-    {% plugin "tab" template="my_template" tab_type="nav-pills" tab_align="justify-content-center" %}
+    {% plugin "tab" tab_type="nav-pills" tab_alignment="justify-content-center" %}
         {% plugin "tabitem" tab_title="Tab 1" tab_bordered=True %}
             <h4>Content of tab 1</h4>
             <p> Some content...</p>
@@ -751,7 +768,7 @@ Parameters for ``{% plugin "tab" %}`` are:
 * ``template``: The template to use for the tabs. If not specified the default
   template is used.
 * ``tab_type``: The type of the tabs. If not specified the default type is used.
-* ``tab_align``: The alignment of the tabs. If not specified the default alignment
+* ``tab_alignment``: The alignment of the tabs. If not specified the default alignment
   is used.
 * ``tab_index``: The index of the initially active tab. If not specified the
   first tab is active.
@@ -940,12 +957,18 @@ Re-usable component example
 used in all your project's templates. Example (if key word arguments are
 skipped they fall back to their defaults):
 
-.. code-block::
+.. note::
 
-    {% load frontend %}
+    The navigation builds a menu from the current request, so it has to be
+    rendered within a django CMS page request. Unlike the other components, it
+    cannot be rendered standalone with the ``{% plugin %}`` tag.
+
+.. code-block:: django
+
+    {% load frontend djangocms_link_tags %}
     {% plugin "navigation" navbar_design="light" navbar_breakpoint="lg" navbar_container=True %}
         {% plugin "navbrand" simple_content="My site" %}{% endplugin %}
-        {% plugin "navlink" external_link="/about/" %}About{% endplugin %}
+        {% plugin "navlink" link="/about/"|to_link %}About{% endplugin %}
         {% plugin "pagetree" start_level=0 %}{% endplugin %}
     {% endplugin %}
 
