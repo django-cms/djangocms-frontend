@@ -103,8 +103,7 @@ def _make_test(doc, line_number, source):
         self.assertNotIn(
             UNREGISTERED_MARKER,
             result,
-            msg=f"{doc}:{line_number} uses a plugin slug that is not a "
-            f"registered component:\n{source}",
+            msg=f"{doc}:{line_number} uses a plugin slug that is not a registered component:\n{source}",
         )
         self.assertTrue(
             result.strip(),
