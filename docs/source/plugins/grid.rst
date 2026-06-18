@@ -97,6 +97,7 @@ row** are distributed horizontally.
     given), the "row-cols-xl" entry the number of columns on a xl screen.
 
 .. image:: screenshots/row.png
+    :alt: The Row plugin editing form with alignment and row-cols settings
 
 
 .. index::
@@ -133,6 +134,7 @@ comes handy if, e.g., the column is supposed to contain centered
 content.
 
 .. image:: screenshots/col.png
+    :alt: The Column plugin editing form with size and alignment settings
 
 .. note::
 
