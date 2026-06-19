@@ -56,7 +56,12 @@ class AutoComponentTestCase(TestFixture, CMSTestCase):
         self.assertIn("hero_image", form.declared_fields)
         self.assertIn("config", form.declared_fields)  # Inherited from djangocms_frontend.models.FrontendUIItem
         self.assertTrue(plugin.allow_children)
-        self.assertEqual(plugin.child_classes, ["AutoHeroWithSlotsButtonsPlugin"])
+        # django CMS 5.1+ resolves slot children from their parent_classes ("auto");
+        # older versions enumerate them explicitly.
+        from djangocms_frontend.component_base import _CMS_AUTO_CHILD_CLASSES
+
+        expected_child_classes = "auto" if _CMS_AUTO_CHILD_CLASSES else ["AutoHeroWithSlotsButtonsPlugin"]
+        self.assertEqual(plugin.child_classes, expected_child_classes)
 
         self.assertIn("AutoHeroWithSlotsButtonsPlugin", plugin_pool.plugins)
         slot_plugin = plugin_pool.get_plugin("AutoHeroWithSlotsButtonsPlugin")
