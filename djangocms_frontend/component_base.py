@@ -94,14 +94,16 @@ def _insert_template_folder(path: str, template: str) -> str:
 def _resolve_template(instance) -> str:
     """Return the selected template string for ``instance``.
 
-    Reads ``template`` from the plugin's own config or, if it has none of its
-    own, walks up the parent chain so a child component follows the template
-    chosen on its (grand)parent."""
+    A component that declares a ``template`` field owns its choice. One that does
+    not inherits from the nearest ancestor that *declares* a ``template`` field
+    (its template owner). The walk stops at that owner even if its value is empty
+    -- so a tab item never reaches past its tab to a grandparent that happens to
+    have its own, unrelated ``template``."""
     node = instance
     while node is not None:
-        config = getattr(node, "config", None)
-        if isinstance(config, dict) and config.get("template"):
-            return config["template"]
+        if getattr(node, "_has_template_field", False):
+            config = getattr(node, "config", None)
+            return config.get("template", "") if isinstance(config, dict) else ""
         parent = getattr(node, "parent", None)
         if parent is None:
             break
@@ -261,6 +263,8 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
                 ),
                 "get_short_description": cls.get_short_description,
                 "__module__": cls.__module__,
+                # Lets ``_resolve_template`` find the template-owning ancestor.
+                "_has_template_field": "template" in cls.declared_fields,
             }
             default_config = getattr(cls._component_meta, "default_config", None)
             if default_config:

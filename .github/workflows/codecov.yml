@@ -20,10 +20,10 @@ jobs:
         requirements-file: [
             dj42_cms311.txt,
             dj42_cms41.txt,
-            dj50_cms41.txt,
-            dj51_cms41.txt,
             dj52_cms50.txt,
             dj60_cms50.txt,
+            dj52_cms51.txt,
+            dj60_cms51.txt,
         ]
         os: [
             ubuntu-latest,
