@@ -326,20 +326,27 @@ class RenderChildPluginsTag(Tag):
         return content
 
 
+def _child_plugins(instance, plugin_type=None):
+    """Yield the direct child plugin instances of ``instance``, optionally
+    filtered by exact ``plugin_type``. Shared core of ``children`` and
+    ``get_slot``; tolerates instances without ``child_plugin_instances``."""
+    for child in getattr(instance, "child_plugin_instances", None) or []:
+        if plugin_type is None or child.plugin_type == plugin_type:
+            yield child
+
+
 @register.filter
 def get_slot(instance, slot_name):
     """Get plugins for a specific slot directly from the instance. This is useful for rendering slots in a component's template,
     e.g. with {% for plugin in instance|get_slot:"community" %}.
     Usage: {% for plugin in instance|get_slot:"community" %} ... {% endfor %}
     """
-
-    def generator():
-        plugin_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
-        for plugin in instance.child_plugin_instances:
-            if plugin.plugin_type == plugin_type:
-                yield from plugin.child_plugin_instances
-
-    return tuple(generator())
+    slot_type = f"{instance.__class__.__name__}{slot_name.capitalize()}Plugin"
+    return tuple(
+        grandchild
+        for slot in _child_plugins(instance, slot_type)
+        for grandchild in getattr(slot, "child_plugin_instances", None) or []
+    )
 
 
 @register.filter
@@ -356,15 +363,9 @@ def children(instance, plugin_type=None):
 
     Usage: ``{% for item in instance|children:"TabComponentItem" %} ... {% endfor %}``
     """
-    wanted = None
-    if plugin_type:
-        wanted = plugin_type if plugin_type.endswith("Plugin") else f"{plugin_type}Plugin"
-
-    return tuple(
-        child
-        for child in getattr(instance, "child_plugin_instances", None) or []
-        if wanted is None or child.plugin_type == wanted
-    )
+    if plugin_type and not plugin_type.endswith("Plugin"):
+        plugin_type = f"{plugin_type}Plugin"
+    return tuple(_child_plugins(instance, plugin_type))
 
 
 class InlineField(CMSEditableObject):
