@@ -15,12 +15,14 @@ from tests.fixtures import TestFixture
 
 
 class _FakeInstance:
-    """Minimal stand-in for a plugin model instance (carries ``config`` and an
-    optional ``parent`` whose ``get_plugin_instance`` returns itself)."""
+    """Minimal stand-in for a plugin model instance (carries ``config``, the
+    ``_has_template_field`` marker, and an optional ``parent`` whose
+    ``get_plugin_instance`` returns itself)."""
 
-    def __init__(self, template=None, parent=None):
+    def __init__(self, template=None, parent=None, has_template_field=True):
         self.config = {"template": template} if template else {}
         self.parent = parent
+        self._has_template_field = has_template_field
 
     def get_plugin_instance(self):
         return (self, None)
@@ -239,12 +241,26 @@ class GetRenderTemplateTestCase(SimpleTestCase):
 
     def test_child_inherits_parent_template(self):
         parent = _FakeInstance(template="pills")
-        child = _FakeInstance(template=None, parent=parent)
+        # The child has no template field of its own -> inherits from the parent.
+        child = _FakeInstance(template=None, parent=parent, has_template_field=False)
         plugin = _FakePlugin("tabs/item.html")
         with mock.patch.object(component_base, "select_template") as select:
             result = plugin.get_render_template({}, child, None)
         self.assertEqual(result, "tabs/pills/item.html")
         select.assert_called_once_with(["tabs/pills/item.html"])
+
+    def test_child_stops_at_template_owner_not_grandparent(self):
+        # A grandparent with its own template must not leak into the child when
+        # the immediate template owner (the parent) has an empty selection.
+        grandparent = _FakeInstance(template="grid")
+        parent = _FakeInstance(template=None, parent=grandparent)  # owns template, empty
+        child = _FakeInstance(template=None, parent=parent, has_template_field=False)
+        plugin = _FakePlugin("tabs/item.html")
+        with mock.patch.object(component_base, "select_template") as select:
+            result = plugin.get_render_template({}, child, None)
+        # Resolves to the parent's (empty) template -> bare path, never "grid".
+        self.assertEqual(result, "tabs/item.html")
+        select.assert_not_called()
 
     def test_insert_template_folder_helper(self):
         self.assertEqual(_insert_template_folder("tabs/content.html", "pills"), "tabs/pills/content.html")
