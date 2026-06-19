@@ -3,3 +3,4 @@
 Django>=6.0,<6.1
 django-cms>=5.1.0a1,<5.2
 djangocms-versioning>=2.0.1
+django-treebeard<5
