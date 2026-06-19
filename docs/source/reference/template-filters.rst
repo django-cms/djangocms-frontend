@@ -44,7 +44,7 @@ Load them with ``{% load frontend %}``.
     slot, ``children`` returns the component's own children; unlike
     ``{% childplugins %}``, which returns rendered HTML, it returns the instances
     themselves. That lets a template iterate the same children more than once — a
-    tab nav and the tab panes, say — and render their fields and bodies itself.
+    tab nav and the tab panes, say — and render their fields and bodies themselves.
 
     The ``plugin_type`` may be given with or without the ``Plugin`` suffix, so
     both ``"TabItem"`` and ``"TabItemPlugin"`` resolve to the same type. Omitting

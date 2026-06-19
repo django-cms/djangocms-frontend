@@ -195,11 +195,18 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
             # generated form has a single, consistent one.
             form_metaclass = type(cls._base_form)
             if not issubclass(form_metaclass, ComponentMeta):
-                form_metaclass = type(
-                    f"{cls.__name__}FormMeta",
-                    (ComponentMeta, form_metaclass),
-                    {},
-                )
+                try:
+                    form_metaclass = type(
+                        f"{cls.__name__}FormMeta",
+                        (ComponentMeta, form_metaclass),
+                        {},
+                    )
+                except TypeError as exc:  # pragma: no cover - defensive
+                    raise TypeError(
+                        f"Cannot build the admin form for component {cls.__name__!r}: its base form "
+                        f"{cls._base_form.__name__!r} uses a metaclass incompatible with ComponentMeta. "
+                        f"Provide a compatible '_base_form'."
+                    ) from exc
             cls._admin_form = form_metaclass(
                 f"{cls.__name__}Form",
                 (
@@ -269,7 +276,7 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
         return cls._model
 
     @classmethod
-    def _get_child_classes(cls, slots: dict) -> list | str:
+    def _get_child_classes(cls, slots: dict) -> list | str | None:
         """Resolve the plugin's ``child_classes``.
 
         An explicit ``Meta.child_classes`` always wins and is extended with the
@@ -278,8 +285,10 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
         children are resolved from the plugins that name this one in their
         ``parent_classes``, so the parent makes no assumptions about them. Before
         5.1 ``"auto"`` is unavailable, so those children are enumerated instead.
-        A plain ``allow_children`` component (no nested, no slots) stays
-        unrestricted on every version.
+
+        A plain ``allow_children`` component (no nested, no slots) returns
+        ``None`` -- django CMS reads that as "unrestricted". (An explicit empty
+        ``[]`` means "no children allowed", so it is left untouched.)
         """
         slot_classes = list(slots.keys())
         child_classes = getattr(cls._component_meta, "child_classes", None)
@@ -293,7 +302,7 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
             # Older django CMS: enumerate nested components and slots explicitly.
             nested_classes = [f"{component.__name__}Plugin" for component in cls._nested_components]
             return nested_classes + slot_classes
-        return []
+        return None
 
     @classmethod
     def plugin_factory(cls) -> type:
@@ -360,7 +369,7 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
                     "show_add_form": False,
                     "parent_classes": [cls.__name__ + "Plugin"],
                     "render_template": cls.slot_template,
-                    "model": SlotModel if cms_version >= "5" else CMSPlugin,
+                    "model": SlotModel if _cms_major_minor >= (5, 0) else CMSPlugin,
                     **slot.kwargs,
                 },
             )

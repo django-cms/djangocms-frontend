@@ -170,7 +170,20 @@ class ChildClassesAutoTestCase(SimpleTestCase):
                 render_template = "box.html"
                 allow_children = True
 
-        # No nested components and no slots: unrestricted on every version.
+        # No nested components and no slots: ``None`` (django CMS reads that as
+        # "unrestricted"; an explicit ``[]`` would instead mean "no children").
+        for flag in (True, False):
+            with mock.patch.object(component_base, "_CMS_AUTO_CHILD_CLASSES", flag):
+                self.assertIsNone(Box._get_child_classes({}))
+
+    def test_explicit_empty_child_classes_means_no_children(self):
+        class Box(CMSFrontendComponent):
+            class Meta:
+                name = "Box"
+                render_template = "box.html"
+                allow_children = True
+                child_classes = []  # explicit: no children allowed
+
         for flag in (True, False):
             with mock.patch.object(component_base, "_CMS_AUTO_CHILD_CLASSES", flag):
                 self.assertEqual(Box._get_child_classes({}), [])

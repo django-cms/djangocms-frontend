@@ -263,6 +263,8 @@ From this declaration ``djangocms-frontend`` derives:
   children are resolved from the plugins that name it in their
   ``parent_classes`` — while on older versions the nested children are
   enumerated explicitly. Either way, only ``Tab item`` plugins may be added.
+  (A plain ``allow_children`` component with no nested children stays
+  unrestricted; set ``child_classes = []`` explicitly to forbid all children.)
 - **Registration.** Registering ``Tabs`` registers the nested ``Item`` too; you
   do not decorate it separately.
 
@@ -469,7 +471,7 @@ Components already ship with a default ``get_render_template()`` that handles th
 :ref:`nested_components`), so you only need to override it for non-standard
 template resolution.
 
-For maximun flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
+For maximum flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
 
 
 Conclusion
