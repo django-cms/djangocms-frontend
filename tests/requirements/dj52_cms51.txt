@@ -3,3 +3,4 @@
 Django>=5.2,<6.0
 django-cms>=5.1.0a1,<5.2
 djangocms-versioning>=2.0.0
+django-treebeard<5  # can be removed for released 5.1.0
