@@ -349,6 +349,14 @@ class CMSFrontendComponent(forms.Form, metaclass=ComponentMeta):
                         for field in cls.META_FIELDS
                         if hasattr(cls._component_meta, field)
                     },
+                    **(
+                        {
+                            "get_render_template": cls.get_render_template,
+                            "TEMPLATES": getattr(cls, "TEMPLATES", (("default", "Default"),)),
+                        }
+                        if hasattr(cls, "get_render_template")
+                        else {}
+                    ),
                     "__module__": "djangocms_frontend.cms_plugins",
                 },
             )
