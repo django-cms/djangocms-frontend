@@ -186,7 +186,7 @@ class CMSFrontendComponent(forms.Form):
                     **(
                         {
                             "get_render_template": cls.get_render_template,
-                            "TEMPLATES": getattr(cls, "TEMPLATES", (("default", "Default),)),
+                            "TEMPLATES": getattr(cls, "TEMPLATES", (("default", "Default"),)),
                         }
                         if hasattr(cls, "get_render_template")
                         else {}
