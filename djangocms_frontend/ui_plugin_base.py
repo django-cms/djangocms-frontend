@@ -83,4 +83,15 @@ class CMSUIPluginBase(FrontendEditableAdminMixin, CMSPluginBase):
 
 
 class CMSUIComponent(CMSUIPluginBase):
-    pass
+    def save_model(self, request, obj, form, change):
+        """Auto-create slot plugins when a component plugin instance is created.
+
+        This is the component default. A component's nested ``PluginMixin`` can
+        extend it by calling ``super().save_model(...)``.
+        """
+        from cms.api import add_plugin
+
+        super().save_model(request, obj, form, change)
+        if not change:
+            for slot in getattr(self, "slots", {}).keys():
+                add_plugin(obj.placeholder, slot, obj.language, target=obj)

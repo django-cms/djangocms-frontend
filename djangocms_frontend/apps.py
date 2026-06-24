@@ -13,6 +13,7 @@ class DjangocmsFrontendConfig(apps.AppConfig):
         plugin_tag.setup()
         checks.register(check_settings)
         checks.register(check_installed_apps)
+        checks.register(check_component_plugin_behavior)
 
 
 def check_settings(*args, **kwargs):  # pragma: no cover
@@ -41,6 +42,32 @@ def check_settings(*args, **kwargs):  # pragma: no cover
                 obj="settings.DJANGOCMS_FRONTEND_LINK_MODELS",
             )
         )
+    return warnings
+
+
+def check_component_plugin_behavior(*args, **kwargs):
+    """Report components that declare plugin behavior directly on the component class.
+
+    ``save_model``, ``get_render_template`` and ``TEMPLATES`` belong in a nested
+    ``PluginMixin`` class. Declaring them on the component itself is deprecated; the
+    factory still grafts them onto the plugin for backwards compatibility.
+    """
+    from .component_pool import components
+
+    warnings = []
+    for name, component in components._components.items():
+        attrs = component._deprecated_plugin_attrs()
+        if attrs:
+            warnings.append(
+                checks.Warning(
+                    f"Component {name!r} declares {', '.join(repr(attr) for attr in attrs)} directly "
+                    f"on the component class, which is deprecated.",
+                    "Move the declaration(s) into a nested 'PluginMixin' class. They are still applied "
+                    "for backwards compatibility, but support will be removed in a future release.",
+                    id="djangocms_frontend.W003",
+                    obj=f"{component.__module__}.{component.__qualname__}",
+                )
+            )
     return warnings
 
 
