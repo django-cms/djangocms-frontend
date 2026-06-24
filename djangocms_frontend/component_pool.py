@@ -115,6 +115,7 @@ class CMSAutoComponentDiscovery:
 
 class Components:
     _registry: dict = {}
+    _components: dict = {}
     _discovered: bool = False
 
     def register(self, component):
@@ -122,6 +123,7 @@ class Components:
             warnings.warn(f"Component {component.__name__} already registered", stacklevel=2)
             return component
         self._registry[component.__name__] = component.get_registration()
+        self._components[component.__name__] = component
         return component
 
     def __getitem__(self, item):
