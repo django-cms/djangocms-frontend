@@ -93,5 +93,5 @@ class CMSUIComponent(CMSUIPluginBase):
 
         super().save_model(request, obj, form, change)
         if not change:
-            for slot in getattr(self, "slots", {}).keys():
+            for slot in self.slots:
                 add_plugin(obj.placeholder, slot, obj.language, target=obj)

@@ -64,23 +64,32 @@ class DeprecatedPluginBehaviorCheckTestCase(SimpleTestCase):
             def save_model(self, request, obj, form, change):
                 pass
 
-        # Reported in declaration order, ``get_render_template`` is absent here.
-        self.assertEqual(OldStyle._deprecated_plugin_attrs(), ["save_model", "TEMPLATES"])
+            def get_render_template(self, context, instance, placeholder):
+                return "custom.html"
 
-        # The factory still grafts them for backwards compatibility.
+        # Reported in the order of ``_DEPRECATED_PLUGIN_ATTRS``.
+        self.assertEqual(
+            OldStyle._deprecated_plugin_attrs(),
+            ["save_model", "get_render_template", "TEMPLATES"],
+        )
+
+        # The factory still grafts them all for backwards compatibility.
         plugin = OldStyle.plugin_factory()
         self.assertIn("save_model", plugin.__dict__)
+        self.assertIn("get_render_template", plugin.__dict__)
         self.assertEqual(plugin.__dict__["TEMPLATES"], (("z", "Z"),))
+        self.assertEqual(plugin().get_render_template({}, None, None), "custom.html")
 
+        self.addCleanup(components._components.pop, "OldStyleComponent", None)
         components._components["OldStyleComponent"] = OldStyle
-        try:
-            warnings = check_component_plugin_behavior()
-        finally:
-            components._components.pop("OldStyleComponent", None)
+        warnings = check_component_plugin_behavior()
 
         match = [w for w in warnings if w.obj.endswith("OldStyle")]
         self.assertEqual(len(match), 1)
         self.assertEqual(match[0].id, "djangocms_frontend.W003")
+        # All deprecated attributes are named in the warning.
+        for attr in ("save_model", "get_render_template", "TEMPLATES"):
+            self.assertIn(attr, match[0].msg)
 
     def test_plugin_mixin_is_not_flagged(self):
         class Clean(CMSFrontendComponent):
@@ -97,3 +106,9 @@ class DeprecatedPluginBehaviorCheckTestCase(SimpleTestCase):
                     super().save_model(request, obj, form, change)
 
         self.assertEqual(Clean._deprecated_plugin_attrs(), [])
+
+        # The system check itself produces no warning for the component.
+        self.addCleanup(components._components.pop, "CleanComponent", None)
+        components._components["CleanComponent"] = Clean
+        warnings = check_component_plugin_behavior()
+        self.assertEqual([w for w in warnings if w.obj.endswith("Clean")], [])
