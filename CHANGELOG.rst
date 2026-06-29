@@ -7,8 +7,8 @@ Changelog
 
 * feat: feat: Add PluginMixin class to frontend components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/384
 * feat: Add rename subcommand for renaming ui plugins and components. by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/370
+* feat: Heading ID (Heading Plugin) is now a prepopulated field by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/379
 * feat: Ensure `get_slot` gives a tuple (instead of a generator) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/375
-* feat: Heading ID is now a prepopulated field by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/379
 * fix: Add form ignored `dafault_config` by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/365
 * fix: plugin template tag calls were not isolated by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/367
 * fix: Read-only placeholders rendered inline fields editable by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/368
