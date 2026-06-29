@@ -340,14 +340,56 @@ For more details on the setting, see
 Limitations of custom frontend components
 =========================================
 
-Custom frontend components are a powerful tool for developers, but they have a limitations:
+Custom frontend components are a powerful tool for developers, but they have some limitations:
 
 **Limited Python code**: Custom components are (indirect) subclasses of Django's ``AdminForm`` class
-and can contain Python code to modify the behavior of a form. You cannot directly add Python code to
-the resulting plugin class with the exception of ``get_render_template()``. Similarly, you cannot add
-Python code the model class, in this case with the exception of ``get_short_description()``.
+and can contain Python code to modify the behavior of a form. To add behavior to the *plugin* class
+itself -- such as ``save_model()`` or ``get_render_template()`` -- declare a nested ``PluginMixin``
+class (see below). You cannot add Python code to the model class, with the exception of
+``get_short_description()``.
 
-For maximun flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
+For maximum flexibility in your customized components, you can build a :ref:`custom Plugin<how-to-add-frontend-plugins>`.
+
+
+Plugin-side behavior with ``PluginMixin``
+=========================================
+
+A component declaration describes a *form*. Behavior that belongs to the generated CMS *plugin* --
+methods such as ``save_model()`` or ``get_render_template()`` -- goes into a nested ``PluginMixin``
+class. Its methods and attributes are mixed into the plugin's bases, so it behaves like a normal
+mixin and can call ``super()``:
+
+.. code-block:: python
+
+    from cms.api import add_plugin
+
+
+    @components.register
+    class CTAPanel(CMSFrontendComponent):
+        class Meta:
+            name = "CTA Panel"
+            render_template = "cta.html"
+
+        main_heading = forms.CharField()
+
+        class PluginMixin:
+            def save_model(self, request, obj, form, change):
+                super().save_model(request, obj, form, change)
+                if not change:
+                    add_plugin(
+                        obj.placeholder, "TextLinkPlugin", obj.language, target=obj, config={...}
+                    )
+
+Because ``PluginMixin`` sits in the plugin's method-resolution order, ``super().save_model(...)``
+reaches the component default (which auto-creates any slot plugins) and then django CMS's own
+``save_model()``. Attributes such as ``TEMPLATES`` and methods such as ``get_render_template()`` can
+be declared here too.
+
+.. deprecated:: 2.5
+    Declaring ``save_model()``, ``get_render_template()`` or ``TEMPLATES`` directly on the component
+    class is deprecated. They are still grafted onto the plugin for backwards compatibility, and the
+    deprecated usage is reported by ``manage.py check`` (``djangocms_frontend.W003``). Support will be
+    removed in a future release -- move them into a nested ``PluginMixin`` class instead.
 
 
 Conclusion

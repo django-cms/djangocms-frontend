@@ -140,6 +140,20 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
         self.assertEqual(plugins[2].plugin_type, MyHeroSlotPlugin.__name__)
         self.assertEqual(plugins[2].parent.pk, instance.pk)
 
+    def test_no_slots_created_on_change(self):
+        # Editing an existing plugin (change=True) must not re-create slots.
+        instance = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=MyHeroPlugin.__name__,
+            language=self.language,
+        )
+        request = self.get_request(path="/")
+        MyHeroPlugin().save_model(request=request, obj=instance, form=MyHeroPlugin.form, change=True)
+
+        plugins = list(self.placeholder.get_plugins())
+        self.assertEqual(len(plugins), 1)
+        self.assertEqual(plugins[0].plugin_type, MyHeroPlugin.__name__)
+
     def test_simple_component_plugin(self):
         instance = add_plugin(
             placeholder=self.placeholder,

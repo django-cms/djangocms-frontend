@@ -157,10 +157,19 @@ class CMSFrontendComponent(forms.Form):
             slots = cls.get_slot_plugins()
             mixins = _get_mixin_classes(mixins)
 
+            # Plugin-side behavior (``save_model``, ``get_render_template``,
+            # ``TEMPLATES``, ...) is declared in a nested ``PluginMixin`` class and
+            # mixed into the generated plugin's bases. Living in the MRO means its
+            # methods can call ``super()`` normally instead of being grafted onto
+            # the plugin as standalone functions.
+            plugin_mixin = getattr(cls, "PluginMixin", None)
+            behavior = (plugin_mixin,) if plugin_mixin is not None else ()
+
             cls._plugin = type(
                 cls.__name__ + "Plugin",
                 (
                     *mixins,
+                    *behavior,
                     *cls._plugin_mixins,
                     CMSUIComponent,
                 ),
@@ -177,20 +186,12 @@ class CMSFrontendComponent(forms.Form):
                         cls._component_meta, "change_form_template", "djangocms_frontend/admin/base.html"
                     ),
                     "slots": slots,
-                    "save_model": cls.save_model,
                     **{
                         field: getattr(cls._component_meta, field)
                         for field in cls.META_FIELDS
                         if hasattr(cls._component_meta, field)
                     },
-                    **(
-                        {
-                            "get_render_template": cls.get_render_template,
-                            "TEMPLATES": getattr(cls, "TEMPLATES", (("default", "Default"),)),
-                        }
-                        if hasattr(cls, "get_render_template")
-                        else {}
-                    ),
+                    **cls._deprecated_plugin_graft(),
                     "__module__": "djangocms_frontend.cms_plugins",
                 },
             )
@@ -241,13 +242,27 @@ class CMSFrontendComponent(forms.Form):
     def get_short_description(self) -> str:
         return self.config.get("title", "")
 
-    def save_model(self, request, obj, form: forms.Form, change: bool) -> None:
-        """Auto-creates slot plugins upon creation of component plugin instance"""
-        from cms.api import add_plugin
+    #: Plugin attributes that used to be authored directly on the component and
+    #: grafted onto the generated plugin. They now belong in a nested
+    #: ``PluginMixin`` (``save_model``/``get_render_template`` as methods that can
+    #: call ``super()``, ``TEMPLATES`` as a plain attribute). Declaring them on the
+    #: component is deprecated and reported by ``check_component_plugin_behavior``.
+    _DEPRECATED_PLUGIN_ATTRS = ("save_model", "get_render_template", "TEMPLATES")
 
-        from .ui_plugin_base import CMSUIComponent
+    @classmethod
+    def _deprecated_plugin_attrs(cls) -> list[str]:
+        """Names of deprecated plugin attributes declared directly on the
+        component class (used by both the back-compat graft and the system check)."""
+        return [name for name in cls._DEPRECATED_PLUGIN_ATTRS if name in cls.__dict__]
 
-        super(CMSUIComponent, self).save_model(request, obj, form, change)
-        if not change:
-            for slot in self.slots.keys():
-                add_plugin(obj.placeholder, slot, obj.language, target=obj)
+    @classmethod
+    def _deprecated_plugin_graft(cls) -> dict:
+        """Back-compat shim: graft plugin attributes still declared directly on
+        the component class onto the generated plugin.
+
+        New code should declare these in a nested ``PluginMixin`` class so they
+        live in the plugin's MRO and can use ``super()`` instead of relying on the
+        factory to copy them across. The deprecated usage is surfaced via the
+        system check framework (see ``apps.check_component_plugin_behavior``).
+        """
+        return {name: cls.__dict__[name] for name in cls._deprecated_plugin_attrs()}

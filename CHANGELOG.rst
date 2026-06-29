@@ -2,8 +2,24 @@
 Changelog
 =========
 
+2.5.0 (2026-06-29)
+==================
 
-2.4.0 (2026.03-27
+* feat: feat: Add PluginMixin class to frontend components by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/384
+* feat: Add rename subcommand for renaming ui plugins and components. by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/370
+* feat: Heading ID (Heading Plugin) is now a prepopulated field by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/379
+* feat: Ensure `get_slot` gives a tuple (instead of a generator) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/375
+* fix: Add form ignored `dafault_config` by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/365
+* fix: plugin template tag calls were not isolated by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/367
+* fix: Read-only placeholders rendered inline fields editable by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/368
+* fix: Add space between element attributes into AbstractFrontendUIItem… by @zbohm in https://github.com/django-cms/djangocms-frontend/pull/369
+* fix: Forms did not validate if advanced settings had been disabled by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/371
+* fix: Default configs of shared mixins leaked into other plugins by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/373
+* fix: Let icon have <i> as default tag (w/o advanced settings) by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/374
+* fix: Use getattr for TEMPLATES attribute in component_base by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/382
+* docs: Add tests for code examples in the docs by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/380
+
+2.4.0 (2026-03-27)
 ==================
 
 * feat: add "target" option to link plugin by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/355
