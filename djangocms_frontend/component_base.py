@@ -164,6 +164,9 @@ class CMSFrontendComponent(forms.Form):
             # the plugin as standalone functions.
             plugin_mixin = getattr(cls, "PluginMixin", None)
             behavior = (plugin_mixin,) if plugin_mixin is not None else ()
+            child_classes = getattr(cls._component_meta, "child_classes", None)
+            if slots:
+                child_classes = (child_classes or []) + list(slots.keys())
 
             cls._plugin = type(
                 cls.__name__ + "Plugin",
@@ -179,7 +182,7 @@ class CMSFrontendComponent(forms.Form):
                     "model": cls.plugin_model_factory(),
                     "form": cls.admin_form_factory(),
                     "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
-                    "child_classes": getattr(cls._component_meta, "child_classes", []) + list(slots.keys()),
+                    "child_classes": child_classes,
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
                     "fieldsets": getattr(cls._component_meta, "fieldsets", cls._generate_fieldset()),
                     "change_form_template": getattr(
