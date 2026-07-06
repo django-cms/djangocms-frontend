@@ -15,19 +15,19 @@ repos:
             args: ["--py310-plus"]
 
     - repo: https://github.com/adamchainz/django-upgrade
-      rev: "1.30.0"
+      rev: "1.31.1"
       hooks:
           - id: django-upgrade
             args: [--target-version, "4.2"]
 
     - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.15.15
+      rev: v0.15.20
       hooks:
           - id: ruff
             args: [--fix]
           - id: ruff-format
 
     - repo: https://github.com/tox-dev/pyproject-fmt
-      rev: v2.23.0
+      rev: v2.25.1
       hooks:
       - id: pyproject-fmt
