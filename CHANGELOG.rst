@@ -2,6 +2,11 @@
 Changelog
 =========
 
+2.5.1 (2026-07-08)
+==================
+
+* fix: Component child classes falsely set to [] instead of None by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/386
+
 2.5.0 (2026-06-29)
 ==================
 
