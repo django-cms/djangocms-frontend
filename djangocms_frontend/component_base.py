@@ -181,7 +181,7 @@ class CMSFrontendComponent(forms.Form):
                     "module": getattr(cls._component_meta, "module", _("Components")),
                     "model": cls.plugin_model_factory(),
                     "form": cls.admin_form_factory(),
-                    "allow_children": slots or getattr(cls._component_meta, "allow_children", False),
+                    "allow_children": slots or getattr(cls._component_meta, "allow_children", bool(child_classes)),
                     "child_classes": child_classes,
                     "render_template": getattr(cls._component_meta, "render_template", CMSUIComponent.render_template),
                     "fieldsets": getattr(cls._component_meta, "fieldsets", cls._generate_fieldset()),
