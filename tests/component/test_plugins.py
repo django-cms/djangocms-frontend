@@ -166,9 +166,10 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
 
         from djangocms_link.templatetags.djangocms_link_tags import to_url
 
-        link = to_url(instance.link)
-
         self.publish(self.page, self.language)
+
+        # Resolve the URL only after publishing: since django-cms 5.1 an unpublished page has no URL.
+        link = to_url(instance.link)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

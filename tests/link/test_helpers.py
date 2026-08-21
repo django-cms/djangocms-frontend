@@ -1,8 +1,11 @@
+from cms.test_utils.testcases import CMSTestCase
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.test import TestCase
 
 from djangocms_frontend.contrib.link.helpers import GetLinkMixin, get_object_for_value
+
+from ..fixtures import TestFixture
 
 
 class GetObjectForValueTestCase(TestCase):
@@ -30,7 +33,7 @@ class GetObjectForValueTestCase(TestCase):
         self.assertIsNone(get_object_for_value(""))
 
 
-class GetLinkMixinTestCase(TestCase):
+class GetLinkMixinTestCase(TestFixture, CMSTestCase):
     """Tests for GetLinkMixin.get_link() using djangocms_link fallback path."""
 
     def _make_instance(self, config):
@@ -55,9 +58,9 @@ class GetLinkMixinTestCase(TestCase):
         self.assertEqual(instance.get_link(), "")
 
     def test_internal_link_to_page(self):
-        from cms.api import create_page
-
-        page = create_page("Test Page", "page.html", "en")
+        page = self.create_page(title="Test Page", template="page.html")
+        # Since django-cms 5.1 an unpublished page has no URL at all, so publish before linking.
+        self.publish(page, self.language)
         instance = self._make_instance({"link": {"internal_link": f"cms.page:{page.pk}"}})
         link = instance.get_link()
-        self.assertTrue(link.endswith("/test-page/") or link != "", f"Unexpected link: {link}")
+        self.assertTrue(link.endswith("/test-page/"), f"Unexpected link: {link}")

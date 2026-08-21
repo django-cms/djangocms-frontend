@@ -23,8 +23,17 @@ class TestFixture:
             template="page.html",
         )
         self.placeholder = self.get_placeholders(self.page).get(slot="content")
-        self.request_url = self.page.get_absolute_url(self.language) + "?toolbar_off=true"
         return super().setUp()
+
+    @property
+    def request_url(self):
+        """URL of ``self.page``, evaluated lazily.
+
+        Since django-cms 5.1 a page only gets a ``PageUrl`` once its content is published, so
+        ``get_absolute_url()`` returns ``None`` for the still unpublished page in ``setUp()``.
+        Tests publish the page themselves before requesting it.
+        """
+        return self.page.get_absolute_url(self.language) + "?toolbar_off=true"
 
     def tearDown(self):
         self.page.delete()
