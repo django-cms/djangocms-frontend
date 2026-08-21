@@ -15,20 +15,29 @@ MENU_TEMPLATES = (
 class MenuTemplateTestCase(TestFixture, CMSTestCase):
     def setUp(self):
         super().setUp()
+        # ``in_navigation`` has to be passed explicitly: django-cms 3's ``create_page`` defaults it
+        # to ``False``, which would leave the menu empty.
+        self.parent = self.create_page(
+            title="parent",
+            template="page.html",
+            in_navigation=True,
+        )
         self.child = self.create_page(
             title="child",
             template="page.html",
-            parent=self.page,
+            parent=self.parent,
+            in_navigation=True,
         )
-        self.publish(self.page, self.language)
+        self.publish(self.parent, self.language)
         self.publish(self.child, self.language)
 
     def tearDown(self):
         self.child.delete()
+        self.parent.delete()
         return super().tearDown()
 
     def render_menu(self, template):
-        request = self.get_request(self.page.get_absolute_url(self.language), page=self.page)
+        request = self.get_request(self.parent.get_absolute_url(self.language), page=self.parent)
         return Template('{% load menu_tags %}{% show_menu 0 100 100 100 "' + template + '" %}').render(
             RequestContext(request)
         )
