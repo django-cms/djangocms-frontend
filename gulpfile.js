@@ -73,5 +73,5 @@ function task(id, extra) {
 gulp.task('sass', task('sass'));
 
 gulp.task('watch', function () {
-    gulp.watch(PROJECT_PATTERNS.sass, ['sass']);
+    gulp.watch(PROJECT_PATTERNS.sass, gulp.series('sass'));
 });
