@@ -2,10 +2,20 @@
 Changelog
 =========
 
+2.5.2 (2026-09-3)
+==================
+
+* feat: Add aria labels to icons, fix them in menus by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/397
+* fix: Conform to the documentation and automatically set allow_children if child classes are specified by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/390
+* fix: Removed false positive warnings by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/394
+* fix: ./manage.py frontend stale_references failed by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/395
+
+
 2.5.1 (2026-07-08)
 ==================
 
 * fix: Component child classes falsely set to [] instead of None by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/386
+
 
 2.5.0 (2026-06-29)
 ==================
@@ -24,6 +34,7 @@ Changelog
 * fix: Use getattr for TEMPLATES attribute in component_base by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/382
 * docs: Add tests for code examples in the docs by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/380
 
+
 2.4.0 (2026-03-27)
 ==================
 
@@ -35,6 +46,7 @@ Changelog
 * fix: picture now uses filer thumbnail option if set by @corentinbettiol in https://github.com/django-cms/djangocms-frontend/pull/360
 * fix: plugin template tag ignored dynamic templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/361
 * fix: Avoid copying compiled templates by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/362
+
 
 2.3.1 (2026-03-12)
 ==================
@@ -51,6 +63,7 @@ Changelog
 
 * @kunaly111 made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/340
 * @creimers made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/341
+
 
 2.3.0 (2025-12-29)
 ==================
@@ -77,6 +90,7 @@ Changelog
 
 **Full Changelog**: https://github.com/django-cms/djangocms-frontend/compare/2.2.0...2.3.0
 
+
 2.2.0 (2025-08-16)
 ==================
 
@@ -96,6 +110,7 @@ Changelog
 **New Contributors**
 
 * @nchaourar made their first contribution in https://github.com/django-cms/djangocms-frontend/pull/293
+
 
 2.1.3 (2025-07-20)
 ==================
