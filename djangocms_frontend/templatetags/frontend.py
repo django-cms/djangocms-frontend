@@ -215,6 +215,11 @@ class Plugin(AsTag):
     def get_value(self, context, name, kwargs, nodelist):
         from djangocms_frontend.plugin_tag import plugin_tag_pool
 
+        if "_cms_components" in context:
+            # Component templates are rendered at startup to collect their declarations. At that
+            # point the plugin tag pool is not populated yet, so no plugin can be rendered (and no
+            # output is used anyway). Render the nodelist only to pick up nested declarations.
+            return nodelist.render(context)
         if name not in plugin_tag_pool:
             return self.message(
                 f'To use "{name}" with the {{% plugin %}} template tag, add its plugin class to '
