@@ -26,3 +26,20 @@ class IconPluginTestCase(TestFixture, CMSTestCase):
         self.assertContains(response, "</i>")
         self.assertContains(response, "style=")
         self.assertContains(response, "400%")
+        self.assertNotContains(response, "aria-label=")
+
+    def test_icon_plugin_renders_aria_label(self):
+        add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=IconPlugin.__name__,
+            language=self.language,
+            config={**icon_config, "label": "Airplane & travel"},
+            tag_type="i",
+        )
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'aria-label="Airplane &amp; travel"')

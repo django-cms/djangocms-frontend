@@ -46,6 +46,7 @@ class IconPlugin(
                         "icon",
                         "icon_size",
                     ),
+                    "label",
                     "icon_foreground",
                     "icon_rounded",
                 )

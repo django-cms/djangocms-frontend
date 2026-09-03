@@ -24,6 +24,7 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
         entangled_fields = {
             "config": [
                 "icon",
+                "label",
                 "icon_size",
                 "icon_foreground",
                 "icon_rounded",
@@ -33,6 +34,11 @@ class IconForm(BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin, Entan
         untangled_fields = ("tag_type",)
 
     icon = IconPickerField()
+    label = forms.CharField(
+        label=_("Label"),
+        required=False,
+        help_text=_("A description of the icon for screen reader users."),
+    )
     icon_size = forms.ChoiceField(
         label=_("Icon size"),
         choices=ICON_SIZE_CHOICES,

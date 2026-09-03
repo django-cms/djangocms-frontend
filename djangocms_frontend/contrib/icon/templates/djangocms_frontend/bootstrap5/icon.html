@@ -1,5 +1,5 @@
 {% load cms_tags sekizai_tags icon_tags %}{% add_css_for_icon instance.icon %}
-    <{{ instance.tag_type }}{{ instance.get_attributes }}>
+    <{{ instance.tag_type }}{{ instance.get_attributes }}{% if instance.label %} aria-label="{{ instance.label }}"{% endif %}>
     {% for plugin in instance.child_plugin_instances %}
         {% with parentloop=forloop parent=instance %}{% render_plugin plugin %}{% endwith %}
     {% empty %}{{ instance.simple_content }}{% endfor %}{{ icon_text }}
