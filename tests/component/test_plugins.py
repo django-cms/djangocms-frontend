@@ -166,9 +166,10 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
 
         from djangocms_link.templatetags.djangocms_link_tags import to_url
 
-        link = to_url(instance.link)
-
         self.publish(self.page, self.language)
+
+        # Only resolvable after publishing: since django CMS 5.1 a page gets its url on first publish
+        link = to_url(instance.link)
 
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)

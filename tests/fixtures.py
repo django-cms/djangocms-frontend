@@ -23,8 +23,12 @@ class TestFixture:
             template="page.html",
         )
         self.placeholder = self.get_placeholders(self.page).get(slot="content")
-        self.request_url = self.page.get_absolute_url(self.language) + "?toolbar_off=true"
         return super().setUp()
+
+    @property
+    def request_url(self):
+        """Evaluated lazily: since django CMS 5.1 a page only gets its url once it is published."""
+        return f"{self.page.get_absolute_url(self.language)}?toolbar_off=true"
 
     def tearDown(self):
         self.page.delete()
