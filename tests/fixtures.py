@@ -27,8 +27,13 @@ class TestFixture:
 
     @property
     def request_url(self):
-        """Evaluated lazily: since django CMS 5.1 a page only gets its url once it is published."""
-        return f"{self.page.get_absolute_url(self.language)}?toolbar_off=true"
+        """URL of ``self.page``, evaluated lazily.
+
+        Since django-cms 5.1 a page only gets a ``PageUrl`` once its content is published, so
+        ``get_absolute_url()`` returns ``None`` for the still unpublished page in ``setUp()``.
+        Tests publish the page themselves before requesting it.
+        """
+        return self.page.get_absolute_url(self.language) + "?toolbar_off=true"
 
     def tearDown(self):
         self.page.delete()

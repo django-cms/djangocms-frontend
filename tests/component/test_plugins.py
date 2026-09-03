@@ -168,7 +168,7 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
 
         self.publish(self.page, self.language)
 
-        # Only resolvable after publishing: since django CMS 5.1 a page gets its url on first publish
+        # Resolve the URL only after publishing: since django-cms 5.1 an unpublished page has no URL.
         link = to_url(instance.link)
 
         with self.login_user_context(self.superuser):

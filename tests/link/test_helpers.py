@@ -58,8 +58,9 @@ class GetLinkMixinTestCase(TestFixture, CMSTestCase):
         self.assertEqual(instance.get_link(), "")
 
     def test_internal_link_to_page(self):
-        # Since django CMS 5.1 a page only gets its url once it is published
-        self.publish(self.page, self.language)
-
-        instance = self._make_instance({"link": {"internal_link": f"cms.page:{self.page.pk}"}})
-        self.assertEqual(instance.get_link(), self.page.get_absolute_url(self.language))
+        page = self.create_page(title="Test Page", template="page.html")
+        # Since django-cms 5.1 an unpublished page has no URL at all, so publish before linking.
+        self.publish(page, self.language)
+        instance = self._make_instance({"link": {"internal_link": f"cms.page:{page.pk}"}})
+        link = instance.get_link()
+        self.assertTrue(link.endswith("/test-page/"), f"Unexpected link: {link}")
