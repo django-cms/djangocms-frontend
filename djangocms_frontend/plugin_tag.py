@@ -7,11 +7,8 @@ from cms.plugin_pool import plugin_pool
 from cms.templatetags.cms_tags import render_plugin
 from django.conf import settings
 from django.contrib.admin.sites import site as admin_site
-from django.template import engines
 from django.template.library import SimpleNode
 from django.template.loader import get_template
-
-django_engine = engines["django"]
 
 plugin_tag_pool = {}
 
@@ -80,6 +77,10 @@ def get_plugin_class(settings_string: str | type) -> type:
 
 
 def setup():
+    # Do not rely on another app having populated the plugin pool already: depending on the order of
+    # INSTALLED_APPS this runs before django.contrib.admin's autodiscover triggers plugin discovery.
+    plugin_pool.discover_plugins()
+
     allowed_plugin_types = tuple(get_plugin_class(cls) for cls in getattr(settings, "CMS_COMPONENT_PLUGINS", []))
 
     for plugin in plugin_pool.plugins.values():  # We'll check all plugins irrespectivly of placeholder config
