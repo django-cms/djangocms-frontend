@@ -13,6 +13,21 @@ and templates.
 
 .. image:: preview.png
 
+Why this exists
+===============
+
+The plugin tree is the editor's interface. Every component you define, every
+nesting rule you allow, and every name you choose becomes a decision an editor
+has to make – over and over. **Plugin architecture is editor experience.**
+
+django CMS Frontend exists so that you can shape that experience deliberately:
+declare components that model editorial intent rather than framework internals,
+constrain what can go where, and keep the CSS framework an implementation
+detail instead of a structure your editors have to navigate.
+
+Further reading: `Plugin Architecture Is Editor Experience
+<https://www.django-cms.org/resources/blog/2026/09/07/plugin-architecture-is-editor-experience/>`_.
+
 Key features
 ============
 
