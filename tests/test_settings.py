@@ -14,6 +14,8 @@ INSTALLED_APPS = [
     "treebeard",
     "djangocms_text",
     "djangocms_link",
+    "djangocms_picture",
+    "djangocms_picture.contrib.filer",
     "djangocms_frontend",
     "djangocms_frontend.contrib.accordion",
     "djangocms_frontend.contrib.alert",

@@ -1,18 +1,10 @@
-from django.core.exceptions import ImproperlyConfigured
-
-try:
-    import filer
-except ImportError:
-    raise ImproperlyConfigured(
-        "Image plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
-    )
-
 from django import forms
 from django.conf import settings as django_settings
-from django.db.models.fields.related import ManyToOneRel
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
-from filer.fields.image import AdminImageFormField, FilerImageField
-from filer.models import Image, ThumbnailOption
+from djangocms_picture.backends import BasePictureBackend
+from djangocms_picture.models import RenditionPreset
+from filer.models import ThumbnailOption
 
 from djangocms_frontend import settings
 
@@ -21,6 +13,7 @@ from ...fields import AttributesFormField, TagTypeFormField, TemplateChoiceMixin
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from ..link.forms import AbstractLinkForm
+from .fields import ImageFormField, get_picture_reference
 
 
 def get_alignment():
@@ -77,7 +70,6 @@ class ImageForm(
             "config": [
                 "template",
                 "picture",
-                "external_picture",
                 "lazy_loading",
                 "width",
                 "height",
@@ -87,6 +79,7 @@ class ImageForm(
                 "use_upscale",
                 "use_responsive_image",
                 "thumbnail_options",
+                "rendition_preset",
                 "picture_fluid",
                 "picture_rounded",
                 "picture_thumbnail",
@@ -102,21 +95,9 @@ class ImageForm(
         choices=get_templates(),
         initial=first_choice(get_templates()),
     )
-    picture = AdminImageFormField(
-        rel=ManyToOneRel(FilerImageField, Image, "id"),
-        queryset=Image.objects.all(),
-        to_field_name="id",
-        label=_("Image"),
-        required=False,
-    )
-    external_picture = forms.URLField(
-        label=_("External image"),
-        required=False,
-        help_text=_(
-            "If provided, overrides the embedded image. "
-            "Certain options such as cropping are not applicable to external images."
-        ),
-    )
+    # Replaced by a request-aware ImageFormField in __init__. Keeping a
+    # declared field makes it visible to django CMS's fieldset processing.
+    picture = forms.Field(label=_("Image source"), required=False)
     lazy_loading = forms.BooleanField(
         label=_("Load lazily"),
         required=False,
@@ -181,6 +162,12 @@ class ImageForm(
         required=False,
         help_text=_("Overrides width, height, and crop; scales up to the provided preset dimensions."),
     )
+    rendition_preset = forms.ModelChoiceField(
+        queryset=RenditionPreset.objects.all(),
+        label=_("Rendition preset"),
+        required=False,
+        help_text=_("Portable rendition settings for image sources other than django-filer."),
+    )
     picture_fluid = forms.BooleanField(
         label=_("Responsive"),
         required=False,
@@ -202,24 +189,72 @@ class ImageForm(
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
 
+    def __init__(
+        self,
+        *args,
+        request: HttpRequest | None = None,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+        source_field = ImageFormField(
+            request=request,
+            label=_("Image source"),
+            required=False,
+        )
+        self.fields["picture"] = source_field
+
+        reference = get_picture_reference(
+            self.instance.config,
+            "picture",
+            external_field_name="external_picture",
+        )
+        selected_backend = self._get_selected_backend(reference)
+        if not self.is_bound and reference:
+            self.initial["picture"] = source_field.selection_from_reference(reference)
+        self._configure_backend_fields(selected_backend)
+
+    def _get_selected_backend(self, reference) -> BasePictureBackend:
+        alias = self.data.get(f"{self.add_prefix('picture')}_backend") if self.is_bound else None
+        alias = alias or (reference.backend if reference else None)
+        alias = alias or getattr(django_settings, "DJANGOCMS_PICTURE_DEFAULT_BACKEND", "filer")
+        return self.fields["picture"].backends_by_alias.get(alias, self.fields["picture"].backends[0])
+
+    def _configure_backend_fields(self, backend: BasePictureBackend) -> None:
+        for field_name in (
+            "use_crop",
+            "use_upscale",
+            "use_responsive_image",
+            "thumbnail_options",
+            "rendition_preset",
+        ):
+            field = self.fields[field_name]
+            field.disabled = not backend.supports_configuration_field(field_name)
+            field.widget.attrs["data-picture-backend-option"] = field_name
+
     def clean(self):
         super().clean()
         data = self.cleaned_data
-        # you shall only set one image kind
-        if not data.get("picture", False) and not data.get("external_picture", False):
-            raise forms.ValidationError(_("You need to add either an image, or a URL linking to an external image."))
+        if not data.get("picture", False):
+            raise forms.ValidationError(_("You need to select an image source."))
 
         # certain cropping options do not work together, the following
         # list defines the disallowed options used in the ``clean`` method
         invalid_option_pairs = [
             ("thumbnail_options", "use_crop"),
             ("thumbnail_options", "use_upscale"),
+            ("rendition_preset", "use_crop"),
+            ("rendition_preset", "use_upscale"),
         ]
         # invalid_option_pairs
         invalid_option_pair = None
 
         for pair in invalid_option_pairs:
-            if data.get(pair[0], False) and data.get(pair[1], False):
+            if (
+                not self.fields[pair[0]].disabled
+                and not self.fields[pair[1]].disabled
+                and data.get(pair[0], False)
+                and data.get(pair[1], False)
+            ):
                 invalid_option_pair = pair
                 break
 
@@ -227,6 +262,14 @@ class ImageForm(
             message = _('Invalid cropping settings. You cannot combine "{field_a}" with "{field_b}".')
             message = message.format(
                 field_a=self.fields[invalid_option_pair[0]].label,
-                field_b=self.fields[invalid_option_pair[0]].label,
+                field_b=self.fields[invalid_option_pair[1]].label,
             )
             raise forms.ValidationError(message)
+        return data
+
+    def _clean_form(self):
+        super()._clean_form()
+        config = self.cleaned_data.get("config")
+        if config is not None:
+            # Old URL values are converted to the URL backend on a successful edit.
+            config.pop("external_picture", None)

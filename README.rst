@@ -107,8 +107,9 @@ See ``REQUIREMENTS`` in the `setup.py
 <https://github.com/django-cms/djangocms-frontend/blob/master/setup.py>`_
 file for additional dependencies:
 
--  django-cms, version 3.11 or later
--  django-filer, version 1.7 or later
+-  django-cms, version 5.0 or later
+-  django-filer, version 2.2 or later
+-  djangocms-picture, version 5.0 or later
 -  djangocms-attributes-field, version 1.0 or later
 -  djangocms-text
 -  djangocms-link
@@ -136,6 +137,8 @@ For a manual install:
 
       'easy_thumbnails',
       'djangocms_link',  # Needed for link support
+      'djangocms_picture',
+      'djangocms_picture.contrib.filer',  # Filer image backend
 
       # Base package template components and custom components
       'djangocms_frontend',

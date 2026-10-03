@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.core.files.base import ContentFile
+from djangocms_picture.backends import UnsupportedBackendOperation, get_backend
 
 from djangocms_frontend.contrib.image.cms_plugins import ImagePlugin
 from djangocms_frontend.contrib.image.forms import get_templates
@@ -9,13 +11,30 @@ default_template = first_choice(get_templates())
 
 
 def create_image_plugin(filename, file, parent_plugin, **kwargs):
-    # Set the FilerImageField value.
-    from filer.settings import FILER_IMAGE_MODEL
-    from filer.utils.loader import load_model
+    backend_alias = kwargs.get(
+        "backend",
+        getattr(settings, "DJANGOCMS_PICTURE_DEFAULT_BACKEND", "filer"),
+    )
+    backend = get_backend(backend_alias)
+    try:
+        reference = backend.upload(
+            file,
+            name=filename,
+            user=kwargs.get("user"),
+            context=kwargs.get("context"),
+        )
+    except UnsupportedBackendOperation:
+        if backend.alias != "filer":
+            raise
+        # Compatibility until djangocms-picture's filer adapter implements
+        # upload(). All persisted data already uses the neutral reference.
+        from filer.settings import FILER_IMAGE_MODEL
+        from filer.utils.loader import load_model
 
-    image_class = load_model(FILER_IMAGE_MODEL)
-    image_obj = image_class(file=ContentFile(file.read(), name=filename))
-    image_obj.save()
+        image_class = load_model(FILER_IMAGE_MODEL)
+        image_obj = image_class(file=ContentFile(file.read(), name=filename))
+        image_obj.save()
+        reference = backend.serialize(image_obj)
 
     img = Image(
         parent=parent_plugin,
@@ -28,7 +47,7 @@ def create_image_plugin(filename, file, parent_plugin, **kwargs):
     ).initialize_from_form()
     img.config.update(
         {
-            "picture": {"pk": image_obj.pk, "model": "filer.image"},
+            "picture": reference.as_dict(),
             "use_no_cropping": True,
         }
     )

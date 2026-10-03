@@ -1,64 +1,132 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
-from easy_thumbnails.files import get_thumbnailer
+from djangocms_picture.backends import RenditionSpec, get_backend
+from djangocms_picture.rendering import build_srcset, calculate_size
 
 from djangocms_frontend.contrib.link.models import GetLinkMixin
 from djangocms_frontend.helpers import get_related_object
 from djangocms_frontend.models import FrontendUIItem
 
-# use golden ration as default (https://en.wikipedia.org/wiki/Golden_ratio)
+from .fields import get_picture_reference
+
+# use golden ratio as default (https://en.wikipedia.org/wiki/Golden_ratio)
 PICTURE_RATIO = getattr(settings, "DJANGOCMS_PICTURE_RATIO", 1.6180)
 
 
 class ImageMixin:
     image_field = None
 
-    def get_size(self, width=None, height=None):
+    @cached_property
+    def picture_reference(self):
+        return get_picture_reference(
+            self.config,
+            self.image_field,
+            external_field_name="external_picture" if self.image_field == "picture" else None,
+        )
+
+    @cached_property
+    def picture_backend(self):
+        reference = self.picture_reference
+        if not reference:
+            return None
+        try:
+            return get_backend(reference.backend)
+        except (ImproperlyConfigured, KeyError, ValueError):
+            return None
+
+    @cached_property
+    def image_asset(self):
+        if not self.picture_backend or not self.picture_reference:
+            return None
+        return self.picture_backend.resolve(self.picture_reference)
+
+    @cached_property
+    def image_attribution(self):
+        return self.image_asset.attribution if self.image_asset else None
+
+    @property
+    def image_alt_text(self):
+        return self.image_asset.info.alt_text if self.image_asset else ""
+
+    @cached_property
+    def rel_image(self):
+        """Compatibility facade for templates that still expect a model image."""
+
+        return getattr(self.image_asset, "image", None) if self.image_asset else None
+
+    def _related_preset(self, field_name):
+        if not self.config.get(field_name):
+            return None
+        return get_related_object(self.config, field_name)
+
+    def get_rendition_spec(self, width=None, height=None):
         crop = getattr(self, "use_crop", False)
         upscale = getattr(self, "use_upscale", False)
-        # use field thumbnail settings
-        if getattr(self, "thumbnail_options", None):
-            thumbnail_options = get_related_object(self.config, "thumbnail_options")
+        backend = self.picture_backend
+
+        thumbnail_options = self._related_preset("thumbnail_options")
+        rendition_preset = self._related_preset("rendition_preset")
+        if backend and backend.supports_configuration_field("thumbnail_options") and thumbnail_options:
             width = thumbnail_options.width
             height = thumbnail_options.height
             crop = thumbnail_options.crop
             upscale = thumbnail_options.upscale
+        elif backend and backend.supports_configuration_field("rendition_preset") and rendition_preset:
+            width = rendition_preset.width
+            height = rendition_preset.height
+            crop = rendition_preset.crop
+            upscale = rendition_preset.upscale
         else:
-            width = getattr(self, "width", None)
-            height = getattr(self, "height", None)
+            width = width or getattr(self, "width", None)
+            height = height or getattr(self, "height", None)
 
-        # calculate height when not given according to the
-        # golden ratio or fallback to the image size
-        picture_ratio = self.rel_image.width / self.rel_image.height if self.rel_image else PICTURE_RATIO
-        if not height and width:
-            height = width / picture_ratio
-        elif not width and height:
-            width = height * picture_ratio
-        elif not width and not height and getattr(self, "picture", None):
-            if self.rel_image:
-                width = self.rel_image.width
-                height = self.rel_image.height
-            else:
-                width = 0
-                height = 0
-        elif not width and not height:  # pragma: no cover
-            # If no information is available on the image size whatsoever,
-            # make it 640px wide and use PICTURE_RATIO
-            width, height = 640, 640 / PICTURE_RATIO
-        width = int(width)
-        height = int(height)
+        return calculate_size(
+            self.image_asset.info if self.image_asset else None,
+            width=width,
+            height=height,
+            crop=crop,
+            upscale=upscale,
+            picture_ratio=PICTURE_RATIO,
+        )
+
+    def get_size(self, width=None, height=None):
+        spec = self.get_rendition_spec(width=width, height=height)
         return {
-            "size": (width, height),
-            "crop": crop,
-            "upscale": upscale,
+            "size": (spec.width, spec.height),
+            "crop": spec.crop,
+            "upscale": spec.upscale,
         }
 
     @cached_property
-    def rel_image(self):
-        if self.config.get(self.image_field, None):
-            return get_related_object(self.config, self.image_field)
-        return None
+    def img_src(self):
+        if not self.image_asset:
+            return ""
+        if getattr(self, "use_no_cropping", False):
+            return self.image_asset.get_original().url
+
+        has_transform = any(
+            (
+                getattr(self, "width", None),
+                getattr(self, "height", None),
+                self.config.get("thumbnail_options"),
+                self.config.get("rendition_preset"),
+            )
+        )
+        if not has_transform:
+            return self.image_asset.get_original().url
+
+        spec = self.get_rendition_spec()
+        capabilities = self.picture_backend.capabilities
+        return self.image_asset.get_rendition(
+            RenditionSpec(
+                width=spec.width,
+                height=spec.height,
+                crop=spec.crop and capabilities.crop,
+                upscale=spec.upscale and capabilities.upscale,
+            )
+        ).url
 
 
 class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
@@ -74,8 +142,16 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
     image_field = "picture"
 
     @property
+    def external_picture(self):
+        legacy_value = self.config.get("external_picture")
+        if legacy_value:
+            return legacy_value
+        reference = self.picture_reference
+        return reference.id if reference and reference.backend == "url" else ""
+
+    @property
     def is_responsive_image(self):
-        if self.external_picture:
+        if not self.image_asset or not self.picture_backend.capabilities.responsive:
             return False
         if self.use_responsive_image == "inherit":
             return getattr(settings, "DJANGOCMS_PICTURE_RESPONSIVE_IMAGES", False)
@@ -83,70 +159,25 @@ class Image(GetLinkMixin, ImageMixin, FrontendUIItem):
 
     @cached_property
     def img_srcset_data(self):
-        if not (self.picture and self.is_responsive_image):
+        if not self.is_responsive_image:
             return None
 
-        srcset = []
-
-        try:
-            thumbnailer = get_thumbnailer(self.rel_image)
-
-            picture_options = self.get_size(self.width, self.height)
-            picture_width = picture_options["size"][0]
-            thumbnail_options = {"crop": picture_options["crop"]}
-            breakpoints = getattr(
-                settings,
-                "DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS",
-                [576, 768, 992],
-            )
-
-            for size in filter(lambda x: x < picture_width, breakpoints):
-                thumbnail_options["size"] = (size, size)
-                srcset.append((int(size), thumbnailer.get_thumbnail(thumbnail_options)))
-        except ValueError:
-            # get_thumbnailer() raises this if it can't establish a `relative_name`.
-            # This may mean that the filer image has been deleted
-            pass
-
-        return srcset
-
-    @cached_property
-    def img_src(self):
-        # we want the external image to take priority by design
-        # please open a ticket if you disagree for an open discussion
-        if self.external_picture:
-            return self.external_picture
-        # image can be empty, for example when the image is removed from filer
-        # in this case we want to return an empty string to avoid #69
-        elif not self.picture:
-            return ""
-        # skip image processing when there's no width or height defined,
-        # or when legacy use_no_cropping flag is present
-        elif getattr(self, "use_no_cropping", None) or not (
-            self.width or self.height or getattr(self, "thumbnail_options")
-        ):
-            return self.rel_image.url if self.rel_image else ""
-
-        picture_options = self.get_size()
-        thumbnail_options = {
-            "size": picture_options["size"],
-            "crop": picture_options["crop"],
-            "upscale": picture_options["upscale"],
-            "subject_location": self.rel_image.subject_location if self.rel_image else (),
-        }
-
-        try:
-            thumbnailer = get_thumbnailer(self.rel_image)
-            url = thumbnailer.get_thumbnail(thumbnail_options).url
-        except ValueError:
-            # get_thumbnailer() raises this if it can't establish a `relative_name`.
-            # This may mean that the filer image has been deleted
-            url = ""
-        return url
+        spec = self.get_rendition_spec(self.width, self.height)
+        breakpoints = getattr(
+            settings,
+            "DJANGOCMS_PICTURE_RESPONSIVE_IMAGES_VIEWPORT_BREAKPOINTS",
+            [576, 768, 992],
+        )
+        return build_srcset(
+            self.image_asset,
+            widths=breakpoints,
+            width=spec.width,
+            height=spec.height,
+            crop=spec.crop and self.picture_backend.capabilities.crop,
+            upscale=spec.upscale and self.picture_backend.capabilities.upscale,
+        )
 
     def get_short_description(self):
-        if self.external_picture:
-            return self.external_picture
-        if self.rel_image and self.rel_image.label:
-            return self.rel_image.label
+        if self.image_asset and self.image_asset.info.label:
+            return self.image_asset.info.label
         return _("<file is missing>")

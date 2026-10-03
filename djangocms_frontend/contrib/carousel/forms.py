@@ -1,18 +1,7 @@
-from django.core.exceptions import ImproperlyConfigured
-
-try:
-    import filer
-except ImportError:
-    raise ImproperlyConfigured(
-        "Carousel plugin requires django-filer. Install it using: pip install djangocms-frontend[filer]"
-    )
-
 from django import forms
-from django.db.models.fields.related import ManyToOneRel
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm
-from filer.fields.image import AdminImageFormField, FilerImageField
-from filer.models import Image
 
 from djangocms_frontend.fields import AttributesFormField, ButtonGroup, TagTypeFormField, TemplateChoiceMixin
 
@@ -22,6 +11,7 @@ from ...fields import HTMLFormField
 from ...helpers import first_choice
 from ...models import FrontendUIItem
 from .. import carousel
+from ..image.fields import ImageFormField, get_picture_reference
 from ..link.forms import LinkFormMixin
 from .constants import (
     CAROUSEL_ASPECT_RATIO_CHOICES,
@@ -169,13 +159,7 @@ class CarouselSlideForm(
 
     link_is_optional = True
 
-    carousel_image = AdminImageFormField(
-        rel=ManyToOneRel(FilerImageField, Image, "id"),
-        queryset=Image.objects.all(),
-        to_field_name="id",
-        label=_("Slide image"),
-        required=False,
-    )
+    carousel_image = forms.Field(label=_("Slide image"), required=False)
     carousel_content = HTMLFormField(
         label=_("Content"),
         required=False,
@@ -184,3 +168,20 @@ class CarouselSlideForm(
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()
+
+    def __init__(
+        self,
+        *args,
+        request: HttpRequest | None = None,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+        source_field = ImageFormField(
+            request=request,
+            label=_("Slide image"),
+            required=False,
+        )
+        self.fields["carousel_image"] = source_field
+        reference = get_picture_reference(self.instance.config, "carousel_image")
+        if not self.is_bound and reference:
+            self.initial["carousel_image"] = source_field.selection_from_reference(reference)

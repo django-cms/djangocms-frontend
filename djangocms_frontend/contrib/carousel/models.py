@@ -1,5 +1,3 @@
-import os
-
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 
@@ -46,15 +44,8 @@ class CarouselSlide(GetLinkMixin, ImageMixin, FrontendUIItem):
     def get_short_description(self):
         image_text = content_text = ""
 
-        if self.carousel_image:
-            if self.rel_image is None:
-                image_text = _("<file is missing>")
-            elif self.rel_image.name:
-                image_text = self.rel_image.name
-            elif self.rel_image.original_filename and os.path.split(self.rel_image.original_filename)[1]:
-                image_text = os.path.split(self.rel_image.original_filename)[1]
-            else:
-                image_text = "Image"
+        if self.config.get(self.image_field):
+            image_text = self.image_asset.info.label if self.image_asset else _("<file is missing>")
         if self.carousel_content:
             text = strip_tags(self.carousel_content).strip()
             if len(text) > 100:

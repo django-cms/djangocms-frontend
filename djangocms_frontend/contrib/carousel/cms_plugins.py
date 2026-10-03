@@ -1,4 +1,5 @@
 from cms.plugin_pool import plugin_pool
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend.helpers import get_plugin_template
@@ -83,6 +84,18 @@ class CarouselSlidePlugin(
         ),
     ]
     link_fieldset_position = 1
+
+    def get_form(self, request: HttpRequest, obj=None, change=False, **kwargs):
+        form_class = super().get_form(request, obj=obj, change=change, **kwargs)
+
+        class RequestAwareCarouselSlideForm(form_class):
+            def __init__(self, *args, **form_kwargs):
+                form_kwargs.setdefault("request", request)
+                super().__init__(*args, **form_kwargs)
+
+        RequestAwareCarouselSlideForm.__name__ = form_class.__name__
+        RequestAwareCarouselSlideForm.__qualname__ = form_class.__qualname__
+        return RequestAwareCarouselSlideForm
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(

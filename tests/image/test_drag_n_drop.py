@@ -22,6 +22,8 @@ class DjangoCMSPictureIntegrationTestCase(TestFixture, CMSTestCase):
         picture_plugins = Image.objects.order_by("-id")
         self.assertEqual(len(picture_plugins), 1)
         self.assertEqual(picture_plugins[0].parent.id, text_plugin.id)
+        self.assertEqual(picture_plugins[0].config["picture"]["backend"], "filer")
+        self.assertTrue(picture_plugins[0].config["picture"]["id"])
         id = picture_plugins[0].id
         self.assertHTMLEqual(
             text_plugin.body,

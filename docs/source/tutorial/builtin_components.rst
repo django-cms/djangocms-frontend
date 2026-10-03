@@ -70,6 +70,8 @@ Configuration
             'djangocms_icon',
             'easy_thumbnails',
             'djangocms_link',  # Required if djangocms_frontend.contrib.link is used
+            'djangocms_picture',  # Required for image selection and rendering
+            'djangocms_picture.contrib.filer',  # Filer image backend
             # Main frontend components
             'djangocms_frontend',
             'djangocms_frontend.contrib.accordion',
@@ -316,4 +318,3 @@ Now that you have installed and configured ``djangocms-frontend``, explore addit
 - Integrating with third-party frameworks.
 
 For more details, refer to the official documentation: https://djangocms-frontend.readthedocs.io/en/latest/
-

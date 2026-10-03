@@ -14,13 +14,10 @@ requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Django",
-  "Framework :: Django :: 4.2",
-  "Framework :: Django :: 5.0",
-  "Framework :: Django :: 5.1",
   "Framework :: Django :: 5.2",
+  "Framework :: Django :: 6.0",
+  "Framework :: Django :: 6.1",
   "Framework :: Django CMS",
-  "Framework :: Django CMS :: 3.11",
-  "Framework :: Django CMS :: 4.1",
   "Framework :: Django CMS :: 5.0",
   "Framework :: Django CMS :: 5.1",
   "Programming Language :: Python :: 3 :: Only",
@@ -32,21 +29,17 @@ classifiers = [
 ]
 dynamic = [ "version" ]
 dependencies = [
-  "django-cms>=3.7",
+  "django>=5.2",
+  "django-cms>=5",
   "django-entangled>=0.6",
-  "django-filer>=1.7",
+  "django-filer>=2.2",
   "djangocms-attributes-field>=4",
   "djangocms-link>=5",
+  "djangocms-picture>=5,<6",
   "easy-thumbnails",
 ]
-optional-dependencies.cms-3 = [
-  "django-cms<4",
-  "django-parler",
-  "djangocms-link>=5",
-  "djangocms-text",
-]
-optional-dependencies.cms-4 = [
-  "django-cms>=4.1",
+optional-dependencies.cms-5 = [
+  "django-cms>=5",
   "django-parler",
   "djangocms-alias>=2",
   "djangocms-link>=5",

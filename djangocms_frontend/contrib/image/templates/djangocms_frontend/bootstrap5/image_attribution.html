@@ -1,0 +1,14 @@
+{% if attribution %}
+    <small class="image-attribution">
+        {% if attribution.copyright_notice %}{{ attribution.copyright_notice }}{% endif %}
+        {% if attribution.creator_name %}
+            {% if attribution.creator_url %}<a href="{{ attribution.creator_url }}" rel="noopener noreferrer">{% endif %}{{ attribution.creator_name }}{% if attribution.creator_url %}</a>{% endif %}
+        {% endif %}
+        {% if attribution.provider_name %}
+            {% if attribution.provider_url %}<a href="{{ attribution.provider_url }}" rel="noopener noreferrer">{% endif %}{{ attribution.provider_name }}{% if attribution.provider_url %}</a>{% endif %}
+        {% endif %}
+        {% if attribution.license_name %}
+            {% if attribution.license_url %}<a href="{{ attribution.license_url }}" rel="license noopener noreferrer">{% endif %}{{ attribution.license_name }}{% if attribution.license_url %}</a>{% endif %}
+        {% endif %}
+    </small>
+{% endif %}

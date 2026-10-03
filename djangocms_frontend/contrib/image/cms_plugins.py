@@ -1,4 +1,5 @@
 from cms.plugin_pool import plugin_pool
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from ... import settings
@@ -49,7 +50,6 @@ class ImagePlugin(
                 "fields": (
                     "template",
                     "picture",
-                    "external_picture",
                     (
                         "picture_fluid",
                         "lazy_loading",
@@ -77,11 +77,24 @@ class ImagePlugin(
                     ("width", "height"),
                     ("use_crop", "use_upscale"),
                     "thumbnail_options",
+                    "rendition_preset",
                 ),
             },
         ),
     ]
     link_fieldset_position = -1
+
+    def get_form(self, request: HttpRequest, obj=None, change=False, **kwargs):
+        form_class = super().get_form(request, obj=obj, change=change, **kwargs)
+
+        class RequestAwareImageForm(form_class):
+            def __init__(self, *args, **form_kwargs):
+                form_kwargs.setdefault("request", request)
+                super().__init__(*args, **form_kwargs)
+
+        RequestAwareImageForm.__name__ = form_class.__name__
+        RequestAwareImageForm.__qualname__ = form_class.__qualname__
+        return RequestAwareImageForm
 
     def get_render_template(self, context, instance, placeholder):
         return f"djangocms_frontend/{settings.framework}/{instance.template}/image.html"

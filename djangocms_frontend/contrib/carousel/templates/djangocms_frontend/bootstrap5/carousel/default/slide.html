@@ -13,7 +13,7 @@
     {% if instance.carousel_content %}
         {{ instance.carousel_content|html_safe }}
     {% endif %}
-    {% if instance.rel_image %}
+    {% if instance.image_asset %}
         {% for plugin in instance.child_plugin_instances %}
             {% render_plugin plugin %}
         {% endfor %}

@@ -156,21 +156,65 @@ class PicturePluginTestCase(TestFixture, CMSTestCase):
         request = HttpRequest()
         request.POST = {
             "template": first_choice(get_templates()),
-            "picture": "",
-            "external_picture": "https://www.django-cms.com/",
+            "picture_backend": "url",
+            "picture_url": "https://www.django-cms.com/",
             "use_responsive_image": "yes",
             "margin_devices": ["xs"],
         }
         form = ImageForm(request.POST)
         self.assertTrue(form.is_valid(), f"{form.__class__.__name__}:form errors: {form.errors}")
-        self.assertEqual(form.cleaned_data["config"]["use_responsive_image"], "yes")
+        self.assertEqual(
+            form.cleaned_data["config"]["picture"],
+            {
+                "version": 1,
+                "backend": "url",
+                "id": "https://www.django-cms.com/",
+                "context": {},
+                "snapshot": {},
+            },
+        )
 
         # Test invalid option pair
-        request.POST.update(
-            {
-                "thumbnail_options": True,
-                "use_crop": True,
-            }
-        )
+        thumbnail_options = ThumbnailOption.objects.create(name="form preset", width=100, height=100)
+        request.POST = {
+            "template": first_choice(get_templates()),
+            "picture_backend": "filer",
+            "picture_filer": self.image.pk,
+            "thumbnail_options": thumbnail_options.pk,
+            "use_crop": True,
+            "use_responsive_image": "inherit",
+            "margin_devices": ["xs"],
+        }
         form = ImageForm(request.POST)
         self.assertFalse(form.is_valid())
+
+    def test_legacy_external_picture_initializes_url_backend(self):
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={"external_picture": "https://example.com/legacy.jpg"},
+        )
+
+        form = ImageForm(instance=plugin)
+
+        self.assertEqual(form.initial["picture"].backend.alias, "url")
+        self.assertEqual(form.initial["picture"].value, "https://example.com/legacy.jpg")
+
+    def test_default_template_renders_backend_attribution(self):
+        self.image.author = "Example Photographer"
+        self.image.save()
+        plugin = add_plugin(
+            placeholder=self.placeholder,
+            plugin_type=ImagePlugin.__name__,
+            language=self.language,
+            config={"picture": {"pk": self.image.id, "model": "filer.Image"}},
+        )
+        plugin.initialize_from_form(ImageForm).save()
+        self.publish(self.page, self.language)
+
+        with self.login_user_context(self.superuser):
+            response = self.client.get(self.request_url)
+
+        self.assertContains(response, 'class="image-attribution"')
+        self.assertContains(response, "Example Photographer")
