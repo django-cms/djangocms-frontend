@@ -10,6 +10,7 @@ from djangocms_frontend.cms_plugins import (
 from djangocms_frontend.contrib.alert.cms_plugins import AlertPlugin
 
 from ..fixtures import TestFixture
+from ..helpers import get_filer_image
 
 
 class ComponentPluginTestCase(TestFixture, CMSTestCase):
@@ -119,16 +120,32 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
             count=0,
         )
 
+    def _save_hero_through_admin(self, instance, change):
+        """Call ``save_model`` the way Django's admin does: with a bound, validated form
+        and ``obj`` being that form's unsaved instance."""
+        image = get_filer_image()
+        self.addCleanup(image.delete)
+        form = MyHeroPlugin.form(
+            data={"title": "my title", "slogan": "my slogan", "image": image.pk},
+            instance=instance,
+        )
+        self.assertTrue(form.is_valid(), form.errors)
+        obj = form.save(commit=False)
+        request = self.get_request(path="/")
+        request.user = self.superuser
+        MyHeroPlugin().save_model(request=request, obj=obj, form=form, change=change)
+        return obj
+
     def test_autocreate_slots(self):
         from djangocms_frontend.cms_plugins import MyHeroSlotPlugin, MyHeroTitlePlugin
 
-        instance = add_plugin(
+        instance = MyHeroPlugin.model(
             placeholder=self.placeholder,
             plugin_type=MyHeroPlugin.__name__,
             language=self.language,
+            position=1,
         )
-        request = self.get_request(path="/")
-        MyHeroPlugin().save_model(request=request, obj=instance, form=MyHeroPlugin.form, change=False)
+        instance = self._save_hero_through_admin(instance, change=False)
 
         plugins = list(self.placeholder.get_plugins())
 
@@ -147,8 +164,7 @@ class ComponentPluginTestCase(TestFixture, CMSTestCase):
             plugin_type=MyHeroPlugin.__name__,
             language=self.language,
         )
-        request = self.get_request(path="/")
-        MyHeroPlugin().save_model(request=request, obj=instance, form=MyHeroPlugin.form, change=True)
+        self._save_hero_through_admin(instance, change=True)
 
         plugins = list(self.placeholder.get_plugins())
         self.assertEqual(len(plugins), 1)
