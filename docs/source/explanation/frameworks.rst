@@ -73,7 +73,7 @@ helper falls back to that framework's ``default`` variant when the requested
 variant is missing, rather than selecting a different framework.
 
 Frameworks and universal tokens
-==============================
+===============================
 
 .. versionadded:: 3.0
    Universal configuration tokens and the Bootstrap 5 token adapter.
