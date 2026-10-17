@@ -3,7 +3,7 @@ See PEP 440 (https://www.python.org/dev/peps/pep-0440/)
 
 Release logic:
  1. Increase version number (change __version__ below).
- 2. Ensure the static bundle is upto date with ``nvm use && npm install && gulp sass && gulp bundle``
+ 2. Ensure the static CSS is up to date with ``nvm use && npm install && npm run build``
  3. Assure that all changes have been documented in CHANGELOG.rst.
  4. In setup.py check that
    - versions from all third party packages are pinned in ``REQUIREMENTS``.
