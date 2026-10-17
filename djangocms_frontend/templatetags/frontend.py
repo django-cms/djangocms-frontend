@@ -3,6 +3,12 @@ import json
 import typing
 import uuid
 
+from classytags.arguments import Argument, MultiKeywordArgument
+from classytags.core import Options, Tag
+from classytags.helpers import AsTag, flatten_context
+from cms.models import CMSPlugin, get_cms_setting
+from cms.plugin_rendering import PluginContext
+from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
 from django import template
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
@@ -15,14 +21,6 @@ from django.utils.functional import Promise
 from django.utils.html import conditional_escape
 from django.utils.module_loading import import_string
 from django.utils.safestring import mark_safe
-
-from cms.models import CMSPlugin, get_cms_setting
-from cms.plugin_rendering import PluginContext
-from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
-
-from classytags.arguments import Argument, MultiKeywordArgument
-from classytags.core import Options, Tag
-from classytags.helpers import AsTag, flatten_context
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings, tokens

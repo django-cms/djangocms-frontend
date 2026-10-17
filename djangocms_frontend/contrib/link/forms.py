@@ -2,12 +2,12 @@ from django import apps, forms
 from django.conf import settings as django_settings
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _
+from djangocms_link.fields import LinkFormField
 
 # from djangocms_link.validators import IntranetURLValidator
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend.token_forms import EntangledModelForm
-from djangocms_link.fields import LinkFormField
 
 from ... import settings
 from ...common import SpacingFormMixin

@@ -10,7 +10,6 @@ except ImportError:
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
-
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
 

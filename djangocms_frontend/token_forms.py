@@ -10,7 +10,6 @@ from weakref import WeakKeyDictionary
 
 from django import forms
 from django.core.exceptions import ValidationError
-
 from entangled.forms import EntangledModelForm as BaseEntangledModelForm
 
 from djangocms_frontend import settings, tokens

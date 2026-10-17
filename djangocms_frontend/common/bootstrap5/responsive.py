@@ -1,5 +1,4 @@
 from django.utils.translation import gettext_lazy as _
-
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend.fields import IconMultiselect, OptionalDeviceChoiceField

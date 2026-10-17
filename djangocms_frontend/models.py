@@ -1,13 +1,12 @@
 import logging
 
+from cms.models import CMSPlugin
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
-
-from cms.models import CMSPlugin
 
 from djangocms_frontend import settings, tokens
 from djangocms_frontend.fields import TagTypeField

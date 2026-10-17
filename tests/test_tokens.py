@@ -612,6 +612,7 @@ class TokenReviewRegressionTests(TestCase):
 class TokenSecondReviewTests(TestCase):
     def test_title_only_form_preserves_uneditable_unsupported_value(self):
         from django import forms
+
         from djangocms_frontend.token_forms import EntangledModelForm
 
         class TitleOnlyForm(EntangledModelForm):
@@ -730,6 +731,7 @@ class TokenSecondReviewTests(TestCase):
     def test_card_template_wraps_grid_cards_without_render_mixin(self):
         from cms.models import CMSPlugin
         from django.template.loader import render_to_string
+
         from djangocms_frontend.contrib.card.models import Card, CardLayout
 
         parent = CMSPlugin(plugin_type="CardLayoutPlugin")
@@ -768,8 +770,10 @@ class TokenThirdReviewTests(TestCase):
         resolve.assert_called_once_with("tab_type")
 
     def test_row_creation_writes_canonical_columns(self):
-        from cms.models import CMSPlugin
         from unittest.mock import Mock
+
+        from cms.models import CMSPlugin
+
         from djangocms_frontend.cms_plugins import CMSUIPlugin
         from djangocms_frontend.contrib.grid.cms_plugins import GridRowPlugin
 
@@ -786,11 +790,13 @@ class TokenThirdReviewTests(TestCase):
         self.assertNotIn("xxl_ml", config)
 
     def test_card_render_and_template_resolve_parent_once(self):
+        from unittest.mock import Mock
+
         from cms.models import CMSPlugin
         from django.template.loader import render_to_string
-        from unittest.mock import Mock
-        from djangocms_frontend.contrib.card.models import Card, CardLayout
+
         from djangocms_frontend.contrib.card.frameworks.bootstrap5 import CardRenderMixin
+        from djangocms_frontend.contrib.card.models import Card, CardLayout
 
         class Terminal:
             def render(self, context, instance, placeholder):
@@ -810,6 +816,7 @@ class TokenThirdReviewTests(TestCase):
 
     def test_carousel_does_not_add_empty_transition(self):
         from unittest.mock import Mock
+
         from djangocms_frontend.contrib.carousel.frameworks.bootstrap5 import CarouselRenderMixin
 
         class Terminal:
@@ -1185,6 +1192,7 @@ class TokenFullReviewTests(TestCase):
 class ProjectBoundaryRegressionTests(TestCase):
     def project_form(self):
         from django import forms
+
         from djangocms_frontend.token_forms import EntangledModelForm
 
         class ProjectForm(EntangledModelForm):
@@ -1605,6 +1613,7 @@ class TokenRenderReviewTests(TestCase):
 class StrictAndStandaloneRegressionTests(TestCase):
     def test_strict_migration_rolls_back_before_unreadable_plugin(self):
         from entangled.forms import EntangledModelForm as PlainEntangledModelForm
+
         from djangocms_frontend.management import universal_migration
 
         for unreadable_form in (None, PlainEntangledModelForm):

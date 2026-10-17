@@ -1,12 +1,11 @@
 import importlib
 
+from cms.models import CMSPlugin
 from django import forms
 from django.apps import apps
 from django.utils.encoding import force_str
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-
-from cms.models import CMSPlugin
 
 from djangocms_frontend.token_forms import EntangledModelForm
 
