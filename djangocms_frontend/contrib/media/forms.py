@@ -1,6 +1,5 @@
-from entangled.forms import EntangledModelForm
-
 from djangocms_frontend.fields import AttributesFormField, TagTypeFormField
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ...common import ResponsiveFormMixin
 from ...models import FrontendUIItem

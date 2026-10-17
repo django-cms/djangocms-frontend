@@ -1,12 +1,14 @@
 import importlib
 
-from cms.models import CMSPlugin
 from django import forms
 from django.apps import apps
 from django.utils.encoding import force_str
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
+
+from cms.models import CMSPlugin
+
+from djangocms_frontend.token_forms import EntangledModelForm
 
 
 def _import_or_empty(module, name):
@@ -19,9 +21,11 @@ def _import_or_empty(module, name):
 def _get_mixin_classes(mixins: list, suffix: str = "") -> list[type]:
     """Find and import mixin classes from a list of mixin strings"""
     mixins = [
-        (mixin.rsplit(".")[0], f"{mixin.rsplit('.')[-1]}{suffix}Mixin")
-        if "." in mixin
-        else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
+        (
+            (mixin.rsplit(".")[0], f"{mixin.rsplit('.')[-1]}{suffix}Mixin")
+            if "." in mixin
+            else ("djangocms_frontend.common", f"{mixin}{suffix}Mixin")
+        )
         for mixin in reversed(mixins)
     ]
 
@@ -92,6 +96,8 @@ class CMSFrontendComponent(forms.Form):
                 ),
                 {
                     **kwargs,
+                    # Report the component's module, so its fields are recognized as its own.
+                    "__module__": cls.__module__,
                     "Meta": type(
                         "Meta",
                         (),

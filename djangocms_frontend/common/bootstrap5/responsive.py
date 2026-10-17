@@ -1,7 +1,9 @@
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend.fields import IconMultiselect, OptionalDeviceChoiceField
+from djangocms_frontend.frameworks.bootstrap5_tokens import value
 from djangocms_frontend.helpers import insert_fields
 from djangocms_frontend.settings import DEVICE_CHOICES
 
@@ -13,6 +15,7 @@ visibility_class = {
 def get_display_classes(visibility_set, visibility_class="block"):
     """Generates the necessary bootstrap display utility classes for a set
     of devices on which the content should be seen/hidden"""
+    visibility_set = value("responsive_visibility", visibility_set)
     classes = []
     visible = True
     for device, __ in DEVICE_CHOICES:

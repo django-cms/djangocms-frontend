@@ -15,7 +15,7 @@ class GridFormTestCase(TestCase):
         )
         self.assertTrue(form.is_valid())
         self.assertIn("container_type", form.instance.config)
-        self.assertEqual(form.instance.container_type, "container")
+        self.assertEqual(form.instance.container_type, "bounded")
 
     def test_grid_row_form(self):
         form = GridRowForm(
@@ -27,7 +27,7 @@ class GridFormTestCase(TestCase):
         )
         self.assertTrue(form.is_valid())
         self.assertIn("row_cols_xs", form.instance.config)
-        self.assertIn("row_cols_xxl", form.instance.config)
+        self.assertIn("row_cols_2xl", form.instance.config)
         self.assertEqual(form.instance.row_cols_xs, 5)
 
     def test_grid_column_form(self):

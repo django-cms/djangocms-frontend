@@ -1,11 +1,17 @@
+from functools import partial
+
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
+
+
 class SpacingRenderMixin:
     def render(self, context, instance, placeholder):
-        if not instance.space_device or instance.space_device == "xs":
-            instance.add_classes(f"{instance.space_property}{instance.space_sides}-{instance.space_size}")
-        else:
-            instance.add_classes(
-                f"{instance.space_property}{instance.space_sides}-{instance.space_device}-{instance.space_size}"
-            )
+        # Shares the class rule with the structure board description, including overrides.
+        get_base_css_class = getattr(instance, "get_base_css_class", None)
+        if get_base_css_class is None:
+            from djangocms_frontend.contrib.utilities.models import Spacing
+
+            get_base_css_class = partial(Spacing.get_base_css_class, instance)
+        instance.add_classes(get_base_css_class())
         return super().render(context, instance, placeholder)
 
 
@@ -15,7 +21,7 @@ class EditorNoteRenderMixin:
 
 class HeadingRenderMixin:
     def render(self, context, instance, placeholder):
-        heading_context = instance.config.get("heading_context", None)
+        heading_context = field_value(instance, "heading_context")
         if heading_context:
             instance.add_classes(f"text-{heading_context}")
         heading_alignment = instance.config.get("heading_alignment", None)

@@ -1,6 +1,6 @@
-{% load cms_tags %}{% spaceless %}
+{% load cms_tags frontend_tokens %}{% with tab_type=instance|framework_value:"tab_type" tab_alignment=instance|framework_value:"tab_alignment" %}{% spaceless %}
     <{{ instance.tag_type }}{{ instance.get_attributes }}>
-    <ul class="nav {{ instance.tab_type }} {% if instance.tab_alignment %} {{ instance.tab_alignment }}{% endif %}" role="tablist">
+    <ul class="nav {{ tab_type }} {% if tab_alignment %} {{ tab_alignment }}{% endif %}" role="tablist">
         {% for plugin in instance.child_plugin_instances %}
             <li class="nav-item">
                 <button
@@ -18,7 +18,7 @@
         {% endfor %}
     </ul>
 
-    <div class="tab-content{% if instance.tab_alignment == "flex-column" %} flex-fill{% endif %}">{% endspaceless %}
+    <div class="tab-content{% if tab_alignment == "flex-column" %} flex-fill{% endif %}">{% endspaceless %}
         {% for plugin in instance.child_plugin_instances %}
             {% with parent=instance parentloop=forloop %}
                 {% render_plugin plugin %}
@@ -27,3 +27,5 @@
     </div>
     </{{ instance.tag_type }}>
 {% endspaceless %}
+
+{% endwith %}

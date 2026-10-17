@@ -2,9 +2,9 @@ from copy import copy
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES, DEVICE_SIZES
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ... import settings
 from ...common import BackgroundFormMixin, MarginFormMixin, PaddingFormMixin, ResponsiveFormMixin
@@ -110,9 +110,9 @@ class CardForm(
         choices=settings.EMPTY_CHOICE + CARD_COLOR_STYLE_CHOICES,
         required=False,
         help_text=_("Uses the border to indicate context."),
-        widget=forms.HiddenInput()
-        if "card_outline" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
+        widget=(
+            forms.HiddenInput() if "card_outline" in getattr(settings, "EXCL_CARD_PROP", ()) else ColoredButtonGroup()
+        ),
     )
     card_alignment = forms.ChoiceField(
         label=_("Alignment"),
@@ -124,18 +124,22 @@ class CardForm(
         label=_("Text context"),
         choices=settings.EMPTY_CHOICE + CARD_TEXT_STYLES,
         required=False,
-        widget=forms.HiddenInput()
-        if "card_text_color" in getattr(settings, "EXCL_CARD_PROP", ())
-        else ColoredButtonGroup(),
+        widget=(
+            forms.HiddenInput()
+            if "card_text_color" in getattr(settings, "EXCL_CARD_PROP", ())
+            else ColoredButtonGroup()
+        ),
     )
     card_full_height = forms.BooleanField(
         label=_("Full height"),
         initial=False,
         required=False,
         help_text=_("If checked cards in one row will automatically extend to the full row height."),
-        widget=forms.HiddenInput()
-        if "card_full_height" in getattr(settings, "EXCL_CARD_PROP", ())
-        else forms.CheckboxInput,
+        widget=(
+            forms.HiddenInput()
+            if "card_full_height" in getattr(settings, "EXCL_CARD_PROP", ())
+            else forms.CheckboxInput
+        ),
     )
     attributes = AttributesFormField()
     tag_type = TagTypeFormField()

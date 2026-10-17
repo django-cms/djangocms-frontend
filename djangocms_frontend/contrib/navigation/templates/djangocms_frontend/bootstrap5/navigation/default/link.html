@@ -1,34 +1,34 @@
-{% load cms_tags sekizai_tags %}{% spaceless %}
+{% load cms_tags sekizai_tags frontend_tokens %}{% spaceless %}{% with parent_is_navigation=parent.plugin_type|is_plugin_type:"NavigationPlugin" %}
     {# djlint:off #}
 {% if instance.child_plugin_instances %}
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="nav-item">
+    {% if not parent_is_navigation %}<li class="nav-item">
         <li class="{{ item|default:"nav" }}-item {{ drop|default:"dropdown" }}">
     {% else %}
         <div class="{{ item|default:"nav" }}-item  {{ drop|default:"dropdown" }}">
     {% endif %}
         {% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
         <a {{ instance.get_attributes }} href="{{ instance.get_link }}"
-           {% if parent.plugin_type != "NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
+           {% if not parent.plugin_type|is_plugin_type:"NavLinkPlugin" %}data-bs-toggle="dropdown"{% endif %}>{{ instance.name }}</a>
         {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
         <ul class="dropdown-menu">
             {% for plugin in instance.child_plugin_instances %}
                 {% with forloop=parentloop parent=instance drop="dropend" item="dropdown" %}{% render_plugin plugin %}{% endwith %}
             {% endfor %}
         </ul>
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="nav-item">
+    {% if not parent_is_navigation %}<li class="nav-item">
         </li>
     {% else %}
         </div>
     {% endif %}
 {% else %}
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
+    {% if not parent_is_navigation %}<li class="{{ item|default:"nav" }}-item">{% endif %}
         <a {{ instance.get_attributes }} href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{% if instance.icon_left %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_left attribute_class="pe-0 nav-link" %}{% endif %}
             {{ instance.name }}
             {% if instance.icon_right %}{% include "djangocms_frontend/bootstrap5/navigation/default/icon.html" with icon_class=instance.icon_right attribute_class="ps-0 nav-link" %}{% endif %}
         </a>
-    {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
+    {% if not parent_is_navigation %}</li>{% endif %}
 {% endif %}{# djlint:on #}
-{% endspaceless %}
+{% endwith %}{% endspaceless %}
 {% addtoblock "css" %}
     <style>
         .dropdown-menu > li:hover > .dropdown-menu {

@@ -1,4 +1,5 @@
-from cms.models import CMSPlugin
+import logging
+
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.html import conditional_escape
@@ -6,8 +7,37 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+from cms.models import CMSPlugin
+
+from djangocms_frontend import settings, tokens
 from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS, SHOW_ADVANCED_SETTINGS
+
+logger = logging.getLogger(__name__)
+
+
+def normalize_defaults(config, source, skip=()):
+    config, conflicts = tokens.resolve_aliases(config, skip=skip)
+    for canonical in conflicts:
+        legacy = tokens.legacy_key(canonical)
+        logger.warning("%s contains conflicting %s and %s; using %s", source, legacy, canonical, canonical)
+    return tokens.normalize_config(config, skip=skip)
+
+
+_plugin_pool = None
+
+
+def is_plugin_type(name, base):
+    """True if the registered plugin ``name`` is the plugin ``base`` or one of its subclasses."""
+    global _plugin_pool
+    if name == base:
+        return True
+    if _plugin_pool is None:  # Import once: templates call this for each child plugin.
+        from cms.plugin_pool import plugin_pool as _plugin_pool
+    try:
+        return issubclass(_plugin_pool.get_plugin(name), _plugin_pool.get_plugin(base))
+    except KeyError:
+        return False
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -115,15 +145,65 @@ class AbstractFrontendUIItem(CMSPlugin):
                 form._meta.model = self.__class__
             form = form()  # instantiate
         entangled_fields = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
+        defaults = getattr(self, "default_config", {})
+        project_defaults = PLUGIN_DEFAULTS.get(self.__class__.__name__, {})
+        from djangocms_frontend.token_forms import project_fields
+
+        name = self.__class__.__name__
+        use_tokens = bool(settings.token_adapter)
+        skip = project_fields(type(form)) if use_tokens and hasattr(form, "base_fields") else frozenset()
+        if use_tokens:
+            try:
+                self.config = normalize_defaults(self.config, f"{name} configuration", skip)
+            except ValueError as exc:
+                # Leave an unreadable configuration (e.g. a newer schema) untouched
+                # rather than mixing in defaults written in another schema.
+                logger.warning("Cannot initialize %s: %s", name, exc)
+                return self
+            sources = []
+            default_sources = ((defaults, f"{name}.default_config"), (project_defaults, f"PLUGIN_DEFAULTS[{name}]"))
+            for values, source in default_sources:
+                try:
+                    sources.append(normalize_defaults(values, source, skip))
+                except ValueError as exc:
+                    # A broken defaults source must not make plugin creation fail.
+                    logger.warning("Ignoring %s: %s", source, exc)
+                    sources.append({})
+            defaults, project_defaults = sources
         for field in entangled_fields:
-            self.config.setdefault(field, {} if field == "attributes" else form[field].initial or "")
+            initial = {} if field == "attributes" else form[field].initial or ""
+            if use_tokens and field not in skip:
+                self.config.setdefault(tokens.canonical_key(field), tokens.normalize_value(field, initial))
+            else:
+                self.config.setdefault(field, initial)
         # Apply model-level defaults (override form defaults)
-        for key, value in getattr(self, "default_config", {}).items():
-            self.config[key] = value
+        self.config.update(defaults)
         # Apply settings-level defaults (highest priority)
-        for key, value in PLUGIN_DEFAULTS.get(self.__class__.__name__, {}).items():
-            self.config[key] = value
+        self.config.update(project_defaults)
         return self
+
+    def get_framework_value(self, field, default=""):
+        """Presentation value for structure-board descriptions and project templates."""
+        if settings.token_adapter:
+            return settings.token_adapter.field_value(self, field, default)
+        return self.config.get(field, default)
+
+    def get_parent_plugin_instance(self, plugin_type=None):
+        """Return the concrete parent instance, resolved once per instance. With ``plugin_type``,
+        only if the parent's plugin is that plugin or a subclass of it."""
+        parent = self.parent
+        if parent is None or plugin_type is not None and not is_plugin_type(parent.plugin_type, plugin_type):
+            return None
+        cached = self.__dict__.get("_framework_parent")
+        if cached is None or cached[0] is not parent:
+            cached = (parent, parent.get_plugin_instance()[0])
+            self._framework_parent = cached
+        return cached[1]
+
+    def get_parent_framework_value(self, plugin_type, field):
+        """Share parent resolution between render mixins and templates."""
+        concrete = self.get_parent_plugin_instance(plugin_type)
+        return concrete.get_framework_value(field) if concrete is not None else ""
 
     def get_short_description(self):
         """Plugin-specific short description (to be defined by subclasses). Try title attribute first."""

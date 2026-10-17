@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
 from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.tokens import normalize_value
 
 from .constants import GRID_CONTAINER_CHOICES
 
@@ -29,7 +30,7 @@ class GridContainer(TitleModelMixin, FrontendUIItem):
     def get_short_description(self):
         text = self.config.get("plugin_title", {}).get("title", "") or self.config.get("attributes", {}).get("id", "")
         for item in GRID_CONTAINER_CHOICES[1:]:
-            if item[0] == self.container_type:
+            if normalize_value("container_type", item[0]) == normalize_value("container_type", self.container_type):
                 text += f" ({item[1]})"
         return text
 

@@ -3,12 +3,6 @@ import json
 import typing
 import uuid
 
-from classytags.arguments import Argument, MultiKeywordArgument
-from classytags.core import Options, Tag
-from classytags.helpers import AsTag, flatten_context
-from cms.models import CMSPlugin, get_cms_setting
-from cms.plugin_rendering import PluginContext
-from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
 from django import template
 from django.conf import settings as django_settings
 from django.contrib.contenttypes.models import ContentType
@@ -21,13 +15,22 @@ from django.utils.functional import Promise
 from django.utils.html import conditional_escape
 from django.utils.module_loading import import_string
 from django.utils.safestring import mark_safe
+
+from cms.models import CMSPlugin, get_cms_setting
+from cms.plugin_rendering import PluginContext
+from cms.templatetags.cms_tags import CMSEditableObject, render_plugin
+
+from classytags.arguments import Argument, MultiKeywordArgument
+from classytags.core import Options, Tag
+from classytags.helpers import AsTag, flatten_context
 from entangled.forms import EntangledModelFormMixin
 
-from djangocms_frontend import settings
+from djangocms_frontend import settings, tokens
 from djangocms_frontend.fields import HTMLsanitized
 from djangocms_frontend.helpers import get_related_object as related_object
-from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.models import AbstractFrontendUIItem, FrontendUIItem
 from djangocms_frontend.plugin_tag import patched_template
+from djangocms_frontend.token_forms import project_fields
 
 register = template.Library()
 
@@ -230,15 +233,21 @@ class Plugin(AsTag):
 
         if issubclass(plugin.form, EntangledModelFormMixin):
             # Handle entangled forms such as djangocms-frontend's correctly
+            universal = settings.token_adapter and issubclass(plugin.model, AbstractFrontendUIItem)
+            skip = project_fields(plugin.form) if universal else frozenset()
             for field, value in kwargs.items():
+                lookup_field = tokens.legacy_key(field) if universal and field not in skip else field
                 for container, fields in plugin.form._meta.entangled_fields.items():
-                    if field in fields:
+                    if field in fields or lookup_field in fields:
                         if isinstance(value, models.Model):
                             # Correctly encode references
                             value = {
                                 "model": f"{value._meta.app_label}.{value._meta.model_name}",
                                 "pk": value.pk,
                             }
+                        if universal and container == "config" and field not in skip:
+                            field = tokens.canonical_key(field)
+                            value = tokens.normalize_value(field, value)
                         field_values[container][field] = value
                         break
                 else:

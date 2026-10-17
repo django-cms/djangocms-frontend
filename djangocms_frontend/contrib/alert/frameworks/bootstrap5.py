@@ -1,9 +1,11 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.fields import ButtonGroup
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
 from djangocms_frontend.helpers import insert_fields
 
 
@@ -11,12 +13,13 @@ class AlertRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/alert.html"
 
     def render(self, context, instance, placeholder):
-        instance.add_classes(f"alert alert-{instance.alert_context}")
-        if getattr(instance, "alert_shadow", ""):
-            if instance.alert_shadow == "reg":
-                instance.add_classes("shadow")
-            else:
-                instance.add_classes(f"shadow-{instance.alert_shadow}")
+        context_color = field_value(instance, "alert_context")
+        instance.add_classes("alert")
+        if context_color:
+            instance.add_classes(f"alert-{context_color}")
+        shadow = field_value(instance, "alert_shadow")
+        if shadow:
+            instance.add_classes("shadow" if shadow == "reg" else f"shadow-{shadow}")
         if instance.alert_dismissible:
             instance.add_classes("alert-dismissible")
         return super().render(context, instance, placeholder)

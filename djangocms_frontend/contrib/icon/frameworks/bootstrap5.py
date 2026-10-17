@@ -1,3 +1,6 @@
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
+
+
 class IconRenderMixin:
     render_template = "djangocms_frontend/bootstrap5/icon.html"
 
@@ -11,8 +14,9 @@ class IconRenderMixin:
                 instance.add_attribute("style", f"font-size:{size};")
             else:
                 instance.add_classes(size)
-        if instance.config.get("icon_foreground", None):
-            instance.add_classes(f"text-{instance.icon_foreground}")
+        foreground = field_value(instance, "icon_foreground")
+        if foreground:
+            instance.add_classes(f"text-{foreground}")
         if instance.config.get("icon_rounded", False):
             instance.add_classes("text-center", "rounded", "rounded-circle")
             instance.add_attribute(

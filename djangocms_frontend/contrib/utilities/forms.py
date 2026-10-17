@@ -1,7 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
-from entangled.forms import EntangledModelForm
+
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ... import settings
 from ...common import SpacingFormMixin
@@ -58,7 +59,7 @@ class SpacingForm(mixin_factory("Spacing"), EntangledModelForm):
 
     def clean(self):
         super().clean()
-        if self.cleaned_data["space_property"] == "p" and self.cleaned_data["space_size"] == "auto":
+        if self.cleaned_data.get("space_property") == "p" and self.cleaned_data.get("space_size") == "auto":
             raise ValidationError(
                 {
                     "space_property": _(

@@ -2,6 +2,23 @@
 Changelog
 =========
 
+3.0.0 (unreleased)
+==================
+
+* Add universal configuration tokens, Bootstrap 5 rendering compatibility, and
+  canonical storage in built-in forms.
+* Add ``frontend migrate --from bootstrap5 --to universal`` with dry-run,
+  database selection, unmapped-value reports, and transactional conversion.
+* **Backwards incompatible:** saving a plugin in the admin stores its
+  configuration as universal tokens, even before the migration has run (e.g.
+  ``container_type`` ``"container"`` becomes ``"bounded"``, ``tab_type``
+  ``"nav-tabs"`` becomes ``"tabs"``, ``xxl_col`` becomes ``2xl_col`` and
+  spacing values become objects). Project templates and code that read these
+  values directly (e.g. ``{{ instance.tab_type }}``) should use
+  ``{{ instance|framework_value:"tab_type" }}`` (``{% load frontend_tokens %}``)
+  or ``instance.get_framework_value("tab_type")`` instead. Fields that a
+  project declares itself, e.g. on a component, are stored unchanged.
+
 2.5.2 (2026-09-3)
 ==================
 

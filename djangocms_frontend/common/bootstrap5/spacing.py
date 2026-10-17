@@ -1,10 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.fields import DeviceChoiceField, IconGroup
+from djangocms_frontend.frameworks.bootstrap5_tokens import value
 from djangocms_frontend.helpers import insert_fields
 from djangocms_frontend.settings import DEVICE_CHOICES
 
@@ -86,12 +88,22 @@ class SpacingSizeSideField(forms.MultiValueField):  # lgtm [py/missing-call-to-i
 def get_spacing_classes(spacing_set, active_set=None):
     """Generates the necessary bootstrap spacing utility classes"""
 
+    resolved = []
+    for spacing in spacing_set:
+        try:
+            native = value("margin_x", spacing)
+        except (ValueError, KeyError, TypeError):
+            continue
+        if native:
+            resolved.append(native)
+    spacing_set = resolved
+    active_set = value("margin_devices", active_set)
     if active_set is None or len(active_set) == len(DEVICE_CHOICES):
         return [spacing for spacing in spacing_set if spacing[-1] != "-"]
 
     classes = []
-    active = False
     for spacing in spacing_set:
+        active = False
         for device, __ in DEVICE_CHOICES:
             if (device in active_set) != active:
                 active = device in active_set
