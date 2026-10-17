@@ -1,15 +1,15 @@
 {
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-css.mjs",
+    "watch": "node tools/build-css.mjs --debug --watch",
+    "lint": "stylelint 'private/sass/*.scss' --syntax scss"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "gulp": "^5.0.1",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-cli": "^3.1.0",
-    "gulp-concat-util": "^0.5.5",
-    "gulp-postcss": "^10.0.0",
-    "gulp-sass": "^6.0.1",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-stylelint": "^13.0.0",
-    "minimist": "^1.2.8",
-    "sass": "^1.90.0"
+    "clean-css": "^5.3.3",
+    "postcss": "^8.5.6",
+    "sass": "^1.90.0",
+    "stylelint": "^13.13.1"
   }
 }

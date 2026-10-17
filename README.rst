@@ -53,6 +53,17 @@ Key features
   your project, promoting a cohesive and uniform user interface.
 
 
+Building admin CSS
+==================
+
+Use the Node version in ``.nvmrc`` and install the build dependencies with
+``npm install``. Run ``npm run build`` to compile the Sass in ``private/sass``
+into the packaged admin CSS, with browser prefixes and minification.
+
+For development, ``npm run build -- --debug`` produces expanded CSS with source
+maps. ``npm run watch`` rebuilds that output when Sass files change.
+``npm run lint`` runs the existing Sass style checks separately.
+
 Description
 ===========
 
