@@ -17,6 +17,23 @@ form .form-row div.frontend-button-group.frontend-button-group-block {
 }
 
 form .form-row div.frontend-button-group {
+    input.btn-check {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    input.btn-check:focus-visible + label.btn-grp {
+        outline: 3px dashed $body-fg;
+        outline-offset: 3px;
+    }
+
     label.btn-grp {
         margin: 3px;
 
@@ -153,4 +170,16 @@ form .form-row div.frontend-button-group {
 
 body:not(.djangocms-admin-style) .frontend-button-group .optgroup {
     clear: both;  // Bug in django 3.2?
+}
+
+.frontend-sr-only:not([hidden]) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
 }

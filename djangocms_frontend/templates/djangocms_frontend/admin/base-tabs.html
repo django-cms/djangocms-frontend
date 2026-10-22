@@ -1,5 +1,5 @@
 {% extends "admin/cms/page/plugin/change_form.html" %}
-{% load static %}
+{% load static i18n %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'djangocms_frontend/css/base.css' %}"/>
     <script src="{% static 'djangocms_frontend/js/base.js' %}"></script>
@@ -12,31 +12,34 @@
 {% block field_sets %}
   <div class="djangocms-frontend
     {% block custom_class %}{% endblock %}" data-static="{% get_static_prefix %}">
-    <ul class="djangocms-frontend nav nav-pills" role="tablist">
+    <ul class="djangocms-frontend nav nav-pills" role="tablist" aria-label="{% translate 'Plugin settings' %}">
       {% for fieldset in adminform %}
         {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
           <li class="nav-item" role="presentation">
-            <a class="nav-link" href="#tab-{{ forloop.counter }}"
+            <button class="nav-link"
              {% if forloop.counter == 1 and original %}title="{{ original.pk|safe }}"{% endif %}
-             data-bs-toggle="tab" id="lnk-{{ forloop.counter }}" type="button" role="tab"
+             id="lnk-{{ forloop.counter }}" type="button" role="tab" aria-selected="false" tabindex="-1"
+             aria-controls="tab-{{ forloop.counter }}"
              data-bs-target="#tab-{{ forloop.counter }}">{{ fieldset.name|default:adminform.model_admin }}
               {% if "attributes" in fieldset.classes and original.attributes %}
-               <span class="indicator attributes"></span>
+               <span class="indicator attributes" aria-hidden="true"></span>
+               <span class="frontend-sr-only">{% translate "Has custom attributes" %}</span>
               {% endif %}
-              <span class="indicator error"></span>
-            </a>
+              <span class="indicator error" aria-hidden="true"></span>
+              <span class="frontend-sr-only tab-error-label" hidden>{% translate "Contains errors" %}</span>
+            </button>
           </li>
         {% endif %}
       {% endfor %}
-      {% if original %}
-          <div class="tab-pk">{{ original.pk|safe }}</div>
-      {% endif %}
   </ul>
+  {% if original %}
+      <div class="tab-pk">{{ original.pk|safe }}</div>
+  {% endif %}
   <div class="djangocms-frontend tab-content">
     {% for fieldset in adminform %}
       {% if forloop.counter == 1 or "collapse" in fieldset.classes %}
         {% if forloop.counter != 1 %}</div>{% endif %}
-        <div class="tab-pane fade" id="tab-{{ forloop.counter }}" role="tabpanel">
+        <div class="tab-pane fade" id="tab-{{ forloop.counter }}" role="tabpanel" aria-labelledby="lnk-{{ forloop.counter }}" tabindex="0">
       {% endif %}
       {% include "djangocms_frontend/admin/includes/fieldset.html" %}
     {% endfor %}{# djlint:off #}</div>
