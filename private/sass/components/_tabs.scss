@@ -19,12 +19,21 @@ form ul.djangocms-frontend.nav.nav-pills {
         margin-inline-start: 0;
         margin-inline-end: $nav-pills-margin;
         margin-block-end: 14px;
-        a.nav-link {
+        button.nav-link {
+            cursor: pointer;
+            font: inherit;
             padding: $nav-pills-padding;
             height: $nav-pills-height;
-            line-height: $nav-pills-height;
-            display: inline-block;
+            box-sizing: border-box;
+            line-height: normal;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             @include button-variant($body-fg, $body-bg, $color-gray, $btn-border-radius-base);
+            &:focus-visible {
+                outline: 3px solid $body-fg;
+                outline-offset: 2px;
+            }
             &.active {
                 @include button-variant($nav-pills-color, $nav-pills-background, $color-gray, $btn-border-radius-base);
             }
