@@ -9,10 +9,11 @@ class Tab(FrontendUIItem):
         verbose_name = _("Tab")
 
     def get_short_description(self):
-        text = f"({self.tab_type})"
+        text = f"({self.get_framework_value('tab_type')})"
 
-        if self.tab_alignment:
-            text += f" .{self.tab_alignment}"
+        alignment = self.get_framework_value("tab_alignment")
+        if alignment:
+            text += f" .{alignment}"
         return text
 
 

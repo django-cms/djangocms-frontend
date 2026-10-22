@@ -32,8 +32,9 @@ class ListGroupItem(FrontendUIItem):
 
     def get_short_description(self):
         text = []
-        if self.list_context:
-            text.append(f".list-group-item-{self.list_context}")
+        context = self.get_framework_value("list_context")
+        if context:
+            text.append(f".list-group-item-{context}")
         if self.list_state:
             text.append(f".{self.list_state}")
         return " ".join(text)

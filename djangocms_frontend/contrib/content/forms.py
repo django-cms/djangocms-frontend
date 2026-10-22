@@ -1,9 +1,9 @@
 from django import forms
 from django.conf import settings as django_settings
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.settings import ALIGN_CHOICES
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ... import settings
 from ...common import BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin
@@ -30,9 +30,11 @@ class CodeForm(
 
     class Media:
         js = (
-            "admin/vendor/ace/ace.js"
-            if "djangocms_static_ace" in django_settings.INSTALLED_APPS
-            else "https://cdnjs.cloudflare.com/ajax/libs/ace/1.43.3/ace.js",
+            (
+                "admin/vendor/ace/ace.js"
+                if "djangocms_static_ace" in django_settings.INSTALLED_APPS
+                else "https://cdnjs.cloudflare.com/ajax/libs/ace/1.43.3/ace.js"
+            ),
         )
 
     class Meta:

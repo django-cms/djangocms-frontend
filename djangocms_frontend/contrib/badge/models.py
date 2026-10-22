@@ -14,4 +14,4 @@ class Badge(FrontendUIItem):
         verbose_name = _("Badge")
 
     def get_short_description(self):
-        return f"({self.badge_context})"
+        return f"({self.get_framework_value('badge_context')})"

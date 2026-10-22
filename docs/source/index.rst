@@ -74,6 +74,7 @@ Contents
    plugins/index
    how-to/index
    reference/index
+   explanation/index
 
 .. toctree::
    :hidden:

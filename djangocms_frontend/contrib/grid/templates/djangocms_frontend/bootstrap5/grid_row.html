@@ -1,8 +1,8 @@
-{% load cms_tags %}
+{% load cms_tags frontend_tokens %}
     <{{ instance.tag_type }}{{ instance.get_attributes }}>
-    {% for plugin in instance.child_plugin_instances %}
-        {% if plugin.plugin_type == "CardPlugin" %}<div class="col mb-3">{% endif %}
+    {% for plugin in instance.child_plugin_instances %}{% with is_card=plugin.plugin_type|is_plugin_type:"CardPlugin" %}
+        {% if is_card %}<div class="col mb-3">{% endif %}
         {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
-        {% if plugin.plugin_type == "CardPlugin" %}</div>{% endif %}
-    {% endfor %}
+        {% if is_card %}</div>{% endif %}
+    {% endwith %}{% endfor %}
     </{{ instance.tag_type }}>
