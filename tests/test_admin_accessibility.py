@@ -1,3 +1,4 @@
+import re
 from types import SimpleNamespace
 
 from django import forms
@@ -16,6 +17,11 @@ class AdminAccessibilityTests(SimpleTestCase):
             with self.subTest(widget=widget_class.__name__):
                 widget = widget_class(choices=[("start", "Align start"), ("end", "Align end")])
                 html = widget.render("alignment", "start", attrs={"id": "id_alignment"})
+                inputs = re.findall(r"<input\b[^>]*>", html)
+                self.assertEqual(len(inputs), 2)
+                expected_type = "checkbox" if widget_class is IconMultiselect else "radio"
+                for input_html in inputs:
+                    self.assertIn(f'type="{expected_type}"', input_html)
                 self.assertNotIn("display: none", html)
                 self.assertIn('for="id_alignment_0"', html)
                 self.assertIn('id="id_alignment_0"', html)
