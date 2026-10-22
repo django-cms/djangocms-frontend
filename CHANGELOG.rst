@@ -2,7 +2,15 @@
 Changelog
 =========
 
-2.5.2 (2026-09-3)
+2.5.3 (2026-10-22)
+==================
+
+* fix: Lazy translations for link proxy model by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/403
+* fix: Tests need to follow django admin rules by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/404
+* fix: Add missing a11y support for tabs by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/409
+
+
+2.5.2 (2026-09-03)
 ==================
 
 * feat: Add aria labels to icons, fix them in menus by @fsbraun in https://github.com/django-cms/djangocms-frontend/pull/397
