@@ -18,16 +18,25 @@ class SparseConfigAttributeAccessTestCase(TestCase):
         self.assertEqual(sparse.alert_context, AlertForm()["alert_context"].initial)
 
     def test_all_render_read_fields_resolve(self):
-        """Every attribute the Alert bootstrap5 render reads unguarded must resolve."""
+        """Every attribute the Alert bootstrap5 render reads unguarded must resolve to
+        exactly the form's declared initial (not just 'not raise')."""
         sparse = Alert(plugin_type="AlertPlugin", config={})
+        bound = AlertForm()
         for field in ("alert_context", "alert_shadow", "alert_dismissible"):
-            # Must not raise.
-            getattr(sparse, field)
+            self.assertEqual(getattr(sparse, field), bound[field].initial)
+
+    def test_falsey_initial_is_preserved(self):
+        """A falsey declared initial (BooleanField -> False) must survive, not become ''."""
+        sparse = Alert(plugin_type="AlertPlugin", config={})
+        self.assertIs(sparse.alert_dismissible, False)
 
     def test_card_fields_resolve(self):
         sparse = Card(plugin_type="CardPlugin", config={})
-        for field in ("card_alignment", "card_outline", "card_text_color", "card_full_height"):
-            getattr(sparse, field)
+        # Choice fields with no (or None) initial normalize to "" ...
+        for field in ("card_alignment", "card_outline", "card_text_color"):
+            self.assertEqual(getattr(sparse, field), "")
+        # ... the boolean keeps its falsey declared initial.
+        self.assertIs(sparse.card_full_height, False)
 
     def test_present_value_wins_over_default(self):
         instance = Alert(plugin_type="AlertPlugin", config={"alert_context": "danger"})
@@ -52,9 +61,10 @@ class CleanPopulatesConfigTestCase(TestCase):
     def test_clean_fills_missing_fields(self):
         sparse = Alert(plugin_type="AlertPlugin", config={})
         sparse.clean()
-        self.assertIn("alert_context", sparse.config)
-        self.assertIn("alert_dismissible", sparse.config)
-        self.assertEqual(sparse.config["alert_context"], AlertForm()["alert_context"].initial)
+        bound = AlertForm()
+        # Assert values, not just presence -- a wrong default must fail here.
+        self.assertEqual(sparse.config["alert_context"], bound["alert_context"].initial)
+        self.assertIs(sparse.config["alert_dismissible"], False)
 
     def test_clean_does_not_clobber_user_values(self):
         instance = Alert(plugin_type="AlertPlugin", config={"alert_context": "danger"})
@@ -84,5 +94,6 @@ class CleanPopulatesConfigTestCase(TestCase):
     def test_card_clean_fills_fields(self):
         sparse = Card(plugin_type="CardPlugin", config={})
         sparse.clean()
-        self.assertIn("card_alignment", sparse.config)
-        self.assertIn("card_outline", sparse.config)
+        self.assertEqual(sparse.config["card_alignment"], "")
+        self.assertEqual(sparse.config["card_outline"], "")
+        self.assertIs(sparse.config["card_full_height"], False)

@@ -113,7 +113,7 @@ class AbstractFrontendUIItem(CMSPlugin):
                 bound = form()
                 entangled_fields = getattr(form._meta, "entangled_fields", {}).get("config", ())
                 for field in entangled_fields:
-                    defaults[field] = {} if field == "attributes" else (bound[field].initial or "")
+                    defaults[field] = self._field_default(bound, field)
             except Exception:
                 form = None  # incomplete -> don't cache
         for key, value in getattr(cls, "default_config", {}).items():
@@ -123,6 +123,18 @@ class AbstractFrontendUIItem(CMSPlugin):
         if form is not None:
             cls._config_defaults_cache = defaults
         return defaults
+
+    @staticmethod
+    def _field_default(bound_form, field):
+        """Default value stored for an entangled config field.
+
+        Preserves falsey declared initials (``False``, ``0``) -- only ``None`` falls back
+        to ``""`` -- so defaults match what a submitted form actually stores.
+        """
+        if field == "attributes":
+            return {}
+        initial = bound_form[field].initial
+        return "" if initial is None else initial
 
     def __str__(self):
         if "__str__" in self.config:
@@ -194,7 +206,7 @@ class AbstractFrontendUIItem(CMSPlugin):
             form = form()  # instantiate
         entangled_fields = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
         for field in entangled_fields:
-            self.config.setdefault(field, {} if field == "attributes" else form[field].initial or "")
+            self.config.setdefault(field, self._field_default(form, field))
         # Apply model-level defaults (override form defaults)
         for key, value in getattr(self, "default_config", {}).items():
             self.config[key] = value
