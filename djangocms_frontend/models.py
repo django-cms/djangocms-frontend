@@ -10,7 +10,6 @@ from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings, tokens
-from djangocms_frontend.fields import TagTypeField
 from djangocms_frontend.fields import HTMLFormField, HTMLsanitized, TagTypeField, clean_html
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS, SHOW_ADVANCED_SETTINGS
 
@@ -195,7 +194,7 @@ class AbstractFrontendUIItem(CMSPlugin):
             return frozenset()
         return project_fields(form_class)
 
-      def _html_config_fields(self):
+    def _html_config_fields(self):
         """Names of the entangled config fields backed by a sanitizing HTML form field.
 
         Cached per (proxy class, plugin_type); empty when no sanitizing rich-text editor
@@ -274,7 +273,7 @@ class AbstractFrontendUIItem(CMSPlugin):
         idempotent and safe to re-run. When tokens are active the config is normalized to
         canonical storage first, matching ``initialize_from_form``; an unreadable config is
         left untouched (and reported by the form) rather than crashing here.
- 
+
         HTML config fields (djangocms-text ``HTMLFormField``) are sanitized here too, so
         instances built outside the editing form (imports, programmatic creation, the API)
         get the same XSS sanitization the admin form applies on input -- the render-side
