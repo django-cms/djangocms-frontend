@@ -10,11 +10,11 @@ except ImportError:
 from django import forms
 from django.db.models.fields.related import ManyToOneRel
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 from filer.fields.image import AdminImageFormField, FilerImageField
 from filer.models import Image
 
 from djangocms_frontend.fields import AttributesFormField, ButtonGroup, TagTypeFormField, TemplateChoiceMixin
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ... import settings
 from ...common import BackgroundFormMixin

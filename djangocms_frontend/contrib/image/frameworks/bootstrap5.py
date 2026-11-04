@@ -1,4 +1,5 @@
 from djangocms_frontend.helpers import is_first_child
+from djangocms_frontend.models import is_plugin_type
 
 
 class ImageRenderMixin:
@@ -15,8 +16,8 @@ class ImageRenderMixin:
             instance.add_classes("rounded")
         if instance.picture_thumbnail:
             instance.add_classes("img-thumbnail")
-        if instance.parent and instance.parent.plugin_type == "CardPlugin":
+        if instance.parent and is_plugin_type(instance.parent.plugin_type, "CardPlugin"):
             instance.add_classes("card-img-top" if is_first_child(instance, instance.parent) else "card-img-bottom")
-        elif instance.parent and instance.parent.plugin_type == "FigurePlugin":
+        elif instance.parent and is_plugin_type(instance.parent.plugin_type, "FigurePlugin"):
             instance.add_classes("figure-img")
         return super().render(context, instance, placeholder)

@@ -1,9 +1,12 @@
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
+
+
 class NavigationRenderMixin:
     def render(self, context, instance, placeholder):
         instance.add_classes(
             "navbar",
             f"navbar-{instance.config.get('navbar_design', '')}",
-            f"navbar-expand-{instance.config.get('navbar_breakpoint', '')}",
+            f"navbar-expand-{field_value(instance, 'navbar_breakpoint', '')}",
         )
         if instance.config.get("navbar_design", "") == "dark":
             instance.add_classes("bg-dark")

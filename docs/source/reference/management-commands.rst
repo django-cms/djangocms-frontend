@@ -11,6 +11,17 @@ project directory. ``command`` can be one of the following:
     Other packages can be migrated adding custom migration modules to
     the ``DJANGOCMS_FRONTEND_ADDITIONAL_MIGRATIONS`` setting.
 
+    .. versionadded:: 3.0
+       Bootstrap 5 to universal token conversion.
+
+    To convert existing Bootstrap 5 configuration to universal tokens, run::
+
+        python manage.py frontend migrate --from bootstrap5 --to universal --dry-run
+        python manage.py frontend migrate --from bootstrap5 --to universal
+
+    Supports ``--database ALIAS`` and ``--fail-on-unmapped``. See
+    :doc:`../explanation/universal-tokens` for compatibility and conversion details.
+
 ``stale_references``
     If references in a UI item are moved or removed the UI items are designed to
     fall back gracefully and both not throw errors or be deleted themselves

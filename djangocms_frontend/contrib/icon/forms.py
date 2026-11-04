@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup, TagTypeFormField
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ... import settings
 from ...common import BackgroundFormMixin, ResponsiveFormMixin, SpacingFormMixin

@@ -4,6 +4,7 @@ from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
 from djangocms_frontend.fields import ButtonGroup, ColoredButtonGroup
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
 from djangocms_frontend.helpers import insert_fields
 
 
@@ -21,15 +22,14 @@ class BackgroundMixin:
         )
 
     def render(self, context, instance, placeholder):
-        if getattr(instance, "background_context", ""):
-            instance.add_classes(f"bg-{instance.background_context}")
+        background = field_value(instance, "background_context")
+        if background:
+            instance.add_classes(f"bg-{background}")
         if getattr(instance, "background_opacity", ""):
             instance.add_classes(f"bg-opacity-{instance.background_opacity}")
-        if getattr(instance, "background_shadow", ""):
-            if instance.background_shadow == "reg":
-                instance.add_classes("shadow")
-            else:
-                instance.add_classes(f"shadow-{instance.background_shadow}")
+        shadow = field_value(instance, "background_shadow")
+        if shadow:
+            instance.add_classes("shadow" if shadow == "reg" else f"shadow-{shadow}")
         return super().render(context, instance, placeholder)
 
 

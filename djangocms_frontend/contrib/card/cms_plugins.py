@@ -1,7 +1,7 @@
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from ... import settings
+from ... import settings, tokens
 from ...cms_plugins import CMSUIPlugin
 from ...common import AttributesMixin, BackgroundMixin, MarginMixin, PaddingMixin, ResponsiveMixin
 from ...helpers import add_plugin
@@ -111,6 +111,9 @@ class CardPlugin(
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         if not change:
+            inner_config = dict(inner_type="card-body")
+            if settings.token_adapter:
+                inner_config = tokens.normalize_config(inner_config)
             add_plugin(
                 obj.placeholder,
                 models.CardInner(
@@ -120,7 +123,7 @@ class CardPlugin(
                     language=obj.language,
                     plugin_type=CardInnerPlugin.__name__,
                     ui_item=models.CardInner.__class__.__name__,
-                    config=dict(inner_type="card-body"),
+                    config=inner_config,
                 ),
             )
 

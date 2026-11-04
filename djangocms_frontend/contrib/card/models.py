@@ -20,7 +20,7 @@ class CardLayout(FrontendUIItem):
         verbose_name = _("Card layout")
 
     def get_short_description(self):
-        text = f"({self.card_type})"
+        text = f"({self.get_framework_value('card_type')})"
         return text
 
 
@@ -35,12 +35,14 @@ class Card(FrontendUIItem):
         verbose_name = _("Card")
 
     def get_short_description(self):
-        if self.config.get("background_context", False):
-            text = [f".bg-{self.background_context}"]
+        background = self.get_framework_value("background_context")
+        if background:
+            text = [f".bg-{background}"]
         else:
             text = []
-        if self.config.get("card_outline", False):
-            text.append(f".border-{self.card_outline}")
+        outline = self.get_framework_value("card_outline")
+        if outline:
+            text.append(f".border-{outline}")
         if self.card_alignment:
             text.append(f".{self.card_alignment}")
         return " ".join(text)
@@ -57,4 +59,4 @@ class CardInner(FrontendUIItem):
         verbose_name = _("Card inner")
 
     def get_short_description(self):
-        return "({})".format(self.inner_type.split("-", 1)[-1])
+        return "({})".format(self.get_framework_value("inner_type").split("-", 1)[-1])

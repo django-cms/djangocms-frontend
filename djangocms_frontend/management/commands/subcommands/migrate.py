@@ -2,6 +2,7 @@ import importlib
 
 from django.apps import apps
 from django.conf import settings
+from django.core.management.base import CommandError
 from django.db import connection, models
 
 from .base import SubcommandsCommand
@@ -162,7 +163,34 @@ class Migrate(SubcommandsCommand):
     help = "Migrates plugins djangocms_bootstrap4 to djangocms_frontend"
     command_name = "migrate"
 
+    def add_arguments(self, parser):
+        parser.add_argument("--from", dest="source", choices=("bootstrap5",))
+        parser.add_argument("--to", dest="target", choices=("universal",))
+        parser.add_argument("--dry-run", action="store_true", help="Report universal token changes without writing")
+        parser.add_argument("--database", default="default")
+        parser.add_argument(
+            "--fail-on-unmapped", action="store_true", help="Roll back if any configuration cannot be mapped"
+        )
+
     def handle(self, *args, **options):
+        if options.get("source") or options.get("target"):
+            if (options.get("source"), options.get("target")) != ("bootstrap5", "universal"):
+                raise CommandError("Specify both --from bootstrap5 and --to universal")
+            from djangocms_frontend.management.universal_migration import migrate_to_universal
+
+            return migrate_to_universal(
+                database=options.get("database", "default"),
+                dry_run=options.get("dry_run", False),
+                fail_on_unmapped=options.get("fail_on_unmapped", False),
+                stdout=self.stdout,
+                stderr=self.stderr,
+            )
+        if (
+            options.get("dry_run")
+            or options.get("fail_on_unmapped")
+            or options.get("database", "default") != "default"
+        ):
+            raise CommandError("These options require --from bootstrap5 --to universal")
         tables = connection.introspection.table_names()
         if "djangocms_frontend_frontenduiitem" not in tables:
             self.stdout.write(

@@ -1,6 +1,6 @@
-{% load cms_tags sekizai_tags %}{% spaceless %}{# djlint:off #}
+{% load cms_tags sekizai_tags frontend_tokens %}{% spaceless %}{% with parent_is_navigation=parent.plugin_type|is_plugin_type:"NavigationPlugin" %}{# djlint:off #}
 {% if instance.child_plugin_instances %}
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="nav-item">
+    {% if not parent_is_navigation %}<li class="nav-item">
         <li class="{{ item|default:"nav" }}-item {{ drop|default:"dropdown" }}">
     {% else %}
         <div class="{{ item|default:"nav" }}-item  {{ drop|default:"dropdown" }}">
@@ -11,14 +11,14 @@
                 {% with forloop=parentloop parent=instance drop="dropend" item="dropdown" %}{% render_plugin plugin %}{% endwith %}
             {% endfor %}
         </ul>
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="nav-item">
+    {% if not parent_is_navigation %}<li class="nav-item">
         </li>
     {% else %}
         </div>
     {% endif %}
 {% else %}
-    {% if parent.plugin_type != "NavigationPlugin" %}<li class="{{ item|default:"nav" }}-item">{% endif %}
+    {% if not parent_is_navigation %}<li class="{{ item|default:"nav" }}-item">{% endif %}
         <a class="nav-link" href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{{ instance.name }}</a>
-    {% if parent.plugin_type != "NavigationPlugin" %}</li>{% endif %}
+    {% if not parent_is_navigation %}</li>{% endif %}
 {% endif %}{# djlint:on #}
-{% endspaceless %}
+{% endwith %}{% endspaceless %}

@@ -36,7 +36,11 @@ The plugin model defines what kind information will be associated with instances
 
 2. **Define a Plugin Form**: This form will declare which data to store in the
    ``FrontendUIItem``'s JSON field. The ``EntangledModelForm`` will automatically
-   store the data in the JSON field. The ``untangled_fields`` attribute can be used
+   store the data in the JSON field. Import it from
+   ``djangocms_frontend.token_forms``, not from ``entangled.forms``: it reads and
+   writes the universal configuration tokens that built-in forms and
+   ``frontend migrate`` store. A form based on ``entangled.forms`` cannot read
+   them and drops them on save, e.g. a margin stored by a built-in form. The ``untangled_fields`` attribute can be used
    to define fields that should be stored as regular model fields. This is useful
    for fields that are used in the frontend, but not in the backend. The
    ``untangled_fields`` attribute is optional.
@@ -52,7 +56,7 @@ The plugin model defines what kind information will be associated with instances
         # forms.py
         from django import forms
         from djangocms_frontend.models import FrontendUIItem
-        from entangled.forms import EntangledModelForm
+        from djangocms_frontend.token_forms import EntangledModelForm
 
         class YourPluginForm(EntangledModelForm):
             class Meta:
@@ -141,15 +145,16 @@ mixin is used to add their fields to the plugin form. The mixins are
 designed to be used together.
 
 For example, if you want to use the attributes mixin, you need to add the
-``AttributesMixin`` to your plugin and the ``AttributesMixinForm`` to your
+``AttributesMixin`` to your plugin and the ``AttributesFormMixin`` to your
 plugin form::
 
-    from djangocms_frontend.cms_plugins import AttributesMixin, AttributesMixinForm
+    from djangocms_frontend.common import AttributesFormMixin, AttributesMixin
+    from djangocms_frontend.token_forms import EntangledModelForm
 
     class YourPlugin(AttributesMixin, CMSUIPlugin):
         ...
 
-    class YourPluginForm(AttributesMixinForm, EntangledModelForm):
+    class YourPluginForm(AttributesFormMixin, EntangledModelForm):
         ...
 
 Re-using links and images

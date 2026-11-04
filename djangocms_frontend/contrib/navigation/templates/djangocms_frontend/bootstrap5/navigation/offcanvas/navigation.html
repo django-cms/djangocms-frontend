@@ -1,8 +1,8 @@
-{% load cms_tags frontend %}{% spaceless %}
+{% load cms_tags frontend frontend_tokens %}{% spaceless %}
     <nav{{ instance.get_attributes }}>
         {% if instance.navbar_container %}<div class="container">{% endif %}
         {% for plugin in instance.child_plugin_instances %}
-            {% if plugin.plugin_type == "NavBrandPlugin" %}
+            {% if plugin.plugin_type|is_plugin_type:"NavBrandPlugin" %}
                 {% render_plugin plugin %}
             {% endif %}
         {% endfor %}
@@ -18,7 +18,7 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 {% for plugin in instance.child_plugin_instances %}
-                    {% if plugin.plugin_type != "NavBrandPlugin" %}
+                    {% if not plugin.plugin_type|is_plugin_type:"NavBrandPlugin" %}
                         {% with forloop=parentloop parent=instance %}{% render_plugin plugin %}{% endwith %}
                     {% endif %}
                 {% endfor %}

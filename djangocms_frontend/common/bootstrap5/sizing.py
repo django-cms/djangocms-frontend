@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelFormMixin
 
 from djangocms_frontend import settings
+from djangocms_frontend.frameworks.bootstrap5_tokens import field_value
 from djangocms_frontend.helpers import insert_fields
 
 AUTO_SIZE = (("auto", _("Auto")),)
@@ -18,12 +19,12 @@ class SizingMixin:
         )
 
     def render(self, context, instance, placeholder):
-        size_x = instance.config.get("size_x", "")
+        size_x = field_value(instance, "size_x", "")
         if size_x.isnumeric() or size_x == "auto":
             instance.add_classes(f"w-{size_x}")
         else:
             instance.add_classes(size_x)
-        size_y = instance.config.get("size_y", "")
+        size_y = field_value(instance, "size_y", "")
         if size_y.isnumeric() or size_y == "auto":
             instance.add_classes(f"h-{size_y}")
         else:

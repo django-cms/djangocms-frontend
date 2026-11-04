@@ -1,4 +1,5 @@
 import copy
+import logging
 
 from cms.models import CMSPlugin
 from django.core.serializers.json import DjangoJSONEncoder
@@ -8,8 +9,35 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+from djangocms_frontend import settings, tokens
 from djangocms_frontend.fields import HTMLFormField, HTMLsanitized, TagTypeField, clean_html
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS, SHOW_ADVANCED_SETTINGS
+
+logger = logging.getLogger(__name__)
+
+
+def normalize_defaults(config, source, skip=()):
+    config, conflicts = tokens.resolve_aliases(config, skip=skip)
+    for canonical in conflicts:
+        legacy = tokens.legacy_key(canonical)
+        logger.warning("%s contains conflicting %s and %s; using %s", source, legacy, canonical, canonical)
+    return tokens.normalize_config(config, skip=skip)
+
+
+_plugin_pool = None
+
+
+def is_plugin_type(name, base):
+    """True if the registered plugin ``name`` is the plugin ``base`` or one of its subclasses."""
+    global _plugin_pool
+    if name == base:
+        return True
+    if _plugin_pool is None:  # Import once: templates call this for each child plugin.
+        from cms.plugin_pool import plugin_pool as _plugin_pool
+    try:
+        return issubclass(_plugin_pool.get_plugin(name), _plugin_pool.get_plugin(base))
+    except KeyError:
+        return False
 
 
 class AbstractFrontendUIItem(CMSPlugin):
@@ -81,10 +109,17 @@ class AbstractFrontendUIItem(CMSPlugin):
         return super().__getattribute__(item)
 
     def _get_config_defaults(self):
-        """Declared config defaults for this plugin, cached on the (proxy) class."""
+        """Declared config defaults for this plugin, cached on the (proxy) class.
+
+        The cache is keyed by ``plugin_type``: a registered plugin has its own proxy class
+        (one plugin_type), but the base ``FrontendUIItem`` is instantiated directly with
+        varying plugin types, so a bare key would leak one plugin's defaults onto another.
+        """
         cls = type(self)
-        if "_config_defaults_cache" in vars(cls):
-            return cls._config_defaults_cache
+        plugin_type = self.__dict__.get("plugin_type")
+        cached = vars(cls).get("_config_defaults_cache")
+        if cached is not None and cached[0] == plugin_type:
+            return cached[1]
         self.__dict__["_resolving_defaults"] = True
         try:
             return self._compute_config_defaults()
@@ -101,6 +136,7 @@ class AbstractFrontendUIItem(CMSPlugin):
         cls = type(self)
         defaults = {}
         form = None
+        use_tokens = bool(settings.token_adapter)
         if self.__dict__.get("plugin_type"):
             try:
                 form = self.get_plugin_class().form
@@ -110,10 +146,19 @@ class AbstractFrontendUIItem(CMSPlugin):
             if not getattr(form._meta, "model", None):
                 form._meta.model = cls
             try:
+                skip = self._token_skip_fields(form) if use_tokens else frozenset()
                 bound = form()
                 entangled_fields = getattr(form._meta, "entangled_fields", {}).get("config", ())
                 for field in entangled_fields:
-                    defaults[field] = self._field_default(bound, field)
+                    default = self._field_default(bound, field)
+                    # Store defaults exactly as ``initialize_from_form`` does, so an instance
+                    # completed by ``clean()`` reaches the same canonical config as an edited
+                    # one. ``canonical_key``/``normalize_value`` are identities for non-grid
+                    # fields, so non-token and project-owned fields are unaffected.
+                    if use_tokens and field not in skip:
+                        defaults[tokens.canonical_key(field)] = tokens.normalize_value(field, default)
+                    else:
+                        defaults[field] = default
             except Exception:
                 form = None  # incomplete -> don't cache
         for key, value in getattr(cls, "default_config", {}).items():
@@ -121,7 +166,7 @@ class AbstractFrontendUIItem(CMSPlugin):
         for key, value in PLUGIN_DEFAULTS.get(cls.__name__, {}).items():
             defaults[key] = value
         if form is not None:
-            cls._config_defaults_cache = defaults
+            cls._config_defaults_cache = (self.__dict__.get("plugin_type"), defaults)
         return defaults
 
     @staticmethod
@@ -135,6 +180,19 @@ class AbstractFrontendUIItem(CMSPlugin):
             return {}
         initial = bound_form[field].initial
         return "" if initial is None else initial
+
+    @staticmethod
+    def _token_skip_fields(form):
+        """Fields a project declares itself (never rewritten as tokens). ``form`` may be a
+        form class or instance; returns an empty set when tokens are off or unresolvable."""
+        if not settings.token_adapter:
+            return frozenset()
+        from djangocms_frontend.token_forms import project_fields
+
+        form_class = form if isinstance(form, type) else type(form)
+        if not hasattr(form_class, "base_fields"):
+            return frozenset()
+        return project_fields(form_class)
 
     def _html_config_fields(self):
         """Names of the entangled config fields backed by a sanitizing HTML form field.
@@ -212,7 +270,9 @@ class AbstractFrontendUIItem(CMSPlugin):
         (e.g. an import) reaches the same complete, renderable config as an edited one.
 
         Fill-missing only: existing (user-set) values are never overwritten, so this is
-        idempotent and safe to re-run.
+        idempotent and safe to re-run. When tokens are active the config is normalized to
+        canonical storage first, matching ``initialize_from_form``; an unreadable config is
+        left untouched (and reported by the form) rather than crashing here.
 
         HTML config fields (djangocms-text ``HTMLFormField``) are sanitized here too, so
         instances built outside the editing form (imports, programmatic creation, the API)
@@ -220,6 +280,17 @@ class AbstractFrontendUIItem(CMSPlugin):
         filters only ``mark_safe`` the stored value, they do not sanitize it.
         """
         super().clean()
+        if settings.token_adapter:
+            name = self.__class__.__name__
+            form = self.get_plugin_class().form if self.__dict__.get("plugin_type") else None
+            skip = self._token_skip_fields(form) if form is not None else frozenset()
+            try:
+                self.config = normalize_defaults(self.config, f"{name} configuration", skip)
+            except (ValueError, AttributeError) as exc:
+                # Non-object or newer-schema config: leave it for the form to report
+                # rather than mixing in defaults written in another schema.
+                logger.warning("Cannot clean %s: %s", name, exc)
+                return
         for key, value in self._get_config_defaults().items():
             self.config.setdefault(key, copy.deepcopy(value))
         if HTMLsanitized and isinstance(self.config, dict):
@@ -240,15 +311,65 @@ class AbstractFrontendUIItem(CMSPlugin):
                 form._meta.model = self.__class__
             form = form()  # instantiate
         entangled_fields = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
+        defaults = getattr(self, "default_config", {})
+        project_defaults = PLUGIN_DEFAULTS.get(self.__class__.__name__, {})
+        from djangocms_frontend.token_forms import project_fields
+
+        name = self.__class__.__name__
+        use_tokens = bool(settings.token_adapter)
+        skip = project_fields(type(form)) if use_tokens and hasattr(form, "base_fields") else frozenset()
+        if use_tokens:
+            try:
+                self.config = normalize_defaults(self.config, f"{name} configuration", skip)
+            except ValueError as exc:
+                # Leave an unreadable configuration (e.g. a newer schema) untouched
+                # rather than mixing in defaults written in another schema.
+                logger.warning("Cannot initialize %s: %s", name, exc)
+                return self
+            sources = []
+            default_sources = ((defaults, f"{name}.default_config"), (project_defaults, f"PLUGIN_DEFAULTS[{name}]"))
+            for values, source in default_sources:
+                try:
+                    sources.append(normalize_defaults(values, source, skip))
+                except ValueError as exc:
+                    # A broken defaults source must not make plugin creation fail.
+                    logger.warning("Ignoring %s: %s", source, exc)
+                    sources.append({})
+            defaults, project_defaults = sources
         for field in entangled_fields:
-            self.config.setdefault(field, self._field_default(form, field))
+            initial = self._field_default(form, field)
+            if use_tokens and field not in skip:
+                self.config.setdefault(tokens.canonical_key(field), tokens.normalize_value(field, initial))
+            else:
+                self.config.setdefault(field, initial)
         # Apply model-level defaults (override form defaults)
-        for key, value in getattr(self, "default_config", {}).items():
-            self.config[key] = value
+        self.config.update(defaults)
         # Apply settings-level defaults (highest priority)
-        for key, value in PLUGIN_DEFAULTS.get(self.__class__.__name__, {}).items():
-            self.config[key] = value
+        self.config.update(project_defaults)
         return self
+
+    def get_framework_value(self, field, default=""):
+        """Presentation value for structure-board descriptions and project templates."""
+        if settings.token_adapter:
+            return settings.token_adapter.field_value(self, field, default)
+        return self.config.get(field, default)
+
+    def get_parent_plugin_instance(self, plugin_type=None):
+        """Return the concrete parent instance, resolved once per instance. With ``plugin_type``,
+        only if the parent's plugin is that plugin or a subclass of it."""
+        parent = self.parent
+        if parent is None or plugin_type is not None and not is_plugin_type(parent.plugin_type, plugin_type):
+            return None
+        cached = self.__dict__.get("_framework_parent")
+        if cached is None or cached[0] is not parent:
+            cached = (parent, parent.get_plugin_instance()[0])
+            self._framework_parent = cached
+        return cached[1]
+
+    def get_parent_framework_value(self, plugin_type, field):
+        """Share parent resolution between render mixins and templates."""
+        concrete = self.get_parent_plugin_instance(plugin_type)
+        return concrete.get_framework_value(field) if concrete is not None else ""
 
     def get_short_description(self):
         """Plugin-specific short description (to be defined by subclasses). Try title attribute first."""

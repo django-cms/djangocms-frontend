@@ -16,6 +16,16 @@ from .fixtures import TestFixture
 class GetSpacingClassesTestCase(TestCase):
     """Tests for get_spacing_classes utility function."""
 
+    def test_multiple_values_start_with_independent_device_state(self):
+        self.assertEqual(
+            get_spacing_classes(["mx-3", "my-2"], ["md", "lg", "xl", "xxl"]),
+            ["mx-md-3", "my-md-2"],
+        )
+        self.assertEqual(
+            get_spacing_classes(["mx-3", "my-2"], ["md", "lg"]),
+            ["mx-md-3", "mx-xl-0", "my-md-2", "my-xl-0"],
+        )
+
     def test_basic_spacing(self):
         result = get_spacing_classes(["mx-3", "my-2"])
         self.assertEqual(result, ["mx-3", "my-2"])
