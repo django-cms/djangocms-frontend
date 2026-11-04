@@ -11,15 +11,24 @@ from .helpers import first_choice
 
 if apps.is_installed("djangocms_text"):
     from djangocms_text.fields import HTMLFormField  # noqa F401
+    from djangocms_text.html import clean_html  # noqa F401
 
     HTMLsanitized = True
 elif apps.is_installed("djangocms_text_ckeditor"):  # pragma: no cover
     from djangocms_text_ckeditor.fields import HTMLFormField  # noqa F401
+    from djangocms_text_ckeditor.html import clean_html  # noqa F401
 
     HTMLsanitized = True
 else:  # pragma: no cover
     HTMLFormField = forms.CharField
     HTMLsanitized = False
+
+    def clean_html(data, *args, **kwargs):
+        """No sanitizer available (no rich-text editor installed): return data unchanged.
+
+        The render-side filters do not ``mark_safe`` in this case, so Django escapes the
+        value on output instead."""
+        return data
 
 
 class TemplateChoiceMixin:
