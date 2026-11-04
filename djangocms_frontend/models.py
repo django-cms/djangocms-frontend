@@ -1,3 +1,4 @@
+import copy
 import logging
 
 from cms.models import CMSPlugin
@@ -82,10 +83,116 @@ class AbstractFrontendUIItem(CMSPlugin):
             self.tag_type = getattr(self, "default_tag_type", self._meta.get_field("tag_type").default)
 
     def __getattr__(self, item):
-        """Makes properties of plugin config available as plugin properties."""
-        if item[0] != "_" and item in self.config:  # Avoid infinite recursion trying to get .config from db
-            return self.config[item]
+        """Makes properties of plugin config available as plugin properties.
+
+        A declared entangled field that is not (yet) present in ``config`` resolves to
+        its default instead of raising ``AttributeError``. This keeps plugin render code
+        (which reads ``instance.<field>`` directly) working for instances that have not
+        been through the editing form -- e.g. imported or programmatically built ones --
+        while ``clean()`` remains the authoritative place that writes and validates them.
+        """
+        # 1. Underscore/dunder names are never config fields. Bail first: copy, pickle
+        #    and Django internals probe these before ``config`` even exists.
+        if item.startswith("_"):
+            return super().__getattribute__(item)
+        # 2. Read config via __dict__, never self.config -- during unpickle/early init
+        #    the field is not set yet and self.config would recurse right here.
+        config = self.__dict__.get("config")
+        if config is not None and item in config:
+            return config[item]
+        # 3. Declared entangled field but unset -> its default (a copy, never the shared
+        #    cached object). Guarded so resolving the defaults can't re-enter here.
+        if not self.__dict__.get("_resolving_defaults"):
+            defaults = self._get_config_defaults()
+            if item in defaults:
+                return copy.deepcopy(defaults[item])
         return super().__getattribute__(item)
+
+    def _get_config_defaults(self):
+        """Declared config defaults for this plugin, cached on the (proxy) class.
+
+        The cache is keyed by ``plugin_type``: a registered plugin has its own proxy class
+        (one plugin_type), but the base ``FrontendUIItem`` is instantiated directly with
+        varying plugin types, so a bare key would leak one plugin's defaults onto another.
+        """
+        cls = type(self)
+        plugin_type = self.__dict__.get("plugin_type")
+        cached = vars(cls).get("_config_defaults_cache")
+        if cached is not None and cached[0] == plugin_type:
+            return cached[1]
+        self.__dict__["_resolving_defaults"] = True
+        try:
+            return self._compute_config_defaults()
+        finally:
+            self.__dict__.pop("_resolving_defaults", None)
+
+    def _compute_config_defaults(self):
+        """Resolve the default value of every declared config field.
+
+        Mirrors ``initialize_from_form``: entangled form-field initials, then model-level
+        ``default_config``, then settings ``PLUGIN_DEFAULTS``. Returns a partial (and does
+        not cache) when the plugin/form cannot be resolved yet (e.g. no ``plugin_type``).
+        """
+        cls = type(self)
+        defaults = {}
+        form = None
+        use_tokens = bool(settings.token_adapter)
+        if self.__dict__.get("plugin_type"):
+            try:
+                form = self.get_plugin_class().form
+            except Exception:
+                form = None
+        if form is not None:
+            if not getattr(form._meta, "model", None):
+                form._meta.model = cls
+            try:
+                skip = self._token_skip_fields(form) if use_tokens else frozenset()
+                bound = form()
+                entangled_fields = getattr(form._meta, "entangled_fields", {}).get("config", ())
+                for field in entangled_fields:
+                    default = self._field_default(bound, field)
+                    # Store defaults exactly as ``initialize_from_form`` does, so an instance
+                    # completed by ``clean()`` reaches the same canonical config as an edited
+                    # one. ``canonical_key``/``normalize_value`` are identities for non-grid
+                    # fields, so non-token and project-owned fields are unaffected.
+                    if use_tokens and field not in skip:
+                        defaults[tokens.canonical_key(field)] = tokens.normalize_value(field, default)
+                    else:
+                        defaults[field] = default
+            except Exception:
+                form = None  # incomplete -> don't cache
+        for key, value in getattr(cls, "default_config", {}).items():
+            defaults[key] = value
+        for key, value in PLUGIN_DEFAULTS.get(cls.__name__, {}).items():
+            defaults[key] = value
+        if form is not None:
+            cls._config_defaults_cache = (self.__dict__.get("plugin_type"), defaults)
+        return defaults
+
+    @staticmethod
+    def _field_default(bound_form, field):
+        """Default value stored for an entangled config field.
+
+        Preserves falsey declared initials (``False``, ``0``) -- only ``None`` falls back
+        to ``""`` -- so defaults match what a submitted form actually stores.
+        """
+        if field == "attributes":
+            return {}
+        initial = bound_form[field].initial
+        return "" if initial is None else initial
+
+    @staticmethod
+    def _token_skip_fields(form):
+        """Fields a project declares itself (never rewritten as tokens). ``form`` may be a
+        form class or instance; returns an empty set when tokens are off or unresolvable."""
+        if not settings.token_adapter:
+            return frozenset()
+        from djangocms_frontend.token_forms import project_fields
+
+        form_class = form if isinstance(form, type) else type(form)
+        if not hasattr(form_class, "base_fields"):
+            return frozenset()
+        return project_fields(form_class)
 
     def __str__(self):
         if "__str__" in self.config:
@@ -132,6 +239,31 @@ class AbstractFrontendUIItem(CMSPlugin):
         self.ui_item = self.__class__.__name__
         return super().save(*args, **kwargs)
 
+    def clean(self):
+        """Ensure every declared config field is present, filling missing ones with their
+        default. Runs via ``full_clean()``, so an instance built outside the editing form
+        (e.g. an import) reaches the same complete, renderable config as an edited one.
+
+        Fill-missing only: existing (user-set) values are never overwritten, so this is
+        idempotent and safe to re-run. When tokens are active the config is normalized to
+        canonical storage first, matching ``initialize_from_form``; an unreadable config is
+        left untouched (and reported by the form) rather than crashing here.
+        """
+        super().clean()
+        if settings.token_adapter:
+            name = self.__class__.__name__
+            form = self.get_plugin_class().form if self.__dict__.get("plugin_type") else None
+            skip = self._token_skip_fields(form) if form is not None else frozenset()
+            try:
+                self.config = normalize_defaults(self.config, f"{name} configuration", skip)
+            except (ValueError, AttributeError) as exc:
+                # Non-object or newer-schema config: leave it for the form to report
+                # rather than mixing in defaults written in another schema.
+                logger.warning("Cannot clean %s: %s", name, exc)
+                return
+        for key, value in self._get_config_defaults().items():
+            self.config.setdefault(key, copy.deepcopy(value))
+
     def initialize_from_form(self, form=None):
         """Populates the config JSON field based on initial values provided by the fields of form.
         After setting form defaults, applies per-model defaults from the model's ``default_config``
@@ -170,7 +302,7 @@ class AbstractFrontendUIItem(CMSPlugin):
                     sources.append({})
             defaults, project_defaults = sources
         for field in entangled_fields:
-            initial = {} if field == "attributes" else form[field].initial or ""
+            initial = self._field_default(form, field)
             if use_tokens and field not in skip:
                 self.config.setdefault(tokens.canonical_key(field), tokens.normalize_value(field, initial))
             else:
