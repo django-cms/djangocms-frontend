@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from djangocms_frontend import settings, tokens
 from djangocms_frontend.fields import TagTypeField
+from djangocms_frontend.fields import HTMLFormField, HTMLsanitized, TagTypeField, clean_html
 from djangocms_frontend.settings import FRAMEWORK_PLUGIN_INFO, PLUGIN_DEFAULTS, SHOW_ADVANCED_SETTINGS
 
 logger = logging.getLogger(__name__)
@@ -194,6 +195,31 @@ class AbstractFrontendUIItem(CMSPlugin):
             return frozenset()
         return project_fields(form_class)
 
+      def _html_config_fields(self):
+        """Names of the entangled config fields backed by a sanitizing HTML form field.
+
+        Cached per (proxy class, plugin_type); empty when no sanitizing rich-text editor
+        is installed or the plugin's form cannot be resolved (e.g. no ``plugin_type``).
+        """
+        if not HTMLsanitized:
+            return frozenset()
+        cls = type(self)
+        plugin_type = self.__dict__.get("plugin_type")
+        cached = vars(cls).get("_html_fields_cache")
+        if cached is not None and cached[0] == plugin_type:
+            return cached[1]
+        names = frozenset()
+        if plugin_type:
+            try:
+                form = self.get_plugin_class().form
+                entangled = getattr(getattr(form, "_meta", None), "entangled_fields", {}).get("config", ())
+                base_fields = getattr(form, "base_fields", {})
+                names = frozenset(name for name in entangled if isinstance(base_fields.get(name), HTMLFormField))
+                cls._html_fields_cache = (plugin_type, names)
+            except Exception:
+                names = frozenset()  # unresolved -> don't cache
+        return names
+
     def __str__(self):
         if "__str__" in self.config:
             return self.config["__str__"]
@@ -248,6 +274,11 @@ class AbstractFrontendUIItem(CMSPlugin):
         idempotent and safe to re-run. When tokens are active the config is normalized to
         canonical storage first, matching ``initialize_from_form``; an unreadable config is
         left untouched (and reported by the form) rather than crashing here.
+ 
+        HTML config fields (djangocms-text ``HTMLFormField``) are sanitized here too, so
+        instances built outside the editing form (imports, programmatic creation, the API)
+        get the same XSS sanitization the admin form applies on input -- the render-side
+        filters only ``mark_safe`` the stored value, they do not sanitize it.
         """
         super().clean()
         if settings.token_adapter:
@@ -263,6 +294,11 @@ class AbstractFrontendUIItem(CMSPlugin):
                 return
         for key, value in self._get_config_defaults().items():
             self.config.setdefault(key, copy.deepcopy(value))
+        if HTMLsanitized and isinstance(self.config, dict):
+            for field in self._html_config_fields():
+                value = self.config.get(field)
+                if isinstance(value, str) and value:
+                    self.config[field] = clean_html(value)
 
     def initialize_from_form(self, form=None):
         """Populates the config JSON field based on initial values provided by the fields of form.
