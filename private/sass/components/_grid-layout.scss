@@ -78,6 +78,8 @@
         label {
             font-size: 12px !important;
             font-weight: normal !important;
+            // Let clicks reach the native number controls beneath the label.
+            pointer-events: none;
             position: absolute;
             inset-inline-start: 15px;
             inset-block-end: 17px;
@@ -146,6 +148,7 @@
         text-align: start;
 
         label {
+            pointer-events: auto;
             inset-inline-start: 30px;
             inset-block-start: 14px;
         }
