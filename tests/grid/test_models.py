@@ -16,7 +16,7 @@ class PluginDefaultsHierarchyTestCase(TestCase):
         instance = GridContainer.objects.create()
         instance.initialize_from_form(GridContainerForm)
         # container_type should get the form field's initial value
-        self.assertEqual(instance.config["container_type"], "container")
+        self.assertEqual(instance.config["container_type"], "bounded")
         # spacing fields default to empty
         self.assertEqual(instance.config.get("padding_y", ""), "")
 
@@ -30,8 +30,10 @@ class PluginDefaultsHierarchyTestCase(TestCase):
                 "padding_y": "py-5",
             }
             instance.initialize_from_form(GridContainerForm)
-            self.assertEqual(instance.config["container_type"], "container-fluid")
-            self.assertEqual(instance.config["padding_y"], "py-5")
+            self.assertEqual(instance.config["container_type"], "fluid")
+            self.assertEqual(
+                instance.config["padding_y"], {"property": "padding", "side": "vertical", "size": "rem-3"}
+            )
         finally:
             if original:
                 GridContainer.default_config = original
@@ -48,8 +50,8 @@ class PluginDefaultsHierarchyTestCase(TestCase):
         """Level 3: PLUGIN_DEFAULTS setting overrides form field initials."""
         instance = GridContainer.objects.create()
         instance.initialize_from_form(GridContainerForm)
-        self.assertEqual(instance.config["container_type"], "container-full")
-        self.assertEqual(instance.config["padding_x"], "px-3")
+        self.assertEqual(instance.config["container_type"], "full")
+        self.assertEqual(instance.config["padding_x"], {"property": "padding", "side": "horizontal", "size": "rem-1"})
 
     @patch(
         "djangocms_frontend.models.PLUGIN_DEFAULTS",
@@ -68,9 +70,11 @@ class PluginDefaultsHierarchyTestCase(TestCase):
             }
             instance.initialize_from_form(GridContainerForm)
             # Setting wins over model default_config for container_type
-            self.assertEqual(instance.config["container_type"], "container-full")
+            self.assertEqual(instance.config["container_type"], "full")
             # Model default_config still applies for fields not in settings
-            self.assertEqual(instance.config["padding_y"], "py-5")
+            self.assertEqual(
+                instance.config["padding_y"], {"property": "padding", "side": "vertical", "size": "rem-3"}
+            )
         finally:
             if original:
                 GridContainer.default_config = original
@@ -96,9 +100,9 @@ class PluginDefaultsHierarchyTestCase(TestCase):
         instance = GridContainer.objects.create()
         instance.initialize_from_form(GridContainerForm)
         # container_type should still have the form default
-        self.assertEqual(instance.config["container_type"], "container")
+        self.assertEqual(instance.config["container_type"], "bounded")
         # padding_y overridden by settings
-        self.assertEqual(instance.config["padding_y"], "py-5")
+        self.assertEqual(instance.config["padding_y"], {"property": "padding", "side": "vertical", "size": "rem-3"})
 
 
 class GetFormDefaultsTestCase(TestCase):

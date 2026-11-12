@@ -18,20 +18,17 @@ class Spacing(FrontendUIItem):
         # [...] format {property}{sides}-{size} for xs and
         # {property}{sides}-{breakpoint}-{size} for sm, md, lg, and xl.
 
-        if not self.space_device or self.space_device == "xs":
-            template = "{property}{sides}-{size}"
-        else:
-            template = "{property}{sides}-{breakpoint}-{size}"
-
-        return template.format(
-            property=self.space_property,
-            sides=self.space_sides,
-            breakpoint=self.space_device,
-            size=self.space_size,
-        )
+        prop = self.get_framework_value("space_property")
+        side = self.get_framework_value("space_sides")
+        device = self.get_framework_value("space_device")
+        size = self.get_framework_value("space_size")
+        if not prop or size in ("", None):
+            return ""
+        return f"{prop}{side}-{size}" if not device or device == "xs" else f"{prop}{side}-{device}-{size}"
 
     def get_short_description(self):
-        return f"(.{self.get_base_css_class()})"
+        css_class = self.get_base_css_class()
+        return f"(.{css_class})" if css_class else ""
 
 
 class Heading(FrontendUIItem):

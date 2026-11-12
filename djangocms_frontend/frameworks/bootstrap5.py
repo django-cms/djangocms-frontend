@@ -2,6 +2,8 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 
+from . import bootstrap5_tokens as token_adapter
+
 DEVICE_CHOICES = (
     ("xs", _("Extra small")),  # default <576px
     ("sm", _("Small")),  # default ≥576px
@@ -47,9 +49,9 @@ SPACER_PROPERTY_CHOICES = (
 SPACER_SIDE_CHOICES = (
     ("", "*"),
     ("t", "*-top"),
-    ("r", "*-right"),
+    ("e", "*-end"),
     ("b", "*-bottom"),
-    ("l", "*-left"),
+    ("s", "*-start"),
     ("x", "*-left & *-right"),
     ("y", "*-top & *-bottom"),
 )
@@ -101,6 +103,7 @@ SIZE_Y_CHOICES = getattr(
         ("75", "75%"),
         ("100", "100%"),
         ("auto", _("Auto")),
+        ("vh-100", _("Screen")),
         ("min-vh-100", _("Screen (minimum)")),
     ),
 )

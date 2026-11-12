@@ -1,7 +1,7 @@
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 
-from djangocms_frontend import settings
+from djangocms_frontend import settings, tokens
 from djangocms_frontend.common import AttributesMixin, BackgroundMixin, ResponsiveMixin, SizingMixin, SpacingMixin
 
 from ...cms_plugins import CMSUIPlugin
@@ -112,8 +112,10 @@ class GridRowPlugin(
                 extra[f"{size}_col"] = data.get(f"create_{size}_col")
                 extra[f"{size}_order"] = None
                 extra[f"{size}_offset"] = None
-                extra[f"{size}_ml"] = None
-                extra[f"{size}_mr"] = None
+                extra[f"{size}_ms"] = None
+                extra[f"{size}_me"] = None
+            if settings.token_adapter:
+                extra = tokens.normalize_config(extra)
             add_plugin(
                 obj.placeholder,
                 models.GridColumn(

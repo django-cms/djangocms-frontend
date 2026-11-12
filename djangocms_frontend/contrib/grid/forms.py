@@ -3,13 +3,13 @@ from copy import copy
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
 from djangocms_frontend import settings
 from djangocms_frontend.common import BackgroundFormMixin, ResponsiveFormMixin, SizingFormMixin, SpacingFormMixin
 from djangocms_frontend.fields import AttributesFormField, AutoNumberInput, ButtonGroup, IconGroup, TagTypeFormField
 from djangocms_frontend.helpers import first_choice, link_to_framework_doc
 from djangocms_frontend.models import FrontendUIItem
+from djangocms_frontend.token_forms import EntangledModelForm
 
 from ...common.title import TitleFormMixin
 from .. import grid
@@ -204,18 +204,18 @@ for size in settings.DEVICE_SIZES:
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
-        widget=forms.HiddenInput()
-        if "{size}_order" in getattr(settings, "EXCL_COL_PROP", ())
-        else forms.NumberInput(),
+        widget=(
+            forms.HiddenInput() if "{size}_order" in getattr(settings, "EXCL_COL_PROP", ()) else forms.NumberInput()
+        ),
     )
     extra_fields_column[f"{size}_offset"] = forms.IntegerField(
         label="offset" if size == "xs" else f"offset-{size}",
         required=False,
         min_value=0,
         max_value=GRID_SIZE,
-        widget=forms.HiddenInput()
-        if "{size}_offset" in getattr(settings, "EXCL_COL_PROP", ())
-        else forms.NumberInput(),
+        widget=(
+            forms.HiddenInput() if "{size}_offset" in getattr(settings, "EXCL_COL_PROP", ()) else forms.NumberInput()
+        ),
     )
     extra_fields_column[f"{size}_ms"] = forms.BooleanField(
         label="ms-auto" if size == "xs" else f"ms-{size}-auto",

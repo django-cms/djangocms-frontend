@@ -14,4 +14,4 @@ class Alert(FrontendUIItem):
         verbose_name = _("Alert")
 
     def get_short_description(self):
-        return f"({self.alert_context})"
+        return f"({self.get_framework_value('alert_context')})"

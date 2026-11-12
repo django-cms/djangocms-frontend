@@ -1,11 +1,11 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from entangled.forms import EntangledModelForm
 
 from djangocms_frontend.fields import AttributesFormField, ColoredButtonGroup, TagTypeFormField
 from djangocms_frontend.helpers import first_choice
 from djangocms_frontend.models import FrontendUIItem
 from djangocms_frontend.settings import COLOR_STYLE_CHOICES
+from djangocms_frontend.token_forms import EntangledModelForm
 
 
 class BadgeForm(EntangledModelForm):

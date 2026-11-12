@@ -1,8 +1,8 @@
-{% load cms_tags frontend %}
+{% load cms_tags frontend frontend_tokens %}
 <{{ instance.tag_type }} {{ instance.get_attributes }}>
     <div class="flex-shrink-0">
         {% for plugin in instance.child_plugin_instances %}
-            {% if plugin.plugin_type == "MediaBodyPlugin" %}
+            {% if plugin.plugin_type|is_plugin_type:"MediaBodyPlugin" %}
                 </div>
             {% endif %}
             {% with forloop=parentloop %}{% render_plugin plugin %}{% endwith %}

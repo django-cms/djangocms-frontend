@@ -120,6 +120,7 @@ class ImageForm(
     lazy_loading = forms.BooleanField(
         label=_("Load lazily"),
         required=False,
+        initial=True,
         help_text=_("Use for images below the fold. This will load images only if user scrolls them into view. "),
     )
 
